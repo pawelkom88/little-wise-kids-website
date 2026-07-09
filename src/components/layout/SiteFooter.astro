@@ -1,0 +1,63 @@
+---
+import { footerColumns, site } from "../../data/site";
+import Icon from "../icons/Icon.astro";
+import Button from "../ui/Button.astro";
+import Container from "./Container.astro";
+---
+
+<footer id="contact" class="site-footer">
+  <Container>
+    <div class="footer-hero">
+      <img class="footer-hero__logo" src="/assets/images/logo.png" alt={site.name} />
+      <h2>Growing confident, kind and curious children.</h2>
+      <p>A safe, nurturing space where every child is supported to learn, explore and thrive.</p>
+    </div>
+
+    <form class="newsletter" action="#" method="post">
+      <div class="newsletter__intro">
+        <span class="newsletter__icon"><Icon name="mail" size={34} /></span>
+        <div>
+          <h3>Stay in the know</h3>
+          <p>Tips, activities and inspiration for little learners.</p>
+        </div>
+      </div>
+      <label class="sr-only" for="newsletter-email">Email address</label>
+      <div class="newsletter__field">
+        <input id="newsletter-email" type="email" name="email" placeholder="Enter your email address" />
+        <Button>Subscribe</Button>
+      </div>
+    </form>
+
+    <div class="footer-grid">
+      {
+        footerColumns.map((column) => (
+          <div class="footer-column">
+            <h3 class={`tone-${column.tone}`}>{column.title}</h3>
+            <ul>
+              {column.links.map((link) => (
+                <li><a href="#">{link}</a></li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+      <div class="footer-column footer-column--contact">
+        <h3 class="tone-purple">Get in touch</h3>
+        <p><Icon name="person" size={18} /> {site.address}</p>
+        <p><Icon name="mail" size={18} /> <a href={`mailto:${site.email}`}>{site.email}</a></p>
+        <p><Icon name="calendar" size={18} /> <a href={`tel:${site.phone.replaceAll(" ", "")}`}>{site.phone}</a></p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>Safe. Caring. Nurturing. Every child. Every day.</p>
+      <nav aria-label="Legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Safeguarding</a>
+        <a href="#">Cookies</a>
+      </nav>
+      <p>&copy; 2026 {site.name}. All rights reserved.</p>
+    </div>
+  </Container>
+</footer>

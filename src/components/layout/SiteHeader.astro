@@ -1,0 +1,58 @@
+---
+import { navItems, site } from "../../data/site";
+import Icon from "../icons/Icon.astro";
+import Button from "../ui/Button.astro";
+import Container from "./Container.astro";
+---
+
+<header class="site-header">
+  <Container size="wide" class="site-header__inner">
+    <a class="brand" href="/" aria-label={`${site.name} home`}>
+      <img class="brand__logo" src="/assets/images/logo.png" alt="" width="1774" height="887" />
+      <span class="sr-only">{site.name}</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      {
+        navItems.map((item) => (
+          <a class={`site-nav__link tone-${item.tone}`} href={item.href}>
+            <Icon name={item.icon} size={28} />
+            <span>{item.label}</span>
+          </a>
+        ))
+      }
+    </nav>
+
+    <Button href="#contact">Book a Visit</Button>
+
+    <details class="mobile-menu">
+      <summary class="mobile-menu__toggle" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </summary>
+      <div class="mobile-menu__panel">
+        <div class="mobile-menu__top">
+          <img class="mobile-menu__logo" src="/assets/images/logo.png" alt={site.name} />
+          <span class="mobile-menu__close" aria-hidden="true">
+            <Icon name="close" size={32} />
+          </span>
+        </div>
+        <nav class="mobile-menu__nav" aria-label="Mobile primary">
+          {
+            navItems.map((item) => (
+              <a class={`mobile-menu__link tone-${item.tone}`} href={item.href}>
+                <span class="mobile-menu__icon">
+                  <Icon name={item.icon} size={30} />
+                </span>
+                <span>{item.label}</span>
+                <Icon name="arrowRight" size={22} />
+              </a>
+            ))
+          }
+        </nav>
+        <Button href="#contact" icon="calendar" class="mobile-menu__cta">Book a Visit</Button>
+      </div>
+    </details>
+  </Container>
+</header>

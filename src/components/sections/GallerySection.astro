@@ -1,0 +1,24 @@
+---
+import Icon from "../icons/Icon.astro";
+import Section from "../layout/Section.astro";
+---
+
+<Section id="parents" class="gallery-section" tone="purple" width="wide">
+  <div class="section-heading">
+    <span class="heading-icon"><Icon name="palette" size={28} /></span>
+    <h2>Photo Gallery</h2>
+    <p>A CMS-ready gallery scaffold for joyful moments, learning and adventures.</p>
+  </div>
+
+  <div class="gallery-grid" aria-label="Gallery placeholders">
+    <figure class="gallery-card gallery-card--large">
+      <figcaption>Outdoor Play</figcaption>
+    </figure>
+    <figure class="gallery-card">
+      <figcaption>Creative Discovery</figcaption>
+    </figure>
+    <figure class="gallery-card">
+      <figcaption>Happy Moments</figcaption>
+    </figure>
+  </div>
+</Section>

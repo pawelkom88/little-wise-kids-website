@@ -1,0 +1,23 @@
+---
+import Container from "./Container.astro";
+
+interface Props {
+  id?: string;
+  tone?: "plain" | "mist" | "purple" | "blue" | "green";
+  width?: "default" | "narrow" | "wide" | "full";
+  class?: string;
+}
+
+const {
+  id,
+  tone = "plain",
+  width = "default",
+  class: className = "",
+} = Astro.props;
+
+const classes = ["section", `section--${tone}`, className].filter(Boolean).join(" ");
+---
+
+<section id={id} class={classes}>
+  {width === "full" ? <slot /> : <Container size={width}><slot /></Container>}
+</section>

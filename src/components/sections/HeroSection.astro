@@ -1,0 +1,59 @@
+---
+import { heroFeatures, site } from "../../data/site";
+import Icon from "../icons/Icon.astro";
+import Section from "../layout/Section.astro";
+import Button from "../ui/Button.astro";
+---
+
+<Section class="hero-section" width="full">
+  <div class="hero" aria-labelledby="hero-title">
+    <span class="hero__soft-blob" aria-hidden="true"></span>
+    <span class="hero__star hero__star--eyebrow" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="m12 1.7 3 6.4 7 .8-5.2 4.7 1.4 6.9L12 17.1l-6.2 3.4 1.4-6.9L2 8.9l7-.8 3-6.4Z"></path></svg>
+    </span>
+    <span class="hero__star hero__star--left" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="m12 1.7 3 6.4 7 .8-5.2 4.7 1.4 6.9L12 17.1l-6.2 3.4 1.4-6.9L2 8.9l7-.8 3-6.4Z"></path></svg>
+    </span>
+    <svg class="hero__fly-line" viewBox="0 0 215 128" aria-hidden="true">
+      <path d="M7 78c54-67 102-17 61 15-28 22-66-28 21-50 46-12 82 2 118-35"></path>
+    </svg>
+
+    <div class="hero__content">
+      <h1 id="hero-title">
+        <span class="tone-purple">Nurturing</span> <span class="tone-green">curious</span><br />
+        <span class="tone-green">minds,</span> <span class="tone-blue">creating</span><br />
+        <span class="tone-purple">bright futures.</span>
+      </h1>
+      <p>{site.description}</p>
+      <div class="hero__actions">
+        <Button href="#approach" icon="heart">Our Approach</Button>
+        <Button href="#contact" variant="secondary">Book a Visit</Button>
+      </div>
+    </div>
+    <div class="hero__media" aria-hidden="true">
+      <img class="hero__photo" src="/assets/images/hero-image.png" alt="" width="1426" height="1103" />
+      <div class="hero__badge">
+        <Icon name="heart" size={26} />
+        <span>Caring</span>
+        <span>Safe</span>
+        <span>Nurturing</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-strip">
+    {
+      heroFeatures.map((feature) => (
+        <article class="feature-strip__item">
+          <span class={`feature-strip__icon tone-${feature.tone}`}>
+            <Icon name={feature.icon} size={34} />
+          </span>
+          <div>
+            <h2 class={`tone-${feature.tone}`}>{feature.title}</h2>
+            <p>{feature.text}</p>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</Section>

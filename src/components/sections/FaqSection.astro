@@ -1,0 +1,23 @@
+---
+import { faqs } from "../../data/site";
+import Section from "../layout/Section.astro";
+---
+
+<Section class="faq-section" tone="green" width="narrow">
+  <div class="section-heading">
+    <p class="section-kicker">FAQ</p>
+    <h2>Got Questions?</h2>
+    <p>Clear answers to the things parents most often ask before joining Little Wise Kids.</p>
+  </div>
+
+  <div class="faq-list">
+    {
+      faqs.map((faq) => (
+        <details class="faq-item">
+          <summary>{faq.question}</summary>
+          <p>{faq.answer}</p>
+        </details>
+      ))
+    }
+  </div>
+</Section>

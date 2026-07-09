@@ -1,0 +1,66 @@
+---
+import Icon from "../icons/Icon.astro";
+import Section from "../layout/Section.astro";
+
+const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const terms = [
+  ["Term 1", "5 September - 21 October"],
+  ["Term 2", "31 October - 16 December"],
+  ["Term 3", "3 January - 10 February"],
+  ["Term 4", "20 February - 31 March"],
+  ["Term 5", "17 April - 26 May"],
+  ["Term 6", "5 June - 21 July"],
+];
+---
+
+<Section class="opening-section">
+  <div class="section-heading">
+    <p class="section-kicker">Term dates and hours</p>
+    <h2>When we're open and welcoming</h2>
+    <p>Everything you need to plan your child's week with us, at a glance.</p>
+  </div>
+
+  <div class="opening-grid">
+    <article class="hours-card">
+      <span class="status-pill"><Icon name="check" size={18} /> Open today</span>
+      <div class="hours-card__time">
+        <Icon name="clock" size={70} />
+        <strong>7:00-18:00</strong>
+      </div>
+      <p>Monday to Friday, every week of the year</p>
+    </article>
+
+    <article class="week-card">
+      <h3><Icon name="star" size={24} /> This week at a glance</h3>
+      <div class="week-list">
+        {
+          days.map((day, index) => (
+            <span class={index > 4 ? "is-closed" : undefined}>{day}</span>
+          ))
+        }
+      </div>
+      <p>A morning with us - playful, warm and full of little discoveries.</p>
+    </article>
+  </div>
+
+  <article class="term-card">
+    <div class="term-card__header">
+      <h3><Icon name="calendar" size={30} /> School term dates</h3>
+      <div class="term-card__tabs" aria-label="Term year">
+        <button type="button" aria-pressed="true">2022/23</button>
+        <button type="button">2023/24</button>
+      </div>
+    </div>
+    <ol class="term-list">
+      {
+        terms.map(([name, range]) => (
+          <li>
+            <span>{name.replace("Term ", "")}</span>
+            <strong>{name}</strong>
+            <em>{range}</em>
+          </li>
+        ))
+      }
+    </ol>
+  </article>
+</Section>

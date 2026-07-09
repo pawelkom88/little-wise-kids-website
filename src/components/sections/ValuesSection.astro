@@ -1,0 +1,28 @@
+---
+import { values } from "../../data/site";
+import Icon from "../icons/Icon.astro";
+import Section from "../layout/Section.astro";
+---
+
+<Section id="activities" class="values-section">
+  <div class="section-heading">
+    <h2>Nurturing Little Minds, Inspiring Bright Futures</h2>
+    <p>Every day is a chance to learn, grow and shine at Little Wise Kids.</p>
+  </div>
+
+  <div class="value-grid">
+    {
+      values.map((value) => (
+        <article class={`value-card tone-bg-${value.tone}`}>
+          <span class={`value-card__icon tone-solid-${value.tone}`}>
+            <Icon name={value.icon} size={46} />
+          </span>
+          <div>
+            <h3 class={`tone-${value.tone}`}>{value.title}</h3>
+            <p>{value.text}</p>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</Section>

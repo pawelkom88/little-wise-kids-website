@@ -1,0 +1,31 @@
+---
+import { approachPoints } from "../../data/site";
+import Icon from "../icons/Icon.astro";
+import Section from "../layout/Section.astro";
+---
+
+<Section id="approach" class="approach-section" tone="mist">
+  <div class="section-heading section-heading--split">
+    <div>
+      <p class="section-kicker">Our Children's Future</p>
+      <h2>Warm care, clear structure, curious learning.</h2>
+    </div>
+    <p>
+      Little Wise Kids combines a home-from-home environment with child-led discovery,
+      early years learning and modern languages.
+    </p>
+  </div>
+
+  <div class="approach-grid">
+    {
+      approachPoints.map((point, index) => (
+        <article class={`approach-card tone-bg-${point.tone}`}>
+          <span class={`approach-card__number tone-${point.tone}`}>{index + 1}</span>
+          <h3>{point.title}</h3>
+          <p>{point.text}</p>
+          <Icon name={index === 0 ? "heart" : index === 1 ? "star" : "chat"} size={30} />
+        </article>
+      ))
+    }
+  </div>
+</Section>

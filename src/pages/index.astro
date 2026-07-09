@@ -1,18 +1,18 @@
 ---
-const title = 'Little Wise Kids';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import ApproachSection from "../components/sections/ApproachSection.astro";
+import ValuesSection from "../components/sections/ValuesSection.astro";
+import FaqSection from "../components/sections/FaqSection.astro";
+import GallerySection from "../components/sections/GallerySection.astro";
+import OpeningHoursSection from "../components/sections/OpeningHoursSection.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Little Wise Kids</title>
-  </head>
-  <body>
-    <h1>Little Wise Kids 🎈</h1>
-    <p>Astro + Sanity scaffold ready.</p>
-    <hr />
-    <h2>Sanity Studio</h2>
-    <p>Visit <a href="/admin">/admin</a> to access the CMS.</p>
-  </body>
-</html>
+<BaseLayout>
+  <HeroSection />
+  <ApproachSection />
+  <ValuesSection />
+  <FaqSection />
+  <GallerySection />
+  <OpeningHoursSection />
+</BaseLayout>
