@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Little Wise Kids — FAQ Section</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --purple: #9137D1;
+    --purple-soft: #F5ECFF;
+
+    --green: #5DBF49;
+    --green-dark: #3F982E;
+    --green-soft: #F1FBEF;
+
+    --blue: #1BA9E8;
+
+    --navy: #061947;
+    --ink: #263A68;
+    --muted: #66728E;
+    --line: rgba(9, 22, 66, .10);
+    --white: #FFFFFF;
+
+    --radius-lg: 26px;
+    --radius-md: 18px;
+
+    --shadow-card: 0 18px 45px rgba(8, 24, 66, .07);
+    --shadow-soft: 0 10px 26px rgba(8, 24, 66, .055);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: #fff;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background: #fff;
+    color: var(--navy);
+    font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+  }
+
+  img,
+  svg {
+    display: block;
+  }
+
+  .faq-section {
+    width: min(1060px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: clamp(56px, 7vw, 92px) 0 clamp(68px, 8vw, 112px);
+  }
+
+  .faq-header {
+    position: relative;
+    max-width: 660px;
+    margin: 0 auto 44px;
+    text-align: center;
+  }
+
+  .faq-kicker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    margin: 0 0 18px;
+    padding: 0 18px;
+    border-radius: 999px;
+    color: var(--green-dark);
+    background: var(--green-soft);
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .faq-title {
+    margin: 0;
+    color: var(--navy);
+    font-family: "Fredoka", "Nunito", system-ui, sans-serif;
+    font-size: clamp(42px, 5vw, 66px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -.045em;
+    text-wrap: balance;
+  }
+
+  .faq-title span {
+    color: var(--green);
+  }
+
+  .faq-intro {
+    max-width: 520px;
+    margin: 18px auto 0;
+    color: var(--ink);
+    font-size: clamp(17px, 1.45vw, 20px);
+    font-weight: 700;
+    line-height: 1.55;
+    text-wrap: balance;
+  }
+
+  .faq-doodle {
+    position: absolute;
+    right: -72px;
+    top: 54px;
+    width: 54px;
+    height: 44px;
+    color: var(--green);
+    opacity: .8;
+    pointer-events: none;
+  }
+
+  .faq-doodle svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 14px;
+    width: min(760px, 100%);
+    margin: 0 auto;
+  }
+
+  details.faq-item {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, .94);
+    box-shadow: var(--shadow-soft);
+    transition:
+      border-color .22s ease,
+      box-shadow .22s ease,
+      background-color .22s ease;
+  }
+
+  details.faq-item[open] {
+    border-color: rgba(93, 191, 73, .22);
+    background: #fff;
+    box-shadow: var(--shadow-card);
+  }
+
+  .faq-item summary {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 34px;
+    align-items: center;
+    gap: 18px;
+    min-height: 74px;
+    padding: 0 20px 0 24px;
+    color: var(--navy);
+    cursor: pointer;
+    list-style: none;
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 1.25;
+    outline: none;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary:focus-visible {
+    box-shadow: inset 0 0 0 3px rgba(93, 191, 73, .34);
+    border-radius: inherit;
+  }
+
+  .faq-question {
+    min-width: 0;
+  }
+
+  .faq-control {
+    position: relative;
+    display: grid;
+    place-items: center;
+    justify-self: end;
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    color: var(--green-dark);
+    background: var(--green-soft);
+    transition:
+      color .22s ease,
+      background-color .22s ease,
+      transform .22s ease;
+  }
+
+  .faq-control::before,
+  .faq-control::after {
+    content: "";
+    position: absolute;
+    width: 13px;
+    height: 3px;
+    border-radius: 999px;
+    background: currentColor;
+    transition: transform .24s cubic-bezier(.2,.8,.2,1);
+  }
+
+  .faq-control::after {
+    transform: rotate(90deg);
+  }
+
+  details[open] .faq-control {
+    color: #fff;
+    background: var(--green);
+    transform: rotate(180deg);
+  }
+
+  details[open] .faq-control::after {
+    transform: rotate(0deg);
+  }
+
+  .faq-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .32s cubic-bezier(.2,.8,.2,1);
+  }
+
+  details[open] .faq-answer {
+    grid-template-rows: 1fr;
+  }
+
+  .faq-answer-inner {
+    overflow: hidden;
+  }
+
+  .faq-answer-content {
+    margin: 0 20px 20px 24px;
+    padding: 18px 20px;
+    border-radius: 16px;
+    background: var(--green-soft);
+    color: var(--ink);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.58;
+  }
+
+  .faq-answer-content p {
+    margin: 0;
+  }
+
+  .faq-answer-content p + p {
+    margin-top: 12px;
+  }
+
+  .faq-answer-content strong {
+    color: var(--green-dark);
+    font-weight: 900;
+  }
+
+  /*
+    Progressive enhancement for newer browsers:
+    animates the native details content area more naturally.
+    The grid fallback above still works without JavaScript.
+  */
+  @supports selector(::details-content) {
+    details::details-content {
+      block-size: 0;
+      overflow: hidden;
+      transition:
+        block-size .32s cubic-bezier(.2,.8,.2,1),
+        content-visibility .32s allow-discrete;
+    }
+
+    details[open]::details-content {
+      block-size: auto;
+    }
+  }
+
+  .faq-note {
+    width: min(760px, 100%);
+    margin: 22px auto 0;
+    padding: 18px 22px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--purple-soft), #fff);
+    color: var(--ink);
+    font-size: 15.5px;
+    font-weight: 800;
+    line-height: 1.45;
+  }
+
+  .faq-note a {
+    color: var(--purple);
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .faq-note a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 680px) {
+    .faq-section {
+      width: calc(100% - 28px);
+      padding-top: 48px;
+    }
+
+    .faq-header {
+      margin-bottom: 32px;
+    }
+
+    .faq-doodle {
+      display: none;
+    }
+
+    .faq-title {
+      font-size: clamp(38px, 11vw, 50px);
+    }
+
+    .faq-intro {
+      font-size: 16px;
+      line-height: 1.48;
+    }
+
+    .faq-list {
+      gap: 12px;
+    }
+
+    .faq-item summary {
+      min-height: 68px;
+      padding: 0 16px 0 18px;
+      grid-template-columns: 1fr 30px;
+      gap: 14px;
+      font-size: 16px;
+    }
+
+    .faq-control {
+      width: 28px;
+      height: 28px;
+    }
+
+    .faq-control::before,
+    .faq-control::after {
+      width: 12px;
+      height: 2.5px;
+    }
+
+    .faq-answer-content {
+      margin: 0 14px 14px 14px;
+      padding: 16px;
+      font-size: 15.5px;
+      line-height: 1.5;
+    }
+
+    .faq-note {
+      font-size: 15px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    details.faq-item,
+    .faq-answer,
+    .faq-control,
+    .faq-control::before,
+    .faq-control::after {
+      transition: none;
+    }
+  }
+</style>
+</head>
+
+<body>
+  <main>
+    <section class="faq-section" aria-labelledby="faq-title">
+      <header class="faq-header">
+        <p class="faq-kicker">FAQ</p>
+
+        <h2 class="faq-title" id="faq-title">
+          Got <span>Questions?</span>
+        </h2>
+
+        <p class="faq-intro">
+          Clear answers to the things parents most often ask before joining Little Wise Kids.
+        </p>
+
+        <span class="faq-doodle" aria-hidden="true">
+          <svg viewBox="0 0 54 44">
+            <path d="M8 36C21 16 34 8 47 6"/>
+            <path d="M24 22c-7-1-12-5-14-13 9 0 15 4 17 12"/>
+            <path d="M33 15c2-8 7-12 15-13-1 9-6 13-15 13Z"/>
+          </svg>
+        </span>
+      </header>
+
+      <div class="faq-list">
+        <details class="faq-item" name="little-wise-kids-faq" open>
+          <summary>
+            <span class="faq-question">What age range do you care for?</span>
+            <span class="faq-control" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <div class="faq-answer-content">
+                <p>
+                  We care for children from <strong>6 months to 5 years old</strong>, providing a safe, nurturing and engaging early years environment tailored to each stage of development.
+                </p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="faq-item" name="little-wise-kids-faq">
+          <summary>
+            <span class="faq-question">What languages are part of the curriculum?</span>
+            <span class="faq-control" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <div class="faq-answer-content">
+                <p>
+                  Portuguese and Spanish are introduced through songs, stories, play and everyday routines, so children experience language in a natural and enjoyable way.
+                </p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="faq-item" name="little-wise-kids-faq">
+          <summary>
+            <span class="faq-question">What are your opening hours?</span>
+            <span class="faq-control" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <div class="faq-answer-content">
+                <p>
+                  We are open Monday to Friday from <strong>7:00 to 18:00</strong>. We are open through school holidays and closed on bank holidays.
+                </p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="faq-item" name="little-wise-kids-faq">
+          <summary>
+            <span class="faq-question">Where are you located?</span>
+            <span class="faq-control" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <div class="faq-answer-content">
+                <p>
+                  Little Wise Kids Childminding is based in a home setting just behind Cabot Circus car park, with easy access to town and the M32.
+                </p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="faq-item" name="little-wise-kids-faq">
+          <summary>
+            <span class="faq-question">What is your childminding approach?</span>
+            <span class="faq-control" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <div class="faq-answer-content">
+                <p>
+                  Our approach combines traditional Early Years learning with modern languages and cultures. We focus on play, care, confidence, curiosity and strong partnerships with families.
+                </p>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <p class="faq-note">
+        Still need help? <a href="#">Contact us</a> and we’ll answer your question directly.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

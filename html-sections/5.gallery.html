@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Little Wise Kids — Photo Gallery Refined</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --purple: #9137D1;
+    --purple-dark: #7E23C2;
+    --purple-soft: #F6ECFF;
+
+    --green: #5DBF49;
+    --green-dark: #3F982E;
+    --green-soft: #EFFBEA;
+
+    --blue: #1BA9E8;
+    --blue-soft: #EAF8FF;
+
+    --yellow: #F2C63D;
+    --yellow-soft: #FFF6D9;
+
+    --navy: #061947;
+    --ink: #52607E;
+    --white: #FFFFFF;
+
+    --shadow-card: 0 18px 42px rgba(8, 24, 66, .12);
+    --shadow-soft: 0 10px 26px rgba(8, 24, 66, .09);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: #fff;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background: #fff;
+    color: var(--navy);
+    font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .gallery-section {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    width: min(1500px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: clamp(52px, 6vw, 78px) clamp(80px, 7vw, 132px) clamp(50px, 6vw, 76px);
+    border-radius: 18px;
+    background:
+      radial-gradient(circle at 5% 10%, rgba(145, 55, 209, .08), transparent 24%),
+      radial-gradient(circle at 95% 94%, rgba(27, 169, 232, .09), transparent 21%),
+      linear-gradient(180deg, #FCFBFF 0%, #FFFFFF 54%, #FCFBFF 100%);
+  }
+
+  .gallery-section::before,
+  .gallery-section::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    opacity: .75;
+  }
+
+  .gallery-section::before {
+    top: 95px;
+    left: -78px;
+    width: 205px;
+    height: 205px;
+    border-radius: 44% 58% 38% 64%;
+    background: rgba(145, 55, 209, .12);
+  }
+
+  .gallery-section::after {
+    right: -82px;
+    bottom: 2px;
+    width: 214px;
+    height: 214px;
+    border-radius: 58% 42% 58% 44%;
+    background: rgba(27, 169, 232, .12);
+  }
+
+  .gallery-header {
+    position: relative;
+    max-width: 640px;
+    margin: 0 auto 50px;
+    text-align: center;
+  }
+
+  .gallery-icon {
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 18px;
+    border-radius: 999px;
+    color: var(--purple);
+    background: rgba(145, 55, 209, .13);
+  }
+
+  .gallery-icon svg {
+    width: 38px;
+    height: 38px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .gallery-header h2 {
+    margin: 0;
+    color: var(--navy);
+    font-family: "Fredoka", "Nunito", system-ui, sans-serif;
+    font-size: clamp(44px, 5vw, 66px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -.035em;
+  }
+
+  .gallery-header p {
+    max-width: 590px;
+    margin: 24px auto 0;
+    color: var(--ink);
+    font-size: clamp(17px, 1.55vw, 21px);
+    font-weight: 700;
+    line-height: 1.45;
+    text-wrap: balance;
+  }
+
+  .gallery-header .underline {
+    display: block;
+    width: 48px;
+    height: 6px;
+    margin: 26px auto 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #AA42DD, #8225C8);
+  }
+
+  .gallery-frame {
+    position: relative;
+  }
+
+  .gallery-track {
+    display: flex;
+    gap: 34px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 20px;
+  }
+
+  .gallery-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-page {
+    flex: 0 0 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, .74fr);
+    grid-template-rows: 1fr 1fr;
+    gap: 18px 22px;
+    min-width: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .photo-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+    margin: 0;
+    border-radius: 16px;
+    box-shadow: var(--shadow-card);
+    background: #eef2f8;
+    transform: translateZ(0);
+    transition: transform .42s cubic-bezier(.2,.8,.2,1), box-shadow .42s ease, opacity .42s ease;
+  }
+
+  .photo-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 22px 48px rgba(8, 24, 66, .14);
+  }
+
+  .photo-card--large {
+    grid-row: 1 / span 2;
+    min-height: 420px;
+  }
+
+  .photo-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    object-fit: cover;
+    transform: scale(1.015);
+    transition: transform .7s cubic-bezier(.2,.8,.2,1), filter .7s ease;
+  }
+
+  .photo-card:hover img {
+    transform: scale(1.045);
+  }
+
+  .photo-label {
+    position: absolute;
+    left: 22px;
+    bottom: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    max-width: calc(100% - 44px);
+    min-height: 44px;
+    padding: 0 18px 0 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .95);
+    color: var(--navy);
+    box-shadow: var(--shadow-soft);
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .photo-label svg {
+    width: 23px;
+    height: 23px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .photo-card--green .photo-label svg { color: var(--green); fill: rgba(93, 191, 73, .18); }
+  .photo-card--purple .photo-label svg { color: var(--purple); }
+  .photo-card--blue .photo-label svg { color: var(--blue); fill: rgba(27, 169, 232, .18); }
+  .photo-card--yellow .photo-label svg { color: var(--yellow); fill: rgba(242, 198, 61, .24); }
+
+  .gallery-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 4;
+    display: grid;
+    place-items: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.95);
+    color: var(--purple);
+    box-shadow: 0 14px 34px rgba(8, 24, 66, .10);
+    transform: translateY(-50%);
+    text-decoration: none;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+
+  .gallery-arrow:hover {
+    transform: translateY(-50%) scale(1.04);
+    box-shadow: 0 18px 42px rgba(8, 24, 66, .13);
+  }
+
+  .gallery-arrow svg {
+    width: 34px;
+    height: 34px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .gallery-arrow--prev {
+    left: -88px;
+  }
+
+  .gallery-arrow--next {
+    right: -88px;
+  }
+
+  .gallery-dots {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 38px 0 0;
+  }
+
+  .gallery-dots a {
+    width: 13px;
+    height: 13px;
+    border-radius: 999px;
+    background: rgba(9, 22, 66, .13);
+    text-decoration: none;
+    transition: background .2s ease, transform .2s ease;
+  }
+
+  .gallery-dots a:first-child,
+  .gallery-dots a:hover {
+    background: var(--purple);
+    transform: scale(1.12);
+  }
+
+  @supports (animation-timeline: view()) {
+    .gallery-page {
+      animation: page-focus both linear;
+      animation-timeline: view(inline);
+      animation-range: entry 5% exit 95%;
+    }
+
+    @keyframes page-focus {
+      0%, 100% {
+        opacity: .72;
+        transform: scale(.985);
+      }
+
+      35%, 65% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html,
+    .gallery-track {
+      scroll-behavior: auto;
+    }
+
+    .photo-card,
+    .photo-card img,
+    .gallery-arrow,
+    .gallery-dots a {
+      transition: none;
+    }
+
+    .photo-card:hover,
+    .photo-card:hover img {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 1180px) {
+    .gallery-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .gallery-section {
+      width: min(100%, calc(100% - 22px));
+      padding: 44px 16px 46px;
+      border-radius: 20px;
+      background: #fff;
+    }
+
+    .gallery-section::before,
+    .gallery-section::after {
+      display: none;
+    }
+
+    .gallery-header {
+      margin-bottom: 34px;
+    }
+
+    .gallery-icon {
+      width: 58px;
+      height: 58px;
+      margin-bottom: 14px;
+    }
+
+    .gallery-icon svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    .gallery-header h2 {
+      font-size: clamp(38px, 11vw, 50px);
+    }
+
+    .gallery-header p {
+      margin-top: 16px;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .gallery-header .underline {
+      width: 42px;
+      height: 5px;
+      margin-top: 20px;
+    }
+
+    .gallery-track {
+      gap: 16px;
+      scroll-padding-inline: 0;
+      border-radius: 22px;
+      touch-action: pan-x;
+      cursor: grab;
+    }
+
+    .gallery-track.is-swiping {
+      cursor: grabbing;
+    }
+
+    .gallery-page {
+      display: contents;
+    }
+
+    .photo-card,
+    .photo-card--large {
+      flex: 0 0 100%;
+      min-height: 0;
+      height: clamp(310px, 74vw, 430px);
+      border-radius: 22px;
+      scroll-snap-align: center;
+      scroll-snap-stop: always;
+    }
+
+    .photo-label {
+      left: 16px;
+      bottom: 16px;
+      min-height: 42px;
+      padding-inline: 13px 16px;
+      font-size: 15.5px;
+    }
+
+    .gallery-dots {
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .gallery-dots a {
+      width: 11px;
+      height: 11px;
+    }
+  }
+</style>
+</head>
+
+<body>
+  <main>
+    <section class="gallery-section" aria-labelledby="gallery-title">
+      <header class="gallery-header">
+        <span class="gallery-icon" aria-hidden="true">
+          <svg viewBox="0 0 40 40">
+            <path d="M13 14.5h2.6l2.1-3h4.6l2.1 3H27a5 5 0 0 1 5 5v7.5a5 5 0 0 1-5 5H13a5 5 0 0 1-5-5v-7.5a5 5 0 0 1 5-5Z"/>
+            <circle cx="20" cy="23" r="5.8"/>
+            <path d="M29 18h.01"/>
+          </svg>
+        </span>
+
+        <h2 id="gallery-title">Photo Gallery</h2>
+        <p>A glimpse into the joyful moments, learning, and adventures that make childhood so special.</p>
+        <span class="underline" aria-hidden="true"></span>
+      </header>
+
+      <div class="gallery-frame">
+        <a class="gallery-arrow gallery-arrow--prev" href="#gallery-page-1" aria-label="Previous gallery slide">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+
+        <div class="gallery-track" aria-label="Photo carousel">
+          
+        <article class="gallery-page" id="gallery-page-1" aria-label="Gallery slide 1">
+          
+          <figure class="photo-card photo-card--large photo-card--green" id="photo-1">
+            <img src="https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/cminder_table1-pzej258v3czl2144padkre67zd10ydplgpms3uml1c.jpg" alt="Warm learning moments" loading="lazy">
+            <figcaption class="photo-label">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.2 4.9C11.8 5.5 6.4 9.4 5.1 17.8c8.1-1.1 12.6-5.8 14.1-12.9Z"/><path d="M5.2 17.8c3.3-3.7 6.4-5.8 10.4-7"/></svg>
+              <span>Learning Together</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card photo-card--purple" id="photo-2">
+            <img src="https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/artgallery2_o-pzgcyj2id2lpvh3en9iif8b6qdulcwwsmx7m2b2io0.jpg" alt="Creative discovery" loading="lazy">
+            <figcaption class="photo-label">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5c4.2-7.4 9.8-8.1 14-7.1-1.2 6.7-5.3 10.4-12 11.1"/><path d="M7 16.5 4.6 20"/></svg>
+              <span>Creative Discovery</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card photo-card--blue" id="photo-3">
+            <img src="https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/child_car-pzej1zltycrv4dcbm7xtcflgf1sto737fxpv86uy2o.jpg" alt="Happy little moments" loading="lazy">
+            <figcaption class="photo-label">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.2-4.6-8.8-9.1C2 7.3 4.5 4.4 8 4.4c2 0 3.4 1 4 2.3.6-1.3 2-2.3 4-2.3 3.5 0 6 2.9 4.8 6.5C19.2 15.4 12 20 12 20Z"/></svg>
+              <span>Happy Moments</span>
+            </figcaption>
+          </figure>
+        </article>
+        <article class="gallery-page" id="gallery-page-2" aria-label="Gallery slide 2">
+          
+          <figure class="photo-card photo-card--large photo-card--yellow" id="photo-4">
+            <img src="https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/child_play3-pzej21hic0ufrl9lb8r2hf4dltjk3lao470u6qs5q8.jpg" alt="Hands-on play" loading="lazy">
+            <figcaption class="photo-label">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.5 5.1 5.6.8-4 3.9.9 5.5-5-2.6-5 2.6.9-5.5-4-3.9 5.6-.8L12 3Z"/></svg>
+              <span>Hands-on Play</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card photo-card--purple" id="photo-5">
+            <img src="https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/girl_read-pzej05t4ny9sjnzwafhxhw76u2t4pdtzuw1vmtki68.jpg" alt="Story time" loading="lazy">
+            <figcaption class="photo-label">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5c4.2-7.4 9.8-8.1 14-7.1-1.2 6.7-5.3 10.4-12 11.1"/><path d="M7 16.5 4.6 20"/></svg>
+              <span>Story Time</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card photo-card--green" id="photo-6">
+            <img src="https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/girl_grass2-pzeizvgwkrvmzyewyt118gt4au83cpoy5gvjcrzu2o.jpg" alt="Outdoor adventures" loading="lazy">
+            <figcaption class="photo-label">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.2 4.9C11.8 5.5 6.4 9.4 5.1 17.8c8.1-1.1 12.6-5.8 14.1-12.9Z"/><path d="M5.2 17.8c3.3-3.7 6.4-5.8 10.4-7"/></svg>
+              <span>Outdoor Play</span>
+            </figcaption>
+          </figure>
+        </article>
+        <article class="gallery-page" id="gallery-page-3" aria-label="Gallery slide 3">
+          
+          <figure class="photo-card photo-card--large photo-card--blue" id="photo-7">
+            <img src="https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/run_grass-pzeiyc0fdjrpyyngyn21ncsx93tfqkks9udw1ga29s.jpg" alt="Exploring outside" loading="lazy">
+            <figcaption class="photo-label">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.2-4.6-8.8-9.1C2 7.3 4.5 4.4 8 4.4c2 0 3.4 1 4 2.3.6-1.3 2-2.3 4-2.3 3.5 0 6 2.9 4.8 6.5C19.2 15.4 12 20 12 20Z"/></svg>
+              <span>Fresh Air</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card photo-card--yellow" id="photo-8">
+            <img src="https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/kitchen5-pzej0x2g65b3wcwav9a407bk292rwlu7mmyyjug35s.jpg" alt="Curious minds" loading="lazy">
+            <figcaption class="photo-label">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.5 5.1 5.6.8-4 3.9.9 5.5-5-2.6-5 2.6.9-5.5-4-3.9 5.6-.8L12 3Z"/></svg>
+              <span>Curious Minds</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-card photo-card--purple" id="photo-9">
+            <img src="https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/kitchen2-pzej1exdrzzk0y6cyz00tktbckmqyut413d6o3plvk.jpg" alt="Imaginative play" loading="lazy">
+            <figcaption class="photo-label">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5c4.2-7.4 9.8-8.1 14-7.1-1.2 6.7-5.3 10.4-12 11.1"/><path d="M7 16.5 4.6 20"/></svg>
+              <span>Play to Learn</span>
+            </figcaption>
+          </figure>
+        </article>
+        </div>
+
+        <a class="gallery-arrow gallery-arrow--next" href="#gallery-page-2" aria-label="Next gallery slide">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <nav class="gallery-dots" aria-label="Gallery pagination">
+        <a href="#photo-1" aria-label="Go to photo 1"></a>
+<a href="#photo-2" aria-label="Go to photo 2"></a>
+<a href="#photo-3" aria-label="Go to photo 3"></a>
+<a href="#photo-4" aria-label="Go to photo 4"></a>
+<a href="#photo-5" aria-label="Go to photo 5"></a>
+<a href="#photo-6" aria-label="Go to photo 6"></a>
+<a href="#photo-7" aria-label="Go to photo 7"></a>
+<a href="#photo-8" aria-label="Go to photo 8"></a>
+<a href="#photo-9" aria-label="Go to photo 9"></a>
+      </nav>
+    </section>
+  </main>
+<script>
+  (() => {
+    const track = document.querySelector(".gallery-track");
+    if (!track) return;
+
+    const mobileQuery = window.matchMedia("(max-width: 760px)");
+    let startX = 0;
+    let startY = 0;
+    let startScroll = 0;
+    let pointerDown = false;
+
+    const photos = () => Array.from(track.querySelectorAll(".photo-card"));
+
+    function currentPhotoIndex() {
+      const items = photos();
+      const trackCenter = track.scrollLeft + track.clientWidth / 2;
+
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+
+      items.forEach((item, index) => {
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const distance = Math.abs(itemCenter - trackCenter);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      return closestIndex;
+    }
+
+    function scrollToPhoto(index) {
+      const items = photos();
+      const target = items[Math.max(0, Math.min(index, items.length - 1))];
+
+      if (!target) return;
+
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center"
+      });
+    }
+
+    track.addEventListener("pointerdown", (event) => {
+      if (!mobileQuery.matches || event.pointerType === "mouse") return;
+
+      pointerDown = true;
+      startX = event.clientX;
+      startY = event.clientY;
+      startScroll = track.scrollLeft;
+      track.classList.add("is-swiping");
+    }, { passive: true });
+
+    track.addEventListener("pointerup", (event) => {
+      if (!pointerDown || !mobileQuery.matches) return;
+
+      pointerDown = false;
+      track.classList.remove("is-swiping");
+
+      const deltaX = event.clientX - startX;
+      const deltaY = event.clientY - startY;
+      const movedByNativeScroll = Math.abs(track.scrollLeft - startScroll);
+      const isHorizontalSwipe = Math.abs(deltaX) > 42 && Math.abs(deltaX) > Math.abs(deltaY);
+
+      if (!isHorizontalSwipe && movedByNativeScroll < 32) return;
+
+      const index = currentPhotoIndex();
+      const direction = deltaX < 0 ? 1 : -1;
+
+      scrollToPhoto(index + direction);
+    }, { passive: true });
+
+    track.addEventListener("pointercancel", () => {
+      pointerDown = false;
+      track.classList.remove("is-swiping");
+    }, { passive: true });
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Opening hours and term dates — Little Wise Kids Left Aligned</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --lwk-purple: #9137D1;
+    --lwk-purple-dark: #7E23C2;
+    --lwk-purple-soft: #F7EFFF;
+
+    --lwk-green: #5DBF49;
+    --lwk-green-dark: #358A26;
+    --lwk-green-soft: #F1FBEF;
+
+    --lwk-blue: #1BA9E8;
+    --lwk-blue-dark: #117FB8;
+    --lwk-blue-soft: #EFF9FF;
+
+    --lwk-navy: #061947;
+    --lwk-ink: #102251;
+    --lwk-muted: #61708D;
+    --lwk-line: rgba(6, 25, 71, .12);
+    --lwk-white: #FFFFFF;
+
+    --radius-xl: 34px;
+    --radius-lg: 26px;
+    --radius-md: 18px;
+
+    --shadow-card: 0 20px 50px rgba(8, 24, 66, .09);
+    --shadow-soft: 0 12px 30px rgba(8, 24, 66, .07);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: #fff;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background: #fff;
+    color: var(--lwk-navy);
+    font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+  }
+
+  .page-shell {
+    width: min(1220px, 100%);
+    margin-inline: auto;
+    padding: clamp(56px, 7vw, 92px) 24px clamp(72px, 8vw, 110px);
+  }
+
+  .opening-section {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .opening-section__decor {
+    display: none;
+  }
+
+  .opening-section__decor svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .opening-section__decor--left {
+    top: -38px;
+    left: -72px;
+    width: 190px;
+    height: 110px;
+    --decor-color: var(--lwk-purple);
+  }
+
+  .opening-section__decor--right {
+    top: -22px;
+    right: -58px;
+    width: 185px;
+    height: 104px;
+    --decor-color: var(--lwk-green);
+  }
+
+  .opening-section__decor--bottom-left {
+    bottom: -44px;
+    left: -70px;
+    width: 170px;
+    height: 110px;
+    --decor-color: var(--lwk-blue);
+  }
+
+  .opening-section__decor--bottom-right {
+    right: -14px;
+    bottom: 22px;
+    width: 190px;
+    height: 70px;
+    --decor-color: var(--lwk-purple);
+    --decor-opacity: .55;
+  }
+
+  .section-heading {
+    max-width: 800px;
+    margin: 0 auto 34px;
+    text-align: center;
+  }
+
+  .section-heading__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 0 14px;
+    color: var(--lwk-purple);
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: -.02em;
+  }
+
+  .section-heading__eyebrow svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .section-heading__title {
+    margin: 0;
+    color: var(--lwk-navy);
+    font-family: "Fredoka", "Nunito", system-ui, sans-serif;
+    font-size: clamp(42px, 5.1vw, 68px);
+    font-weight: 700;
+    line-height: .96;
+    letter-spacing: -.04em;
+    text-wrap: balance;
+  }
+
+  .section-heading__title em {
+    font-style: normal;
+  }
+
+  .section-heading__title .text-purple { color: var(--lwk-purple); }
+  .section-heading__title .text-green { color: var(--lwk-green); }
+
+  .section-heading__intro {
+    max-width: 700px;
+    margin: 18px auto 0;
+    color: rgba(6, 25, 71, .78);
+    font-size: clamp(17px, 1.5vw, 22px);
+    font-weight: 700;
+    line-height: 1.45;
+  }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: minmax(0, .93fr) minmax(0, 1.07fr);
+    gap: 22px;
+    margin-bottom: 22px;
+  }
+
+  .info-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--lwk-line);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(12px);
+  }
+
+  .opening-hours {
+    min-height: 320px;
+    padding: 40px 48px 34px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .opening-status {
+    margin: 0 0 34px;
+    color: var(--lwk-green-dark);
+    font-size: clamp(23px, 2.2vw, 30px);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -.025em;
+  }
+
+  .opening-status strong {
+    font-weight: 900;
+  }
+
+  .opening-hours__main {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 28px;
+    width: 100%;
+    margin-bottom: 22px;
+  }
+
+  .clock-mark {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 100px;
+    height: 100px;
+    color: var(--lwk-purple);
+  }
+
+  .clock-mark svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 3.1;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .opening-hours__time-wrap {
+    display: inline-grid;
+    justify-items: start;
+  }
+
+  .opening-hours__time {
+    display: block;
+    color: var(--lwk-navy);
+    font-family: "Fredoka", "Nunito", system-ui, sans-serif;
+    font-size: clamp(52px, 5vw, 78px);
+    font-weight: 700;
+    line-height: .9;
+    letter-spacing: -.045em;
+  }
+
+
+
+  .opening-hours__days {
+    margin: 0 0 24px;
+    color: var(--lwk-ink);
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  .opening-hours__rule {
+    width: 100%;
+    margin: 0 0 22px;
+    border: 0;
+    border-top: 2px dashed rgba(6, 25, 71, .17);
+  }
+
+  .opening-notes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .opening-notes__item {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
+    min-height: 50px;
+    color: var(--lwk-navy);
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1.15;
+    text-align: left;
+  }
+
+  .opening-notes__item + .opening-notes__item {
+    border-left: 1px solid rgba(6, 25, 71, .16);
+  }
+
+  .opening-notes__icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 46px;
+    height: 46px;
+    border-radius: 999px;
+    color: #fff;
+  }
+
+  .opening-notes__icon--yes {
+    background: linear-gradient(135deg, #73CB4D, #48AF36);
+  }
+
+  .opening-notes__icon--no {
+    background: linear-gradient(135deg, #AA42DC, #8023C5);
+  }
+
+  .opening-notes__icon svg {
+    width: 25px;
+    height: 25px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 3.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .week-summary {
+    min-height: 320px;
+    padding: 32px 30px 24px;
+    background: #fff;
+  }
+
+  .week-summary__heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 20px;
+    color: var(--lwk-navy);
+    font-family: "Fredoka", "Nunito", system-ui, sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -.025em;
+  }
+
+  .week-summary__heading svg {
+    flex: 0 0 auto;
+    width: 29px;
+    height: 29px;
+    color: var(--lwk-blue);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+
+  .week-list {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 9px;
+    margin: 0 0 24px;
+    padding: 0;
+  }
+
+  .week-day {
+    list-style: none;
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: 6px;
+    min-height: 74px;
+    border-radius: 13px;
+    border: 1.5px solid rgba(53, 138, 38, .42);
+    background: rgba(93, 191, 73, .07);
+    color: var(--lwk-green-dark);
+    font-size: 18px;
+    font-weight: 900;
+  }
+
+  .week-day svg {
+    width: 30px;
+    height: 30px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.35;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .week-day--closed {
+    border-color: rgba(6, 25, 71, .14);
+    background: rgba(6, 25, 71, .03);
+    color: rgba(6, 25, 71, .43);
+  }
+
+  .week-moment {
+    display: grid;
+    grid-template-columns: minmax(180px, .95fr) minmax(170px, .75fr);
+    align-items: center;
+    gap: 30px;
+  }
+
+  .week-moment__image {
+    min-height: 150px;
+    border-radius: 20px;
+    overflow: hidden;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,0)),
+      url("https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=900&auto=format&fit=crop") center 38% / cover no-repeat;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .week-moment__text {
+    position: relative;
+    margin: 0;
+    color: var(--lwk-navy);
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.32;
+  }
+
+  .week-moment__text::before {
+    content: "♡";
+    display: block;
+    margin-bottom: 10px;
+    color: var(--lwk-blue);
+    font-size: 42px;
+    font-weight: 900;
+    line-height: .75;
+  }
+
+  .term-card {
+    padding: 28px 30px 24px;
+    background: #fff;
+  }
+
+  .term-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 22px;
+    margin: 0 0 18px;
+  }
+
+  .term-card__title {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin: 0;
+    color: var(--lwk-navy);
+    font-family: "Fredoka", "Nunito", system-ui, sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -.035em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .term-card__title svg {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    color: var(--lwk-purple);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .year-tabs {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .year-tabs__button {
+    appearance: none;
+    min-width: 124px;
+    min-height: 50px;
+    padding: 11px 22px 12px;
+    border: 2px solid rgba(145, 55, 209, .8);
+    border-radius: 999px;
+    background: var(--lwk-white);
+    color: var(--lwk-purple);
+    font: inherit;
+    font-size: 21px;
+    font-weight: 900;
+    letter-spacing: -.02em;
+    cursor: pointer;
+  }
+
+  .year-tabs__button[aria-selected="true"] {
+    border-color: transparent;
+    background: linear-gradient(135deg, #A244DD, #8326C7);
+    color: #fff;
+    box-shadow: 0 12px 22px rgba(145, 55, 209, .22);
+  }
+
+  .term-panel[hidden] {
+    display: none;
+  }
+
+  .term-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 34px;
+    margin: 0;
+    padding: 15px 18px 11px;
+    border: 1px solid rgba(6, 25, 71, .12);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .75);
+  }
+
+  .term-item {
+    display: grid;
+    grid-template-columns: 46px 84px minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    min-height: 60px;
+    padding: 10px 0;
+    border-top: 1px solid rgba(6, 25, 71, .10);
+  }
+
+  .term-item:nth-child(1),
+  .term-item:nth-child(2) {
+    border-top: 0;
+  }
+
+  .term-item__number {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    background: rgba(27, 169, 232, .16);
+    color: var(--lwk-blue-dark);
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .term-item__label {
+    color: var(--lwk-navy);
+    font-size: 19px;
+    font-weight: 900;
+    white-space: nowrap;
+  }
+
+  .term-item__range {
+    color: var(--lwk-ink);
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  .term-note {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 18px 0 0;
+    padding: 15px 28px;
+    border-radius: 18px;
+    background: linear-gradient(90deg, rgba(145, 55, 209, .09), rgba(145, 55, 209, .04));
+    color: rgba(6, 25, 71, .76);
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  .term-note svg {
+    flex: 0 0 auto;
+    width: 26px;
+    height: 26px;
+    color: var(--lwk-purple);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media (max-width: 980px) {
+    .overview-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .week-moment {
+      grid-template-columns: .8fr 1fr;
+    }
+
+    .term-list {
+      grid-template-columns: 1fr;
+    }
+
+    .term-item:nth-child(2) {
+      border-top: 1px solid rgba(6, 25, 71, .10);
+    }
+  }
+
+  @media (max-width: 680px) {
+    body {
+      background: #fff;
+    }
+
+    .page-shell {
+      padding: 50px 14px 70px;
+    }
+
+    .opening-section__decor {
+    display: none;
+  }
+
+    .opening-section__decor--left {
+      top: -28px;
+      left: -88px;
+      width: 170px;
+    }
+
+    .opening-section__decor--right {
+      top: -34px;
+      right: -92px;
+      width: 155px;
+    }
+
+    .opening-section__decor--bottom-left,
+    .opening-section__decor--bottom-right {
+      display: none;
+    }
+
+    .section-heading {
+      margin-bottom: 26px;
+    }
+
+    .section-heading__eyebrow {
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    .section-heading__eyebrow svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .section-heading__title {
+      max-width: 430px;
+      margin-inline: auto;
+      font-size: clamp(38px, 12vw, 50px);
+      line-height: 1.02;
+    }
+
+    .section-heading__intro {
+      max-width: 350px;
+      margin-top: 14px;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .overview-grid {
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .info-card {
+      border-radius: 24px;
+      box-shadow: 0 15px 36px rgba(8, 24, 66, .08);
+    }
+
+    .opening-hours {
+      min-height: 0;
+      padding: 24px 20px 22px;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .opening-status {
+      margin-bottom: 22px;
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .opening-hours__main {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      justify-content: start;
+      gap: 14px;
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .clock-mark {
+      width: 62px;
+      height: 62px;
+    }
+
+    .opening-hours__time-wrap {
+      justify-items: start;
+      min-width: 0;
+    }
+
+    .opening-hours__time {
+      font-size: clamp(45px, 14.2vw, 60px);
+      letter-spacing: -.055em;
+    }
+
+
+
+    .opening-hours__days {
+      align-self: stretch;
+      margin: 2px 0 18px;
+      font-size: 16.5px;
+      line-height: 1.35;
+      text-align: left;
+    }
+
+    .opening-hours__rule {
+      margin-bottom: 16px;
+    }
+
+    .opening-notes {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .opening-notes__item {
+      justify-content: flex-start;
+      min-height: 44px;
+      font-size: 15.5px;
+      line-height: 1.22;
+    }
+
+    .opening-notes__item + .opening-notes__item {
+      border-left: 0;
+    }
+
+    .opening-notes__icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .opening-notes__icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .week-summary {
+    min-height: 320px;
+    padding: 32px 30px 24px;
+    background: #fff;
+  }
+
+    .week-summary__heading {
+      margin-bottom: 16px;
+      font-size: 27px;
+    }
+
+    .week-summary__heading svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .week-list {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .week-day {
+      min-height: 58px;
+      border-radius: 14px;
+      font-size: 14.5px;
+    }
+
+    .week-day svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .week-moment {
+      grid-template-columns: 82px minmax(0, 1fr);
+      gap: 14px;
+      align-items: center;
+      padding-top: 18px;
+      border-top: 1px solid rgba(6, 25, 71, .10);
+    }
+
+    .week-moment__image {
+      min-height: 82px;
+      border-radius: 17px;
+    }
+
+    .week-moment__text {
+      font-size: 15.5px;
+      line-height: 1.35;
+    }
+
+    .week-moment__text::before {
+      display: none;
+    }
+
+    .term-card {
+    padding: 28px 30px 24px;
+    background: #fff;
+  }
+
+    .term-card__header {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .term-card__title {
+      gap: 11px;
+      font-size: 31px;
+      line-height: 1.05;
+      white-space: normal;
+    }
+
+    .term-card__title svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .year-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .year-tabs__button {
+      min-width: 0;
+      min-height: 46px;
+      padding-inline: 14px;
+      font-size: 17px;
+    }
+
+    .term-list {
+      gap: 0;
+      padding: 6px 15px;
+      border-radius: 18px;
+    }
+
+    .term-item {
+      grid-template-columns: 40px minmax(0, 1fr);
+      gap: 11px 12px;
+      min-height: 0;
+      padding: 15px 0;
+    }
+
+    .term-item:nth-child(1) {
+      border-top: 0;
+    }
+
+    .term-item:nth-child(2) {
+      border-top: 1px solid rgba(6, 25, 71, .10);
+    }
+
+    .term-item__number {
+      grid-row: 1 / span 2;
+      width: 34px;
+      height: 34px;
+      font-size: 18px;
+    }
+
+    .term-item__label {
+      font-size: 17px;
+      line-height: 1.1;
+    }
+
+    .term-item__range {
+      font-size: 15.5px;
+      line-height: 1.35;
+    }
+
+    .term-note {
+      align-items: flex-start;
+      margin-top: 14px;
+      padding: 14px 15px;
+      font-size: 14px;
+    }
+
+    .term-note svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .opening-hours__main {
+      grid-template-columns: 1fr;
+      text-align: left;
+      justify-items: start;
+    }
+
+    .opening-hours__time-wrap {
+      justify-items: start;
+    }
+
+    .opening-hours__days {
+      text-align: left;
+    }
+
+    .week-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .section-heading__title {
+      font-size: 37px;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .opening-status {
+      transition: color .2s ease;
+    }
+  }
+</style>
+</head>
+
+<body>
+  <main class="page-shell">
+    <section class="opening-section" aria-labelledby="opening-title">
+      <div class="opening-section__decor opening-section__decor--left" aria-hidden="true">
+        <svg viewBox="0 0 190 110">
+          <path d="M-6 22C22 18 32 42 60 42c36 0 34-40 68-36 29 3 25 35 56 34" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="8 10" stroke-linecap="round"/>
+          <path d="m90 68 6.2 12.5 13.8 2-10 9.8 2.3 13.7L90 99.5 77.7 106l2.3-13.7-10-9.8 13.8-2L90 68Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="opening-section__decor opening-section__decor--right" aria-hidden="true">
+        <svg viewBox="0 0 185 104">
+          <path d="M2 38c26-28 61-15 83 1 19 14 48 24 94-10" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="8 10" stroke-linecap="round"/>
+          <path d="m45 4 6.2 12.5 13.8 2-10 9.8 2.3 13.7L45 35.5 32.7 42l2.3-13.7-10-9.8 13.8-2L45 4Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="opening-section__decor opening-section__decor--bottom-left" aria-hidden="true">
+        <svg viewBox="0 0 170 110">
+          <path d="M-10 72c29 23 55 19 78 2 17-12 5-35-11-24-20 14 9 55 65 49" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="7 9" stroke-linecap="round"/>
+          <path d="m130 54 6.2 12.5 13.8 2-10 9.8 2.3 13.7L130 85.5 117.7 92l2.3-13.7-10-9.8 13.8-2L130 54Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="opening-section__decor opening-section__decor--bottom-right" aria-hidden="true">
+        <svg viewBox="0 0 190 70">
+          <path d="M2 40c41-37 80-35 112-16 20 12 31-4 20-13-18-15-44 32 44 50" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="8 10" stroke-linecap="round"/>
+          <path d="m34 31 5.2 10.5 11.6 1.7-8.4 8.2 2 11.6L34 57.5 23.6 63l2-11.6-8.4-8.2 11.6-1.7L34 31Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <header class="section-heading">
+        <p class="section-heading__eyebrow">
+          <svg viewBox="0 0 40 40" aria-hidden="true">
+            <path d="m20 5.8 4.4 8.8 9.8 1.4-7.1 6.9 1.7 9.7L20 28l-8.8 4.6 1.7-9.7L5.8 16l9.8-1.4L20 5.8Z"/>
+          </svg>
+          Term dates and hours
+        </p>
+        <h2 class="section-heading__title" id="opening-title">
+          When we’re <em class="text-purple">open</em> and <em class="text-green">welcoming</em>
+        </h2>
+        <p class="section-heading__intro">
+          Everything you need to plan your child’s week with us, at a glance.
+        </p>
+      </header>
+
+      <div class="overview-grid">
+        <article class="info-card opening-hours" aria-labelledby="opening-hours-title">
+          <p class="opening-status" id="opening-hours-title">
+            <strong>Open today</strong>
+            <span aria-hidden="true"> · </span>
+            <span>closes at 18:00</span>
+          </p>
+
+          <div class="opening-hours__main">
+            <span class="clock-mark" aria-hidden="true">
+              <svg viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="38"/>
+                <path d="M50 22v29l22 14"/>
+                <path d="M50 10v7M50 83v7M10 50h7M83 50h7M22 22l5 5M73 73l5 5M78 22l-5 5M27 73l-5 5"/>
+              </svg>
+            </span>
+
+            <span class="opening-hours__time-wrap">
+              <strong class="opening-hours__time">7:00–18:00</strong>
+            </span>
+          </div>
+
+          <p class="opening-hours__days">Monday to Friday, every week of the year</p>
+          <hr class="opening-hours__rule" />
+
+          <ul class="opening-notes" aria-label="Opening notes">
+            <li class="opening-notes__item">
+              <span class="opening-notes__icon opening-notes__icon--yes" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 12.8 9.4 17 19.3 7"/></svg>
+              </span>
+              <span>Open through<br>school holidays</span>
+            </li>
+            <li class="opening-notes__item">
+              <span class="opening-notes__icon opening-notes__icon--no" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7 7 17"/></svg>
+              </span>
+              <span>Closed on<br>bank holidays</span>
+            </li>
+          </ul>
+        </article>
+
+        <article class="info-card week-summary" aria-labelledby="week-summary-title">
+          <h3 class="week-summary__heading" id="week-summary-title">
+            <svg viewBox="0 0 40 40" aria-hidden="true">
+              <path d="M19 4c1.2 8.7 3.8 13.1 12 15-8.2 1.9-10.8 6.3-12 15-1.2-8.7-3.8-13.1-12-15 8.2-1.9 10.8-6.3 12-15Z"/>
+              <path d="M31 4c.5 3.5 1.6 5.1 5 6-3.4.9-4.5 2.5-5 6-.5-3.5-1.6-5.1-5-6 3.4-.9 4.5-2.5 5-6Z"/>
+            </svg>
+            This week at a glance
+          </h3>
+
+          <ul class="week-list" role="list" aria-label="Weekly open and closed days">
+            <li class="week-day"><span>Mon</span><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12"/><path d="M11 18c1.2 2 3 3 5 3s3.8-1 5-3M12 12h.1M20 12h.1"/></svg></li>
+            <li class="week-day"><span>Tue</span><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12"/><path d="M11 18c1.2 2 3 3 5 3s3.8-1 5-3M12 12h.1M20 12h.1"/></svg></li>
+            <li class="week-day"><span>Wed</span><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12"/><path d="M11 18c1.2 2 3 3 5 3s3.8-1 5-3M12 12h.1M20 12h.1"/></svg></li>
+            <li class="week-day"><span>Thu</span><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12"/><path d="M11 18c1.2 2 3 3 5 3s3.8-1 5-3M12 12h.1M20 12h.1"/></svg></li>
+            <li class="week-day"><span>Fri</span><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12"/><path d="M11 18c1.2 2 3 3 5 3s3.8-1 5-3M12 12h.1M20 12h.1"/></svg></li>
+            <li class="week-day week-day--closed"><span>Sat</span><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12"/><path d="M11 18c1.2 2 3 3 5 3s3.8-1 5-3M12 12h.1M20 12h.1"/></svg></li>
+            <li class="week-day week-day--closed"><span>Sun</span><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12"/><path d="M11 18c1.2 2 3 3 5 3s3.8-1 5-3M12 12h.1M20 12h.1"/></svg></li>
+          </ul>
+
+          <div class="week-moment">
+            <div class="week-moment__image" role="img" aria-label="A child playing with colourful blocks"></div>
+            <p class="week-moment__text">A morning with us — playful, warm and full of little discoveries.</p>
+          </div>
+        </article>
+      </div>
+
+      <article class="info-card term-card" aria-labelledby="term-title">
+        <div class="term-card__header">
+          <h3 class="term-card__title" id="term-title">
+            <svg viewBox="0 0 40 40" aria-hidden="true">
+              <path d="M10 7v6M30 7v6M7 14h26M10 10h20a3 3 0 0 1 3 3v18a3 3 0 0 1-3 3H10a3 3 0 0 1-3-3V13a3 3 0 0 1 3-3Z"/>
+              <path d="M13 20h4M21 20h4M13 26h4M21 26h4"/>
+            </svg>
+            School term dates
+          </h3>
+
+          <div class="year-tabs" role="tablist" aria-label="Choose academic year">
+            <button class="year-tabs__button" type="button" role="tab" aria-selected="true" aria-controls="term-panel-2022" id="term-tab-2022">2022/23</button>
+            <button class="year-tabs__button" type="button" role="tab" aria-selected="false" aria-controls="term-panel-2023" id="term-tab-2023">2023/24</button>
+          </div>
+        </div>
+
+        <div class="term-panel" id="term-panel-2022" role="tabpanel" aria-labelledby="term-tab-2022">
+          <dl class="term-list">
+            <div class="term-item">
+              <dt class="term-item__number">1</dt>
+              <dd class="term-item__label">Term 1</dd>
+              <dd class="term-item__range">5 September – 21 October 2022</dd>
+            </div>
+            <div class="term-item">
+              <dt class="term-item__number">4</dt>
+              <dd class="term-item__label">Term 4</dd>
+              <dd class="term-item__range">20 February – 31 March 2023</dd>
+            </div>
+            <div class="term-item">
+              <dt class="term-item__number">2</dt>
+              <dd class="term-item__label">Term 2</dd>
+              <dd class="term-item__range">31 October – 16 December 2022</dd>
+            </div>
+            <div class="term-item">
+              <dt class="term-item__number">5</dt>
+              <dd class="term-item__label">Term 5</dd>
+              <dd class="term-item__range">17 April – 26 May 2023</dd>
+            </div>
+            <div class="term-item">
+              <dt class="term-item__number">3</dt>
+              <dd class="term-item__label">Term 3</dd>
+              <dd class="term-item__range">3 January – 10 February 2023</dd>
+            </div>
+            <div class="term-item">
+              <dt class="term-item__number">6</dt>
+              <dd class="term-item__label">Term 6</dd>
+              <dd class="term-item__range">5 June – 21 July 2023</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="term-panel" id="term-panel-2023" role="tabpanel" aria-labelledby="term-tab-2023" hidden>
+          <dl class="term-list">
+            <div class="term-item">
+              <dt class="term-item__number">1</dt>
+              <dd class="term-item__label">Term 1</dd>
+              <dd class="term-item__range">1 September – 20 October 2023</dd>
+            </div>
+            <div class="term-item">
+              <dt class="term-item__number">4</dt>
+              <dd class="term-item__label">Term 4</dd>
+              <dd class="term-item__range">19 February – 28 March 2024</dd>
+            </div>
+            <div class="term-item">
+              <dt class="term-item__number">2</dt>
+              <dd class="term-item__label">Term 2</dd>
+              <dd class="term-item__range">30 October – 15 December 2023</dd>
+            </div>
+            <div class="term-item">
+              <dt class="term-item__number">5</dt>
+              <dd class="term-item__label">Term 5</dd>
+              <dd class="term-item__range">15 April – 24 May 2024</dd>
+            </div>
+            <div class="term-item">
+              <dt class="term-item__number">3</dt>
+              <dd class="term-item__label">Term 3</dd>
+              <dd class="term-item__range">2 January – 9 February 2024</dd>
+            </div>
+            <div class="term-item">
+              <dt class="term-item__number">6</dt>
+              <dd class="term-item__label">Term 6</dd>
+              <dd class="term-item__range">3 June – 23 July 2024</dd>
+            </div>
+          </dl>
+        </div>
+
+        <p class="term-note">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 7v5l3.4 2"/>
+          </svg>
+          <span>Term dates follow the local authority school calendar and may be updated during the year.</span>
+        </p>
+      </article>
+    </section>
+  </main>
+
+<script>
+  const yearTabs = document.querySelectorAll('[role="tab"]');
+  const yearPanels = document.querySelectorAll('[role="tabpanel"]');
+
+  yearTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.getAttribute('aria-controls');
+
+      yearTabs.forEach((item) => {
+        item.setAttribute('aria-selected', String(item === tab));
+      });
+
+      yearPanels.forEach((panel) => {
+        panel.hidden = panel.id !== targetId;
+      });
+    });
+  });
+</script>
+</body>
+</html>
