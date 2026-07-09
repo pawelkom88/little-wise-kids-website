@@ -1,28 +1,507 @@
 ---
-import { values } from "../../data/site";
-import Icon from "../icons/Icon.astro";
 import Section from "../layout/Section.astro";
+import multilingualBubble from "../../../assets/icons/bubble-multilingual.png";
+import heartBubble from "../../../assets/icons/bubble-heart-with-smile.png";
+import artBubble from "../../../assets/icons/bubble-art.png";
+import peopleBubble from "../../../assets/icons/bubble-people.png";
+
+const cards = [
+  {
+    tone: "purple",
+    image: multilingualBubble,
+    title: ["Multilingual", "Learning"],
+    copy:
+      "We introduce languages through songs, stories and everyday moments—helping children connect, communicate and celebrate the world around them.",
+  },
+  {
+    tone: "green",
+    image: heartBubble,
+    title: ["Safe & Caring"],
+    copy:
+      "Your child’s wellbeing comes first. We provide secure, nurturing environments where children feel loved, respected and free to be themselves.",
+  },
+  {
+    tone: "blue",
+    image: artBubble,
+    title: ["Creative Play"],
+    copy:
+      "Through imaginative play, art, music and hands-on exploration, children build confidence, spark curiosity and develop a love for learning.",
+  },
+  {
+    tone: "yellow",
+    image: peopleBubble,
+    title: ["Parent Partnership"],
+    copy:
+      "We believe strong partnerships create the best outcomes. We work closely with families to support each child’s unique journey.",
+  },
+] as const;
 ---
 
-<Section id="activities" class="values-section">
-  <div class="section-heading">
-    <h2>Nurturing Little Minds, Inspiring Bright Futures</h2>
-    <p>Every day is a chance to learn, grow and shine at Little Wise Kids.</p>
-  </div>
+<Section id="activities" class="values-section" width="full">
+  <div class="values-shell" aria-labelledby="values-title">
+    <div class="values-section__blob values-section__blob--top-left" aria-hidden="true"></div>
+    <div class="values-section__blob values-section__blob--right" aria-hidden="true"></div>
 
-  <div class="value-grid">
-    {
-      values.map((value) => (
-        <article class={`value-card tone-bg-${value.tone}`}>
-          <span class={`value-card__icon tone-solid-${value.tone}`}>
-            <Icon name={value.icon} size={46} />
-          </span>
-          <div>
-            <h3 class={`tone-${value.tone}`}>{value.title}</h3>
-            <p>{value.text}</p>
-          </div>
-        </article>
-      ))
-    }
+    <div class="values-section__decor values-section__decor--heart-top" aria-hidden="true">
+      <svg viewBox="0 0 48 40">
+        <path fill="currentColor" d="M24 34c-.8 0-1.6-.3-2.2-.8C10.2 24.1 4 18.7 4 11.4 4 6.8 7.7 3 12.3 3c4 0 6.4 2.2 7.8 4.4C21.3 5.2 23.7 3 27.7 3 32.3 3 36 6.8 36 11.4c0 7.3-6.2 12.7-17.8 21.8-.6.5-1.2.8-1.9.8z"></path>
+      </svg>
+    </div>
+
+    <div class="values-section__decor values-section__decor--left-line" aria-hidden="true">
+      <svg viewBox="0 0 230 110">
+        <path d="M-2 18c36 0 24 64 98 64 56 0 46-58 124-58" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="8 12"></path>
+      </svg>
+    </div>
+
+    <div class="values-section__decor values-section__decor--star-left" aria-hidden="true">
+      <svg viewBox="0 0 44 44">
+        <path d="M22 5.5 26.8 15l10.5 1.5-7.6 7.4 1.8 10.4L22 29.3l-9.5 5 1.8-10.4-7.6-7.4L17.2 15 22 5.5Z" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+
+    <div class="values-section__decor values-section__decor--plane" aria-hidden="true">
+      <svg viewBox="0 0 170 132">
+        <path d="M24 18 52 31 38 46l-14-28Zm0 0 92 24-78 14-14-38Zm14 38 78-14-40 40" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M126 20c20 14 21 29 12 46-5 10-8 14-10 18-4 9-2 22 17 33" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 10"></path>
+      </svg>
+    </div>
+
+    <header class="values-section__header">
+      <h2 class="values-section__title" id="values-title">
+        <span class="values-section__title-line">
+          Nurturing <span class="is-purple">Little Minds,</span>
+        </span>
+        <span class="values-section__title-line">
+          Inspiring <span class="is-blue">Bright Futures</span>
+        </span>
+      </h2>
+      <p class="values-section__subtitle">
+        Every day is a chance to learn, grow and shine at Little Wise Kids.
+      </p>
+    </header>
+
+    <div class="values-grid">
+      {
+        cards.map((card) => (
+          <article class={`value-card value-card--${card.tone}`}>
+            <div class={`value-card__badge value-card__badge--${card.tone}`} aria-hidden="true">
+              <img src={card.image.src} alt="" loading="lazy" />
+            </div>
+
+            <div class="value-card__content">
+              <h3 class={`value-card__heading value-card__heading--${card.tone}`}>
+                {card.title.map((line) => <span>{line}</span>)}
+              </h3>
+              <p class="value-card__copy">{card.copy}</p>
+            </div>
+
+            <div class={`value-card__doodle value-card__doodle--${card.tone}-corner`} aria-hidden="true">
+              <svg viewBox="0 0 74 52">
+                <path d="M23 6 28 16l11 1.6-8 7.8 1.9 11.1L23 31.2l-9.9 5.3L15 25.4l-8-7.8L18 16 23 6Z" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"></path>
+              </svg>
+            </div>
+          </article>
+        ))
+      }
+    </div>
   </div>
 </Section>
+
+<style>
+  .values-section {
+    padding-block: 0;
+    background: var(--color-surface);
+  }
+
+  .values-shell {
+    position: relative;
+    overflow: hidden;
+    width: min(1240px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 46px 24px 30px;
+    font-family: "Nunito", var(--font-body);
+  }
+
+  .values-section__blob,
+  .values-section__decor {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .values-section__blob {
+    opacity: 0.9;
+  }
+
+  .values-section__blob--top-left {
+    inset: -2px auto auto -4px;
+    width: 170px;
+    height: 116px;
+    border-bottom-right-radius: 96px;
+    background: color-mix(in srgb, var(--color-purple-soft), white 18%);
+  }
+
+  .values-section__blob--right {
+    inset: 0 -38px auto auto;
+    width: 138px;
+    height: 252px;
+    border-top-left-radius: 124px;
+    border-bottom-left-radius: 124px;
+    background: color-mix(in srgb, var(--color-green-soft), white 24%);
+  }
+
+  .values-section__decor {
+    z-index: 0;
+  }
+
+  .values-section__decor svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .values-section__decor--left-line {
+    top: 104px;
+    left: -10px;
+    width: 230px;
+    height: 110px;
+    color: color-mix(in srgb, var(--color-blue), white 18%);
+  }
+
+  .values-section__decor--plane {
+    top: 56px;
+    right: 66px;
+    width: 170px;
+    height: 132px;
+    color: color-mix(in srgb, var(--color-purple), white 22%);
+  }
+
+  .values-section__decor--heart-top {
+    top: 6px;
+    left: 50%;
+    width: 48px;
+    height: 40px;
+    color: var(--color-green);
+    transform: translateX(-50%);
+  }
+
+  .values-section__decor--star-left {
+    top: 136px;
+    left: 254px;
+    width: 44px;
+    height: 44px;
+    color: color-mix(in srgb, var(--color-blue), white 18%);
+  }
+
+  .values-section__header {
+    position: relative;
+    z-index: 1;
+    max-width: 850px;
+    margin: 0 auto 36px;
+    text-align: center;
+  }
+
+  .values-section__title {
+    margin: 14px 0 16px;
+    color: var(--color-ink);
+    font-family: var(--font-heading);
+    font-size: clamp(44px, 5.3vw, 74px);
+    font-weight: 600;
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+  }
+
+  .values-section__title-line {
+    display: block;
+  }
+
+  .values-section__title .is-purple {
+    color: var(--color-purple);
+  }
+
+  .values-section__title .is-blue {
+    color: var(--color-blue);
+  }
+
+  .values-section__subtitle {
+    margin: 0;
+    color: color-mix(in srgb, var(--color-ink-soft), white 10%);
+    font-size: clamp(19px, 1.7vw, 24px);
+    font-weight: 700;
+    line-height: 1.45;
+  }
+
+  .values-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 30px;
+  }
+
+  .values-grid .value-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 186px 1fr;
+    gap: 22px;
+    align-items: center;
+    min-height: 302px;
+    padding: 34px 34px 30px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-l);
+    box-shadow: 0 20px 40px rgba(10, 22, 70, 0.04);
+  }
+
+  .value-card--purple {
+    background: var(--color-purple-soft);
+  }
+
+  .value-card--green {
+    background: var(--color-green-soft);
+  }
+
+  .value-card--blue {
+    background: var(--color-blue-soft);
+  }
+
+  .value-card--yellow {
+    background: var(--color-yellow-soft);
+  }
+
+  .value-card__badge {
+    position: relative;
+    display: grid;
+    width: 176px;
+    height: 176px;
+    flex-shrink: 0;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .value-card__badge img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .value-card__content {
+    min-width: 0;
+    align-self: center;
+  }
+
+  .value-card__heading {
+    margin: 0 0 12px;
+    font-family: "Fredoka", var(--font-heading);
+    font-size: clamp(32px, 2.7vw, 42px);
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+  }
+
+  .value-card__heading span {
+    display: block;
+  }
+
+  .value-card__heading--purple {
+    color: var(--color-purple-dark);
+  }
+
+  .value-card__heading--green {
+    color: var(--color-green-dark);
+  }
+
+  .value-card__heading--blue {
+    color: var(--color-blue-dark);
+  }
+
+  .value-card__heading--yellow {
+    color: color-mix(in srgb, var(--color-yellow), black 18%);
+  }
+
+  .values-grid .value-card__copy {
+    max-width: 420px;
+    margin: 0;
+    color: var(--color-ink-soft);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.48;
+  }
+
+  .value-card__doodle {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .value-card__doodle svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .value-card__doodle--purple-burst,
+  .value-card__doodle--green-burst,
+  .value-card__doodle--blue-burst,
+  .value-card__doodle--yellow-burst {
+    top: 36px;
+    left: 24px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .value-card__doodle--purple-burst,
+  .value-card__doodle--purple-corner {
+    color: color-mix(in srgb, var(--color-purple), white 18%);
+  }
+
+  .value-card__doodle--green-burst,
+  .value-card__doodle--green-corner {
+    color: color-mix(in srgb, var(--color-green), white 10%);
+  }
+
+  .value-card__doodle--blue-burst,
+  .value-card__doodle--blue-corner {
+    color: color-mix(in srgb, var(--color-blue), white 8%);
+  }
+
+  .value-card__doodle--yellow-burst,
+  .value-card__doodle--yellow-corner {
+    color: color-mix(in srgb, var(--color-yellow), black 4%);
+  }
+
+  .value-card__doodle--purple-corner,
+  .value-card__doodle--green-corner,
+  .value-card__doodle--blue-corner,
+  .value-card__doodle--yellow-corner {
+    right: 18px;
+    bottom: 18px;
+    width: 46px;
+    height: 46px;
+  }
+
+  @media (max-width: 1080px) {
+    .values-grid {
+      gap: 22px;
+    }
+
+    .values-grid .value-card {
+      grid-template-columns: 150px 1fr;
+      min-height: 280px;
+      padding: 28px 28px 26px;
+    }
+
+    .value-card__badge {
+      width: 144px;
+      height: 144px;
+    }
+
+    .values-grid .value-card__copy {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 820px) {
+    .values-shell {
+      width: min(100%, calc(100% - 22px));
+      padding: 34px 12px 20px;
+    }
+
+    .values-section__blob--top-left {
+      width: 112px;
+      height: 74px;
+    }
+
+    .values-section__blob--right {
+      right: -22px;
+      width: 78px;
+      height: 160px;
+    }
+
+    .values-section__decor--left-line {
+      top: 94px;
+      left: -18px;
+      width: 150px;
+    }
+
+    .values-section__decor--star-left {
+      top: 128px;
+      left: 122px;
+      width: 34px;
+      height: 34px;
+    }
+
+    .values-section__decor--plane {
+      top: 62px;
+      right: 24px;
+      width: 108px;
+      height: 88px;
+    }
+
+    .values-section__header {
+      margin-bottom: 28px;
+      padding-inline: 10px;
+    }
+
+    .values-section__title {
+      margin-top: 12px;
+      margin-bottom: 12px;
+      font-size: clamp(36px, 8.8vw, 52px);
+    }
+
+    .values-section__subtitle {
+      font-size: 17px;
+      line-height: 1.45;
+    }
+
+    .values-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .values-grid .value-card {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      min-height: 0;
+      padding: 24px 22px;
+    }
+
+    .value-card__badge {
+      width: 124px;
+      height: 124px;
+      margin-left: 8px;
+    }
+
+    .value-card__content {
+      padding-right: 22px;
+    }
+
+    .value-card__heading {
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
+
+    .values-grid .value-card__copy {
+      max-width: none;
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .value-card__doodle--purple-burst,
+    .value-card__doodle--green-burst,
+    .value-card__doodle--blue-burst,
+    .value-card__doodle--yellow-burst {
+      top: 22px;
+      left: 14px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .value-card__doodle--purple-corner,
+    .value-card__doodle--green-corner,
+    .value-card__doodle--blue-corner,
+    .value-card__doodle--yellow-corner {
+      right: 16px;
+      bottom: 14px;
+    }
+  }
+</style>
