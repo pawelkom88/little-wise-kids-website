@@ -1,31 +1,128 @@
 ---
-import { approachPoints } from "../../data/site";
 import Icon from "../icons/Icon.astro";
 import Section from "../layout/Section.astro";
 ---
 
-<Section id="approach" class="approach-section" tone="mist">
-  <div class="section-heading section-heading--split">
-    <div>
-      <p class="section-kicker">Our Children's Future</p>
-      <h2>Warm care, clear structure, curious learning.</h2>
-    </div>
-    <p>
-      Little Wise Kids combines a home-from-home environment with child-led discovery,
-      early years learning and modern languages.
-    </p>
-  </div>
+<Section id="approach" class="future-section" width="full">
+  <div class="future-grid">
+    <div class="future-copy">
+      <span class="future-dash" aria-hidden="true">
+        <svg viewBox="0 0 330 68">
+          <path d="M8 34c43 36 96 22 132-2 47-31 89-24 126-5 19 10 35 11 54-6" />
+        </svg>
+      </span>
 
-  <div class="approach-grid">
-    {
-      approachPoints.map((point, index) => (
-        <article class={`approach-card tone-bg-${point.tone}`}>
-          <span class={`approach-card__number tone-${point.tone}`}>{index + 1}</span>
-          <h3>{point.title}</h3>
-          <p>{point.text}</p>
-          <Icon name={index === 0 ? "heart" : index === 1 ? "star" : "chat"} size={30} />
+      <span class="future-top-icon" aria-hidden="true">
+        <Icon name="users" size={34} />
+      </span>
+
+      <h2 class="future-title" id="future-title">
+        Our Children's Future
+        <span class="title-star" aria-hidden="true">
+          <Icon name="star" size={42} />
+        </span>
+      </h2>
+
+      <p class="future-lead">
+        Little Wise Kids Childminding is a multilingual service based in a home setting,
+        just behind Cabot Circus car park with easy access to town and the M32.
+      </p>
+
+      <div class="future-points" aria-label="About Little Wise Kids">
+        <article class="future-point future-point--home">
+          <span class="future-point__icon" aria-hidden="true">
+            <Icon name="heart" size={43} />
+          </span>
+          <p>
+            A warm, home-from-home environment in a convenient central location with easy
+            access to town and the M32.
+          </p>
         </article>
-      ))
-    }
+
+        <article class="future-point future-point--talent">
+          <span class="future-point__icon" aria-hidden="true">
+            <Icon name="star" size={43} />
+          </span>
+          <p>
+            Our curriculum helps each child recognise and cultivate their talents, building
+            confidence for a bright future.
+          </p>
+        </article>
+
+        <article class="future-point future-point--language">
+          <span class="future-point__icon" aria-hidden="true">
+            <Icon name="chat" size={43} />
+          </span>
+          <p>
+            We combine traditional Early Years learning with modern languages and cultures,
+            incorporating Portuguese and Spanish through play and fun activities.
+          </p>
+        </article>
+      </div>
+    </div>
+
+    <div class="future-visual" aria-label="Little Wise Kids highlights">
+      <!--todo: give img-->
+      <div class="visual-card">
+
+        <span class="visual-dash" aria-hidden="true">
+          <svg viewBox="0 0 258 108">
+            <path d="M4 74c42 23 64-16 93 0 25 14 16 45 52 24 29-17 22-56 61-59 21-2 35 7 44 20" />
+          </svg>
+        </span>
+
+        <article class="float-card float-card--one">
+          <span class="float-icon float-icon--green" aria-hidden="true">
+            <Icon name="heart" size={31} />
+          </span>
+          <div>
+            <h3>Multilingual Learning</h3>
+            <p>Portuguese &amp; Spanish through play</p>
+          </div>
+        </article>
+
+        <article class="float-card float-card--two">
+          <span class="float-icon float-icon--blue" aria-hidden="true">
+            <Icon name="star" size={31} />
+          </span>
+          <div>
+            <h3>Home-Based Care</h3>
+            <p>Safe, nurturing and personalised</p>
+          </div>
+        </article>
+
+        <article class="float-card float-card--three">
+          <span class="float-icon float-icon--purple" aria-hidden="true">
+            <Icon name="users" size={31} />
+          </span>
+          <div>
+            <h3>Central Location</h3>
+            <p>Behind Cabot Circus car park with easy access to town and the M32</p>
+          </div>
+        </article>
+
+        <div class="stats-panel" aria-label="Little Wise Kids statistics">
+          <div class="stat">
+            <Icon name="heartSmile" size={30} />
+            <strong>1:4</strong>
+            <span>Small ratios for personalised care</span>
+          </div>
+          <div class="stat">
+            <Icon name="heart" size={30} />
+            <strong>100%</strong>
+            <span>Focus on wellbeing, learning &amp; growth</span>
+          </div>
+          <div class="stat">
+            <Icon name="chat" size={30} />
+            <strong>2</strong>
+            <span>Languages taught through fun</span>
+          </div>
+        </div>
+
+        <span class="tiny-star" aria-hidden="true">
+          <Icon name="star" size={42} />
+        </span>
+      </div>
+    </div>
   </div>
 </Section>
