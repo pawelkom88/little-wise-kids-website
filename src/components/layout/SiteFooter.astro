@@ -9,7 +9,7 @@ import Container from "./Container.astro";
   <Container>
     <div class="footer-hero">
       <img class="footer-hero__logo" src="/assets/images/logo.png" alt={site.name} />
-      <h2>Growing confident, kind and curious children.</h2>
+      <p class="footer-hero__title">Growing confident, kind and curious children.</p>
       <p>A safe, nurturing space where every child is supported to learn, explore and thrive.</p>
     </div>
 
@@ -17,7 +17,7 @@ import Container from "./Container.astro";
       <div class="newsletter__intro">
         <span class="newsletter__icon"><Icon name="mail" size={34} /></span>
         <div>
-          <h3>Stay in the know</h3>
+          <p class="newsletter__title">REPLACE</p>
           <p>Tips, activities and inspiration for little learners.</p>
         </div>
       </div>
@@ -32,7 +32,7 @@ import Container from "./Container.astro";
       {
         footerColumns.map((column) => (
           <div class="footer-column">
-            <h3 class={`tone-${column.tone}`}>{column.title}</h3>
+            <p class={`footer-column__title tone-${column.tone}`}>{column.title}</p>
             <ul>
               {column.links.map((link) => (
                 <li><a href="#">{link}</a></li>
@@ -42,7 +42,7 @@ import Container from "./Container.astro";
         ))
       }
       <div class="footer-column footer-column--contact">
-        <h3 class="tone-purple">Get in touch</h3>
+        <p class="footer-column__title tone-purple">Get in touch</p>
         <p><Icon name="person" size={18} /> {site.address}</p>
         <p><Icon name="mail" size={18} /> <a href={`mailto:${site.email}`}>{site.email}</a></p>
         <p><Icon name="calendar" size={18} /> <a href={`tel:${site.phone.replaceAll(" ", "")}`}>{site.phone}</a></p>

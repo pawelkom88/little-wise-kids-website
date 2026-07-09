@@ -34,8 +34,20 @@ h6,
 .site-nav__link {
   font-family: var(--font-heading);
   font-weight: 400;
-  line-height: 1.08;
+  line-height: var(--heading-line-height);
   margin: 0;
+}
+
+h1 {
+  font-size: var(--heading-h1-size);
+}
+
+h2 {
+  font-size: var(--heading-h2-size);
+}
+
+h3 {
+  font-size: var(--heading-h3-size);
 }
 
 p {

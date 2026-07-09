@@ -28,6 +28,11 @@
   --step-3: clamp(1.73rem, 1.4rem + 1.63vw, 2.66rem);
   --step-4: clamp(2.07rem, 1.56rem + 2.57vw, 3.55rem);
   --step-5: clamp(2.49rem, 1.71rem + 3.89vw, 4.73rem);
+  --heading-h1-size: clamp(2.125rem, 1.37rem + 3.78vw, 4.5rem);
+  --heading-h2-size: clamp(2.375rem, 1.64rem + 3.67vw, 4.625rem);
+  --heading-h3-size: clamp(1.5rem, 1.24rem + 1.3vw, 2.25rem);
+  --heading-line-height: 1.06;
+  --heading-card-line-height: 1.08;
 
   --space-3xs: clamp(0.25rem, 0.23rem + 0.11vw, 0.31rem);
   --space-2xs: clamp(0.5rem, 0.46rem + 0.22vw, 0.63rem);
@@ -39,6 +44,7 @@
   --space-2xl: clamp(4rem, 3.65rem + 1.74vw, 5rem);
   --space-3xl: clamp(6rem, 5.48rem + 2.61vw, 7.5rem);
 
+  --section-spacing: clamp(5rem, 7vw, 8rem);
   --gutter: clamp(1rem, 0.48rem + 2.61vw, 2.5rem);
   --container: 72rem;
   --container-narrow: 52rem;

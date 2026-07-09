@@ -7,3 +7,5 @@
 7. icons
 8. photos
 9. SEO
+10. heading hierarchy
+11. heading font size
