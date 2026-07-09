@@ -8,6 +8,7 @@ import Container from "./Container.astro";
 <header class="site-header">
   <Container size="wide" class="site-header__inner">
     <a class="brand" href="/" aria-label={`${site.name} home`}>
+      <!--todo: change to picture ! automate - add alt -->
       <img class="brand__logo" src="/assets/images/logo.png" alt="" width="1774" height="887" />
       <span class="sr-only">{site.name}</span>
     </a>
@@ -22,8 +23,6 @@ import Container from "./Container.astro";
         ))
       }
     </nav>
-
-    <Button href="#contact">Book a Visit</Button>
 
     <details class="mobile-menu">
       <summary class="mobile-menu__toggle" aria-label="Open menu">
@@ -51,7 +50,6 @@ import Container from "./Container.astro";
             ))
           }
         </nav>
-        <Button href="#contact" icon="calendar" class="mobile-menu__cta">Book a Visit</Button>
       </div>
     </details>
   </Container>

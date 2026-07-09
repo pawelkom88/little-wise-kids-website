@@ -62,8 +62,7 @@
 
 .button--primary {
   color: #fff;
-  background: linear-gradient(135deg, var(--color-purple), var(--color-purple-dark));
-  box-shadow: 0 0.9rem 1.8rem rgba(145, 55, 209, 0.26);
+  background: var(--color-purple-dark);
 }
 
 .button--secondary {
@@ -102,7 +101,7 @@
   z-index: 20;
   background: rgba(251, 253, 255, 0.88);
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(8, 24, 66, 0.06);
+  border-bottom: 1px solid var(--color-purple-soft);
 }
 
 .site-header__inner {
@@ -110,7 +109,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-m);
-  min-height: 6.75rem;
+  min-height: 6rem;
 }
 
 .brand {
@@ -119,7 +118,7 @@
 }
 
 .brand__logo {
-  width: clamp(8rem, 6.2rem + 7.8vw, 15rem);
+  width: clamp(6rem, 6rem + 7vw, 12rem);
 }
 
 .site-nav {
