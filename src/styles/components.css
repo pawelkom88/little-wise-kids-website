@@ -4,11 +4,11 @@
 }
 
 .container--narrow {
-  max-width: var(--container-narrow);
+  width: min(100% - (var(--gutter) * 2), var(--container-narrow));
 }
 
 .container--wide {
-  max-width: var(--container-wide);
+  width: min(100% - (var(--gutter) * 2), var(--container-wide));
 }
 
 .container--full {
@@ -18,6 +18,11 @@
 
 .section {
   padding-block: var(--space-3xl);
+}
+
+.section--bleed > .container {
+  width: 100%;
+  max-width: none;
 }
 
 .section--mist {

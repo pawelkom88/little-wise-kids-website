@@ -37,7 +37,7 @@ const cards = [
 ] as const;
 ---
 
-<Section id="activities" class="values-section" width="full">
+<Section id="activities" class="values-section" width="wide">
   <div class="values-shell" aria-labelledby="values-title">
     <div class="values-section__blob values-section__blob--top-left" aria-hidden="true"></div>
     <div class="values-section__blob values-section__blob--right" aria-hidden="true"></div>
@@ -109,18 +109,10 @@ const cards = [
 </Section>
 
 <style>
-  .values-section {
-    padding-block: 0;
-    background: var(--color-surface);
-  }
-
   .values-shell {
     position: relative;
     overflow: hidden;
-    width: min(1240px, calc(100% - 32px));
     margin: 0 auto;
-    padding: 46px 24px 30px;
-    font-family: "Nunito", var(--font-body);
   }
 
   .values-section__blob,
@@ -292,7 +284,7 @@ const cards = [
 
   .value-card__heading {
     margin: 0 0 12px;
-    font-family: "Fredoka", var(--font-heading);
+    font-family: var(--font-heading);
     font-size: clamp(32px, 2.7vw, 42px);
     font-weight: 600;
     line-height: 0.95;
@@ -402,7 +394,6 @@ const cards = [
 
   @media (max-width: 820px) {
     .values-shell {
-      width: min(100%, calc(100% - 22px));
       padding: 34px 12px 20px;
     }
 

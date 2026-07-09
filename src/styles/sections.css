@@ -87,7 +87,7 @@
   position: absolute;
   z-index: 2;
   top: -12px;
-  right: -54px;
+  right: 0;
   width: 820px;
   height: 640px;
   pointer-events: none;
@@ -99,49 +99,6 @@
   height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 28px 38px rgba(8, 24, 66, 0.06));
-}
-
-.hero__star {
-  position: absolute;
-  color: var(--color-purple);
-}
-
-.hero__star svg {
-  width: 100%;
-  height: 100%;
-  fill: currentColor;
-}
-
-.hero__star--eyebrow {
-  z-index: 4;
-  top: 72px;
-  left: 632px;
-  width: 29px;
-  height: 29px;
-  filter: drop-shadow(0 8px 12px rgba(145, 55, 209, 0.16));
-}
-
-.hero__star--left {
-  z-index: 1;
-  top: 310px;
-  left: 219px;
-  width: 22px;
-  height: 22px;
-}
-
-.hero__fly-line {
-  position: absolute;
-  z-index: 1;
-  top: 190px;
-  left: 600px;
-  width: 245px;
-  height: 150px;
-  fill: none;
-  stroke: var(--color-green);
-  stroke-dasharray: 9 14;
-  stroke-linecap: round;
-  stroke-width: 3;
-  opacity: 0.9;
 }
 
 .feature-strip {
@@ -1010,7 +967,6 @@
   }
 
   .future-section .container {
-    width: min(100% - 1.5rem, var(--container-wide));
     padding: 2.625rem 1.375rem 1.75rem;
     border-radius: 1.625rem;
   }

@@ -1,0 +1,33 @@
+- main [ref=e2]:
+  - region "Got Questions?" [ref=e3]:
+    - generic [ref=e4]:
+      - paragraph [ref=e5]: FAQ
+      - heading "Got Questions?" [level=2] [ref=e6]
+      - paragraph [ref=e7]: Clear answers to the things parents most often ask before joining Little Wise Kids.
+      - generic:
+        - img
+    - generic [ref=e8]:
+      - group [ref=e9]:
+        - generic "What age range do you care for?" [ref=e10] [cursor=pointer]:
+          - generic [ref=e11]: What age range do you care for?
+        - paragraph [ref=e16]:
+          - text: We care for children from
+          - strong [ref=e17]: 6 months to 5 years old
+          - text: ", providing a safe, nurturing and engaging early years environment tailored to each stage of development."
+      - group [ref=e18]:
+        - generic "What languages are part of the curriculum?" [ref=e19] [cursor=pointer]:
+          - generic [ref=e20]: What languages are part of the curriculum?
+      - group [ref=e22]:
+        - generic "What are your opening hours?" [ref=e23] [cursor=pointer]:
+          - generic [ref=e24]: What are your opening hours?
+      - group [ref=e26]:
+        - generic "Where are you located?" [ref=e27] [cursor=pointer]:
+          - generic [ref=e28]: Where are you located?
+      - group [ref=e30]:
+        - generic "What is your childminding approach?" [ref=e31] [cursor=pointer]:
+          - generic [ref=e32]: What is your childminding approach?
+    - paragraph [ref=e34]:
+      - text: Still need help?
+      - link "Contact us" [ref=e35] [cursor=pointer]:
+        - /url: "#"
+      - text: and we’ll answer your question directly.

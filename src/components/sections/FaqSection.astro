@@ -1,23 +1,404 @@
 ---
-import { faqs } from "../../data/site";
 import Section from "../layout/Section.astro";
+
+const faqs = [
+  {
+    question: "What age range do you care for?",
+    answer:
+      "We care for children from <strong>6 months to 5 years old</strong>, providing a safe, nurturing and engaging early years environment tailored to each stage of development.",
+    open: true,
+  },
+  {
+    question: "What languages are part of the curriculum?",
+    answer:
+      "Portuguese and Spanish are introduced through songs, stories, play and everyday routines, so children experience language in a natural and enjoyable way.",
+  },
+  {
+    question: "What are your opening hours?",
+    answer:
+      "We are open Monday to Friday from <strong>7:00 to 18:00</strong>. We are open through school holidays and closed on bank holidays.",
+  },
+  {
+    question: "Where are you located?",
+    answer:
+      "Little Wise Kids Childminding is based in a home setting just behind Cabot Circus car park, with easy access to town and the M32.",
+  },
+  {
+    question: "What is your childminding approach?",
+    answer:
+      "Our approach combines traditional Early Years learning with modern languages and cultures. We focus on play, care, confidence, curiosity and strong partnerships with families.",
+  },
+] as const;
 ---
 
-<Section class="faq-section" tone="green" width="narrow">
-  <div class="section-heading">
-    <p class="section-kicker">FAQ</p>
-    <h2>Got Questions?</h2>
-    <p>Clear answers to the things parents most often ask before joining Little Wise Kids.</p>
-  </div>
+<Section class="faq-section" width="wide">
+  <div class="faq-shell" aria-labelledby="faq-title">
+    <header class="faq-header">
+      <p class="faq-kicker">FAQ</p>
 
-  <div class="faq-list">
-    {
-      faqs.map((faq) => (
-        <details class="faq-item">
-          <summary>{faq.question}</summary>
-          <p>{faq.answer}</p>
-        </details>
-      ))
-    }
+      <h2 class="faq-title" id="faq-title">
+        Got <span>Questions?</span>
+      </h2>
+
+      <p class="faq-intro">
+        Clear answers to the things parents most often ask before joining Little Wise Kids.
+      </p>
+
+      <span class="faq-doodle" aria-hidden="true">
+        <svg viewBox="0 0 54 44">
+          <path d="M8 36C21 16 34 8 47 6"></path>
+          <path d="M24 22c-7-1-12-5-14-13 9 0 15 4 17 12"></path>
+          <path d="M33 15c2-8 7-12 15-13-1 9-6 13-15 13Z"></path>
+        </svg>
+      </span>
+    </header>
+
+    <div class="faq-list">
+      {
+        faqs.map((faq) => (
+          <details class="faq-item" name="little-wise-kids-faq" open={faq.open}>
+            <summary>
+              <span class="faq-question">{faq.question}</span>
+              <span class="faq-control" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <div class="faq-answer-content">
+                  <p set:html={faq.answer}></p>
+                </div>
+              </div>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+
+    <p class="faq-note">
+      Still need help? <a href="#">Contact us</a> and we’ll answer your question directly.
+    </p>
   </div>
 </Section>
+
+<style>
+  .faq-section {
+    padding-block: 0;
+    background: var(--color-surface);
+  }
+
+  .faq-shell {
+    width: min(1060px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: clamp(56px, 7vw, 92px) 0 clamp(68px, 8vw, 112px);
+    color: var(--color-ink);
+  }
+
+  .faq-header {
+    position: relative;
+    max-width: 660px;
+    margin: 0 auto 44px;
+    text-align: center;
+  }
+
+  .faq-kicker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    margin: 0 0 18px;
+    padding: 0 18px;
+    border-radius: 999px;
+    color: var(--color-green-dark);
+    background: var(--color-green-soft);
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .faq-title {
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-heading);
+    font-size: clamp(42px, 5vw, 66px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .faq-title span {
+    color: var(--color-green);
+  }
+
+  .faq-intro {
+    max-width: 520px;
+    margin: 18px auto 0;
+    color: var(--color-ink-soft);
+    font-size: clamp(17px, 1.45vw, 20px);
+    font-weight: 700;
+    line-height: 1.55;
+    text-wrap: balance;
+  }
+
+  .faq-doodle {
+    position: absolute;
+    top: 54px;
+    right: -72px;
+    width: 54px;
+    height: 44px;
+    color: var(--color-green);
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  .faq-doodle svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 14px;
+    width: min(760px, 100%);
+    margin: 0 auto;
+  }
+
+  .faq-list details.faq-item {
+    overflow: hidden;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 10px 26px rgba(8, 24, 66, 0.055);
+    transition:
+      border-color 0.22s ease,
+      box-shadow 0.22s ease,
+      background-color 0.22s ease;
+  }
+
+  .faq-list details.faq-item[open] {
+    border-color: color-mix(in srgb, var(--color-green), transparent 78%);
+    background: #fff;
+    box-shadow: 0 18px 45px rgba(8, 24, 66, 0.07);
+  }
+
+  .faq-item summary {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 34px;
+    gap: 18px;
+    align-items: center;
+    min-height: 74px;
+    padding: 0 20px 0 24px;
+    color: var(--color-ink);
+    cursor: pointer;
+    list-style: none;
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 1.25;
+    outline: none;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary:focus-visible {
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--color-green), transparent 66%);
+  }
+
+  .faq-question {
+    min-width: 0;
+  }
+
+  .faq-control {
+    position: relative;
+    display: grid;
+    justify-self: end;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+    border-radius: 999px;
+    color: var(--color-green-dark);
+    background: var(--color-green-soft);
+    transition:
+      color 0.22s ease,
+      background-color 0.22s ease,
+      transform 0.22s ease;
+  }
+
+  .faq-control::before,
+  .faq-control::after {
+    position: absolute;
+    width: 13px;
+    height: 3px;
+    border-radius: 999px;
+    background: currentColor;
+    content: "";
+    transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .faq-control::after {
+    transform: rotate(90deg);
+  }
+
+  details[open] .faq-control {
+    color: #fff;
+    background: var(--color-green);
+    transform: rotate(180deg);
+  }
+
+  details[open] .faq-control::after {
+    transform: rotate(0deg);
+  }
+
+  .faq-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  details[open] .faq-answer {
+    grid-template-rows: 1fr;
+  }
+
+  .faq-answer-inner {
+    overflow: hidden;
+  }
+
+  .faq-answer-content {
+    margin: 0 20px 20px 24px;
+    padding: 18px 20px;
+    border-radius: 16px;
+    background: var(--color-green-soft);
+    color: var(--color-ink-soft);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.58;
+  }
+
+  .faq-list .faq-answer-content p {
+    margin: 0;
+    padding: 0;
+  }
+
+  .faq-list .faq-answer-content p + p {
+    margin-top: 12px;
+  }
+
+  .faq-answer-content strong {
+    color: var(--color-green-dark);
+    font-weight: 900;
+  }
+
+  @supports selector(::details-content) {
+    details::details-content {
+      block-size: 0;
+      overflow: hidden;
+      transition:
+        block-size 0.32s cubic-bezier(0.2, 0.8, 0.2, 1),
+        content-visibility 0.32s allow-discrete;
+    }
+
+    details[open]::details-content {
+      block-size: auto;
+    }
+  }
+
+  .faq-note {
+    width: min(760px, 100%);
+    margin: 22px auto 0;
+    padding: 18px 22px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--color-purple-soft), #fff);
+    color: var(--color-ink-soft);
+    font-size: 15.5px;
+    font-weight: 800;
+    line-height: 1.45;
+  }
+
+  .faq-note a {
+    color: var(--color-purple);
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .faq-note a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 680px) {
+    .faq-shell {
+      width: calc(100% - 28px);
+      padding-top: 48px;
+    }
+
+    .faq-header {
+      margin-bottom: 32px;
+    }
+
+    .faq-doodle {
+      display: none;
+    }
+
+    .faq-title {
+      font-size: clamp(38px, 11vw, 50px);
+    }
+
+    .faq-intro {
+      font-size: 16px;
+      line-height: 1.48;
+    }
+
+    .faq-list {
+      gap: 12px;
+    }
+
+    .faq-item summary {
+      grid-template-columns: 1fr 30px;
+      gap: 14px;
+      min-height: 68px;
+      padding: 0 16px 0 18px;
+      font-size: 16px;
+    }
+
+    .faq-control {
+      width: 28px;
+      height: 28px;
+    }
+
+    .faq-control::before,
+    .faq-control::after {
+      width: 12px;
+      height: 2.5px;
+    }
+
+    .faq-answer-content {
+      margin: 0 14px 14px;
+      padding: 16px;
+      font-size: 15.5px;
+      line-height: 1.5;
+    }
+
+    .faq-note {
+      font-size: 15px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-list details.faq-item,
+    .faq-answer,
+    .faq-control,
+    .faq-control::before,
+    .faq-control::after {
+      transition: none;
+    }
+  }
+</style>
