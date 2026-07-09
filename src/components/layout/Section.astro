@@ -19,5 +19,5 @@ const classes = ["section", `section--${tone}`, className].filter(Boolean).join(
 ---
 
 <section id={id} class={classes}>
-  {width === "full" ? <slot /> : <Container size={width}><slot /></Container>}
+  <Container size={width}><slot /></Container>
 </section>

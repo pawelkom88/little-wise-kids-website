@@ -46,7 +46,7 @@
 .hero {
   position: relative;
   min-height: 514px;
-  padding-left: 86px;
+  padding-left: var(--space-xl);
   isolation: isolate;
 }
 
@@ -185,7 +185,6 @@
   place-items: center;
   border-radius: 50%;
   color: #fff;
-  box-shadow: 0 9px 18px rgba(8, 24, 66, 0.1);
 }
 
 .feature-strip__icon .icon {
@@ -193,15 +192,15 @@
 }
 
 .feature-strip__icon.tone-purple {
-  background: linear-gradient(135deg, var(--color-purple) 0%, var(--color-purple-dark) 100%);
+  background: var(--color-purple-dark);
 }
 
 .feature-strip__icon.tone-green {
-  background: linear-gradient(135deg, #70cd57 0%, var(--color-green) 100%);
+  background: var(--color-green)
 }
 
 .feature-strip__icon.tone-blue {
-  background: linear-gradient(135deg, #29b2ea 0%, var(--color-blue-dark) 100%);
+  background: var(--color-blue-dark);
 }
 
 .feature-strip h2 {
