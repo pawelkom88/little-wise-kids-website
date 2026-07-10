@@ -1,4 +1,5 @@
 ---
+import Image from "astro/components/Image.astro";
 import Section from "../layout/Section.astro";
 
 const faqs = [
@@ -30,12 +31,13 @@ const faqs = [
   },
 ] as const;
 ---
-
+<br>
+  <svg class="wave" viewBox="0 0 1448 120" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 26c105 38 193 38 292 8 107-32 190-36 304-1 115 35 199 31 305-5 110-37 197-31 308 4 93 29 161 30 239-4v92H0V26Z"></path>
+  </svg>
 <Section class="faq-section" width="wide">
   <div class="faq-shell" aria-labelledby="faq-title">
     <header class="faq-header">
-      <p class="faq-kicker">FAQ</p>
-
       <h2 class="faq-title" id="faq-title">
         Got <span>Questions?</span>
       </h2>
@@ -64,16 +66,64 @@ const faqs = [
         ))
       }
     </div>
+<br>
+    <aside class="faq-contact" aria-labelledby="faq-contact-title">
+      <Image
+          width={82}
+          height={82}
+          class="faq-contact__envelope"
+          src="/assets/icons/icon-envelope.png"
+          alt="Envelope icon"
+          aria-hidden="true"
+      />
 
-    <p class="faq-note">
-      Still need help? <a href="#">Contact us</a> and we’ll answer your question directly.
-    </p>
+      <div class="faq-contact__content">
+        <h2 class="faq-contact__title" id="faq-contact-title">
+          Have another question? We’re here to help!
+        </h2>
+
+        <p class="faq-contact__text">
+          Our team is happy to help with anything you need.
+          <a class="faq-contact__link" href="/contact">Contact us</a>
+          — we’d love to hear from you.
+        </p>
+      </div>
+
+      <Image
+          width={82}
+          height={82}
+          class="faq-contact__flower"
+          src="/assets/icons/flower-icon.png"
+          alt="Flower icon"
+          aria-hidden="true"
+      />
+    </aside>
   </div>
-</Section>
 
+
+
+
+</Section>
+<svg class="wave wave-rotated" viewBox="0 0 1448 120" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0 26c105 38 193 38 292 8 107-32 190-36 304-1 115 35 199 31 305-5 110-37 197-31 308 4 93 29 161 30 239-4v92H0V26Z"></path>
+</svg>
+<br>
 <style>
-  .faq-section {
-    background: var(--color-surface);
+
+  :root {
+    --faq-width: width: ;
+  }
+
+  .wave{
+    fill: var(--color-green-soft);
+  }
+
+  .wave-rotated {
+    transform: rotate(180deg);
+  }
+
+  :global(.faq-section) {
+    background: var(--color-green-soft);
   }
 
   .faq-shell {
@@ -87,23 +137,6 @@ const faqs = [
     max-width: 660px;
     margin: 0 auto 44px;
     text-align: center;
-  }
-
-  .faq-kicker {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 34px;
-    margin: 0 0 18px;
-    padding: 0 18px;
-    border-radius: 999px;
-    color: var(--color-green-dark);
-    background: var(--color-green-soft);
-    font-size: 14px;
-    font-weight: 900;
-    line-height: 1;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
   }
 
   .faq-title {
@@ -134,7 +167,7 @@ const faqs = [
   .faq-list {
     display: grid;
     gap: 14px;
-    width: min(760px, 100%);
+    width: var(--faq-width);
     margin: 0 auto;
   }
 
@@ -243,8 +276,8 @@ const faqs = [
   }
 
   .faq-answer-content {
-    margin: 0 20px 20px 24px;
-    padding: 18px 20px;
+    margin: 0 var(--space-s) var(--space-s) var(--space-s);
+    padding: var(--space-s);
     border-radius: 16px;
     background: var(--color-green-soft);
     color: var(--color-ink-soft);
@@ -282,7 +315,7 @@ const faqs = [
   }
 
   .faq-note {
-    width: min(760px, 100%);
+    width: var(--faq-width);
     margin: 22px auto 0;
     padding: 18px 22px;
     border-radius: 18px;
@@ -367,6 +400,105 @@ const faqs = [
     .faq-control::before,
     .faq-control::after {
       transition: none;
+    }
+  }
+
+  .faq-contact {
+    position: relative;
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr);
+    align-items: center;
+    gap: 24px;
+    padding: var(--space-m);
+    overflow: hidden;
+    border: 1px solid #e2dcc3;
+    border-radius: 24px;
+    background: var(--color-yellow-soft);
+    box-shadow: 0 12px 28px rgba(16, 39, 95, 0.08);
+  }
+
+  .faq-contact__envelope {
+    background: var(--color-purple-soft);
+    border-radius: 50%;
+    width: 82px;
+    height: 82px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .faq-contact__content {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+  }
+
+  .faq-contact__title {
+    margin: 0 0 6px;
+    font-size: clamp(1.1rem, 1.5vw, 1.45rem);
+    line-height: 1.25;
+    font-weight: 700;
+  }
+
+  .faq-contact__text {
+    margin: 0;
+    color: #243b72;
+    font-size: clamp(0.95rem, 1.1vw, 1.08rem);
+    line-height: 1.55;
+  }
+
+  .faq-contact__link {
+    color: #9737dc;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .faq-contact__link:hover,
+  .faq-contact__link:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .faq-contact__flower {
+    position: absolute;
+    top: 50%;
+    right: 22px;
+    width: 180px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  @media (max-width: 760px) {
+    .faq-contact {
+      grid-template-columns: 68px 1fr;
+      gap: 18px;
+    }
+
+    .faq-contact__envelope {
+      width: 64px;
+      height: 64px;
+    }
+
+    .faq-contact__flower {
+    display: none;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .faq-contact {
+      align-items: start;
+      padding: 20px 20px 92px;
+    }
+
+    .faq-contact__envelope {
+      width: 56px;
+      height: 56px;
+    }
+
+    .faq-contact__flower {
+      display: none;
     }
   }
 </style>

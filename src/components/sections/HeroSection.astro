@@ -40,3 +40,43 @@ import Button from "../ui/Button.astro";
     }
   </div>
 </Section>
+<div class="testimonial">
+  <svg class="wave" viewBox="0 0 1448 120" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 26c105 38 193 38 292 8 107-32 190-36 304-1 115 35 199 31 305-5 110-37 197-31 308 4 93 29 161 30 239-4v92H0V26Z"></path>
+  </svg>
+</div>
+
+<style>
+  .testimonial {
+    position: relative;
+    min-height: 150px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    overflow: hidden;
+    background: var(--color-purple-soft);
+  }
+
+  @media (max-width: 680px) {
+    .testimonial {
+      min-height: 25px;
+    }
+  }
+
+  .testimonial::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .wave {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    fill: var(--color-surface);
+    transform: rotate(180deg);
+  }
+</style>
