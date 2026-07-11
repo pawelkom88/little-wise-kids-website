@@ -3,55 +3,168 @@ import { navItems, site } from "../../data/site";
 import Icon from "../icons/Icon.astro";
 import Button from "../ui/Button.astro";
 import Container from "./Container.astro";
+
+const submenuItems = navItems.filter((item) => "children" in item);
+const itemId = (label: string) => label.toLowerCase().replace(/[’'\/\s]+/g, "-").replace(/[^a-z-]/g, "");
 ---
 
-<header class="site-header">
+<header class="site-header" data-site-header>
   <Container size="wide" class="site-header__inner">
     <a class="brand" href="/" aria-label={`${site.name} home`}>
-      <!--todo: change to picture ! automate - add alt -->
       <img class="brand__logo" src="/assets/images/logo.png" alt="" width="1774" height="887" />
       <span class="sr-only">{site.name}</span>
     </a>
 
-    <nav class="site-nav" aria-label="Primary">
-      {
-        navItems.map((item) => (
-          <a class={`site-nav__link tone-${item.tone}`} href={item.href}>
-            <Icon name={item.icon} size={28} />
+    <nav class="site-nav" aria-label="Primary navigation">
+      {navItems.map((item) => {
+        const id = itemId(item.label);
+        return "children" in item ? (
+          <button class={`site-nav__link site-nav__trigger tone-${item.tone}`} type="button" id={`nav-${id}`} aria-expanded="false" aria-controls={`mega-${id}`} data-mega-trigger={id}>
+            <Icon name={item.icon} size={27} />
+            <span>{item.label}</span>
+            <span class="site-nav__chevron" aria-hidden="true">
+              <Icon name="chevron" size={20}/>
+            </span>
+          </button>
+        ) : (
+          <a class={`site-nav__link tone-${item.tone}`} href={item.href} data-nav-link>
+            <Icon name={item.icon} size={27} />
             <span>{item.label}</span>
           </a>
-        ))
-      }
+        );
+      })}
     </nav>
-    <Button href="#contact">Book a Visit</Button>
-    <details class="mobile-menu">
+
+    <details class="mobile-menu" data-mobile-menu>
       <summary class="mobile-menu__toggle" aria-label="Open menu">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </summary>
       <div class="mobile-menu__panel">
         <div class="mobile-menu__top">
           <img class="mobile-menu__logo" src="/assets/images/logo.png" alt={site.name} />
-          <span class="mobile-menu__close" aria-hidden="true">
-            <Icon name="close" size={32} />
-          </span>
+          <span class="mobile-menu__close" aria-hidden="true"><Icon name="close" size={32} /></span>
         </div>
-        <nav class="mobile-menu__nav" aria-label="Mobile primary">
-          {
-            navItems.map((item) => (
-              <a class={`mobile-menu__link tone-${item.tone}`} href={item.href}>
-                <span class="mobile-menu__icon">
-                  <Icon name={item.icon} size={30} />
-                </span>
-                <span>{item.label}</span>
-                <Icon name="arrowRight" size={22} />
+        <nav class="mobile-menu__nav" aria-label="Mobile primary navigation">
+          {navItems.map((item) => {
+            const id = itemId(item.label);
+            return "children" in item ? (
+              <div class="mobile-menu__section">
+                <button class={`mobile-menu__link mobile-menu__trigger tone-${item.tone}`} type="button" aria-expanded="false" aria-controls={`mobile-${id}`} data-mobile-trigger={id}>
+                  <span class="mobile-menu__icon"><Icon name={item.icon} size={30} /></span>
+                  <span>{item.label}</span>
+                  <span class="mobile-menu__chevron" aria-hidden="true">⌄</span>
+                </button>
+                <div class="mobile-menu__children" id={`mobile-${id}`} hidden inert>
+                  {item.children.map((child) => <a href={child.href} data-nav-link>{child.label}<Icon name="arrowRight" size={18} /></a>)}
+                </div>
+              </div>
+            ) : (
+              <a class={`mobile-menu__link tone-${item.tone}`} href={item.href} data-nav-link>
+                <span class="mobile-menu__icon"><Icon name={item.icon} size={30} /></span>
+                <span>{item.label}</span><Icon name="arrowRight" size={22} />
               </a>
-            ))
-          }
+            );
+          })}
         </nav>
-    <Button href="#contact" icon="calendar" class="mobile-menu__cta">Book a Visit</Button>
+        <Button href="#contact" icon="calendar" class="mobile-menu__cta">Book a Visit</Button>
       </div>
     </details>
   </Container>
+
+  <div class="mega-menu" data-mega-menu hidden aria-hidden="true">
+    <Container size="wide">
+      <div class="mega-menu__surface">
+        {submenuItems.map((item) => {
+          const id = itemId(item.label);
+          return (
+            <section class={`mega-menu__section tone-${item.tone}`} id={`mega-${id}`} aria-labelledby={`nav-${id}`} hidden inert data-mega-panel={id}>
+              <div class="mega-menu__heading"><span class="mega-menu__icon"><Icon name={item.icon} size={30} /></span><h2>{item.label}</h2></div>
+              <div class="mega-menu__links" style={`--link-count:${item.children.length}`}>
+                {item.children.map((child) => <a href={child.href} data-nav-link><Icon name="arrowRight" size={19} /><span>{child.label}</span></a>)}
+              </div>
+            </section>
+          );
+        })}
+      </div>
+    </Container>
+  </div>
 </header>
+
+<script>
+  const initHeader = () => {
+    const header = document.querySelector<HTMLElement>("[data-site-header]");
+    if (!header || header.dataset.ready) return;
+    header.dataset.ready = "true";
+    const menu = header.querySelector<HTMLElement>("[data-mega-menu]")!;
+    const triggers = [...header.querySelectorAll<HTMLButtonElement>("[data-mega-trigger]")];
+    const panels = [...header.querySelectorAll<HTMLElement>("[data-mega-panel]")];
+    const topItems = [...header.querySelectorAll<HTMLElement>(".site-nav > a, .site-nav > button")];
+    let active: string | null = null;
+
+    const setInactive = (element: HTMLElement) => { element.hidden = true; element.setAttribute("inert", ""); };
+    const setActive = (element: HTMLElement) => { element.hidden = false; element.removeAttribute("inert"); };
+    const closeDesktop = (restore = false) => {
+      const trigger = triggers.find((item) => item.dataset.megaTrigger === active);
+      active = null;
+      triggers.forEach((item) => item.setAttribute("aria-expanded", "false"));
+      panels.forEach(setInactive);
+      menu.hidden = true;
+      menu.setAttribute("aria-hidden", "true");
+      if (restore) trigger?.focus();
+    };
+    const openDesktop = (id: string, focusFirst = false) => {
+      active = id;
+      triggers.forEach((item) => item.setAttribute("aria-expanded", String(item.dataset.megaTrigger === id)));
+      panels.forEach((panel) => panel.dataset.megaPanel === id ? setActive(panel) : setInactive(panel));
+      menu.hidden = false;
+      menu.setAttribute("aria-hidden", "false");
+      if (focusFirst) panels.find((panel) => panel.dataset.megaPanel === id)?.querySelector("a")?.focus();
+    };
+    triggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => active === trigger.dataset.megaTrigger ? closeDesktop() : openDesktop(trigger.dataset.megaTrigger!));
+      trigger.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowDown") { event.preventDefault(); openDesktop(trigger.dataset.megaTrigger!, true); }
+        if (event.key === "Escape" && active) { event.preventDefault(); closeDesktop(true); }
+      });
+    });
+    panels.forEach((panel) => panel.addEventListener("keydown", (event) => {
+      const links = [...panel.querySelectorAll<HTMLAnchorElement>("a")];
+      const trigger = triggers.find((item) => item.dataset.megaTrigger === panel.dataset.megaPanel);
+      if (event.key === "Escape") { event.preventDefault(); closeDesktop(true); }
+      if (event.key === "Tab" && event.shiftKey && document.activeElement === links[0]) { event.preventDefault(); closeDesktop(); trigger?.focus(); }
+      if (event.key === "Tab" && !event.shiftKey && document.activeElement === links.at(-1)) {
+        event.preventDefault();
+        const next = topItems[topItems.indexOf(trigger!) + 1];
+        closeDesktop(); next?.focus();
+      }
+    }));
+    document.addEventListener("pointerdown", (event) => { if (active && !header.contains(event.target as Node)) closeDesktop(); });
+    header.addEventListener("focusout", (event) => requestAnimationFrame(() => { if (active && !header.contains(document.activeElement)) closeDesktop(); }));
+
+    const mobile = header.querySelector<HTMLDetailsElement>("[data-mobile-menu]")!;
+    const mobileTriggers = [...mobile.querySelectorAll<HTMLButtonElement>("[data-mobile-trigger]")];
+    const closeMobileSections = (except?: string) => mobileTriggers.forEach((trigger) => {
+      if (trigger.dataset.mobileTrigger === except) return;
+      trigger.setAttribute("aria-expanded", "false");
+      const panel = document.getElementById(trigger.getAttribute("aria-controls")!);
+      if (panel) setInactive(panel);
+    });
+    mobileTriggers.forEach((trigger) => trigger.addEventListener("click", () => {
+      const open = trigger.getAttribute("aria-expanded") === "true";
+      closeMobileSections();
+      if (!open) { trigger.setAttribute("aria-expanded", "true"); setActive(document.getElementById(trigger.getAttribute("aria-controls")!)!); }
+    }));
+    mobile.addEventListener("toggle", () => { if (!mobile.open) closeMobileSections(); });
+    mobile.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      const expanded = mobileTriggers.find((trigger) => trigger.getAttribute("aria-expanded") === "true");
+      event.preventDefault();
+      if (expanded) { closeMobileSections(); expanded.focus(); } else { mobile.open = false; mobile.querySelector("summary")?.focus(); }
+    });
+    header.querySelectorAll<HTMLAnchorElement>("[data-nav-link]").forEach((link) => link.addEventListener("click", () => { closeDesktop(); mobile.open = false; }));
+    const resetForBreakpoint = () => { closeDesktop(); closeMobileSections(); if (matchMedia("(min-width: 981px)").matches) mobile.open = false; };
+    matchMedia("(min-width: 981px)").addEventListener("change", resetForBreakpoint);
+  };
+  initHeader();
+  document.addEventListener("astro:page-load", initHeader);
+</script>

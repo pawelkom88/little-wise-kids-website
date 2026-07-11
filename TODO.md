@@ -11,3 +11,4 @@
 11. heading font size
 12. Astro optimisations - https://chatgpt.com/c/6a4f9744-9fd8-83eb-a75c-ae435d6e5441
 13. how css is loaded. probalby bloated
+14. one var for address, phone number and email

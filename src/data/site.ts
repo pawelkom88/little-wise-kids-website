@@ -8,11 +8,43 @@ export const site = {
 };
 
 export const navItems = [
-  { label: "About Us", href: "#about", icon: "person", tone: "purple" },
-  { label: "Our Approach", href: "#approach", icon: "heart", tone: "green" },
-  { label: "Activities", href: "#activities", icon: "star", tone: "blue" },
-  { label: "Parents", href: "#parents", icon: "users", tone: "purple" },
-  { label: "Contact", href: "#contact", icon: "mail", tone: "green" },
+  {
+    label: "About Us",
+    icon: "person",
+    tone: "purple",
+    children: [
+      { label: "About Us", href: "/#approach" },
+      { label: "Our Approach", href: "/#approach" },
+      { label: "Our Commitment", href: "/#activities" },
+      { label: "Our Leadership Team", href: "/#contact" },
+    ],
+  },
+  {
+    label: "Multilingual Learning",
+    icon: "book",
+    tone: "blue",
+    children: [
+      { label: "Our Curriculum", href: "/#activities" },
+      { label: "EYFS", href: "/#approach" },
+      { label: "Screen-Free Learning", href: "/#activities" },
+    ],
+  },
+  {
+    label: "Parents’ Information",
+    icon: "users",
+    tone: "purple",
+    children: [
+      { label: "Fees & Funding", href: "/#parents" },
+      { label: "Childcare Subsidy Questions", href: "/#parents" },
+      { label: "Partnership With Families", href: "/#parents" },
+      { label: "Policies", href: "/#parents" },
+      { label: "Settling In", href: "/#parents" },
+    ],
+  },
+  { label: "Operating Hours & Nutrition", href: "/", icon: "clock", tone: "green" },
+  { label: "Our Gallery", href: "/#parents", icon: "image", tone: "green" },
+  { label: "Contact Us", href: "/#contact", icon: "mail", tone: "green" },
+  { label: "Blog / News", href: "/", icon: "chat", tone: "green" },
 ] as const;
 
 export const heroFeatures = [
