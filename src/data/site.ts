@@ -1,7 +1,5 @@
 export const site = {
   name: "Little Wise Kids",
-  description:
-    "A multilingual childminding service where children grow, learn and thrive in a safe, caring and stimulating environment.",
   phone: "01234 567890",
   email: "hello@littlewisekids.co.uk",
   address: "123 Little Learners Lane, Surrey, GU1 1AA",

@@ -5,8 +5,8 @@ Paste this near the top of your main CSS file:
 /* ----------------------------- */
 
 @font-face {
-  font-family: "Andika";
-  src: url("/assets/fonts/Andika/Andika-Regular.woff2") format("woff2");
+  font-family: "Quicksand";
+  src: url("/assets/fonts/Quicksand/Quicksand-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -14,8 +14,24 @@ Paste this near the top of your main CSS file:
 
 @font-face {
   font-family: "Roboto";
-  src: url("/assets/fonts/Roboto/Roboto.woff2") format("woff2");
+  src: url("/assets/fonts/Roboto/Roboto-Regular.woff2") format("woff2");
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/assets/fonts/Roboto/Roboto-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/assets/fonts/Roboto/Roboto-Black.woff2") format("woff2");
+  font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
@@ -25,7 +41,7 @@ Paste this near the top of your main CSS file:
 /* ----------------------------- */
 
 :root {
-  --font-heading: "Andika", "Trebuchet MS", system-ui, sans-serif;
+  --font-heading: "Quicksand", "Trebuchet MS", system-ui, sans-serif;
   --font-body: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 }
 
@@ -72,7 +88,7 @@ Also add this to your <head> for better loading:
 
 <link
   rel="preload"
-  href="/assets/fonts/Andika/Andika-Regular.woff2"
+  href="/assets/fonts/Quicksand/Quicksand-Regular.woff2"
   as="font"
   type="font/woff2"
   crossorigin
@@ -80,10 +96,10 @@ Also add this to your <head> for better loading:
 
 <link
   rel="preload"
-  href="/assets/fonts/Roboto/Roboto.woff2"
+  href="/assets/fonts/Roboto/Roboto-Regular.woff2"
   as="font"
   type="font/woff2"
   crossorigin
 >
 
-One important note: you only have regular weight files. So avoid using font-weight: 700 unless you add proper bold .woff2 files, otherwise the browser may fake the bold weight.
+Now includes Regular (400), Bold (700), and Black (900) weights.

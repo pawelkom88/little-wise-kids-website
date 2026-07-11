@@ -19,7 +19,8 @@ body {
   min-width: 320px;
   margin: 0;
   font-size: var(--step-0);
-  line-height: 1.6;
+  font-weight: var(--font-weight-regular);
+  line-height: var(--paragraph-line-height);
   background: var(--color-page);
 }
 
@@ -33,7 +34,7 @@ h6,
 .button,
 .site-nav__link {
   font-family: var(--font-heading);
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
   line-height: var(--heading-line-height);
   margin: 0;
 }
@@ -135,21 +136,21 @@ button {
 }
 
 .tone-solid-purple {
-  color: #fff;
+  color: var(--color-page);
   background: linear-gradient(135deg, var(--color-purple), var(--color-purple-dark));
 }
 
 .tone-solid-green {
-  color: #fff;
+  color: var(--color-page);
   background: linear-gradient(135deg, #76cf5b, var(--color-green-dark));
 }
 
 .tone-solid-blue {
-  color: #fff;
+  color: var(--color-page);
   background: linear-gradient(135deg, #2bb7f4, var(--color-blue-dark));
 }
 
 .tone-solid-yellow {
-  color: #fff;
+  color: var(--color-page);
   background: linear-gradient(135deg, #ffd84d, #e1af17);
 }
