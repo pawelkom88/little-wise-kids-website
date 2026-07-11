@@ -39,7 +39,7 @@ import Button from "../ui/Button.astro";
           </span>
           <div>
             <p class={`feature-strip__title tone-${feature.tone}`}>{feature.title}</p>
-            <p>{feature.text}</p>
+            <p class="feature-strip__text">{feature.text}</p>
           </div>
         </article>
       ))
@@ -55,7 +55,7 @@ import Button from "../ui/Button.astro";
 <style>
   .testimonial {
     position: relative;
-    min-height: 150px;
+    min-height: 25px;
     display: grid;
     place-items: center;
     text-align: center;
@@ -63,9 +63,9 @@ import Button from "../ui/Button.astro";
     background: var(--color-purple-soft);
   }
 
-  @media (max-width: 680px) {
+  @media (min-width: 48rem) {
     .testimonial {
-      min-height: 25px;
+      min-height: 150px;
     }
   }
 
@@ -84,5 +84,11 @@ import Button from "../ui/Button.astro";
     width: 100%;
     fill: var(--color-surface);
     transform: rotate(180deg);
+  }
+
+  @media (width < 30rem) {
+    .wave {
+      display: none;
+    }
   }
 </style>

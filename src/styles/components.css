@@ -60,7 +60,7 @@
   padding: 0.8rem 1.45rem;
   border: 1px solid transparent;
   border-radius: 999px;
-  font-size: var(--step--1);
+  font-size: var(--font-size-small);
   line-height: 1;
   white-space: nowrap;
   transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
@@ -86,8 +86,8 @@
   height: 54px;
   min-height: 54px;
   padding: 0 26px;
-  font-size: 17px;
-  font-weight: 800;
+  font-size: var(--font-size-default);
+  font-weight: var(--font-weight-extrabold);
   letter-spacing: -0.01em;
 }
 
@@ -120,7 +120,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-m);
-  min-height: 6rem;
+  min-height: 5rem;
 }
 
 .brand {
@@ -133,7 +133,7 @@
 }
 
 .site-nav {
-  display: flex;
+  display: none;
   align-items: center;
   flex: 1;
   justify-content: center;
@@ -147,11 +147,11 @@
   gap: 0.25rem;
   min-width: 0;
   min-height: 4.5rem;
-  padding: 0.35rem clamp(0.2rem, 0.1rem + 0.35vw, 0.5rem);
+  padding: 0.35rem;
   border: 0;
   border-radius: var(--radius-s);
   font: inherit;
-  font-size: clamp(0.72rem, 0.61rem + 0.35vw, 0.92rem);
+  font-size: var(--font-size-small);
   line-height: 1.15;
   text-align: center;
   color: var(--color-ink);
@@ -212,7 +212,7 @@
 .mega-menu__section[hidden],
 .mobile-menu__children[hidden] { display: none; }
 .mega-menu__heading { display: flex; align-items: center; gap: var(--space-s); }
-.mega-menu__heading h2 { color: currentColor; font-size: var(--step-1); line-height: 1.2; }
+.mega-menu__heading h2 { color: currentColor; font-size: var(--font-size-large); }
 .mega-menu__icon {
   display: grid;
   width: 2rem;
@@ -239,7 +239,7 @@
 @keyframes mega-in { from { opacity: 0; transform: translateY(-0.4rem); } }
 
 .mobile-menu {
-  display: none;
+  display: block;
 }
 
 .mobile-menu__toggle {
@@ -268,8 +268,10 @@
 .mobile-menu__panel {
   position: fixed;
   inset: 0;
+  z-index: 1;
   display: grid;
   grid-template-rows: auto 1fr auto;
+  min-height: 100dvh;
   gap: var(--space-l);
   padding: var(--space-l);
   overflow-y: auto;
@@ -347,7 +349,7 @@
 .mobile-menu__cta {
   width: 100%;
   min-height: 4.5rem;
-  font-size: var(--step-1);
+  font-size: var(--font-size-large);
 }
 
 .site-footer {
@@ -372,9 +374,9 @@
 
 .footer-hero__title {
   max-width: 18ch;
-  font-size: var(--step-3);
+  font-size: clamp(1.73rem, 1.4rem + 1.63vw, 2.66rem);
   font-family: var(--font-heading);
-  line-height: var(--heading-card-line-height);
+  line-height: var(--line-height-heading);
 }
 
 .footer-hero p {
@@ -384,7 +386,7 @@
 
 .newsletter {
   display: grid;
-  grid-template-columns: 1fr minmax(18rem, 1.2fr);
+  grid-template-columns: 1fr;
   gap: var(--space-l);
   align-items: center;
   max-width: 56rem;
@@ -413,9 +415,9 @@
 
 .newsletter__title {
   color: var(--color-purple);
-  font-size: var(--step-1);
+  font-size: var(--font-size-large);
   font-family: var(--font-heading);
-  line-height: var(--heading-card-line-height);
+  line-height: var(--line-height-heading);
 }
 
 .newsletter p {
@@ -423,10 +425,11 @@
 }
 
 .newsletter__field {
-  display: flex;
-  padding: 0.25rem;
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
+  display: grid;
+  gap: var(--space-xs);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
   background: #fff;
 }
 
@@ -437,11 +440,14 @@
   border: 0;
   color: var(--color-ink);
   background: transparent;
+  min-height: 3.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr;
   gap: var(--space-l);
   padding-block: var(--space-xl);
   border-top: 1px solid rgba(8, 24, 66, 0.1);
@@ -450,9 +456,9 @@
 
 .footer-column__title {
   margin-bottom: var(--space-s);
-  font-size: var(--step-0);
+  font-size: var(--font-size-default);
   font-family: var(--font-heading);
-  line-height: var(--heading-card-line-height);
+  line-height: var(--line-height-heading);
 }
 
 .footer-column ul {
@@ -488,46 +494,13 @@
   justify-content: space-between;
   padding-top: var(--space-l);
   color: var(--color-ink-soft);
-  font-size: var(--step--1);
+  font-size: var(--font-size-small);
 }
 
 .footer-bottom nav {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-s);
-}
-
-@media (max-width: 1180px) and (min-width: 981px) {
-  .site-header__inner { gap: var(--space-xs); }
-  .brand__logo { width: 7rem; }
-  .site-nav { gap: 0.1rem; }
-  .site-nav__link { font-size: 0.7rem; padding-inline: 0.1rem; }
-  .site-nav__link .icon { width: 1.45rem; height: 1.45rem; }
-  .mega-menu__links { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
-
-@media (max-width: 980px) {
-  .site-nav,
-  .site-header .button {
-    display: none;
-  }
-
-  .mobile-menu {
-    display: block;
-  }
-
-  .site-header .mobile-menu__cta {
-    display: inline-flex;
-  }
-
-  .site-header__inner {
-    min-height: 5rem;
-  }
-
-  .newsletter,
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -537,22 +510,50 @@
   .site-nav__link:active { transform: none; }
 }
 
-@media (max-width: 620px) {
-  .site-header {
-    padding-block: 0;
-  }
-
+@media (min-width: 30rem) {
   .newsletter__field {
-    display: grid;
-    gap: var(--space-xs);
-    padding: 0;
-    border: 0;
-    border-radius: 0;
+    display: flex;
+    gap: 0;
+    padding: 0.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
   }
 
   .newsletter input {
-    min-height: 3.25rem;
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
+    min-height: 0;
+    border: 0;
+    border-radius: 0;
+  }
+}
+
+@media (min-width: 64rem) {
+  .site-nav {
+    display: flex;
+  }
+
+  .mobile-menu {
+    display: none;
+  }
+
+  .site-header__inner {
+    min-height: 6rem;
+  }
+
+  .mega-menu__links {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .newsletter {
+    grid-template-columns: 1fr minmax(18rem, 1.2fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 80rem) {
+  .mega-menu__links {
+    grid-template-columns: repeat(var(--link-count), minmax(0, 1fr));
   }
 }

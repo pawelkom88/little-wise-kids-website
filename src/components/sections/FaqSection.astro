@@ -142,10 +142,6 @@ const faqs = [
   .faq-title {
     margin: 0;
     color: var(--color-ink);
-    font-family: var(--font-heading);
-    font-size: var(--heading-h2-size);
-    font-weight: 600;
-    line-height: var(--heading-line-height);
     letter-spacing: -0.045em;
     text-wrap: balance;
   }
@@ -158,9 +154,6 @@ const faqs = [
     max-width: 520px;
     margin: 18px auto 0;
     color: var(--color-ink-soft);
-    font-size: clamp(17px, 1.45vw, 20px);
-    font-weight: var(--font-weight-regular);
-    line-height: 1.55;
     text-wrap: balance;
   }
 
@@ -201,8 +194,8 @@ const faqs = [
     color: var(--color-ink);
     cursor: pointer;
     list-style: none;
-    font-size: 17px;
-    font-weight: 900;
+    font-size: var(--font-size-default);
+    font-weight: var(--font-weight-black);
     line-height: 1.25;
     outline: none;
   }
@@ -281,9 +274,6 @@ const faqs = [
     border-radius: 16px;
     background: var(--color-green-soft);
     color: var(--color-ink-soft);
-    font-size: 16px;
-    font-weight: var(--font-weight-regular);
-    line-height: 1.58;
   }
 
   .faq-list .faq-answer-content p {
@@ -297,7 +287,7 @@ const faqs = [
 
   .faq-answer-content strong {
     color: var(--color-green-dark);
-    font-weight: 900;
+    font-weight: var(--font-weight-black);
   }
 
   @supports selector(::details-content) {
@@ -321,14 +311,14 @@ const faqs = [
     border-radius: 18px;
     background: linear-gradient(135deg, var(--color-purple-soft), #fff);
     color: var(--color-ink-soft);
-    font-size: 15.5px;
-    font-weight: 800;
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-extrabold);
     line-height: 1.45;
   }
 
   .faq-note a {
     color: var(--color-purple);
-    font-weight: 900;
+    font-weight: var(--font-weight-black);
     text-decoration: none;
   }
 
@@ -336,7 +326,7 @@ const faqs = [
     text-decoration: underline;
   }
 
-  @media (max-width: 680px) {
+  @media (width < 48rem) {
     .faq-shell {
       width: calc(100% - 28px);
     }
@@ -349,15 +339,6 @@ const faqs = [
       display: none;
     }
 
-    .faq-title {
-      font-size: var(--heading-h2-size);
-    }
-
-    .faq-intro {
-      font-size: 16px;
-      line-height: 1.48;
-    }
-
     .faq-list {
       gap: 12px;
     }
@@ -367,7 +348,6 @@ const faqs = [
       gap: 14px;
       min-height: 68px;
       padding: 0 16px 0 18px;
-      font-size: 16px;
     }
 
     .faq-control {
@@ -384,12 +364,6 @@ const faqs = [
     .faq-answer-content {
       margin: 0 14px 14px;
       padding: 16px;
-      font-size: 15.5px;
-      line-height: 1.5;
-    }
-
-    .faq-note {
-      font-size: 15px;
     }
   }
 
@@ -434,21 +408,17 @@ const faqs = [
 
   .faq-contact__title {
     margin: 0 0 6px;
-    font-size: clamp(1.1rem, 1.5vw, 1.45rem);
-    line-height: 1.25;
-    font-weight: 700;
+    font-size: var(--font-size-large);
   }
 
   .faq-contact__text {
     margin: 0;
     color: #243b72;
-    font-size: clamp(0.95rem, 1.1vw, 1.08rem);
-    line-height: 1.55;
   }
 
   .faq-contact__link {
     color: #9737dc;
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
     text-decoration: none;
   }
 
@@ -470,7 +440,7 @@ const faqs = [
     pointer-events: none;
   }
 
-  @media (max-width: 760px) {
+  @media (width < 48rem) {
     .faq-contact {
       grid-template-columns: 68px 1fr;
       gap: 18px;
@@ -486,7 +456,7 @@ const faqs = [
     }
   }
 
-  @media (max-width: 520px) {
+  @media (width < 30rem) {
     .faq-contact {
       align-items: start;
       padding: 20px 20px 92px;

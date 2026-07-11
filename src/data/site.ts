@@ -28,7 +28,7 @@ export const navItems = [
     ],
   },
   {
-    label: "Parents’ Information",
+    label: "Parents Information",
     icon: "users",
     tone: "purple",
     children: [
@@ -63,12 +63,6 @@ export const heroFeatures = [
     text: "Hands-on activities that inspire discovery.",
     icon: "star",
     tone: "blue",
-  },
-  {
-    title: "Strong Partnerships",
-    text: "Working closely with parents and families.",
-    icon: "users",
-    tone: "purple",
   },
 ] as const;
 

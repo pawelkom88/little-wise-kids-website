@@ -52,7 +52,7 @@ const itemId = (label: string) => label.toLowerCase().replace(/[’'\/\s]+/g, "-
                 <button class={`mobile-menu__link mobile-menu__trigger tone-${item.tone}`} type="button" aria-expanded="false" aria-controls={`mobile-${id}`} data-mobile-trigger={id}>
                   <span class="mobile-menu__icon"><Icon name={item.icon} size={30} /></span>
                   <span>{item.label}</span>
-                  <span class="mobile-menu__chevron" aria-hidden="true">⌄</span>
+                  <span class="mobile-menu__chevron" aria-hidden="true"><Icon name="chevron" size={20}/></span>
                 </button>
                 <div class="mobile-menu__children" id={`mobile-${id}`} hidden inert>
                   {item.children.map((child) => <a href={child.href} data-nav-link>{child.label}<Icon name="arrowRight" size={18} /></a>)}
@@ -162,8 +162,9 @@ const itemId = (label: string) => label.toLowerCase().replace(/[’'\/\s]+/g, "-
       if (expanded) { closeMobileSections(); expanded.focus(); } else { mobile.open = false; mobile.querySelector("summary")?.focus(); }
     });
     header.querySelectorAll<HTMLAnchorElement>("[data-nav-link]").forEach((link) => link.addEventListener("click", () => { closeDesktop(); mobile.open = false; }));
-    const resetForBreakpoint = () => { closeDesktop(); closeMobileSections(); if (matchMedia("(min-width: 981px)").matches) mobile.open = false; };
-    matchMedia("(min-width: 981px)").addEventListener("change", resetForBreakpoint);
+    const desktopViewport = matchMedia("(min-width: 64rem)");
+    const resetForBreakpoint = () => { closeDesktop(); closeMobileSections(); if (desktopViewport.matches) mobile.open = false; };
+    desktopViewport.addEventListener("change", resetForBreakpoint);
   };
   initHeader();
   document.addEventListener("astro:page-load", initHeader);

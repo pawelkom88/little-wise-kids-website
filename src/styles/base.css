@@ -18,12 +18,11 @@ html {
 body {
   min-width: 320px;
   margin: 0;
-  font-size: var(--step-0);
+  font-size: var(--font-size-default);
   font-weight: var(--font-weight-regular);
-  line-height: var(--paragraph-line-height);
+  line-height: var(--line-height-body);
   background: var(--color-page);
 }
-
 
 h1,
 h2,
@@ -34,9 +33,22 @@ h6,
 .button,
 .site-nav__link {
   font-family: var(--font-heading);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--heading-line-height);
   margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading);
+}
+
+.button,
+.site-nav__link {
+  font-weight: var(--font-weight-regular);
 }
 
 h1 {
@@ -53,6 +65,9 @@ h3 {
 
 p {
   margin: 0;
+  font-size: var(--font-size-default);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
 }
 
 a {

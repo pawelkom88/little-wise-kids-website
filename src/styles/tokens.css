@@ -1,3 +1,8 @@
+/*
+ * Responsive scale (use directly in media queries; CSS variables are invalid there):
+ * xs 30rem | sm 48rem | md 64rem | lg 80rem | xl 90rem
+ * md is the desktop navigation threshold.
+ */
 :root {
   --color-purple: #9137d1;
   --color-purple-dark: #7e23c2;
@@ -24,30 +29,20 @@
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
   --font-weight-black: 900;
 
-  --font-size-small: 0.875rem;
-  --font-size-default: 1rem;
-  --font-size-medium: 1.125rem;
-  --font-size-large: 1.25rem;
+  --font-size-small: clamp(0.88rem, 0.84rem + 0.18vw, 1rem);
+  --font-size-default: clamp(1rem, 0.96rem + 0.22vw, 1.13rem);
+  --font-size-large: clamp(1.2rem, 1.09rem + 0.53vw, 1.5rem);
   --font-size-xlarge: 1.5rem;
-  --font-size-xxlarge: 2rem;
 
-  --step--1: clamp(0.88rem, 0.84rem + 0.18vw, 1rem);
-  --step-0: clamp(1rem, 0.96rem + 0.22vw, 1.13rem);
-  --step-1: clamp(1.2rem, 1.09rem + 0.53vw, 1.5rem);
-  --step-2: clamp(1.44rem, 1.24rem + 0.98vw, 2rem);
-  --step-3: clamp(1.73rem, 1.4rem + 1.63vw, 2.66rem);
-  --step-4: clamp(2.07rem, 1.56rem + 2.57vw, 3.55rem);
-  --step-5: clamp(2.49rem, 1.71rem + 3.89vw, 4.73rem);
+  --heading-h1-size: clamp(2.49rem, 1.71rem + 3.89vw, 4.73rem);
+  --heading-h2-size: clamp(2.07rem, 1.56rem + 2.57vw, 3.55rem);
+  --heading-h3-size: clamp(1.44rem, 1.24rem + 0.98vw, 2rem);
 
-  --heading-h1-size: clamp(2.125rem, 1.37rem + 3.78vw, 4.5rem);
-  --heading-h2-size: clamp(2.375rem, 1.64rem + 3.67vw, 4.625rem);
-  --heading-h3-size: clamp(1.5rem, 1.24rem + 1.3vw, 2.25rem);
-  
-  --heading-line-height: 1.06;
-  --heading-card-line-height: 1.08;
-  --paragraph-line-height: 1.6;
+  --line-height-body: 1.6;
+  --line-height-heading: 1.06;
 
   --space-3xs: clamp(0.25rem, 0.23rem + 0.11vw, 0.31rem);
   --space-2xs: clamp(0.5rem, 0.46rem + 0.22vw, 0.63rem);
