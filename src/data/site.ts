@@ -39,7 +39,7 @@ export const navItems = [
       { label: "Settling In", href: "/#parents" },
     ],
   },
-  { label: "Operating Hours & Nutrition", href: "/", icon: "clock", tone: "green" },
+  { label: "Hours & Nutrition", href: "/", icon: "clock", tone: "green" },
   { label: "Our Gallery", href: "/#parents", icon: "image", tone: "green" },
   { label: "Contact Us", href: "/#contact", icon: "mail", tone: "green" },
   { label: "Blog / News", href: "/", icon: "chat", tone: "green" },
