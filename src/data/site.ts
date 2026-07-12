@@ -41,8 +41,8 @@ export const navItems = [
   },
   { label: "Hours & Nutrition", href: "/", icon: "clock", tone: "green" },
   { label: "Our Gallery", href: "/#parents", icon: "image", tone: "green" },
+  { label: "Blog", href: "/", icon: "chat", tone: "green" },
   { label: "Contact Us", href: "/#contact", icon: "mail", tone: "green" },
-  { label: "Blog / News", href: "/", icon: "chat", tone: "green" },
 ] as const;
 
 export const heroFeatures = [

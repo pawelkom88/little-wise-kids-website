@@ -1,7 +1,7 @@
 1. accessibility audit
 2. semantic html audit
 3. performance audit
-4. assets loading and core vitals audit
+4. assets loading and core vitals audit - https://github.com/danielsogl/lighthouse-mcp-server
 5. preloading, prefetching, deffering
 6. animations/ transitions
 7. icons
@@ -13,3 +13,5 @@
 13. how css is loaded. probalby bloated
 14. one var for address, phone number and email
 15. hero mobile bg 
+
+dead css and duplicated code - use prompt

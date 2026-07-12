@@ -1,493 +1,265 @@
 ---
 import Section from "../layout/Section.astro";
+import Icon from "../icons/Icon.astro";
+import Button from "../ui/Button.astro";
+
+import visitImage from "../../../assets/images/hero-image.png";
 import multilingualBubble from "../../../assets/icons/bubble-multilingual.png";
 import heartBubble from "../../../assets/icons/bubble-heart-with-smile.png";
 import artBubble from "../../../assets/icons/bubble-art.png";
 import peopleBubble from "../../../assets/icons/bubble-people.png";
+import planeIcon from "../../../assets/icons/plane-icon.svg";
 
 const cards = [
   {
     tone: "purple",
     image: multilingualBubble,
-    title: ["Multilingual", "Learning"],
+    title: "Multilingual Learning",
     copy:
       "We currently introduce English and Portuguese through songs, stories and everyday moments, helping children communicate, connect and enjoy language naturally.",
   },
   {
     tone: "green",
     image: heartBubble,
-    title: ["Safe & Caring"],
+    title: "Safe & Caring",
     copy:
       "In our warm, family-style setting in Bristol BS5, children feel secure, loved and respected, with wholesome food supporting growing bodies and minds.",
   },
   {
     tone: "blue",
     image: artBubble,
-    title: ["Creative Play"],
+    title: "Creative Play",
     copy:
       "Through screen-free, child-led play and tactile real-world experiences, children build confidence, independence, curiosity and a love of learning.",
   },
   {
     tone: "yellow",
     image: peopleBubble,
-    title: ["Parent Partnership"],
+    title: "Parent Partnership",
     copy:
       "We work closely with families to create a balanced rhythm of indoor and outdoor learning, supporting each child’s unique needs and development.",
   },
 ] as const;
+
+const visitHighlights = [
+  {
+    tone: "purple",
+    icon: "heartSmile",
+    title: "Warm Welcome",
+    copy: "A friendly hello from our caring team.",
+  },
+  {
+    tone: "green",
+    icon: "users",
+    title: "Meet the Team",
+    copy: "Get to know the people who care for your child.",
+  },
+  {
+    tone: "blue",
+    icon: "book",
+    title: "Calm Setting",
+    copy: "Explore our peaceful, inspiring environment.",
+  },
+] as const;
 ---
-<Section id="activities" class="values-section" width="wide">
-  <div class="values-shell" aria-labelledby="values-title">
-    <header class="values-section__header">
-      <h2 class="values-section__title" id="values-title">
-        <span class="values-section__title-line">
-          A Place to <span class="is-purple">Feel Safe,</span>
+
+<Section id="activities" class="lwk-values" width="wide">
+  <div class="lwk-values__stack">
+    <section class="lwk-values-intro" aria-labelledby="values-title">
+      <div class="lwk-values-intro__decor" aria-hidden="true">
+        <span class="lwk-values-intro__icon lwk-values-intro__icon--star">
+          <Icon name="star" size={54} />
         </span>
-        <span class="is-green">Seen</span> and
-           <span class="is-blue">Celebrated</span>
-      </h2>
-      <br>
-      <p class="values-section__subtitle">
-        We created Little Wise Kids with one heartfelt intention: to offer the kind of environment we would want for our own children.
-        Our setting is calm, loving and rich with purpose, designed to feel like an extension of family life.
-        </p>
-      <br>
-      <p class="values-section__subtitle">
-        Here, children are encouraged to explore their interests, develop confidence and form meaningful relationships. We believe
-        the early years are precious, and every day is an opportunity to support a child’s sense of wonder.
-      </p>
-    </header>
-<br>
-    <h2 class="values-section__title">What Makes Us Different</h2>
-    <br>
-    <div class="values-grid">
-      {
-        cards.map((card) => (
-          <article class={`value-card value-card--${card.tone}`}>
-            <div class={`value-card__badge value-card__badge--${card.tone}`} aria-hidden="true">
-              <img src={card.image.src} alt="" loading="lazy" />
-            </div>
 
-            <div class="value-card__content">
-              <h3 class={`value-card__heading value-card__heading--${card.tone}`}>
-                {card.title.map((line) => <span>{line}</span>)}
-              </h3>
-              <p class="value-card__copy">{card.copy}</p>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </div>
+        <span class="lwk-values-intro__icon lwk-values-intro__icon--heart">
+          <Icon name="heart" size={42} />
+        </span>
 
-  <br>
-  <br>
-  <br>
-  <br>
+        <span class="lwk-values-intro__spark"></span>
+        <span class="lwk-values-intro__cloud"></span>
+        <span class="lwk-values-intro__blob"></span>
+        <span class="lwk-values-intro__dots"></span>
 
-  <div class="closing-cta__inner">
-    <div class="closing-cta__copy">
-      <h2 class="closing-cta__title" id="closing-cta-title">
-        Come See the <span>Magic</span> for Yourself
-      </h2>
-
-      <div class="closing-cta__text">
-        <p>
-          The best way to understand what makes Little Wise Kids special is to
-          visit us. We would love to welcome you, introduce our team and help
-          your child explore our calm, engaging space.
-        </p>
-
-        <p>
-          Whether you are looking for nurturing childcare, a screen-free
-          nursery in Bristol, or a setting that truly feels like a second home,
-          we are here to help.
-        </p>
+        <span class="lwk-values-intro__flight">
+          <span class="lwk-values-intro__flight-line"></span>
+          <img src={planeIcon.src} alt="" width="130" height="66" />
+        </span>
       </div>
 
-      <a class="closing-cta__button" href="/contact">
-        Contact Us
-      </a>
-    </div>
+      <div class="lwk-values-intro__content">
+        <p class="lwk-pill">
+          <Icon name="heart" size={16} />
+          Little Wise Kids
+        </p>
 
-    <div class="closing-cta__media" aria-label="Nursery image placeholder">
-      <!-- TODO: Replace with image -->
-      <span>Image here</span>
-    </div>
+        <h2 class="lwk-values-intro__title" id="values-title">
+          <span>A Place to</span>
+          <span>
+            <span class="lwk-tone-purple">Feel Safe,</span>
+            <span class="lwk-tone-green">Seen</span>
+          </span>
+          <span>
+            and <span class="lwk-tone-blue">Celebrated</span>
+          </span>
+        </h2>
+
+        <div class="lwk-title-rule" aria-hidden="true">
+          <span></span><i></i><span></span>
+        </div>
+
+        <div class="lwk-values-intro__copy">
+          <p>
+            We created Little Wise Kids with one heartfelt intention: to offer
+            the kind of environment we would want for our own children. Our
+            setting is calm, loving and rich with purpose, designed to feel like
+            an extension of family life.
+          </p>
+
+          <span class="lwk-values-intro__copy-heart" aria-hidden="true">
+            <Icon name="heart" size={18} />
+          </span>
+
+          <p>
+            Here, children are encouraged to explore their interests, develop
+            confidence and form meaningful relationships. We believe the early
+            years are precious, and every day is an opportunity to support a
+            child’s sense of wonder.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lwk-values-difference" aria-labelledby="difference-title">
+      <header class="lwk-values-heading">
+        <span class="lwk-values-heading__rays" aria-hidden="true"></span>
+        <h2 id="difference-title">What Makes Us Different</h2>
+        <span class="lwk-values-heading__rays lwk-values-heading__rays--right" aria-hidden="true"></span>
+      </header>
+
+      <div class="lwk-values-heading__dots" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </div>
+
+      <div class="lwk-values-grid">
+        {
+          cards.map((card) => (
+            <article class={`lwk-value-card lwk-value-card--${card.tone}`}>
+              <div class="lwk-value-card__image" aria-hidden="true">
+                <img
+                  src={card.image.src}
+                  alt=""
+                  width="176"
+                  height="176"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+
+              <div class="lwk-value-card__content">
+                <h3 class={`lwk-value-card__title lwk-value-card__title--${card.tone}`}>
+                  {card.title}
+                </h3>
+                <p>{card.copy}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="lwk-visit" aria-labelledby="visit-title">
+      <div class="lwk-visit__wave" aria-hidden="true"></div>
+
+      <div class="lwk-visit__layout">
+        <div class="lwk-visit__content">
+          <p class="lwk-pill lwk-pill--left">
+            <Icon name="heart" size={16} />
+            Visit Little Wise Kids
+          </p>
+
+          <h2 class="lwk-visit__title" id="visit-title">
+            Come See the <span>Magic</span>
+            <br />
+            for Yourself
+          </h2>
+
+          <div class="lwk-title-rule lwk-title-rule--left" aria-hidden="true">
+            <span></span><i></i><span></span>
+          </div>
+
+          <div class="lwk-visit__copy">
+            <p>
+              The best way to understand what makes Little Wise Kids special is
+              to visit us. We would love to welcome you, introduce our team and
+              help your child explore our calm, engaging space.
+            </p>
+
+            <p>
+              Whether you are looking for nurturing childcare, a screen-free
+              nursery in Bristol, or a setting that truly feels like a second
+              home, we are here to help.
+            </p>
+          </div>
+
+          <div class="lwk-visit-highlights" aria-label="What to expect during your visit">
+            {
+              visitHighlights.map((item) => (
+                <article class={`lwk-visit-highlight lwk-visit-highlight--${item.tone}`}>
+                  <span class="lwk-visit-highlight__icon" aria-hidden="true">
+                    <Icon name={item.icon} size={24} />
+                  </span>
+
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.copy}</p>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+
+          <div class="lwk-visit__actions">
+            <Button href="/contact" icon="calendar" class="lwk-visit__primary">
+              Book a Visit
+            </Button>
+
+            <a class="lwk-visit__secondary" href="/contact">
+              Get in Touch
+              <span aria-hidden="true"><Icon name="arrowRight" size={18} /></span>
+            </a>
+          </div>
+
+          <p class="lwk-visit__note">Spots are limited — book your visit today.</p>
+        </div>
+
+        <figure class="lwk-visit-media">
+          <div class="lwk-visit-media__decor" aria-hidden="true">
+            <span class="lwk-visit-media__blob"></span>
+            <span class="lwk-visit-media__dots"></span>
+            <span class="lwk-visit-media__heart"><Icon name="heart" size={42} /></span>
+            <span class="lwk-visit-media__star"><Icon name="star" size={46} /></span>
+          </div>
+
+          <div class="lwk-visit-media__image">
+            <img
+              src={visitImage.src}
+              alt="A child learning through play at Little Wise Kids"
+              width={visitImage.width}
+              height={visitImage.height}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <figcaption class="lwk-visit-testimonial">
+            <blockquote>
+              “From the moment we walked in, we felt at ease. Our daughter loves
+              it here, and so do we.”
+            </blockquote>
+            <p>— Little Wise Kids parent</p>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
   </div>
-
 </Section>
-  <svg class="wave" viewBox="0 0 1448 120" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 26c105 38 193 38 292 8 107-32 190-36 304-1 115 35 199 31 305-5 110-37 197-31 308 4 93 29 161 30 239-4v92H0V26Z"></path>
-  </svg>
-
-
-
-
-
-<style>
-  .wave-container {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .wave {
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    fill: var(--color-cream);
-    transform: rotate(180deg);
-  }
-
-  .values-section {
-    background: var(--color-cream);
-    position: relative;
-  }
-
-  .values-shell {
-    position: relative;
-    overflow: hidden;
-    margin: 0 auto;
-  }
-
-  .values-section__header {
-    position: relative;
-    z-index: 1;
-    max-width: 850px;
-    margin: 0 auto var(--space-l);
-    text-align: center;
-  }
-
-  .values-section__title {
-    letter-spacing: -0.045em;
-    text-align: center;
-  }
-
-  .values-section__title-line {
-    display: block;
-  }
-
-  .values-section__title .is-purple {
-    color: var(--color-purple);
-  }
-
-  .values-section__title .is-blue {
-    color: var(--color-blue);
-  }
-
-  .values-section__title .is-green {
-    color: var(--color-green);
-  }
-
-  .values-section__subtitle {
-    text-wrap: pretty;
-  }
-
-  .values-grid {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px 30px;
-    background: inherit;
-  }
-
-  .values-grid .value-card {
-    position: relative;
-    display: grid;
-    grid-template-columns: 186px 1fr;
-    gap: 22px;
-    align-items: center;
-    min-height: 302px;
-    padding: 34px 34px 30px;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-l);
-  }
-
-  .value-card--purple {
-    background: var(--color-purple-soft);
-  }
-
-  .value-card--green {
-    background: var(--color-green-soft);
-  }
-
-  .value-card--blue {
-    background: var(--color-blue-soft);
-  }
-
-  .value-card--yellow {
-    background: var(--color-yellow-soft);
-  }
-
-  .value-card__badge {
-    position: relative;
-    display: grid;
-    width: 176px;
-    height: 176px;
-    flex-shrink: 0;
-    place-items: center;
-    overflow: hidden;
-    border-radius: 50%;
-  }
-
-  .value-card__badge img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .value-card__content {
-    min-width: 0;
-    align-self: center;
-  }
-
-  .value-card__heading {
-    margin: 0 0 12px;
-    letter-spacing: -0.035em;
-  }
-
-  .value-card__heading span {
-    display: block;
-  }
-
-  .value-card__heading--purple {
-    color: var(--color-purple-dark);
-  }
-
-  .value-card__heading--green {
-    color: var(--color-green-dark);
-  }
-
-  .value-card__heading--blue {
-    color: var(--color-blue-dark);
-  }
-
-  .value-card__heading--yellow {
-    color: color-mix(in srgb, var(--color-yellow), black 18%);
-  }
-
-  .values-grid .value-card__copy {
-    max-width: 420px;
-    margin: 0;
-    color: var(--color-ink-soft);
-  }
-
-  @media (width < 64rem) {
-    .values-grid {
-      gap: 22px;
-    }
-
-    .values-grid .value-card {
-      place-items: center;
-      text-align: center;
-      grid-template-columns: 1fr;
-    }
-
-    .value-card__badge {
-      width: 144px;
-      height: 144px;
-    }
-
-  }
-
-  @media (width < 48rem) {
-    .values-shell {
-      padding-inline: 12px;
-    }
-
-    .values-section__blob--top-left {
-      width: 112px;
-      height: 74px;
-    }
-
-    .values-section__blob--right {
-      right: -22px;
-      width: 78px;
-      height: 160px;
-    }
-
-    .values-section__decor--left-line {
-      top: 94px;
-      left: -18px;
-      width: 150px;
-    }
-
-    .values-section__decor--star-left {
-      top: 128px;
-      left: 122px;
-      width: 34px;
-      height: 34px;
-    }
-
-    .values-section__decor--plane {
-      top: 62px;
-      right: 24px;
-      width: 108px;
-      height: 88px;
-    }
-
-    .values-section__header {
-      margin-bottom: 28px;
-      padding-inline: 10px;
-    }
-
-    .values-section__title {
-      margin-top: 12px;
-      margin-bottom: 12px;
-    }
-
-    .values-grid {
-      grid-template-columns: 1fr;
-      gap: 18px;
-    }
-
-    .values-grid .value-card {
-      grid-template-columns: 1fr;
-      gap: 20px;
-      min-height: 0;
-      padding: 24px 22px;
-    }
-
-    .value-card__badge {
-      width: 124px;
-      height: 124px;
-      margin-left: 8px;
-    }
-
-    .value-card__heading {
-      margin-bottom: 10px;
-    }
-
-    .values-grid .value-card__copy {
-      max-width: none;
-    }
-
-    .value-card__doodle--purple-burst,
-    .value-card__doodle--green-burst,
-    .value-card__doodle--blue-burst,
-    .value-card__doodle--yellow-burst {
-      top: 22px;
-      left: 14px;
-      width: 40px;
-      height: 40px;
-    }
-
-    .value-card__doodle--purple-corner,
-    .value-card__doodle--green-corner,
-    .value-card__doodle--blue-corner,
-    .value-card__doodle--yellow-corner {
-      right: 16px;
-      bottom: 14px;
-    }
-  }
-
-  .closing-cta__wave {
-    position: absolute;
-    top: 1px;
-    left: 0;
-    width: 100%;
-    height: clamp(3rem, 6vw, 5.5rem);
-    color: var(--color-cream);
-    pointer-events: none;
-    transform: translateY(-99%);
-  }
-
-  .closing-cta__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(20rem, 0.8fr);
-    gap: clamp(3rem, 8vw, 8rem);
-    align-items: center;
-    width: 100%;
-    margin-inline: auto;
-  }
-
-  .closing-cta__copy {
-    max-width: 48rem;
-  }
-
-  .closing-cta__title {
-    margin: 0;
-  }
-
-  .closing-cta__title span {
-    color: var(--color-green);
-  }
-
-  .closing-cta__text p {
-    margin: 0;
-  }
-
-  .closing-cta__text p + p {
-    margin-top: 1.25rem;
-  }
-
-  .closing-cta__button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2rem;
-    text-decoration: none;
-  }
-
-  .closing-cta__media {
-    display: grid;
-    width: min(100%, 32rem);
-    min-height: clamp(25rem, 42vw, 36rem);
-    place-items: center;
-    justify-self: end;
-    overflow: hidden;
-    border-radius: 999px 999px 1.75rem 1.75rem;
-    background: #eee9e1;
-  }
-
-  .closing-cta__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  @media (max-width: 64rem) {
-    .closing-cta__inner {
-      grid-template-columns: 1fr;
-      max-width: 48rem;
-    }
-
-    .closing-cta__copy {
-      max-width: none;
-    }
-
-    .closing-cta__media {
-      width: 100%;
-      max-width: 38rem;
-      justify-self: start;
-    }
-  }
-
-  @media (max-width: 40rem) {
-    :global(.closing-cta) {
-      padding-inline: 1.25rem;
-    }
-
-    .closing-cta__title {
-      font-size: clamp(2.75rem, 13vw, 4rem);
-    }
-
-    .closing-cta__button {
-      width: 100%;
-      min-height: 4.25rem;
-    }
-
-    .closing-cta__media {
-      min-height: 25rem;
-      border-radius: 999px 999px 1.5rem 1.5rem;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .closing-cta__button {
-      transition: none;
-    }
-  }
-</style>
