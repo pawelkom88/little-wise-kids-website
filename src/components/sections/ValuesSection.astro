@@ -11,48 +11,55 @@ const cards = [
     image: multilingualBubble,
     title: ["Multilingual", "Learning"],
     copy:
-      "We introduce languages through songs, stories and everyday moments, helping children connect, communicate and celebrate the world around them.",
+      "We currently introduce English and Portuguese through songs, stories and everyday moments, helping children communicate, connect and enjoy language naturally.",
   },
   {
     tone: "green",
     image: heartBubble,
     title: ["Safe & Caring"],
     copy:
-      "Your child’s wellbeing comes first. We provide secure, nurturing environments where children feel loved, respected and free to be themselves.",
+      "In our warm, family-style setting in Bristol BS5, children feel secure, loved and respected, with wholesome food supporting growing bodies and minds.",
   },
   {
     tone: "blue",
     image: artBubble,
     title: ["Creative Play"],
     copy:
-      "Through imaginative play, art, music and hands-on exploration, children build confidence, spark curiosity and develop a love for learning.",
+      "Through screen-free, child-led play and tactile real-world experiences, children build confidence, independence, curiosity and a love of learning.",
   },
   {
     tone: "yellow",
     image: peopleBubble,
     title: ["Parent Partnership"],
     copy:
-      "We believe strong partnerships create the best outcomes. We work closely with families to support each child’s unique journey.",
+      "We work closely with families to create a balanced rhythm of indoor and outdoor learning, supporting each child’s unique needs and development.",
   },
 ] as const;
 ---
-<br>
 <Section id="activities" class="values-section" width="wide">
   <div class="values-shell" aria-labelledby="values-title">
     <header class="values-section__header">
       <h2 class="values-section__title" id="values-title">
         <span class="values-section__title-line">
-          Nurturing <span class="is-purple">Little Minds,</span>
+          A Place to <span class="is-purple">Feel Safe,</span>
         </span>
-        <span class="values-section__title-line">
-          Inspiring <span class="is-blue">Bright Futures</span>
-        </span>
+        <span class="is-green">Seen</span> and
+           <span class="is-blue">Celebrated</span>
       </h2>
+      <br>
       <p class="values-section__subtitle">
-        Every day is a chance to learn, grow and shine at Little Wise Kids.
+        We created Little Wise Kids with one heartfelt intention: to offer the kind of environment we would want for our own children.
+        Our setting is calm, loving and rich with purpose, designed to feel like an extension of family life.
+        </p>
+      <br>
+      <p class="values-section__subtitle">
+        Here, children are encouraged to explore their interests, develop confidence and form meaningful relationships. We believe
+        the early years are precious, and every day is an opportunity to support a child’s sense of wonder.
       </p>
     </header>
-
+<br>
+    <h2 class="values-section__title">What Makes Us Different</h2>
+    <br>
     <div class="values-grid">
       {
         cards.map((card) => (
@@ -73,9 +80,85 @@ const cards = [
     </div>
   </div>
 </Section>
+  <svg class="wave" viewBox="0 0 1448 120" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 26c105 38 193 38 292 8 107-32 190-36 304-1 115 35 199 31 305-5 110-37 197-31 308 4 93 29 161 30 239-4v92H0V26Z"></path>
+  </svg>
+<br>
 <br>
 
+
+
+
+<Section
+    class="closing-cta"
+    width="wide"
+    aria-labelledby="closing-cta-title"
+>
+  <svg
+      class="closing-cta__wave"
+      viewBox="0 0 1440 90"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+  >
+    <path
+        d="M0 38C189 4 340 67 568 42C822 14 1037 63 1240 42C1325 33 1387 35 1440 41V90H0V38Z"
+        fill="currentColor"
+    />
+  </svg>
+
+  <div class="closing-cta__inner">
+    <div class="closing-cta__copy">
+      <h2 class="closing-cta__title" id="closing-cta-title">
+        Come See the <span>Magic</span> for Yourself
+      </h2>
+
+      <div class="closing-cta__text">
+        <p>
+          The best way to understand what makes Little Wise Kids special is to
+          visit us. We would love to welcome you, introduce our team and help
+          your child explore our calm, engaging space.
+        </p>
+
+        <p>
+          Whether you are looking for nurturing childcare, a screen-free
+          nursery in Bristol, or a setting that truly feels like a second home,
+          we are here to help.
+        </p>
+      </div>
+
+      <a class="closing-cta__button" href="/contact">
+        Contact Us
+      </a>
+    </div>
+
+    <div class="closing-cta__media" aria-label="Nursery image placeholder">
+      <!-- TODO: Replace with image -->
+      <span>Image here</span>
+    </div>
+  </div>
+</Section>
+
+
 <style>
+  .wave-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .wave {
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    fill: var(--color-cream);
+    transform: rotate(180deg);
+  }
+
+  .values-section {
+    background: var(--color-cream);
+    position: relative;
+  }
+
   .values-shell {
     position: relative;
     overflow: hidden;
@@ -86,14 +169,13 @@ const cards = [
     position: relative;
     z-index: 1;
     max-width: 850px;
-    margin: 0 auto 36px;
+    margin: 0 auto var(--space-l);
     text-align: center;
   }
 
   .values-section__title {
-    margin: 14px 0 16px;
-    color: var(--color-ink);
     letter-spacing: -0.045em;
+    text-align: center;
   }
 
   .values-section__title-line {
@@ -108,8 +190,12 @@ const cards = [
     color: var(--color-blue);
   }
 
+  .values-section__title .is-green {
+    color: var(--color-green);
+  }
+
   .values-section__subtitle {
-    margin: 0;
+    text-wrap: pretty;
   }
 
   .values-grid {
@@ -118,7 +204,7 @@ const cards = [
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 28px 30px;
-    background: var(--color-page);
+    background: inherit;
   }
 
   .values-grid .value-card {
@@ -210,6 +296,7 @@ const cards = [
     .values-grid .value-card {
       place-items: center;
       text-align: center;
+      grid-template-columns: 1fr;
     }
 
     .value-card__badge {

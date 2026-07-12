@@ -7,6 +7,7 @@ interface Props {
   width?: "default" | "narrow" | "wide" | "full";
   bleed?: boolean;
   class?: string;
+  [key: string]: unknown;
 }
 
 const {
@@ -15,11 +16,21 @@ const {
   width = "default",
   bleed = false,
   class: className = "",
+  ...rest
 } = Astro.props;
 
-const classes = ["section", `section--${tone}`, bleed && "section--bleed", className].filter(Boolean).join(" ");
+const classes = [
+  "section",
+  `section--${tone}`,
+  bleed && "section--bleed",
+  className,
+]
+    .filter(Boolean)
+    .join(" ");
 ---
 
-<section id={id} class={classes}>
-  <Container size={width}><slot /></Container>
+<section id={id} class={classes} {...rest}>
+  <Container size={width}>
+    <slot />
+  </Container>
 </section>
