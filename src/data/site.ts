@@ -1,8 +1,22 @@
 export const site = {
   name: "Little Wise Kids",
-  phone: "01234 567890",
-  email: "hello@littlewisekids.co.uk",
-  address: "123 Little Learners Lane, Surrey, GU1 1AA",
+  description:
+    "A warm, screen-free early years setting in Bristol BS5, supporting children through child-led learning, meaningful play and everyday connection.",
+  phone: "07456 326016",
+  phones: ["07456 326016", "07940 272844"],
+  email: "info@littlewisekids.co.uk",
+  address:
+    "Stapleton Road, Congregational Chapel, Newton Street, Bristol, BS5 0QZ",
+  addressLines: [
+    "Stapleton Road, Congregational Chapel",
+    "Newton Street",
+    "Bristol",
+    "BS5 0QZ",
+  ],
+  social: {
+    facebook: "https://www.facebook.com/profile.php?id=100088937473803",
+    instagram: "https://www.instagram.com/littlewisekidsuk/",
+  },
 };
 
 export const navItems = [
@@ -28,7 +42,7 @@ export const navItems = [
     ],
   },
   {
-    label: "Parents Information",
+    label: "Parents’ Information",
     icon: "users",
     tone: "purple",
     children: [
@@ -39,10 +53,10 @@ export const navItems = [
       { label: "Settling In", href: "/#parents" },
     ],
   },
-  { label: "Hours & Nutrition", href: "/", icon: "clock", tone: "green" },
+  { label: "Operating Hours & Nutrition", href: "/", icon: "clock", tone: "green" },
   { label: "Our Gallery", href: "/#parents", icon: "image", tone: "green" },
-  { label: "Blog", href: "/", icon: "chat", tone: "green" },
   { label: "Contact Us", href: "/#contact", icon: "mail", tone: "green" },
+  { label: "Blog / News", href: "/", icon: "chat", tone: "green" },
 ] as const;
 
 export const heroFeatures = [
@@ -131,23 +145,5 @@ export const faqs = [
     question: "Where are you based?",
     answer:
       "Little Wise Kids is based in a home setting just behind Cabot Circus car park.",
-  },
-] as const;
-
-export const footerColumns = [
-  {
-    title: "Explore",
-    tone: "purple",
-    links: ["About Us", "Our Approach", "Activities", "Book a Visit"],
-  },
-  {
-    title: "Families",
-    tone: "green",
-    links: ["Parents", "Fees & Funding", "FAQs", "News & Insights"],
-  },
-  {
-    title: "Information",
-    tone: "blue",
-    links: ["Careers", "Policies", "Term Dates", "Locations"],
   },
 ] as const;

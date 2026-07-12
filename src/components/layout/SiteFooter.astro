@@ -1,63 +1,196 @@
 ---
-import { footerColumns, site } from "../../data/site";
+import { navItems, site } from "../../data/site";
 import Icon from "../icons/Icon.astro";
-import Button from "../ui/Button.astro";
 import Container from "./Container.astro";
+
+const primaryLinks = [
+  { label: "Home", href: "/" },
+  ...navItems
+    .filter((item) => !("children" in item))
+    .map((item) => ({
+      label: item.label,
+      href: "href" in item ? item.href : "/",
+    })),
+];
+
+const navigationGroups = navItems
+  .filter((item) => "children" in item)
+  .map((item) => ({
+    title: item.label,
+    tone: item.tone,
+    links: "children" in item ? item.children : [],
+  }));
+
+const legalLinks = [
+  { label: "Privacy Policy", href: "/#parents" },
+  { label: "Safeguarding Policy", href: "/#parents" },
+] as const;
 ---
 
-<footer id="contact" class="site-footer">
-  <Container>
-    <div class="footer-hero">
-      <img class="footer-hero__logo" src="/assets/images/logo.png" alt={site.name} />
-      <p class="footer-hero__title">Growing confident, kind and curious children.</p>
-      <p>A safe, nurturing space where every child is supported to learn, explore and thrive.</p>
-    </div>
+<footer id="contact" class="lwk-footer">
+  <Container size="wide">
+    <div class="lwk-footer__panel">
+      <span class="lwk-footer__shape lwk-footer__shape--blue" aria-hidden="true"></span>
+      <span class="lwk-footer__shape lwk-footer__shape--yellow" aria-hidden="true"></span>
 
-    <form class="newsletter" action="#" method="post">
-      <div class="newsletter__intro">
-        <span class="newsletter__icon"><Icon name="mail" size={34} /></span>
+      <section class="lwk-footer__brand" aria-labelledby="footer-heading">
+        <a class="lwk-footer__logo-link" href="/public" aria-label={`${site.name} home`}>
+          <img
+            class="lwk-footer__logo"
+            src="/assets/images/logo.png"
+            alt={site.name}
+            width="1774"
+            height="887"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+
+        <h2 class="lwk-footer__heading" id="footer-heading">
+          Growing confident, kind and <span>curious</span> children.
+        </h2>
+
+        <p class="lwk-footer__summary">
+          A warm, screen-free early years setting in Bristol BS5, where every
+          child is supported to learn, explore and thrive at their own pace.
+        </p>
+
+        <a class="lwk-footer__cta" href="/public#contact">
+          Register Your Interest
+          <Icon name="arrowRight" size={20} />
+        </a>
+      </section>
+
+      <div class="lwk-footer__rule" aria-hidden="true"></div>
+
+      <div class="lwk-footer__navigation">
+        <nav class="lwk-footer__column" aria-labelledby="footer-main-menu">
+          <h3 class="lwk-footer__column-title tone-purple" id="footer-main-menu">
+            Main Menu
+          </h3>
+
+          <ul>
+            {
+              primaryLinks.map((link) => (
+                <li>
+                  <a href={link.href}>{link.label}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+
+        {
+          navigationGroups.map((group) => {
+            const headingId = `footer-${group.title
+              .toLowerCase()
+              .replace(/[’'\/\s]+/g, "-")
+              .replace(/[^a-z-]/g, "")}`;
+
+            return (
+              <nav class="lwk-footer__column" aria-labelledby={headingId}>
+                <h3
+                  class={`lwk-footer__column-title tone-${group.tone}`}
+                  id={headingId}
+                >
+                  {group.title}
+                </h3>
+
+                <ul>
+                  {group.links.map((link) => (
+                    <li>
+                      <a href={link.href}>{link.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            );
+          })
+        }
+
+        <section class="lwk-footer__column lwk-footer__contact" aria-labelledby="footer-contact-heading">
+          <h3 class="lwk-footer__column-title tone-green" id="footer-contact-heading">
+            Get in Touch
+          </h3>
+
+          <address class="lwk-footer__contact-list">
+            <div class="lwk-footer__contact-item">
+              <span class="lwk-footer__contact-icon lwk-footer__contact-icon--green" aria-hidden="true">
+                <Icon name="location" size={20} />
+              </span>
+
+              <span>
+                {site.addressLines.map((line) => (
+                  <span>{line}</span>
+                ))}
+              </span>
+            </div>
+
+            <div class="lwk-footer__contact-item">
+              <span class="lwk-footer__contact-icon lwk-footer__contact-icon--blue" aria-hidden="true">
+                <Icon name="phone" size={20} />
+              </span>
+
+              <span class="lwk-footer__phone-links">
+                {site.phones.map((phone) => (
+                  <a href={`tel:${phone.replaceAll(" ", "")}`}>{phone}</a>
+                ))}
+              </span>
+            </div>
+
+            <div class="lwk-footer__contact-item">
+              <span class="lwk-footer__contact-icon lwk-footer__contact-icon--purple" aria-hidden="true">
+                <Icon name="mail" size={20} />
+              </span>
+
+              <a href={`mailto:${site.email}`}>{site.email}</a>
+            </div>
+          </address>
+        </section>
+      </div>
+
+      <div class="lwk-footer__social-row">
         <div>
-          <p class="newsletter__title">REPLACE</p>
-          <p>Tips, activities and inspiration for little learners.</p>
+          <p class="lwk-footer__social-title">Follow our journey</p>
+          <p class="lwk-footer__social-copy">
+            Nursery moments, news and everyday inspiration.
+          </p>
         </div>
-      </div>
-      <label class="sr-only" for="newsletter-email">Email address</label>
-      <div class="newsletter__field">
-        <input id="newsletter-email" type="email" name="email" placeholder="Enter your email address" />
-        <Button>Subscribe</Button>
-      </div>
-    </form>
 
-    <div class="footer-grid">
-      {
-        footerColumns.map((column) => (
-          <div class="footer-column">
-            <p class={`footer-column__title tone-${column.tone}`}>{column.title}</p>
-            <ul>
-              {column.links.map((link) => (
-                <li><a href="#">{link}</a></li>
-              ))}
-            </ul>
-          </div>
-        ))
-      }
-      <div class="footer-column footer-column--contact">
-        <p class="footer-column__title tone-purple">Get in touch</p>
-        <p><Icon name="person" size={18} /> {site.address}</p>
-        <p><Icon name="mail" size={18} /> <a href={`mailto:${site.email}`}>{site.email}</a></p>
-        <p><Icon name="calendar" size={18} /> <a href={`tel:${site.phone.replaceAll(" ", "")}`}>{site.phone}</a></p>
-      </div>
-    </div>
+        <nav class="lwk-footer__social-links" aria-label="Social media">
+          <a
+            class="lwk-footer__social-link lwk-footer__social-link--facebook"
+            href={site.social.facebook}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Icon name="facebook" size={21} />
+            <span>Facebook</span>
+          </a>
 
-    <div class="footer-bottom">
-      <p>Safe. Caring. Nurturing. Every child. Every day.</p>
-      <nav aria-label="Legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms & Conditions</a>
-        <a href="#">Safeguarding</a>
-        <a href="#">Cookies</a>
-      </nav>
-      <p>&copy; 2026 {site.name}. All rights reserved.</p>
+          <a
+            class="lwk-footer__social-link lwk-footer__social-link--instagram"
+            href={site.social.instagram}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Icon name="instagram" size={21} />
+            <span>Instagram</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="lwk-footer__bottom">
+        <nav class="lwk-footer__legal" aria-label="Legal information">
+          {
+            legalLinks.map((link) => (
+              <a href={link.href}>{link.label}</a>
+            ))
+          }
+        </nav>
+
+        <p>&copy; 2026 {site.name}. All rights reserved.</p>
+      </div>
     </div>
   </Container>
 </footer>

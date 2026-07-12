@@ -24,6 +24,10 @@ type IconName =
   | "butterfly"
   | "baloon"
   | "chevron"
+  | "location"
+  | "phone"
+  | "facebook"
+  | "instagram"
 
 interface Props {
   name: IconName;
@@ -48,6 +52,33 @@ const hidden = label ? undefined : "true";
   {
     name === "home" && (
       <path d="m3.5 11 8.5-7 8.5 7M5.5 9.5v10h5v-6h3v6h5v-10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+    )
+  }
+  {
+    name === "location" && (
+      <>
+        <path d="M12 21s6-5.7 6-11a6 6 0 1 0-12 0c0 5.3 6 11 6 11Z" stroke="currentColor" stroke-linejoin="round" />
+        <circle cx="12" cy="10" r="2.2" stroke="currentColor" />
+      </>
+    )
+  }
+  {
+    name === "phone" && (
+      <path d="M7.4 3.5 4.8 5.2c-.8.5-1.2 1.5-.9 2.4 1.7 5.8 6.3 10.4 12.1 12.1.9.3 1.9-.1 2.4-.9l1.7-2.6-4.6-2.2-1.4 1.8a12.8 12.8 0 0 1-5.9-5.9L10 8.5 7.4 3.5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+    )
+  }
+  {
+    name === "facebook" && (
+      <path d="M13.8 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5H17V4a22 22 0 0 0-2.5-.2c-2.5 0-4.2 1.5-4.2 4.3V10H7.5v3h2.8v8h3.5Z" fill="currentColor" />
+    )
+  }
+  {
+    name === "instagram" && (
+      <>
+        <rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" />
+        <circle cx="12" cy="12" r="3.5" stroke="currentColor" />
+        <circle cx="17.2" cy="6.8" r=".8" fill="currentColor" />
+      </>
     )
   }
   {
