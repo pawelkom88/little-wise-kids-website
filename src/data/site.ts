@@ -20,7 +20,7 @@ export const navItems = [
   {
     label: "About Us",
     icon: "person",
-    tone: "purple",
+    tone: "blue",
     children: [
       { label: "About Us", href: "/#approach" },
       { label: "Our Approach", href: "/#approach" },
@@ -31,7 +31,7 @@ export const navItems = [
   {
     label: "Multilingual Learning",
     icon: "book",
-    tone: "blue",
+    tone: "green",
     children: [
       { label: "Our Curriculum", href: "/#activities" },
       { label: "EYFS", href: "/#approach" },

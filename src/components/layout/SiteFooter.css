@@ -3,9 +3,10 @@
   --footer-heading-size-mobile: clamp(1.75rem, 8vw, 2.4rem);
   --footer-heading-tracking: -0.04em;
   --footer-column-title-tracking: -0.025em;
+
   position: relative;
   overflow: hidden;
-  padding-block: var(--section-spacing) var(--space-l);
+  padding-block: var(--section-spacing) 0;
   background: var(--color-page);
 }
 
@@ -17,31 +18,11 @@
     clamp(var(--space-xl), 6vw, var(--space-3xl))
     clamp(var(--space-m), 5vw, var(--space-2xl))
     var(--space-l);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-l);
   background: color-mix(
     in srgb,
     var(--color-purple-soft),
     var(--color-page) 74%
   );
-  box-shadow: var(--shadow-soft);
-}
-
-.lwk-footer__panel::before {
-  position: absolute;
-  top: -7rem;
-  left: 50%;
-  z-index: -1;
-  width: min(74rem, 94%);
-  height: 13rem;
-  border-radius: 50%;
-  background: color-mix(
-    in srgb,
-    var(--color-blue-soft),
-    transparent 24%
-  );
-  content: "";
-  transform: translateX(-50%);
 }
 
 .lwk-footer__shape {

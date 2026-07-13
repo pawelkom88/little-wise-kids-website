@@ -1,7 +1,6 @@
 ---
 import Icon from "../../icons/Icon.astro";
 import Button from "../../ui/Button.astro";
-import visitImage from "../../../../assets/images/hero-image.png";
 import "./VisitSection.css";
 
 const visitHighlights = [
@@ -27,14 +26,8 @@ const visitHighlights = [
 ---
 
 <section class="lwk-visit" aria-labelledby="visit-title">
-  <div class="lwk-visit__wave" aria-hidden="true"></div>
-
   <div class="lwk-visit__layout">
     <div class="lwk-visit__content">
-      <p class="lwk-pill lwk-pill--left">
-        <Icon name="heart" size={16} />
-        Visit Little Wise Kids
-      </p>
 
       <h2 class="lwk-visit__title" id="visit-title">
         Come See the <span>Magic</span>
@@ -60,35 +53,11 @@ const visitHighlights = [
         </p>
       </div>
 
-      <div class="lwk-visit-highlights" aria-label="What to expect during your visit">
-        {
-          visitHighlights.map((item) => (
-            <article class={`lwk-visit-highlight lwk-visit-highlight--${item.tone}`}>
-              <span class="lwk-visit-highlight__icon" aria-hidden="true">
-                <Icon name={item.icon} size={24} />
-              </span>
-
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.copy}</p>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-
       <div class="lwk-visit__actions">
         <Button href="/#contact" icon="calendar" class="lwk-visit__primary">
           Book a Visit
         </Button>
-
-        <a class="lwk-visit__secondary" href="/#contact">
-          Get in Touch
-          <span aria-hidden="true"><Icon name="arrowRight" size={18} /></span>
-        </a>
       </div>
-
-      <p class="lwk-visit__note">Spots are limited — book your visit today.</p>
     </div>
 
     <figure class="lwk-visit-media">
@@ -101,10 +70,10 @@ const visitHighlights = [
 
       <div class="lwk-visit-media__image">
         <img
-          src={visitImage.src}
-          alt="A child learning through play at Little Wise Kids"
-          width={visitImage.width}
-          height={visitImage.height}
+          src=""
+          alt="???"
+          width="1200"
+          height="800"
           loading="lazy"
           decoding="async"
         />

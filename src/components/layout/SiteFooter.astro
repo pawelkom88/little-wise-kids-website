@@ -29,7 +29,6 @@ const legalLinks = [
 ---
 
 <footer id="contact" class="lwk-footer">
-  <Container size="wide">
     <div class="lwk-footer__panel">
       <span class="lwk-footer__shape lwk-footer__shape--blue" aria-hidden="true"></span>
       <span class="lwk-footer__shape lwk-footer__shape--yellow" aria-hidden="true"></span>
@@ -48,7 +47,8 @@ const legalLinks = [
         </a>
 
         <h2 class="lwk-footer__heading" id="footer-heading">
-          Growing confident, kind and <span>curious</span> children.
+          <!--TODO : make global-->
+          Growing <span class="tone-purple">confident</span>, <span class="tone-green">kind</span> and <span class="tone-blue">curious</span> children.
         </h2>
 
         <p class="lwk-footer__summary">
@@ -62,6 +62,7 @@ const legalLinks = [
         </a>
       </section>
 
+      <Container size="wide">
       <div class="lwk-footer__rule" aria-hidden="true"></div>
 
       <div class="lwk-footer__navigation">
@@ -110,7 +111,7 @@ const legalLinks = [
         }
 
         <section class="lwk-footer__column lwk-footer__contact" aria-labelledby="footer-contact-heading">
-          <h3 class="lwk-footer__column-title tone-green" id="footer-contact-heading">
+          <h3 class="lwk-footer__column-title tone-blue" id="footer-contact-heading">
             Get in Touch
           </h3>
 
@@ -189,9 +190,9 @@ const legalLinks = [
             ))
           }
         </nav>
-
-        <p>&copy; 2026 {site.name}. All rights reserved.</p>
+<!--TODO: do not hardcore date ! use js-->
+        <p>&copy; {new Date().getFullYear()} {site.name}. All rights reserved.</p>
       </div>
+      </Container>
     </div>
-  </Container>
 </footer>
