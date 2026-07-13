@@ -113,11 +113,6 @@ button {
   border: 0;
 }
 
-.icon {
-  flex: none;
-  stroke-width: 2;
-}
-
 .tone-purple {
   color: var(--color-purple);
 }
@@ -130,42 +125,8 @@ button {
   color: var(--color-blue);
 }
 
-.tone-yellow {
-  color: var(--color-yellow);
-}
-
-.tone-bg-purple {
-  background: var(--color-purple-soft);
-}
-
-.tone-bg-green {
-  background: var(--color-green-soft);
-}
-
-.tone-bg-blue {
-  background: var(--color-blue-soft);
-}
-
-.tone-bg-yellow {
-  background: var(--color-yellow-soft);
-}
-
-.tone-solid-purple {
-  color: var(--color-page);
-  background: linear-gradient(135deg, var(--color-purple), var(--color-purple-dark));
-}
-
-.tone-solid-green {
-  color: var(--color-page);
-  background: linear-gradient(135deg, #76cf5b, var(--color-green-dark));
-}
-
-.tone-solid-blue {
-  color: var(--color-page);
-  background: linear-gradient(135deg, #2bb7f4, var(--color-blue-dark));
-}
-
-.tone-solid-yellow {
-  color: var(--color-page);
-  background: linear-gradient(135deg, #ffd84d, #e1af17);
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

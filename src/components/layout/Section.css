@@ -1,0 +1,3 @@
+.section {
+  padding-block: calc(var(--section-spacing) / 2);
+}

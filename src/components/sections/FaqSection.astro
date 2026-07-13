@@ -1,6 +1,9 @@
 ---
 import Image from "astro/components/Image.astro";
+import envelopeIcon from "../../../assets/icons/icon-envelope.png";
+import flowerIcon from "../../../assets/icons/flower-icon.png";
 import Section from "../layout/Section.astro";
+import "./FaqSection.css";
 
 const faqs = [
   {
@@ -31,11 +34,11 @@ const faqs = [
   },
 ] as const;
 ---
-<br>
-<br>
-  <svg class="wave" viewBox="0 0 1448 120" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 26c105 38 193 38 292 8 107-32 190-36 304-1 115 35 199 31 305-5 110-37 197-31 308 4 93 29 161 30 239-4v92H0V26Z"></path>
-  </svg>
+
+<svg class="faq-wave faq-wave--top" viewBox="0 0 1448 120" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0 26c105 38 193 38 292 8 107-32 190-36 304-1 115 35 199 31 305-5 110-37 197-31 308 4 93 29 161 30 239-4v92H0V26Z"></path>
+</svg>
+
 <Section class="faq-section" width="wide">
   <div class="faq-shell" aria-labelledby="faq-title">
     <header class="faq-header">
@@ -67,15 +70,15 @@ const faqs = [
         ))
       }
     </div>
-<br>
+
     <aside class="faq-contact" aria-labelledby="faq-contact-title">
       <Image
-          width={82}
-          height={82}
-          class="faq-contact__envelope"
-          src="/assets/icons/icon-envelope.png"
-          alt="Envelope icon"
-          aria-hidden="true"
+        width={82}
+        height={82}
+        class="faq-contact__envelope"
+        src={envelopeIcon}
+        alt="Envelope icon"
+        aria-hidden="true"
       />
 
       <div class="faq-contact__content">
@@ -85,391 +88,23 @@ const faqs = [
 
         <p class="faq-contact__text">
           Our team is happy to help with anything you need.
-          <a class="faq-contact__link" href="/contact">Contact us</a>
+          <a class="faq-contact__link" href="/#contact">Contact us</a>
           — we’d love to hear from you.
         </p>
       </div>
 
       <Image
-          width={82}
-          height={82}
-          class="faq-contact__flower"
-          src="/assets/icons/flower-icon.png"
-          alt="Flower icon"
-          aria-hidden="true"
+        width={82}
+        height={82}
+        class="faq-contact__flower"
+        src={flowerIcon}
+        alt="Flower icon"
+        aria-hidden="true"
       />
     </aside>
   </div>
-
-
-
-
 </Section>
-<svg class="wave wave-rotated" viewBox="0 0 1448 120" preserveAspectRatio="none" aria-hidden="true">
+
+<svg class="faq-wave faq-wave--rotated" viewBox="0 0 1448 120" preserveAspectRatio="none" aria-hidden="true">
   <path d="M0 26c105 38 193 38 292 8 107-32 190-36 304-1 115 35 199 31 305-5 110-37 197-31 308 4 93 29 161 30 239-4v92H0V26Z"></path>
 </svg>
-<br>
-<style>
-
-  :root {
-    --faq-width: width: ;
-  }
-
-  .wave{
-    fill: var(--color-green-soft);
-  }
-
-  .wave-rotated {
-    transform: rotate(180deg);
-  }
-
-  :global(.faq-section) {
-    background: var(--color-green-soft);
-  }
-
-  .faq-shell {
-    width: min(1060px, calc(100% - 32px));
-    margin: 0 auto;
-    color: var(--color-ink);
-  }
-
-  .faq-header {
-    position: relative;
-    max-width: 660px;
-    margin: 0 auto 44px;
-    text-align: center;
-  }
-
-  .faq-title {
-    margin: 0;
-    color: var(--color-ink);
-    letter-spacing: -0.045em;
-    text-wrap: balance;
-  }
-
-  .faq-title span {
-    color: var(--color-green);
-  }
-
-  .faq-intro {
-    max-width: 520px;
-    margin: 18px auto 0;
-    color: var(--color-ink-soft);
-    text-wrap: balance;
-  }
-
-  .faq-list {
-    display: grid;
-    gap: 14px;
-    width: var(--faq-width);
-    margin: 0 auto;
-  }
-
-  .faq-list details.faq-item {
-    overflow: hidden;
-    padding: 0;
-    border: 1px solid var(--color-border);
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.94);
-    box-shadow: 0 10px 26px rgba(8, 24, 66, 0.055);
-    transition:
-      border-color 0.22s ease,
-      box-shadow 0.22s ease,
-      background-color 0.22s ease;
-  }
-
-  .faq-list details.faq-item[open] {
-    border-color: color-mix(in srgb, var(--color-green), transparent 78%);
-    background: #fff;
-    box-shadow: 0 18px 45px rgba(8, 24, 66, 0.07);
-  }
-
-  .faq-item summary {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 34px;
-    gap: 18px;
-    align-items: center;
-    min-height: 74px;
-    padding: 0 20px 0 24px;
-    color: var(--color-ink);
-    cursor: pointer;
-    list-style: none;
-    font-size: var(--font-size-default);
-    font-weight: var(--font-weight-black);
-    line-height: 1.25;
-    outline: none;
-  }
-
-  .faq-item summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .faq-item summary:focus-visible {
-    border-radius: inherit;
-    box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--color-green), transparent 66%);
-  }
-
-  .faq-question {
-    min-width: 0;
-  }
-
-  .faq-control {
-    position: relative;
-    display: grid;
-    justify-self: end;
-    width: 30px;
-    height: 30px;
-    place-items: center;
-    border-radius: 999px;
-    color: var(--color-green-dark);
-    background: var(--color-green-soft);
-    transition:
-      color 0.22s ease,
-      background-color 0.22s ease,
-      transform 0.22s ease;
-  }
-
-  .faq-control::before,
-  .faq-control::after {
-    position: absolute;
-    width: 13px;
-    height: 3px;
-    border-radius: 999px;
-    background: currentColor;
-    content: "";
-    transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-
-  .faq-control::after {
-    transform: rotate(90deg);
-  }
-
-  details[open] .faq-control {
-    color: #fff;
-    background: var(--color-green);
-    transform: rotate(180deg);
-  }
-
-  details[open] .faq-control::after {
-    transform: rotate(0deg);
-  }
-
-  .faq-answer {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-
-  details[open] .faq-answer {
-    grid-template-rows: 1fr;
-  }
-
-  .faq-answer-inner {
-    overflow: hidden;
-  }
-
-  .faq-answer-content {
-    margin: 0 var(--space-s) var(--space-s) var(--space-s);
-    padding: var(--space-s);
-    border-radius: 16px;
-    background: var(--color-green-soft);
-    color: var(--color-ink-soft);
-  }
-
-  .faq-list .faq-answer-content p {
-    margin: 0;
-    padding: 0;
-  }
-
-  .faq-list .faq-answer-content p + p {
-    margin-top: 12px;
-  }
-
-  .faq-answer-content strong {
-    color: var(--color-green-dark);
-    font-weight: var(--font-weight-black);
-  }
-
-  @supports selector(::details-content) {
-    details::details-content {
-      block-size: 0;
-      overflow: hidden;
-      transition:
-        block-size 0.32s cubic-bezier(0.2, 0.8, 0.2, 1),
-        content-visibility 0.32s allow-discrete;
-    }
-
-    details[open]::details-content {
-      block-size: auto;
-    }
-  }
-
-  .faq-note {
-    width: var(--faq-width);
-    margin: 22px auto 0;
-    padding: 18px 22px;
-    border-radius: 18px;
-    background: linear-gradient(135deg, var(--color-purple-soft), #fff);
-    color: var(--color-ink-soft);
-    font-size: var(--font-size-small);
-    font-weight: var(--font-weight-extrabold);
-    line-height: 1.45;
-  }
-
-  .faq-note a {
-    color: var(--color-purple);
-    font-weight: var(--font-weight-black);
-    text-decoration: none;
-  }
-
-  .faq-note a:hover {
-    text-decoration: underline;
-  }
-
-  @media (width < 48rem) {
-    .faq-shell {
-      width: calc(100% - 28px);
-    }
-
-    .faq-header {
-      margin-bottom: 32px;
-    }
-
-    .faq-doodle {
-      display: none;
-    }
-
-    .faq-list {
-      gap: 12px;
-    }
-
-    .faq-item summary {
-      grid-template-columns: 1fr 30px;
-      gap: 14px;
-      min-height: 68px;
-      padding: 0 16px 0 18px;
-    }
-
-    .faq-control {
-      width: 28px;
-      height: 28px;
-    }
-
-    .faq-control::before,
-    .faq-control::after {
-      width: 12px;
-      height: 2.5px;
-    }
-
-    .faq-answer-content {
-      margin: 0 14px 14px;
-      padding: 16px;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .faq-list details.faq-item,
-    .faq-answer,
-    .faq-control,
-    .faq-control::before,
-    .faq-control::after {
-      transition: none;
-    }
-  }
-
-  .faq-contact {
-    position: relative;
-    display: grid;
-    grid-template-columns: 92px minmax(0, 1fr);
-    align-items: center;
-    gap: 24px;
-    padding: var(--space-m);
-    overflow: hidden;
-    border: 1px solid #e2dcc3;
-    border-radius: 24px;
-    background: var(--color-yellow-soft);
-    box-shadow: 0 12px 28px rgba(16, 39, 95, 0.08);
-  }
-
-  .faq-contact__envelope {
-    background: var(--color-purple-soft);
-    border-radius: 50%;
-    width: 82px;
-    height: 82px;
-    object-fit: contain;
-    display: block;
-  }
-
-  .faq-contact__content {
-    position: relative;
-    z-index: 1;
-    min-width: 0;
-  }
-
-  .faq-contact__title {
-    margin: 0 0 6px;
-    font-size: var(--font-size-large);
-  }
-
-  .faq-contact__text {
-    margin: 0;
-    color: #243b72;
-  }
-
-  .faq-contact__link {
-    color: #9737dc;
-    font-weight: var(--font-weight-bold);
-    text-decoration: none;
-  }
-
-  .faq-contact__link:hover,
-  .faq-contact__link:focus-visible {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-
-  .faq-contact__flower {
-    position: absolute;
-    top: 50%;
-    right: 22px;
-    width: 180px;
-    height: auto;
-    display: block;
-    object-fit: contain;
-    transform: translateY(-50%);
-    pointer-events: none;
-  }
-
-  @media (width < 48rem) {
-    .faq-contact {
-      grid-template-columns: 68px 1fr;
-      gap: 18px;
-    }
-
-    .faq-contact__envelope {
-      width: 64px;
-      height: 64px;
-    }
-
-    .faq-contact__flower {
-    display: none;
-    }
-  }
-
-  @media (width < 30rem) {
-    .faq-contact {
-      align-items: start;
-      padding: 20px 20px 92px;
-    }
-
-    .faq-contact__envelope {
-      width: 56px;
-      height: 56px;
-    }
-
-    .faq-contact__flower {
-      display: none;
-    }
-  }
-</style>

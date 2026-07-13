@@ -1,0 +1,69 @@
+---
+import Icon from "../../icons/Icon.astro";
+import planeIcon from "../../../../assets/icons/plane-icon.svg";
+import "./ValuesIntro.css";
+---
+
+<section id="approach" class="lwk-values-intro" aria-labelledby="values-title">
+  <div class="lwk-values-intro__decor" aria-hidden="true">
+    <span class="lwk-values-intro__icon lwk-values-intro__icon--star">
+      <Icon name="star" size={54} />
+    </span>
+
+    <span class="lwk-values-intro__icon lwk-values-intro__icon--heart">
+      <Icon name="heart" size={42} />
+    </span>
+
+    <span class="lwk-values-intro__spark"></span>
+    <span class="lwk-values-intro__cloud"></span>
+    <span class="lwk-values-intro__blob"></span>
+    <span class="lwk-values-intro__dots"></span>
+
+    <span class="lwk-values-intro__flight">
+      <span class="lwk-values-intro__flight-line"></span>
+      <img src={planeIcon.src} alt="" width="130" height="66" />
+    </span>
+  </div>
+
+  <div class="lwk-values-intro__content">
+    <p class="lwk-pill">
+      <Icon name="heart" size={16} />
+      Little Wise Kids
+    </p>
+
+    <h2 class="lwk-values-intro__title" id="values-title">
+      <span>A Place to</span>
+      <span>
+        <span class="lwk-tone-purple">Feel Safe,</span>
+        <span class="lwk-tone-green">Seen</span>
+      </span>
+      <span>
+        and <span class="lwk-tone-blue">Celebrated</span>
+      </span>
+    </h2>
+
+    <div class="lwk-title-rule" aria-hidden="true">
+      <span></span><i></i><span></span>
+    </div>
+
+    <div class="lwk-values-intro__copy">
+      <p>
+        We created Little Wise Kids with one heartfelt intention: to offer
+        the kind of environment we would want for our own children. Our
+        setting is calm, loving and rich with purpose, designed to feel like
+        an extension of family life.
+      </p>
+
+      <span class="lwk-values-intro__copy-heart" aria-hidden="true">
+        <Icon name="heart" size={18} />
+      </span>
+
+      <p>
+        Here, children are encouraged to explore their interests, develop
+        confidence and form meaningful relationships. We believe the early
+        years are precious, and every day is an opportunity to support a
+        child’s sense of wonder.
+      </p>
+    </div>
+  </div>
+</section>

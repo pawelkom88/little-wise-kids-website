@@ -17,26 +17,35 @@
   --color-yellow-soft: #fff6d9;
   --color-ink: #061947;
   --color-ink-soft: #263a68;
+  --color-text-supporting: #243b72;
   --color-muted: #65728e;
-  --color-border: rgba(8, 24, 66, 0.1);
-  --color-surface: #ffffff;
   --color-page: #fff;
+  --color-surface: var(--color-page);
+  --color-surface-glass: rgb(251 253 255 / 88%);
+  --color-purple-mist: #fbf7ff;
+  --color-border-base: #091642;
+  --color-border: rgb(8 24 66 / 10%);
+  --color-border-warm: #e2dcc3;
+  --color-link-accent: #9737dc;
+  --color-darken-base: #000;
+  --color-shadow-base: #081842;
+  --color-shadow-deep: #0a1c4c;
+  --color-shadow-accent: #10275f;
   --color-cream: #fffbf1;
 
   --font-heading: "Quicksand", "Trebuchet MS", system-ui, sans-serif;
   --font-body: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-  --font-accent: "Caveat", cursive;
+  --font-decorative-symbol: Georgia, serif;
 
   --font-weight-regular: 400;
-  --font-weight-medium: 500;
   --font-weight-bold: 700;
-  --font-weight-extrabold: 800;
   --font-weight-black: 900;
 
   --font-size-small: clamp(0.88rem, 0.84rem + 0.18vw, 1rem);
   --font-size-default: clamp(1rem, 0.96rem + 0.22vw, 1.13rem);
   --font-size-large: clamp(1.2rem, 1.09rem + 0.53vw, 1.5rem);
   --font-size-xlarge: 1.5rem;
+  --font-size-label: 0.78rem;
 
   --heading-h1-size: clamp(2.49rem, 1.71rem + 3.89vw, 4.73rem);
   --heading-h2-size: clamp(2.07rem, 1.56rem + 2.57vw, 3.55rem);
@@ -44,6 +53,10 @@
 
   --line-height-body: 1.6;
   --line-height-heading: 1.06;
+  --line-height-compact: 1.35;
+  --line-height-tight: 1.2;
+  --line-height-solid: 1;
+  --letter-spacing-section-title: -0.045em;
 
   --space-3xs: clamp(0.25rem, 0.23rem + 0.11vw, 0.31rem);
   --space-2xs: clamp(0.5rem, 0.46rem + 0.22vw, 0.63rem);
@@ -63,6 +76,7 @@
   --radius-s: 0.75rem;
   --radius-m: 1.25rem;
   --radius-l: 2rem;
-  --shadow-soft: 0 1.25rem 3rem rgba(8, 24, 66, 0.1);
-  --shadow-card: 0 0.75rem 2rem rgba(8, 24, 66, 0.09);
+  --radius-pill: 999px;
+  --shadow-soft: 0 1.25rem 3rem rgb(8 24 66 / 10%);
+  --shadow-card: 0 0.75rem 2rem rgb(8 24 66 / 9%);
 }

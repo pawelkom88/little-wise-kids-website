@@ -1,0 +1,73 @@
+.lwk-values {
+  --values-title-tracking: -0.055em;
+  --values-pill-tracking: 0.055em;
+
+  position: relative;
+  overflow: hidden;
+  background: var(--color-cream);
+}
+
+.lwk-values > .container {
+  width: min(100% - (var(--gutter) * 2), var(--container-wide));
+}
+
+.lwk-values__stack {
+  display: grid;
+  gap: clamp(4.5rem, 8vw, 7.5rem);
+}
+
+.lwk-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  margin: 0 auto 1.25rem;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid color-mix(in srgb, var(--color-purple), transparent 74%);
+  border-radius: var(--radius-pill);
+  color: var(--color-ink);
+  background: color-mix(in srgb, var(--color-purple-soft), var(--color-surface) 30%);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--values-pill-tracking);
+  line-height: var(--line-height-solid);
+  text-transform: uppercase;
+}
+
+.lwk-pill .icon {
+  color: var(--color-purple);
+}
+
+.lwk-title-rule {
+  display: flex;
+  align-items: center;
+  width: min(8.5rem, 42%);
+  margin: 1.25rem auto 1.75rem;
+}
+
+.lwk-title-rule span {
+  flex: 1;
+  height: 2px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-purple), var(--color-surface) 38%);
+}
+
+.lwk-title-rule i {
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-inline: 0.35rem;
+  border-radius: 50%;
+  background: var(--color-purple);
+}
+
+.lwk-pill--left,
+.lwk-title-rule--left {
+  margin-inline: 0 auto;
+}
+
+@media (width < 48rem) {
+  .lwk-values__stack {
+    gap: 4.5rem;
+  }
+}

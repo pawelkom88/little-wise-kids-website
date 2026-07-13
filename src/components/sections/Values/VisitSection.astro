@@ -1,0 +1,122 @@
+---
+import Icon from "../../icons/Icon.astro";
+import Button from "../../ui/Button.astro";
+import visitImage from "../../../../assets/images/hero-image.png";
+import "./VisitSection.css";
+
+const visitHighlights = [
+  {
+    tone: "purple",
+    icon: "heartSmile",
+    title: "Warm Welcome",
+    copy: "A friendly hello from our caring team.",
+  },
+  {
+    tone: "green",
+    icon: "users",
+    title: "Meet the Team",
+    copy: "Get to know the people who care for your child.",
+  },
+  {
+    tone: "blue",
+    icon: "book",
+    title: "Calm Setting",
+    copy: "Explore our peaceful, inspiring environment.",
+  },
+] as const;
+---
+
+<section class="lwk-visit" aria-labelledby="visit-title">
+  <div class="lwk-visit__wave" aria-hidden="true"></div>
+
+  <div class="lwk-visit__layout">
+    <div class="lwk-visit__content">
+      <p class="lwk-pill lwk-pill--left">
+        <Icon name="heart" size={16} />
+        Visit Little Wise Kids
+      </p>
+
+      <h2 class="lwk-visit__title" id="visit-title">
+        Come See the <span>Magic</span>
+        <br />
+        for Yourself
+      </h2>
+
+      <div class="lwk-title-rule lwk-title-rule--left" aria-hidden="true">
+        <span></span><i></i><span></span>
+      </div>
+
+      <div class="lwk-visit__copy">
+        <p>
+          The best way to understand what makes Little Wise Kids special is
+          to visit us. We would love to welcome you, introduce our team and
+          help your child explore our calm, engaging space.
+        </p>
+
+        <p>
+          Whether you are looking for nurturing childcare, a screen-free
+          nursery in Bristol, or a setting that truly feels like a second
+          home, we are here to help.
+        </p>
+      </div>
+
+      <div class="lwk-visit-highlights" aria-label="What to expect during your visit">
+        {
+          visitHighlights.map((item) => (
+            <article class={`lwk-visit-highlight lwk-visit-highlight--${item.tone}`}>
+              <span class="lwk-visit-highlight__icon" aria-hidden="true">
+                <Icon name={item.icon} size={24} />
+              </span>
+
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="lwk-visit__actions">
+        <Button href="/#contact" icon="calendar" class="lwk-visit__primary">
+          Book a Visit
+        </Button>
+
+        <a class="lwk-visit__secondary" href="/#contact">
+          Get in Touch
+          <span aria-hidden="true"><Icon name="arrowRight" size={18} /></span>
+        </a>
+      </div>
+
+      <p class="lwk-visit__note">Spots are limited — book your visit today.</p>
+    </div>
+
+    <figure class="lwk-visit-media">
+      <div class="lwk-visit-media__decor" aria-hidden="true">
+        <span class="lwk-visit-media__blob"></span>
+        <span class="lwk-visit-media__dots"></span>
+        <span class="lwk-visit-media__heart"><Icon name="heart" size={42} /></span>
+        <span class="lwk-visit-media__star"><Icon name="star" size={46} /></span>
+      </div>
+
+      <div class="lwk-visit-media__image">
+        <img
+          src={visitImage.src}
+          alt="A child learning through play at Little Wise Kids"
+          width={visitImage.width}
+          height={visitImage.height}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      <figcaption class="lwk-visit-testimonial">
+        <blockquote>
+          “From the moment we walked in, we felt at ease. Our daughter loves
+          it here, and so do we.”
+        </blockquote>
+        <p>— Little Wise Kids parent</p>
+      </figcaption>
+    </figure>
+  </div>
+</section>

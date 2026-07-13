@@ -1,15 +1,16 @@
 ---
-import { heroFeatures, site } from "../../data/site";
+import { heroFeatures } from "../../data/site";
 import Icon from "../icons/Icon.astro";
 import Section from "../layout/Section.astro";
 import Button from "../ui/Button.astro";
+import "./HeroSection.css";
 ---
 
 <Section class="hero-section" width="wide">
   <div class="hero" aria-labelledby="hero-title">
     <div class="hero__content">
       <h1 id="hero-title">
-        <span>Welcome to</span> <span  class="tone-purple">Little</span><br />
+        <span>Welcome to</span> <span class="tone-purple">Little</span><br />
         <span class="tone-green">Wise</span> <span class="tone-blue">Kids</span><br />
       </h1>
       <p class="hero-subtitle">Guiding your most precious little ones
@@ -26,7 +27,7 @@ import Button from "../ui/Button.astro";
       </div>
     </div>
     <div class="hero__media" aria-hidden="true">
-      <img class="hero__photo" src="/assets/images/hero-image.png" alt="" width="1426" height="1103" />
+      <img class="hero__photo" src="/assets/images/hero-image.png" alt="" width="1426" height="1103" fetchpriority="high" decoding="async" />
     </div>
   </div>
 
@@ -46,51 +47,8 @@ import Button from "../ui/Button.astro";
     }
   </div>
 </Section>
-<br>
-<br>
-<div class="testimonial">
-  <svg class="wave" viewBox="0 0 1448 120" preserveAspectRatio="none" aria-hidden="true">
+<div class="hero-testimonial">
+  <svg class="hero-wave" viewBox="0 0 1448 120" preserveAspectRatio="none" aria-hidden="true">
     <path d="M0 26c105 38 193 38 292 8 107-32 190-36 304-1 115 35 199 31 305-5 110-37 197-31 308 4 93 29 161 30 239-4v92H0V26Z"></path>
   </svg>
 </div>
-
-<style>
-  .testimonial {
-    position: relative;
-    min-height: 25px;
-    display: grid;
-    place-items: center;
-    text-align: center;
-    overflow: hidden;
-    background: var(--color-cream);
-  }
-
-  @media (min-width: 48rem) {
-    .testimonial {
-      min-height: 150px;
-    }
-  }
-
-  .testimonial::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .wave {
-    position: absolute;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    fill: var(--color-surface);
-    transform: rotate(180deg);
-  }
-
-  @media (width < 30rem) {
-    .wave {
-      display: none;
-    }
-  }
-</style>
