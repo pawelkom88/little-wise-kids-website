@@ -1,0 +1,75 @@
+---
+import "./contact.css";
+import Icon from "../components/icons/Icon.astro";
+import Container from "../components/layout/Container.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Thank You | Little Wise Kids"
+  description="Thank you for contacting Little Wise Kids. Our nursery team will review your enquiry and respond as soon as possible."
+>
+  <main class="contact-success">
+    <header
+      class="contact-hero contact-hero--success"
+      aria-labelledby="thank-you-title"
+    >
+      <div class="contact-hero__content">
+        <p class="contact-page__eyebrow">Message Received</p>
+
+        <h1 id="thank-you-title">
+          <span>Thank You for</span>
+          <span>Getting in Touch</span>
+        </h1>
+
+        <p class="contact-hero__lead">
+          Your enquiry has been sent to the Little Wise Kids team.
+        </p>
+      </div>
+
+      <span class="contact-hero__wave-highlight" aria-hidden="true"></span>
+
+      <div class="contact-hero__wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
+          <path
+            d="M0 58C130 118 272 116 413 86C560 55 655 63 805 112C975 168 1102 119 1258 69C1330 46 1392 39 1440 52V220H0V58Z"
+          ></path>
+        </svg>
+      </div>
+    </header>
+
+    <section class="contact-success__content">
+      <Container size="wide">
+        <div class="contact-success__card">
+          <span class="contact-success__icon" aria-hidden="true">
+            <Icon name="heart" size={44} />
+          </span>
+
+          <p class="contact-section-heading__eyebrow">What Happens Next</p>
+
+          <h2>We’ll Be in Touch Soon</h2>
+
+          <p>
+            A member of our team will review your message and usually respond
+            within one working day. We look forward to learning more about your
+            family and how Little Wise Kids may be able to support your child.
+          </p>
+
+          <div class="contact-success__actions">
+            <a class="contact-button contact-button--primary" href="/">
+              Return to Home
+              <span aria-hidden="true">→</span>
+            </a>
+
+            <a
+              class="contact-button contact-button--secondary"
+              href="/our-gallery"
+            >
+              Explore Our Gallery
+            </a>
+          </div>
+        </div>
+      </Container>
+    </section>
+  </main>
+</BaseLayout>

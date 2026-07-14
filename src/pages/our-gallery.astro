@@ -1,0 +1,207 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/layout/Container.astro";
+import Icon from "../components/icons/Icon.astro";
+import "./our-gallery.css";
+
+const galleryCategories = [
+  {
+    id: "outdoor-learning-experience",
+    title: "Outdoor Learning Experience",
+    icon: "star",
+    tone: "green",
+    image: null,
+  },
+  {
+    id: "indoor-learning-experience",
+    title: "Indoor Learning Experience",
+    icon: "book",
+    tone: "blue",
+    image: null,
+  },
+  {
+    id: "language-immersion",
+    title: "Language Immersion",
+    icon: "chat",
+    tone: "purple",
+    image: null,
+  },
+  {
+    id: "nutrition-and-mealtimes",
+    title: "Nutrition and Mealtimes",
+    icon: "heart",
+    tone: "yellow",
+    image: null,
+  },
+  {
+    id: "creative-play",
+    title: "Creative Play",
+    icon: "palette",
+    tone: "purple",
+    image: null,
+  },
+  {
+    id: "sensory-exploration",
+    title: "Sensory Exploration",
+    icon: "star",
+    tone: "yellow",
+    image: null,
+  },
+  {
+    id: "nature-and-gardening",
+    title: "Nature and Gardening",
+    icon: "heart",
+    tone: "green",
+    image: null,
+  },
+  {
+    id: "celebrations-and-community",
+    title: "Celebrations and Community",
+    icon: "person",
+    tone: "blue",
+    image: null,
+  },
+] as const;
+---
+
+<BaseLayout
+  title="Our Gallery | Little Wise Kids"
+  description="Explore moments of curiosity, creativity and connection from the indoor and outdoor learning spaces at Little Wise Kids."
+>
+  <article class="gallery-page">
+    <header class="gallery-hero" aria-labelledby="gallery-page-title">
+      <div class="gallery-hero__content">
+        <p class="gallery-page__eyebrow">Our Gallery</p>
+
+        <h1 id="gallery-page-title">
+          <span>A Glimpse Into</span>
+          <span>Our Little World</span>
+        </h1>
+
+        <p class="gallery-hero__lead">
+          Every day at Little Wise Kids is full of curiosity, creativity,
+          connection and discovery. Explore moments from our indoor and outdoor
+          learning spaces, activities, celebrations and daily routines.
+        </p>
+
+        <a class="gallery-hero__cta" href="/contact">
+          Register Your Interest
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <span class="gallery-hero__wave-highlight" aria-hidden="true"></span>
+
+      <div class="gallery-hero__wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
+          <path
+            d="M0 58C130 118 272 116 413 86C560 55 655 63 805 112C975 168 1102 119 1258 69C1330 46 1392 39 1440 52V220H0V58Z"
+          ></path>
+        </svg>
+      </div>
+    </header>
+
+    <main class="gallery-page__content">
+      <Container size="wide">
+        <section
+          class="gallery-page__main"
+          aria-labelledby="explore-gallery-title"
+        >
+          <header class="gallery-page__heading">
+            <p class="gallery-page__label">Explore Our Gallery</p>
+
+            <h2 id="explore-gallery-title">
+              Moments of Learning, Play and Discovery
+            </h2>
+
+            <p>
+              Browse the categories below or explore every part of daily life at
+              Little Wise Kids.
+            </p>
+          </header>
+
+          <nav
+            class="gallery-categories"
+            aria-label="Browse gallery categories"
+          >
+            {
+              galleryCategories.map((category) => (
+                <a
+                  class={`gallery-category gallery-category--${category.tone}`}
+                  href={`#${category.id}`}
+                >
+                  <span class="gallery-category__icon" aria-hidden="true">
+                    <Icon name={category.icon} size={23} />
+                  </span>
+
+                  <span>{category.title}</span>
+                </a>
+              ))
+            }
+          </nav>
+
+          <div class="gallery-grid">
+            {
+              galleryCategories.map((item) => (
+                <figure
+                  id={item.id}
+                  class={`gallery-card gallery-card--${item.tone}`}
+                >
+                  <div class="gallery-card__media">
+                    {item.image ? (
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        width="900"
+                        height="680"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : (
+                      <span
+                        class="gallery-card__placeholder"
+                        aria-hidden="true"
+                      >
+                        <Icon name="image" size={40} />
+
+                        <span>New image to be supplied</span>
+                      </span>
+                    )}
+                  </div>
+
+                  <figcaption>
+                    <span class="gallery-card__caption-icon" aria-hidden="true">
+                      <Icon name={item.icon} size={19} />
+                    </span>
+
+                    <span>{item.title}</span>
+                  </figcaption>
+                </figure>
+              ))
+            }
+          </div>
+        </section>
+
+        <aside class="gallery-cta">
+          <span class="gallery-cta__icon" aria-hidden="true">
+            <Icon name="heart" size={34} />
+          </span>
+
+          <div class="gallery-cta__copy">
+            <h2>Come and See Little Wise Kids</h2>
+
+            <p>
+              Visit our setting, meet our educators and discover how we can
+              support your child to learn, grow and thrive.
+            </p>
+          </div>
+
+          <a class="gallery-cta__link" href="/contact">
+            Register Your Interest
+            <span aria-hidden="true">→</span>
+          </a>
+        </aside>
+      </Container>
+    </main>
+  </article>
+</BaseLayout>

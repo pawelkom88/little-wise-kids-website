@@ -1,0 +1,825 @@
+---
+import Icon from "../components/icons/Icon.astro";
+import Container from "../components/layout/Container.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "./contact.css";
+
+const siteUrl = Astro.site ?? new URL("https://littlewisekids.co.uk");
+
+const thankYouUrl = new URL("/contact/thank-you/", siteUrl).toString();
+
+const nextSteps = [
+  {
+    number: "01",
+    title: "We Receive Your Enquiry",
+    copy: "Your message arrives safely with our team, ready for us to review.",
+  },
+  {
+    number: "02",
+    title: "We Get in Touch",
+    copy: "A member of our team will usually respond within one working day.",
+  },
+  {
+    number: "03",
+    title: "We Help With Next Steps",
+    copy: "We will answer your questions and help you arrange a visit when appropriate.",
+  },
+] as const;
+---
+
+<BaseLayout
+  title="Contact Little Wise Kids | Nursery in Bristol BS5"
+  description="Contact Little Wise Kids in Bristol BS5 to ask about nursery availability, book a visit, register your interest or learn more about our screen-free early years setting."
+>
+  <article class="contact-page">
+    <header class="contact-hero" aria-labelledby="contact-page-title">
+      <div class="contact-hero__content">
+        <p class="contact-page__eyebrow">Contact Us</p>
+
+        <h1 id="contact-page-title">
+          <span>We’d Love to Hear</span>
+          <span>From Your Family</span>
+        </h1>
+
+        <p class="contact-hero__lead">
+          Little Wise Kids is here to support families looking for calm, caring
+          and inspiring childcare in Bristol BS5. Get in touch to ask about
+          availability, settling in, daily routines or arranging a personal
+          visit.
+        </p>
+      </div>
+
+      <span class="contact-hero__wave-highlight" aria-hidden="true"></span>
+
+      <div class="contact-hero__wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
+          <path
+            d="M0 58C130 118 272 116 413 86C560 55 655 63 805 112C975 168 1102 119 1258 69C1330 46 1392 39 1440 52V220H0V58Z"
+          ></path>
+        </svg>
+      </div>
+    </header>
+
+    <main class="contact-page__content">
+      <Container size="wide">
+        <div class="contact-page__stack">
+          <section
+            class="contact-form-card"
+            aria-labelledby="contact-form-title"
+          >
+            <header class="contact-section-heading">
+              <p class="contact-section-heading__eyebrow">Get in Touch</p>
+
+              <h2 id="contact-form-title">Send Us a Message</h2>
+
+              <p>
+                Tell us how we can help. Fields marked with an asterisk are
+                required.
+              </p>
+            </header>
+
+            <form
+              id="contact-form"
+              class="contact-form"
+              action="https://api.web3forms.com/submit"
+              method="POST"
+              novalidate
+            >
+                <!--TODO : setup api key for web3form-->
+              <input
+                type="hidden"
+                name="access_key"
+                value=""
+              />
+
+              <input
+                id="contact-subject"
+                type="hidden"
+                name="subject"
+                value="New Little Wise Kids website enquiry"
+              />
+
+              <input
+                type="hidden"
+                name="from_name"
+                value="Little Wise Kids Website"
+              />
+
+              <input
+                id="contact-redirect"
+                type="hidden"
+                name="redirect"
+                value={thankYouUrl}
+              />
+
+              <input
+                type="hidden"
+                name="source"
+                value="Little Wise Kids contact page"
+              />
+
+              <div
+                id="contact-error-summary"
+                class="contact-form__error-summary"
+                role="alert"
+                tabindex="-1"
+                hidden
+              >
+                <h3>Please check the highlighted fields</h3>
+                <ul></ul>
+              </div>
+
+              <div class="contact-form__grid">
+                <div class="contact-field">
+                  <label for="contact-name">
+                    Parent / Carer Name
+                    <span aria-hidden="true">*</span>
+                  </label>
+
+                  <input
+                    id="contact-name"
+                    name="name"
+                    type="text"
+                    autocomplete="name"
+                    minlength="2"
+                    maxlength="80"
+                    placeholder="Your full name"
+                    required
+                    data-validate
+                    data-label="Parent or carer name"
+                    data-required-message="Enter your name."
+                    aria-describedby="contact-name-error"
+                  />
+
+                  <p
+                    id="contact-name-error"
+                    class="contact-field__error"
+                    aria-live="polite"
+                  >
+                  </p>
+                </div>
+
+                <div class="contact-field">
+                  <label for="contact-email">
+                    Email Address
+                    <span aria-hidden="true">*</span>
+                  </label>
+
+                  <input
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    maxlength="160"
+                    placeholder="you@example.com"
+                    required
+                    data-validate
+                    data-label="Email address"
+                    data-required-message="Enter your email address."
+                    aria-describedby="contact-email-error"
+                  />
+
+                  <p
+                    id="contact-email-error"
+                    class="contact-field__error"
+                    aria-live="polite"
+                  >
+                  </p>
+                </div>
+
+                <div class="contact-field">
+                  <label for="contact-phone">
+                    Phone Number
+                    <span class="contact-field__optional"> Optional </span>
+                  </label>
+
+                  <input
+                    id="contact-phone"
+                    name="phone"
+                    type="tel"
+                    autocomplete="tel"
+                    inputmode="tel"
+                    maxlength="30"
+                    placeholder="Your phone number"
+                    data-validate
+                    data-label="Phone number"
+                    aria-describedby="contact-phone-hint contact-phone-error"
+                  />
+
+                  <p id="contact-phone-hint" class="contact-field__hint">
+                    Include the area or international dialling code.
+                  </p>
+
+                  <p
+                    id="contact-phone-error"
+                    class="contact-field__error"
+                    aria-live="polite"
+                  >
+                  </p>
+                </div>
+
+                <div class="contact-field">
+                  <label for="contact-child-age">
+                    Child’s Age
+                    <span class="contact-field__optional"> Optional </span>
+                  </label>
+
+                  <input
+                    id="contact-child-age"
+                    name="child_age"
+                    type="text"
+                    maxlength="60"
+                    placeholder="For example, 2 years and 6 months"
+                    data-validate
+                    data-label="Child’s age"
+                    aria-describedby="contact-child-age-error"
+                  />
+
+                  <p
+                    id="contact-child-age-error"
+                    class="contact-field__error"
+                    aria-live="polite"
+                  >
+                  </p>
+                </div>
+
+                <div class="contact-field">
+                  <label for="contact-enquiry-type">
+                    Enquiry Type
+                    <span aria-hidden="true">*</span>
+                  </label>
+
+                  <select
+                    id="contact-enquiry-type"
+                    name="enquiry_type"
+                    required
+                    data-validate
+                    data-label="Enquiry type"
+                    data-required-message="Choose the type of enquiry."
+                    aria-describedby="contact-enquiry-type-error"
+                  >
+                    <option value=""> Choose an option </option>
+                    <option value="register-interest">
+                      Register your interest
+                    </option>
+                    <option value="book-visit">
+                      Arrange a nursery visit
+                    </option>
+                    <option value="availability"> Nursery availability </option>
+                    <option value="fees-funding"> Fees and funding </option>
+                    <option value="settling-in"> Settling in </option>
+                    <option value="nutrition">
+                      Nutrition or dietary needs
+                    </option>
+                    <option value="general"> General enquiry </option>
+                  </select>
+
+                  <p
+                    id="contact-enquiry-type-error"
+                    class="contact-field__error"
+                    aria-live="polite"
+                  >
+                  </p>
+                </div>
+
+                <div class="contact-field">
+                  <label for="contact-visit-date">
+                    Preferred Visit Day
+                    <span class="contact-field__optional"> Optional </span>
+                  </label>
+
+                  <input
+                    id="contact-visit-date"
+                    name="preferred_visit_date"
+                    type="date"
+                    data-validate
+                    data-label="Preferred visit day"
+                    aria-describedby="contact-visit-date-hint contact-visit-date-error"
+                  />
+
+                  <p id="contact-visit-date-hint" class="contact-field__hint">
+                    Visits are arranged Monday to Friday.
+                  </p>
+
+                  <p
+                    id="contact-visit-date-error"
+                    class="contact-field__error"
+                    aria-live="polite"
+                  >
+                  </p>
+                </div>
+
+                <div class="contact-field contact-field--full">
+                  <div class="contact-field__label-row">
+                    <label for="contact-message">
+                      Message
+                      <span aria-hidden="true">*</span>
+                    </label>
+
+                    <span
+                      id="contact-message-count"
+                      class="contact-field__count"
+                      aria-live="polite"
+                    >
+                      0 / 1500
+                    </span>
+                  </div>
+
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    rows="7"
+                    minlength="20"
+                    maxlength="1500"
+                    placeholder="Tell us a little about your child and how we can help."
+                    required
+                    data-validate
+                    data-label="Message"
+                    data-required-message="Tell us how we can help."
+                    aria-describedby="contact-message-hint contact-message-error"
+                  ></textarea>
+
+                  <p id="contact-message-hint" class="contact-field__hint">
+                    Please do not include confidential medical documents or
+                    other highly sensitive information.
+                  </p>
+
+                  <p
+                    id="contact-message-error"
+                    class="contact-field__error"
+                    aria-live="polite"
+                  >
+                  </p>
+                </div>
+              </div>
+
+              <div id="contact-captcha" class="contact-captcha" tabindex="-1">
+                <div class="h-captcha" data-captcha="true"></div>
+
+                <p
+                  id="contact-captcha-error"
+                  class="contact-field__error"
+                  aria-live="polite"
+                >
+                </p>
+              </div>
+
+              <div class="contact-form__footer">
+                <div class="contact-consent">
+                  <div class="contact-consent__control">
+                    <input
+                      id="contact-consent"
+                      name="privacy_consent"
+                      type="checkbox"
+                      value="Consent provided"
+                      required
+                      data-validate
+                      data-label="Privacy consent"
+                      data-required-message="Confirm that we may use your information to respond."
+                      aria-describedby="contact-consent-error"
+                    />
+
+                    <label for="contact-consent">
+                      I consent to Little Wise Kids using my information to
+                      respond to this enquiry. Read our
+                      <a href="/privacy-policy"> Privacy Policy </a>.
+                    </label>
+                  </div>
+
+                  <p
+                    id="contact-consent-error"
+                    class="contact-field__error"
+                    aria-live="polite"
+                  >
+                  </p>
+                </div>
+
+                <button class="contact-form__submit" type="submit">
+                  <span data-submit-label> Send Enquiry </span>
+                  <span aria-hidden="true">→</span>
+                </button>
+              </div>
+
+              <p
+                id="contact-form-status"
+                class="contact-form__status"
+                role="status"
+                aria-live="polite"
+              >
+              </p>
+            </form>
+          </section>
+
+          <section class="contact-next" aria-labelledby="contact-next-title">
+            <header class="contact-section-heading">
+              <p class="contact-section-heading__eyebrow">After You Submit</p>
+
+              <h2 id="contact-next-title">What Happens Next?</h2>
+            </header>
+
+            <ol class="contact-next__grid">
+              {
+                nextSteps.map((step) => (
+                  <li class="contact-next__step">
+                    <span class="contact-next__number" aria-hidden="true">
+                      {step.number}
+                    </span>
+
+                    <div>
+                      <h3>{step.title}</h3>
+                      <p>{step.copy}</p>
+                    </div>
+                  </li>
+                ))
+              }
+            </ol>
+          </section>
+
+          <section
+            class="contact-location"
+            aria-labelledby="contact-location-title"
+          >
+            <div class="contact-location__map" aria-hidden="true">
+              <span
+                class="contact-location__map-line contact-location__map-line--one"
+              ></span>
+              <span
+                class="contact-location__map-line contact-location__map-line--two"
+              ></span>
+              <span
+                class="contact-location__map-line contact-location__map-line--three"
+              ></span>
+
+              <span class="contact-location__pin">
+                <Icon name="heart" size={32} />
+              </span>
+            </div>
+
+            <div class="contact-location__details">
+              <header
+                class="contact-section-heading contact-section-heading--left"
+              >
+                <p class="contact-section-heading__eyebrow">Visit Us</p>
+
+                <h2 id="contact-location-title">Find Little Wise Kids</h2>
+              </header>
+
+              <div class="contact-location__item">
+                <span class="contact-location__icon" aria-hidden="true">
+                  <Icon name="heart" size={25} />
+                </span>
+
+                <address>
+                  <strong>Little Wise Kids</strong><br />
+                  Stapleton Road, Congregational Chapel<br />
+                  Newton Street<br />
+                  Bristol BS5 0QZ
+                </address>
+              </div>
+
+              <div class="contact-location__item">
+                <span class="contact-location__icon" aria-hidden="true">
+                  <Icon name="clock" size={25} />
+                </span>
+
+                <p>
+                  <strong>Opening hours</strong><br />
+                  Monday–Friday<br />
+                  7:30am–5:30pm
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </Container>
+    </main>
+  </article>
+</BaseLayout>
+
+<script is:inline src="https://web3forms.com/client/script.js" async defer
+></script>
+
+<script>
+  const form = document.querySelector("#contact-form");
+
+  if (form instanceof HTMLFormElement) {
+    const fields = Array.from(form.querySelectorAll("[data-validate]"));
+
+    const touchedFields = new WeakSet();
+    const errorSummary = document.querySelector("#contact-error-summary");
+    const errorSummaryList = errorSummary?.querySelector("ul");
+
+    const subjectInput = document.querySelector("#contact-subject");
+    const redirectInput = document.querySelector("#contact-redirect");
+    const submitButton = form.querySelector(".contact-form__submit");
+    const submitLabel = form.querySelector("[data-submit-label]");
+    const formStatus = document.querySelector("#contact-form-status");
+    const messageField = document.querySelector("#contact-message");
+    const messageCount = document.querySelector("#contact-message-count");
+    const dateField = document.querySelector("#contact-visit-date");
+    const captchaContainer = document.querySelector("#contact-captcha");
+    const captchaError = document.querySelector("#contact-captcha-error");
+
+    const formatLocalDate = (date) => {
+      const adjustedDate = new Date(
+        date.getTime() - date.getTimezoneOffset() * 60_000
+      );
+
+      return adjustedDate.toISOString().split("T")[0];
+    };
+
+    if (dateField instanceof HTMLInputElement) {
+      dateField.min = formatLocalDate(new Date());
+    }
+
+    const updateCharacterCount = () => {
+      if (messageField instanceof HTMLTextAreaElement && messageCount) {
+        messageCount.textContent = `${messageField.value.length} / 1500`;
+      }
+    };
+
+    updateCharacterCount();
+
+    const getFieldContainer = (field) => {
+      return (
+        field.closest(".contact-field") ?? field.closest(".contact-consent")
+      );
+    };
+
+    const getErrorElement = (field) => {
+      if (!field.id) return null;
+
+      return document.querySelector(`#${CSS.escape(field.id)}-error`);
+    };
+
+    const setFieldState = (field, message) => {
+      const container = getFieldContainer(field);
+      const errorElement = getErrorElement(field);
+      const hasError = Boolean(message);
+
+      field.setAttribute("aria-invalid", String(hasError));
+
+      field.setCustomValidity(message);
+
+      container?.classList.toggle("is-invalid", hasError);
+
+      container?.classList.toggle(
+        "is-valid",
+        !hasError && touchedFields.has(field)
+      );
+
+      if (errorElement) {
+        errorElement.textContent = message;
+      }
+
+      return !hasError;
+    };
+
+    const validateField = (field) => {
+      const value = "value" in field ? field.value.trim() : "";
+
+      let message = "";
+
+      if (field instanceof HTMLInputElement && field.type === "checkbox") {
+        if (field.required && !field.checked) {
+          message = field.dataset.requiredMessage ?? "Complete this field.";
+        }
+
+        return setFieldState(field, message);
+      }
+
+      if (field.required && !value) {
+        message = field.dataset.requiredMessage ?? "Complete this field.";
+
+        return setFieldState(field, message);
+      }
+
+      switch (field.name) {
+        case "name": {
+          if (value && value.length < 2) {
+            message = "Enter at least two characters.";
+          }
+          break;
+        }
+
+        case "email": {
+          if (
+            field instanceof HTMLInputElement &&
+            value &&
+            field.validity.typeMismatch
+          ) {
+            message = "Enter a valid email address, such as name@example.com.";
+          }
+          break;
+        }
+
+        case "phone": {
+          const digits = value.replace(/\D/g, "");
+
+          if (value && digits.length < 7) {
+            message =
+              "Enter a complete phone number, including its dialling code.";
+          }
+          break;
+        }
+
+        case "preferred_visit_date": {
+          if (value) {
+            const selectedDate = new Date(`${value}T12:00:00`);
+
+            const today = formatLocalDate(new Date());
+
+            if (value < today) {
+              message = "Choose today or a future date.";
+            } else {
+              const day = selectedDate.getDay();
+
+              if (day === 0 || day === 6) {
+                message = "Choose a Monday to Friday.";
+              }
+            }
+          }
+          break;
+        }
+
+        case "message": {
+          if (value && value.length < 20) {
+            message =
+              "Add a little more detail so our team can help. Use at least 20 characters.";
+          }
+          break;
+        }
+      }
+
+      return setFieldState(field, message);
+    };
+
+    const validateCaptcha = () => {
+      const responseField = form.querySelector(
+        'textarea[name="h-captcha-response"]'
+      );
+
+      const isComplete =
+        responseField instanceof HTMLTextAreaElement &&
+        Boolean(responseField.value.trim());
+
+      captchaContainer?.classList.toggle("is-invalid", !isComplete);
+
+      if (captchaError) {
+        captchaError.textContent = isComplete
+          ? ""
+          : "Complete the anti-spam check before sending your enquiry.";
+      }
+
+      return isComplete;
+    };
+
+    const renderErrorSummary = (errors) => {
+      if (!errorSummary || !errorSummaryList) {
+        return;
+      }
+
+      errorSummaryList.replaceChildren();
+
+      for (const error of errors) {
+        const listItem = document.createElement("li");
+        const link = document.createElement("a");
+
+        link.href = `#${error.id}`;
+        link.textContent = `${error.label}: ${error.message}`;
+
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+
+          const target = document.querySelector(`#${CSS.escape(error.id)}`);
+
+          if (target instanceof HTMLElement) {
+            target.focus();
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+          }
+        });
+
+        listItem.append(link);
+        errorSummaryList.append(listItem);
+      }
+
+      errorSummary.hidden = errors.length === 0;
+
+      if (errors.length > 0) {
+        errorSummary.focus();
+      }
+    };
+
+    for (const field of fields) {
+      field.addEventListener("blur", () => {
+        touchedFields.add(field);
+        validateField(field);
+      });
+
+      field.addEventListener("input", () => {
+        if (touchedFields.has(field)) {
+          validateField(field);
+        }
+
+        if (field === messageField) {
+          updateCharacterCount();
+        }
+      });
+
+      field.addEventListener("change", () => {
+        if (touchedFields.has(field)) {
+          validateField(field);
+        }
+      });
+    }
+
+    form.addEventListener("submit", (event) => {
+      const errors = [];
+
+      for (const field of fields) {
+        touchedFields.add(field);
+
+        const isValid = validateField(field);
+
+        if (!isValid) {
+          const errorElement = getErrorElement(field);
+
+          errors.push({
+            id: field.id,
+            label: field.dataset.label ?? "Field",
+            message: errorElement?.textContent ?? "Check this field.",
+          });
+        }
+      }
+
+      const captchaValid = validateCaptcha();
+
+      if (!captchaValid) {
+        errors.push({
+          id: "contact-captcha",
+          label: "Anti-spam check",
+          message: "Complete the anti-spam check.",
+        });
+      }
+
+      if (errors.length > 0) {
+        event.preventDefault();
+
+        renderErrorSummary(errors);
+
+        if (formStatus) {
+          formStatus.textContent =
+            "Your enquiry has not been sent yet. Correct the highlighted fields and try again.";
+        }
+
+        return;
+      }
+
+      renderErrorSummary([]);
+
+      const nameField = form.elements.namedItem("name");
+
+      const enquiryField = form.elements.namedItem("enquiry_type");
+
+      const visitorName =
+        nameField instanceof HTMLInputElement
+          ? nameField.value.trim()
+          : "Website visitor";
+
+      let enquiryLabel = "General enquiry";
+
+      if (enquiryField instanceof HTMLSelectElement) {
+        enquiryLabel =
+          enquiryField.options[enquiryField.selectedIndex]?.text ??
+          enquiryLabel;
+      }
+
+      if (subjectInput instanceof HTMLInputElement) {
+        subjectInput.value = `New Little Wise Kids enquiry — ${enquiryLabel} — ${visitorName}`;
+      }
+
+      if (redirectInput instanceof HTMLInputElement) {
+        redirectInput.value = new URL(
+          "/contact/thank-you/",
+          window.location.origin
+        ).href;
+      }
+
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = true;
+        submitButton.setAttribute("aria-busy", "true");
+      }
+
+      if (submitLabel) {
+        submitLabel.textContent = "Sending…";
+      }
+
+      if (formStatus) {
+        formStatus.textContent = "Sending your enquiry securely.";
+      }
+    });
+  }
+</script>

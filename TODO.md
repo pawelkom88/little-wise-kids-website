@@ -13,5 +13,6 @@
 13. how css is loaded. probalby bloated
 14. one var for address, phone number and email
 15. hero mobile bg 
+run https://specification.website/mcp/
 
 dead css and duplicated code - use prompt
