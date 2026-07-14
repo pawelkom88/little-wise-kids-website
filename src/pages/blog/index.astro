@@ -1,0 +1,437 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Container from "../../components/layout/Container.astro";
+import Icon from "../../components/icons/Icon.astro";
+import "./blog.css";
+
+type BlogCategory =
+  | "nursery-news"
+  | "early-learning"
+  | "parenting-tips"
+  | "nutrition"
+  | "community";
+
+type BlogTone = "purple" | "green" | "blue" | "yellow";
+
+interface BlogArticle {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: BlogCategory;
+  categoryLabel: string;
+  tone: BlogTone;
+  icon: string;
+  published: string;
+  displayDate: string;
+  readTime: string;
+  featured?: boolean;
+  image?: string;
+  imageAlt?: string;
+}
+
+const categories = [
+  {
+    id: "all",
+    label: "All Articles",
+    icon: "star",
+  },
+  {
+    id: "nursery-news",
+    label: "Nursery News",
+    icon: "star",
+  },
+  {
+    id: "early-learning",
+    label: "Early Learning",
+    icon: "book",
+  },
+  {
+    id: "parenting-tips",
+    label: "Parenting Tips",
+    icon: "heart",
+  },
+  {
+    id: "nutrition",
+    label: "Nutrition",
+    icon: "heart",
+  },
+  {
+    id: "community",
+    label: "Community",
+    icon: "person",
+  },
+] as const;
+
+const articles = [
+  {
+    slug: "welcome-to-a-new-term",
+    title: "Welcome to a New Term at Little Wise Kids",
+    excerpt:
+      "A look at what is ahead this season, from joyful learning themes and new experiences to the little moments that make nursery life special.",
+    category: "nursery-news",
+    categoryLabel: "Nursery News",
+    tone: "purple",
+    icon: "star",
+    published: "2026-07-14",
+    displayDate: "14 July 2026",
+    readTime: "4 min read",
+    featured: true,
+  },
+  {
+    slug: "the-power-of-play",
+    title: "The Power of Play: Learning Through Discovery",
+    excerpt:
+      "How meaningful play helps children build confidence, curiosity, communication and problem-solving skills at their own pace.",
+    category: "early-learning",
+    categoryLabel: "Early Learning",
+    tone: "blue",
+    icon: "book",
+    published: "2026-07-08",
+    displayDate: "8 July 2026",
+    readTime: "5 min read",
+  },
+  {
+    slug: "settling-in-gentle-tips",
+    title: "Settling In: Gentle Tips for a Smooth Start",
+    excerpt:
+      "Practical ideas to help your child feel safe, secure and understood during those important first days at nursery.",
+    category: "parenting-tips",
+    categoryLabel: "Parenting Tips",
+    tone: "purple",
+    icon: "heart",
+    published: "2026-07-01",
+    displayDate: "1 July 2026",
+    readTime: "6 min read",
+  },
+  {
+    slug: "outdoor-adventures-why-nature-nurtures",
+    title: "Outdoor Adventures: Why Nature Nurtures",
+    excerpt:
+      "The benefits of outdoor learning and how time in nature supports wellbeing, creativity, confidence and resilience.",
+    category: "early-learning",
+    categoryLabel: "Early Learning",
+    tone: "green",
+    icon: "star",
+    published: "2026-06-24",
+    displayDate: "24 June 2026",
+    readTime: "5 min read",
+  },
+  {
+    slug: "healthy-habits-happy-little-learners",
+    title: "Healthy Habits, Happy Little Learners",
+    excerpt:
+      "How positive mealtimes, varied foods and gentle encouragement help children develop a healthy relationship with nutrition.",
+    category: "nutrition",
+    categoryLabel: "Nutrition",
+    tone: "yellow",
+    icon: "heart",
+    published: "2026-06-18",
+    displayDate: "18 June 2026",
+    readTime: "4 min read",
+  },
+  {
+    slug: "celebrating-community-and-cultural-diversity",
+    title: "Celebrating Our Community and Cultural Diversity",
+    excerpt:
+      "How we celebrate languages, traditions, family stories and the many different experiences that make our community special.",
+    category: "community",
+    categoryLabel: "Community",
+    tone: "blue",
+    icon: "person",
+    published: "2026-06-10",
+    displayDate: "10 June 2026",
+    readTime: "4 min read",
+  },
+  {
+    slug: "screen-free-learning-deeper-play",
+    title: "Screen-Free Learning: Space for Deeper Play",
+    excerpt:
+      "Why real-world experiences, movement, stories and face-to-face connection matter so much during the earliest years.",
+    category: "early-learning",
+    categoryLabel: "Early Learning",
+    tone: "green",
+    icon: "book",
+    published: "2026-06-03",
+    displayDate: "3 June 2026",
+    readTime: "6 min read",
+  },
+  {
+    slug: "helping-young-children-build-confidence",
+    title: "Helping Young Children Build Confidence",
+    excerpt:
+      "Simple ways families and educators can encourage independence, emotional resilience and a positive sense of self.",
+    category: "parenting-tips",
+    categoryLabel: "Parenting Tips",
+    tone: "purple",
+    icon: "heart",
+    published: "2026-05-27",
+    displayDate: "27 May 2026",
+    readTime: "5 min read",
+  },
+  {
+    slug: "a-calm-rhythm-for-busy-family-days",
+    title: "A Calm Rhythm for Busy Family Days",
+    excerpt:
+      "How familiar routines can support smoother transitions, better rest and a stronger sense of security for young children.",
+    category: "nursery-news",
+    categoryLabel: "Nursery News",
+    tone: "yellow",
+    icon: "clock",
+    published: "2026-05-20",
+    displayDate: "20 May 2026",
+    readTime: "4 min read",
+  },
+] satisfies BlogArticle[];
+---
+
+<BaseLayout
+  title="Nursery News and Early Years Advice | Little Wise Kids"
+  description="Read nursery news, early years guidance, parenting ideas, nutrition advice and community updates from Little Wise Kids in Bristol BS5."
+>
+  <article class="blog-page">
+    <header class="blog-hero" aria-labelledby="blog-page-title">
+      <div class="blog-hero__content">
+        <p class="blog-page__eyebrow">Blog / News</p>
+
+        <h1 id="blog-page-title">
+          <span>Ideas, Updates and</span>
+          <span>Little Moments That Matter</span>
+        </h1>
+
+        <p class="blog-hero__lead">
+          Sharing nursery news, early years guidance, learning ideas and
+          community updates for families in Bristol BS5.
+        </p>
+      </div>
+
+      <span class="blog-hero__wave-highlight" aria-hidden="true"></span>
+
+      <div class="blog-hero__wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
+          <path
+            d="M0 58C130 118 272 116 413 86C560 55 655 63 805 112C975 168 1102 119 1258 69C1330 46 1392 39 1440 52V220H0V58Z"
+          ></path>
+        </svg>
+      </div>
+    </header>
+
+    <main class="blog-page__content">
+      <Container size="wide">
+        <section class="blog-index" aria-labelledby="latest-articles-title">
+          <header class="blog-index__header">
+            <div class="blog-index__heading">
+              <p class="blog-index__eyebrow">From Little Wise Kids</p>
+
+              <h2 id="latest-articles-title">Latest Articles</h2>
+
+              <p>
+                Explore helpful guidance, thoughtful ideas and updates from
+                daily life at our early years setting.
+              </p>
+            </div>
+
+            <div
+              class="blog-filters"
+              role="group"
+              aria-label="Filter articles by category"
+            >
+              {
+                categories.map((category, index) => (
+                  <button
+                    class="blog-filter"
+                    type="button"
+                    data-blog-filter={category.id}
+                    aria-pressed={index === 0 ? "true" : "false"}
+                  >
+                    <span class="blog-filter__icon" aria-hidden="true">
+                      <Icon name={category.icon} size={18} />
+                    </span>
+
+                    <span>{category.label}</span>
+                  </button>
+                ))
+              }
+            </div>
+          </header>
+
+          <p class="blog-visually-hidden" data-blog-status aria-live="polite">
+          </p>
+
+          <div class="blog-grid">
+            {
+              articles.map((article, index) => (
+                <article
+                  class={`blog-card blog-card--${article.tone}`}
+                  data-blog-card
+                  data-category={article.category}
+                  data-article-index={index}
+                  hidden={index >= 6}
+                >
+                  <a class="blog-card__link" href={`/blog/${article.slug}`}>
+                    <div class="blog-card__media">
+                      {article.image ? (
+                        <img
+                          src={article.image}
+                          alt={article.imageAlt ?? ""}
+                          width="900"
+                          height="600"
+                          loading={index < 3 ? "eager" : "lazy"}
+                          decoding="async"
+                        />
+                      ) : (
+                        <span class="blog-card__placeholder" aria-hidden="true">
+                          <Icon name={article.icon} size={42} />
+                        </span>
+                      )}
+
+                      {article.featured && (
+                        <span class="blog-card__featured">
+                          <Icon name="star" size={16} />
+                          Featured
+                        </span>
+                      )}
+                    </div>
+
+                    <div class="blog-card__body">
+                      <span class="blog-card__category">
+                        <span aria-hidden="true">
+                          <Icon name={article.icon} size={17} />
+                        </span>
+
+                        {article.categoryLabel}
+                      </span>
+
+                      <h3>{article.title}</h3>
+
+                      <p class="blog-card__excerpt">{article.excerpt}</p>
+
+                      <footer class="blog-card__footer">
+                        <div class="blog-card__meta">
+                          <time datetime={article.published}>
+                            {article.displayDate}
+                          </time>
+
+                          <span aria-hidden="true">·</span>
+
+                          <span>{article.readTime}</span>
+                        </div>
+
+                        <span class="blog-card__read">
+                          Read Article
+                          <span aria-hidden="true">→</span>
+                        </span>
+                      </footer>
+                    </div>
+                  </a>
+                </article>
+              ))
+            }
+          </div>
+
+          <div class="blog-index__actions">
+            <button class="blog-load-more" type="button" data-blog-load-more>
+              <span class="blog-load-more__icon" aria-hidden="true"> ↓ </span>
+
+              <span data-blog-load-more-label> Load More Articles </span>
+            </button>
+          </div>
+        </section>
+      </Container>
+    </main>
+  </article>
+</BaseLayout>
+
+<script>
+  const blogCards = Array.from(
+    document.querySelectorAll("[data-blog-card]")
+  ).filter((card) => card instanceof HTMLElement);
+
+  const filterButtons = Array.from(
+    document.querySelectorAll("[data-blog-filter]")
+  ).filter((button) => button instanceof HTMLButtonElement);
+
+  const loadMoreButton = document.querySelector("[data-blog-load-more]");
+
+  const loadMoreLabel = document.querySelector("[data-blog-load-more-label]");
+
+  const status = document.querySelector("[data-blog-status]");
+
+  const pageSize = 6;
+  let activeCategory = "all";
+  let expanded = false;
+
+  const getMatchingCards = () => {
+    return blogCards.filter((card) => {
+      return (
+        activeCategory === "all" || card.dataset.category === activeCategory
+      );
+    });
+  };
+
+  const updateArticles = () => {
+    const matchingCards = getMatchingCards();
+
+    blogCards.forEach((card) => {
+      const matches =
+        activeCategory === "all" || card.dataset.category === activeCategory;
+
+      const matchingIndex = matchingCards.indexOf(card);
+      const isWithinLimit = expanded || matchingIndex < pageSize;
+
+      card.hidden = !(matches && isWithinLimit);
+    });
+
+    const hiddenMatchingCount = matchingCards.filter(
+      (card) => card.hidden
+    ).length;
+
+    if (loadMoreButton instanceof HTMLButtonElement) {
+      loadMoreButton.hidden = hiddenMatchingCount === 0;
+
+      loadMoreButton.setAttribute("aria-expanded", String(expanded));
+    }
+
+    if (loadMoreLabel) {
+      loadMoreLabel.textContent =
+        hiddenMatchingCount > 0
+          ? `Load ${hiddenMatchingCount} More ${
+              hiddenMatchingCount === 1 ? "Article" : "Articles"
+            }`
+          : "All Articles Shown";
+    }
+
+    if (status) {
+      const visibleCount = matchingCards.filter((card) => !card.hidden).length;
+
+      status.textContent = `${visibleCount} ${
+        visibleCount === 1 ? "article" : "articles"
+      } shown.`;
+    }
+  };
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      activeCategory = button.dataset.blogFilter ?? "all";
+
+      expanded = false;
+
+      filterButtons.forEach((filterButton) => {
+        filterButton.setAttribute(
+          "aria-pressed",
+          String(filterButton === button)
+        );
+      });
+
+      updateArticles();
+    });
+  });
+
+  if (loadMoreButton instanceof HTMLButtonElement) {
+    loadMoreButton.addEventListener("click", () => {
+      expanded = true;
+      updateArticles();
+    });
+  }
+
+  updateArticles();
+</script>
