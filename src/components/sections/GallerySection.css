@@ -13,8 +13,7 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding:
-    clamp(var(--space-xl), 5vw, var(--space-3xl))
+  padding: clamp(var(--space-xl), 5vw, var(--space-3xl))
     clamp(var(--space-m), 5vw, var(--space-2xl))
     clamp(var(--space-l), 4vw, var(--space-xl));
   border: 1px solid var(--color-border);
@@ -61,8 +60,8 @@
   width: clamp(4rem, 5vw, 5rem);
   aspect-ratio: 1;
   place-items: center;
-  margin: calc(clamp(var(--space-xl), 5vw, var(--space-3xl)) * -1.28)
-    auto var(--space-m);
+  margin: calc(clamp(var(--space-xl), 5vw, var(--space-3xl)) * -1.28) auto
+    var(--space-m);
   border-radius: 50%;
   color: var(--color-purple);
   background: var(--color-purple-soft);
@@ -233,13 +232,9 @@
   gap: var(--space-xs);
   max-width: calc(100% - (var(--space-s) * 2));
   min-height: 3.25rem;
-  padding: var(--space-2xs) var(--space-s) var(--space-2xs)
-    var(--space-2xs);
-  border: 1px solid color-mix(
-    in srgb,
-    var(--color-page),
-    var(--color-border) 16%
-  );
+  padding: var(--space-2xs) var(--space-s) var(--space-2xs) var(--space-2xs);
+  border: 1px solid
+    color-mix(in srgb, var(--color-page), var(--color-border) 16%);
   border-radius: var(--radius-pill);
   color: var(--color-ink);
   background: color-mix(in srgb, var(--color-page), transparent 3%);
@@ -336,11 +331,7 @@
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: color-mix(
-    in srgb,
-    var(--color-purple),
-    transparent 82%
-  );
+  background: color-mix(in srgb, var(--color-purple), transparent 82%);
   transition:
     width 180ms ease,
     background-color 180ms ease,
@@ -367,7 +358,8 @@
 
 @media (hover: hover) {
   .lwk-gallery__card:hover {
-    box-shadow: 0 1.25rem 2.8rem color-mix(in srgb, var(--color-shadow-base) 13%, transparent);
+    box-shadow: 0 1.25rem 2.8rem
+      color-mix(in srgb, var(--color-shadow-base) 13%, transparent);
     transform: translateY(-0.2rem);
   }
 
@@ -415,10 +407,7 @@
   }
 
   .lwk-gallery {
-    padding:
-      var(--space-xl)
-      var(--space-s)
-      var(--space-l);
+    padding: var(--space-xl) var(--space-s) var(--space-l);
     border-radius: var(--radius-m);
   }
 

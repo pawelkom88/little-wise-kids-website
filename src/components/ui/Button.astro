@@ -16,7 +16,9 @@ const {
   class: className = "",
 } = Astro.props;
 
-const classes = ["button", `button--${variant}`, className].filter(Boolean).join(" ");
+const classes = ["button", `button--${variant}`, className]
+  .filter(Boolean)
+  .join(" ");
 ---
 
 {

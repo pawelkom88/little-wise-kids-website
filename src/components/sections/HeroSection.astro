@@ -10,24 +10,43 @@ import "./HeroSection.css";
   <div class="hero" aria-labelledby="hero-title">
     <div class="hero__content">
       <h1 id="hero-title">
-        <span>Welcome to</span> <span class="tone-purple">Little</span><br />
-        <span class="tone-green">Wise</span> <span class="tone-blue">Kids</span><br />
+        <span>Welcome to</span>
+        <span class="tone-purple">Little</span><br />
+        <span class="tone-green">Wise</span>
+        <span class="tone-blue">Kids</span><br />
       </h1>
-      <p class="hero-subtitle">Guiding your most precious little ones
-        through their earliest years.</p>
-      <p class="hero-paragraph">A magical oasis of wonder in the heart of Bristol. Step into Little Wise Kids and you will immediately feel the difference: a
-        peaceful haven where laughter echoes, curiosity blooms, and every child is cherished as the unique, capable little learner they
-        are.</p>
-      <p class="hero-paragraph">Nestled in Bristol BS5, Little Wise Kids is more than childcare. It is a nurturing home-from-home where warmth, trust and
-        belonging sit at the heart of every day. We welcome children aged 0–4 years for now, supporting each child to learn, play and
-        grow at their own pace.</p>
+      <p class="hero-subtitle">
+        Guiding your most precious little ones through their earliest years.
+      </p>
+      <p class="hero-paragraph">
+        A magical oasis of wonder in the heart of Bristol. Step into Little Wise
+        Kids and you will immediately feel the difference: a peaceful haven
+        where laughter echoes, curiosity blooms, and every child is cherished as
+        the unique, capable little learner they are.
+      </p>
+      <p class="hero-paragraph">
+        Nestled in Bristol BS5, Little Wise Kids is more than childcare. It is a
+        nurturing home-from-home where warmth, trust and belonging sit at the
+        heart of every day. We welcome children aged 0–4 years for now,
+        supporting each child to learn, play and grow at their own pace.
+      </p>
       <div class="hero__actions">
         <Button href="#approach" icon="heart">Register Your Interest</Button>
-        <Button href="#contact" variant="secondary">Explore Little Wise Kids</Button>
+        <Button href="#contact" variant="secondary"
+          >Explore Little Wise Kids</Button
+        >
       </div>
     </div>
     <div class="hero__media" aria-hidden="true">
-      <img class="hero__photo" src="/assets/images/hero-image.png" alt="" width="1426" height="1103" fetchpriority="high" decoding="async" />
+      <img
+        class="hero__photo"
+        src="/assets/images/hero-image.png"
+        alt=""
+        width="1426"
+        height="1103"
+        fetchpriority="high"
+        decoding="async"
+      />
     </div>
   </div>
 
@@ -39,7 +58,9 @@ import "./HeroSection.css";
             <Icon name={feature.icon} size={34} />
           </span>
           <div>
-            <p class={`feature-strip__title tone-${feature.tone}`}>{feature.title}</p>
+            <p class={`feature-strip__title tone-${feature.tone}`}>
+              {feature.title}
+            </p>
             <p class="feature-strip__text">{feature.text}</p>
           </div>
         </article>
@@ -48,7 +69,14 @@ import "./HeroSection.css";
   </div>
 </Section>
 <div class="hero-testimonial">
-  <svg class="hero-wave" viewBox="0 0 1448 120" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 26c105 38 193 38 292 8 107-32 190-36 304-1 115 35 199 31 305-5 110-37 197-31 308 4 93 29 161 30 239-4v92H0V26Z"></path>
+  <svg
+    class="hero-wave"
+    viewBox="0 0 1448 120"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M0 26c105 38 193 38 292 8 107-32 190-36 304-1 115 35 199 31 305-5 110-37 197-31 308 4 93 29 161 30 239-4v92H0V26Z"
+    ></path>
   </svg>
 </div>

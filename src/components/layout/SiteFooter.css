@@ -14,10 +14,8 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding:
-    clamp(var(--space-xl), 6vw, var(--space-3xl))
-    clamp(var(--space-m), 5vw, var(--space-2xl))
-    var(--space-l);
+  padding: clamp(var(--space-xl), 6vw, var(--space-3xl))
+    clamp(var(--space-m), 5vw, var(--space-2xl)) var(--space-l);
   background: color-mix(
     in srgb,
     var(--color-purple-soft),
@@ -37,11 +35,7 @@
   width: clamp(15rem, 25vw, 24rem);
   aspect-ratio: 1.25;
   border-radius: 48% 52% 42% 58%;
-  background: color-mix(
-    in srgb,
-    var(--color-blue-soft),
-    transparent 12%
-  );
+  background: color-mix(in srgb, var(--color-blue-soft), transparent 12%);
   transform: rotate(10deg);
 }
 
@@ -51,11 +45,7 @@
   width: clamp(17rem, 28vw, 27rem);
   aspect-ratio: 1.35;
   border-radius: 58% 42% 48% 52%;
-  background: color-mix(
-    in srgb,
-    var(--color-yellow-soft),
-    transparent 4%
-  );
+  background: color-mix(in srgb, var(--color-yellow-soft), transparent 4%);
   transform: rotate(-8deg);
 }
 
@@ -113,11 +103,8 @@
   border-radius: var(--radius-pill);
   color: var(--color-page);
   background: var(--color-purple);
-  box-shadow: 0 0.75rem 1.75rem color-mix(
-    in srgb,
-    var(--color-purple),
-    transparent 76%
-  );
+  box-shadow: 0 0.75rem 1.75rem
+    color-mix(in srgb, var(--color-purple), transparent 76%);
   font-family: var(--font-heading);
   font-weight: var(--font-weight-bold);
   transition:
@@ -138,7 +125,7 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, .6fr)) 1fr;
+  grid-template-columns: repeat(4, minmax(0, 0.6fr)) 1fr;
   gap: 0;
 }
 
@@ -244,11 +231,7 @@
   padding: var(--space-m);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-m);
-  background: color-mix(
-    in srgb,
-    var(--color-page),
-    transparent 6%
-  );
+  background: color-mix(in srgb, var(--color-page), transparent 6%);
   box-shadow: var(--shadow-card);
 }
 
@@ -334,11 +317,8 @@
 @media (hover: hover) {
   .lwk-footer__cta:hover {
     background: var(--color-purple-dark);
-    box-shadow: 0 1rem 2.2rem color-mix(
-      in srgb,
-      var(--color-purple),
-      transparent 68%
-    );
+    box-shadow: 0 1rem 2.2rem
+      color-mix(in srgb, var(--color-purple), transparent 68%);
     transform: translateY(-0.14rem);
   }
 
@@ -349,11 +329,7 @@
   }
 
   .lwk-footer__social-link:hover {
-    border-color: color-mix(
-      in srgb,
-      var(--color-purple),
-      transparent 58%
-    );
+    border-color: color-mix(in srgb, var(--color-purple), transparent 58%);
     color: var(--color-purple-dark);
     transform: translateY(-0.1rem);
   }

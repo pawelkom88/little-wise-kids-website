@@ -10,7 +10,10 @@
   font-size: var(--font-size-small);
   line-height: var(--line-height-solid);
   white-space: nowrap;
-  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease;
 }
 
 .button:hover {
@@ -25,7 +28,11 @@
 .button--secondary {
   color: var(--color-purple);
   background: var(--color-surface);
-  border-color: color-mix(in srgb, var(--color-purple), var(--color-surface) 24%);
+  border-color: color-mix(
+    in srgb,
+    var(--color-purple),
+    var(--color-surface) 24%
+  );
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -58,7 +58,6 @@
   margin-top: 2rem;
 }
 
-
 .lwk-visit-media {
   position: relative;
   z-index: 1;
@@ -76,9 +75,11 @@
   padding: 0.65rem;
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--color-yellow), transparent 42%);
-  border-radius: var(--radius-pill) var(--radius-pill) var(--radius-l) var(--radius-l);
+  border-radius: var(--radius-pill) var(--radius-pill) var(--radius-l)
+    var(--radius-l);
   background: var(--color-cream);
-  box-shadow: 0 1.5rem 3.5rem color-mix(in srgb, var(--color-ink) 10%, transparent);
+  box-shadow: 0 1.5rem 3.5rem
+    color-mix(in srgb, var(--color-ink) 10%, transparent);
 }
 
 .lwk-visit-media__image img {
@@ -189,49 +190,48 @@
 }
 
 @media (hover: hover) {
+  @media (width < 68rem) {
+    .lwk-visit__layout {
+      grid-template-columns: 1fr;
+      width: min(100%, var(--container-narrow));
+      margin-inline: auto;
+    }
 
-@media (width < 68rem) {
-  .lwk-visit__layout {
-    grid-template-columns: 1fr;
-    width: min(100%, var(--container-narrow));
-    margin-inline: auto;
+    .lwk-visit-media {
+      justify-self: center;
+    }
   }
 
-  .lwk-visit-media {
-    justify-self: center;
-  }
-}
+  @media (width < 48rem) {
+    .lwk-visit {
+      padding-top: 3rem;
+    }
 
-@media (width < 48rem) {
-  .lwk-visit {
-    padding-top: 3rem;
-  }
+    .lwk-visit__title {
+      font-size: var(--visit-title-size-mobile);
+    }
 
-  .lwk-visit__title {
-    font-size: var(--visit-title-size-mobile);
-  }
+    .lwk-visit-highlights {
+      grid-template-columns: 1fr;
+    }
 
-  .lwk-visit-highlights {
-    grid-template-columns: 1fr;
-  }
+    .lwk-visit-highlight p {
+      font-size: var(--visit-highlight-copy-size-mobile);
+    }
 
-  .lwk-visit-highlight p {
-    font-size: var(--visit-highlight-copy-size-mobile);
-  }
+    .lwk-visit__actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
 
-  .lwk-visit__actions {
-    align-items: stretch;
-    flex-direction: column;
-  }
+    .lwk-visit-media {
+      width: 100%;
+    }
 
-  .lwk-visit-media {
-    width: 100%;
+    .lwk-visit-media__image {
+      width: min(100%, 24rem);
+    }
   }
-
-  .lwk-visit-media__image {
-    width: min(100%, 24rem);
-  }
-}
 
   .lwk-visit__secondary:hover > span {
     transform: none;

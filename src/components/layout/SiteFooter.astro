@@ -29,45 +29,56 @@ const legalLinks = [
 ---
 
 <footer id="contact" class="lwk-footer">
-    <div class="lwk-footer__panel">
-      <span class="lwk-footer__shape lwk-footer__shape--blue" aria-hidden="true"></span>
-      <span class="lwk-footer__shape lwk-footer__shape--yellow" aria-hidden="true"></span>
+  <div class="lwk-footer__panel">
+    <span class="lwk-footer__shape lwk-footer__shape--blue" aria-hidden="true"
+    ></span>
+    <span class="lwk-footer__shape lwk-footer__shape--yellow" aria-hidden="true"
+    ></span>
 
-      <section class="lwk-footer__brand" aria-labelledby="footer-heading">
-        <a class="lwk-footer__logo-link" href="/" aria-label={`${site.name} home`}>
-          <img
-            class="lwk-footer__logo"
-            src="/assets/images/logo.png"
-            alt={site.name}
-            width="1774"
-            height="887"
-            loading="lazy"
-            decoding="async"
-          />
-        </a>
+    <section class="lwk-footer__brand" aria-labelledby="footer-heading">
+      <a
+        class="lwk-footer__logo-link"
+        href="/"
+        aria-label={`${site.name} home`}
+      >
+        <img
+          class="lwk-footer__logo"
+          src="/assets/images/logo.png"
+          alt={site.name}
+          width="1774"
+          height="887"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
 
-        <h2 class="lwk-footer__heading" id="footer-heading">
-          <!--TODO : make global-->
-          Growing <span class="tone-purple">confident</span>, <span class="tone-green">kind</span> and <span class="tone-blue">curious</span> children.
-        </h2>
+      <h2 class="lwk-footer__heading" id="footer-heading">
+        <!--TODO : make global-->
+        Growing <span class="tone-purple">confident</span>, <span
+          class="tone-green">kind</span
+        > and <span class="tone-blue">curious</span> children.
+      </h2>
 
-        <p class="lwk-footer__summary">
-          A warm, screen-free early years setting in Bristol BS5, where every
-          child is supported to learn, explore and thrive at their own pace.
-        </p>
+      <p class="lwk-footer__summary">
+        A warm, screen-free early years setting in Bristol BS5, where every
+        child is supported to learn, explore and thrive at their own pace.
+      </p>
 
-        <a class="lwk-footer__cta" href="/#contact">
-          Register Your Interest
-          <Icon name="arrowRight" size={20} />
-        </a>
-      </section>
+      <a class="lwk-footer__cta" href="/#contact">
+        Register Your Interest
+        <Icon name="arrowRight" size={20} />
+      </a>
+    </section>
 
-      <Container size="wide">
+    <Container size="wide">
       <div class="lwk-footer__rule" aria-hidden="true"></div>
 
       <div class="lwk-footer__navigation">
         <nav class="lwk-footer__column" aria-labelledby="footer-main-menu">
-          <h3 class="lwk-footer__column-title tone-purple" id="footer-main-menu">
+          <h3
+            class="lwk-footer__column-title tone-purple"
+            id="footer-main-menu"
+          >
             Main Menu
           </h3>
 
@@ -110,38 +121,53 @@ const legalLinks = [
           })
         }
 
-        <section class="lwk-footer__column lwk-footer__contact" aria-labelledby="footer-contact-heading">
-          <h3 class="lwk-footer__column-title tone-blue" id="footer-contact-heading">
+        <section
+          class="lwk-footer__column lwk-footer__contact"
+          aria-labelledby="footer-contact-heading"
+        >
+          <h3
+            class="lwk-footer__column-title tone-blue"
+            id="footer-contact-heading"
+          >
             Get in Touch
           </h3>
 
           <address class="lwk-footer__contact-list">
             <div class="lwk-footer__contact-item">
-              <span class="lwk-footer__contact-icon lwk-footer__contact-icon--green" aria-hidden="true">
+              <span
+                class="lwk-footer__contact-icon lwk-footer__contact-icon--green"
+                aria-hidden="true"
+              >
                 <Icon name="location" size={20} />
               </span>
 
               <span>
-                {site.addressLines.map((line) => (
-                  <span>{line}</span>
-                ))}
+                {site.addressLines.map((line) => <span>{line}</span>)}
               </span>
             </div>
 
             <div class="lwk-footer__contact-item">
-              <span class="lwk-footer__contact-icon lwk-footer__contact-icon--blue" aria-hidden="true">
+              <span
+                class="lwk-footer__contact-icon lwk-footer__contact-icon--blue"
+                aria-hidden="true"
+              >
                 <Icon name="phone" size={20} />
               </span>
 
               <span class="lwk-footer__phone-links">
-                {site.phones.map((phone) => (
-                  <a href={`tel:${phone.replaceAll(" ", "")}`}>{phone}</a>
-                ))}
+                {
+                  site.phones.map((phone) => (
+                    <a href={`tel:${phone.replaceAll(" ", "")}`}>{phone}</a>
+                  ))
+                }
               </span>
             </div>
 
             <div class="lwk-footer__contact-item">
-              <span class="lwk-footer__contact-icon lwk-footer__contact-icon--purple" aria-hidden="true">
+              <span
+                class="lwk-footer__contact-icon lwk-footer__contact-icon--purple"
+                aria-hidden="true"
+              >
                 <Icon name="mail" size={20} />
               </span>
 
@@ -184,15 +210,14 @@ const legalLinks = [
 
       <div class="lwk-footer__bottom">
         <nav class="lwk-footer__legal" aria-label="Legal information">
-          {
-            legalLinks.map((link) => (
-              <a href={link.href}>{link.label}</a>
-            ))
-          }
+          {legalLinks.map((link) => <a href={link.href}>{link.label}</a>)}
         </nav>
-<!--TODO: do not hardcore date ! use js-->
-        <p>&copy; {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+        <!--TODO: do not hardcore date ! use js-->
+        <p>
+          &copy; {new Date().getFullYear()}
+          {site.name}. All rights reserved.
+        </p>
       </div>
-      </Container>
-    </div>
+    </Container>
+  </div>
 </footer>

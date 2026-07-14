@@ -6,34 +6,57 @@ import Container from "./Container.astro";
 import "./SiteHeader.css";
 
 const submenuItems = navItems.filter((item) => "children" in item);
-const itemId = (label: string) => label.toLowerCase().replace(/[’'\/\s]+/g, "-").replace(/[^a-z-]/g, "");
+const itemId = (label: string) =>
+  label
+    .toLowerCase()
+    .replace(/[’'\/\s]+/g, "-")
+    .replace(/[^a-z-]/g, "");
 ---
 
 <header class="site-header" data-site-header>
   <Container size="wide" class="site-header__inner">
     <a class="brand" href="/" aria-label={`${site.name} home`}>
-      <img class="brand__logo" src="/assets/images/logo.png" alt="" width="1774" height="887" />
+      <img
+        class="brand__logo"
+        src="/assets/images/logo.png"
+        alt=""
+        width="1774"
+        height="887"
+      />
       <span class="sr-only">{site.name}</span>
     </a>
 
     <nav class="site-nav" aria-label="Primary navigation">
-      {navItems.map((item) => {
-        const id = itemId(item.label);
-        return "children" in item ? (
-          <button class={`site-nav__link site-nav__trigger tone-${item.tone}`} type="button" id={`nav-${id}`} aria-expanded="false" aria-controls={`mega-${id}`} data-mega-trigger={id}>
-            <Icon name={item.icon} size={27} />
-            <span>{item.label}</span>
-            <span class="site-nav__chevron" aria-hidden="true">
-              <Icon name="chevron" size={20}/>
-            </span>
-          </button>
-        ) : (
-          <a class={`site-nav__link tone-${item.tone}`} href={item.href} data-nav-link>
-            <Icon name={item.icon} size={27} />
-            <span>{item.label}</span>
-          </a>
-        );
-      })}
+      {
+        navItems.map((item) => {
+          const id = itemId(item.label);
+          return "children" in item ? (
+            <button
+              class={`site-nav__link site-nav__trigger tone-${item.tone}`}
+              type="button"
+              id={`nav-${id}`}
+              aria-expanded="false"
+              aria-controls={`mega-${id}`}
+              data-mega-trigger={id}
+            >
+              <Icon name={item.icon} size={27} />
+              <span>{item.label}</span>
+              <span class="site-nav__chevron" aria-hidden="true">
+                <Icon name="chevron" size={20} />
+              </span>
+            </button>
+          ) : (
+            <a
+              class={`site-nav__link tone-${item.tone}`}
+              href={item.href}
+              data-nav-link
+            >
+              <Icon name={item.icon} size={27} />
+              <span>{item.label}</span>
+            </a>
+          );
+        })
+      }
     </nav>
 
     <details class="mobile-menu" data-mobile-menu>
@@ -42,32 +65,74 @@ const itemId = (label: string) => label.toLowerCase().replace(/[’'\/\s]+/g, "-
       </summary>
       <div class="mobile-menu__panel">
         <div class="mobile-menu__top">
-          <img class="mobile-menu__logo" src="/assets/images/logo.png" alt={site.name} />
-          <button class="mobile-menu__close" type="button" aria-label="Close menu" data-mobile-close><Icon name="close" size={32} /></button>
+          <img
+            class="mobile-menu__logo"
+            src="/assets/images/logo.png"
+            alt={site.name}
+          />
+          <button
+            class="mobile-menu__close"
+            type="button"
+            aria-label="Close menu"
+            data-mobile-close><Icon name="close" size={32} /></button
+          >
         </div>
         <nav class="mobile-menu__nav" aria-label="Mobile primary navigation">
-          {navItems.map((item) => {
-            const id = itemId(item.label);
-            return "children" in item ? (
-              <div class="mobile-menu__section">
-                <button class={`mobile-menu__link mobile-menu__trigger tone-${item.tone}`} type="button" aria-expanded="false" aria-controls={`mobile-${id}`} data-mobile-trigger={id}>
-                  <span class="mobile-menu__icon"><Icon name={item.icon} size={30} /></span>
-                  <span>{item.label}</span>
-                  <span class="mobile-menu__chevron" aria-hidden="true"><Icon name="chevron" size={20}/></span>
-                </button>
-                <div class="mobile-menu__children" id={`mobile-${id}`} hidden inert>
-                  {item.children.map((child) => <a href={child.href} data-nav-link>{child.label}<Icon name="arrowRight" size={18} /></a>)}
+          {
+            navItems.map((item) => {
+              const id = itemId(item.label);
+              return "children" in item ? (
+                <div class="mobile-menu__section">
+                  <button
+                    class={`mobile-menu__link mobile-menu__trigger tone-${item.tone}`}
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls={`mobile-${id}`}
+                    data-mobile-trigger={id}
+                  >
+                    <span class="mobile-menu__icon">
+                      <Icon name={item.icon} size={30} />
+                    </span>
+                    <span>{item.label}</span>
+                    <span class="mobile-menu__chevron" aria-hidden="true">
+                      <Icon name="chevron" size={20} />
+                    </span>
+                  </button>
+                  <div
+                    class="mobile-menu__children"
+                    id={`mobile-${id}`}
+                    hidden
+                    inert
+                  >
+                    {item.children.map((child) => (
+                      <a href={child.href} data-nav-link>
+                        {child.label}
+                        <Icon name="arrowRight" size={18} />
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <a class={`mobile-menu__link tone-${item.tone}`} href={item.href} data-nav-link>
-                <span class="mobile-menu__icon"><Icon name={item.icon} size={30} /></span>
-                <span>{item.label}</span><Icon name="arrowRight" size={22} />
-              </a>
-            );
-          })}
+              ) : (
+                <a
+                  class={`mobile-menu__link tone-${item.tone}`}
+                  href={item.href}
+                  data-nav-link
+                >
+                  <span class="mobile-menu__icon">
+                    <Icon name={item.icon} size={30} />
+                  </span>
+                  <>
+                    <span>{item.label}</span>
+                    <Icon name="arrowRight" size={22} />
+                  </>
+                </a>
+              );
+            })
+          }
         </nav>
-        <Button href="#contact" icon="calendar" class="mobile-menu__cta">Book a Visit</Button>
+        <Button href="#contact" icon="calendar" class="mobile-menu__cta"
+          >Book a Visit</Button
+        >
       </div>
     </details>
   </Container>
@@ -75,17 +140,41 @@ const itemId = (label: string) => label.toLowerCase().replace(/[’'\/\s]+/g, "-
   <div class="mega-menu" data-mega-menu hidden aria-hidden="true">
     <Container size="wide">
       <div class="mega-menu__surface">
-        {submenuItems.map((item) => {
-          const id = itemId(item.label);
-          return (
-            <section class={`mega-menu__section tone-${item.tone}`} id={`mega-${id}`} aria-labelledby={`nav-${id}`} hidden inert data-mega-panel={id}>
-              <div class="mega-menu__heading"><span class="mega-menu__icon"><Icon name={item.icon} size={30} /></span><h2>{item.label}</h2></div>
-              <div class="mega-menu__links" style={`--link-count:${item.children.length}`}>
-                {item.children.map((child) => <a href={child.href} data-nav-link><Icon name="arrowRight" size={19} /><span>{child.label}</span></a>)}
-              </div>
-            </section>
-          );
-        })}
+        {
+          submenuItems.map((item) => {
+            const id = itemId(item.label);
+            return (
+              <section
+                class={`mega-menu__section tone-${item.tone}`}
+                id={`mega-${id}`}
+                aria-labelledby={`nav-${id}`}
+                hidden
+                inert
+                data-mega-panel={id}
+              >
+                <div class="mega-menu__heading">
+                  <>
+                    <span class="mega-menu__icon">
+                      <Icon name={item.icon} size={30} />
+                    </span>
+                    <h2>{item.label}</h2>
+                  </>
+                </div>
+                <div
+                  class="mega-menu__links"
+                  style={`--link-count:${item.children.length}`}
+                >
+                  {item.children.map((child) => (
+                    <a href={child.href} data-nav-link>
+                      <Icon name="arrowRight" size={19} />
+                      <span>{child.label}</span>
+                    </a>
+                  ))}
+                </div>
+              </section>
+            );
+          })
+        }
       </div>
     </Container>
   </div>

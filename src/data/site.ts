@@ -22,7 +22,7 @@ export const navItems = [
     icon: "person",
     tone: "blue",
     children: [
-      { label: "About Us", href: "/#approach" },
+      { label: "About Us", href: "/" },
       { label: "Our Approach", href: "/#approach" },
       { label: "Our Commitment", href: "/#activities" },
       { label: "Our Leadership Team", href: "/#contact" },

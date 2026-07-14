@@ -9,12 +9,7 @@ interface Props {
   [key: string]: unknown;
 }
 
-const {
-  id,
-  width = "default",
-  class: className = "",
-  ...rest
-} = Astro.props;
+const { id, width = "default", class: className = "", ...rest } = Astro.props;
 
 const classes = ["section", className].filter(Boolean).join(" ");
 ---

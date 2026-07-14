@@ -35,8 +35,15 @@ const faqs = [
 ] as const;
 ---
 
-<svg class="faq-wave faq-wave--top" viewBox="0 0 1448 120" preserveAspectRatio="none" aria-hidden="true">
-  <path d="M0 26c105 38 193 38 292 8 107-32 190-36 304-1 115 35 199 31 305-5 110-37 197-31 308 4 93 29 161 30 239-4v92H0V26Z"></path>
+<svg
+  class="faq-wave faq-wave--top"
+  viewBox="0 0 1448 120"
+  preserveAspectRatio="none"
+  aria-hidden="true"
+>
+  <path
+    d="M0 26c105 38 193 38 292 8 107-32 190-36 304-1 115 35 199 31 305-5 110-37 197-31 308 4 93 29 161 30 239-4v92H0V26Z"
+  ></path>
 </svg>
 
 <Section class="faq-section" width="wide">
@@ -47,7 +54,8 @@ const faqs = [
       </h2>
 
       <p class="faq-intro">
-        Clear answers to the things parents most often ask before joining Little Wise Kids.
+        Clear answers to the things parents most often ask before joining Little
+        Wise Kids.
       </p>
     </header>
 
@@ -57,12 +65,12 @@ const faqs = [
           <details class="faq-item" name="little-wise-kids-faq" open={faq.open}>
             <summary>
               <span class="faq-question">{faq.question}</span>
-              <span class="faq-control" aria-hidden="true"></span>
+              <span class="faq-control" aria-hidden="true" />
             </summary>
             <div class="faq-answer">
               <div class="faq-answer-inner">
                 <div class="faq-answer-content">
-                  <p set:html={faq.answer}></p>
+                  <p set:html={faq.answer} />
                 </div>
               </div>
             </div>
@@ -105,6 +113,13 @@ const faqs = [
   </div>
 </Section>
 
-<svg class="faq-wave faq-wave--rotated" viewBox="0 0 1448 120" preserveAspectRatio="none" aria-hidden="true">
-  <path d="M0 26c105 38 193 38 292 8 107-32 190-36 304-1 115 35 199 31 305-5 110-37 197-31 308 4 93 29 161 30 239-4v92H0V26Z"></path>
+<svg
+  class="faq-wave faq-wave--rotated"
+  viewBox="0 0 1448 120"
+  preserveAspectRatio="none"
+  aria-hidden="true"
+>
+  <path
+    d="M0 26c105 38 193 38 292 8 107-32 190-36 304-1 115 35 199 31 305-5 110-37 197-31 308 4 93 29 161 30 239-4v92H0V26Z"
+  ></path>
 </svg>

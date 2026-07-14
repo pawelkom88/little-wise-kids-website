@@ -48,10 +48,8 @@
   border-radius: var(--radius-pill);
   background: var(--color-purple);
   opacity: 0;
-  transform:
-          translateY(calc(-50% + var(--ray-y)))
-          rotate(var(--ray-angle))
-          scaleX(0.15);
+  transform: translateY(calc(-50% + var(--ray-y))) rotate(var(--ray-angle))
+    scaleX(0.15);
   transform-origin: var(--ray-origin);
 }
 
@@ -59,27 +57,23 @@
  * Left rays
  */
 
-.lwk-values-heading__rays--left
-.lwk-values-heading__ray {
+.lwk-values-heading__rays--left .lwk-values-heading__ray {
   right: 0;
 }
 
-.lwk-values-heading__rays--left
-.lwk-values-heading__ray:nth-child(1) {
+.lwk-values-heading__rays--left .lwk-values-heading__ray:nth-child(1) {
   --ray-y: -0.72rem;
   --ray-angle: 25deg;
   --ray-delay: 0ms;
 }
 
-.lwk-values-heading__rays--left
-.lwk-values-heading__ray:nth-child(2) {
+.lwk-values-heading__rays--left .lwk-values-heading__ray:nth-child(2) {
   --ray-y: 0rem;
   --ray-angle: 0deg;
   --ray-delay: 90ms;
 }
 
-.lwk-values-heading__rays--left
-.lwk-values-heading__ray:nth-child(3) {
+.lwk-values-heading__rays--left .lwk-values-heading__ray:nth-child(3) {
   --ray-y: 0.72rem;
   --ray-angle: -25deg;
   --ray-delay: 180ms;
@@ -89,29 +83,25 @@
  * Right rays
  */
 
-.lwk-values-heading__rays--right
-.lwk-values-heading__ray {
+.lwk-values-heading__rays--right .lwk-values-heading__ray {
   --ray-origin: left center;
 
   left: 0;
 }
 
-.lwk-values-heading__rays--right
-.lwk-values-heading__ray:nth-child(1) {
+.lwk-values-heading__rays--right .lwk-values-heading__ray:nth-child(1) {
   --ray-y: -0.72rem;
   --ray-angle: -25deg;
   --ray-delay: 60ms;
 }
 
-.lwk-values-heading__rays--right
-.lwk-values-heading__ray:nth-child(2) {
+.lwk-values-heading__rays--right .lwk-values-heading__ray:nth-child(2) {
   --ray-y: 0rem;
   --ray-angle: 0deg;
   --ray-delay: 150ms;
 }
 
-.lwk-values-heading__rays--right
-.lwk-values-heading__ray:nth-child(3) {
+.lwk-values-heading__rays--right .lwk-values-heading__ray:nth-child(3) {
   --ray-y: 0.72rem;
   --ray-angle: 25deg;
   --ray-delay: 240ms;
@@ -122,39 +112,28 @@
  * small → slightly oversized → natural size.
  */
 
-.lwk-values-difference.is-heading-animated
-.lwk-values-heading__ray {
-  animation:
-          lwk-values-ray-pop
-          540ms
-          var(--values-ray-ease)
-          var(--ray-delay)
-          both;
+.lwk-values-difference.is-heading-animated .lwk-values-heading__ray {
+  animation: lwk-values-ray-pop 540ms var(--values-ray-ease) var(--ray-delay)
+    both;
 }
 
 @keyframes lwk-values-ray-pop {
   0% {
     opacity: 0;
-    transform:
-            translateY(calc(-50% + var(--ray-y)))
-            rotate(var(--ray-angle))
-            scaleX(0.15);
+    transform: translateY(calc(-50% + var(--ray-y))) rotate(var(--ray-angle))
+      scaleX(0.15);
   }
 
   62% {
     opacity: 1;
-    transform:
-            translateY(calc(-50% + var(--ray-y)))
-            rotate(var(--ray-angle))
-            scaleX(1.16);
+    transform: translateY(calc(-50% + var(--ray-y))) rotate(var(--ray-angle))
+      scaleX(1.16);
   }
 
   100% {
     opacity: 1;
-    transform:
-            translateY(calc(-50% + var(--ray-y)))
-            rotate(var(--ray-angle))
-            scaleX(1);
+    transform: translateY(calc(-50% + var(--ray-y))) rotate(var(--ray-angle))
+      scaleX(1);
   }
 }
 
@@ -197,10 +176,7 @@
 
 .lwk-values-grid {
   display: grid;
-  grid-template-columns: repeat(
-    2,
-    minmax(0, 1fr)
-  );
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.35rem;
 }
 
@@ -216,8 +192,8 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-l);
   transition:
-          transform 180ms ease,
-          box-shadow 180ms ease;
+    transform 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .lwk-value-card--purple {
@@ -251,8 +227,7 @@
 
 .lwk-value-card__title {
   margin-bottom: 0.65rem;
-  letter-spacing:
-          var(--values-card-title-tracking);
+  letter-spacing: var(--values-card-title-tracking);
 }
 
 .lwk-value-card__title--purple {
@@ -268,12 +243,7 @@
 }
 
 .lwk-value-card__title--yellow {
-  color:
-          color-mix(
-                  in srgb,
-                  var(--color-yellow),
-                  var(--color-darken-base) 28%
-          );
+  color: color-mix(in srgb, var(--color-yellow), var(--color-darken-base) 28%);
 }
 
 .lwk-value-card p {
@@ -288,13 +258,8 @@
 
 @media (hover: hover) {
   .lwk-value-card:hover {
-    box-shadow:
-            0 1rem 2.5rem
-            color-mix(
-                    in srgb,
-                    var(--color-ink) 8%,
-                    transparent
-            );
+    box-shadow: 0 1rem 2.5rem
+      color-mix(in srgb, var(--color-ink) 8%, transparent);
     transform: translateY(-0.2rem);
   }
 }
@@ -328,17 +293,13 @@
     height: 2.5px;
   }
 
-  .lwk-values-heading__rays--left
-  .lwk-values-heading__ray:nth-child(1),
-  .lwk-values-heading__rays--right
-  .lwk-values-heading__ray:nth-child(1) {
+  .lwk-values-heading__rays--left .lwk-values-heading__ray:nth-child(1),
+  .lwk-values-heading__rays--right .lwk-values-heading__ray:nth-child(1) {
     --ray-y: -0.58rem;
   }
 
-  .lwk-values-heading__rays--left
-  .lwk-values-heading__ray:nth-child(3),
-  .lwk-values-heading__rays--right
-  .lwk-values-heading__ray:nth-child(3) {
+  .lwk-values-heading__rays--left .lwk-values-heading__ray:nth-child(3),
+  .lwk-values-heading__rays--right .lwk-values-heading__ray:nth-child(3) {
     --ray-y: 0.58rem;
   }
 
@@ -361,10 +322,8 @@
 @media (prefers-reduced-motion: reduce) {
   .lwk-values-heading__ray {
     opacity: 1;
-    transform:
-            translateY(calc(-50% + var(--ray-y)))
-            rotate(var(--ray-angle))
-            scaleX(1);
+    transform: translateY(calc(-50% + var(--ray-y))) rotate(var(--ray-angle))
+      scaleX(1);
     animation: none !important;
   }
 

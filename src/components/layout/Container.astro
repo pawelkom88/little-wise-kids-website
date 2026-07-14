@@ -7,7 +7,9 @@ interface Props {
 }
 
 const { size = "default", class: className = "" } = Astro.props;
-const classes = ["container", `container--${size}`, className].filter(Boolean).join(" ");
+const classes = ["container", `container--${size}`, className]
+  .filter(Boolean)
+  .join(" ");
 ---
 
 <div class={classes}>
