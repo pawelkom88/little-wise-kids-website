@@ -1,0 +1,722 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/layout/Container.astro";
+import "./parents-information.css";
+
+const schoolSupport = [
+  "Play-based experiences aligned with EYFS",
+  "Early literacy, numeracy, communication and self-care opportunities",
+  "Emotional wellbeing and confidence-building",
+  "Cooperative play and friendships",
+  "Language exposure in English and Portuguese for now",
+  "Consistent, loving routines that help children feel secure",
+] as const;
+
+const fundingExamples = [
+  {
+    entitlement: "15 funded hours per week during term time",
+    equivalent: "Approximately 11.18 hours per week across 51 weeks",
+  },
+  {
+    entitlement: "30 funded hours per week during term time",
+    equivalent: "Approximately 22.35 hours per week across 51 weeks",
+  },
+] as const;
+
+const feeRows = [
+  {
+    label: "Full-day rate",
+    value: "[Editable]",
+    field: "fullDayRate",
+  },
+  {
+    label: "Half-day rate",
+    value: "[Editable]",
+    field: "halfDayRate",
+  },
+  {
+    label: "Funded-hour deductions",
+    value: "[Editable]",
+    field: "fundedHourDeductions",
+  },
+  {
+    label: "Additional charges",
+    value: "[Editable]",
+    field: "additionalCharges",
+  },
+  {
+    label: "Example weekly costs",
+    value: "[Editable]",
+    field: "exampleWeeklyCosts",
+  },
+] as const;
+
+const subsidyFaqs = [
+  {
+    question: "Can I use funded childcare at Little Wise Kids?",
+    answer:
+      "Yes, eligible families may be able to use government-funded childcare hours. Please contact us so we can explain how funding is applied across our 51-week year.",
+  },
+  {
+    question: "Can I use Tax-Free Childcare?",
+    answer:
+      "Yes, eligible families may be able to pay through the Government’s Tax-Free Childcare scheme.",
+  },
+  {
+    question: "When does funding start?",
+    answer:
+      "Funding usually begins from the term after your child becomes eligible. Please check current eligibility and dates through the Government childcare website.",
+  },
+  {
+    question: "What will I need to provide?",
+    answer:
+      "Depending on your entitlement, we may ask for your eligibility code and supporting details before funding can be applied.",
+  },
+  {
+    question: "Can you help me apply?",
+    answer:
+      "We can explain the process and help you understand what to do next, although applications are completed through the Government childcare portal.",
+  },
+] as const;
+
+const settlingStrategies = [
+  "Short introductory sessions with a parent or carer present",
+  "Gradually increasing session length",
+  "Consistent staffing and key-person continuity",
+  "Familiar comfort routines and transitional objects",
+  "Language cues in English and Portuguese where helpful",
+  "A calm, predictable rhythm to each day",
+] as const;
+
+const policies = [
+  {
+    label: "GDPR / Privacy Policy",
+    href: "/documents/gdpr-privacy-policy.pdf",
+  },
+  {
+    label: "Safeguarding Policy",
+    href: "/documents/safeguarding-policy.pdf",
+  },
+  {
+    label: "Complaints Policy",
+    href: "/documents/complaints-policy.pdf",
+  },
+  {
+    label: "Health and Safety Policy",
+    href: "/documents/health-and-safety-policy.pdf",
+  },
+  {
+    label: "Partnership Policy",
+    href: "/documents/partnership-policy.pdf",
+  },
+  {
+    label: "Settling-In Process Policy",
+    href: "/documents/settling-in-process-policy.pdf",
+  },
+] as const;
+---
+
+<BaseLayout
+  title="Parents’ Information | Little Wise Kids"
+  description="Guidance for Little Wise Kids families covering school readiness, childcare funding, fees, settling in, family partnerships and nursery policies."
+>
+  <article class="parents-page">
+    <header class="parents-hero" aria-labelledby="parents-page-title">
+      <div class="parents-hero__content">
+        <p class="parents-page__eyebrow">Parents’ Information</p>
+
+        <h1 id="parents-page-title">
+          <span>Everything You Need,</span>
+          <span>So Your Child Can Thrive</span>
+        </h1>
+
+        <p class="parents-hero__lead">
+          Clear guidance on starting school, fees and funding, childcare
+          support, settling in and the policies that help every family feel
+          informed and reassured.
+        </p>
+      </div>
+
+      <span class="parents-hero__wave-highlight" aria-hidden="true"></span>
+
+      <div class="parents-hero__wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
+          <path
+            d="M0 58C130 118 272 116 413 86C560 55 655 63 805 112C975 168 1102 119 1258 69C1330 46 1392 39 1440 52V220H0V58Z"
+          ></path>
+        </svg>
+      </div>
+    </header>
+
+    <main class="parents-page__content">
+      <Container size="wide">
+        <div class="parents-page__stack">
+          <section
+            id="starting-school"
+            class="parents-card
+              parents-card--purple"
+            aria-labelledby="starting-school-title"
+          >
+            <div class="parents-card__grid">
+              <div class="parents-card__main">
+                <header class="parents-card__heading">
+                  <span class="parents-card__number" aria-hidden="true">
+                    01
+                  </span>
+
+                  <div>
+                    <p class="parents-card__label">Starting School</p>
+
+                    <h2 id="starting-school-title">A Confident First Step</h2>
+                  </div>
+                </header>
+
+                <div class="parents-card__prose">
+                  <p>
+                    Starting school is an exciting and sometimes emotional
+                    milestone. At Little Wise Kids, we help make the transition
+                    smooth, joyful and empowering for children and families.
+                  </p>
+
+                  <p>
+                    Through a screen-free, child-led and play-rich approach,
+                    children build the emotional resilience, social skills,
+                    independence and curiosity they need for their next chapter.
+                  </p>
+                </div>
+              </div>
+
+              <aside class="parents-card__panel">
+                <h3>We Support Children Through:</h3>
+
+                <ul class="parents-check-list">
+                  {schoolSupport.map((item) => <li>{item}</li>)}
+                </ul>
+              </aside>
+            </div>
+          </section>
+
+          <section
+            id="fees-funding"
+            class="parents-card
+              parents-card--green"
+            aria-labelledby="fees-funding-title"
+          >
+            <div class="parents-card__grid">
+              <div class="parents-card__main">
+                <header class="parents-card__heading">
+                  <span class="parents-card__number" aria-hidden="true">
+                    02
+                  </span>
+
+                  <div>
+                    <p class="parents-card__label">Fees and Funding</p>
+
+                    <h2 id="fees-funding-title">
+                      Supporting Families, Investing in Early Years
+                    </h2>
+                  </div>
+                </header>
+
+                <div class="parents-card__prose">
+                  <p>
+                    We believe every child deserves access to nurturing,
+                    high-quality early years education and that families deserve
+                    clear, supportive information about childcare costs.
+                  </p>
+
+                  <p>
+                    Little Wise Kids offers government-funded childcare places
+                    for eligible families. We are open year-round for 51 weeks
+                    of the year, helping children benefit from consistent
+                    routines, care and learning.
+                  </p>
+                </div>
+              </div>
+
+              <aside
+                class="parents-card__notice
+                  parents-card__notice--yellow"
+              >
+                <p class="parents-card__notice-label">CMS note</p>
+
+                <p>
+                  Funding rules, entitlements and rates can change. This section
+                  must be reviewed regularly and made easy to update.
+                </p>
+              </aside>
+            </div>
+          </section>
+
+          <section
+            id="how-funding-works"
+            class="parents-card
+              parents-card--blue"
+            aria-labelledby="funding-works-title"
+          >
+            <div class="parents-card__grid">
+              <div class="parents-card__main">
+                <header class="parents-card__heading">
+                  <span class="parents-card__number" aria-hidden="true">
+                    03
+                  </span>
+
+                  <div>
+                    <p class="parents-card__label">How Funding Works</p>
+
+                    <h2 id="funding-works-title">
+                      Government-Funded Childcare
+                    </h2>
+                  </div>
+                </header>
+
+                <div class="parents-card__prose">
+                  <p>
+                    The government provides childcare support for eligible
+                    families, depending on a child’s age and a family’s
+                    circumstances. Funding may cover some of your childcare
+                    costs, helping to make quality early years education more
+                    accessible.
+                  </p>
+
+                  <p>
+                    Because Little Wise Kids operates year-round for 51 weeks,
+                    funded hours are spread across the year rather than only
+                    used during school terms.
+                  </p>
+
+                  <p>
+                    Additional fees may apply for hours outside a family’s
+                    funded entitlement. These support extended care, meals,
+                    nursery experiences and the high-quality early years
+                    provision offered by Little Wise Kids.
+                  </p>
+                </div>
+              </div>
+
+              <aside class="parents-card__panel">
+                <h3>Current Example Calculations</h3>
+
+                <div class="parents-calculations">
+                  {
+                    fundingExamples.map((example) => (
+                      <article class="parents-calculation">
+                        <p>{example.entitlement}</p>
+                        <strong>{example.equivalent}</strong>
+                      </article>
+                    ))
+                  }
+                </div>
+              </aside>
+            </div>
+          </section>
+
+          <section
+            id="funding-support"
+            class="parents-card
+              parents-card--purple"
+            aria-labelledby="funding-support-title"
+          >
+            <div class="parents-card__grid">
+              <div class="parents-card__main">
+                <header class="parents-card__heading">
+                  <span class="parents-card__number" aria-hidden="true">
+                    04
+                  </span>
+
+                  <div>
+                    <p class="parents-card__label">Funding Support</p>
+
+                    <h2 id="funding-support-title">We Are Here to Help</h2>
+                  </div>
+                </header>
+
+                <div class="parents-card__prose">
+                  <p>
+                    Funding can feel complicated, but you do not have to work it
+                    out alone. Our team is happy to help you understand the
+                    options available, explain what information may be needed
+                    and support you through the process.
+                  </p>
+                </div>
+              </div>
+
+              <aside class="parents-resource">
+                <p class="parents-resource__label">
+                  Current Government Guidance and Eligibility
+                </p>
+
+                <a
+                  href="https://www.gov.uk/get-childcare"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Visit the Government childcare guidance website. Opens in a new tab."
+                >
+                  gov.uk/get-childcare
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </aside>
+            </div>
+          </section>
+
+          <section
+            id="tax-free-childcare"
+            class="parents-card
+              parents-card--green"
+            aria-labelledby="tax-free-title"
+          >
+            <div class="parents-card__grid">
+              <div class="parents-card__main">
+                <header class="parents-card__heading">
+                  <span class="parents-card__number" aria-hidden="true">
+                    05
+                  </span>
+
+                  <div>
+                    <p class="parents-card__label">Tax-Free Childcare</p>
+
+                    <h2 id="tax-free-title">
+                      Additional Help With Childcare Costs
+                    </h2>
+                  </div>
+                </header>
+
+                <div class="parents-card__prose">
+                  <p>
+                    Eligible families may also benefit from Tax-Free Childcare.
+                    For every £8 paid into a childcare account, the government
+                    adds £2, subject to the scheme rules and limits.
+                  </p>
+
+                  <p>
+                    Tax-Free Childcare can often be used alongside funded
+                    childcare hours.
+                  </p>
+                </div>
+              </div>
+
+              <aside class="parents-resource">
+                <p class="parents-resource__label">
+                  Current Details and Eligibility
+                </p>
+
+                <a
+                  href="https://www.gov.uk/tax-free-childcare"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Visit the Government Tax-Free Childcare website. Opens in a new tab."
+                >
+                  gov.uk/tax-free-childcare
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </aside>
+            </div>
+          </section>
+
+          <section
+            id="weekly-fees-funding"
+            class="parents-card
+              parents-card--purple
+              parents-card--table"
+            aria-labelledby="weekly-fees-title"
+          >
+            <div class="parents-card__main">
+              <header class="parents-card__heading">
+                <span class="parents-card__number" aria-hidden="true">
+                  06
+                </span>
+
+                <div>
+                  <p class="parents-card__label">Weekly Fees and Funding</p>
+
+                  <h2 id="weekly-fees-title">
+                    Weekly Costs and Funding Examples
+                  </h2>
+                </div>
+              </header>
+
+              <div class="parents-card__prose">
+                <p>
+                  Your weekly childcare cost will depend on your child’s
+                  sessions, funding entitlement and any additional services or
+                  charges. We will always explain your estimated fees clearly
+                  before a place is confirmed.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="parents-fees-table-wrapper"
+              tabindex="0"
+              role="region"
+              aria-label="Weekly fees and funding table"
+            >
+              <table class="parents-fees-table">
+                <caption class="sr-only">
+                  Editable weekly childcare fee and funding values
+                </caption>
+
+                <thead>
+                  <tr>
+                    <th scope="col"> Fee or funding element </th>
+                    <th scope="col"> CMS value </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {
+                    feeRows.map((row) => (
+                      <tr>
+                        <th scope="row">{row.label}</th>
+
+                        <td data-cms-field={row.field}>
+                          <em>{row.value}</em>
+                        </td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </div>
+
+            <aside
+              class="parents-card__notice
+                parents-card__notice--yellow
+                parents-card__notice--full"
+            >
+              <p class="parents-card__notice-label">CMS / developer note</p>
+
+              <p>
+                Connect these values to editable CMS fields. Do not hard-code
+                current fee figures into the page because rates, deductions and
+                additional charges require regular updates.
+              </p>
+            </aside>
+          </section>
+
+          <section
+            id="childcare-subsidy-questions"
+            class="parents-card
+              parents-card--yellow
+              parents-card--faq"
+            aria-labelledby="subsidy-questions-title"
+          >
+            <div class="parents-card__main">
+              <header class="parents-card__heading">
+                <span class="parents-card__number" aria-hidden="true">
+                  07
+                </span>
+
+                <div>
+                  <p class="parents-card__label">Childcare Subsidy Questions</p>
+
+                  <h2 id="subsidy-questions-title">
+                    Childcare Support: Your Questions Answered
+                  </h2>
+                </div>
+              </header>
+
+              <div class="parents-card__prose">
+                <p>
+                  Understanding childcare support can feel confusing, especially
+                  when your family’s circumstances or eligibility change. We are
+                  here to help you understand the options available and signpost
+                  you to the right information.
+                </p>
+              </div>
+            </div>
+
+            <div class="parents-faq-list">
+              {
+                subsidyFaqs.map((faq) => (
+                  <details class="parents-faq">
+                    <summary>
+                      <span>{faq.question}</span>
+                    </summary>
+
+                    <div class="parents-faq__answer">
+                      <p>{faq.answer}</p>
+                    </div>
+                  </details>
+                ))
+              }
+            </div>
+          </section>
+
+          <section
+            id="partnership-with-families"
+            class="parents-card
+              parents-card--blue"
+            aria-labelledby="partnership-title"
+          >
+            <div class="parents-card__grid">
+              <div class="parents-card__main">
+                <header class="parents-card__heading">
+                  <span class="parents-card__number" aria-hidden="true">
+                    08
+                  </span>
+
+                  <div>
+                    <p class="parents-card__label">Partnership With Families</p>
+
+                    <h2 id="partnership-title">
+                      Working Together for Your Child
+                    </h2>
+                  </div>
+                </header>
+              </div>
+
+              <div class="parents-card__prose">
+                <p>
+                  Families are at the heart of Little Wise Kids. You know your
+                  child best, and we value the insight, trust and communication
+                  that help us provide consistent, responsive care.
+                </p>
+
+                <p>
+                  We share meaningful updates, celebrate milestones and work
+                  together around routines, interests, wellbeing and
+                  development. By creating a strong bridge between home and
+                  nursery, we help each child feel secure, understood and ready
+                  to thrive.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section
+            id="settling-in"
+            class="parents-card
+              parents-card--green
+              parents-card--settling"
+            aria-labelledby="settling-title"
+          >
+            <div class="parents-card__main">
+              <header class="parents-card__heading">
+                <span class="parents-card__number" aria-hidden="true">
+                  09
+                </span>
+
+                <div>
+                  <p class="parents-card__label">Settling In</p>
+
+                  <h2 id="settling-title">
+                    Where Transitions Are Gentle, Personal and Full of Heart
+                  </h2>
+                </div>
+              </header>
+
+              <div class="parents-card__prose">
+                <p>
+                  Choosing an early years setting is one of the most personal
+                  decisions a family can make. At Little Wise Kids, we give
+                  settling in the time, care and attention it deserves.
+                </p>
+
+                <p>
+                  We see settling in as a journey, not a single event. From your
+                  first visit onward, we work with you to understand your
+                  child’s routines, personality, comforts, preferences and any
+                  particular worries or needs.
+                </p>
+              </div>
+            </div>
+
+            <div class="parents-settling-grid">
+              <article class="parents-settling-panel">
+                <h3>Partnership From the First Day</h3>
+
+                <p>
+                  You know your child best. We value your knowledge and work in
+                  partnership with you to make each transition feel familiar,
+                  reassuring and secure.
+                </p>
+
+                <p>
+                  Our team supports children to build trusting relationships
+                  with their key person, other educators and their new
+                  environment.
+                </p>
+              </article>
+
+              <article class="parents-settling-panel">
+                <h3>Tailored Transition Strategies</h3>
+
+                <p>
+                  Every child settles in differently. We use flexible strategies
+                  that are agreed with families and shaped around the child’s
+                  readiness.
+                </p>
+
+                <ul class="parents-check-list">
+                  {settlingStrategies.map((item) => <li>{item}</li>)}
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <section
+            id="policies"
+            class="parents-card
+    parents-card--blue
+    parents-card--policies"
+            aria-labelledby="policies-title"
+          >
+            <div class="parents-card__main parents-card__main--policies">
+              <header class="parents-card__heading">
+                <span class="parents-card__number" aria-hidden="true">
+                  10
+                </span>
+
+                <div>
+                  <p class="parents-card__label">Policies</p>
+
+                  <h2 id="policies-title">Our Policies</h2>
+                </div>
+              </header>
+
+              <div class="parents-card__prose">
+                <p>
+                  Our policies help us maintain a safe, respectful, transparent
+                  and nurturing environment for children and families.
+                </p>
+              </div>
+            </div>
+
+            <nav
+              class="parents-policy-links"
+              aria-label="Download nursery policies"
+            >
+              {
+                policies.map((policy) => (
+                  <a href={policy.href} target="_blank" rel="noreferrer">
+                    <span class="parents-policy-links__title">
+                      {policy.label}
+                    </span>
+
+                    <span class="parents-policy-links__action">
+                      Download PDF
+                    </span>
+                  </a>
+                ))
+              }
+            </nav>
+
+            <aside
+              class="parents-card__notice
+      parents-card__notice--yellow
+      parents-card__notice--full"
+            >
+              <p class="parents-card__notice-label">CMS note</p>
+
+              <p>
+                Each policy should be uploaded as a downloadable PDF and managed
+                by nursery administrators.
+              </p>
+            </aside>
+          </section>
+        </div>
+      </Container>
+    </main>
+  </article>
+</BaseLayout>
