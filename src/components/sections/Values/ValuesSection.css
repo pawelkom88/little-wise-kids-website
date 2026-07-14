@@ -265,12 +265,12 @@ path {
 .lwk-values-intro__flight {
   top: 9.2rem;
   left: clamp(
-          -2rem,
-          calc(50% - 48rem),
-          3rem
+          -16rem,
+          -10vw,
+          6rem
   );
-  width: clamp(19rem, 25vw, 24rem);
-  height: 7rem;
+  width: clamp(24rem, 31vw, 30rem);
+  height: 7.5rem;
   color: var(--color-yellow);
 }
 
@@ -295,14 +295,14 @@ path {
 
 .lwk-values-intro__plane {
   position: absolute;
-  top: 0.3rem;
+  top: 0.2rem;
   right: 0;
   width: 6.7rem;
   height: auto;
   opacity: 0;
   transform:
-          translate3d(-2.2rem, 0.45rem, 0)
-          rotate(-10deg);
+          translate3d(-5.8rem, 0.8rem, 0)
+          rotate(-12deg);
 }
 
 .lwk-values-intro.is-animated
@@ -322,7 +322,7 @@ path {
           900ms
           var(--values-intro-ease)
           490ms
-          forwards;
+          both;
 }
 
 @keyframes lwk-values-flight-reveal {
@@ -338,14 +338,18 @@ path {
 }
 
 @keyframes lwk-values-plane-arrive {
-  from {
+  0% {
     opacity: 0;
     transform:
-            translate3d(-2.2rem, 0.45rem, 0)
-            rotate(-10deg);
+            translate3d(-7rem, 0.9rem, 0)
+            rotate(-12deg);
   }
 
-  to {
+  18% {
+    opacity: 0.55;
+  }
+
+  100% {
     opacity: 0.88;
     transform:
             translate3d(0, 0, 0)
