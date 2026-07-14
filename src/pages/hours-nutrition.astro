@@ -1,0 +1,366 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/layout/Container.astro";
+import Icon from "../components/icons/Icon.astro";
+import "./hours-nutrition.css";
+
+const sessionDetails = [
+  {
+    icon: "clock",
+    label: "Days",
+    value: "Monday–Friday",
+  },
+  {
+    icon: "calendar",
+    label: "Full day",
+    value: "7:30am–5:30pm",
+  },
+  {
+    icon: "clock",
+    label: "Half day",
+    value: "7:30am–12:30pm",
+  },
+  {
+    icon: "heart",
+    label: "Age range",
+    value: "0–4 years",
+  },
+] as const;
+
+const nutritionPoints = [
+  "Nutritious meals and snacks prepared with children’s needs in mind",
+  "A varied and wholesome food offering",
+  "Warm, social and unhurried mealtimes",
+  "Opportunities to try new tastes and develop independence",
+  "Support for allergies and individual dietary requirements",
+] as const;
+
+const nutritionFeatures = [
+  {
+    icon: "star",
+    tone: "yellow",
+    title: "Freshly Prepared With Care",
+    copy: "Our Nursery Chef provides nutritious meals and snacks designed around the needs of growing children.",
+  },
+  {
+    icon: "heart",
+    tone: "green",
+    title: "Positive Mealtimes",
+    copy: "Food is part of the learning day: a chance to try new tastes, build independence and enjoy social moments together.",
+  },
+  {
+    icon: "person",
+    tone: "blue",
+    title: "Dietary Needs",
+    copy: "Please contact us to discuss allergies, dietary requirements and the nursery’s current food offering.",
+  },
+] as const;
+
+const dailyRhythm = [
+  {
+    icon: "star",
+    time: "7:30am–9:00am",
+    title: "Welcome & Free Play",
+    copy: "Warm arrivals and time to settle through calm, child-led play.",
+  },
+  {
+    icon: "book",
+    time: "9:00am–10:30am",
+    title: "Learning & Exploration",
+    copy: "Play-based activities, stories, singing and meaningful discovery.",
+  },
+  {
+    icon: "heart",
+    time: "10:30am–11:00am",
+    title: "Morning Snack",
+    copy: "A healthy snack and relaxed social time together.",
+  },
+  {
+    icon: "star",
+    time: "11:00am–12:30pm",
+    title: "Outdoor Adventures",
+    copy: "Fresh air, movement and nature-based play in our outdoor space.",
+  },
+  {
+    icon: "heart",
+    time: "12:30pm–1:30pm",
+    title: "Lunch",
+    copy: "A nutritious, freshly prepared meal enjoyed together.",
+  },
+  {
+    icon: "clock",
+    time: "1:30pm–3:00pm",
+    title: "Rest & Quiet Time",
+    copy: "Sleep or quiet activities that allow children to recharge and relax.",
+  },
+  {
+    icon: "star",
+    time: "3:00pm–5:30pm",
+    title: "Afternoon Play & Home",
+    copy: "Creative play, a nourishing snack and calm goodbyes.",
+  },
+] as const;
+---
+
+<BaseLayout
+  title="Childcare Sessions & Wholesome Nutrition Bristol BS5"
+  description="We are open Monday–Friday, 7:30am–5:30pm in Easton. Enjoy fresh, healthy, home-cooked meals prepared daily by our nursery chef for growing bodies."
+>
+  <article class="hours-page">
+    <header class="hours-hero" aria-labelledby="hours-page-title">
+      <div class="hours-hero__content">
+        <p class="hours-page__eyebrow">Operating Hours & Nutrition</p>
+
+        <h1 id="hours-page-title">
+          <span>Care That Fits</span>
+          <span>Your Family’s Day</span>
+        </h1>
+
+        <p class="hours-hero__lead">
+          Clear routines, nourishing meals and caring support to help your child
+          feel secure, energised and ready to thrive every day.
+        </p>
+      </div>
+
+      <span class="hours-hero__wave-highlight" aria-hidden="true"></span>
+
+      <div class="hours-hero__wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
+          <path
+            d="M0 58C130 118 272 116 413 86C560 55 655 63 805 112C975 168 1102 119 1258 69C1330 46 1392 39 1440 52V220H0V58Z"
+          ></path>
+        </svg>
+      </div>
+    </header>
+
+    <main class="hours-page__content">
+      <Container size="wide">
+        <div class="hours-page__stack">
+          <section
+            id="operating-hours"
+            class="hours-card
+              hours-card--green"
+            aria-labelledby="operating-hours-title"
+          >
+            <div class="hours-card__split">
+              <div class="hours-card__main">
+                <header class="hours-card__heading">
+                  <span class="hours-card__number" aria-hidden="true">
+                    01
+                  </span>
+
+                  <div>
+                    <p class="hours-card__label">Operating Hours</p>
+
+                    <h2 id="operating-hours-title">
+                      Available Childcare Sessions
+                    </h2>
+                  </div>
+                </header>
+
+                <div class="hours-card__prose">
+                  <p>
+                    Little Wise Kids is open Monday to Friday, helping families
+                    access consistent, caring early years support throughout the
+                    week.
+                  </p>
+
+                  <p>
+                    We are open for 51 weeks of the year, providing familiar
+                    routines and continuity for children and their families.
+                  </p>
+                </div>
+              </div>
+
+              <dl
+                class="hours-schedule"
+                aria-label="Little Wise Kids session details"
+              >
+                {
+                  sessionDetails.map((detail) => (
+                    <div class="hours-schedule__row">
+                      <span class="hours-schedule__icon" aria-hidden="true">
+                        <Icon name={detail.icon} size={25} />
+                      </span>
+
+                      <dt>{detail.label}</dt>
+                      <dd>{detail.value}</dd>
+                    </div>
+                  ))
+                }
+              </dl>
+            </div>
+
+            <aside class="hours-card__note">
+              <span class="hours-card__note-icon" aria-hidden="true">
+                <Icon name="heart" size={30} />
+              </span>
+
+              <div class="hours-card__note-copy">
+                <h3>Minimum Attendance</h3>
+
+                <p>
+                  Children attend a minimum of two full days per week, with at
+                  least one of those days being a Monday or Friday.
+                </p>
+              </div>
+
+              <a class="hours-card__note-link" href="/contact">
+                Contact Us About Availability
+                <span aria-hidden="true">→</span>
+              </a>
+            </aside>
+          </section>
+
+          <section
+            id="nutrition"
+            class="hours-card
+              hours-card--purple"
+            aria-labelledby="nutrition-title"
+          >
+            <!--
+                          CMS: Keep menus, dietary requirements, allergen information
+                          and any meal-related charges editable by nursery staff.
+                        -->
+
+            <div class="hours-card__split">
+              <div class="hours-card__main">
+                <header class="hours-card__heading">
+                  <span class="hours-card__number" aria-hidden="true">
+                    02
+                  </span>
+
+                  <div>
+                    <p class="hours-card__label">Nutrition</p>
+
+                    <h2 id="nutrition-title">
+                      Wholesome Food for Growing Minds
+                    </h2>
+                  </div>
+                </header>
+
+                <div class="hours-card__prose">
+                  <p>
+                    At Little Wise Kids, we know that thriving minds start with
+                    nourished bodies. Our food offering is designed to support
+                    children’s wellbeing, energy and enjoyment of mealtimes.
+                  </p>
+
+                  <p>
+                    We create a warm, social approach to food, helping children
+                    enjoy a varied and wholesome diet alongside their friends.
+                  </p>
+                </div>
+              </div>
+
+              <aside class="nutrition-checklist">
+                <h3>What We Provide</h3>
+
+                <ul>
+                  {
+                    nutritionPoints.map((point) => (
+                      <li>
+                        <span aria-hidden="true">✓</span>
+                        <p>{point}</p>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </aside>
+            </div>
+
+            <div class="nutrition-features">
+              {
+                nutritionFeatures.map((feature) => (
+                  <article
+                    class={`
+                      nutrition-feature
+                      nutrition-feature--${feature.tone}
+                    `}
+                  >
+                    <span class="nutrition-feature__icon" aria-hidden="true">
+                      <Icon name={feature.icon} size={29} />
+                    </span>
+
+                    <div>
+                      <h3>{feature.title}</h3>
+                      <p>{feature.copy}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section
+            id="typical-day"
+            class="hours-card
+              hours-card--blue
+              hours-day"
+            aria-labelledby="typical-day-title"
+          >
+            <header class="hours-day__header">
+              <span class="hours-day__header-icon" aria-hidden="true">
+                <Icon name="clock" size={30} />
+              </span>
+
+              <div>
+                <p class="hours-card__label">A Typical Day</p>
+
+                <h2 id="typical-day-title">A Calm and Familiar Daily Rhythm</h2>
+
+                <p class="hours-day__lead">
+                  A gentle flow that gives children security, connection,
+                  meaningful learning and time to rest.
+                </p>
+              </div>
+            </header>
+
+            <ol
+              class="hours-day__timeline"
+              aria-label="Example daily nursery schedule"
+            >
+              {
+                dailyRhythm.map((event) => (
+                  <li class="hours-day__item">
+                    <article class="hours-day__event">
+                      <p class="hours-day__time">{event.time}</p>
+
+                      <h3>{event.title}</h3>
+
+                      <p>{event.copy}</p>
+                    </article>
+
+                    <span class="hours-day__marker" aria-hidden="true">
+                      <Icon name={event.icon} size={25} />
+                    </span>
+                  </li>
+                ))
+              }
+            </ol>
+          </section>
+
+          <aside class="hours-contact">
+            <span class="hours-contact__icon" aria-hidden="true">
+              <Icon name="heart" size={32} />
+            </span>
+
+            <div class="hours-contact__copy">
+              <h2>We’re Here for You</h2>
+
+              <p>
+                Have questions about our hours, sessions, meals or your child’s
+                dietary needs? Our team will be happy to help.
+              </p>
+            </div>
+
+            <a class="hours-contact__link" href="/contact">
+              Contact Us
+              <span aria-hidden="true">→</span>
+            </a>
+          </aside>
+        </div>
+      </Container>
+    </main>
+  </article>
+</BaseLayout>

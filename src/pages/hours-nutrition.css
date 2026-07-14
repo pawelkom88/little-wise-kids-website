@@ -1,0 +1,1061 @@
+.hours-page {
+  --hours-hero-image: none;
+
+  --hours-card-inline: clamp(var(--space-m), 4vw, var(--space-2xl));
+
+  --hours-card-block: clamp(var(--space-l), 4vw, var(--space-2xl));
+
+  color: var(--color-ink);
+  background: var(--color-page);
+}
+
+/*
+ * Hero
+ *
+ * This uses the same structure, spacing, overlay and wave treatment
+ * as the existing Multilingual Learning and Parents’ Information pages.
+ */
+
+.hours-hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-height: clamp(36rem, 62vw, 50rem);
+  place-items: center;
+  padding: clamp(5rem, 9vw, 8rem) var(--gutter) clamp(10rem, 15vw, 13rem);
+  overflow: hidden;
+  text-align: center;
+  background: var(--color-cream);
+}
+
+.hours-hero::before,
+.hours-hero::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.hours-hero::before {
+  z-index: -3;
+  background-image: var(--hours-hero-image);
+  background-position: center;
+  background-size: cover;
+  transform: scale(1.03);
+}
+
+.hours-hero::after {
+  z-index: -2;
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      color-mix(in srgb, var(--color-page) 96%, transparent) 0%,
+      color-mix(in srgb, var(--color-page) 88%, transparent) 36%,
+      color-mix(in srgb, var(--color-page) 68%, transparent) 70%,
+      color-mix(in srgb, var(--color-page) 55%, transparent) 100%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-page) 76%, transparent),
+      color-mix(in srgb, var(--color-page) 55%, transparent) 44%,
+      color-mix(in srgb, var(--color-page) 84%, transparent)
+    );
+  backdrop-filter: blur(1.5px);
+}
+
+.hours-hero__content {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 58rem);
+  margin-inline: auto;
+}
+
+.hours-page__eyebrow,
+.hours-card__label {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-black);
+  letter-spacing: 0.16em;
+  line-height: var(--line-height-solid);
+  text-transform: uppercase;
+}
+
+.hours-page__eyebrow {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  color: var(--color-purple);
+}
+
+.hours-page__eyebrow::after {
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  width: 5rem;
+  height: 3px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-purple),
+    transparent
+  );
+  content: "";
+  transform: translateX(-50%);
+}
+
+.hours-hero h1 {
+  max-width: 58rem;
+  margin: var(--space-xl) auto 0;
+  color: var(--color-ink);
+  font-size: var(--heading-h1-size);
+  letter-spacing: var(--letter-spacing-section-title);
+  line-height: var(--line-height-heading);
+  text-wrap: balance;
+}
+
+.hours-hero h1 span {
+  display: block;
+}
+
+.hours-hero__lead {
+  width: min(100%, 46rem);
+  margin: var(--space-l) auto 0;
+  color: var(--color-ink-soft);
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-compact);
+  text-wrap: balance;
+}
+
+.hours-hero__wave {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  z-index: 3;
+  height: clamp(7.5rem, 14vw, 13rem);
+  color: var(--color-page);
+  filter: drop-shadow(
+    0 -0.75rem 1.15rem color-mix(in srgb, var(--color-ink) 3%, transparent)
+  );
+}
+
+.hours-hero__wave svg {
+  width: 100%;
+  height: 100%;
+}
+
+.hours-hero__wave path {
+  fill: currentColor;
+}
+
+.hours-hero__wave-highlight {
+  position: absolute;
+  right: 0;
+  bottom: clamp(4.6rem, 8.4vw, 8.1rem);
+  left: 0;
+  z-index: 2;
+  height: 1.1rem;
+  opacity: 0.4;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-purple) 11%, transparent),
+    color-mix(in srgb, var(--color-green) 8%, transparent),
+    color-mix(in srgb, var(--color-blue) 9%, transparent)
+  );
+  filter: blur(1.1rem);
+}
+
+/*
+ * Page structure
+ */
+
+.hours-page__content {
+  padding-bottom: var(--section-spacing);
+  background: var(--color-page);
+}
+
+.hours-page__stack {
+  display: grid;
+  gap: clamp(var(--space-m), 2.5vw, var(--space-xl));
+}
+
+/*
+ * Shared content cards
+ */
+
+.hours-card {
+  --hours-accent: var(--color-green);
+  --hours-soft: var(--color-green-soft);
+
+  width: 100%;
+  padding: var(--hours-card-block) var(--hours-card-inline);
+  border: 1px solid
+    color-mix(in srgb, var(--hours-accent) 18%, var(--color-border));
+  border-radius: var(--radius-l);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--hours-soft) 35%, var(--color-surface)),
+    var(--color-surface) 74%
+  );
+  box-shadow: 0 1.1rem 3rem color-mix(in srgb, var(--color-ink) 4%, transparent);
+  scroll-margin-top: var(--section-spacing);
+}
+
+.hours-card--green {
+  --hours-accent: var(--color-green);
+  --hours-soft: var(--color-green-soft);
+}
+
+.hours-card--purple {
+  --hours-accent: var(--color-purple);
+  --hours-soft: var(--color-purple-soft);
+}
+
+.hours-card--blue {
+  --hours-accent: var(--color-blue);
+  --hours-soft: var(--color-blue-soft);
+}
+
+.hours-card__split {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 0.95fr)
+    minmax(20rem, 1.05fr);
+  gap: clamp(var(--space-l), 5vw, var(--space-3xl));
+  align-items: center;
+}
+
+.hours-card__main {
+  min-width: 0;
+}
+
+.hours-card__heading {
+  display: grid;
+  grid-template-columns:
+    3.6rem
+    minmax(0, 1fr);
+  gap: var(--space-s);
+  align-items: start;
+}
+
+.hours-card__number {
+  display: grid;
+  width: 3.6rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--hours-accent) 25%, transparent);
+  border-radius: 50%;
+  color: var(--hours-accent);
+  background: color-mix(in srgb, var(--hours-soft) 78%, var(--color-surface));
+  font-family: var(--font-heading);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-black);
+  line-height: 1;
+}
+
+.hours-card__label {
+  margin-bottom: var(--space-xs);
+  color: var(--hours-accent);
+  letter-spacing: 0.12em;
+}
+
+.hours-card h2 {
+  color: var(--color-ink);
+  letter-spacing: var(--letter-spacing-section-title);
+  text-wrap: balance;
+}
+
+.hours-card h3 {
+  color: var(--hours-accent);
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.hours-card__prose {
+  display: grid;
+  gap: var(--space-s);
+  margin-top: var(--space-m);
+}
+
+.hours-card__prose p {
+  color: var(--color-ink-soft);
+  line-height: var(--line-height-body);
+  text-wrap: pretty;
+}
+
+/*
+ * Session schedule
+ */
+
+.hours-schedule {
+  display: grid;
+  margin: 0;
+  padding: clamp(var(--space-m), 3vw, var(--space-l));
+  border: 1px solid
+    color-mix(in srgb, var(--color-green) 17%, var(--color-border));
+  border-radius: var(--radius-m);
+  background: color-mix(
+    in srgb,
+    var(--color-green-soft) 54%,
+    var(--color-surface)
+  );
+}
+
+.hours-schedule__row {
+  display: grid;
+  grid-template-columns:
+    2.75rem
+    minmax(7rem, 0.7fr)
+    minmax(8rem, 1fr);
+  gap: var(--space-xs);
+  align-items: center;
+  min-height: 4.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hours-schedule__row:last-child {
+  border-bottom: 0;
+}
+
+.hours-schedule__icon {
+  display: grid;
+  width: 2.75rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--color-green-dark);
+  background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+}
+
+.hours-schedule dt {
+  color: var(--color-ink);
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-compact);
+}
+
+.hours-schedule dd {
+  margin: 0;
+  color: var(--color-ink);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-compact);
+  text-align: right;
+}
+
+/*
+ * Minimum attendance strip
+ */
+
+.hours-card__note {
+  display: grid;
+  grid-template-columns:
+    3.75rem
+    minmax(0, 1fr)
+    auto;
+  gap: var(--space-s);
+  align-items: center;
+  margin-top: var(--space-l);
+  padding: var(--space-s);
+  border: 1px solid
+    color-mix(in srgb, var(--color-green) 16%, var(--color-border));
+  border-radius: var(--radius-m);
+  background: color-mix(
+    in srgb,
+    var(--color-green-soft) 56%,
+    var(--color-surface)
+  );
+}
+
+.hours-card__note-icon {
+  display: grid;
+  width: 3.75rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--color-green-dark);
+  background: var(--color-surface);
+}
+
+.hours-card__note-copy h3 {
+  margin-bottom: 0.25rem;
+  color: var(--color-green-dark);
+}
+
+.hours-card__note-copy p {
+  color: var(--color-ink-soft);
+  line-height: var(--line-height-compact);
+  text-wrap: pretty;
+}
+
+.hours-card__note-link {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-s);
+  border-radius: var(--radius-pill);
+  color: var(--color-surface);
+  background: var(--color-green-dark);
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-compact);
+  text-align: center;
+  text-decoration: none;
+}
+
+.hours-card__note-link span {
+  flex: none;
+  font-size: 1.25em;
+}
+
+/*
+ * Nutrition checklist
+ */
+
+.nutrition-checklist {
+  min-width: 0;
+  padding: clamp(var(--space-m), 3vw, var(--space-l));
+  border: 1px solid
+    color-mix(in srgb, var(--color-purple) 16%, var(--color-border));
+  border-radius: var(--radius-m);
+  background: color-mix(
+    in srgb,
+    var(--color-purple-soft) 54%,
+    var(--color-surface)
+  );
+}
+
+.nutrition-checklist h3 {
+  margin-bottom: var(--space-m);
+  color: var(--color-purple-dark);
+}
+
+.nutrition-checklist ul {
+  display: grid;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nutrition-checklist li {
+  display: grid;
+  grid-template-columns:
+    1.5rem
+    minmax(0, 1fr);
+  gap: var(--space-xs);
+  align-items: start;
+}
+
+.nutrition-checklist li > span {
+  display: grid;
+  width: 1.25rem;
+  aspect-ratio: 1;
+  place-items: center;
+  margin-top: 0.2rem;
+  border-radius: 50%;
+  color: var(--color-surface);
+  background: var(--color-purple);
+  font-size: 0.7rem;
+  font-weight: var(--font-weight-black);
+  line-height: 1;
+}
+
+.nutrition-checklist li p {
+  color: var(--color-ink);
+  line-height: var(--line-height-compact);
+  text-wrap: pretty;
+}
+
+/*
+ * Nutrition feature cards
+ */
+
+.nutrition-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-s);
+  margin-top: var(--space-l);
+}
+
+.nutrition-feature {
+  --feature-accent: var(--color-purple);
+  --feature-soft: var(--color-purple-soft);
+
+  display: grid;
+  grid-template-columns:
+    3.4rem
+    minmax(0, 1fr);
+  gap: var(--space-s);
+  align-items: start;
+  min-width: 0;
+  padding: var(--space-m);
+  border: 1px solid
+    color-mix(in srgb, var(--feature-accent) 18%, var(--color-border));
+  border-radius: var(--radius-m);
+  background: color-mix(in srgb, var(--feature-soft) 48%, var(--color-surface));
+}
+
+.nutrition-feature--yellow {
+  --feature-accent: color-mix(
+    in srgb,
+    var(--color-yellow),
+    var(--color-ink) 30%
+  );
+  --feature-soft: var(--color-yellow-soft);
+}
+
+.nutrition-feature--green {
+  --feature-accent: var(--color-green-dark);
+  --feature-soft: var(--color-green-soft);
+}
+
+.nutrition-feature--blue {
+  --feature-accent: var(--color-blue-dark);
+  --feature-soft: var(--color-blue-soft);
+}
+
+.nutrition-feature__icon {
+  display: grid;
+  width: 3.4rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--feature-accent);
+  background: var(--color-surface);
+}
+
+.nutrition-feature h3 {
+  margin-bottom: var(--space-xs);
+  color: var(--feature-accent);
+}
+
+.nutrition-feature p {
+  color: var(--color-ink-soft);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-body);
+  text-wrap: pretty;
+}
+
+/*
+ * Daily timeline
+ */
+
+.hours-day {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-blue-soft) 48%, var(--color-surface)),
+    var(--color-surface) 76%
+  );
+}
+
+.hours-day__header {
+  display: grid;
+  grid-template-columns:
+    4rem
+    minmax(0, 1fr);
+  gap: var(--space-s);
+  align-items: start;
+  max-width: 58rem;
+}
+
+.hours-day__header-icon {
+  display: grid;
+  width: 4rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid
+    color-mix(in srgb, var(--color-blue) 22%, var(--color-border));
+  border-radius: 50%;
+  color: var(--color-blue-dark);
+  background: var(--color-surface);
+}
+
+.hours-day__lead {
+  margin-top: var(--space-xs);
+  color: var(--color-ink-soft);
+  line-height: var(--line-height-body);
+  text-wrap: pretty;
+}
+
+.hours-day__timeline {
+  position: relative;
+  display: grid;
+  gap: var(--space-xs);
+  margin: var(--space-xl) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hours-day__timeline::before {
+  position: absolute;
+  top: 2rem;
+  bottom: 2rem;
+  left: 50%;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--color-blue) 44%, transparent) 8%,
+    color-mix(in srgb, var(--color-blue) 44%, transparent) 92%,
+    transparent
+  );
+  content: "";
+  transform: translateX(-50%);
+}
+
+.hours-day__item {
+  position: relative;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    4.5rem
+    minmax(0, 1fr);
+  align-items: center;
+  min-height: 8rem;
+}
+
+.hours-day__event {
+  position: relative;
+  grid-row: 1;
+  min-width: 0;
+  padding: var(--space-m);
+  border: 1px solid
+    color-mix(in srgb, var(--color-blue) 16%, var(--color-border));
+  border-radius: var(--radius-m);
+  background: color-mix(in srgb, var(--color-surface) 94%, transparent);
+  box-shadow: 0 0.75rem 2rem
+    color-mix(in srgb, var(--color-blue) 5%, transparent);
+}
+
+.hours-day__item:nth-child(odd) .hours-day__event {
+  grid-column: 1;
+  margin-right: var(--space-s);
+}
+
+.hours-day__item:nth-child(even) .hours-day__event {
+  grid-column: 3;
+  margin-left: var(--space-s);
+}
+
+.hours-day__event::after {
+  position: absolute;
+  top: 50%;
+  width: calc(var(--space-s) + 0.6rem);
+  height: 1px;
+  background: color-mix(in srgb, var(--color-blue) 30%, transparent);
+  content: "";
+}
+
+.hours-day__item:nth-child(odd) .hours-day__event::after {
+  right: calc((var(--space-s) + 0.6rem) * -1);
+}
+
+.hours-day__item:nth-child(even) .hours-day__event::after {
+  left: calc((var(--space-s) + 0.6rem) * -1);
+}
+
+.hours-day__marker {
+  position: relative;
+  z-index: 2;
+  grid-column: 2;
+  grid-row: 1;
+  display: grid;
+  width: 3.5rem;
+  aspect-ratio: 1;
+  place-self: center;
+  place-items: center;
+  border: 2px solid
+    color-mix(in srgb, var(--color-blue) 58%, var(--color-surface));
+  border-radius: 50%;
+  color: var(--color-blue-dark);
+  background: var(--color-surface);
+  box-shadow: 0 0 0 0.45rem
+    color-mix(in srgb, var(--color-blue-soft) 68%, var(--color-surface));
+}
+
+.hours-day__time {
+  margin-bottom: 0.3rem;
+  color: var(--color-blue-dark);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-black);
+  line-height: var(--line-height-compact);
+}
+
+.hours-day__event h3 {
+  margin-bottom: var(--space-xs);
+  color: var(--color-ink);
+}
+
+.hours-day__event > p:last-child {
+  color: var(--color-ink-soft);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-body);
+  text-wrap: pretty;
+}
+
+/*
+ * Contact banner
+ */
+
+.hours-contact {
+  display: grid;
+  grid-template-columns:
+    4rem
+    minmax(0, 1fr)
+    auto;
+  gap: var(--space-s);
+  align-items: center;
+  width: 100%;
+  padding: var(--space-m) var(--space-l);
+  border: 1px solid
+    color-mix(in srgb, var(--color-yellow) 32%, var(--color-border));
+  border-radius: var(--radius-l);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-yellow-soft) 76%, var(--color-surface)),
+    var(--color-surface)
+  );
+}
+
+.hours-contact__icon {
+  display: grid;
+  width: 4rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid
+    color-mix(in srgb, var(--color-yellow) 42%, var(--color-border));
+  border-radius: 50%;
+  color: color-mix(in srgb, var(--color-yellow), var(--color-ink) 24%);
+  background: var(--color-surface);
+}
+
+.hours-contact__copy h2 {
+  margin-bottom: 0.25rem;
+  color: color-mix(in srgb, var(--color-yellow), var(--color-ink) 38%);
+}
+
+.hours-contact__copy p {
+  color: var(--color-ink-soft);
+  line-height: var(--line-height-compact);
+  text-wrap: pretty;
+}
+
+.hours-contact__link {
+  display: inline-flex;
+  min-width: 10rem;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-m);
+  border-radius: var(--radius-m);
+  color: var(--color-ink);
+  background: var(--color-yellow);
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-black);
+  line-height: var(--line-height-compact);
+  text-decoration: none;
+}
+
+.hours-contact__link span {
+  font-size: 1.25em;
+}
+
+/*
+ * Focus
+ */
+
+.hours-card__note-link:focus-visible,
+.hours-contact__link:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-purple) 52%, transparent);
+  outline-offset: 3px;
+}
+
+/*
+ * Hover
+ */
+
+@media (hover: hover) {
+  .hours-card__note-link,
+  .hours-contact__link,
+  .nutrition-feature,
+  .hours-day__event {
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      filter 180ms ease;
+  }
+
+  .hours-card__note-link:hover,
+  .hours-contact__link:hover {
+    filter: brightness(1.03);
+    transform: translateY(-0.1rem);
+  }
+
+  .nutrition-feature:hover,
+  .hours-day__event:hover {
+    box-shadow: 0 1rem 2.5rem
+      color-mix(in srgb, var(--color-ink) 6%, transparent);
+    transform: translateY(-0.15rem);
+  }
+}
+
+/*
+ * Tablet and compact desktop
+ */
+
+@media (width < 64rem) {
+  .hours-card__split {
+    grid-template-columns: 1fr;
+  }
+
+  .hours-card__note {
+    grid-template-columns:
+      3.75rem
+      minmax(0, 1fr);
+  }
+
+  .hours-card__note-link {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .nutrition-features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .nutrition-feature:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/*
+ * Mobile
+ */
+
+@media (width < 48rem) {
+  .hours-page {
+    --hours-card-inline: var(--space-m);
+    --hours-card-block: var(--space-l);
+  }
+
+  .hours-hero {
+    min-height: 38rem;
+    padding: var(--space-2xl) var(--gutter) clamp(8rem, 30vw, 10rem);
+  }
+
+  .hours-hero::before {
+    transform: scale(1.08);
+  }
+
+  .hours-hero::after {
+    background:
+      radial-gradient(
+        circle at 50% 46%,
+        color-mix(in srgb, var(--color-page) 97%, transparent) 0%,
+        color-mix(in srgb, var(--color-page) 90%, transparent) 50%,
+        color-mix(in srgb, var(--color-page) 73%, transparent) 100%
+      ),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--color-page) 84%, transparent),
+        color-mix(in srgb, var(--color-page) 76%, transparent)
+      );
+    backdrop-filter: blur(2px);
+  }
+
+  .hours-hero h1 {
+    font-size: clamp(2.65rem, 13vw, 4rem);
+    line-height: 1.02;
+  }
+
+  .hours-hero__lead {
+    margin-top: var(--space-m);
+    font-size: var(--font-size-default);
+  }
+
+  .hours-hero__wave {
+    height: 7rem;
+  }
+
+  .hours-hero__wave-highlight {
+    bottom: 4.5rem;
+  }
+
+  .hours-page__stack {
+    gap: var(--space-m);
+  }
+
+  .hours-card,
+  .hours-contact {
+    border-radius: var(--radius-m);
+  }
+
+  .hours-card__heading {
+    grid-template-columns:
+      3rem
+      minmax(0, 1fr);
+    gap: var(--space-xs);
+  }
+
+  .hours-card__number {
+    width: 3rem;
+    font-size: 0.75rem;
+  }
+
+  .hours-card__label {
+    letter-spacing: 0.09em;
+  }
+
+  .hours-schedule {
+    padding: var(--space-s);
+  }
+
+  .hours-schedule__row {
+    grid-template-columns:
+      2.5rem
+      minmax(0, 1fr);
+    gap: var(--space-xs);
+    padding-block: var(--space-xs);
+  }
+
+  .hours-schedule__icon {
+    grid-row: 1 / span 2;
+    width: 2.5rem;
+  }
+
+  .hours-schedule dd {
+    grid-column: 2;
+    text-align: left;
+  }
+
+  .hours-card__note {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
+  .nutrition-features {
+    grid-template-columns: 1fr;
+  }
+
+  .nutrition-feature:last-child {
+    grid-column: auto;
+  }
+
+  /*
+     * Mobile timeline:
+     * one chronological column with a line on the left.
+     */
+
+  .hours-day__header {
+    grid-template-columns:
+      3.5rem
+      minmax(0, 1fr);
+  }
+
+  .hours-day__header-icon {
+    width: 3.5rem;
+  }
+
+  .hours-day__timeline {
+    gap: var(--space-s);
+    margin-top: var(--space-l);
+  }
+
+  .hours-day__timeline::before {
+    top: 1.75rem;
+    bottom: 1.75rem;
+    left: 1.5rem;
+    transform: none;
+  }
+
+  .hours-day__item {
+    grid-template-columns:
+      3rem
+      minmax(0, 1fr);
+    gap: var(--space-s);
+    min-height: 0;
+  }
+
+  .hours-day__item:nth-child(odd) .hours-day__event,
+  .hours-day__item:nth-child(even) .hours-day__event {
+    grid-column: 2;
+    margin: 0;
+  }
+
+  .hours-day__marker {
+    grid-column: 1;
+    width: 3rem;
+  }
+
+  .hours-day__event::after {
+    top: 1.5rem;
+    left: calc(var(--space-s) * -1);
+    width: var(--space-s);
+  }
+
+  .hours-day__item:nth-child(odd) .hours-day__event::after,
+  .hours-day__item:nth-child(even) .hours-day__event::after {
+    right: auto;
+    left: calc(var(--space-s) * -1);
+  }
+
+  .hours-contact {
+    grid-template-columns:
+      3.5rem
+      minmax(0, 1fr);
+    padding: var(--space-m);
+  }
+
+  .hours-contact__icon {
+    width: 3.5rem;
+  }
+
+  .hours-contact__link {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}
+
+/*
+ * Very small screens
+ */
+
+@media (width < 30rem) {
+  .nutrition-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .nutrition-feature__icon {
+    width: 3rem;
+  }
+
+  .hours-card__note-link {
+    width: 100%;
+  }
+}
+
+/*
+ * Reduced motion
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  .hours-card__note-link,
+  .hours-contact__link,
+  .nutrition-feature,
+  .hours-day__event {
+    transition: none;
+  }
+
+  .hours-card__note-link:hover,
+  .hours-contact__link:hover,
+  .nutrition-feature:hover,
+  .hours-day__event:hover {
+    transform: none;
+  }
+}
