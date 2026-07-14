@@ -2,27 +2,6 @@
 import Icon from "../../icons/Icon.astro";
 import Button from "../../ui/Button.astro";
 import "./VisitSection.css";
-
-const visitHighlights = [
-  {
-    tone: "purple",
-    icon: "heartSmile",
-    title: "Warm Welcome",
-    copy: "A friendly hello from our caring team.",
-  },
-  {
-    tone: "green",
-    icon: "users",
-    title: "Meet the Team",
-    copy: "Get to know the people who care for your child.",
-  },
-  {
-    tone: "blue",
-    icon: "book",
-    title: "Calm Setting",
-    copy: "Explore our peaceful, inspiring environment.",
-  },
-] as const;
 ---
 
 <section class="lwk-visit" aria-labelledby="visit-title">
@@ -54,8 +33,8 @@ const visitHighlights = [
       </div>
 
       <div class="lwk-visit__actions">
-        <Button href="/#contact" icon="calendar" class="lwk-visit__primary">
-          Book a Visit
+        <Button href="/#contact" class="lwk-visit__primary">
+          Contact us
         </Button>
       </div>
     </div>

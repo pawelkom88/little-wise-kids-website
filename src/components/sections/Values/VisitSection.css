@@ -58,13 +58,6 @@
   margin-top: 2rem;
 }
 
-.lwk-visit__primary.button {
-  min-width: 12.5rem;
-  min-height: 3.6rem;
-  color: var(--color-surface);
-  background: var(--color-purple);
-  box-shadow: 0 0.75rem 1.8rem color-mix(in srgb, var(--color-purple) 22%, transparent);
-}
 
 .lwk-visit-media {
   position: relative;
@@ -231,10 +224,6 @@
     flex-direction: column;
   }
 
-  .lwk-visit__primary.button {
-    width: 100%;
-  }
-
   .lwk-visit-media {
     width: 100%;
   }
@@ -243,11 +232,6 @@
     width: min(100%, 24rem);
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .lwk-visit__primary.button {
-    transition: none;
-  }
 
   .lwk-visit__secondary:hover > span {
     transform: none;
