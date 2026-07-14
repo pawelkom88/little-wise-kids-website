@@ -312,7 +312,7 @@ path {
           950ms
           var(--values-intro-ease)
           360ms
-          forwards;
+          both;
 }
 
 .lwk-values-intro.is-animated

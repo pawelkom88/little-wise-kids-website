@@ -11,66 +11,234 @@ const cards = [
     image: multilingualBubble,
     title: "Multilingual Learning",
     copy:
-      "We currently introduce English and Portuguese through songs, stories and everyday moments, helping children communicate, connect and enjoy language naturally.",
+        "We currently introduce English and Portuguese through songs, stories and everyday moments, helping children communicate, connect and enjoy language naturally.",
   },
   {
     tone: "green",
     image: heartBubble,
     title: "Safe & Caring",
     copy:
-      "In our warm, family-style setting in Bristol BS5, children feel secure, loved and respected, with wholesome food supporting growing bodies and minds.",
+        "In our warm, family-style setting in Bristol BS5, children feel secure, loved and respected, with wholesome food supporting growing bodies and minds.",
   },
   {
     tone: "blue",
     image: artBubble,
     title: "Creative Play",
     copy:
-      "Through screen-free, child-led play and tactile real-world experiences, children build confidence, independence, curiosity and a love of learning.",
+        "Through screen-free, child-led play and tactile real-world experiences, children build confidence, independence, curiosity and a love of learning.",
   },
   {
     tone: "yellow",
     image: peopleBubble,
     title: "Parent Partnership",
     copy:
-      "We work closely with families to create a balanced rhythm of indoor and outdoor learning, supporting each child’s unique needs and development.",
+        "We work closely with families to create a balanced rhythm of indoor and outdoor learning, supporting each child’s unique needs and development.",
   },
 ] as const;
 ---
 
-<section class="lwk-values-difference" aria-labelledby="difference-title">
-  <header class="lwk-values-heading">
-    <span class="lwk-values-heading__rays" aria-hidden="true"></span>
-    <h2 id="difference-title">What Makes Us Different</h2>
-    <span class="lwk-values-heading__rays lwk-values-heading__rays--right" aria-hidden="true"></span>
+<section
+    class="lwk-values-difference"
+    aria-labelledby="difference-title"
+    data-values-difference
+>
+  <header
+      class="lwk-values-heading"
+      data-values-difference-heading
+  >
+    <span
+        class="
+        lwk-values-heading__rays
+        lwk-values-heading__rays--left
+      "
+        aria-hidden="true"
+    >
+      <span class="lwk-values-heading__ray"></span>
+      <span class="lwk-values-heading__ray"></span>
+      <span class="lwk-values-heading__ray"></span>
+    </span>
+
+    <h2 id="difference-title">
+      What Makes Us Different
+    </h2>
+
+    <span
+        class="
+        lwk-values-heading__rays
+        lwk-values-heading__rays--right
+      "
+        aria-hidden="true"
+    >
+      <span class="lwk-values-heading__ray"></span>
+      <span class="lwk-values-heading__ray"></span>
+      <span class="lwk-values-heading__ray"></span>
+    </span>
   </header>
 
-  <div class="lwk-values-heading__dots" aria-hidden="true">
-    <span></span><span></span><span></span><span></span>
+  <div
+      class="lwk-values-heading__dots"
+      aria-hidden="true"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 
   <div class="lwk-values-grid">
     {
       cards.map((card) => (
-        <article class={`lwk-value-card lwk-value-card--${card.tone}`}>
-          <div class="lwk-value-card__image" aria-hidden="true">
-            <img
-              src={card.image.src}
-              alt=""
-              width="176"
-              height="176"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
+          <article
+              class={`lwk-value-card lwk-value-card--${card.tone}`}
+          >
+            <div
+                class="lwk-value-card__image"
+                aria-hidden="true"
+            >
+              <img
+                  src={card.image.src}
+                  alt=""
+                  width="176"
+                  height="176"
+                  loading="lazy"
+                  decoding="async"
+              />
+            </div>
 
-          <div class="lwk-value-card__content">
-            <h3 class={`lwk-value-card__title lwk-value-card__title--${card.tone}`}>
-              {card.title}
-            </h3>
-            <p>{card.copy}</p>
-          </div>
-        </article>
+            <div class="lwk-value-card__content">
+              <h3
+                  class={`lwk-value-card__title lwk-value-card__title--${card.tone}`}
+              >
+                {card.title}
+              </h3>
+
+              <p>{card.copy}</p>
+            </div>
+          </article>
       ))
     }
   </div>
 </section>
+
+<script is:inline>
+  const initialiseValuesDifference = () => {
+    const sections = document.querySelectorAll(
+        "[data-values-difference]"
+    );
+
+    sections.forEach((section) => {
+      if (!(section instanceof HTMLElement)) {
+        return;
+      }
+
+      if (
+          section.dataset.valuesDifferenceInitialised ===
+          "true"
+      ) {
+        return;
+      }
+
+      const heading = section.querySelector(
+          "[data-values-difference-heading]"
+      );
+
+      if (!(heading instanceof HTMLElement)) {
+        return;
+      }
+
+      section.dataset.valuesDifferenceInitialised =
+          "true";
+
+      const reducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+      );
+
+      if (reducedMotion.matches) {
+        section.classList.add("is-heading-animated");
+        return;
+      }
+
+      let hasAnimated = false;
+      let hasUserScrolled = false;
+      let headingIsInTriggerArea = false;
+
+      const cleanUp = () => {
+        observer.disconnect();
+
+        window.removeEventListener(
+            "scroll",
+            handleScroll
+        );
+      };
+
+      const animateHeading = () => {
+        if (
+            hasAnimated ||
+            !hasUserScrolled ||
+            !headingIsInTriggerArea
+        ) {
+          return;
+        }
+
+        hasAnimated = true;
+
+        section.classList.add(
+            "is-heading-animated"
+        );
+
+        cleanUp();
+      };
+
+      const handleScroll = () => {
+        hasUserScrolled = true;
+        animateHeading();
+      };
+
+      const observer = new IntersectionObserver(
+          ([entry]) => {
+            headingIsInTriggerArea =
+                entry?.isIntersecting ?? false;
+
+            animateHeading();
+          },
+          {
+            threshold: 0,
+            rootMargin: "-38% 0px -38% 0px",
+          }
+      );
+
+      observer.observe(heading);
+
+      window.addEventListener(
+          "scroll",
+          handleScroll,
+          {
+            passive: true,
+          }
+      );
+
+      document.addEventListener(
+          "astro:before-swap",
+          cleanUp,
+          {
+            once: true,
+          }
+      );
+    });
+  };
+
+  initialiseValuesDifference();
+
+  if (
+      document.documentElement.dataset
+          .valuesDifferencePageListener !== "true"
+  ) {
+    document.documentElement.dataset
+        .valuesDifferencePageListener = "true";
+
+    document.addEventListener(
+        "astro:page-load",
+        initialiseValuesDifference
+    );
+  }
+</script>
