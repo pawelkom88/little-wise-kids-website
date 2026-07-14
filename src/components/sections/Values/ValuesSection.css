@@ -1,49 +1,441 @@
+/*
+ * Preserve the existing cream Values section.
+ */
+
 .lwk-values {
-  --values-title-tracking: -0.055em;
-  --values-pill-tracking: 0.055em;
+  background: var(--color-cream);
+}
+
+.lwk-tone-purple {
+  color: var(--color-purple);
+}
+
+.lwk-tone-green {
+  color: var(--color-green);
+}
+
+.lwk-tone-blue {
+  color: var(--color-blue);
+}
+
+/*
+ * Intro
+ */
+
+.lwk-values-intro {
+  --values-intro-title-size:
+          clamp(3rem, 5.7vw, 5.8rem);
+
+  --values-intro-title-size-mobile:
+          clamp(2.75rem, 13vw, 4.25rem);
+
+  --values-intro-title-line-height: 0.96;
+  --values-intro-copy-line-height: 1.68;
+
+  --values-intro-ease:
+          cubic-bezier(0.22, 1, 0.36, 1);
 
   position: relative;
+  display: grid;
+  min-height: clamp(31rem, 43vw, 37rem);
+  place-items: center;
+  padding:
+          clamp(3.5rem, 7vw, 5.75rem)
+          clamp(1.5rem, 7vw, 7rem);
   overflow: hidden;
   background: var(--color-cream);
 }
 
-.lwk-values > .container {
-  width: min(100% - (var(--gutter) * 2), var(--container-wide));
+.lwk-values-intro__content {
+  position: relative;
+  z-index: 2;
+  width: min(100%, var(--container-narrow));
+  text-align: center;
 }
 
-.lwk-values__stack {
-  display: grid;
-  gap: clamp(4.5rem, 8vw, 7.5rem);
+/*
+ * Heading
+ */
+
+.lwk-values-intro__title {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: var(--values-intro-title-size);
+  letter-spacing: var(--values-title-tracking);
+  line-height: var(--values-intro-title-line-height);
+  text-wrap: balance;
 }
+
+.lwk-values-intro__title-line {
+  display: block;
+}
+
+.lwk-values-intro__title-line--phrases {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.08em;
+}
+
+.lwk-values-intro__connector {
+  display: inline-block;
+}
+
+/*
+ * Accent words
+ */
+
+.lwk-values-intro__accent {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.105em;
+  white-space: nowrap;
+  transform-origin: center bottom;
+}
+
+.lwk-values-intro__accent--purple {
+  --accent-delay: 0ms;
+}
+
+.lwk-values-intro__accent--green {
+  --accent-delay: 110ms;
+}
+
+.lwk-values-intro__accent--blue {
+  --accent-delay: 220ms;
+}
+
+.lwk-values-intro.is-animated
+.lwk-values-intro__accent {
+  animation:
+          lwk-values-word-settle
+          520ms
+          var(--values-intro-ease)
+          var(--accent-delay)
+          both;
+}
+
+@keyframes lwk-values-word-settle {
+  from {
+    opacity: 0.88;
+    transform: translate3d(0, 0.045em, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/*
+ * One uninterrupted custom underline per phrase
+ */
+
+.lwk-values-intro__underline {
+  position: absolute;
+  right: 0;
+  bottom: -0.025em;
+  left: 0;
+  width: 100%;
+  height: 0.15em;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.lwk-values-intro__underline path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  opacity: 0;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+
+.lwk-values-intro.is-animated
+.lwk-values-intro__underline
+path {
+  animation:
+          lwk-values-underline-draw
+          720ms
+          var(--values-intro-ease)
+          calc(var(--accent-delay) + 130ms)
+          forwards;
+}
+
+@keyframes lwk-values-underline-draw {
+  0% {
+    opacity: 0;
+    stroke-dashoffset: 100;
+  }
+
+  8% {
+    opacity: 0.82;
+  }
+
+  100% {
+    opacity: 0.82;
+    stroke-dashoffset: 0;
+  }
+}
+
+/*
+ * Divider and body copy
+ */
 
 .lwk-title-rule {
-  display: flex;
-  align-items: center;
-  width: min(8.5rem, 42%);
-  margin: 1.25rem auto 1.75rem;
+  margin-top: clamp(1.25rem, 2vw, 1.75rem);
 }
 
-.lwk-title-rule span {
-  flex: 1;
-  height: 2px;
-  border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--color-purple), var(--color-surface) 38%);
+.lwk-values-intro__copy {
+  width: min(100%, 46rem);
+  margin:
+          clamp(1.8rem, 3vw, 2.5rem)
+          auto
+          0;
 }
 
-.lwk-title-rule i {
-  width: 0.5rem;
-  height: 0.5rem;
-  margin-inline: 0.35rem;
-  border-radius: 50%;
-  background: var(--color-purple);
+.lwk-values-intro__copy p {
+  margin: 0;
+  color: var(--color-ink-soft);
+  line-height: var(--values-intro-copy-line-height);
+  text-wrap: pretty;
 }
 
-.lwk-title-rule--left {
-  margin-inline: 0 auto;
+.lwk-values-intro__copy p + p {
+  margin-top: 1.6rem;
 }
+
+/*
+ * Decorative elements
+ */
+
+.lwk-values-intro__decor {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.lwk-values-intro__icon,
+.lwk-values-intro__flight {
+  position: absolute;
+}
+
+.lwk-values-intro__icon .icon {
+  width: 100%;
+  height: 100%;
+}
+
+.lwk-values-intro__icon--star {
+  top: 3.75rem;
+  left: 10%;
+  width: 3.4rem;
+  height: 3.4rem;
+  color:
+          color-mix(
+                  in srgb,
+                  var(--color-purple),
+                  var(--color-surface) 35%
+          );
+  transform: rotate(-8deg);
+}
+
+.lwk-values-intro__icon--heart {
+  top: 10rem;
+  right: 15%;
+  width: 2.7rem;
+  height: 2.7rem;
+  color:
+          color-mix(
+                  in srgb,
+                  var(--color-purple),
+                  var(--color-surface) 35%
+          );
+  transform: rotate(8deg);
+}
+
+/*
+ * Plane remains well left of the heading.
+ */
+
+.lwk-values-intro__flight {
+  top: 9.2rem;
+  left: clamp(
+          -2rem,
+          calc(50% - 48rem),
+          3rem
+  );
+  width: clamp(19rem, 25vw, 24rem);
+  height: 7rem;
+  color: var(--color-yellow);
+}
+
+.lwk-values-intro__flight-path {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+}
+
+.lwk-values-intro__flight-path path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 7 9;
+}
+
+.lwk-values-intro__plane {
+  position: absolute;
+  top: 0.3rem;
+  right: 0;
+  width: 6.7rem;
+  height: auto;
+  opacity: 0;
+  transform:
+          translate3d(-2.2rem, 0.45rem, 0)
+          rotate(-10deg);
+}
+
+.lwk-values-intro.is-animated
+.lwk-values-intro__flight-path {
+  animation:
+          lwk-values-flight-reveal
+          950ms
+          var(--values-intro-ease)
+          360ms
+          forwards;
+}
+
+.lwk-values-intro.is-animated
+.lwk-values-intro__plane {
+  animation:
+          lwk-values-plane-arrive
+          900ms
+          var(--values-intro-ease)
+          490ms
+          forwards;
+}
+
+@keyframes lwk-values-flight-reveal {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+
+  to {
+    opacity: 0.92;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes lwk-values-plane-arrive {
+  from {
+    opacity: 0;
+    transform:
+            translate3d(-2.2rem, 0.45rem, 0)
+            rotate(-10deg);
+  }
+
+  to {
+    opacity: 0.88;
+    transform:
+            translate3d(0, 0, 0)
+            rotate(-7deg);
+  }
+}
+
+/*
+ * Tablet
+ */
+
+@media (width < 64rem) {
+  .lwk-values-intro__flight {
+    left: -4rem;
+    width: 21rem;
+  }
+
+  .lwk-values-intro__icon--heart {
+    right: 8%;
+  }
+}
+
+/*
+ * Mobile
+ */
 
 @media (width < 48rem) {
-  .lwk-values__stack {
-    gap: 4.5rem;
+  .lwk-values-intro {
+    min-height: 0;
+    padding: 3.25rem 1.25rem;
+  }
+
+  .lwk-values-intro__title {
+    font-size: var(--values-intro-title-size-mobile);
+  }
+
+  .lwk-values-intro__title-line--phrases {
+    gap: 0.075em;
+  }
+
+  .lwk-values-intro__flight,
+  .lwk-values-intro__icon--heart {
+    display: none;
+  }
+
+  .lwk-values-intro__icon--star {
+    top: 1.25rem;
+    left: 1.25rem;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .lwk-values-intro__underline {
+    height: 0.135em;
+  }
+
+  .lwk-values-intro__underline path {
+    stroke-width: 3;
+  }
+}
+
+/*
+ * Reduced motion
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  .lwk-values-intro__accent,
+  .lwk-values-intro__underline path,
+  .lwk-values-intro__flight-path,
+  .lwk-values-intro__plane {
+    animation: none !important;
+  }
+
+  .lwk-values-intro__accent {
+    opacity: 1;
+    transform: none;
+  }
+
+  .lwk-values-intro__underline path {
+    opacity: 0.82;
+    stroke-dashoffset: 0;
+  }
+
+  .lwk-values-intro__flight-path {
+    opacity: 0.92;
+    clip-path: inset(0);
+  }
+
+  .lwk-values-intro__plane {
+    opacity: 0.88;
+    transform: rotate(-7deg);
   }
 }
