@@ -1,0 +1,421 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/layout/Container.astro";
+import Icon from "../components/icons/Icon.astro";
+import "./multilingual-learning.css";
+
+const philosophyPoints = [
+  {
+    tone: "purple",
+    text: "Adult-facilitated, free-flow play",
+  },
+  {
+    tone: "green",
+    text: "Opportunities for experimentation, discovery and sensible risk-taking",
+  },
+  {
+    tone: "blue",
+    text: "Colour, creativity and artistic expression",
+  },
+  {
+    tone: "yellow",
+    text: "Sensory and hands-on learning",
+  },
+  {
+    tone: "purple",
+    text: "Nature-based experiences",
+  },
+  {
+    tone: "green",
+    text: "A balance of themed learning and children’s individual interests",
+  },
+] as const;
+
+const eyfsAreas = [
+  {
+    icon: "chat",
+    tone: "purple",
+    title: "Communication and Language",
+  },
+  {
+    icon: "person",
+    tone: "green",
+    title: "Physical Development",
+  },
+  {
+    icon: "heart",
+    tone: "blue",
+    title: "Personal, Social and Emotional Development",
+  },
+  {
+    icon: "book",
+    tone: "yellow",
+    title: "Literacy",
+  },
+  {
+    icon: "calendar",
+    tone: "green",
+    title: "Mathematics",
+  },
+  {
+    icon: "star",
+    tone: "purple",
+    title: "Understanding the World",
+  },
+  {
+    icon: "palette",
+    tone: "blue",
+    title: "Expressive Arts and Design",
+  },
+] as const;
+
+const screenFreeBenefits = [
+  {
+    tone: "purple",
+    text: "Deeper concentration and sustained attention",
+  },
+  {
+    tone: "green",
+    text: "Richer language development and face-to-face communication",
+  },
+  {
+    tone: "blue",
+    text: "Creativity, physical activity and social interaction",
+  },
+  {
+    tone: "yellow",
+    text: "Emotional regulation and meaningful connections",
+  },
+  {
+    tone: "purple",
+    text: "A childhood shaped by puddles, paints, puzzles and people rather than pixels",
+  },
+] as const;
+---
+
+<BaseLayout
+  title="Multilingual Learning | Little Wise Kids"
+  description="Explore the multilingual, child-led, screen-free learning philosophy at Little Wise Kids."
+>
+  <article class="lwk-multilingual">
+    <header
+      class="lwk-multilingual-hero"
+      aria-labelledby="multilingual-page-title"
+    >
+      <div class="lwk-multilingual-hero__content">
+        <p class="lwk-multilingual__eyebrow">Multilingual Learning</p>
+
+        <h1 id="multilingual-page-title">
+          <span>Language, Play</span>
+          <span>and Discovery</span>
+        </h1>
+
+        <p class="lwk-multilingual-hero__lead">
+          A joyful, screen-free approach where children explore language,
+          creativity and the world around them through meaningful everyday
+          experiences.
+        </p>
+      </div>
+
+      <span class="lwk-multilingual-hero__wave-highlight" aria-hidden="true"
+      ></span>
+
+      <div class="lwk-multilingual-hero__wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
+          <path
+            d="M0 58C130 118 272 116 413 86C560 55 655 63 805 112C975 168 1102 119 1258 69C1330 46 1392 39 1440 52V220H0V58Z"
+          ></path>
+        </svg>
+      </div>
+    </header>
+
+    <div class="lwk-multilingual__sections">
+      <section
+        id="our-learning-philosophy"
+        class="lwk-multilingual__section
+          lwk-multilingual__section--philosophy"
+        aria-labelledby="learning-philosophy-title"
+      >
+        <Container size="wide">
+          <div class="lwk-multilingual__philosophy-card">
+            <div class="lwk-multilingual__copy-block">
+              <p
+                class="lwk-multilingual__label
+                  lwk-multilingual__label--purple"
+              >
+                Our Learning Philosophy
+              </p>
+
+              <h2 id="learning-philosophy-title">
+                Curiosity-Led. Emotionally Attuned. Rich in Meaning.
+              </h2>
+
+              <div class="lwk-multilingual__prose">
+                <p>
+                  At the heart of our curriculum is a simple belief: children
+                  learn best when they feel safe, seen and supported. We bring
+                  the seven areas of the Early Years Foundation Stage together
+                  through engaging, active and joyful experiences.
+                </p>
+
+                <p>
+                  Our approach supports children to become independent thinkers
+                  and doers through play, exploration and real-world discovery.
+                </p>
+              </div>
+
+              <aside class="lwk-multilingual__discovery-note">
+                <span
+                  class="lwk-multilingual__discovery-icon"
+                  aria-hidden="true"
+                >
+                  <Icon name="heart" size={30} />
+                </span>
+
+                <p>
+                  Every day can bring a new discovery: a word in Portuguese, an
+                  insect in the garden, a new way to solve a problem or a story
+                  that sparks a child’s imagination.
+                </p>
+              </aside>
+            </div>
+
+            <div class="lwk-multilingual__list-panel">
+              <h3>Children Enjoy:</h3>
+
+              <ul class="lwk-multilingual__check-list">
+                {
+                  philosophyPoints.map((point) => (
+                    <li>
+                      <span
+                        class={`
+                          lwk-multilingual__check
+                          lwk-multilingual__check--${point.tone}
+                        `}
+                        aria-hidden="true"
+                      >
+                        ✓
+                      </span>
+
+                      <span>{point.text}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section
+        id="english-and-portuguese"
+        class="lwk-multilingual__section"
+        aria-labelledby="languages-title"
+      >
+        <Container size="wide">
+          <div
+            class="lwk-multilingual__split-card
+              lwk-multilingual__split-card--green"
+          >
+            <div class="lwk-multilingual__copy-block">
+              <p
+                class="lwk-multilingual__label
+                  lwk-multilingual__label--green"
+              >
+                English and Portuguese
+              </p>
+
+              <h2 id="languages-title">Language Through Everyday Connection</h2>
+
+              <div class="lwk-multilingual__prose">
+                <p>
+                  Little Wise Kids currently offers children exposure to English
+                  and Portuguese through everyday routines, songs, stories, play
+                  and warm interactions.
+                </p>
+
+                <p>
+                  Language learning is woven naturally into the day rather than
+                  taught in a pressured way. Children are encouraged to listen,
+                  communicate and build confidence while celebrating cultural
+                  diversity and connection.
+                </p>
+              </div>
+
+              <aside class="lwk-multilingual__cms-note">
+                <span class="lwk-multilingual__cms-icon" aria-hidden="true">
+                  <Icon name="chat" size={24} />
+                </span>
+
+                <p>
+                  <strong>CMS note:</strong> English and Portuguese are the current
+                  languages offered. This may change and must be easy to update.
+                </p>
+              </aside>
+            </div>
+
+            <figure
+              class="lwk-multilingual__media
+                lwk-multilingual__media--languages"
+              aria-label="English and Portuguese learning image placeholder"
+            >
+              <!-- Add the language-learning image here when it is supplied. -->
+
+              <span
+                class="lwk-multilingual__media-placeholder"
+                aria-hidden="true"
+              >
+                <Icon name="book" size={48} />
+
+                <span>Language-learning image</span>
+              </span>
+            </figure>
+          </div>
+        </Container>
+      </section>
+
+      <section
+        id="eyfs"
+        class="lwk-multilingual__section"
+        aria-labelledby="eyfs-title"
+      >
+        <Container size="wide">
+          <div class="lwk-multilingual__eyfs-card">
+            <div class="lwk-multilingual__copy-block">
+              <p
+                class="lwk-multilingual__label
+                  lwk-multilingual__label--purple"
+              >
+                EYFS
+              </p>
+
+              <h2 id="eyfs-title">Supporting Every Area of Development</h2>
+
+              <div class="lwk-multilingual__prose">
+                <p>
+                  Our practice is aligned with the Early Years Foundation Stage,
+                  supporting children’s development through meaningful play and
+                  responsive care.
+                </p>
+
+                <p>
+                  We help children build confidence across communication and
+                  language, physical development, personal, social and emotional
+                  development, literacy, mathematics, understanding the world,
+                  and expressive arts and design.
+                </p>
+
+                <p>
+                  We recognise that children develop in different ways and at
+                  different rates. Our educators observe carefully, follow
+                  children’s interests and work closely with families to support
+                  each child’s individual journey.
+                </p>
+              </div>
+            </div>
+
+            <ul
+              class="lwk-multilingual__eyfs-grid"
+              aria-label="The seven areas of the Early Years Foundation Stage"
+            >
+              {
+                eyfsAreas.map((area) => (
+                  <li>
+                    <span
+                      class={`
+                        lwk-multilingual__area-icon
+                        lwk-multilingual__area-icon--${area.tone}
+                      `}
+                      aria-hidden="true"
+                    >
+                      <Icon name={area.icon} size={28} />
+                    </span>
+
+                    <span>{area.title}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </Container>
+      </section>
+
+      <section
+        id="screen-free-learning"
+        class="lwk-multilingual__section
+          lwk-multilingual__section--screen-free"
+        aria-labelledby="screen-free-title"
+      >
+        <Container size="wide">
+          <div class="lwk-multilingual__screen-free-card">
+            <div class="lwk-multilingual__copy-block">
+              <p
+                class="lwk-multilingual__label
+                  lwk-multilingual__label--blue"
+              >
+                Screen-Free Learning
+              </p>
+
+              <h2 id="screen-free-title">
+                A Rare and Refreshing Childhood in a Noisy World
+              </h2>
+
+              <div class="lwk-multilingual__prose">
+                <p>
+                  In a fast-paced, digital-first world, screen exposure can feel
+                  almost unavoidable. At Little Wise Kids, we have made a
+                  conscious choice to offer a completely screen-free learning
+                  environment.
+                </p>
+
+                <p>
+                  Instead of flashing screens and artificial stimulation,
+                  children are immersed in real-world experiences. They can feel
+                  the texture of soil, enjoy role-play, listen to stories,
+                  paint, build, move, explore outdoors and connect with people
+                  around them.
+                </p>
+              </div>
+            </div>
+
+            <div class="lwk-multilingual__list-panel">
+              <h3>Screen-Free Learning Supports:</h3>
+
+              <ul class="lwk-multilingual__check-list">
+                {
+                  screenFreeBenefits.map((benefit) => (
+                    <li>
+                      <span
+                        class={`
+                          lwk-multilingual__check
+                          lwk-multilingual__check--${benefit.tone}
+                        `}
+                        aria-hidden="true"
+                      >
+                        ✓
+                      </span>
+
+                      <span>{benefit.text}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+
+            <aside class="lwk-multilingual__closing-note">
+              <span class="lwk-multilingual__closing-icon" aria-hidden="true">
+                <Icon name="heart" size={32} />
+              </span>
+
+              <p>
+                We believe the early years are sacred. Our screen-free nursery
+                environment gives children space to imagine, create and connect
+                with all their senses fully awake.
+              </p>
+            </aside>
+          </div>
+        </Container>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
