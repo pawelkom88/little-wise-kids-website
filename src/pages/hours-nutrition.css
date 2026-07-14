@@ -1,9 +1,19 @@
 .hours-page {
   --hours-hero-image: none;
 
-  --hours-card-inline: clamp(var(--space-m), 4vw, var(--space-2xl));
+  --hours-card-inline:
+          clamp(
+                  var(--space-m),
+                  4vw,
+                  var(--space-2xl)
+          );
 
-  --hours-card-block: clamp(var(--space-l), 4vw, var(--space-2xl));
+  --hours-card-block:
+          clamp(
+                  var(--space-l),
+                  4vw,
+                  var(--space-2xl)
+          );
 
   color: var(--color-ink);
   background: var(--color-page);
@@ -12,8 +22,7 @@
 /*
  * Hero
  *
- * This uses the same structure, spacing, overlay and wave treatment
- * as the existing Multilingual Learning and Parents’ Information pages.
+ * Matches the structure used by the other subpages.
  */
 
 .hours-hero {
@@ -22,7 +31,10 @@
   display: grid;
   min-height: clamp(36rem, 62vw, 50rem);
   place-items: center;
-  padding: clamp(5rem, 9vw, 8rem) var(--gutter) clamp(10rem, 15vw, 13rem);
+  padding:
+          clamp(5rem, 9vw, 8rem)
+          var(--gutter)
+          clamp(10rem, 15vw, 13rem);
   overflow: hidden;
   text-align: center;
   background: var(--color-cream);
@@ -47,19 +59,47 @@
 .hours-hero::after {
   z-index: -2;
   background:
-    radial-gradient(
-      circle at 50% 42%,
-      color-mix(in srgb, var(--color-page) 96%, transparent) 0%,
-      color-mix(in srgb, var(--color-page) 88%, transparent) 36%,
-      color-mix(in srgb, var(--color-page) 68%, transparent) 70%,
-      color-mix(in srgb, var(--color-page) 55%, transparent) 100%
-    ),
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--color-page) 76%, transparent),
-      color-mix(in srgb, var(--color-page) 55%, transparent) 44%,
-      color-mix(in srgb, var(--color-page) 84%, transparent)
-    );
+          radial-gradient(
+                  circle at 50% 42%,
+                  color-mix(
+                          in srgb,
+                          var(--color-page) 96%,
+                          transparent
+                  ) 0%,
+                  color-mix(
+                          in srgb,
+                          var(--color-page) 88%,
+                          transparent
+                  ) 36%,
+                  color-mix(
+                          in srgb,
+                          var(--color-page) 68%,
+                          transparent
+                  ) 70%,
+                  color-mix(
+                          in srgb,
+                          var(--color-page) 55%,
+                          transparent
+                  ) 100%
+          ),
+          linear-gradient(
+                  180deg,
+                  color-mix(
+                          in srgb,
+                          var(--color-page) 76%,
+                          transparent
+                  ),
+                  color-mix(
+                          in srgb,
+                          var(--color-page) 55%,
+                          transparent
+                  ) 44%,
+                  color-mix(
+                          in srgb,
+                          var(--color-page) 84%,
+                          transparent
+                  )
+          );
   backdrop-filter: blur(1.5px);
 }
 
@@ -95,12 +135,13 @@
   width: 5rem;
   height: 3px;
   border-radius: var(--radius-pill);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--color-purple),
-    transparent
-  );
+  background:
+          linear-gradient(
+                  90deg,
+                  transparent,
+                  var(--color-purple),
+                  transparent
+          );
   content: "";
   transform: translateX(-50%);
 }
@@ -110,7 +151,8 @@
   margin: var(--space-xl) auto 0;
   color: var(--color-ink);
   font-size: var(--heading-h1-size);
-  letter-spacing: var(--letter-spacing-section-title);
+  letter-spacing:
+          var(--letter-spacing-section-title);
   line-height: var(--line-height-heading);
   text-wrap: balance;
 }
@@ -137,9 +179,15 @@
   z-index: 3;
   height: clamp(7.5rem, 14vw, 13rem);
   color: var(--color-page);
-  filter: drop-shadow(
-    0 -0.75rem 1.15rem color-mix(in srgb, var(--color-ink) 3%, transparent)
-  );
+  filter:
+          drop-shadow(
+                  0 -0.75rem 1.15rem
+                  color-mix(
+                          in srgb,
+                          var(--color-ink) 3%,
+                          transparent
+                  )
+          );
 }
 
 .hours-hero__wave svg {
@@ -159,12 +207,25 @@
   z-index: 2;
   height: 1.1rem;
   opacity: 0.4;
-  background: linear-gradient(
-    90deg,
-    color-mix(in srgb, var(--color-purple) 11%, transparent),
-    color-mix(in srgb, var(--color-green) 8%, transparent),
-    color-mix(in srgb, var(--color-blue) 9%, transparent)
-  );
+  background:
+          linear-gradient(
+                  90deg,
+                  color-mix(
+                          in srgb,
+                          var(--color-purple) 11%,
+                          transparent
+                  ),
+                  color-mix(
+                          in srgb,
+                          var(--color-green) 8%,
+                          transparent
+                  ),
+                  color-mix(
+                          in srgb,
+                          var(--color-blue) 9%,
+                          transparent
+                  )
+          );
   filter: blur(1.1rem);
 }
 
@@ -179,7 +240,12 @@
 
 .hours-page__stack {
   display: grid;
-  gap: clamp(var(--space-m), 2.5vw, var(--space-xl));
+  gap:
+          clamp(
+                  var(--space-m),
+                  2.5vw,
+                  var(--space-xl)
+          );
 }
 
 /*
@@ -191,16 +257,34 @@
   --hours-soft: var(--color-green-soft);
 
   width: 100%;
-  padding: var(--hours-card-block) var(--hours-card-inline);
-  border: 1px solid
-    color-mix(in srgb, var(--hours-accent) 18%, var(--color-border));
+  padding:
+          var(--hours-card-block)
+          var(--hours-card-inline);
+  border:
+          1px solid
+          color-mix(
+                  in srgb,
+                  var(--hours-accent) 18%,
+                  var(--color-border)
+          );
   border-radius: var(--radius-l);
-  background: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--hours-soft) 35%, var(--color-surface)),
-    var(--color-surface) 74%
-  );
-  box-shadow: 0 1.1rem 3rem color-mix(in srgb, var(--color-ink) 4%, transparent);
+  background:
+          linear-gradient(
+                  135deg,
+                  color-mix(
+                          in srgb,
+                          var(--hours-soft) 35%,
+                          var(--color-surface)
+                  ),
+                  var(--color-surface) 74%
+          );
+  box-shadow:
+          0 1.1rem 3rem
+          color-mix(
+                  in srgb,
+                  var(--color-ink) 4%,
+                  transparent
+          );
   scroll-margin-top: var(--section-spacing);
 }
 
@@ -224,7 +308,12 @@
   grid-template-columns:
     minmax(0, 0.95fr)
     minmax(20rem, 1.05fr);
-  gap: clamp(var(--space-l), 5vw, var(--space-3xl));
+  gap:
+          clamp(
+                  var(--space-l),
+                  5vw,
+                  var(--space-3xl)
+          );
   align-items: center;
 }
 
@@ -246,10 +335,21 @@
   width: 3.6rem;
   aspect-ratio: 1;
   place-items: center;
-  border: 1px solid color-mix(in srgb, var(--hours-accent) 25%, transparent);
+  border:
+          1px solid
+          color-mix(
+                  in srgb,
+                  var(--hours-accent) 25%,
+                  transparent
+          );
   border-radius: 50%;
   color: var(--hours-accent);
-  background: color-mix(in srgb, var(--hours-soft) 78%, var(--color-surface));
+  background:
+          color-mix(
+                  in srgb,
+                  var(--hours-soft) 78%,
+                  var(--color-surface)
+          );
   font-family: var(--font-heading);
   font-size: var(--font-size-small);
   font-weight: var(--font-weight-black);
@@ -264,7 +364,8 @@
 
 .hours-card h2 {
   color: var(--color-ink);
-  letter-spacing: var(--letter-spacing-section-title);
+  letter-spacing:
+          var(--letter-spacing-section-title);
   text-wrap: balance;
 }
 
@@ -293,15 +394,26 @@
 .hours-schedule {
   display: grid;
   margin: 0;
-  padding: clamp(var(--space-m), 3vw, var(--space-l));
-  border: 1px solid
-    color-mix(in srgb, var(--color-green) 17%, var(--color-border));
+  padding:
+          clamp(
+                  var(--space-m),
+                  3vw,
+                  var(--space-l)
+          );
+  border:
+          1px solid
+          color-mix(
+                  in srgb,
+                  var(--color-green) 17%,
+                  var(--color-border)
+          );
   border-radius: var(--radius-m);
-  background: color-mix(
-    in srgb,
-    var(--color-green-soft) 54%,
-    var(--color-surface)
-  );
+  background:
+          color-mix(
+                  in srgb,
+                  var(--color-green-soft) 54%,
+                  var(--color-surface)
+          );
 }
 
 .hours-schedule__row {
@@ -327,7 +439,12 @@
   place-items: center;
   border-radius: 50%;
   color: var(--color-green-dark);
-  background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+  background:
+          color-mix(
+                  in srgb,
+                  var(--color-surface) 82%,
+                  transparent
+          );
 }
 
 .hours-schedule dt {
@@ -359,14 +476,20 @@
   align-items: center;
   margin-top: var(--space-l);
   padding: var(--space-s);
-  border: 1px solid
-    color-mix(in srgb, var(--color-green) 16%, var(--color-border));
+  border:
+          1px solid
+          color-mix(
+                  in srgb,
+                  var(--color-green) 16%,
+                  var(--color-border)
+          );
   border-radius: var(--radius-m);
-  background: color-mix(
-    in srgb,
-    var(--color-green-soft) 56%,
-    var(--color-surface)
-  );
+  background:
+          color-mix(
+                  in srgb,
+                  var(--color-green-soft) 56%,
+                  var(--color-surface)
+          );
 }
 
 .hours-card__note-icon {
@@ -396,7 +519,9 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-xs);
-  padding: var(--space-xs) var(--space-s);
+  padding:
+          var(--space-xs)
+          var(--space-s);
   border-radius: var(--radius-pill);
   color: var(--color-surface);
   background: var(--color-green-dark);
@@ -418,15 +543,26 @@
 
 .nutrition-checklist {
   min-width: 0;
-  padding: clamp(var(--space-m), 3vw, var(--space-l));
-  border: 1px solid
-    color-mix(in srgb, var(--color-purple) 16%, var(--color-border));
+  padding:
+          clamp(
+                  var(--space-m),
+                  3vw,
+                  var(--space-l)
+          );
+  border:
+          1px solid
+          color-mix(
+                  in srgb,
+                  var(--color-purple) 16%,
+                  var(--color-border)
+          );
   border-radius: var(--radius-m);
-  background: color-mix(
-    in srgb,
-    var(--color-purple-soft) 54%,
-    var(--color-surface)
-  );
+  background:
+          color-mix(
+                  in srgb,
+                  var(--color-purple-soft) 54%,
+                  var(--color-surface)
+          );
 }
 
 .nutrition-checklist h3 {
@@ -477,7 +613,8 @@
 
 .nutrition-features {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
   gap: var(--space-s);
   margin-top: var(--space-l);
 }
@@ -494,18 +631,29 @@
   align-items: start;
   min-width: 0;
   padding: var(--space-m);
-  border: 1px solid
-    color-mix(in srgb, var(--feature-accent) 18%, var(--color-border));
+  border:
+          1px solid
+          color-mix(
+                  in srgb,
+                  var(--feature-accent) 18%,
+                  var(--color-border)
+          );
   border-radius: var(--radius-m);
-  background: color-mix(in srgb, var(--feature-soft) 48%, var(--color-surface));
+  background:
+          color-mix(
+                  in srgb,
+                  var(--feature-soft) 48%,
+                  var(--color-surface)
+          );
 }
 
 .nutrition-feature--yellow {
-  --feature-accent: color-mix(
-    in srgb,
-    var(--color-yellow),
-    var(--color-ink) 30%
-  );
+  --feature-accent:
+          color-mix(
+                  in srgb,
+                  var(--color-yellow),
+                  var(--color-ink) 30%
+          );
   --feature-soft: var(--color-yellow-soft);
 }
 
@@ -546,11 +694,16 @@
  */
 
 .hours-day {
-  background: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--color-blue-soft) 48%, var(--color-surface)),
-    var(--color-surface) 76%
-  );
+  background:
+          linear-gradient(
+                  135deg,
+                  color-mix(
+                          in srgb,
+                          var(--color-blue-soft) 48%,
+                          var(--color-surface)
+                  ),
+                  var(--color-surface) 76%
+          );
 }
 
 .hours-day__header {
@@ -568,8 +721,13 @@
   width: 4rem;
   aspect-ratio: 1;
   place-items: center;
-  border: 1px solid
-    color-mix(in srgb, var(--color-blue) 22%, var(--color-border));
+  border:
+          1px solid
+          color-mix(
+                  in srgb,
+                  var(--color-blue) 22%,
+                  var(--color-border)
+          );
   border-radius: 50%;
   color: var(--color-blue-dark);
   background: var(--color-surface);
@@ -597,13 +755,23 @@
   bottom: 2rem;
   left: 50%;
   width: 2px;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    color-mix(in srgb, var(--color-blue) 44%, transparent) 8%,
-    color-mix(in srgb, var(--color-blue) 44%, transparent) 92%,
-    transparent
-  );
+  border-radius: var(--radius-pill);
+  background:
+          linear-gradient(
+                  180deg,
+                  transparent,
+                  color-mix(
+                          in srgb,
+                          var(--color-blue) 28%,
+                          transparent
+                  ) 8%,
+                  color-mix(
+                          in srgb,
+                          var(--color-blue) 28%,
+                          transparent
+                  ) 92%,
+                  transparent
+          );
   content: "";
   transform: translateX(-50%);
 }
@@ -624,20 +792,37 @@
   grid-row: 1;
   min-width: 0;
   padding: var(--space-m);
-  border: 1px solid
-    color-mix(in srgb, var(--color-blue) 16%, var(--color-border));
+  border:
+          1px solid
+          color-mix(
+                  in srgb,
+                  var(--color-blue) 16%,
+                  var(--color-border)
+          );
   border-radius: var(--radius-m);
-  background: color-mix(in srgb, var(--color-surface) 94%, transparent);
-  box-shadow: 0 0.75rem 2rem
-    color-mix(in srgb, var(--color-blue) 5%, transparent);
+  background:
+          color-mix(
+                  in srgb,
+                  var(--color-surface) 94%,
+                  transparent
+          );
+  box-shadow:
+          0 0.75rem 2rem
+          color-mix(
+                  in srgb,
+                  var(--color-blue) 5%,
+                  transparent
+          );
 }
 
-.hours-day__item:nth-child(odd) .hours-day__event {
+.hours-day__item:nth-child(odd)
+.hours-day__event {
   grid-column: 1;
   margin-right: var(--space-s);
 }
 
-.hours-day__item:nth-child(even) .hours-day__event {
+.hours-day__item:nth-child(even)
+.hours-day__event {
   grid-column: 3;
   margin-left: var(--space-s);
 }
@@ -647,15 +832,22 @@
   top: 50%;
   width: calc(var(--space-s) + 0.6rem);
   height: 1px;
-  background: color-mix(in srgb, var(--color-blue) 30%, transparent);
+  background:
+          color-mix(
+                  in srgb,
+                  var(--color-blue) 30%,
+                  transparent
+          );
   content: "";
 }
 
-.hours-day__item:nth-child(odd) .hours-day__event::after {
+.hours-day__item:nth-child(odd)
+.hours-day__event::after {
   right: calc((var(--space-s) + 0.6rem) * -1);
 }
 
-.hours-day__item:nth-child(even) .hours-day__event::after {
+.hours-day__item:nth-child(even)
+.hours-day__event::after {
   left: calc((var(--space-s) + 0.6rem) * -1);
 }
 
@@ -669,13 +861,23 @@
   aspect-ratio: 1;
   place-self: center;
   place-items: center;
-  border: 2px solid
-    color-mix(in srgb, var(--color-blue) 58%, var(--color-surface));
+  border:
+          2px solid
+          color-mix(
+                  in srgb,
+                  var(--color-blue) 58%,
+                  var(--color-surface)
+          );
   border-radius: 50%;
   color: var(--color-blue-dark);
   background: var(--color-surface);
-  box-shadow: 0 0 0 0.45rem
-    color-mix(in srgb, var(--color-blue-soft) 68%, var(--color-surface));
+  box-shadow:
+          0 0 0 0.45rem
+          color-mix(
+                  in srgb,
+                  var(--color-blue-soft) 68%,
+                  var(--color-surface)
+          );
 }
 
 .hours-day__time {
@@ -711,15 +913,27 @@
   gap: var(--space-s);
   align-items: center;
   width: 100%;
-  padding: var(--space-m) var(--space-l);
-  border: 1px solid
-    color-mix(in srgb, var(--color-yellow) 32%, var(--color-border));
+  padding:
+          var(--space-m)
+          var(--space-l);
+  border:
+          1px solid
+          color-mix(
+                  in srgb,
+                  var(--color-yellow) 32%,
+                  var(--color-border)
+          );
   border-radius: var(--radius-l);
-  background: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--color-yellow-soft) 76%, var(--color-surface)),
-    var(--color-surface)
-  );
+  background:
+          linear-gradient(
+                  135deg,
+                  color-mix(
+                          in srgb,
+                          var(--color-yellow-soft) 76%,
+                          var(--color-surface)
+                  ),
+                  var(--color-surface)
+          );
 }
 
 .hours-contact__icon {
@@ -727,16 +941,31 @@
   width: 4rem;
   aspect-ratio: 1;
   place-items: center;
-  border: 1px solid
-    color-mix(in srgb, var(--color-yellow) 42%, var(--color-border));
+  border:
+          1px solid
+          color-mix(
+                  in srgb,
+                  var(--color-yellow) 42%,
+                  var(--color-border)
+          );
   border-radius: 50%;
-  color: color-mix(in srgb, var(--color-yellow), var(--color-ink) 24%);
+  color:
+          color-mix(
+                  in srgb,
+                  var(--color-yellow),
+                  var(--color-ink) 24%
+          );
   background: var(--color-surface);
 }
 
 .hours-contact__copy h2 {
   margin-bottom: 0.25rem;
-  color: color-mix(in srgb, var(--color-yellow), var(--color-ink) 38%);
+  color:
+          color-mix(
+                  in srgb,
+                  var(--color-yellow),
+                  var(--color-ink) 38%
+          );
 }
 
 .hours-contact__copy p {
@@ -752,7 +981,9 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-xs);
-  padding: var(--space-xs) var(--space-m);
+  padding:
+          var(--space-xs)
+          var(--space-m);
   border-radius: var(--radius-m);
   color: var(--color-ink);
   background: var(--color-yellow);
@@ -767,17 +998,23 @@
 }
 
 /*
- * Focus
+ * Focus states
  */
 
 .hours-card__note-link:focus-visible,
 .hours-contact__link:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--color-purple) 52%, transparent);
+  outline:
+          3px solid
+          color-mix(
+                  in srgb,
+                  var(--color-purple) 52%,
+                  transparent
+          );
   outline-offset: 3px;
 }
 
 /*
- * Hover
+ * Hover states
  */
 
 @media (hover: hover) {
@@ -786,9 +1023,9 @@
   .nutrition-feature,
   .hours-day__event {
     transition:
-      transform 180ms ease,
-      box-shadow 180ms ease,
-      filter 180ms ease;
+            transform 180ms ease,
+            box-shadow 180ms ease,
+            filter 180ms ease;
   }
 
   .hours-card__note-link:hover,
@@ -799,8 +1036,13 @@
 
   .nutrition-feature:hover,
   .hours-day__event:hover {
-    box-shadow: 0 1rem 2.5rem
-      color-mix(in srgb, var(--color-ink) 6%, transparent);
+    box-shadow:
+            0 1rem 2.5rem
+            color-mix(
+                    in srgb,
+                    var(--color-ink) 6%,
+                    transparent
+            );
     transform: translateY(-0.15rem);
   }
 }
@@ -826,7 +1068,8 @@
   }
 
   .nutrition-features {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
   }
 
   .nutrition-feature:last-child {
@@ -846,7 +1089,10 @@
 
   .hours-hero {
     min-height: 38rem;
-    padding: var(--space-2xl) var(--gutter) clamp(8rem, 30vw, 10rem);
+    padding:
+            var(--space-2xl)
+            var(--gutter)
+            clamp(8rem, 30vw, 10rem);
   }
 
   .hours-hero::before {
@@ -855,22 +1101,47 @@
 
   .hours-hero::after {
     background:
-      radial-gradient(
-        circle at 50% 46%,
-        color-mix(in srgb, var(--color-page) 97%, transparent) 0%,
-        color-mix(in srgb, var(--color-page) 90%, transparent) 50%,
-        color-mix(in srgb, var(--color-page) 73%, transparent) 100%
-      ),
-      linear-gradient(
-        180deg,
-        color-mix(in srgb, var(--color-page) 84%, transparent),
-        color-mix(in srgb, var(--color-page) 76%, transparent)
-      );
+            radial-gradient(
+                    circle at 50% 46%,
+                    color-mix(
+                            in srgb,
+                            var(--color-page) 97%,
+                            transparent
+                    ) 0%,
+                    color-mix(
+                            in srgb,
+                            var(--color-page) 90%,
+                            transparent
+                    ) 50%,
+                    color-mix(
+                            in srgb,
+                            var(--color-page) 73%,
+                            transparent
+                    ) 100%
+            ),
+            linear-gradient(
+                    180deg,
+                    color-mix(
+                            in srgb,
+                            var(--color-page) 84%,
+                            transparent
+                    ),
+                    color-mix(
+                            in srgb,
+                            var(--color-page) 76%,
+                            transparent
+                    )
+            );
     backdrop-filter: blur(2px);
   }
 
   .hours-hero h1 {
-    font-size: clamp(2.65rem, 13vw, 4rem);
+    font-size:
+            clamp(
+                    2.65rem,
+                    13vw,
+                    4rem
+            );
     line-height: 1.02;
   }
 
@@ -948,9 +1219,8 @@
   }
 
   /*
-     * Mobile timeline:
-     * one chronological column with a line on the left.
-     */
+   * Mobile timeline
+   */
 
   .hours-day__header {
     grid-template-columns:
@@ -982,8 +1252,10 @@
     min-height: 0;
   }
 
-  .hours-day__item:nth-child(odd) .hours-day__event,
-  .hours-day__item:nth-child(even) .hours-day__event {
+  .hours-day__item:nth-child(odd)
+  .hours-day__event,
+  .hours-day__item:nth-child(even)
+  .hours-day__event {
     grid-column: 2;
     margin: 0;
   }
@@ -999,8 +1271,10 @@
     width: var(--space-s);
   }
 
-  .hours-day__item:nth-child(odd) .hours-day__event::after,
-  .hours-day__item:nth-child(even) .hours-day__event::after {
+  .hours-day__item:nth-child(odd)
+  .hours-day__event::after,
+  .hours-day__item:nth-child(even)
+  .hours-day__event::after {
     right: auto;
     left: calc(var(--space-s) * -1);
   }
@@ -1041,6 +1315,383 @@
 }
 
 /*
+ * Scroll-driven timeline animation
+ *
+ * Progressive enhancement:
+ * unsupported browsers keep the fully visible static layout.
+ */
+
+@supports (animation-timeline: view()) {
+  .hours-day__timeline {
+    --hours-line-offset: -50%;
+
+    view-timeline-name: --hours-complete-timeline;
+    view-timeline-axis: block;
+  }
+
+  /*
+   * Animated progress line drawn over the static track.
+   */
+
+  .hours-day__timeline::after {
+    position: absolute;
+    top: 2rem;
+    bottom: 2rem;
+    left: 50%;
+    z-index: 1;
+    width: 2px;
+    border-radius: var(--radius-pill);
+    background:
+            linear-gradient(
+                    180deg,
+                    color-mix(
+                            in srgb,
+                            var(--color-blue) 38%,
+                            transparent
+                    ),
+                    var(--color-blue) 18%,
+                    var(--color-blue) 82%,
+                    color-mix(
+                            in srgb,
+                            var(--color-blue) 38%,
+                            transparent
+                    )
+            );
+    content: "";
+    opacity: 0;
+    transform:
+            translateX(var(--hours-line-offset))
+            scaleY(0);
+    transform-origin: top center;
+
+    animation:
+            hours-day-line-draw
+            1s
+            linear
+            both;
+    animation-timeline: --hours-complete-timeline;
+    animation-range:
+            entry 8%
+            cover 78%;
+  }
+
+  /*
+   * Each timeline item controls its own card,
+   * connector, marker and icon animation.
+   */
+
+  .hours-day__item {
+    --hours-event-enter-x: -2.5rem;
+    --hours-connector-origin: right center;
+
+    view-timeline-name: --hours-day-item;
+    view-timeline-axis: block;
+  }
+
+  .hours-day__item:nth-child(even) {
+    --hours-event-enter-x: 2.5rem;
+    --hours-connector-origin: left center;
+  }
+
+  /*
+   * Timeline card reveal.
+   */
+
+  .hours-day__event {
+    opacity: 0;
+    transform:
+            translate3d(
+                    var(--hours-event-enter-x),
+                    0.85rem,
+                    0
+            )
+            scale(0.985);
+    transform-origin: center;
+
+    animation:
+            hours-day-event-reveal
+            1s
+            cubic-bezier(0.22, 1, 0.36, 1)
+            both;
+    animation-timeline: --hours-day-item;
+    animation-range:
+            entry 4%
+            cover 38%;
+  }
+
+  /*
+   * Connector extends from the card towards the marker.
+   */
+
+  .hours-day__event::after {
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: var(--hours-connector-origin);
+
+    animation:
+            hours-day-connector-reveal
+            1s
+            cubic-bezier(0.22, 1, 0.36, 1)
+            both;
+    animation-timeline: --hours-day-item;
+    animation-range:
+            entry 16%
+            cover 42%;
+  }
+
+  /*
+   * Marker circle responds when the vertical line reaches it.
+   */
+
+  .hours-day__marker {
+    opacity: 0;
+    transform:
+            scale(0.65)
+            rotate(-7deg);
+
+    animation:
+            hours-day-marker-arrive
+            1s
+            cubic-bezier(0.34, 1.42, 0.64, 1)
+            both;
+    animation-timeline: --hours-day-item;
+    animation-range:
+            entry 22%
+            cover 48%;
+  }
+
+  /*
+   * Expanding pulse ring around the marker.
+   */
+
+  .hours-day__marker::after {
+    position: absolute;
+    inset: -0.45rem;
+    border:
+            2px solid
+            color-mix(
+                    in srgb,
+                    var(--color-blue) 34%,
+                    transparent
+            );
+    border-radius: 50%;
+    content: "";
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.72);
+
+    animation:
+            hours-day-marker-pulse
+            1s
+            ease-out
+            both;
+    animation-timeline: --hours-day-item;
+    animation-range:
+            entry 25%
+            cover 51%;
+  }
+
+  /*
+   * Icon animates immediately after its marker activates.
+   */
+
+  .hours-day__marker svg,
+  .hours-day__marker img {
+    opacity: 0;
+    transform: scale(0.65);
+    transform-origin: center;
+
+    animation:
+            hours-day-marker-icon
+            1s
+            cubic-bezier(0.34, 1.56, 0.64, 1)
+            both;
+    animation-timeline: --hours-day-item;
+    animation-range:
+            entry 27%
+            cover 53%;
+  }
+
+  /*
+   * Scroll animation keyframes
+   */
+
+  @keyframes hours-day-line-draw {
+    0% {
+      opacity: 0;
+      transform:
+              translateX(var(--hours-line-offset))
+              scaleY(0);
+    }
+
+    8% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 1;
+      transform:
+              translateX(var(--hours-line-offset))
+              scaleY(1);
+    }
+  }
+
+  @keyframes hours-day-event-reveal {
+    0% {
+      opacity: 0;
+      transform:
+              translate3d(
+                      var(--hours-event-enter-x),
+                      0.85rem,
+                      0
+              )
+              scale(0.985);
+    }
+
+    68% {
+      opacity: 1;
+      transform:
+              translate3d(
+                      0,
+                      -0.08rem,
+                      0
+              )
+              scale(1.006);
+    }
+
+    100% {
+      opacity: 1;
+      transform:
+              translate3d(0, 0, 0)
+              scale(1);
+    }
+  }
+
+  @keyframes hours-day-connector-reveal {
+    0% {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    35% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes hours-day-marker-arrive {
+    0% {
+      opacity: 0;
+      transform:
+              scale(0.65)
+              rotate(-7deg);
+      box-shadow:
+              0 0 0 0
+              color-mix(
+                      in srgb,
+                      var(--color-blue) 0%,
+                      transparent
+              );
+    }
+
+    62% {
+      opacity: 1;
+      transform:
+              scale(1.12)
+              rotate(2deg);
+      box-shadow:
+              0 0 0 0.45rem
+              color-mix(
+                      in srgb,
+                      var(--color-blue-soft) 72%,
+                      var(--color-surface)
+              ),
+              0 0 0 0.85rem
+              color-mix(
+                      in srgb,
+                      var(--color-blue) 12%,
+                      transparent
+              );
+    }
+
+    100% {
+      opacity: 1;
+      transform:
+              scale(1)
+              rotate(0);
+      box-shadow:
+              0 0 0 0.45rem
+              color-mix(
+                      in srgb,
+                      var(--color-blue-soft) 68%,
+                      var(--color-surface)
+              );
+    }
+  }
+
+  @keyframes hours-day-marker-pulse {
+    0% {
+      opacity: 0;
+      transform: scale(0.72);
+    }
+
+    28% {
+      opacity: 0.72;
+    }
+
+    100% {
+      opacity: 0;
+      transform: scale(1.42);
+    }
+  }
+
+  @keyframes hours-day-marker-icon {
+    0% {
+      opacity: 0;
+      transform: scale(0.65);
+    }
+
+    66% {
+      opacity: 1;
+      transform: scale(1.18);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+/*
+ * Scroll-driven mobile timeline alignment
+ */
+
+@media (width < 48rem) {
+  @supports (animation-timeline: view()) {
+    .hours-day__timeline {
+      --hours-line-offset: 0%;
+    }
+
+    .hours-day__timeline::after {
+      top: 1.75rem;
+      bottom: 1.75rem;
+      left: 1.5rem;
+    }
+
+    .hours-day__item,
+    .hours-day__item:nth-child(even) {
+      --hours-event-enter-x: 1.35rem;
+      --hours-connector-origin: left center;
+    }
+  }
+}
+
+/*
  * Reduced motion
  */
 
@@ -1057,5 +1708,45 @@
   .nutrition-feature:hover,
   .hours-day__event:hover {
     transform: none;
+  }
+
+  @supports (animation-timeline: view()) {
+    .hours-day__timeline::after {
+      opacity: 1;
+      transform:
+              translateX(var(--hours-line-offset))
+              scaleY(1);
+      animation: none;
+    }
+
+    .hours-day__event {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .hours-day__event::after {
+      opacity: 1;
+      transform: scaleX(1);
+      animation: none;
+    }
+
+    .hours-day__marker {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .hours-day__marker::after {
+      display: none;
+      animation: none;
+    }
+
+    .hours-day__marker svg,
+    .hours-day__marker img {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
   }
 }
