@@ -1,0 +1,30 @@
+---
+import { formatTime, formatPhoneDisplay } from "../../../lib/formatters";
+import { ensureBusinessDetails } from "../../../lib/context";
+import type { BusinessDetails } from "../../../lib/types";
+
+interface Props {
+  node: { field: string };
+}
+
+const { node } = Astro.props;
+const bd = await ensureBusinessDetails();
+
+function resolve(field: string, bd: BusinessDetails): string {
+  switch (field) {
+    case "organisationName": return bd.organisationName;
+    case "ageRange": return bd.ageRange.displayOverride || `${bd.ageRange.minimum} to ${bd.ageRange.maximum} years`;
+    case "languages": return bd.languages.join(", ");
+    case "openingDays": return bd.openingDays;
+    case "openingHours": return `${formatTime(bd.openingTime)}\u2013${formatTime(bd.closingTime)}`;
+    case "weeksOpen": return String(bd.weeksOpen);
+    case "publicEmail": return bd.publicEmail;
+    case "primaryPhone": return formatPhoneDisplay(bd.primaryPhone.number);
+    case "fullAddress": return `${bd.address.line1}, ${bd.address.city}, ${bd.address.postcode}`;
+    case "shortLocation": return bd.address.shortLocation;
+    default: return `[Unknown: ${field}]`;
+  }
+}
+---
+
+{resolve(node.field, bd)}

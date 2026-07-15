@@ -10,7 +10,7 @@ const homePage = await getHomePage();
 const businessDetails = await getBusinessDetails();
 ---
 
-<BaseLayout>
+<BaseLayout businessDetails={businessDetails}>
   <HeroSection homePage={homePage} businessDetails={businessDetails} />
   <ValuesSection homePage={homePage} />
   <FaqSection homePage={homePage} />

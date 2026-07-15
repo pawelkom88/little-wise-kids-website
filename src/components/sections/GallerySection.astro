@@ -1,107 +1,36 @@
 ---
 import Icon from "../icons/Icon.astro";
 import Section from "../layout/Section.astro";
+import { getHomeGalleryPhotos } from "../../utils/sanity";
+import { urlFor } from "../../lib/images";
 import "./GallerySection.css";
-
-import type { IconName } from "../icons/types";
+import type { HomePage } from "../../lib/types";
 
 interface Props {
-  homePage: any;
+  homePage: HomePage;
 }
 
 const { homePage } = Astro.props;
+const galleryPhotos = await getHomeGalleryPhotos();
 
-interface GalleryPhoto {
-  src: string;
-  alt: string;
-  label: string;
-  tone: string;
-  icon: IconName;
+const toneOptions = ["green", "purple", "blue", "yellow"] as const;
+const iconOptions = ["heart", "palette", "star", "book", "users"] as const;
+
+const galleryPages = [];
+for (let i = 0; i < galleryPhotos.length; i += 3) {
+  const pagePhotos = galleryPhotos.slice(i, i + 3);
+  galleryPages.push({
+    photos: pagePhotos.map((photo, idx) => ({
+      src: urlFor(photo.image).width(1200).height(900).url() ?? "",
+      alt: photo.image.altText ?? "",
+      label: photo.internalTitle ?? `Photo ${i + idx + 1}`,
+      tone: toneOptions[(i + idx) % toneOptions.length],
+      icon: iconOptions[(i + idx) % iconOptions.length],
+    })),
+  });
 }
 
-interface GalleryPage {
-  photos: GalleryPhoto[];
-}
-
-const galleryPages: GalleryPage[] = [
-  {
-    photos: [
-      {
-        src: "https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/cminder_table1-pzej258v3czl2144padkre67zd10ydplgpms3uml1c.jpg",
-        alt: "Children enjoying outdoor play at Little Wise Kids",
-        label: "Outdoor Play",
-        tone: "green",
-        icon: "heart",
-      },
-      {
-        src: "https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/artgallery2_o-pzgcyj2id2lpvh3en9iif8b6qdulcwwsmx7m2b2io0.jpg",
-        alt: "A child exploring creative activities",
-        label: "Creative Discovery",
-        tone: "purple",
-        icon: "palette",
-      },
-      {
-        src: "https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/child_car-pzej1zltycrv4dcbm7xtcflgf1sto737fxpv86uy2o.jpg",
-        alt: "Children sharing a happy moment together",
-        label: "Happy Moments",
-        tone: "blue",
-        icon: "heart",
-      },
-    ],
-  },
-  {
-    photos: [
-      {
-        src: "https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/child_play3-pzej21hic0ufrl9lb8r2hf4dltjk3lao470u6qs5q8.jpg",
-        alt: "A child learning through hands-on play",
-        label: "Hands-on Play",
-        tone: "yellow",
-        icon: "star",
-      },
-      {
-        src: "https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/girl_read-pzej05t4ny9sjnzwafhxhw76u2t4pdtzuw1vmtki68.jpg",
-        alt: "A child enjoying story time",
-        label: "Story Time",
-        tone: "purple",
-        icon: "book",
-      },
-      {
-        src: "https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/girl_grass2-pzeizvgwkrvmzyewyt118gt4au83cpoy5gvjcrzu2o.jpg",
-        alt: "A child exploring outdoors",
-        label: "Outdoor Adventures",
-        tone: "green",
-        icon: "heart",
-      },
-    ],
-  },
-  {
-    photos: [
-      {
-        src: "https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/run_grass-pzeiyc0fdjrpyyngyn21ncsx93tfqkks9udw1ga29s.jpg",
-        alt: "Children running and playing outside",
-        label: "Fresh Air",
-        tone: "blue",
-        icon: "users",
-      },
-      {
-        src: "https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/kitchen5-pzej0x2g65b3wcwav9a407bk292rwlu7mmyyjug35s.jpg",
-        alt: "A child discovering new activities",
-        label: "Curious Minds",
-        tone: "yellow",
-        icon: "star",
-      },
-      {
-        src: "https://littlewisekids.co.uk/wp-content/uploads/elementor/thumbs/kitchen2-pzej1exdrzzk0y6cyz00tktbckmqyut413d6o3plvk.jpg",
-        alt: "A child enjoying imaginative play",
-        label: "Play to Learn",
-        tone: "purple",
-        icon: "palette",
-      },
-    ],
-  },
-];
-
-const galleryPhotos = galleryPages.flatMap((page) => page.photos);
+const flatPhotos = galleryPages.flatMap((p) => p.photos);
 ---
 
 <Section
@@ -173,7 +102,7 @@ const galleryPhotos = galleryPages.flatMap((page) => page.photos);
                     ]}
                     id={`gallery-photo-${globalIndex + 1}`}
                     data-gallery-card
-                    aria-label={`${photo.label}, photo ${globalIndex + 1} of ${galleryPhotos.length}`}
+                    aria-label={`${photo.label}, photo ${globalIndex + 1} of ${flatPhotos.length}`}
                   >
                     <img
                       src={photo.src}
@@ -236,7 +165,7 @@ const galleryPhotos = galleryPages.flatMap((page) => page.photos);
         aria-label="Choose a gallery photo"
       >
         {
-          galleryPhotos.map((_, index) => (
+          flatPhotos.map((_, index) => (
             <button
               class="lwk-gallery__dot"
               type="button"

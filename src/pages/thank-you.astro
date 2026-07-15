@@ -4,25 +4,30 @@ import Icon from "../components/icons/Icon.astro";
 import Container from "../components/layout/Container.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
+import PortableContent from "../components/content/PortableContent.astro";
+import { getThankYouPage } from "../utils/sanity";
+
+const thankYouPage = await getThankYouPage();
 ---
 
 <BaseLayout
+ 
   title="Thank You | Little Wise Kids"
   description="Thank you for contacting Little Wise Kids. Our nursery team will review your enquiry and respond as soon as possible."
 >
   <article class="contact-success">
     <SubpageHero
       id="thank-you-title"
-      eyebrow="Message Received"
+      eyebrow={thankYouPage.heroEyebrow ?? "Message Received"}
       tone="blue"
       class="contact-hero--success"
     >
       <Fragment slot="title">
-        <span>Thank You for</span>
-        <span>Getting in Touch</span>
+        <span>{thankYouPage.heroTitleLineOne}</span>
+        <span>{thankYouPage.heroTitleLineTwo}</span>
       </Fragment>
 
-      <p>Your enquiry has been sent to the Little Wise Kids team.</p>
+      <PortableContent value={thankYouPage.heroParagraphs} />
     </SubpageHero>
 
     <section class="contact-success__content">
@@ -32,19 +37,17 @@ import SubpageHero from "../components/layout/SubpageHero.astro";
             <Icon name="heart" size={44} />
           </span>
 
-          <p class="contact-section-heading__eyebrow">What Happens Next</p>
+          {thankYouPage.nextStepsEyebrow && (
+            <p class="contact-section-heading__eyebrow">{thankYouPage.nextStepsEyebrow}</p>
+          )}
 
-          <h2>We’ll Be in Touch Soon</h2>
+          <h2>{thankYouPage.nextStepsHeading}</h2>
 
-          <p>
-            A member of our team will review your message and usually respond
-            within one working day. We look forward to learning more about your
-            family and how Little Wise Kids may be able to support your child.
-          </p>
+          <PortableContent value={thankYouPage.nextStepsBody} />
 
           <div class="contact-success__actions">
             <a class="contact-button contact-button--primary" href="/">
-              Return to Home
+              {thankYouPage.primaryCtaLabel}
               <span aria-hidden="true">→</span>
             </a>
 
@@ -52,7 +55,7 @@ import SubpageHero from "../components/layout/SubpageHero.astro";
               class="contact-button contact-button--secondary"
               href="/our-gallery"
             >
-              Explore Our Gallery
+              {thankYouPage.secondaryCtaLabel}
             </a>
           </div>
         </div>

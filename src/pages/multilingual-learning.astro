@@ -3,20 +3,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
 import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
-import { PortableText } from "astro-portabletext";
-import { getMultilingualPage, getBusinessDetails, urlFor } from "../utils/sanity";
+import PortableContent from "../components/content/PortableContent.astro";
+import { getMultilingualPage, urlFor } from "../utils/sanity";
 import "./multilingual-learning.css";
 
-const formatLanguages = (languages: readonly string[] | undefined) => {
-  if (!languages || languages.length === 0) return "";
-  if (languages.length === 1) return languages[0];
-  return `${languages.slice(0, -1).join(", ")} and ${languages[languages.length - 1]}`;
-};
-
 const multilingualPage = await getMultilingualPage();
-const businessDetails = await getBusinessDetails();
 
-const langImage = multilingualPage.languageConnectionImage ? urlFor(multilingualPage.languageConnectionImage).width(800).height(800).url() : undefined;
+const hasLangImage = multilingualPage.languageConnectionImage?.asset?._ref && !multilingualPage.languageConnectionImage.asset._ref.includes("dummy");
+const langImage = hasLangImage ? urlFor(multilingualPage.languageConnectionImage).width(800).height(800).url() : undefined;
 
 const philosophyPoints = [
   {
@@ -96,6 +90,7 @@ const screenFreeBenefits = [
 ---
 
 <BaseLayout
+ 
   title="Multilingual Learning | Little Wise Kids"
   description="Explore the multilingual, child-led, screen-free learning philosophy at Little Wise Kids."
 >
@@ -110,7 +105,7 @@ const screenFreeBenefits = [
         <span>{multilingualPage.heroTitleLineTwo}</span>
       </Fragment>
 
-      <PortableText value={multilingualPage.heroParagraphs} />
+      <PortableContent value={multilingualPage.heroParagraphs} />
     </SubpageHero>
 
     <div class="lwk-multilingual__sections">
@@ -135,23 +130,21 @@ const screenFreeBenefits = [
               </h2>
 
               <div class="lwk-multilingual__prose">
-                <PortableText value={multilingualPage.philosophyParagraphs} />
+                <PortableContent value={multilingualPage.philosophyParagraphs} />
               </div>
 
-              <aside class="lwk-multilingual__discovery-note">
-                <span
-                  class="lwk-multilingual__discovery-icon"
-                  aria-hidden="true"
-                >
-                  <Icon name="heart" size={30} />
-                </span>
+                <aside class="lwk-multilingual__discovery-note">
+                  <span
+                    class="lwk-multilingual__discovery-icon"
+                    aria-hidden="true"
+                  >
+                    <Icon name="heart" size={30} />
+                  </span>
 
-                <p>
-                  Every day can bring a new discovery: a word in Portuguese, an
-                  insect in the garden, a new way to solve a problem or a story
-                  that sparks a child’s imagination.
-                </p>
-              </aside>
+                  <p>
+                    {multilingualPage.discoveryNote}
+                  </p>
+                </aside>
             </div>
 
             <div class="lwk-multilingual__list-panel">
@@ -202,20 +195,10 @@ const screenFreeBenefits = [
               <h2 id="languages-title">{multilingualPage.languageConnectionHeading}</h2>
 
               <div class="lwk-multilingual__prose">
-                <PortableText value={multilingualPage.languageConnectionParagraphs} />
+                <PortableContent value={multilingualPage.languageConnectionParagraphs} />
               </div>
 
-              <aside class="lwk-multilingual__cms-note">
-                <span class="lwk-multilingual__cms-icon" aria-hidden="true">
-                  <Icon name="chat" size={24} />
-                </span>
 
-                <p>
-                  <strong>CMS note:</strong>
-                  {formatLanguages(businessDetails.languages)} are the current languages offered.
-                  This may change and must be easy to update.
-                </p>
-              </aside>
             </div>
 
             <div
@@ -254,7 +237,7 @@ const screenFreeBenefits = [
               <h2 id="eyfs-title">{multilingualPage.eyfsHeading}</h2>
 
               <div class="lwk-multilingual__prose">
-                <PortableText value={multilingualPage.eyfsParagraphs} />
+                <PortableContent value={multilingualPage.eyfsParagraphs} />
               </div>
             </div>
 
@@ -305,7 +288,7 @@ const screenFreeBenefits = [
               </h2>
 
               <div class="lwk-multilingual__prose">
-                <PortableText value={multilingualPage.screenFreeParagraphs} />
+                <PortableContent value={multilingualPage.screenFreeParagraphs} />
               </div>
             </div>
 

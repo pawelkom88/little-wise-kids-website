@@ -1,0 +1,27 @@
+---
+import { PortableText } from "astro-portabletext";
+import InlineBusinessDetail from "./portable/InlineBusinessDetail.astro";
+import ContentImageBlock from "./portable/ContentImageBlock.astro";
+import StrictImageBlock from "./portable/StrictImageBlock.astro";
+import ExternalLink from "./portable/ExternalLink.astro";
+
+interface Props {
+  value: any;
+  class?: string;
+}
+
+const { value } = Astro.props;
+
+const components = {
+  type: {
+    inlineBusinessDetail: InlineBusinessDetail,
+    contentImage: ContentImageBlock,
+    strictImage: StrictImageBlock,
+  },
+  mark: {
+    link: ExternalLink,
+  },
+} as any;
+---
+
+<PortableText value={value} components={components} />

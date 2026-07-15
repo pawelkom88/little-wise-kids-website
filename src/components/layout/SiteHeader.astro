@@ -4,9 +4,10 @@ import Icon from "../icons/Icon.astro";
 import Button from "../ui/Button.astro";
 import Container from "./Container.astro";
 import "./SiteHeader.css";
+import type { BusinessDetails } from "../../lib/types";
 
 interface Props {
-  businessDetails: any;
+  businessDetails: BusinessDetails;
 }
 
 const { businessDetails } = Astro.props;
@@ -14,7 +15,7 @@ const { businessDetails } = Astro.props;
 
 <header class="site-header" data-site-header>
   <Container size="wide" class="site-header__inner">
-    <a class="brand" href="/" aria-label={`${businessDetails.organizationName} home`}>
+    <a class="brand" href="/" aria-label={`${businessDetails.organisationName} home`}>
       <img
         class="brand__logo"
         src="/assets/images/logo.png"
@@ -22,7 +23,7 @@ const { businessDetails } = Astro.props;
         width="1774"
         height="887"
       />
-      <span class="sr-only">{businessDetails.organizationName}</span>
+      <span class="sr-only">{businessDetails.organisationName}</span>
     </a>
 
     <nav class="site-nav" aria-label="Primary navigation">
@@ -49,7 +50,7 @@ const { businessDetails } = Astro.props;
           <img
             class="mobile-menu__logo"
             src="/assets/images/logo.png"
-            alt={businessDetails.organizationName}
+            alt={businessDetails.organisationName}
           />
           <button
             class="mobile-menu__close"

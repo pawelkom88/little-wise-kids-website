@@ -1,0 +1,18 @@
+---
+import { urlFor } from "../../../lib/images";
+
+interface Props {
+  node: any;
+}
+const { node } = Astro.props;
+
+const hasValidAsset = node?.asset?._ref && !node.asset._ref.includes("dummy");
+const imageUrl = hasValidAsset ? urlFor(node).width(1200).url() : null;
+---
+
+{imageUrl ? (
+  <figure class="content-image">
+    <img src={imageUrl} alt={node.altText ?? ""} loading="lazy" decoding="async" />
+    {node.caption && <figcaption>{node.caption}</figcaption>}
+  </figure>
+) : null}

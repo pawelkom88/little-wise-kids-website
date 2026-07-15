@@ -1,7 +1,7 @@
 ---
-import { PortableText } from "astro-portabletext";
 import Icon from "../../icons/Icon.astro";
 import Button from "../../ui/Button.astro";
+import PortableContent from "../../content/PortableContent.astro";
 import { urlFor } from "../../../utils/sanity";
 import "./VisitSection.css";
 
@@ -10,7 +10,8 @@ interface Props {
 }
 
 const { homePage } = Astro.props;
-const imageUrl = homePage.visitImage ? urlFor(homePage.visitImage).width(1200).height(800).url() : undefined;
+const hasVisitImage = homePage.visitImage?.asset?._ref && !homePage.visitImage.asset._ref.includes("dummy");
+const imageUrl = hasVisitImage ? urlFor(homePage.visitImage).width(1200).height(800).url() : undefined;
 ---
 
 <section class="lwk-visit" aria-labelledby="visit-title">
@@ -27,7 +28,7 @@ const imageUrl = homePage.visitImage ? urlFor(homePage.visitImage).width(1200).h
       </div>
 
       <div class="lwk-visit__copy">
-        <PortableText value={homePage.visitParagraphs} />
+        <PortableContent value={homePage.visitParagraphs} />
       </div>
 
       <div class="lwk-visit__actions">

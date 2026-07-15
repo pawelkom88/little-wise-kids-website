@@ -1,13 +1,14 @@
 ---
-import { PortableText } from "astro-portabletext";
 import Image from "astro/components/Image.astro";
 import envelopeIcon from "../../../assets/icons/icon-envelope.png";
 import flowerIcon from "../../../assets/icons/flower-icon.png";
 import Section from "../layout/Section.astro";
+import PortableContent from "../content/PortableContent.astro";
 import "./FaqSection.css";
+import type { HomePage } from "../../lib/types";
 
 interface Props {
-  homePage: any;
+  homePage: HomePage;
 }
 
 const { homePage } = Astro.props;
@@ -47,7 +48,7 @@ const { homePage } = Astro.props;
             <div class="faq-answer">
               <div class="faq-answer-inner">
                 <div class="faq-answer-content">
-                  <PortableText value={faq.answer} />
+                  <PortableContent value={faq.answer} />
                 </div>
               </div>
             </div>

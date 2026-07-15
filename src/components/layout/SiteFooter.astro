@@ -3,9 +3,11 @@ import { navItems, legalLinks } from "../../data/site";
 import Icon from "../icons/Icon.astro";
 import Container from "./Container.astro";
 import "./SiteFooter.css";
+import type { BusinessDetails } from "../../lib/types";
+import { formatPhoneDisplay, formatPhoneHref } from "../../lib/formatters";
 
 interface Props {
-  businessDetails: any;
+  businessDetails: BusinessDetails;
 }
 
 const { businessDetails } = Astro.props;
@@ -29,12 +31,12 @@ const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact 
       <a
         class="lwk-footer__logo-link"
         href="/"
-        aria-label={`${businessDetails.organizationName} home`}
+        aria-label={`${businessDetails.organisationName} home`}
       >
         <img
           class="lwk-footer__logo"
           src="/assets/images/logo.png"
-          alt={businessDetails.organizationName}
+          alt={businessDetails.organisationName}
           width="1774"
           height="887"
           loading="lazy"
@@ -137,12 +139,12 @@ const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact 
               </span>
 
               <span class="lwk-footer__phone-links">
-                <a href={`tel:${businessDetails.primaryPhone.number.replace(/\s+/g, '')}`}>
-                  {businessDetails.primaryPhone.number}
+                <a href={formatPhoneHref(businessDetails.primaryPhone.number)}>
+                  {formatPhoneDisplay(businessDetails.primaryPhone.number)}
                 </a>
                 {businessDetails.secondaryPhone?.number && (
-                  <a href={`tel:${businessDetails.secondaryPhone.number.replace(/\s+/g, '')}`}>
-                    {businessDetails.secondaryPhone.number}
+                  <a href={formatPhoneHref(businessDetails.secondaryPhone.number)}>
+                    {formatPhoneDisplay(businessDetails.secondaryPhone.number)}
                   </a>
                 )}
               </span>
@@ -203,7 +205,7 @@ const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact 
         </nav>
         <p>
           &copy; {new Date().getFullYear()}
-          {businessDetails.organizationName}. All rights reserved.
+          {businessDetails.organisationName}. All rights reserved.
         </p>
       </div>
     </Container>

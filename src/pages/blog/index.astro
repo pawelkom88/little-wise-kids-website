@@ -3,26 +3,29 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Container from "../../components/layout/Container.astro";
 import Icon from "../../components/icons/Icon.astro";
 import SubpageHero from "../../components/layout/SubpageHero.astro";
+import PortableContent from "../../components/content/PortableContent.astro";
+import { getBlogPage, getBlogPosts } from "../../utils/sanity";
+import { mapBlogPost, blogCategories } from "../../lib/blog";
 import "./blog.css";
 
-import { articles, categories } from "../../data/blog";
+const blogPage = await getBlogPage();
+const posts = await getBlogPosts();
+const articles = posts.map(mapBlogPost);
 ---
 
 <BaseLayout
+ 
   title="Nursery News and Early Years Advice | Little Wise Kids"
   description="Read nursery news, early years guidance, parenting ideas, nutrition advice and community updates from Little Wise Kids in Bristol BS5."
 >
   <article class="blog-page">
-    <SubpageHero id="blog-page-title" eyebrow="Blog / News" tone="purple">
+    <SubpageHero id="blog-page-title" eyebrow={blogPage.heroEyebrow} tone="purple">
       <Fragment slot="title">
-        <span>Ideas, Updates and</span>
-        <span>Little Moments That Matter</span>
+        <span>{blogPage.heroTitleLineOne}</span>
+        <span>{blogPage.heroTitleLineTwo}</span>
       </Fragment>
 
-      <p>
-        Sharing nursery news, early years guidance, learning ideas and community
-        updates for families in Bristol BS5.
-      </p>
+      <PortableContent value={blogPage.heroParagraphs} />
     </SubpageHero>
 
     <div class="blog-page__content">
@@ -30,14 +33,15 @@ import { articles, categories } from "../../data/blog";
         <section class="blog-index" aria-labelledby="latest-articles-title">
           <header class="blog-index__header">
             <div class="blog-index__heading">
-              <p class="blog-index__eyebrow">From Little Wise Kids</p>
+              {blogPage.latestArticlesEyebrow && (
+                <p class="blog-index__eyebrow">{blogPage.latestArticlesEyebrow}</p>
+              )}
 
-              <h2 id="latest-articles-title">Latest Articles</h2>
+              <h2 id="latest-articles-title">{blogPage.latestArticlesHeading}</h2>
 
-              <p>
-                Explore helpful guidance, thoughtful ideas and updates from
-                daily life at our early years setting.
-              </p>
+              {blogPage.latestArticlesIntroduction && (
+                <PortableContent value={blogPage.latestArticlesIntroduction} />
+              )}
             </div>
 
             <div
@@ -46,7 +50,7 @@ import { articles, categories } from "../../data/blog";
               aria-label="Filter articles by category"
             >
               {
-                categories.map((category, index) => (
+                blogCategories.map((category, index) => (
                   <button
                     class="blog-filter"
                     type="button"
@@ -54,7 +58,7 @@ import { articles, categories } from "../../data/blog";
                     aria-pressed={index === 0 ? "true" : "false"}
                   >
                     <span class="blog-filter__icon" aria-hidden="true">
-                      <Icon name={category.icon} size={18} />
+                      <Icon name={category.icon as any} size={18} />
                     </span>
 
                     <span>{category.label}</span>
@@ -106,7 +110,7 @@ import { articles, categories } from "../../data/blog";
                     <div class="blog-card__body">
                       <span class="blog-card__category">
                         <span aria-hidden="true">
-                          <Icon name={article.icon} size={17} />
+                          <Icon name={article.icon as any} size={17} />
                         </span>
 
                         {article.categoryLabel}

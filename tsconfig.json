@@ -5,6 +5,7 @@
     "jsxImportSource": "react"
   },
   "include": [
+    "src",
     "./worker-configuration.d.ts"
   ]
 }

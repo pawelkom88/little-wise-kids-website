@@ -3,87 +3,53 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
 import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
+import PortableContent from "../components/content/PortableContent.astro";
+import { getGalleryPage, getGalleryPhotos } from "../utils/sanity";
+import { urlFor } from "../lib/images";
 import "./our-gallery.css";
 
-const galleryCategories = [
-  {
-    id: "outdoor-learning-experience",
-    title: "Outdoor Learning Experience",
-    icon: "star",
-    tone: "green",
-    image: null,
-  },
-  {
-    id: "indoor-learning-experience",
-    title: "Indoor Learning Experience",
-    icon: "book",
-    tone: "blue",
-    image: null,
-  },
-  {
-    id: "language-immersion",
-    title: "Language Immersion",
-    icon: "chat",
-    tone: "purple",
-    image: null,
-  },
-  {
-    id: "nutrition-and-mealtimes",
-    title: "Nutrition and Mealtimes",
-    icon: "heart",
-    tone: "yellow",
-    image: null,
-  },
-  {
-    id: "creative-play",
-    title: "Creative Play",
-    icon: "palette",
-    tone: "purple",
-    image: null,
-  },
-  {
-    id: "sensory-exploration",
-    title: "Sensory Exploration",
-    icon: "star",
-    tone: "yellow",
-    image: null,
-  },
-  {
-    id: "nature-and-gardening",
-    title: "Nature and Gardening",
-    icon: "heart",
-    tone: "green",
-    image: null,
-  },
-  {
-    id: "celebrations-and-community",
-    title: "Celebrations and Community",
-    icon: "person",
-    tone: "blue",
-    image: null,
-  },
-] as const;
+const galleryPage = await getGalleryPage();
+const allPhotos = await getGalleryPhotos();
+
+const categoryMeta: Record<string, { title: string; icon: string; tone: string }> = {
+  "outdoor-learning-experience": { title: "Outdoor Learning Experience", icon: "star", tone: "green" },
+  "indoor-learning-experience": { title: "Indoor Learning Experience", icon: "book", tone: "blue" },
+  "language-immersion": { title: "Language Immersion", icon: "chat", tone: "purple" },
+  "nutrition-and-mealtimes": { title: "Nutrition and Mealtimes", icon: "heart", tone: "yellow" },
+  "creative-play": { title: "Creative Play", icon: "palette", tone: "purple" },
+  "sensory-exploration": { title: "Sensory Exploration", icon: "star", tone: "yellow" },
+  "nature-and-gardening": { title: "Nature and Gardening", icon: "heart", tone: "green" },
+  "celebrations-and-community": { title: "Celebrations and Community", icon: "person", tone: "blue" },
+};
+
+const categories = allPhotos.reduce((acc, photo) => {
+  const cat = photo.category ?? "other";
+  if (!acc[cat]) {
+    acc[cat] = { photos: [], meta: categoryMeta[cat] ?? { title: cat, icon: "image", tone: "purple" } };
+  }
+  acc[cat].photos.push(photo);
+  return acc;
+}, {} as Record<string, { photos: typeof allPhotos; meta: { title: string; icon: string; tone: string } }>);
+
+const categoryEntries = Object.entries(categories);
 ---
 
 <BaseLayout
+ 
   title="Our Gallery | Little Wise Kids"
   description="Explore moments of curiosity, creativity and connection from the indoor and outdoor learning spaces at Little Wise Kids."
 >
   <article class="gallery-page">
-    <SubpageHero id="gallery-page-title" eyebrow="Our Gallery" tone="blue">
+    <SubpageHero id="gallery-page-title" eyebrow={galleryPage.heroEyebrow ?? "Our Gallery"} tone="blue">
       <Fragment slot="title">
-        <span>A Glimpse Into</span>
-        <span>Our Little World</span>
+        <span>{galleryPage.heroTitleLineOne}</span>
+        <span>{galleryPage.heroTitleLineTwo}</span>
       </Fragment>
 
-      <p>
-        Every day at Little Wise Kids is full of curiosity, creativity,
-        connection and discovery. Explore moments from our indoor and outdoor
-        learning spaces, activities, celebrations and daily routines.
-      </p>
+      <PortableContent value={galleryPage.heroParagraphs} />
 
       <a class="gallery-hero__cta" href="/contact">
-        Register Your Interest
+        {galleryPage.heroCtaLabel}
         <span aria-hidden="true">→</span>
       </a>
     </SubpageHero>
@@ -95,76 +61,64 @@ const galleryCategories = [
           aria-labelledby="explore-gallery-title"
         >
           <header class="gallery-page__heading">
-            <p class="gallery-page__label">Explore Our Gallery</p>
+            <p class="gallery-page__label">{galleryPage.galleryIntroLabel}</p>
 
-            <h2 id="explore-gallery-title">
-              Moments of Learning, Play and Discovery
-            </h2>
+            <h2 id="explore-gallery-title">{galleryPage.galleryIntroHeading}</h2>
 
-            <p>
-              Browse the categories below or explore every part of daily life at
-              Little Wise Kids.
-            </p>
+            <PortableContent value={galleryPage.galleryIntroCopy} />
           </header>
 
-          <nav
-            class="gallery-categories"
-            aria-label="Browse gallery categories"
-          >
-            {
-              galleryCategories.map((category) => (
-                <a
-                  class={`gallery-category gallery-category--${category.tone}`}
-                  href={`#${category.id}`}
-                >
-                  <span class="gallery-category__icon" aria-hidden="true">
-                    <Icon name={category.icon} size={23} />
-                  </span>
+          {categoryEntries.length > 0 && (
+            <nav
+              class="gallery-categories"
+              aria-label="Browse gallery categories"
+            >
+              {
+                categoryEntries.map(([id, { meta }]) => (
+                  <a
+                    class={`gallery-category gallery-category--${meta.tone}`}
+                    href={`#${id}`}
+                  >
+                    <span class="gallery-category__icon" aria-hidden="true">
+                      <Icon name={meta.icon as any} size={23} />
+                    </span>
 
-                  <span>{category.title}</span>
-                </a>
-              ))
-            }
-          </nav>
+                    <span>{meta.title}</span>
+                  </a>
+                ))
+              }
+            </nav>
+          )}
 
           <div class="gallery-grid">
             {
-              galleryCategories.map((item) => (
-                <figure
-                  id={item.id}
-                  class={`gallery-card gallery-card--${item.tone}`}
-                >
-                  <div class="gallery-card__media">
-                    {item.image ? (
+              categoryEntries.map(([id, { photos, meta }]) =>
+                photos.map((photo) => (
+                  <figure
+                    id={id}
+                    class={`gallery-card gallery-card--${meta.tone}`}
+                  >
+                    <div class="gallery-card__media">
                       <img
-                        src={item.image}
-                        alt={item.title}
+                        src={urlFor(photo.image).width(900).height(680).url()}
+                        alt={photo.image.altText ?? ""}
                         width="900"
                         height="680"
                         loading="lazy"
                         decoding="async"
                       />
-                    ) : (
-                      <span
-                        class="gallery-card__placeholder"
-                        aria-hidden="true"
-                      >
-                        <Icon name="image" size={40} />
+                    </div>
 
-                        <span>New image to be supplied</span>
+                    <figcaption>
+                      <span class="gallery-card__caption-icon" aria-hidden="true">
+                        <Icon name={meta.icon as any} size={19} />
                       </span>
-                    )}
-                  </div>
 
-                  <figcaption>
-                    <span class="gallery-card__caption-icon" aria-hidden="true">
-                      <Icon name={item.icon} size={19} />
-                    </span>
-
-                    <span>{item.title}</span>
-                  </figcaption>
-                </figure>
-              ))
+                      <span>{meta.title}</span>
+                    </figcaption>
+                  </figure>
+                ))
+              )
             }
           </div>
         </section>
@@ -175,16 +129,13 @@ const galleryCategories = [
           </span>
 
           <div class="gallery-cta__copy">
-            <h2>Come and See Little Wise Kids</h2>
+            <h2>{galleryPage.finalCtaHeading}</h2>
 
-            <p>
-              Visit our setting, meet our educators and discover how we can
-              support your child to learn, grow and thrive.
-            </p>
+            <PortableContent value={galleryPage.finalCtaCopy} />
           </div>
 
           <a class="gallery-cta__link" href="/contact">
-            Register Your Interest
+            {galleryPage.finalCtaLabel}
             <span aria-hidden="true">→</span>
           </a>
         </aside>

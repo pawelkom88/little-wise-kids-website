@@ -3,32 +3,34 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Container from "../../components/layout/Container.astro";
 import Icon from "../../components/icons/Icon.astro";
 import SubpageHero from "../../components/layout/SubpageHero.astro";
+import PortableContent from "../../components/content/PortableContent.astro";
+import { getBlogPosts } from "../../utils/sanity";
+import { mapBlogPost } from "../../lib/blog";
+import { urlFor } from "../../lib/images";
 import "./blog-article.css";
 
-import { articles } from "../../data/blog";
-import type { BlogArticle } from "../../data/blog";
-
-export function getStaticPaths() {
-  return articles.map((article) => ({
-    params: {
-      slug: article.slug,
-    },
-    props: {
-      article,
-    },
+export async function getStaticPaths() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug.current },
+    props: { post },
   }));
 }
 
 interface Props {
-  article: BlogArticle;
+  post: any;
 }
 
-const { article } = Astro.props as Props;
+const { post } = Astro.props;
 
-const { displayDate, readTime } = article;
+const article = mapBlogPost(post);
+const imageUrl = post.featuredImage
+  ? urlFor(post.featuredImage).width(1200).url()
+  : null;
 ---
 
 <BaseLayout
+ 
   title={`${article.title} | Little Wise Kids`}
   description={article.excerpt}
 >
@@ -62,7 +64,7 @@ const { displayDate, readTime } = article;
               </span>
 
               <time datetime={article.published} itemprop="datePublished">
-                {displayDate}
+                {article.displayDate}
               </time>
             </div>
 
@@ -75,53 +77,27 @@ const { displayDate, readTime } = article;
               </span>
 
               <span>
-                {readTime}
+                {article.readTime}
               </span>
             </div>
           </header>
 
-          <figure class="blog-article__image">
-            {
-              article.image ? (
-                <img
-                  src={article.image.src}
-                  alt={article.image.alt}
-                  width={article.image.width}
-                  height={article.image.height}
-                  loading="eager"
-                  decoding="async"
-                  itemprop="image"
-                />
-              ) : (
-                <div class="blog-article__image-placeholder" aria-hidden="true">
-                  <Icon name="image" size={54} />
-
-                  <span>Main article image</span>
-                </div>
-              )
-            }
-          </figure>
+          {imageUrl && (
+            <figure class="blog-article__image">
+              <img
+                src={imageUrl}
+                alt={post.featuredImage?.altText ?? ""}
+                width="1200"
+                height="800"
+                loading="eager"
+                decoding="async"
+                itemprop="image"
+              />
+            </figure>
+          )}
 
           <div class="blog-article__prose" itemprop="articleBody">
-            {
-              article.content.map((block) => {
-                if (block.type === "heading") {
-                  return <h2 id={block.id}>{block.text}</h2>;
-                }
-
-                if (block.type === "list") {
-                  return (
-                    <ul>
-                      {block.items.map((item) => (
-                        <li>{item}</li>
-                      ))}
-                    </ul>
-                  );
-                }
-
-                return <p>{block.text}</p>;
-              })
-            }
+            <PortableContent value={article.body} />
           </div>
         </div>
       </Container>

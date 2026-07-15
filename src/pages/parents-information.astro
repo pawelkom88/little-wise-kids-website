@@ -2,8 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
-import { PortableText } from "astro-portabletext";
-import { getParentsPage } from "../utils/sanity";
+import PortableContent from "../components/content/PortableContent.astro";
+import { getParentsPage, getPolicyDocuments } from "../utils/sanity";
+import { getFileUrl } from "../lib/formatters";
 import "./parents-information.css";
 
 const parentsPage = await getParentsPage();
@@ -44,36 +45,12 @@ const subsidyFaqs = parentsPage.subsidyFaqs;
 
 const settlingStrategies = parentsPage.settlingStrategies;
 
-const policies = [
-  {
-    label: "GDPR / Privacy Policy",
-    href: "/documents/gdpr-privacy-policy.pdf",
-  },
-  {
-    label: "Safeguarding Policy",
-    href: "/documents/safeguarding-policy.pdf",
-  },
-  {
-    label: "Complaints Policy",
-    href: "/documents/complaints-policy.pdf",
-  },
-  {
-    label: "Health and Safety Policy",
-    href: "/documents/health-and-safety-policy.pdf",
-  },
-  {
-    label: "Partnership Policy",
-    href: "/documents/partnership-policy.pdf",
-  },
-  {
-    label: "Settling-In Process Policy",
-    href: "/documents/settling-in-process-policy.pdf",
-  },
-] as const;
+const policyDocuments = await getPolicyDocuments();
 ---
 
 <BaseLayout
-  title="Parents’ Information | Little Wise Kids"
+ 
+  title="Parents' Information | Little Wise Kids"
   description="Guidance for Little Wise Kids families covering school readiness, childcare funding, fees, settling in, family partnerships and nursery policies."
 >
   <article class="parents-page">
@@ -87,7 +64,7 @@ const policies = [
         <span>{parentsPage.heroTitleLineTwo}</span>
       </Fragment>
 
-      <PortableText value={parentsPage.heroParagraphs} />
+      <PortableContent value={parentsPage.heroParagraphs} />
     </SubpageHero>
 
     <div class="parents-page__content">
@@ -114,7 +91,7 @@ const policies = [
                 </header>
 
                 <div class="parents-card__prose">
-                  <PortableText value={parentsPage.startingSchoolParagraphs} />
+                  <PortableContent value={parentsPage.startingSchoolParagraphs} />
                 </div>
               </div>
 
@@ -151,21 +128,11 @@ const policies = [
                 </header>
 
                 <div class="parents-card__prose">
-                  <PortableText value={parentsPage.feesFundingParagraphs} />
+                  <PortableContent value={parentsPage.feesFundingParagraphs} />
                 </div>
               </div>
 
-              <aside
-                class="parents-card__notice
-                  parents-card__notice--yellow"
-              >
-                <p class="parents-card__notice-label">CMS note</p>
 
-                <p>
-                  Funding rules, entitlements and rates can change. This section
-                  must be reviewed regularly and made easy to update.
-                </p>
-              </aside>
             </div>
           </section>
 
@@ -192,7 +159,7 @@ const policies = [
                 </header>
 
                 <div class="parents-card__prose">
-                  <PortableText value={parentsPage.howFundingWorksParagraphs} />
+                  <PortableContent value={parentsPage.howFundingWorksParagraphs} />
                 </div>
               </div>
 
@@ -234,7 +201,7 @@ const policies = [
                 </header>
 
                 <div class="parents-card__prose">
-                  <PortableText value={parentsPage.fundingSupportParagraphs} />
+                  <PortableContent value={parentsPage.fundingSupportParagraphs} />
                 </div>
               </div>
 
@@ -279,7 +246,7 @@ const policies = [
                 </header>
 
                 <div class="parents-card__prose">
-                  <PortableText value={parentsPage.taxFreeParagraphs} />
+                  <PortableContent value={parentsPage.taxFreeParagraphs} />
                 </div>
               </div>
 
@@ -324,7 +291,7 @@ const policies = [
               </header>
 
               <div class="parents-card__prose">
-                <PortableText value={parentsPage.weeklyFeesParagraphs} />
+                  <PortableContent value={parentsPage.weeklyFeesParagraphs} />
               </div>
             </div>
 
@@ -335,16 +302,16 @@ const policies = [
               aria-label="Weekly fees and funding table"
             >
               <table class="parents-fees-table">
-                <caption class="sr-only">
-                  Editable weekly childcare fee and funding values
-                </caption>
+                  <caption class="sr-only">
+                    Weekly childcare fee and funding values
+                  </caption>
 
-                <thead>
-                  <tr>
-                    <th scope="col"> Fee or funding element </th>
-                    <th scope="col"> CMS value </th>
-                  </tr>
-                </thead>
+                  <thead>
+                    <tr>
+                      <th scope="col"> Fee or funding element </th>
+                      <th scope="col"> Current rate </th>
+                    </tr>
+                  </thead>
 
                 <tbody>
                   {
@@ -362,19 +329,7 @@ const policies = [
               </table>
             </div>
 
-            <aside
-              class="parents-card__notice
-                parents-card__notice--yellow
-                parents-card__notice--full"
-            >
-              <p class="parents-card__notice-label">CMS / developer note</p>
 
-              <p>
-                Connect these values to editable CMS fields. Do not hard-code
-                current fee figures into the page because rates, deductions and
-                additional charges require regular updates.
-              </p>
-            </aside>
           </section>
 
           <section
@@ -400,7 +355,7 @@ const policies = [
               </header>
 
               <div class="parents-card__prose">
-                <PortableText value={parentsPage.subsidyFaqsParagraphs} />
+                <PortableContent value={parentsPage.subsidyFaqsParagraphs} />
               </div>
             </div>
 
@@ -445,7 +400,7 @@ const policies = [
               </div>
 
               <div class="parents-card__prose">
-                <PortableText value={parentsPage.partnershipParagraphs} />
+                <PortableContent value={parentsPage.partnershipParagraphs} />
               </div>
             </div>
           </section>
@@ -473,7 +428,7 @@ const policies = [
               </header>
 
               <div class="parents-card__prose">
-                <PortableText value={parentsPage.settlingInParagraphs} />
+                <PortableContent value={parentsPage.settlingInParagraphs} />
               </div>
             </div>
 
@@ -523,7 +478,7 @@ const policies = [
               </header>
 
               <div class="parents-card__prose">
-                <PortableText value={parentsPage.policiesIntro} />
+                <PortableContent value={parentsPage.policiesIntro} />
               </div>
             </div>
 
@@ -532,10 +487,10 @@ const policies = [
               aria-label="Download nursery policies"
             >
               {
-                policies.map((policy) => (
-                  <a href={policy.href} target="_blank" rel="noreferrer">
+                policyDocuments.map((doc) => (
+                  <a href={getFileUrl(doc.file.asset._ref)} target="_blank" rel="noreferrer">
                     <span class="parents-policy-links__title">
-                      {policy.label}
+                      {doc.title}
                     </span>
 
                     <span class="parents-policy-links__action">
@@ -545,18 +500,6 @@ const policies = [
                 ))
               }
             </nav>
-
-            <aside
-              class="parents-card__notice
-      parents-card__notice--yellow
-      parents-card__notice--full"
-            >
-              <p class="parents-card__notice-label">CMS note</p>
-
-              <p>
-                {parentsPage.policiesSupportingNote}
-              </p>
-            </aside>
           </section>
         </div>
       </Container>

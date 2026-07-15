@@ -4,101 +4,46 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
 import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
+import PortableContent from "../components/content/PortableContent.astro";
+import { getAboutPage, getAboutGalleryPhotos } from "../utils/sanity";
+import { urlFor } from "../lib/images";
+
+const aboutPage = await getAboutPage();
+const galleryPhotos = await getAboutGalleryPhotos();
 
 const approachPoints = [
-  {
-    icon: "users",
-    tone: "purple",
-    text: "Child-led, play-based learning",
-  },
-  {
-    icon: "clock",
-    tone: "green",
-    text: "Calm and unhurried daily rhythms",
-  },
-  {
-    icon: "heart",
-    tone: "blue",
-    text: "Indoor and outdoor learning opportunities",
-  },
-  {
-    icon: "palette",
-    tone: "yellow",
-    text: "Sensory, imaginative and creative exploration",
-  },
-  {
-    icon: "star",
-    tone: "purple",
-    text: "Support for confidence, focus and independence",
-  },
-  {
-    icon: "users",
-    tone: "green",
-    text: "Strong relationships with children and families",
-  },
+  { icon: "users", tone: "purple", text: aboutPage.approachChildLed },
+  { icon: "clock", tone: "green", text: aboutPage.approachCalmRhythm },
+  { icon: "heart", tone: "blue", text: aboutPage.approachLearning },
+  { icon: "palette", tone: "yellow", text: aboutPage.approachExploration },
+  { icon: "star", tone: "purple", text: aboutPage.approachConfidence },
+  { icon: "users", tone: "green", text: aboutPage.approachRelationships },
 ] as const;
 
 const learningFoundations = [
-  {
-    icon: "chat",
-    tone: "purple",
-    label: "Communication",
-  },
-  {
-    icon: "heart",
-    tone: "green",
-    label: "Empathy",
-  },
-  {
-    icon: "person",
-    tone: "blue",
-    label: "Independence",
-  },
-  {
-    icon: "palette",
-    tone: "yellow",
-    label: "Creativity",
-  },
-  {
-    icon: "star",
-    tone: "purple",
-    label: "Critical thinking",
-  },
-] as const;
-
-const activityPhotos = [
-  "Creative play",
-  "Learning together",
-  "Outdoor exploration",
-  "Happy moments",
+  { icon: "chat", tone: "purple", label: aboutPage.foundationCommunication },
+  { icon: "heart", tone: "green", label: aboutPage.foundationEmpathy },
+  { icon: "person", tone: "blue", label: aboutPage.foundationIndependence },
+  { icon: "palette", tone: "yellow", label: aboutPage.foundationCreativity },
+  { icon: "star", tone: "purple", label: aboutPage.foundationCriticalThinking },
 ] as const;
 ---
 
 <BaseLayout
+ 
   title="About Us | Little Wise Kids"
+  description="Discover the values, approach, environment, educators and leadership behind Little Wise Kids."
   description="Discover the values, approach, environment, educators and leadership behind Little Wise Kids."
 >
   <article class="about-page">
     <section id="about-us" class="lwk-about" aria-labelledby="about-page-title">
-      <SubpageHero id="about-page-title" eyebrow="About Us" tone="purple">
+      <SubpageHero id="about-page-title" eyebrow={aboutPage.heroEyebrow ?? "About Us"} tone="purple">
         <Fragment slot="title">
-          <span>Rooted in Curiosity,</span>
-          <span>Rising in Confidence</span>
+          <span>{aboutPage.heroTitleLineOne}</span>
+          <span>{aboutPage.heroTitleLineTwo}</span>
         </Fragment>
 
-        <p>
-          At Little Wise Kids, we believe every child is born wise: full of
-          wonder, ready to explore and uniquely themselves. Our role is to
-          nurture that natural brilliance through responsive, child-led learning
-          in a loving, home-like environment.
-        </p>
-
-        <p>
-          We honour each child’s individuality by offering meaningful
-          experiences that meet them where they are developmentally, emotionally
-          and culturally. Children aged 0–4 years are welcomed for now, with
-          their wellbeing, confidence and curiosity guiding our practice.
-        </p>
+        <PortableContent value={aboutPage.heroParagraphs} />
       </SubpageHero>
 
       <div class="lwk-about__sections">
@@ -114,26 +59,13 @@ const activityPhotos = [
                   class="lwk-about__label
                 lwk-about__label--purple"
                 >
-                  Our Approach
+                  {aboutPage.approachLabel}
                 </p>
 
-                <h2>Child-Led Learning With Purpose</h2>
+                <h2>{aboutPage.approachHeading}</h2>
 
                 <div class="lwk-about__prose">
-                  <p>
-                    Children flourish when they feel seen, safe and supported.
-                    Our experienced educators thoughtfully create learning
-                    experiences around children’s evolving interests,
-                    curiosities and developmental milestones.
-                  </p>
-
-                  <p>
-                    We believe play is the work of childhood. Children are given
-                    time to explore, build, create, question and imagine without
-                    being rushed. From planting seeds outdoors to role-playing
-                    in our home corners, every experience is designed to support
-                    cognitive, emotional, physical and social development.
-                  </p>
+                  <PortableContent value={aboutPage.approachParagraphs} />
                 </div>
               </div>
 
@@ -174,34 +106,29 @@ const activityPhotos = [
                   class="lwk-about__label
                 lwk-about__label--green"
                 >
-                  Our Commitment
+                  {aboutPage.commitmentLabel}
                 </p>
 
-                <h2>A True Home-from-Home</h2>
+                <h2>{aboutPage.commitmentHeading}</h2>
 
                 <div class="lwk-about__prose">
-                  <p>
-                    At Little Wise Kids, we do things differently and
-                    intentionally. We offer a calm, screen-free sanctuary where
-                    childhood is honoured rather than hurried.
-                  </p>
-
-                  <p>
-                    Our setting combines thoughtful early education with genuine
-                    warmth and care. Children benefit from enriching play,
-                    English and Portuguese exposure for now, nutritious food and
-                    a family-style environment that supports them to feel secure
-                    and capable.
-                  </p>
+                  <PortableContent value={aboutPage.commitmentParagraphs} />
                 </div>
               </div>
 
               <div class="lwk-about__media" aria-hidden="true">
-                <span class="lwk-about__media-placeholder">
-                  <Icon name="heartSmile" size={44} />
-
-                  <span>Home-from-home image</span>
-                </span>
+                {aboutPage.commitmentImage?.asset?._ref && !aboutPage.commitmentImage.asset._ref.includes("dummy") ? (
+                  <img
+                    src={urlFor(aboutPage.commitmentImage).width(800).url()}
+                    alt={aboutPage.commitmentImage.altText ?? ""}
+                    class="lwk-about__image"
+                  />
+                ) : (
+                  <span class="lwk-about__media-placeholder">
+                    <Icon name="heartSmile" size={44} />
+                    <span>Home-from-home image</span>
+                  </span>
+                )}
               </div>
             </div>
           </Container>
@@ -219,34 +146,29 @@ const activityPhotos = [
                   class="lwk-about__label
                 lwk-about__label--blue"
                 >
-                  Our Environment
+                  {aboutPage.environmentLabel}
                 </p>
 
-                <h2>Spaces Made for Wonder</h2>
+                <h2>{aboutPage.environmentHeading}</h2>
 
                 <div class="lwk-about__prose">
-                  <p>
-                    Our indoor and outdoor spaces are designed to feel like a
-                    natural extension of home. Children can discover cosy
-                    reading corners, imaginative play areas, sensory experiences
-                    and outdoor adventures in a calm, inviting and screen-free
-                    setting.
-                  </p>
-
-                  <p>
-                    Every space is created to encourage exploration while
-                    helping children feel safe, comfortable and free to be
-                    themselves.
-                  </p>
+                  <PortableContent value={aboutPage.environmentParagraphs} />
                 </div>
               </div>
 
               <div class="lwk-about__media" aria-hidden="true">
-                <span class="lwk-about__media-placeholder">
-                  <Icon name="image" size={44} />
-
-                  <span>Environment image</span>
-                </span>
+                {aboutPage.environmentImage?.asset?._ref && !aboutPage.environmentImage.asset._ref.includes("dummy") ? (
+                  <img
+                    src={urlFor(aboutPage.environmentImage).width(800).url()}
+                    alt={aboutPage.environmentImage.altText ?? ""}
+                    class="lwk-about__image"
+                  />
+                ) : (
+                  <span class="lwk-about__media-placeholder">
+                    <Icon name="image" size={44} />
+                    <span>Environment image</span>
+                  </span>
+                )}
               </div>
             </div>
           </Container>
@@ -260,25 +182,13 @@ const activityPhotos = [
                   class="lwk-about__label
                 lwk-about__label--purple"
                 >
-                  Our Learning Programmes
+                  {aboutPage.programmesLabel}
                 </p>
 
-                <h2>Learning That Grows With Your Child</h2>
+                <h2>{aboutPage.programmesHeading}</h2>
 
                 <div class="lwk-about__prose">
-                  <p>
-                    Learning at Little Wise Kids is a joyful journey led by
-                    children’s interests. Our curriculum encourages children to
-                    explore, question and create in their own time, while
-                    educators provide gentle guidance and meaningful
-                    opportunities to extend learning.
-                  </p>
-
-                  <p>
-                    Through play, language, sensory exploration, creativity and
-                    nature-based discovery, children develop foundations in
-                    communication, independence, empathy and critical thinking.
-                  </p>
+                  <PortableContent value={aboutPage.programmesParagraphs} />
                 </div>
               </div>
 
@@ -319,34 +229,29 @@ const activityPhotos = [
                   class="lwk-about__label
                 lwk-about__label--green"
                 >
-                  Our Educators
+                  {aboutPage.educatorsLabel}
                 </p>
 
-                <h2>Caring People at the Heart of Our Nursery</h2>
+                <h2>{aboutPage.educatorsHeading}</h2>
 
                 <div class="lwk-about__prose">
-                  <p>
-                    Our educators are the heart of Little Wise Kids. They do
-                    more than supervise: they listen, guide, encourage and
-                    inspire.
-                  </p>
-
-                  <p>
-                    With a deep understanding of early years development and a
-                    genuine love for working with children, our team builds
-                    warm, respectful relationships with every child and family.
-                    Each day, they bring care, insight and intention to make
-                    learning meaningful and joyful.
-                  </p>
+                  <PortableContent value={aboutPage.educatorsParagraphs} />
                 </div>
               </div>
 
               <div class="lwk-about__media" aria-hidden="true">
-                <span class="lwk-about__media-placeholder">
-                  <Icon name="users" size={44} />
-
-                  <span>Team photo to be supplied</span>
-                </span>
+                {aboutPage.educatorsImage?.asset?._ref && !aboutPage.educatorsImage.asset._ref.includes("dummy") ? (
+                  <img
+                    src={urlFor(aboutPage.educatorsImage).width(800).url()}
+                    alt={aboutPage.educatorsImage.altText ?? ""}
+                    class="lwk-about__image"
+                  />
+                ) : (
+                  <span class="lwk-about__media-placeholder">
+                    <Icon name="users" size={44} />
+                    <span>Team photo to be supplied</span>
+                  </span>
+                )}
               </div>
             </div>
           </Container>
@@ -356,11 +261,18 @@ const activityPhotos = [
           <Container size="wide">
             <div class="lwk-about__leadership-card">
               <div class="lwk-about__portrait" aria-hidden="true">
-                <span class="lwk-about__media-placeholder">
-                  <Icon name="person" size={48} />
-
-                  <span>Leadership photo to be supplied</span>
-                </span>
+                {aboutPage.leadershipImage?.asset?._ref && !aboutPage.leadershipImage.asset._ref.includes("dummy") ? (
+                  <img
+                    src={urlFor(aboutPage.leadershipImage).width(400).url()}
+                    alt={aboutPage.leadershipImage.altText ?? ""}
+                    class="lwk-about__portrait-image"
+                  />
+                ) : (
+                  <span class="lwk-about__media-placeholder">
+                    <Icon name="person" size={48} />
+                    <span>Leadership photo to be supplied</span>
+                  </span>
+                )}
               </div>
 
               <div class="lwk-about__copy-block">
@@ -368,50 +280,13 @@ const activityPhotos = [
                   class="lwk-about__label
                 lwk-about__label--yellow"
                 >
-                  Our Leadership Team
+                  {aboutPage.leadershipLabel}
                 </p>
 
-                <h2>
-                  From Boardrooms to Building Blocks: A Journey of Purpose
-                </h2>
+                <h2>{aboutPage.leadershipHeading}</h2>
 
                 <div class="lwk-about__prose">
-                  <p>
-                    Hello, I’m Lukeba, the founder of Little Wise Kids and a
-                    passionate early years educator.
-                  </p>
-
-                  <p>
-                    Before entering early childhood education, I spent more than
-                    a decade leading teams in corporate and academic settings,
-                    including health, safety, environment, public transport,
-                    food manufacturing, construction, housing safety management
-                    and higher education.
-                  </p>
-
-                  <p>
-                    Supporting young adults through important transitions showed
-                    me the lasting impact of early emotional development and
-                    educational foundations. I saw how childhood experiences
-                    shape confidence, resilience and wellbeing far into
-                    adulthood. That understanding inspired me to retrain as an
-                    EYFS childminder and become part of building those
-                    foundations from the very beginning.
-                  </p>
-
-                  <p>
-                    Today, I bring together strategic thinking, emotional
-                    intelligence and a deep respect for children’s
-                    individuality. At Little Wise Kids, I blend structure with
-                    warmth, curiosity with care, and high expectations with a
-                    truly nurturing approach.
-                  </p>
-
-                  <p>
-                    This is not just childcare. It is my calling, and I am
-                    honoured to support the first chapter of every child’s
-                    learning journey.
-                  </p>
+                  <PortableContent value={aboutPage.leadershipParagraphs} />
                 </div>
               </div>
             </div>
@@ -427,23 +302,30 @@ const activityPhotos = [
             <header class="lwk-about__gallery-heading">
               <p class="lwk-about__label
               lwk-about__label--purple">
-                Life at Little Wise Kids
+                {aboutPage.gallerySectionLabel}
               </p>
 
-              <h2 id="about-gallery-title">Little Moments, Big Discoveries</h2>
+              <h2 id="about-gallery-title">{aboutPage.gallerySectionHeading}</h2>
             </header>
 
             <div class="lwk-about__gallery-grid">
               {
-                activityPhotos.map((label) => (
-                  <div class="lwk-about__gallery-card" aria-hidden="true">
-                    <span class="lwk-about__media-placeholder">
-                      <Icon name="image" size={38} />
-
-                      <span>{label}</span>
-                    </span>
-                  </div>
-                ))
+                galleryPhotos.length > 0 ? (
+                  galleryPhotos.map((photo) => (
+                    <figure class="lwk-about__gallery-card">
+                      <img
+                        src={urlFor(photo.image).width(600).height(500).url()}
+                        alt={photo.image.altText ?? ""}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </figure>
+                  ))
+                ) : (
+                  galleryPhotos.length === 0 && (
+                    <p>Gallery photos coming soon.</p>
+                  )
+                )
               }
             </div>
           </Container>

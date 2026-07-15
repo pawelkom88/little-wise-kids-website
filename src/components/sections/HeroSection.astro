@@ -1,16 +1,17 @@
 ---
-import { PortableText } from "astro-portabletext";
 import Icon from "../icons/Icon.astro";
 import Section from "../layout/Section.astro";
 import Button from "../ui/Button.astro";
+import PortableContent from "../content/PortableContent.astro";
 import "./HeroSection.css";
+import type { HomePage, BusinessDetails } from "../../lib/types";
 
 interface Props {
-  homePage: any;
-  businessDetails: any;
+  homePage: HomePage;
+  businessDetails: BusinessDetails;
 }
 
-const { homePage, businessDetails } = Astro.props;
+const { homePage } = Astro.props;
 
 // Convert the 3 feature objects to array for the strip
 const featureStrip = [
@@ -35,7 +36,7 @@ const featureStrip = [
       </p>
       
       <div class="hero-paragraphs">
-        <PortableText value={homePage.heroParagraphs} />
+        <PortableContent value={homePage.heroParagraphs} />
       </div>
 
       <div class="hero__actions">

@@ -3,16 +3,18 @@ import "../styles/site.css";
 import { getBusinessDetails } from "../utils/sanity";
 import SiteHeader from "../components/layout/SiteHeader.astro";
 import SiteFooter from "../components/layout/SiteFooter.astro";
+import type { BusinessDetails } from "../lib/types";
 
 interface Props {
   title?: string;
   description?: string;
+  businessDetails?: BusinessDetails;
 }
 
-const businessDetails = await getBusinessDetails();
+const businessDetails = Astro.props.businessDetails ?? await getBusinessDetails();
 
 const { 
-  title = businessDetails.organizationName, 
+  title = businessDetails.organisationName, 
   description = businessDetails.footerBusinessCopy 
 } = Astro.props;
 ---

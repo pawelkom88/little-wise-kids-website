@@ -3,16 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
 import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
-import { PortableText } from "astro-portabletext";
+import PortableContent from "../components/content/PortableContent.astro";
 import { getHoursNutritionPage, getBusinessDetails } from "../utils/sanity";
+import { formatTimeRange, getAgeRangeDisplay } from "../lib/formatters";
 import "./hours-nutrition.css";
 
 const hoursNutritionPage = await getHoursNutritionPage();
 const businessDetails = await getBusinessDetails();
-
-const startTime = businessDetails.openingTime;
-const endTime = businessDetails.closingTime;
-const morningEnd = businessDetails.morningSessionEnd;
 
 const sessionDetails = [
   {
@@ -23,60 +20,60 @@ const sessionDetails = [
   {
     icon: "calendar",
     label: "Full day",
-    value: `${businessDetails.openingTime}–${businessDetails.closingTime}`,
+    value: formatTimeRange(businessDetails.openingTime, businessDetails.closingTime),
   },
   {
     icon: "clock",
     label: "Half day",
-    value: `${businessDetails.openingTime}–${businessDetails.morningSessionEnd}`,
+    value: formatTimeRange(businessDetails.openingTime, businessDetails.morningSessionEnd),
   },
   {
     icon: "heart",
     label: "Age range",
-    value: `${businessDetails.ageRange.minimum} to ${businessDetails.ageRange.maximum} years`,
+    value: getAgeRangeDisplay(businessDetails),
   },
 ] as const;
 
 const dailyRhythm = [
   {
     icon: "star",
-    time: `${hoursNutritionPage.welcomeAndFreePlay.startTime}–${hoursNutritionPage.welcomeAndFreePlay.endTime}`,
+    time: formatTimeRange(hoursNutritionPage.welcomeAndFreePlay.startTime, hoursNutritionPage.welcomeAndFreePlay.endTime),
     title: hoursNutritionPage.welcomeAndFreePlay.title,
     copy: hoursNutritionPage.welcomeAndFreePlay.description,
   },
   {
     icon: "book",
-    time: `${hoursNutritionPage.learningAndExploration.startTime}–${hoursNutritionPage.learningAndExploration.endTime}`,
+    time: formatTimeRange(hoursNutritionPage.learningAndExploration.startTime, hoursNutritionPage.learningAndExploration.endTime),
     title: hoursNutritionPage.learningAndExploration.title,
     copy: hoursNutritionPage.learningAndExploration.description,
   },
   {
     icon: "heart",
-    time: `${hoursNutritionPage.morningSnack.startTime}–${hoursNutritionPage.morningSnack.endTime}`,
+    time: formatTimeRange(hoursNutritionPage.morningSnack.startTime, hoursNutritionPage.morningSnack.endTime),
     title: hoursNutritionPage.morningSnack.title,
     copy: hoursNutritionPage.morningSnack.description,
   },
   {
     icon: "star",
-    time: `${hoursNutritionPage.outdoorAdventures.startTime}–${hoursNutritionPage.outdoorAdventures.endTime}`,
+    time: formatTimeRange(hoursNutritionPage.outdoorAdventures.startTime, hoursNutritionPage.outdoorAdventures.endTime),
     title: hoursNutritionPage.outdoorAdventures.title,
     copy: hoursNutritionPage.outdoorAdventures.description,
   },
   {
     icon: "heart",
-    time: `${hoursNutritionPage.lunch.startTime}–${hoursNutritionPage.lunch.endTime}`,
+    time: formatTimeRange(hoursNutritionPage.lunch.startTime, hoursNutritionPage.lunch.endTime),
     title: hoursNutritionPage.lunch.title,
     copy: hoursNutritionPage.lunch.description,
   },
   {
     icon: "clock",
-    time: `${hoursNutritionPage.restAndQuietTime.startTime}–${hoursNutritionPage.restAndQuietTime.endTime}`,
+    time: formatTimeRange(hoursNutritionPage.restAndQuietTime.startTime, hoursNutritionPage.restAndQuietTime.endTime),
     title: hoursNutritionPage.restAndQuietTime.title,
     copy: hoursNutritionPage.restAndQuietTime.description,
   },
   {
     icon: "star",
-    time: `${hoursNutritionPage.afternoonPlayAndHome.startTime}–${hoursNutritionPage.afternoonPlayAndHome.endTime}`,
+    time: formatTimeRange(hoursNutritionPage.afternoonPlayAndHome.startTime, hoursNutritionPage.afternoonPlayAndHome.endTime),
     title: hoursNutritionPage.afternoonPlayAndHome.title,
     copy: hoursNutritionPage.afternoonPlayAndHome.description,
   },
@@ -84,6 +81,7 @@ const dailyRhythm = [
 ---
 
 <BaseLayout
+ 
   title="Childcare Sessions & Wholesome Nutrition Bristol BS5"
   description={`We are open ${businessDetails.openingDays}, ${businessDetails.openingTime}–${businessDetails.closingTime} in Easton. Enjoy fresh, healthy, home-cooked meals prepared daily by our nursery chef for growing bodies.`}
 >
@@ -98,7 +96,7 @@ const dailyRhythm = [
         <span>{hoursNutritionPage.heroTitleLineTwo}</span>
       </Fragment>
 
-      <PortableText value={hoursNutritionPage.heroParagraphs} />
+      <PortableContent value={hoursNutritionPage.heroParagraphs} />
     </SubpageHero>
 
     <div class="hours-page__content">
@@ -127,7 +125,7 @@ const dailyRhythm = [
                 </header>
 
                 <div class="hours-card__prose">
-                  <PortableText value={hoursNutritionPage.operatingHoursParagraphs} />
+                  <PortableContent value={hoursNutritionPage.operatingHoursParagraphs} />
                 </div>
               </div>
 
@@ -176,10 +174,7 @@ const dailyRhythm = [
               hours-card--purple"
             aria-labelledby="nutrition-title"
           >
-            <!--
-                          CMS: Keep menus, dietary requirements, allergen information
-                          and any meal-related charges editable by nursery staff.
-                        -->
+
 
             <div class="hours-card__split">
               <div class="hours-card__main">
@@ -198,7 +193,7 @@ const dailyRhythm = [
                 </header>
 
                 <div class="hours-card__prose">
-                  <PortableText value={hoursNutritionPage.nutritionParagraphs} />
+                  <PortableContent value={hoursNutritionPage.nutritionParagraphs} />
                 </div>
               </div>
 

@@ -3,8 +3,9 @@ import Icon from "../components/icons/Icon.astro";
 import Container from "../components/layout/Container.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
-import { PortableText } from "astro-portabletext";
+import PortableContent from "../components/content/PortableContent.astro";
 import { getContactPage, getBusinessDetails } from "../utils/sanity";
+import { formatTimeRange } from "../lib/formatters";
 import "./contact.css";
 
 const siteUrl = Astro.site ?? new URL("https://littlewisekids.co.uk");
@@ -41,6 +42,7 @@ const nextSteps = [
 ---
 
 <BaseLayout
+ 
   title="Contact Little Wise Kids | Nursery in Bristol BS5"
   description="Contact Little Wise Kids in Bristol BS5 to ask about nursery availability, book a visit, register your interest or learn more about our screen-free early years setting."
 >
@@ -51,7 +53,7 @@ const nextSteps = [
         <span>{contactPage.heroTitleLineTwo}</span>
       </Fragment>
 
-      <PortableText value={contactPage.heroParagraphs} />
+      <PortableContent value={contactPage.heroParagraphs} />
     </SubpageHero>
 
     <div class="contact-page__content">
@@ -66,7 +68,7 @@ const nextSteps = [
 
               <h2 id="contact-form-title">{contactPage.sectionHeading}</h2>
 
-              <PortableText value={contactPage.introduction} />
+              <PortableContent value={contactPage.introduction} />
             </header>
 
             <form
@@ -520,7 +522,7 @@ const nextSteps = [
                 <p>
                   <strong>Opening hours</strong><br />
                   {businessDetails.openingDays}<br />
-                  {businessDetails.openingTime} - {businessDetails.closingTime}
+                  {formatTimeRange(businessDetails.openingTime, businessDetails.closingTime)}
                 </p>
               </div>
             </div>
