@@ -1,4 +1,6 @@
 .faq-wave {
+  width: 100%;
+  height: auto;
   fill: var(--color-green-soft);
 }
 
@@ -12,7 +14,6 @@
 }
 
 .faq-section {
-  --faq-question-line-height: 1.25;
   background: var(--color-green-soft);
 }
 
@@ -88,7 +89,7 @@
   font-family: var(--font-heading);
   font-size: var(--font-size-default);
   font-weight: var(--font-weight-bold);
-  line-height: var(--faq-question-line-height);
+  line-height: var(--line-height-tight);
   outline: none;
 }
 
@@ -175,12 +176,12 @@ details[open] .faq-answer {
 }
 
 .faq-list .faq-answer-content p + p {
-  margin-top: 12px;
+  margin-top: var(--space-paragraph-flow);
 }
 
 .faq-answer-content strong {
   color: var(--color-green-dark);
-  font-weight: var(--font-weight-black);
+  font-weight: var(--font-weight-bold);
 }
 
 .faq-contact {

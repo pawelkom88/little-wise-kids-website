@@ -2,6 +2,12 @@
 import Icon from "../../icons/Icon.astro";
 import Button from "../../ui/Button.astro";
 import "./VisitSection.css";
+
+interface Props {
+  image?: { src: string; alt: string };
+}
+
+const { image } = Astro.props;
 ---
 
 <section class="lwk-visit" aria-labelledby="visit-title">
@@ -32,9 +38,7 @@ import "./VisitSection.css";
       </div>
 
       <div class="lwk-visit__actions">
-        <Button href="/#contact" class="lwk-visit__primary">
-          Contact us
-        </Button>
+        <Button href="/contact" class="lwk-visit__primary"> Contact us </Button>
       </div>
     </div>
 
@@ -50,14 +54,20 @@ import "./VisitSection.css";
       </div>
 
       <div class="lwk-visit-media__image">
-        <img
-          src=""
-          alt="???"
-          width="1200"
-          height="800"
-          loading="lazy"
-          decoding="async"
-        />
+        {
+          image ? (
+            <img
+              src={image.src}
+              alt={image.alt}
+              width="1200"
+              height="800"
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <div class="image-placeholder" aria-hidden="true" />
+          )
+        }
       </div>
 
       <figcaption class="lwk-visit-testimonial">

@@ -1,5 +1,4 @@
 .parents-page {
-  --parents-hero-image: none;
   --parents-card-inline: clamp(var(--space-m), 4vw, var(--space-2xl));
   --parents-card-block: clamp(var(--space-l), 4vw, var(--space-2xl));
 
@@ -8,162 +7,8 @@
 }
 
 /*
- * Hero
+ * Hero preserved by SubpageHero component
  */
-
-.parents-hero {
-  position: relative;
-  isolation: isolate;
-  display: grid;
-  min-height: clamp(36rem, 62vw, 50rem);
-  place-items: center;
-  padding: clamp(5rem, 9vw, 8rem) var(--gutter) clamp(10rem, 15vw, 13rem);
-  overflow: hidden;
-  text-align: center;
-  background: var(--color-cream);
-}
-
-.parents-hero::before,
-.parents-hero::after {
-  position: absolute;
-  inset: 0;
-  content: "";
-  pointer-events: none;
-}
-
-.parents-hero::before {
-  z-index: -3;
-  background-image: var(--parents-hero-image);
-  background-position: center;
-  background-size: cover;
-  transform: scale(1.03);
-}
-
-.parents-hero::after {
-  z-index: -2;
-  background:
-    radial-gradient(
-      circle at 50% 42%,
-      color-mix(in srgb, var(--color-page) 96%, transparent) 0%,
-      color-mix(in srgb, var(--color-page) 88%, transparent) 36%,
-      color-mix(in srgb, var(--color-page) 68%, transparent) 70%,
-      color-mix(in srgb, var(--color-page) 55%, transparent) 100%
-    ),
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--color-page) 76%, transparent),
-      color-mix(in srgb, var(--color-page) 55%, transparent) 44%,
-      color-mix(in srgb, var(--color-page) 84%, transparent)
-    );
-  backdrop-filter: blur(1.5px);
-}
-
-.parents-hero__content {
-  position: relative;
-  z-index: 2;
-  width: min(100%, 58rem);
-  margin-inline: auto;
-}
-
-.parents-page__eyebrow,
-.parents-card__label,
-.parents-card__notice-label,
-.parents-resource__label {
-  margin: 0;
-  font-family: var(--font-heading);
-  font-size: var(--font-size-label);
-  font-weight: var(--font-weight-black);
-  letter-spacing: 0.16em;
-  line-height: var(--line-height-solid);
-  text-transform: uppercase;
-}
-
-.parents-page__eyebrow {
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  color: var(--color-purple);
-}
-
-.parents-page__eyebrow::after {
-  position: absolute;
-  bottom: -1rem;
-  left: 50%;
-  width: 5rem;
-  height: 3px;
-  border-radius: var(--radius-pill);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--color-purple),
-    transparent
-  );
-  content: "";
-  transform: translateX(-50%);
-}
-
-.parents-hero h1 {
-  max-width: 58rem;
-  margin: var(--space-xl) auto 0;
-  color: var(--color-ink);
-  font-size: var(--heading-h1-size);
-  letter-spacing: var(--letter-spacing-section-title);
-  line-height: var(--line-height-heading);
-  text-wrap: balance;
-}
-
-.parents-hero h1 span {
-  display: block;
-}
-
-.parents-hero__lead {
-  width: min(100%, 46rem);
-  margin: var(--space-l) auto 0;
-  color: var(--color-ink-soft);
-  font-size: var(--font-size-large);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-compact);
-  text-wrap: balance;
-}
-
-.parents-hero__wave {
-  position: absolute;
-  right: 0;
-  bottom: -1px;
-  left: 0;
-  z-index: 3;
-  height: clamp(7.5rem, 14vw, 13rem);
-  color: var(--color-page);
-  filter: drop-shadow(
-    0 -0.75rem 1.15rem color-mix(in srgb, var(--color-ink) 3%, transparent)
-  );
-}
-
-.parents-hero__wave svg {
-  width: 100%;
-  height: 100%;
-}
-
-.parents-hero__wave path {
-  fill: currentColor;
-}
-
-.parents-hero__wave-highlight {
-  position: absolute;
-  right: 0;
-  bottom: clamp(4.6rem, 8.4vw, 8.1rem);
-  left: 0;
-  z-index: 2;
-  height: 1.1rem;
-  opacity: 0.4;
-  background: linear-gradient(
-    90deg,
-    color-mix(in srgb, var(--color-purple) 11%, transparent),
-    color-mix(in srgb, var(--color-green) 8%, transparent),
-    color-mix(in srgb, var(--color-blue) 9%, transparent)
-  );
-  filter: blur(1.1rem);
-}
 
 /*
  * Page stack
@@ -258,8 +103,8 @@
   background: color-mix(in srgb, var(--parents-soft) 78%, var(--color-surface));
   font-family: var(--font-heading);
   font-size: var(--font-size-small);
-  font-weight: var(--font-weight-black);
-  line-height: 1;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-solid);
 }
 
 .parents-card__label {
@@ -383,8 +228,8 @@
   background: var(--parents-accent);
   content: "✓";
   font-size: 0.65rem;
-  font-weight: var(--font-weight-black);
-  line-height: 1;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-solid);
 }
 
 /*
@@ -453,7 +298,7 @@
 
 .parents-resource a span {
   flex: none;
-  font-size: 1.25em;
+  font-size: var(--font-size-large);
 }
 
 /*
@@ -505,7 +350,7 @@
     var(--color-purple)
   );
   font-family: var(--font-heading);
-  font-weight: var(--font-weight-black);
+  font-weight: var(--font-weight-bold);
 }
 
 .parents-fees-table thead th:first-child {
@@ -574,9 +419,9 @@
   right: var(--space-m);
   color: var(--parents-accent);
   content: "+";
-  font-size: 1.5rem;
+  font-size: var(--font-size-xlarge);
   font-weight: var(--font-weight-bold);
-  line-height: 1;
+  line-height: var(--line-height-solid);
   transform: translateY(-50%);
   transition: transform 180ms ease;
 }
@@ -761,49 +606,6 @@
     --parents-card-block: var(--space-l);
   }
 
-  .parents-hero {
-    min-height: 38rem;
-    padding: var(--space-2xl) var(--gutter) clamp(8rem, 30vw, 10rem);
-  }
-
-  .parents-hero::before {
-    transform: scale(1.08);
-  }
-
-  .parents-hero::after {
-    background:
-      radial-gradient(
-        circle at 50% 46%,
-        color-mix(in srgb, var(--color-page) 97%, transparent) 0%,
-        color-mix(in srgb, var(--color-page) 90%, transparent) 50%,
-        color-mix(in srgb, var(--color-page) 73%, transparent) 100%
-      ),
-      linear-gradient(
-        180deg,
-        color-mix(in srgb, var(--color-page) 84%, transparent),
-        color-mix(in srgb, var(--color-page) 76%, transparent)
-      );
-    backdrop-filter: blur(2px);
-  }
-
-  .parents-hero h1 {
-    font-size: clamp(2.65rem, 13vw, 4rem);
-    line-height: 1.02;
-  }
-
-  .parents-hero__lead {
-    margin-top: var(--space-m);
-    font-size: var(--font-size-default);
-  }
-
-  .parents-hero__wave {
-    height: 7rem;
-  }
-
-  .parents-hero__wave-highlight {
-    bottom: 4.5rem;
-  }
-
   .parents-page__stack {
     gap: var(--space-m);
   }
@@ -821,7 +623,7 @@
 
   .parents-card__number {
     width: 3rem;
-    font-size: 0.75rem;
+    font-size: var(--font-size-label);
   }
 
   .parents-card__label {

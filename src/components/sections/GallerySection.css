@@ -9,7 +9,6 @@
 
 .lwk-gallery {
   --gallery-trail-symbol-size: clamp(1.8rem, 2.5vw, 2.7rem);
-  --gallery-label-line-height: 1.1;
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -160,6 +159,8 @@
 .lwk-gallery__viewport {
   position: relative;
   z-index: 2;
+  overflow: hidden;
+  width: 100%;
 }
 
 .lwk-gallery__track {
@@ -242,7 +243,7 @@
   font-family: var(--font-heading);
   font-size: var(--font-size-default);
   font-weight: var(--font-weight-bold);
-  line-height: var(--gallery-label-line-height);
+  line-height: var(--line-height-tight);
   white-space: nowrap;
 }
 

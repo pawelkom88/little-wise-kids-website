@@ -2,186 +2,10 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Container from "../../components/layout/Container.astro";
 import Icon from "../../components/icons/Icon.astro";
+import SubpageHero from "../../components/layout/SubpageHero.astro";
 import "./blog.css";
 
-type BlogCategory =
-  | "nursery-news"
-  | "early-learning"
-  | "parenting-tips"
-  | "nutrition"
-  | "community";
-
-type BlogTone = "purple" | "green" | "blue" | "yellow";
-
-interface BlogArticle {
-  slug: string;
-  title: string;
-  excerpt: string;
-  category: BlogCategory;
-  categoryLabel: string;
-  tone: BlogTone;
-  icon: string;
-  published: string;
-  displayDate: string;
-  readTime: string;
-  featured?: boolean;
-  image?: string;
-  imageAlt?: string;
-}
-
-const categories = [
-  {
-    id: "all",
-    label: "All Articles",
-    icon: "star",
-  },
-  {
-    id: "nursery-news",
-    label: "Nursery News",
-    icon: "star",
-  },
-  {
-    id: "early-learning",
-    label: "Early Learning",
-    icon: "book",
-  },
-  {
-    id: "parenting-tips",
-    label: "Parenting Tips",
-    icon: "heart",
-  },
-  {
-    id: "nutrition",
-    label: "Nutrition",
-    icon: "heart",
-  },
-  {
-    id: "community",
-    label: "Community",
-    icon: "person",
-  },
-] as const;
-
-const articles = [
-  {
-    slug: "welcome-to-a-new-term",
-    title: "Welcome to a New Term at Little Wise Kids",
-    excerpt:
-      "A look at what is ahead this season, from joyful learning themes and new experiences to the little moments that make nursery life special.",
-    category: "nursery-news",
-    categoryLabel: "Nursery News",
-    tone: "purple",
-    icon: "star",
-    published: "2026-07-14",
-    displayDate: "14 July 2026",
-    readTime: "4 min read",
-    featured: true,
-  },
-  {
-    slug: "the-power-of-play",
-    title: "The Power of Play: Learning Through Discovery",
-    excerpt:
-      "How meaningful play helps children build confidence, curiosity, communication and problem-solving skills at their own pace.",
-    category: "early-learning",
-    categoryLabel: "Early Learning",
-    tone: "blue",
-    icon: "book",
-    published: "2026-07-08",
-    displayDate: "8 July 2026",
-    readTime: "5 min read",
-  },
-  {
-    slug: "settling-in-gentle-tips",
-    title: "Settling In: Gentle Tips for a Smooth Start",
-    excerpt:
-      "Practical ideas to help your child feel safe, secure and understood during those important first days at nursery.",
-    category: "parenting-tips",
-    categoryLabel: "Parenting Tips",
-    tone: "purple",
-    icon: "heart",
-    published: "2026-07-01",
-    displayDate: "1 July 2026",
-    readTime: "6 min read",
-  },
-  {
-    slug: "outdoor-adventures-why-nature-nurtures",
-    title: "Outdoor Adventures: Why Nature Nurtures",
-    excerpt:
-      "The benefits of outdoor learning and how time in nature supports wellbeing, creativity, confidence and resilience.",
-    category: "early-learning",
-    categoryLabel: "Early Learning",
-    tone: "green",
-    icon: "star",
-    published: "2026-06-24",
-    displayDate: "24 June 2026",
-    readTime: "5 min read",
-  },
-  {
-    slug: "healthy-habits-happy-little-learners",
-    title: "Healthy Habits, Happy Little Learners",
-    excerpt:
-      "How positive mealtimes, varied foods and gentle encouragement help children develop a healthy relationship with nutrition.",
-    category: "nutrition",
-    categoryLabel: "Nutrition",
-    tone: "yellow",
-    icon: "heart",
-    published: "2026-06-18",
-    displayDate: "18 June 2026",
-    readTime: "4 min read",
-  },
-  {
-    slug: "celebrating-community-and-cultural-diversity",
-    title: "Celebrating Our Community and Cultural Diversity",
-    excerpt:
-      "How we celebrate languages, traditions, family stories and the many different experiences that make our community special.",
-    category: "community",
-    categoryLabel: "Community",
-    tone: "blue",
-    icon: "person",
-    published: "2026-06-10",
-    displayDate: "10 June 2026",
-    readTime: "4 min read",
-  },
-  {
-    slug: "screen-free-learning-deeper-play",
-    title: "Screen-Free Learning: Space for Deeper Play",
-    excerpt:
-      "Why real-world experiences, movement, stories and face-to-face connection matter so much during the earliest years.",
-    category: "early-learning",
-    categoryLabel: "Early Learning",
-    tone: "green",
-    icon: "book",
-    published: "2026-06-03",
-    displayDate: "3 June 2026",
-    readTime: "6 min read",
-  },
-  {
-    slug: "helping-young-children-build-confidence",
-    title: "Helping Young Children Build Confidence",
-    excerpt:
-      "Simple ways families and educators can encourage independence, emotional resilience and a positive sense of self.",
-    category: "parenting-tips",
-    categoryLabel: "Parenting Tips",
-    tone: "purple",
-    icon: "heart",
-    published: "2026-05-27",
-    displayDate: "27 May 2026",
-    readTime: "5 min read",
-  },
-  {
-    slug: "a-calm-rhythm-for-busy-family-days",
-    title: "A Calm Rhythm for Busy Family Days",
-    excerpt:
-      "How familiar routines can support smoother transitions, better rest and a stronger sense of security for young children.",
-    category: "nursery-news",
-    categoryLabel: "Nursery News",
-    tone: "yellow",
-    icon: "clock",
-    published: "2026-05-20",
-    displayDate: "20 May 2026",
-    readTime: "4 min read",
-  },
-] satisfies BlogArticle[];
+import { articles, categories } from "../../data/blog";
 ---
 
 <BaseLayout
@@ -189,33 +13,19 @@ const articles = [
   description="Read nursery news, early years guidance, parenting ideas, nutrition advice and community updates from Little Wise Kids in Bristol BS5."
 >
   <article class="blog-page">
-    <header class="blog-hero" aria-labelledby="blog-page-title">
-      <div class="blog-hero__content">
-        <p class="blog-page__eyebrow">Blog / News</p>
+    <SubpageHero id="blog-page-title" eyebrow="Blog / News" tone="purple">
+      <Fragment slot="title">
+        <span>Ideas, Updates and</span>
+        <span>Little Moments That Matter</span>
+      </Fragment>
 
-        <h1 id="blog-page-title">
-          <span>Ideas, Updates and</span>
-          <span>Little Moments That Matter</span>
-        </h1>
+      <p>
+        Sharing nursery news, early years guidance, learning ideas and community
+        updates for families in Bristol BS5.
+      </p>
+    </SubpageHero>
 
-        <p class="blog-hero__lead">
-          Sharing nursery news, early years guidance, learning ideas and
-          community updates for families in Bristol BS5.
-        </p>
-      </div>
-
-      <span class="blog-hero__wave-highlight" aria-hidden="true"></span>
-
-      <div class="blog-hero__wave" aria-hidden="true">
-        <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
-          <path
-            d="M0 58C130 118 272 116 413 86C560 55 655 63 805 112C975 168 1102 119 1258 69C1330 46 1392 39 1440 52V220H0V58Z"
-          ></path>
-        </svg>
-      </div>
-    </header>
-
-    <main class="blog-page__content">
+    <div class="blog-page__content">
       <Container size="wide">
         <section class="blog-index" aria-labelledby="latest-articles-title">
           <header class="blog-index__header">
@@ -271,17 +81,18 @@ const articles = [
                     <div class="blog-card__media">
                       {article.image ? (
                         <img
-                          src={article.image}
-                          alt={article.imageAlt ?? ""}
-                          width="900"
-                          height="600"
+                          src={article.image.src}
+                          alt={article.image.alt}
+                          width={article.image.width}
+                          height={article.image.height}
                           loading={index < 3 ? "eager" : "lazy"}
                           decoding="async"
                         />
                       ) : (
-                        <span class="blog-card__placeholder" aria-hidden="true">
-                          <Icon name={article.icon} size={42} />
-                        </span>
+                        <div
+                          class="blog-card__placeholder"
+                          aria-hidden="true"
+                        />
                       )}
 
                       {article.featured && (
@@ -337,7 +148,7 @@ const articles = [
           </div>
         </section>
       </Container>
-    </main>
+    </div>
   </article>
 </BaseLayout>
 

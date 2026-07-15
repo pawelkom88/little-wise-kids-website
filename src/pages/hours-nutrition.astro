@@ -2,28 +2,34 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
 import Icon from "../components/icons/Icon.astro";
+import SubpageHero from "../components/layout/SubpageHero.astro";
+import { site } from "../data/site";
 import "./hours-nutrition.css";
+
+const startTime = site.openingHours.fullDay.split("–")[0];
+const endTime = site.openingHours.fullDay.split("–")[1];
+const morningEnd = site.openingHours.morning.split("–")[1];
 
 const sessionDetails = [
   {
     icon: "clock",
     label: "Days",
-    value: "Monday–Friday",
+    value: site.openingHours.days,
   },
   {
     icon: "calendar",
     label: "Full day",
-    value: "7:30am–5:30pm",
+    value: site.openingHours.fullDay,
   },
   {
     icon: "clock",
     label: "Half day",
-    value: "7:30am–12:30pm",
+    value: site.openingHours.morning,
   },
   {
     icon: "heart",
     label: "Age range",
-    value: "0–4 years",
+    value: site.ageRange,
   },
 ] as const;
 
@@ -59,7 +65,7 @@ const nutritionFeatures = [
 const dailyRhythm = [
   {
     icon: "star",
-    time: "7:30am–9:00am",
+    time: `${startTime}–9:00am`,
     title: "Welcome & Free Play",
     copy: "Warm arrivals and time to settle through calm, child-led play.",
   },
@@ -77,13 +83,13 @@ const dailyRhythm = [
   },
   {
     icon: "star",
-    time: "11:00am–12:30pm",
+    time: `11:00am–${morningEnd}`,
     title: "Outdoor Adventures",
     copy: "Fresh air, movement and nature-based play in our outdoor space.",
   },
   {
     icon: "heart",
-    time: "12:30pm–1:30pm",
+    time: `${morningEnd}–1:30pm`,
     title: "Lunch",
     copy: "A nutritious, freshly prepared meal enjoyed together.",
   },
@@ -95,7 +101,7 @@ const dailyRhythm = [
   },
   {
     icon: "star",
-    time: "3:00pm–5:30pm",
+    time: `3:00pm–${endTime}`,
     title: "Afternoon Play & Home",
     copy: "Creative play, a nourishing snack and calm goodbyes.",
   },
@@ -104,36 +110,26 @@ const dailyRhythm = [
 
 <BaseLayout
   title="Childcare Sessions & Wholesome Nutrition Bristol BS5"
-  description="We are open Monday–Friday, 7:30am–5:30pm in Easton. Enjoy fresh, healthy, home-cooked meals prepared daily by our nursery chef for growing bodies."
+  description={`We are open ${site.openingHours.days}, ${site.openingHours.fullDay} in Easton. Enjoy fresh, healthy, home-cooked meals prepared daily by our nursery chef for growing bodies.`}
 >
   <article class="hours-page">
-    <header class="hours-hero" aria-labelledby="hours-page-title">
-      <div class="hours-hero__content">
-        <p class="hours-page__eyebrow">Operating Hours & Nutrition</p>
+    <SubpageHero
+      id="hours-page-title"
+      eyebrow="Operating Hours & Nutrition"
+      tone="green"
+    >
+      <Fragment slot="title">
+        <span>Care That Fits</span>
+        <span>Your Family’s Day</span>
+      </Fragment>
 
-        <h1 id="hours-page-title">
-          <span>Care That Fits</span>
-          <span>Your Family’s Day</span>
-        </h1>
+      <p>
+        Clear routines, nourishing meals and caring support to help your child
+        feel secure, energised and ready to thrive every day.
+      </p>
+    </SubpageHero>
 
-        <p class="hours-hero__lead">
-          Clear routines, nourishing meals and caring support to help your child
-          feel secure, energised and ready to thrive every day.
-        </p>
-      </div>
-
-      <span class="hours-hero__wave-highlight" aria-hidden="true"></span>
-
-      <div class="hours-hero__wave" aria-hidden="true">
-        <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
-          <path
-            d="M0 58C130 118 272 116 413 86C560 55 655 63 805 112C975 168 1102 119 1258 69C1330 46 1392 39 1440 52V220H0V58Z"
-          ></path>
-        </svg>
-      </div>
-    </header>
-
-    <main class="hours-page__content">
+    <div class="hours-page__content">
       <Container size="wide">
         <div class="hours-page__stack">
           <section
@@ -361,6 +357,6 @@ const dailyRhythm = [
           </aside>
         </div>
       </Container>
-    </main>
+    </div>
   </article>
 </BaseLayout>

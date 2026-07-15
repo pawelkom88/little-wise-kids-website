@@ -5,34 +5,44 @@ import flowerIcon from "../../../assets/icons/flower-icon.png";
 import Section from "../layout/Section.astro";
 import "./FaqSection.css";
 
-const faqs = [
+import { site } from "../../data/site";
+
+const formatLanguages = (languages: readonly string[]) => {
+  if (languages.length === 0) return "";
+  if (languages.length === 1) return languages[0];
+  return `${languages.slice(0, -1).join(", ")} and ${languages[languages.length - 1]}`;
+};
+
+interface FaqItem {
+  question: string;
+  answer: string;
+  open?: boolean;
+}
+
+const faqs: FaqItem[] = [
   {
     question: "What age range do you care for?",
-    answer:
-      "We care for children from <strong>6 months to 5 years old</strong>, providing a safe, nurturing and engaging early years environment tailored to each stage of development.",
+    answer: `We care for children aged <strong>${site.ageRange}</strong>, providing a safe, nurturing and engaging early years environment tailored to each stage of development.`,
     open: true,
   },
   {
     question: "What languages are part of the curriculum?",
-    answer:
-      "Portuguese and Spanish are introduced through songs, stories, play and everyday routines, so children experience language in a natural and enjoyable way.",
+    answer: `${formatLanguages(site.languages)} are introduced through songs, stories, play and everyday routines, so children experience language in a natural and enjoyable way.`,
   },
   {
     question: "What are your opening hours?",
-    answer:
-      "We are open Monday to Friday from <strong>7:00 to 18:00</strong>. We are open through school holidays and closed on bank holidays.",
+    answer: `We are open ${site.openingHours.days} from <strong>${site.openingHours.fullDay}</strong>. We are open through school holidays and closed on bank holidays.`,
   },
   {
     question: "Where are you located?",
-    answer:
-      "Little Wise Kids Childminding is based in a home setting just behind Cabot Circus car park, with easy access to town and the M32.",
+    answer: `Little Wise Kids Childminding is based in a home setting at <strong>${site.address.line1}, ${site.address.line2}, ${site.address.city}, ${site.address.postcode}</strong>, with easy access to town and the M32.`,
   },
   {
     question: "What is your childminding approach?",
     answer:
       "Our approach combines traditional Early Years learning with modern languages and cultures. We focus on play, care, confidence, curiosity and strong partnerships with families.",
   },
-] as const;
+];
 ---
 
 <svg
@@ -96,7 +106,7 @@ const faqs = [
 
         <p class="faq-contact__text">
           Our team is happy to help with anything you need.
-          <a class="faq-contact__link" href="/#contact">Contact us</a>
+          <a class="faq-contact__link" href="/contact">Contact us</a>
           — we’d love to hear from you.
         </p>
       </div>

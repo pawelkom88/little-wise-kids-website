@@ -3,7 +3,21 @@ import Icon from "../icons/Icon.astro";
 import Section from "../layout/Section.astro";
 import "./GallerySection.css";
 
-const galleryPages = [
+import type { IconName } from "../icons/types";
+
+interface GalleryPhoto {
+  src: string;
+  alt: string;
+  label: string;
+  tone: string;
+  icon: IconName;
+}
+
+interface GalleryPage {
+  photos: GalleryPhoto[];
+}
+
+const galleryPages: GalleryPage[] = [
   {
     photos: [
       {
@@ -79,7 +93,7 @@ const galleryPages = [
       },
     ],
   },
-] as const;
+];
 
 const galleryPhotos = galleryPages.flatMap((page) => page.photos);
 ---

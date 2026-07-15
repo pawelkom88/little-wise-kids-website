@@ -139,4 +139,32 @@ for (const path of sourceFiles) {
   }
 }
 
+// Whitelist of files allowed to bypass the "any" cast check (currently empty)
+const anyCheckWhitelist = [];
+
+// Source hygiene and "any" cast assertions
+const hygieneRegex =
+  /src=""|image:\s*["']["']|alt="\?\?\?"|img\[src=["']["']\]/;
+const anyRegex = /\bas any\b|:\s*any\b/;
+
+for (const path of sourceFiles) {
+  const relativePath = relative(root, path);
+  const source = read(path);
+  const lines = source.split(/\r?\n/);
+
+  lines.forEach((line, index) => {
+    assert(
+      !hygieneRegex.test(line),
+      `Source hygiene violation in ${relativePath}:${index + 1}: ${line.trim()}`
+    );
+
+    if (!anyCheckWhitelist.includes(relativePath)) {
+      assert(
+        !anyRegex.test(line),
+        `Broad 'any' type cast violation in ${relativePath}:${index + 1}: ${line.trim()}`
+      );
+    }
+  });
+}
+
 console.log("Architecture checks passed");

@@ -35,7 +35,7 @@
 
 .hero__content .hero-subtitle {
   font-size: var(--font-size-xlarge);
-  font-weight: var(--font-weight-black);
+  font-weight: var(--font-weight-bold);
   line-height: var(--hero-subtitle-line-height);
 }
 
@@ -181,6 +181,7 @@
   top: 0;
   left: 0;
   width: 100%;
+  height: auto;
   fill: var(--color-surface);
   transform: rotate(180deg);
 }

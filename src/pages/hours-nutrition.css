@@ -1,6 +1,4 @@
 .hours-page {
-  --hours-hero-image: none;
-
   --hours-card-inline: clamp(var(--space-m), 4vw, var(--space-2xl));
 
   --hours-card-block: clamp(var(--space-l), 4vw, var(--space-2xl));
@@ -10,160 +8,8 @@
 }
 
 /*
- * Hero
+ * Hero preserved by SubpageHero component
  */
-
-.hours-hero {
-  position: relative;
-  isolation: isolate;
-  display: grid;
-  min-height: clamp(36rem, 62vw, 50rem);
-  place-items: center;
-  padding: clamp(5rem, 9vw, 8rem) var(--gutter) clamp(10rem, 15vw, 13rem);
-  overflow: hidden;
-  text-align: center;
-  background: var(--color-cream);
-}
-
-.hours-hero::before,
-.hours-hero::after {
-  position: absolute;
-  inset: 0;
-  content: "";
-  pointer-events: none;
-}
-
-.hours-hero::before {
-  z-index: -3;
-  background-image: var(--hours-hero-image);
-  background-position: center;
-  background-size: cover;
-  transform: scale(1.03);
-}
-
-.hours-hero::after {
-  z-index: -2;
-  background:
-    radial-gradient(
-      circle at 50% 42%,
-      color-mix(in srgb, var(--color-page) 96%, transparent) 0%,
-      color-mix(in srgb, var(--color-page) 88%, transparent) 36%,
-      color-mix(in srgb, var(--color-page) 68%, transparent) 70%,
-      color-mix(in srgb, var(--color-page) 55%, transparent) 100%
-    ),
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--color-page) 76%, transparent),
-      color-mix(in srgb, var(--color-page) 55%, transparent) 44%,
-      color-mix(in srgb, var(--color-page) 84%, transparent)
-    );
-  backdrop-filter: blur(1.5px);
-}
-
-.hours-hero__content {
-  position: relative;
-  z-index: 2;
-  width: min(100%, 58rem);
-  margin-inline: auto;
-}
-
-.hours-page__eyebrow,
-.hours-card__label {
-  margin: 0;
-  font-family: var(--font-heading);
-  font-size: var(--font-size-label);
-  font-weight: var(--font-weight-black);
-  letter-spacing: 0.16em;
-  line-height: var(--line-height-solid);
-  text-transform: uppercase;
-}
-
-.hours-page__eyebrow {
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  color: var(--color-purple);
-}
-
-.hours-page__eyebrow::after {
-  position: absolute;
-  bottom: -1rem;
-  left: 50%;
-  width: 5rem;
-  height: 3px;
-  border-radius: var(--radius-pill);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--color-purple),
-    transparent
-  );
-  content: "";
-  transform: translateX(-50%);
-}
-
-.hours-hero h1 {
-  max-width: 58rem;
-  margin: var(--space-xl) auto 0;
-  color: var(--color-ink);
-  font-size: var(--heading-h1-size);
-  letter-spacing: var(--letter-spacing-section-title);
-  line-height: var(--line-height-heading);
-  text-wrap: balance;
-}
-
-.hours-hero h1 span {
-  display: block;
-}
-
-.hours-hero__lead {
-  width: min(100%, 46rem);
-  margin: var(--space-l) auto 0;
-  color: var(--color-ink-soft);
-  font-size: var(--font-size-large);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-compact);
-  text-wrap: balance;
-}
-
-.hours-hero__wave {
-  position: absolute;
-  right: 0;
-  bottom: -1px;
-  left: 0;
-  z-index: 3;
-  height: clamp(7.5rem, 14vw, 13rem);
-  color: var(--color-page);
-  filter: drop-shadow(
-    0 -0.75rem 1.15rem color-mix(in srgb, var(--color-ink) 3%, transparent)
-  );
-}
-
-.hours-hero__wave svg {
-  width: 100%;
-  height: 100%;
-}
-
-.hours-hero__wave path {
-  fill: currentColor;
-}
-
-.hours-hero__wave-highlight {
-  position: absolute;
-  right: 0;
-  bottom: clamp(4.6rem, 8.4vw, 8.1rem);
-  left: 0;
-  z-index: 2;
-  height: 1.1rem;
-  opacity: 0.4;
-  background: linear-gradient(
-    90deg,
-    color-mix(in srgb, var(--color-purple) 11%, transparent),
-    color-mix(in srgb, var(--color-green) 8%, transparent),
-    color-mix(in srgb, var(--color-blue) 9%, transparent)
-  );
-  filter: blur(1.1rem);
-}
 
 /*
  * Page structure
@@ -249,8 +95,8 @@
   background: color-mix(in srgb, var(--hours-soft) 78%, var(--color-surface));
   font-family: var(--font-heading);
   font-size: var(--font-size-small);
-  font-weight: var(--font-weight-black);
-  line-height: 1;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-solid);
 }
 
 .hours-card__label {
@@ -406,7 +252,7 @@
 
 .hours-card__note-link span {
   flex: none;
-  font-size: 1.25em;
+  font-size: var(--font-size-large);
 }
 
 /*
@@ -457,9 +303,9 @@
   border-radius: 50%;
   color: var(--color-surface);
   background: var(--color-purple);
-  font-size: 0.7rem;
-  font-weight: var(--font-weight-black);
-  line-height: 1;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-solid);
 }
 
 .nutrition-checklist li p {
@@ -680,7 +526,7 @@
   margin-bottom: 0.3rem;
   color: var(--color-blue-dark);
   font-size: var(--font-size-small);
-  font-weight: var(--font-weight-black);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-compact);
 }
 
@@ -755,13 +601,13 @@
   color: var(--color-ink);
   background: var(--color-yellow);
   font-family: var(--font-heading);
-  font-weight: var(--font-weight-black);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-compact);
   text-decoration: none;
 }
 
 .hours-contact__link span {
-  font-size: 1.25em;
+  font-size: var(--font-size-large);
 }
 
 /*
@@ -842,49 +688,6 @@
     --hours-card-block: var(--space-l);
   }
 
-  .hours-hero {
-    min-height: 38rem;
-    padding: var(--space-2xl) var(--gutter) clamp(8rem, 30vw, 10rem);
-  }
-
-  .hours-hero::before {
-    transform: scale(1.08);
-  }
-
-  .hours-hero::after {
-    background:
-      radial-gradient(
-        circle at 50% 46%,
-        color-mix(in srgb, var(--color-page) 97%, transparent) 0%,
-        color-mix(in srgb, var(--color-page) 90%, transparent) 50%,
-        color-mix(in srgb, var(--color-page) 73%, transparent) 100%
-      ),
-      linear-gradient(
-        180deg,
-        color-mix(in srgb, var(--color-page) 84%, transparent),
-        color-mix(in srgb, var(--color-page) 76%, transparent)
-      );
-    backdrop-filter: blur(2px);
-  }
-
-  .hours-hero h1 {
-    font-size: clamp(2.65rem, 13vw, 4rem);
-    line-height: 1.02;
-  }
-
-  .hours-hero__lead {
-    margin-top: var(--space-m);
-    font-size: var(--font-size-default);
-  }
-
-  .hours-hero__wave {
-    height: 7rem;
-  }
-
-  .hours-hero__wave-highlight {
-    bottom: 4.5rem;
-  }
-
   .hours-page__stack {
     gap: var(--space-m);
   }
@@ -903,7 +706,7 @@
 
   .hours-card__number {
     width: 3rem;
-    font-size: 0.75rem;
+    font-size: var(--font-size-label);
   }
 
   .hours-card__label {

@@ -1,5 +1,5 @@
 ---
-import { navItems, site } from "../../data/site";
+import { navItems, site, legalLinks, tagline } from "../../data/site";
 import Icon from "../icons/Icon.astro";
 import Container from "./Container.astro";
 import "./SiteFooter.css";
@@ -21,11 +21,6 @@ const navigationGroups = navItems
     tone: item.tone,
     links: "children" in item ? item.children : [],
   }));
-
-const legalLinks = [
-  { label: "Privacy Policy", href: "/#parents" },
-  { label: "Safeguarding Policy", href: "/#parents" },
-] as const;
 ---
 
 <footer id="contact" class="lwk-footer">
@@ -53,10 +48,15 @@ const legalLinks = [
       </a>
 
       <h2 class="lwk-footer__heading" id="footer-heading">
-        <!--TODO : make global-->
-        Growing <span class="tone-purple">confident</span>, <span
-          class="tone-green">kind</span
-        > and <span class="tone-blue">curious</span> children.
+        {
+          tagline.map((part) =>
+            part.tone ? (
+              <span class={`tone-${part.tone}`}>{part.text}</span>
+            ) : (
+              part.text
+            )
+          )
+        }
       </h2>
 
       <p class="lwk-footer__summary">
@@ -64,7 +64,7 @@ const legalLinks = [
         child is supported to learn, explore and thrive at their own pace.
       </p>
 
-      <a class="lwk-footer__cta" href="/#contact">
+      <a class="lwk-footer__cta" href="/contact">
         Register Your Interest
         <Icon name="arrowRight" size={20} />
       </a>
@@ -142,7 +142,9 @@ const legalLinks = [
               </span>
 
               <span>
-                {site.addressLines.map((line) => <span>{line}</span>)}
+                <span>{site.address.line1}</span>
+                <span>{site.address.line2}</span>
+                <span>{site.address.city}, {site.address.postcode}</span>
               </span>
             </div>
 
@@ -157,7 +159,7 @@ const legalLinks = [
               <span class="lwk-footer__phone-links">
                 {
                   site.phones.map((phone) => (
-                    <a href={`tel:${phone.replaceAll(" ", "")}`}>{phone}</a>
+                    <a href={phone.href}>{phone.display}</a>
                   ))
                 }
               </span>
@@ -212,7 +214,6 @@ const legalLinks = [
         <nav class="lwk-footer__legal" aria-label="Legal information">
           {legalLinks.map((link) => <a href={link.href}>{link.label}</a>)}
         </nav>
-        <!--TODO: do not hardcore date ! use js-->
         <p>
           &copy; {new Date().getFullYear()}
           {site.name}. All rights reserved.

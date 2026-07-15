@@ -1,129 +1,11 @@
 .gallery-page {
-  --gallery-hero-image: none;
-
   color: var(--color-ink);
   background: var(--color-page);
 }
 
 /*
- * Hero
- *
- * Uses the same structure, sizing, overlay and wave treatment
- * as the existing route-level pages.
+ * Hero preserved by SubpageHero component
  */
-
-.gallery-hero {
-  position: relative;
-  isolation: isolate;
-  display: grid;
-  min-height: clamp(36rem, 62vw, 50rem);
-  place-items: center;
-  padding: clamp(5rem, 9vw, 8rem) var(--gutter) clamp(10rem, 15vw, 13rem);
-  overflow: hidden;
-  text-align: center;
-  background: var(--color-cream);
-}
-
-.gallery-hero::before,
-.gallery-hero::after {
-  position: absolute;
-  inset: 0;
-  content: "";
-  pointer-events: none;
-}
-
-.gallery-hero::before {
-  z-index: -3;
-  background-image: var(--gallery-hero-image);
-  background-position: center;
-  background-size: cover;
-  transform: scale(1.03);
-}
-
-.gallery-hero::after {
-  z-index: -2;
-  background:
-    radial-gradient(
-      circle at 50% 42%,
-      color-mix(in srgb, var(--color-page) 96%, transparent) 0%,
-      color-mix(in srgb, var(--color-page) 88%, transparent) 36%,
-      color-mix(in srgb, var(--color-page) 68%, transparent) 70%,
-      color-mix(in srgb, var(--color-page) 55%, transparent) 100%
-    ),
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--color-page) 76%, transparent),
-      color-mix(in srgb, var(--color-page) 55%, transparent) 44%,
-      color-mix(in srgb, var(--color-page) 84%, transparent)
-    );
-  backdrop-filter: blur(1.5px);
-}
-
-.gallery-hero__content {
-  position: relative;
-  z-index: 2;
-  width: min(100%, 58rem);
-  margin-inline: auto;
-}
-
-.gallery-page__eyebrow,
-.gallery-page__label {
-  margin: 0;
-  font-family: var(--font-heading);
-  font-size: var(--font-size-label);
-  font-weight: var(--font-weight-black);
-  letter-spacing: 0.16em;
-  line-height: var(--line-height-solid);
-  text-transform: uppercase;
-}
-
-.gallery-page__eyebrow {
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  color: var(--color-purple);
-}
-
-.gallery-page__eyebrow::after {
-  position: absolute;
-  bottom: -1rem;
-  left: 50%;
-  width: 5rem;
-  height: 3px;
-  border-radius: var(--radius-pill);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--color-purple),
-    transparent
-  );
-  content: "";
-  transform: translateX(-50%);
-}
-
-.gallery-hero h1 {
-  max-width: 58rem;
-  margin: var(--space-xl) auto 0;
-  color: var(--color-ink);
-  font-size: var(--heading-h1-size);
-  letter-spacing: var(--letter-spacing-section-title);
-  line-height: var(--line-height-heading);
-  text-wrap: balance;
-}
-
-.gallery-hero h1 span {
-  display: block;
-}
-
-.gallery-hero__lead {
-  width: min(100%, 47rem);
-  margin: var(--space-l) auto 0;
-  color: var(--color-ink-soft);
-  font-size: var(--font-size-large);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-compact);
-  text-wrap: balance;
-}
 
 .gallery-hero__cta {
   display: inline-flex;
@@ -143,55 +25,10 @@
   box-shadow: 0 0.75rem 1.75rem
     color-mix(in srgb, var(--color-purple) 18%, transparent);
   font-family: var(--font-heading);
-  font-weight: var(--font-weight-black);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-compact);
   text-decoration: none;
 }
-
-.gallery-hero__cta span {
-  flex: none;
-  font-size: 1.25em;
-}
-
-.gallery-hero__wave {
-  position: absolute;
-  right: 0;
-  bottom: -1px;
-  left: 0;
-  z-index: 3;
-  height: clamp(7.5rem, 14vw, 13rem);
-  color: var(--color-page);
-  filter: drop-shadow(
-    0 -0.75rem 1.15rem color-mix(in srgb, var(--color-ink) 3%, transparent)
-  );
-}
-
-.gallery-hero__wave svg {
-  width: 100%;
-  height: 100%;
-}
-
-.gallery-hero__wave path {
-  fill: currentColor;
-}
-
-.gallery-hero__wave-highlight {
-  position: absolute;
-  right: 0;
-  bottom: clamp(4.6rem, 8.4vw, 8.1rem);
-  left: 0;
-  z-index: 2;
-  height: 1.1rem;
-  opacity: 0.4;
-  background: linear-gradient(
-    90deg,
-    color-mix(in srgb, var(--color-purple) 11%, transparent),
-    color-mix(in srgb, var(--color-green) 8%, transparent),
-    color-mix(in srgb, var(--color-blue) 9%, transparent)
-  );
-  filter: blur(1.1rem);
-}
-
 /*
  * Main gallery area
  */
@@ -518,7 +355,7 @@
     var(--color-purple-dark)
   );
   font-family: var(--font-heading);
-  font-weight: var(--font-weight-black);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-compact);
   text-align: center;
   text-decoration: none;
@@ -526,7 +363,7 @@
 }
 
 .gallery-cta__link span {
-  font-size: 1.25em;
+  font-size: var(--font-size-large);
 }
 
 /*
@@ -616,53 +453,10 @@
  */
 
 @media (width < 48rem) {
-  .gallery-hero {
-    min-height: 38rem;
-    padding: var(--space-2xl) var(--gutter) clamp(8rem, 30vw, 10rem);
-  }
-
-  .gallery-hero::before {
-    transform: scale(1.08);
-  }
-
-  .gallery-hero::after {
-    background:
-      radial-gradient(
-        circle at 50% 46%,
-        color-mix(in srgb, var(--color-page) 97%, transparent) 0%,
-        color-mix(in srgb, var(--color-page) 90%, transparent) 50%,
-        color-mix(in srgb, var(--color-page) 73%, transparent) 100%
-      ),
-      linear-gradient(
-        180deg,
-        color-mix(in srgb, var(--color-page) 84%, transparent),
-        color-mix(in srgb, var(--color-page) 76%, transparent)
-      );
-    backdrop-filter: blur(2px);
-  }
-
-  .gallery-hero h1 {
-    font-size: clamp(2.65rem, 13vw, 4rem);
-    line-height: 1.02;
-  }
-
-  .gallery-hero__lead {
-    margin-top: var(--space-m);
-    font-size: var(--font-size-default);
-  }
-
   .gallery-hero__cta {
     width: 100%;
     max-width: 20rem;
     margin-top: var(--space-m);
-  }
-
-  .gallery-hero__wave {
-    height: 7rem;
-  }
-
-  .gallery-hero__wave-highlight {
-    bottom: 4.5rem;
   }
 
   .gallery-page__main {

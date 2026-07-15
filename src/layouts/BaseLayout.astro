@@ -35,8 +35,9 @@ const { title = site.name, description = site.description } = Astro.props;
     />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <SiteHeader />
-    <main>
+    <main id="main-content">
       <slot />
     </main>
     <SiteFooter />

@@ -3,14 +3,21 @@ import multilingualBubble from "../../../../assets/icons/bubble-multilingual.png
 import heartBubble from "../../../../assets/icons/bubble-heart-with-smile.png";
 import artBubble from "../../../../assets/icons/bubble-art.png";
 import peopleBubble from "../../../../assets/icons/bubble-people.png";
+import { site } from "../../../data/site";
 import "./ValuesDifference.css";
+
+const formatLanguages = (languages: readonly string[]) => {
+  if (languages.length === 0) return "";
+  if (languages.length === 1) return languages[0];
+  return `${languages.slice(0, -1).join(", ")} and ${languages[languages.length - 1]}`;
+};
 
 const cards = [
   {
     tone: "purple",
     image: multilingualBubble,
     title: "Multilingual Learning",
-    copy: "We currently introduce English and Portuguese through songs, stories and everyday moments, helping children communicate, connect and enjoy language naturally.",
+    copy: `We currently introduce ${formatLanguages(site.languages)} through songs, stories and everyday moments, helping children communicate, connect and enjoy language naturally.`,
   },
   {
     tone: "green",
@@ -99,94 +106,4 @@ const cards = [
   </div>
 </section>
 
-<script is:inline>
-  const initialiseValuesDifference = () => {
-    const sections = document.querySelectorAll("[data-values-difference]");
-
-    sections.forEach((section) => {
-      if (!(section instanceof HTMLElement)) {
-        return;
-      }
-
-      if (section.dataset.valuesDifferenceInitialised === "true") {
-        return;
-      }
-
-      const heading = section.querySelector("[data-values-difference-heading]");
-
-      if (!(heading instanceof HTMLElement)) {
-        return;
-      }
-
-      section.dataset.valuesDifferenceInitialised = "true";
-
-      const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      );
-
-      if (reducedMotion.matches) {
-        section.classList.add("is-heading-animated");
-        return;
-      }
-
-      let hasAnimated = false;
-      let hasUserScrolled = false;
-      let headingIsInTriggerArea = false;
-
-      const cleanUp = () => {
-        observer.disconnect();
-
-        window.removeEventListener("scroll", handleScroll);
-      };
-
-      const animateHeading = () => {
-        if (hasAnimated || !hasUserScrolled || !headingIsInTriggerArea) {
-          return;
-        }
-
-        hasAnimated = true;
-
-        section.classList.add("is-heading-animated");
-
-        cleanUp();
-      };
-
-      const handleScroll = () => {
-        hasUserScrolled = true;
-        animateHeading();
-      };
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          headingIsInTriggerArea = entry?.isIntersecting ?? false;
-
-          animateHeading();
-        },
-        {
-          threshold: 0,
-          rootMargin: "-38% 0px -38% 0px",
-        }
-      );
-
-      observer.observe(heading);
-
-      window.addEventListener("scroll", handleScroll, {
-        passive: true,
-      });
-
-      document.addEventListener("astro:before-swap", cleanUp, {
-        once: true,
-      });
-    });
-  };
-
-  initialiseValuesDifference();
-
-  if (
-    document.documentElement.dataset.valuesDifferencePageListener !== "true"
-  ) {
-    document.documentElement.dataset.valuesDifferencePageListener = "true";
-
-    document.addEventListener("astro:page-load", initialiseValuesDifference);
-  }
-</script>
+<script src="./ValuesDifference.ts"></script>

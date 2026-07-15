@@ -40,17 +40,31 @@
 
   --font-weight-regular: 400;
   --font-weight-bold: 700;
-  --font-weight-black: 900;
 
   --font-size-small: clamp(0.88rem, 0.84rem + 0.18vw, 1rem);
   --font-size-default: clamp(1rem, 0.96rem + 0.22vw, 1.13rem);
   --font-size-large: clamp(1.2rem, 1.09rem + 0.53vw, 1.5rem);
   --font-size-xlarge: 1.5rem;
-  --font-size-label: 0.78rem;
+  --font-size-label: var(--font-size-small);
+
+  --font-size-page-title: clamp(2.8rem, 5.4vw, 5.6rem);
+  --font-size-section-title: clamp(2rem, 3.4vw, 3.5rem);
+  --font-size-card-title: clamp(1.35rem, 1.8vw, 1.75rem);
+  --font-size-body: var(--font-size-default);
+  --font-size-lead: clamp(1.1rem, 1.5vw, 1.35rem);
+
+  --space-eyebrow-to-heading: var(--space-l);
+  --space-heading-to-copy: var(--space-s);
+  --space-paragraph-flow: var(--space-m);
+  --space-section-heading: var(--space-xl);
+
+  --line-height-page-title-mobile: 1.02;
+
+  --text-prose-body: var(--font-size-body);
+  --text-prose-lead: var(--font-size-lead);
 
   --heading-h1-size: clamp(2.49rem, 1.71rem + 3.89vw, 4.73rem);
   --heading-h2-size: clamp(2.07rem, 1.56rem + 2.57vw, 3.55rem);
-  --heading-h3-size: clamp(1.44rem, 1.24rem + 0.98vw, 2rem);
 
   --line-height-body: 1.6;
   --line-height-heading: 1.06;

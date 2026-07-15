@@ -1,5 +1,4 @@
 .site-header {
-  --header-nav-line-height: 1.15;
   --header-chevron-size: 1.1rem;
   --header-mobile-chevron-size: 1.35rem;
   position: sticky;
@@ -48,7 +47,7 @@
   border-radius: var(--radius-s);
   font: inherit;
   font-size: var(--font-size-small);
-  line-height: var(--header-nav-line-height);
+  line-height: var(--line-height-tight);
   text-align: center;
   color: var(--color-ink);
   background: transparent;

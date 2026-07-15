@@ -2,109 +2,13 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Container from "../../components/layout/Container.astro";
 import Icon from "../../components/icons/Icon.astro";
+import SubpageHero from "../../components/layout/SubpageHero.astro";
 import "./blog-article.css";
 
-type ArticleContentBlock =
-  | {
-      type: "paragraph";
-      text: string;
-    }
-  | {
-      type: "heading";
-      text: string;
-      id: string;
-    }
-  | {
-      type: "list";
-      items: string[];
-    };
-
-interface BlogArticle {
-  slug: string;
-  title: string;
-  description: string;
-  category: string;
-  published: string;
-  image?: string;
-  imageAlt?: string;
-  content: ArticleContentBlock[];
-}
+import { articles } from "../../data/blog";
+import type { BlogArticle } from "../../data/blog";
 
 export function getStaticPaths() {
-    const articles: BlogArticle[] = [
-        {
-            slug: "the-power-of-play",
-            title: "The Power of Play: Learning Through Discovery",
-            description:
-                "Play is how young children make sense of the world around them. At Little Wise Kids, we believe playful learning builds confidence, curiosity and a love of discovery that lasts a lifetime.",
-            category: "Early Learning",
-            published: "2026-07-08",
-            image: "",
-            imageAlt:
-                "Children exploring natural, open-ended learning materials together at Little Wise Kids.",
-            content: [
-                {
-                    type: "paragraph",
-                    text: "Play is far more than just fun. It is how children explore, experiment, imagine and make connections that help them grow in so many important ways. From building friendships to solving problems, play shapes the foundations for lifelong learning.",
-                },
-                {
-                    type: "heading",
-                    id: "why-play-matters",
-                    text: "Why Play Matters",
-                },
-                {
-                    type: "paragraph",
-                    text: "When children play, they are in control of their learning. They follow their interests, take risks, try new things and build confidence along the way. Play supports brain development, language skills, creativity, social understanding and emotional wellbeing.",
-                },
-                {
-                    type: "heading",
-                    id: "learning-through-exploration",
-                    text: "Learning Through Exploration",
-                },
-                {
-                    type: "paragraph",
-                    text: "Children are naturally curious. Through hands-on experiences, open-ended materials and time to wonder, they make discoveries that spark new ideas. Whether they are building, imagining, investigating or creating, every moment of exploration helps children grow.",
-                },
-                {
-                    type: "heading",
-                    id: "supporting-confidence-and-connection",
-                    text: "Supporting Confidence and Connection",
-                },
-                {
-                    type: "paragraph",
-                    text: "Play together builds more than skills. It builds relationships. Through shared play, children learn to communicate, negotiate, empathise and celebrate each other’s ideas. These experiences help them feel understood, valued and confident in themselves.",
-                },
-                {
-                    type: "heading",
-                    id: "play-at-little-wise-kids",
-                    text: "Play at Little Wise Kids",
-                },
-                {
-                    type: "paragraph",
-                    text: "Our environment is carefully prepared to inspire curiosity and imagination. Children have time and space to explore freely, both indoors and outdoors, with a wide range of natural materials, open-ended resources and real-life experiences.",
-                },
-                {
-                    type: "heading",
-                    id: "support-play-at-home",
-                    text: "Simple Ways to Support Play at Home",
-                },
-                {
-                    type: "list",
-                    items: [
-                        "Follow your child’s lead and give them time to explore their own ideas.",
-                        "Offer open-ended materials such as blocks, boxes and natural objects.",
-                        "Spend time outdoors together in different seasons and weather.",
-                        "Read stories, sing songs and make space for imaginative play.",
-                    ],
-                },
-                {
-                    type: "paragraph",
-                    text: "When we value play, we give children the space to become confident, curious and capable learners. At Little Wise Kids, we are proud to protect that space and make every day rich with meaningful discovery.",
-                },
-            ],
-        },
-    ];
-
   return articles.map((article) => ({
     params: {
       slug: article.slug,
@@ -121,67 +25,34 @@ interface Props {
 
 const { article } = Astro.props as Props;
 
-const getBlockText = (block: ArticleContentBlock) => {
-  if (block.type === "list") {
-    return block.items.join(" ");
-  }
-
-  return block.text;
-};
-
-const articleText = [
-  article.title,
-  article.description,
-  ...article.content.map(getBlockText),
-].join(" ");
-
-const wordCount = articleText.trim().split(/\s+/).filter(Boolean).length;
-
-const readingTime = Math.max(1, Math.ceil(wordCount / 220));
-
-const displayDate = new Intl.DateTimeFormat("en-GB", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-}).format(new Date(`${article.published}T12:00:00`));
+const { displayDate, readTime } = article;
 ---
 
 <BaseLayout
   title={`${article.title} | Little Wise Kids`}
-  description={article.description}
+  description={article.excerpt}
 >
   <article
     class="blog-article-page"
     itemscope
     itemtype="https://schema.org/BlogPosting"
   >
-    <header class="blog-article-hero" aria-labelledby="blog-article-title">
-      <div class="blog-article-hero__content">
-        <p class="blog-article-page__eyebrow">
-          Blog / {article.category}
-        </p>
+    <SubpageHero
+      id="blog-article-title"
+      eyebrow={`Blog / ${article.categoryLabel}`}
+      tone="purple"
+      itemprop="headline"
+    >
+      <Fragment slot="title">
+        {article.title}
+      </Fragment>
 
-        <h1 id="blog-article-title" itemprop="headline">
-          {article.title}
-        </h1>
+      <p itemprop="description">
+        {article.excerpt}
+      </p>
+    </SubpageHero>
 
-        <p class="blog-article-hero__lead" itemprop="description">
-          {article.description}
-        </p>
-      </div>
-
-      <span class="blog-article-hero__wave-highlight" aria-hidden="true"></span>
-
-      <div class="blog-article-hero__wave" aria-hidden="true">
-        <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
-          <path
-            d="M0 58C130 118 272 116 413 86C560 55 655 63 805 112C975 168 1102 119 1258 69C1330 46 1392 39 1440 52V220H0V58Z"
-          ></path>
-        </svg>
-      </div>
-    </header>
-
-    <main class="blog-article-page__content">
+    <div class="blog-article-page__content">
       <Container size="wide">
         <div class="blog-article">
           <header class="blog-article__meta">
@@ -204,8 +75,7 @@ const displayDate = new Intl.DateTimeFormat("en-GB", {
               </span>
 
               <span>
-                {readingTime}
-                {readingTime === 1 ? " minute read" : " minute read"}
+                {readTime}
               </span>
             </div>
           </header>
@@ -214,10 +84,10 @@ const displayDate = new Intl.DateTimeFormat("en-GB", {
             {
               article.image ? (
                 <img
-                  src={article.image}
-                  alt={article.imageAlt ?? ""}
-                  width="1400"
-                  height="800"
+                  src={article.image.src}
+                  alt={article.image.alt}
+                  width={article.image.width}
+                  height={article.image.height}
                   loading="eager"
                   decoding="async"
                   itemprop="image"
@@ -234,7 +104,7 @@ const displayDate = new Intl.DateTimeFormat("en-GB", {
 
           <div class="blog-article__prose" itemprop="articleBody">
             {
-              article.content.map((block, index) => {
+              article.content.map((block) => {
                 if (block.type === "heading") {
                   return <h2 id={block.id}>{block.text}</h2>;
                 }
@@ -249,22 +119,12 @@ const displayDate = new Intl.DateTimeFormat("en-GB", {
                   );
                 }
 
-                return (
-                  <p
-                    class:list={[
-                      {
-                        "blog-article__introduction": index === 0,
-                      },
-                    ]}
-                  >
-                    {block.text}
-                  </p>
-                );
+                return <p>{block.text}</p>;
               })
             }
           </div>
         </div>
       </Container>
-    </main>
+    </div>
   </article>
 </BaseLayout>

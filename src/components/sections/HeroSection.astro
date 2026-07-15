@@ -1,5 +1,5 @@
 ---
-import { heroFeatures } from "../../data/site";
+import { heroFeatures, site } from "../../data/site";
 import Icon from "../icons/Icon.astro";
 import Section from "../layout/Section.astro";
 import Button from "../ui/Button.astro";
@@ -27,8 +27,8 @@ import "./HeroSection.css";
       <p class="hero-paragraph">
         Nestled in Bristol BS5, Little Wise Kids is more than childcare. It is a
         nurturing home-from-home where warmth, trust and belonging sit at the
-        heart of every day. We welcome children aged 0–4 years for now,
-        supporting each child to learn, play and grow at their own pace.
+        heart of every day. We welcome children aged {site.ageRange} for now, supporting
+        each child to learn, play and grow at their own pace.
       </p>
       <div class="hero__actions">
         <Button href="#approach" icon="heart">Register Your Interest</Button>

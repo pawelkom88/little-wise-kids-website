@@ -77,7 +77,7 @@ const activityPhotos = [
   title="About Us | Little Wise Kids"
   description="Discover the values, approach, environment, educators and leadership behind Little Wise Kids."
 >
-  <main class="about-page">
+  <article class="about-page">
     <section id="about-us" class="lwk-about" aria-labelledby="about-page-title">
       <header class="lwk-about-hero">
         <div class="lwk-about-hero__content">
@@ -212,25 +212,13 @@ const activityPhotos = [
                 </div>
               </div>
 
-              <figure
-                class="lwk-about__media"
-                aria-label="Home-from-home nursery image placeholder"
-              >
-                <img
-                  src=""
-                  alt=""
-                  width="960"
-                  height="620"
-                  loading="lazy"
-                  decoding="async"
-                />
-
-                <span class="lwk-about__media-placeholder" aria-hidden="true">
+              <div class="lwk-about__media" aria-hidden="true">
+                <span class="lwk-about__media-placeholder">
                   <Icon name="heartSmile" size={44} />
 
                   <span>Home-from-home image</span>
                 </span>
-              </figure>
+              </div>
             </div>
           </Container>
         </section>
@@ -269,25 +257,13 @@ const activityPhotos = [
                 </div>
               </div>
 
-              <figure
-                class="lwk-about__media"
-                aria-label="Nursery environment image placeholder"
-              >
-                <img
-                  src=""
-                  alt=""
-                  width="960"
-                  height="620"
-                  loading="lazy"
-                  decoding="async"
-                />
-
-                <span class="lwk-about__media-placeholder" aria-hidden="true">
+              <div class="lwk-about__media" aria-hidden="true">
+                <span class="lwk-about__media-placeholder">
                   <Icon name="image" size={44} />
 
                   <span>Environment image</span>
                 </span>
-              </figure>
+              </div>
             </div>
           </Container>
         </section>
@@ -381,25 +357,13 @@ const activityPhotos = [
                 </div>
               </div>
 
-              <figure
-                class="lwk-about__media"
-                aria-label="Team photo placeholder"
-              >
-                <img
-                  src=""
-                  alt=""
-                  width="960"
-                  height="620"
-                  loading="lazy"
-                  decoding="async"
-                />
-
-                <span class="lwk-about__media-placeholder" aria-hidden="true">
+              <div class="lwk-about__media" aria-hidden="true">
+                <span class="lwk-about__media-placeholder">
                   <Icon name="users" size={44} />
 
                   <span>Team photo to be supplied</span>
                 </span>
-              </figure>
+              </div>
             </div>
           </Container>
         </section>
@@ -407,25 +371,13 @@ const activityPhotos = [
         <section id="our-leadership-team" class="lwk-about__section">
           <Container size="wide">
             <div class="lwk-about__leadership-card">
-              <figure
-                class="lwk-about__portrait"
-                aria-label="Leadership photo placeholder"
-              >
-                <img
-                  src=""
-                  alt=""
-                  width="720"
-                  height="900"
-                  loading="lazy"
-                  decoding="async"
-                />
-
-                <span class="lwk-about__media-placeholder" aria-hidden="true">
+              <div class="lwk-about__portrait" aria-hidden="true">
+                <span class="lwk-about__media-placeholder">
                   <Icon name="person" size={48} />
 
                   <span>Leadership photo to be supplied</span>
                 </span>
-              </figure>
+              </div>
 
               <div class="lwk-about__copy-block">
                 <p
@@ -500,28 +452,13 @@ const activityPhotos = [
             <div class="lwk-about__gallery-grid">
               {
                 activityPhotos.map((label) => (
-                  <figure
-                    class="lwk-about__gallery-card"
-                    aria-label={`${label} photo placeholder`}
-                  >
-                    <img
-                      src=""
-                      alt=""
-                      width="720"
-                      height="520"
-                      loading="lazy"
-                      decoding="async"
-                    />
-
-                    <span
-                      class="lwk-about__media-placeholder"
-                      aria-hidden="true"
-                    >
+                  <div class="lwk-about__gallery-card" aria-hidden="true">
+                    <span class="lwk-about__media-placeholder">
                       <Icon name="image" size={38} />
 
                       <span>{label}</span>
                     </span>
-                  </figure>
+                  </div>
                 ))
               }
             </div>
@@ -529,5 +466,5 @@ const activityPhotos = [
         </section>
       </div>
     </section>
-  </main>
+  </article>
 </BaseLayout>

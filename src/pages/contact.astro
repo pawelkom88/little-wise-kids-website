@@ -2,11 +2,20 @@
 import Icon from "../components/icons/Icon.astro";
 import Container from "../components/layout/Container.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SubpageHero from "../components/layout/SubpageHero.astro";
+import { site } from "../data/site";
 import "./contact.css";
 
 const siteUrl = Astro.site ?? new URL("https://littlewisekids.co.uk");
 
-const thankYouUrl = new URL("/contact/thank-you/", siteUrl).toString();
+const accessKey = import.meta.env.WEB3FORMS_ACCESS_KEY;
+
+if (!accessKey) {
+  throw new Error(
+    "Missing WEB3FORMS_ACCESS_KEY environment variable. Add it to .env to enable the contact form."
+  );
+}
+const thankYouUrl = new URL("/thank-you/", siteUrl).toString();
 
 const nextSteps = [
   {
@@ -32,35 +41,20 @@ const nextSteps = [
   description="Contact Little Wise Kids in Bristol BS5 to ask about nursery availability, book a visit, register your interest or learn more about our screen-free early years setting."
 >
   <article class="contact-page">
-    <header class="contact-hero" aria-labelledby="contact-page-title">
-      <div class="contact-hero__content">
-        <p class="contact-page__eyebrow">Contact Us</p>
+    <SubpageHero id="contact-page-title" eyebrow="Contact Us" tone="blue">
+      <Fragment slot="title">
+        <span>We’d Love to Hear</span>
+        <span>From Your Family</span>
+      </Fragment>
 
-        <h1 id="contact-page-title">
-          <span>We’d Love to Hear</span>
-          <span>From Your Family</span>
-        </h1>
+      <p>
+        Little Wise Kids is here to support families looking for calm, caring
+        and inspiring childcare in Bristol BS5. Get in touch to ask about
+        availability, settling in, daily routines or arranging a personal visit.
+      </p>
+    </SubpageHero>
 
-        <p class="contact-hero__lead">
-          Little Wise Kids is here to support families looking for calm, caring
-          and inspiring childcare in Bristol BS5. Get in touch to ask about
-          availability, settling in, daily routines or arranging a personal
-          visit.
-        </p>
-      </div>
-
-      <span class="contact-hero__wave-highlight" aria-hidden="true"></span>
-
-      <div class="contact-hero__wave" aria-hidden="true">
-        <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
-          <path
-            d="M0 58C130 118 272 116 413 86C560 55 655 63 805 112C975 168 1102 119 1258 69C1330 46 1392 39 1440 52V220H0V58Z"
-          ></path>
-        </svg>
-      </div>
-    </header>
-
-    <main class="contact-page__content">
+    <div class="contact-page__content">
       <Container size="wide">
         <div class="contact-page__stack">
           <section
@@ -85,8 +79,8 @@ const nextSteps = [
               method="POST"
               novalidate
             >
-              <!--TODO : setup api key for web3form-->
-              <input type="hidden" name="access_key" value="" />
+              <!-- Web3Forms API Key -->
+              <input type="hidden" name="access_key" value={accessKey} />
 
               <input
                 id="contact-subject"
@@ -378,7 +372,9 @@ const nextSteps = [
                     <label for="contact-consent">
                       I consent to Little Wise Kids using my information to
                       respond to this enquiry. Read our
-                      <a href="/privacy-policy"> Privacy Policy </a>.
+                      <a href="/parents-information#policies">
+                        Privacy Policy
+                      </a>.
                     </label>
                   </div>
 
@@ -466,10 +462,11 @@ const nextSteps = [
                 </span>
 
                 <address>
-                  <strong>Little Wise Kids</strong><br />
-                  Stapleton Road, Congregational Chapel<br />
-                  Newton Street<br />
-                  Bristol BS5 0QZ
+                  <strong>{site.address.organisation}</strong><br />
+                  {site.address.line1}<br />
+                  {site.address.line2}<br />
+                  {site.address.city}
+                  {site.address.postcode}
                 </address>
               </div>
 
@@ -480,15 +477,15 @@ const nextSteps = [
 
                 <p>
                   <strong>Opening hours</strong><br />
-                  Monday–Friday<br />
-                  7:30am–5:30pm
+                  {site.openingHours.days}<br />
+                  {site.openingHours.fullDay}
                 </p>
               </div>
             </div>
           </section>
         </div>
       </Container>
-    </main>
+    </div>
   </article>
 </BaseLayout>
 
@@ -496,13 +493,20 @@ const nextSteps = [
 ></script>
 
 <script>
+  type ValidatedField =
+    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+
   const form = document.querySelector("#contact-form");
 
   if (form instanceof HTMLFormElement) {
-    const fields = Array.from(form.querySelectorAll("[data-validate]"));
+    const fields = Array.from(
+      form.querySelectorAll<ValidatedField>("[data-validate]")
+    );
 
     const touchedFields = new WeakSet();
-    const errorSummary = document.querySelector("#contact-error-summary");
+    const errorSummary = document.querySelector(
+      "#contact-error-summary"
+    ) as HTMLElement | null;
     const errorSummaryList = errorSummary?.querySelector("ul");
 
     const subjectInput = document.querySelector("#contact-subject");
@@ -516,7 +520,7 @@ const nextSteps = [
     const captchaContainer = document.querySelector("#contact-captcha");
     const captchaError = document.querySelector("#contact-captcha-error");
 
-    const formatLocalDate = (date) => {
+    const formatLocalDate = (date: Date) => {
       const adjustedDate = new Date(
         date.getTime() - date.getTimezoneOffset() * 60_000
       );
@@ -536,19 +540,19 @@ const nextSteps = [
 
     updateCharacterCount();
 
-    const getFieldContainer = (field) => {
+    const getFieldContainer = (field: ValidatedField) => {
       return (
         field.closest(".contact-field") ?? field.closest(".contact-consent")
       );
     };
 
-    const getErrorElement = (field) => {
+    const getErrorElement = (field: ValidatedField) => {
       if (!field.id) return null;
 
       return document.querySelector(`#${CSS.escape(field.id)}-error`);
     };
 
-    const setFieldState = (field, message) => {
+    const setFieldState = (field: ValidatedField, message: string) => {
       const container = getFieldContainer(field);
       const errorElement = getErrorElement(field);
       const hasError = Boolean(message);
@@ -571,7 +575,7 @@ const nextSteps = [
       return !hasError;
     };
 
-    const validateField = (field) => {
+    const validateField = (field: ValidatedField) => {
       const value = "value" in field ? field.value.trim() : "";
 
       let message = "";
@@ -670,7 +674,9 @@ const nextSteps = [
       return isComplete;
     };
 
-    const renderErrorSummary = (errors) => {
+    const renderErrorSummary = (
+      errors: { id: string; label: string; message: string }[]
+    ) => {
       if (!errorSummary || !errorSummaryList) {
         return;
       }
@@ -745,7 +751,7 @@ const nextSteps = [
 
           errors.push({
             id: field.id,
-            label: field.dataset.label ?? "Field",
+            label: field.getAttribute("data-label") ?? "Field",
             message: errorElement?.textContent ?? "Check this field.",
           });
         }
@@ -799,7 +805,7 @@ const nextSteps = [
 
       if (redirectInput instanceof HTMLInputElement) {
         redirectInput.value = new URL(
-          "/contact/thank-you/",
+          "/thank-you/",
           window.location.origin
         ).href;
       }
