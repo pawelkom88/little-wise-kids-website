@@ -11,6 +11,11 @@ import "./blog.css";
 const blogPage = await getBlogPage();
 const posts = await getBlogPosts();
 const articles = posts.map(mapBlogPost);
+
+const primaryFeaturedArticle = articles.find((a) => a.featured) ?? null;
+const standardArticles = primaryFeaturedArticle
+  ? articles.filter((a) => a.slug !== primaryFeaturedArticle.slug)
+  : articles;
 ---
 
 <BaseLayout
@@ -72,14 +77,14 @@ const articles = posts.map(mapBlogPost);
           </p>
 
           <div class="blog-grid">
-            {
-              articles.map((article, index) => (
+            {primaryFeaturedArticle && (() => {
+              const article = primaryFeaturedArticle;
+              return (
                 <article
-                  class={`blog-card blog-card--${article.tone}`}
+                  class={`blog-card blog-card--featured blog-card--${article.tone}`}
                   data-blog-card
                   data-category={article.category}
-                  data-article-index={index}
-                  hidden={index >= 6}
+                  data-article-index={0}
                 >
                   <a class="blog-card__link" href={`/blog/${article.slug}`}>
                     <div class="blog-card__media">
@@ -89,57 +94,83 @@ const articles = posts.map(mapBlogPost);
                           alt={article.image.alt}
                           width={article.image.width}
                           height={article.image.height}
-                          loading={index < 3 ? "eager" : "lazy"}
+                          loading="eager"
                           decoding="async"
                         />
                       ) : (
-                        <div
-                          class="blog-card__placeholder"
-                          aria-hidden="true"
-                        />
+                        <div class="blog-card__placeholder" aria-hidden="true" />
                       )}
-
-                      {article.featured && (
-                        <span class="blog-card__featured">
-                          <Icon name="star" size={16} />
-                          Featured
-                        </span>
-                      )}
+                      <span class="blog-card__featured">
+                        <Icon name="star" size={16} />
+                        Featured
+                      </span>
                     </div>
-
                     <div class="blog-card__body">
                       <span class="blog-card__category">
-                        <span aria-hidden="true">
-                          <Icon name={article.icon as any} size={17} />
-                        </span>
-
+                        <span aria-hidden="true"><Icon name={article.icon as any} size={17} /></span>
                         {article.categoryLabel}
                       </span>
-
                       <h3>{article.title}</h3>
-
                       <p class="blog-card__excerpt">{article.excerpt}</p>
-
                       <footer class="blog-card__footer">
                         <div class="blog-card__meta">
-                          <time datetime={article.published}>
-                            {article.displayDate}
-                          </time>
-
+                          <time datetime={article.published}>{article.displayDate}</time>
                           <span aria-hidden="true">·</span>
-
                           <span>{article.readTime}</span>
                         </div>
-
-                        <span class="blog-card__read">
-                          Read Article
-                          <span aria-hidden="true">→</span>
-                        </span>
+                        <span class="blog-card__read">Read Article<span aria-hidden="true">→</span></span>
                       </footer>
                     </div>
                   </a>
                 </article>
-              ))
+              );
+            })()}
+            {
+              standardArticles.map((article, idx) => {
+                const displayIndex = (primaryFeaturedArticle ? 1 : 0) + idx;
+                return (
+                <article
+                  class={`blog-card blog-card--${article.tone}`}
+                  data-blog-card
+                  data-category={article.category}
+                  data-article-index={displayIndex}
+                  hidden={displayIndex >= 6}
+                >
+                  <a class="blog-card__link" href={`/blog/${article.slug}`}>
+                    <div class="blog-card__media">
+                      {article.image ? (
+                        <img
+                          src={article.image.src}
+                          alt={article.image.alt}
+                          width={article.image.width}
+                          height={article.image.height}
+                          loading={displayIndex < 3 ? "eager" : "lazy"}
+                          decoding="async"
+                        />
+                      ) : (
+                        <div class="blog-card__placeholder" aria-hidden="true" />
+                      )}
+                    </div>
+                    <div class="blog-card__body">
+                      <span class="blog-card__category">
+                        <span aria-hidden="true"><Icon name={article.icon as any} size={17} /></span>
+                        {article.categoryLabel}
+                      </span>
+                      <h3>{article.title}</h3>
+                      <p class="blog-card__excerpt">{article.excerpt}</p>
+                      <footer class="blog-card__footer">
+                        <div class="blog-card__meta">
+                          <time datetime={article.published}>{article.displayDate}</time>
+                          <span aria-hidden="true">·</span>
+                          <span>{article.readTime}</span>
+                        </div>
+                        <span class="blog-card__read">Read Article<span aria-hidden="true">→</span></span>
+                      </footer>
+                    </div>
+                  </a>
+                </article>
+                );
+              })
             }
           </div>
 

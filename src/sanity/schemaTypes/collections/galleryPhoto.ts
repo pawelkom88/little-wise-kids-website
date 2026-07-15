@@ -12,13 +12,14 @@ export const galleryPhoto = defineType({
       title: "Internal Title",
       description: "For internal CMS organization only. E.g., 'Messy play Aug 2026'.",
       type: "string",
+      validation: (rule) => rule.required().error("Internal title is required for CMS organisation."),
     }),
     defineField({ 
       name: "image", 
       title: "Image", 
       description: "The photo to display in the gallery. Alt text is strictly required.",
       type: "strictImage",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required().assetRequired().error("Upload a gallery photograph.")
     }),
     defineField({
       name: "category",
@@ -27,40 +28,40 @@ export const galleryPhoto = defineType({
       type: "string",
       options: {
         list: [
-          {
-            title: "Outdoor Learning Experience",
-            value: "outdoor-learning-experience",
-          },
-          {
-            title: "Indoor Learning Experience",
-            value: "indoor-learning-experience",
-          },
+          { title: "Outdoor Learning Experience", value: "outdoor-learning-experience" },
+          { title: "Indoor Learning Experience", value: "indoor-learning-experience" },
           { title: "Language Immersion", value: "language-immersion" },
-          {
-            title: "Nutrition and Mealtimes",
-            value: "nutrition-and-mealtimes",
-          },
+          { title: "Nutrition and Mealtimes", value: "nutrition-and-mealtimes" },
           { title: "Creative Play", value: "creative-play" },
           { title: "Sensory Exploration", value: "sensory-exploration" },
           { title: "Nature and Gardening", value: "nature-and-gardening" },
-          {
-            title: "Celebrations and Community",
-            value: "celebrations-and-community",
-          },
+          { title: "Celebrations and Community", value: "celebrations-and-community" },
         ],
       },
+      validation: (rule) => rule.required().error("Category is required."),
     }),
     defineField({
       name: "showOnHomepage",
       title: "Show On Homepage",
       description: "Toggle to feature this photo on the home page gallery preview.",
       type: "boolean",
+      initialValue: false,
     }),
     defineField({
       name: "homepageDisplayOrder",
       title: "Homepage Display Order",
       description: "Lower numbers appear first on the homepage gallery.",
       type: "number",
+      validation: (rule) => [
+        rule.integer().min(0),
+        rule.custom((value, context) => {
+          const parent = context.parent as { showOnHomepage?: boolean } | undefined;
+          if (parent?.showOnHomepage && (value === undefined || value === null)) {
+            return "Display order is required when shown on homepage.";
+          }
+          return true;
+        }),
+      ],
     }),
     defineField({
       name: "publicCaption",
@@ -71,21 +72,33 @@ export const galleryPhoto = defineType({
     }),
     defineField({
       name: "displayOrder",
-      title: "Gallery Page Display Order",
+      title: "Full Gallery Display Order",
       description: "Lower numbers appear first on the full Gallery page.",
       type: "number",
+      validation: (rule) => rule.required().integer().min(0).error("Display order is required."),
     }),
     defineField({
       name: "showOnAboutPage",
       title: "Show On About Page",
       description: "Toggle to feature this photo in the About page activity gallery.",
       type: "boolean",
+      initialValue: false,
     }),
     defineField({
       name: "aboutPageDisplayOrder",
       title: "About Page Display Order",
       description: "Lower numbers appear first on the About page gallery.",
       type: "number",
+      validation: (rule) => [
+        rule.integer().min(0),
+        rule.custom((value, context) => {
+          const parent = context.parent as { showOnAboutPage?: boolean } | undefined;
+          if (parent?.showOnAboutPage && (value === undefined || value === null)) {
+            return "Display order is required when shown on About page.";
+          }
+          return true;
+        }),
+      ],
     }),
   ],
   preview: {
@@ -97,12 +110,19 @@ export const galleryPhoto = defineType({
   },
   orderings: [
     {
-      title: "Category, then Title",
-      name: "categoryAsc",
-      by: [
-        { field: "category", direction: "asc" },
-        { field: "internalTitle", direction: "asc" },
-      ],
+      title: "Full Gallery Order",
+      name: "fullGalleryOrder",
+      by: [{ field: "displayOrder", direction: "asc" }],
+    },
+    {
+      title: "Homepage Order",
+      name: "homepageOrder",
+      by: [{ field: "homepageDisplayOrder", direction: "asc" }],
+    },
+    {
+      title: "About Page Order",
+      name: "aboutPageOrder",
+      by: [{ field: "aboutPageDisplayOrder", direction: "asc" }],
     },
   ],
 });

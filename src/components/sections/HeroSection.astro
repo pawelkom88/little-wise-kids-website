@@ -15,8 +15,9 @@ interface Props {
 const { homePage } = Astro.props;
 
 const heroSrc = homePage.heroImage ? getImageUrl(homePage.heroImage, 800) : null;
+const heroIsDecorative = !heroSrc || homePage.heroImage?.isDecorative === true;
 const heroImg = heroSrc
-  ? { src: heroSrc, alt: homePage.heroImage?.isDecorative ? "" : homePage.heroImage?.altText ?? "" }
+  ? { src: heroSrc, alt: heroIsDecorative ? "" : homePage.heroImage?.altText ?? "" }
   : { src: "/assets/images/hero-image.png", alt: "" };
 
 const featureStrip = [
@@ -51,7 +52,7 @@ const featureStrip = [
         >
       </div>
     </div>
-    <div class="hero__media" aria-hidden="true">
+    <div class="hero__media" aria-hidden={heroIsDecorative ? "true" : undefined}>
       <img
         class="hero__photo"
         src={heroImg.src}

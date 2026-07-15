@@ -1,11 +1,18 @@
 ---
-interface Props {
-  node: { href: string; blank?: boolean };
-  children?: any;
+interface ExternalLinkDef {
+  _type: "link";
+  href: string;
+  blank?: boolean;
 }
+
+interface Props {
+  node: { markDef: ExternalLinkDef };
+}
+
 const { node } = Astro.props;
+const { href, blank } = node.markDef;
 ---
 
-<a href={node.href} target={node.blank ? "_blank" : undefined} rel={node.blank ? "noreferrer" : undefined}>
+<a href={href} target={blank ? "_blank" : undefined} rel={blank ? "noopener noreferrer" : undefined}>
   <slot />
 </a>

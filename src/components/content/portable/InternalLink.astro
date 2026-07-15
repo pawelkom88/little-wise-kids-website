@@ -1,18 +1,24 @@
 ---
+interface InternalReference {
+  _id: string;
+  _type: string;
+  slug?: { current?: string };
+}
+
+interface InternalLinkDef {
+  _type: "internalLink";
+  reference?: InternalReference;
+}
+
 interface Props {
-  node: {
-    reference?: {
-      _type: string;
-      slug?: { current: string };
-    };
-  };
-  children?: any;
+  node: { markDef: InternalLinkDef };
 }
 
 const { node } = Astro.props;
+const ref = node.markDef.reference;
 
-function getHref(ref: { _type: string; slug?: { current: string } }): string {
-  switch (ref._type) {
+function getHref(r: InternalReference): string {
+  switch (r._type) {
     case "homePage": return "/";
     case "aboutPage": return "/about-us";
     case "multilingualPage": return "/multilingual-learning";
@@ -21,12 +27,12 @@ function getHref(ref: { _type: string; slug?: { current: string } }): string {
     case "galleryPage": return "/our-gallery";
     case "contactPage": return "/contact";
     case "blogPage": return "/blog";
-    case "blogPost": return `/blog/${ref.slug?.current ?? ""}`;
-    default: return "#";
+    case "blogPost": return r.slug?.current ? `/blog/${r.slug.current}` : "";
+    default: return "";
   }
 }
 
-const href = node.reference ? getHref(node.reference) : "#";
+const href = ref ? getHref(ref) : "";
 ---
 
-<a href={href} class="internal-link"><slot /></a>
+{href ? <a href={href} class="internal-link"><slot /></a> : <slot />}
