@@ -27,7 +27,7 @@ export default defineConfig({
   projectId:
     process.env.SANITY_PROJECT_ID ||
     process.env.PUBLIC_SANITY_PROJECT_ID ||
-    "vxtgqckg",
+    "c10vla3h",
   dataset:
     process.env.SANITY_DATASET ||
     process.env.PUBLIC_SANITY_DATASET ||

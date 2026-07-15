@@ -1,8 +1,8 @@
 import fs from "fs";
-import path from "path";
 import { fileURLToPath } from "url";
+import pathModule from "path";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = pathModule.dirname(fileURLToPath(import.meta.url));
 
 function createTextBlock(text) {
   return {
@@ -37,13 +37,32 @@ function validate(doc) {
   }
 }
 
+const imageRef = {
+  _type: "image",
+  asset: {
+    _type: "reference",
+    _ref: "image-dummyasset-png"
+  },
+  isDecorative: false,
+  altText: "Representative illustrative image for Little Wise Kids nursery setting."
+};
+
+const decorativeImageRef = {
+  _type: "image",
+  asset: {
+    _type: "reference",
+    _ref: "image-dummyasset-png"
+  },
+  isDecorative: true
+};
+
 const documents = [
   {
     _id: "businessDetails",
     _type: "businessDetails",
     organizationName: "Little Wise Kids",
     publicEmail: "hello@littlewisekids.co.uk",
-    primaryPhone: { _type: "object", label: "Main Office", number: "0117 123 4567" },
+    primaryPhone: { _type: "object", label: "Main Office", number: "+441171234567" },
     address: {
       _type: "object",
       organisation: "Little Wise Kids",
@@ -92,6 +111,10 @@ const documents = [
     visitHeading: { _type: "object", lineOnePrefix: "Come and See", accentedPhrase: "For Yourself", lineTwo: "" },
     visitParagraphs: [createTextBlock("Choosing a nursery is a big decision.")],
     visitCtaLabel: "Book a Visit",
+    visitImage: {
+      ...imageRef,
+      altText: "Parents and child exploring the outdoor play space together."
+    },
     testimonialQuote: "Little Wise Kids has been wonderful for our daughter.",
     testimonialAttribution: "Sarah, Parent",
     faqHeading: { _type: "object", prefix: "Questions Families", accentedPhrase: "Often Ask" },
@@ -111,16 +134,7 @@ const documents = [
     heroTitleLineOne: "About Us",
     heroTitleLineTwo: "Our Story",
     heroParagraphs: [createTextBlock("This is the about page.")],
-    storyTitleLineOne: "Our",
-    storyTitleLineTwo: "Beginning",
-    storyParagraphs: [createTextBlock("Our journey started...")],
-    leadershipTitleLineOne: "Meet",
-    leadershipTitleLineTwo: "Our Team",
     leadershipParagraphs: [createTextBlock("We are passionate educators.")],
-    galleryEyebrow: "Our Environment",
-    galleryHeading: "See our nursery",
-    galleryParagraphs: [createTextBlock("Our space is designed for play.")],
-    galleryPrimaryCtaLabel: "View Full Gallery",
     approachLabel: "Our Approach",
     approachHeading: "Child-Led Learning",
     approachParagraphs: [createTextBlock("We focus on individual growth.")],
@@ -131,6 +145,30 @@ const documents = [
     approachConfidence: "Confidence",
     approachRelationships: "Relationships",
     commitmentLabel: "Our Commitment",
+    commitmentHeading: "Nurturing Your Child's Unique Path",
+    commitmentParagraphs: [createTextBlock("We are committed to providing the highest quality education.")],
+    commitmentImage: decorativeImageRef,
+    environmentLabel: "Our Space",
+    environmentHeading: "Designed for Exploration",
+    environmentParagraphs: [createTextBlock("Our indoor and outdoor spaces are carefully designed.")],
+    environmentImage: decorativeImageRef,
+    programmesLabel: "Our Programmes",
+    programmesHeading: "Foundations for the Future",
+    programmesParagraphs: [createTextBlock("Our programmes build core learning foundations.")],
+    foundationCommunication: "Communication",
+    foundationEmpathy: "Empathy",
+    foundationIndependence: "Independence",
+    foundationCreativity: "Creativity",
+    foundationCriticalThinking: "Critical Thinking",
+    educatorsLabel: "Our Team",
+    educatorsHeading: "Passionate Educators",
+    educatorsParagraphs: [createTextBlock("Our staff are qualified and dedicated.")],
+    educatorsImage: decorativeImageRef,
+    leadershipLabel: "Leadership",
+    leadershipHeading: "Our Visionaries",
+    leadershipImage: decorativeImageRef,
+    gallerySectionLabel: "Gallery",
+    gallerySectionHeading: "Moments from Little Wise Kids",
   },
   {
     _id: "multilingualPage",
@@ -138,6 +176,40 @@ const documents = [
     heroTitleLineOne: "Multilingual",
     heroTitleLineTwo: "Learning",
     heroParagraphs: [createTextBlock("We speak English and Portuguese.")],
+    philosophyLabel: "Philosophy",
+    philosophyHeading: "Natural Language Acquisition",
+    philosophyParagraphs: [createTextBlock("We believe in natural exposure to multiple languages.")],
+    childrenEnjoyHeading: "What Children Enjoy Here",
+    philosophyPoints: [
+      "Storytelling in multiple languages",
+      "Interactive bilingual music sessions",
+      "Bilingual daily routines"
+    ],
+    languageConnectionLabel: "Connection",
+    languageConnectionHeading: "Building Bridges Through Talk",
+    languageConnectionParagraphs: [createTextBlock("Languages connect our diverse community.")],
+    languageConnectionImage: decorativeImageRef,
+    eyfsLabel: "EYFS",
+    eyfsHeading: "Early Years Foundation Stage",
+    eyfsParagraphs: [createTextBlock("We follow the EYFS framework dynamically.")],
+    eyfsCommunication: { title: "Communication & Language", description: "Expressing ideas freely." },
+    eyfsPhysical: { title: "Physical Development", description: "Active and healthy lives." },
+    eyfsPersonal: { title: "Personal, Social & Emotional", description: "Self-regulation and relationships." },
+    eyfsLiteracy: { title: "Literacy", description: "Loving books and words." },
+    eyfsMaths: { title: "Mathematics", description: "Exploring shapes and numbers." },
+    eyfsUnderstanding: { title: "Understanding the World", description: "Investigating nature." },
+    eyfsArts: { title: "Expressive Arts & Design", description: "Creating and building." },
+    screenFreeLabel: "Screen-Free",
+    screenFreeHeading: "A Space for Mindful Play",
+    screenFreeParagraphs: [createTextBlock("We keep our spaces screen-free to encourage real-world interaction.")],
+    screenFreeBenefits: [
+      "Greater focus and attention span",
+      "Deeper social connections with peers",
+      "Active physical play and health",
+      "Imaginative open-ended learning",
+      "Closer engagement with nature"
+    ],
+    closingNote: "Screen-free play lets children grow naturally."
   },
   {
     _id: "hoursNutritionPage",
@@ -178,6 +250,62 @@ const documents = [
     heroParagraphs: [createTextBlock("Resources for parents.")],
     policiesHeading: "Our Policies",
     policiesIntro: [createTextBlock("Please read our policies carefully.")],
+    startingSchoolLabel: "Transition",
+    startingSchoolHeading: "Starting School Readiness",
+    startingSchoolParagraphs: [createTextBlock("We prepare children for school entry.")],
+    schoolSupport: [
+      "Phonics familiarity and pre-writing skills",
+      "Social-emotional readiness",
+      "Self-care independence (toileting, dressing)",
+      "Listening and concentration games",
+      "School visit preparation",
+      "Parent consultation evenings"
+    ],
+    feesFundingLabel: "Fees",
+    feesFundingHeading: "Clear and Simple Pricing",
+    feesFundingParagraphs: [createTextBlock("All fee structures are transparent.")],
+    howFundingWorksLabel: "Funding",
+    howFundingWorksHeading: "15 and 30 Hour Funding Support",
+    howFundingWorksParagraphs: [createTextBlock("We support both government schemes.")],
+    fundingExamples: [
+      { entitlement: "15 Hours Funding", equivalent: "2 free half days per week" }
+    ],
+    fundingSupportLabel: "Eligibility",
+    fundingSupportHeading: "How to Apply for Subsidies",
+    fundingSupportParagraphs: [createTextBlock("Visit childcarechoices.gov.uk to check eligibility.")],
+    taxFreeLabel: "Tax-Free Childcare",
+    taxFreeHeading: "Get 20% Government Help",
+    taxFreeParagraphs: [createTextBlock("Parents can pay through Tax-Free Childcare accounts.")],
+    weeklyFeesLabel: "Rates",
+    weeklyFeesHeading: "Weekly and Daily Rates",
+    weeklyFeesParagraphs: [createTextBlock("Review our pricing tiers below.")],
+    fullDayRate: "£85.00 per day",
+    halfDayRate: "£50.00 per day",
+    fundedHourDeductions: "Deducted directly",
+    additionalCharges: "Meals & consumables included",
+    exampleWeeklyCosts: "Example: 3 days is £255.00/week",
+    subsidyFaqsLabel: "FAQs",
+    subsidyFaqsHeading: "Frequently Asked Fee Questions",
+    subsidyFaqsParagraphs: [createTextBlock("Common queries about funding.")],
+    subsidyFaqs: [
+      { question: "When are fees due?", answer: "Fees are billed monthly in advance on the 1st." }
+    ],
+    partnershipLabel: "Parents as Partners",
+    partnershipHeading: "Nurturing Together",
+    partnershipParagraphs: [createTextBlock("We value continuous parent feedback.")],
+    settlingInLabel: "Settling In",
+    settlingInHeading: "A Warm, Gentle Welcome",
+    settlingInParagraphs: [createTextBlock("We arrange settling-in sessions for all children.")],
+    partnershipText: "We use an online portal for daily parent communication.",
+    settlingStrategies: [
+      "First short session with parent present",
+      "Second session with parent leaving briefly",
+      "Short morning sessions leading to lunch",
+      "Consistent drop-off routines",
+      "Comfort object from home allowed",
+      "Daily check-in calls for parents"
+    ],
+    policiesSupportingNote: "Printed policy documents are available on request at the main office."
   },
   {
     _id: "galleryPage",
@@ -185,11 +313,13 @@ const documents = [
     heroTitleLineOne: "Our",
     heroTitleLineTwo: "Gallery",
     heroParagraphs: [createTextBlock("See our beautiful nursery.")],
-    contactCtaEyebrow: "Like what you see?",
-    contactCtaHeading: "Come and Visit",
-    contactCtaParagraphs: [createTextBlock("Book a tour today.")],
-    contactCtaPrimaryLabel: "Book a Visit",
-    contactCtaSecondaryLabel: "Contact Us",
+    heroCtaLabel: "Book a Visit",
+    galleryIntroLabel: "Nursery Environment",
+    galleryIntroHeading: "A Home from Home",
+    galleryIntroCopy: [createTextBlock("Our classrooms use natural wooden materials.")],
+    finalCtaHeading: "Ready to Explore?",
+    finalCtaCopy: [createTextBlock("Schedule a walkthrough of our Bristol BS5 setting.")],
+    finalCtaLabel: "Book a Tour",
   },
   {
     _id: "contactPage",
@@ -234,9 +364,9 @@ const documents = [
 documents.forEach(doc => validate(doc));
 
 const ndjson = documents.map((doc) => JSON.stringify(doc)).join("\n");
-const outputPath = path.join(__dirname, "../docs/sanity/seed-data.ndjson");
+const outputPath = pathModule.join(__dirname, "../docs/sanity/seed-data.ndjson");
 
-fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+fs.mkdirSync(pathModule.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, ndjson, "utf-8");
 
 console.log(`✅ Successfully generated validated seed data at ${outputPath}`);
