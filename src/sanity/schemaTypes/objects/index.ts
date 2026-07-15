@@ -1,3 +1,5 @@
 export * from "./contentImage";
 export * from "./strictImage";
-export * from "./constrainedPortableText";
+export * from "./minimalPortableText";
+export * from "./pagePortableText";
+export * from "./blogPortableText";

@@ -4,6 +4,23 @@ export const businessDetails = defineType({
   name: "businessDetails",
   title: "Business Details",
   type: "document",
+  validation: (rule) => [
+    rule.custom((fields: any) => {
+      if (!fields) return true;
+      if (fields.openingTime && fields.closingTime && fields.openingTime >= fields.closingTime) {
+        return "Closing time must be after opening time.";
+      }
+      if (fields.morningSessionEnd && fields.afternoonSessionStart && fields.morningSessionEnd > fields.afternoonSessionStart) {
+        return "Afternoon session cannot start before morning session ends.";
+      }
+      if (fields.ageRange && typeof fields.ageRange.minimum === 'number' && typeof fields.ageRange.maximum === 'number') {
+        if (fields.ageRange.minimum > fields.ageRange.maximum) {
+          return "Age range maximum must be greater than or equal to minimum.";
+        }
+      }
+      return true;
+    }),
+  ],
   groups: [
     { name: "contact", title: "Contact Info" },
     { name: "hours", title: "Hours & Attendance" },
@@ -12,118 +29,309 @@ export const businessDetails = defineType({
   fields: [
     defineField({
       name: "organizationName",
-      title: "Organization Name",
+      title: "Organisation name",
+      description: "The official name of the setting.",
       type: "string",
       group: "contact",
+      validation: (rule) =>
+        rule.required().error("Organisation name is required."),
     }),
     defineField({
       name: "publicEmail",
       title: "Public Email",
+      description: "The primary email address for public enquiries.",
       type: "string",
       group: "contact",
+      validation: (rule) =>
+        rule.required().email().error("A valid email is required."),
     }),
     defineField({
       name: "primaryPhone",
-      title: "Primary Phone",
+      title: "Primary Telephone Number",
+      description: "The main contact number for the setting.",
       type: "object",
       group: "contact",
       fields: [
-        defineField({ name: "label", type: "string", title: "Label" }),
-        defineField({ name: "number", type: "string", title: "Number" }),
+        defineField({
+          name: "label",
+          type: "string",
+          title: "Label",
+          description: "e.g. Main Office",
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: "number",
+          type: "string",
+          title: "Number",
+          description: "E.g., +441171234567. Must be canonical UK format.",
+          validation: (rule) =>
+                rule.regex(/^\+44\d{10}$/, { name: "UK Canonical format" }).error("Must match ^\\+44\\d{10}$ format (e.g. +441171234567)."),
+        }),
       ],
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "secondaryPhone",
-      title: "Secondary Phone",
+      title: "Secondary Telephone Number",
+      description:
+        "An optional secondary contact number, e.g. for emergencies.",
       type: "object",
       group: "contact",
       fields: [
-        defineField({ name: "label", type: "string", title: "Label" }),
-        defineField({ name: "number", type: "string", title: "Number" }),
+        defineField({
+          name: "label",
+          type: "string",
+          title: "Label",
+          description: "e.g. Emergency",
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: "number",
+          type: "string",
+          title: "Number",
+          description: "E.g., +447700900000. Must be canonical UK format.",
+          validation: (rule) =>
+                rule.regex(/^\+44\d{10}$/, { name: "UK Canonical format" }).error("Must match ^\\+44\\d{10}$ format (e.g. +447700900000)."),
+        }),
       ],
+      validation: (rule) =>
+        rule.custom((fields) => {
+          if (fields && ((fields.label && !fields.number) || (!fields.label && fields.number))) {
+            return "Both label and number must be provided if using a secondary phone.";
+          }
+          return true;
+        }),
     }),
     defineField({
       name: "address",
       title: "Address",
-      type: "text",
+      description: "The physical address of the setting.",
+      type: "object",
       group: "contact",
+      fields: [
+        defineField({
+          name: "organisation",
+          type: "string",
+          title: "Organisation",
+          description: "e.g. Little Wise Kids",
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: "line1",
+          type: "string",
+          title: "Address Line 1",
+          validation: (rule) => rule.required(),
+        }),
+        defineField({ name: "line2", type: "string", title: "Address Line 2" }),
+        defineField({
+          name: "city",
+          type: "string",
+          title: "City",
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: "postcode",
+          type: "string",
+          title: "Postcode",
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: "shortLocation",
+          type: "string",
+          title: "Short Location",
+          description: "e.g. Easton, Bristol",
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: "mapUrl",
+          type: "url",
+          title: "Map URL",
+          description: "Google Maps link",
+          validation: (rule) => rule.required(),
+        }),
+      ],
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "openingDays",
       title: "Opening Days",
+      description:
+        "A short string summarising the opening days, e.g. 'Monday to Friday'.",
       type: "string",
       group: "hours",
+      validation: (rule) => rule.required().error("Opening days are required."),
     }),
     defineField({
       name: "openingTime",
       title: "Opening Time",
       type: "string",
       group: "hours",
-      description: "e.g., 08:00",
+      description: "24-hour format, e.g., 07:30",
+      validation: (rule) =>
+        rule
+          .required()
+          .regex(/^(?:[01]\d|2[0-3]):[0-5]\d$/)
+          .error("Must be a valid 24-hour time (HH:MM)."),
     }),
     defineField({
       name: "closingTime",
       title: "Closing Time",
       type: "string",
       group: "hours",
-      description: "e.g., 18:00",
+      description: "24-hour format, e.g., 18:00",
+      validation: (rule) =>
+        rule
+          .required()
+          .regex(/^(?:[01]\d|2[0-3]):[0-5]\d$/)
+          .error("Must be a valid 24-hour time (HH:MM)."),
     }),
     defineField({
       name: "morningSessionEnd",
       title: "Morning Session End",
       type: "string",
       group: "hours",
-      description: "e.g., 13:00",
+      description: "24-hour format, e.g., 13:00",
+      validation: (rule) =>
+        rule
+          .required()
+          .regex(/^(?:[01]\d|2[0-3]):[0-5]\d$/)
+          .error("Must be a valid 24-hour time (HH:MM)."),
     }),
     defineField({
       name: "afternoonSessionStart",
       title: "Afternoon Session Start",
       type: "string",
       group: "hours",
-      description: "e.g., 13:00",
+      description: "24-hour format, e.g., 13:00",
+      validation: (rule) =>
+        rule
+          .required()
+          .regex(/^(?:[01]\d|2[0-3]):[0-5]\d$/)
+          .error("Must be a valid 24-hour time (HH:MM)."),
     }),
     defineField({
       name: "weeksOpen",
       title: "Weeks Open",
-      type: "string",
+      description:
+        "Numeric value representing the number of weeks the setting is open per year.",
+      type: "number",
       group: "hours",
+      validation: (rule) => rule.required().integer().min(1).max(52),
     }),
     defineField({
-      name: "minimumAttendance",
-      title: "Minimum Attendance",
-      type: "string",
+      name: "minimumAttendanceDays",
+      title: "Minimum Attendance (Days)",
+      description:
+        "Numeric value representing the minimum days a child must attend.",
+      type: "number",
       group: "hours",
+      validation: (rule) => rule.required().integer().min(1).max(7),
     }),
     defineField({
       name: "ageRange",
       title: "Age Range",
-      type: "string",
+      description: "The age range accepted.",
+      type: "object",
       group: "other",
+      fields: [
+        defineField({
+          name: "minimum",
+          type: "number",
+          title: "Minimum Age (Years)",
+          validation: (rule) => rule.required().min(0),
+        }),
+        defineField({
+          name: "maximum",
+          type: "number",
+          title: "Maximum Age (Years)",
+          validation: (rule) => rule.required().min(0),
+        }),
+        defineField({
+          name: "displayOverride",
+          type: "string",
+          title: "Display Override (Optional)",
+          description: "Overrides the default 'X to Y years' display.",
+        }),
+      ],
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "languages",
       title: "Languages",
-      type: "string",
+      description: "Add the languages spoken in the setting.",
+      type: "array",
+      of: [
+        {
+          type: "string",
+          validation: (rule) =>
+            [rule.required(), rule.max(30).warning("Keep language names concise.")],
+        },
+      ],
       group: "other",
+      validation: (rule) =>
+        rule
+          .required()
+          .min(1)
+          .unique()
+          .error("At least one language is required and they must be unique."),
     }),
     defineField({
-      name: "socialUrls",
-      title: "Social URLs",
-      type: "array",
-      of: [{ type: "url" }],
+      name: "social",
+      title: "Social Profiles",
+      description: "Links to official social media profiles.",
+      type: "object",
       group: "other",
+      fields: [
+        defineField({
+          name: "facebookUrl",
+          type: "url",
+          title: "Facebook URL",
+          description: "Optional.",
+        }),
+        defineField({
+          name: "instagramUrl",
+          type: "url",
+          title: "Instagram URL",
+          description: "Optional.",
+        }),
+      ],
     }),
     defineField({
       name: "availabilityMessage",
       title: "Availability Message",
+      description:
+        "A short message about current place availability. E.g. 'We are currently accepting registrations for 2027.'",
       type: "string",
       group: "other",
+      validation: (rule) =>
+        [rule.required(), rule.max(80).warning("Keep this message short.")],
     }),
     defineField({
       name: "footerBusinessCopy",
       title: "Footer Business Copy",
+      description: "A short summary of the setting for the global footer.",
       type: "text",
       group: "other",
+      validation: (rule) => [
+        rule.required().error("Required."),
+        rule.max(200).warning("Keep this summary under 200 characters."),
+      ],
+    }),
+    defineField({
+      name: "footerTagline",
+      title: "Footer Tagline",
+      description: "Fixed text fragments for the footer tagline. Colors and order are code-owned.",
+      type: "object",
+      group: "other",
+      fields: [
+        defineField({ name: "prefix", title: "Prefix", type: "string" }),
+        defineField({ name: "purplePhrase", title: "Purple Phrase", type: "string" }),
+        defineField({ name: "separatorOne", title: "Separator One", type: "string" }),
+        defineField({ name: "greenPhrase", title: "Green Phrase", type: "string" }),
+        defineField({ name: "connector", title: "Connector", type: "string" }),
+        defineField({ name: "bluePhrase", title: "Blue Phrase", type: "string" }),
+        defineField({ name: "suffix", title: "Suffix", type: "string" }),
+      ]
     }),
   ],
 });

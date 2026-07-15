@@ -1,5 +1,7 @@
 import { defineType, defineField } from "sanity";
 
+const timeRegex = /^(?:[01]\d|2[0-3]):[0-5]\d$/;
+
 export const hoursNutritionPage = defineType({
   name: "hoursNutritionPage",
   title: "Hours & Nutrition Page",
@@ -12,40 +14,244 @@ export const hoursNutritionPage = defineType({
     { name: "contactPanel", title: "Contact Panel" },
   ],
   fields: [
-    defineField({ name: "heroTitle", title: "Hero Title", type: "string", group: "hero" }),
-    defineField({ name: "heroParagraphs", title: "Hero Paragraphs", type: "constrainedPortableText", group: "hero" }),
-
-    defineField({ name: "operatingHoursTitle", title: "Operating Hours Title", type: "string", group: "operatingHours" }),
-    defineField({ name: "operatingHoursParagraphs", title: "Operating Hours Paragraphs", type: "constrainedPortableText", group: "operatingHours" }),
-    defineField({ name: "minAttendancePanelTitle", title: "Min Attendance Panel Title", type: "string", group: "operatingHours" }),
-    defineField({ name: "minAttendancePanelCopy", title: "Min Attendance Panel Copy", type: "text", group: "operatingHours" }),
-
-    defineField({ name: "nutritionTitle", title: "Nutrition Title", type: "string", group: "nutrition" }),
-    defineField({ name: "nutritionParagraphs", title: "Nutrition Paragraphs", type: "constrainedPortableText", group: "nutrition" }),
-    defineField({ name: "nutritionChecklist", title: "Nutrition Checklist", type: "array", of: [{ type: "string" }], group: "nutrition" }),
-    defineField({ name: "freshlyPreparedHeading", title: "Freshly Prepared Heading", type: "string", group: "nutrition" }),
-    defineField({ name: "chefNote", title: "Chef Note", type: "text", group: "nutrition" }),
-
-    defineField({ name: "typicalDayTitle", title: "Typical Day Title", type: "string", group: "typicalDay" }),
-    defineField({ name: "typicalDayLeadText", title: "Typical Day Lead Text", type: "text", group: "typicalDay" }),
     defineField({
-      name: "dailyRhythm",
-      title: "Daily Rhythm",
-      type: "object",
-      group: "typicalDay",
-      fields: [
-        defineField({ name: "welcomeAndFreePlay", title: "Welcome & Free Play", type: "text" }),
-        defineField({ name: "learningAndExploration", title: "Learning & Exploration", type: "text" }),
-        defineField({ name: "morningSnack", title: "Morning Snack", type: "text" }),
-        defineField({ name: "outdoorAdventures", title: "Outdoor Adventures", type: "text" }),
-        defineField({ name: "lunch", title: "Lunch", type: "text" }),
-        defineField({ name: "restAndQuietTime", title: "Rest & Quiet Time", type: "text" }),
-        defineField({ name: "afternoonPlayAndHome", title: "Afternoon Play & Home", type: "text" }),
-      ]
+      name: "heroEyebrow",
+      title: "Hero Eyebrow",
+      description: "Optional small text above title.",
+      type: "string",
+      group: "hero",
+      validation: (rule) => rule.max(30),
+    }),
+    defineField({
+      name: "heroTitleLineOne",
+      title: "Hero Title - Line One",
+      description: "First line of main heading.",
+      type: "string",
+      group: "hero",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "heroTitleLineTwo",
+      title: "Hero Title - Line Two",
+      description: "Second line of main heading.",
+      type: "string",
+      group: "hero",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "heroParagraphs",
+      title: "Hero Paragraphs",
+      description: "Main introductory paragraphs.",
+      type: "pagePortableText",
+      group: "hero",
+      validation: (rule) => rule.required(),
     }),
 
-    defineField({ name: "contactPanelTitle", title: "Contact Panel Title", type: "string", group: "contactPanel" }),
-    defineField({ name: "contactPanelCopy", title: "Contact Panel Copy", type: "text", group: "contactPanel" }),
-    defineField({ name: "contactPanelCtaLabel", title: "Contact Panel CTA Label", type: "string", group: "contactPanel" }),
+    defineField({
+      name: "operatingHoursLabel",
+      title: "Operating Hours Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "operatingHours",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "operatingHoursHeading",
+      title: "Operating Hours Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "operatingHours",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "operatingHoursParagraphs",
+      title: "Operating Hours Paragraphs",
+      description: "Text for this section.",
+      type: "pagePortableText",
+      group: "operatingHours",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "minAttendancePanelTitle",
+      title: "Minimum Attendance Panel Title",
+      description: "Title of the highlighted panel.",
+      type: "string",
+      group: "operatingHours",
+      validation: (rule) => rule.required().max(50),
+    }),
+    defineField({
+      name: "minAttendancePanelCopy",
+      title: "Minimum Attendance Panel Copy",
+      description: "Text in the highlighted panel.",
+      type: "text",
+      group: "operatingHours",
+      validation: (rule) => rule.required().max(150),
+    }),
+
+    defineField({
+      name: "nutritionLabel",
+      title: "Nutrition Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "nutrition",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "nutritionHeading",
+      title: "Nutrition Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "nutrition",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "nutritionParagraphs",
+      title: "Nutrition Paragraphs",
+      description: "Text for this section.",
+      type: "pagePortableText",
+      group: "nutrition",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "nutritionChecklist",
+      title: "Nutrition Checklist",
+      description: "Bulleted checklist items.",
+      type: "array",
+      group: "nutrition",
+      of: [{ type: "string", validation: (rule) => rule.required().max(80) }],
+      validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
+      name: "freshlyPreparedHeading",
+      title: "Freshly Prepared Heading",
+      description: "Heading for the chef note.",
+      type: "string",
+      group: "nutrition",
+      validation: (rule) => rule.required().max(50),
+    }),
+    defineField({
+      name: "chefNote",
+      title: "Chef Note",
+      description: "Text from the chef.",
+      type: "text",
+      group: "nutrition",
+      validation: (rule) => rule.required().max(150),
+    }),
+
+    defineField({
+      name: "typicalDayLabel",
+      title: "Typical Day Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "typicalDay",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "typicalDayHeading",
+      title: "Typical Day Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "typicalDay",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "typicalDayLead",
+      title: "Typical Day Lead Text",
+      description: "Intro text for the timeline.",
+      type: "text",
+      group: "typicalDay",
+      validation: (rule) => rule.required().max(150),
+    }),
+    ...[
+      "welcomeAndFreePlay",
+      "learningAndExploration",
+      "morningSnack",
+      "outdoorAdventures",
+      "lunch",
+      "restAndQuietTime",
+      "afternoonPlayAndHome",
+    ].map((slot) =>
+      defineField({
+        name: slot,
+        title: `${slot.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}`,
+        description: `Fixed daily rhythm slot for ${slot}.`,
+        type: "object",
+        group: "typicalDay",
+        fields: [
+          defineField({
+            name: "startTime",
+            type: "string",
+            title: "Start Time",
+            description: "24-hour time (e.g. 08:00)",
+            validation: (rule) =>
+              rule
+                .required()
+                .regex(timeRegex)
+                .error("Must be a valid 24-hour time (HH:MM)."),
+          }),
+          defineField({
+            name: "endTime",
+            type: "string",
+            title: "End Time",
+            description: "24-hour time (e.g. 09:00)",
+            validation: (rule) =>
+              rule
+                .required()
+                .regex(timeRegex)
+                .error("Must be a valid 24-hour time (HH:MM)."),
+          }),
+          defineField({
+            name: "title",
+            type: "string",
+            title: "Title",
+            validation: (rule) => rule.required().max(55),
+          }),
+          defineField({
+            name: "description",
+            type: "text",
+            title: "Description",
+            validation: (rule) => rule.required().max(220),
+          }),
+        ],
+        validation: (rule) =>
+          rule
+            .required()
+            .custom(
+              (value: { startTime?: string; endTime?: string } | undefined) => {
+                if (value?.startTime && value?.endTime) {
+                  if (value.endTime <= value.startTime) {
+                    return "End time must be later than start time.";
+                  }
+                }
+                return true;
+              }
+            ),
+      })
+    ),
+
+    defineField({
+      name: "contactPanelTitle",
+      title: "Contact Panel Title",
+      description: "Title for the contact callout.",
+      type: "string",
+      group: "contactPanel",
+      validation: (rule) => rule.required().max(50),
+    }),
+    defineField({
+      name: "contactPanelCopy",
+      title: "Contact Panel Copy",
+      description: "Text inside the contact callout.",
+      type: "text",
+      group: "contactPanel",
+      validation: (rule) => rule.required().max(150),
+    }),
+    defineField({
+      name: "contactPanelCtaLabel",
+      title: "Contact Panel CTA Label",
+      description: "Button text for the contact callout.",
+      type: "string",
+      group: "contactPanel",
+      validation: (rule) => rule.required().max(30),
+    }),
   ],
 });

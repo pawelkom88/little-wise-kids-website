@@ -2,101 +2,402 @@ import { defineType, defineField } from "sanity";
 
 export const parentsPage = defineType({
   name: "parentsPage",
-  title: "Parents' Info Page",
+  title: "Parents' Information",
   type: "document",
   groups: [
     { name: "hero", title: "Hero" },
     { name: "startingSchool", title: "Starting School" },
     { name: "feesFunding", title: "Fees & Funding" },
+    { name: "howFundingWorks", title: "How Funding Works" },
+    { name: "fundingSupport", title: "Funding Support" },
+    { name: "taxFree", title: "Tax-Free" },
+    { name: "weeklyFees", title: "Weekly Fees" },
+    { name: "subsidyFaqs", title: "Subsidy FAQs" },
     { name: "partnership", title: "Partnership" },
     { name: "settlingIn", title: "Settling In" },
     { name: "policies", title: "Policies" },
   ],
   fields: [
-    // Hero
-    defineField({ name: "heroTitle", title: "Hero Title", type: "string", group: "hero" }),
-    defineField({ name: "heroParagraphs", title: "Hero Paragraphs", type: "constrainedPortableText", group: "hero" }),
-    
-    // Starting School
-    defineField({ name: "startingSchoolTitle", title: "Starting School Title", type: "string", group: "startingSchool" }),
-    defineField({ name: "startingSchoolParagraphs", title: "Starting School Paragraphs", type: "constrainedPortableText", group: "startingSchool" }),
-    defineField({ name: "schoolSupport", title: "School Support", type: "array", of: [{ type: "string" }], group: "startingSchool" }),
+    defineField({
+      name: "heroEyebrow",
+      title: "Hero Eyebrow",
+      description: "Optional small text above title.",
+      type: "string",
+      group: "hero",
+      validation: (rule) => rule.max(30),
+    }),
+    defineField({
+      name: "heroTitleLineOne",
+      title: "Hero Title - Line One",
+      description: "First line of main heading.",
+      type: "string",
+      group: "hero",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "heroTitleLineTwo",
+      title: "Hero Title - Line Two",
+      description: "Second line of main heading.",
+      type: "string",
+      group: "hero",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "heroParagraphs",
+      title: "Hero Paragraphs",
+      description: "Main introductory paragraphs.",
+      type: "pagePortableText",
+      group: "hero",
+      validation: (rule) => rule.required(),
+    }),
 
-    // Fees & Funding
-    defineField({ name: "feesFundingTitle", title: "Fees & Funding Title", type: "string", group: "feesFunding" }),
-    defineField({ name: "feesFundingParagraphs", title: "Fees & Funding Paragraphs", type: "constrainedPortableText", group: "feesFunding" }),
+    defineField({
+      name: "startingSchoolLabel",
+      title: "Starting School Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "startingSchool",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "startingSchoolHeading",
+      title: "Starting School Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "startingSchool",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "startingSchoolParagraphs",
+      title: "Starting School Paragraphs",
+      description: "Text for this section.",
+      type: "pagePortableText",
+      group: "startingSchool",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "schoolSupport",
+      title: "School Support Checklist",
+      description:
+        "List of support items for school transition. Based on current design, this requires 6 items.",
+      type: "array",
+      group: "startingSchool",
+      of: [{ type: "string", validation: (rule) => rule.required().max(80) }],
+      validation: (rule) => rule.required().length(6),
+    }),
 
-    defineField({ name: "howFundingWorksTitle", title: "How Funding Works Title", type: "string", group: "feesFunding" }),
-    defineField({ name: "howFundingWorksParagraphs", title: "How Funding Works Paragraphs", type: "constrainedPortableText", group: "feesFunding" }),
+    defineField({
+      name: "feesFundingLabel",
+      title: "Fees & Funding Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "feesFunding",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "feesFundingHeading",
+      title: "Fees & Funding Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "feesFunding",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "feesFundingParagraphs",
+      title: "Fees & Funding Paragraphs",
+      description: "Text for this section.",
+      type: "pagePortableText",
+      group: "feesFunding",
+      validation: (rule) => rule.required(),
+    }),
+
+    defineField({
+      name: "howFundingWorksLabel",
+      title: "How Funding Works Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "howFundingWorks",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "howFundingWorksHeading",
+      title: "How Funding Works Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "howFundingWorks",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "howFundingWorksParagraphs",
+      title: "How Funding Works Paragraphs",
+      description: "Text for this section.",
+      type: "pagePortableText",
+      group: "howFundingWorks",
+      validation: (rule) => rule.required(),
+    }),
     defineField({
       name: "fundingExamples",
       title: "Funding Examples",
+      description: "List of funding entitlement examples.",
       type: "array",
-      group: "feesFunding",
+      group: "howFundingWorks",
       of: [
         {
           type: "object",
           fields: [
-            defineField({ name: "title", type: "string", title: "Title" }),
-            defineField({ name: "description", type: "text", title: "Description" })
-          ]
-        }
-      ]
+            defineField({
+              name: "entitlement",
+              title: "Entitlement",
+              type: "string",
+              validation: (rule) => rule.required().max(60),
+            }),
+            defineField({
+              name: "equivalent",
+              title: "Equivalent",
+              type: "string",
+              validation: (rule) => rule.required().max(80),
+            }),
+          ],
+          preview: { select: { title: "entitlement", subtitle: "equivalent" } },
+        },
+      ],
+      validation: (rule) => rule.required().min(1),
     }),
 
-    defineField({ name: "fundingSupportTitle", title: "Funding Support Title", type: "string", group: "feesFunding" }),
-    defineField({ name: "fundingSupportParagraphs", title: "Funding Support Paragraphs", type: "constrainedPortableText", group: "feesFunding" }),
-
-    defineField({ name: "taxFreeTitle", title: "Tax-Free Title", type: "string", group: "feesFunding" }),
-    defineField({ name: "taxFreeParagraphs", title: "Tax-Free Paragraphs", type: "constrainedPortableText", group: "feesFunding" }),
-
-    defineField({ name: "weeklyFeesTitle", title: "Weekly Fees Title", type: "string", group: "feesFunding" }),
-    defineField({ name: "weeklyFeesParagraphs", title: "Weekly Fees Paragraphs", type: "constrainedPortableText", group: "feesFunding" }),
     defineField({
-      name: "feeRows",
-      title: "Fee Rows",
-      type: "array",
-      group: "feesFunding",
-      of: [
-        {
-          type: "object",
-          fields: [
-            defineField({ name: "label", type: "string", title: "Label" }),
-            defineField({ name: "value", type: "string", title: "Value" })
-          ]
-        }
-      ]
+      name: "fundingSupportLabel",
+      title: "Funding Support Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "fundingSupport",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "fundingSupportHeading",
+      title: "Funding Support Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "fundingSupport",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "fundingSupportParagraphs",
+      title: "Funding Support Paragraphs",
+      description: "Text for this section.",
+      type: "pagePortableText",
+      group: "fundingSupport",
+      validation: (rule) => rule.required(),
     }),
 
+    defineField({
+      name: "taxFreeLabel",
+      title: "Tax-Free Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "taxFree",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "taxFreeHeading",
+      title: "Tax-Free Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "taxFree",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "taxFreeParagraphs",
+      title: "Tax-Free Paragraphs",
+      description: "Text for this section.",
+      type: "pagePortableText",
+      group: "taxFree",
+      validation: (rule) => rule.required(),
+    }),
+
+    defineField({
+      name: "weeklyFeesLabel",
+      title: "Weekly Fees Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "weeklyFees",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "weeklyFeesHeading",
+      title: "Weekly Fees Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "weeklyFees",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "weeklyFeesParagraphs",
+      title: "Weekly Fees Paragraphs",
+      description: "Text for this section.",
+      type: "pagePortableText",
+      group: "weeklyFees",
+      validation: (rule) => rule.required(),
+    }),
+    ...[
+      "fullDayRate",
+      "halfDayRate",
+      "fundedHourDeductions",
+      "additionalCharges",
+      "exampleWeeklyCosts",
+    ].map((slot) =>
+      defineField({
+        name: slot,
+        title: `${slot.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}`,
+        description: `Editable value for the ${slot} row.`,
+        type: "string",
+        group: "weeklyFees",
+        validation: (rule) => rule.required().max(40),
+      })
+    ),
+
+    defineField({
+      name: "subsidyFaqsLabel",
+      title: "Subsidy FAQs Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "subsidyFaqs",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "subsidyFaqsHeading",
+      title: "Subsidy FAQs Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "subsidyFaqs",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "subsidyFaqsParagraphs",
+      title: "Subsidy FAQs Paragraphs",
+      description: "Text for this section.",
+      type: "pagePortableText",
+      group: "subsidyFaqs",
+      validation: (rule) => rule.required(),
+    }),
     defineField({
       name: "subsidyFaqs",
       title: "Subsidy FAQs",
+      description: "List of FAQs regarding childcare subsidies.",
       type: "array",
-      group: "feesFunding",
+      group: "subsidyFaqs",
       of: [
         {
           type: "object",
           fields: [
-            defineField({ name: "question", type: "string", title: "Question" }),
-            defineField({ name: "answer", type: "text", title: "Answer" })
-          ]
-        }
-      ]
+            defineField({
+              name: "question",
+              type: "string",
+              title: "Question",
+              validation: (rule) => rule.required().max(100),
+            }),
+            defineField({
+              name: "answer",
+              type: "text",
+              title: "Answer",
+              validation: (rule) => rule.required().max(400),
+            }),
+          ],
+          preview: { select: { title: "question", subtitle: "answer" } },
+        },
+      ],
+      validation: (rule) => rule.required().min(1),
     }),
 
-    // Partnership
-    defineField({ name: "partnershipTitle", title: "Partnership Title", type: "string", group: "partnership" }),
-    defineField({ name: "partnershipParagraphs", title: "Partnership Paragraphs", type: "constrainedPortableText", group: "partnership" }),
+    defineField({
+      name: "partnershipLabel",
+      title: "Partnership Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "partnership",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "partnershipHeading",
+      title: "Partnership Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "partnership",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "partnershipParagraphs",
+      title: "Partnership Paragraphs",
+      description: "Text for this section.",
+      type: "pagePortableText",
+      group: "partnership",
+      validation: (rule) => rule.required(),
+    }),
 
-    // Settling In
-    defineField({ name: "settlingInTitle", title: "Settling In Title", type: "string", group: "settlingIn" }),
-    defineField({ name: "settlingInParagraphs", title: "Settling In Paragraphs", type: "constrainedPortableText", group: "settlingIn" }),
-    defineField({ name: "partnershipText", title: "Partnership Text", type: "text", group: "settlingIn" }),
-    defineField({ name: "settlingStrategies", title: "Settling Strategies", type: "array", of: [{ type: "string" }], group: "settlingIn" }),
+    defineField({
+      name: "settlingInLabel",
+      title: "Settling In Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "settlingIn",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "settlingInHeading",
+      title: "Settling In Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "settlingIn",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "settlingInParagraphs",
+      title: "Settling In Paragraphs",
+      description: "Text for this section.",
+      type: "pagePortableText",
+      group: "settlingIn",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "partnershipText",
+      title: "Partnership Text",
+      description: "Text for the partnership panel.",
+      type: "text",
+      group: "settlingIn",
+      validation: (rule) => rule.required().max(300),
+    }),
+    defineField({
+      name: "settlingStrategies",
+      title: "Settling Strategies Checklist",
+      description: "Checklist of settling strategies. Exactly 6 items.",
+      type: "array",
+      group: "settlingIn",
+      of: [{ type: "string", validation: (rule) => rule.required().max(80) }],
+      validation: (rule) => rule.required().length(6),
+    }),
 
-    // Policies
-    defineField({ name: "policiesHeading", title: "Policies Heading", type: "string", group: "policies" }),
-    defineField({ name: "policiesIntroduction", title: "Policies Introduction", type: "text", group: "policies" }),
-    defineField({ name: "policiesSupportingNote", title: "Policies Supporting Note", type: "text", group: "policies" }),
+    defineField({
+      name: "policiesHeading",
+      title: "Policies Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "policies",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "policiesIntro",
+      title: "Policies Intro",
+      description: "Text for this section.",
+      type: "pagePortableText",
+      group: "policies",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "policiesSupportingNote",
+      title: "Policies Supporting Note",
+      description: "Yellow panel text.",
+      type: "text",
+      group: "policies",
+      validation: (rule) => rule.required().max(150),
+    }),
   ],
 });

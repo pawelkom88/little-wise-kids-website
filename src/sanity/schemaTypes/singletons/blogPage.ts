@@ -2,18 +2,56 @@ import { defineType, defineField } from "sanity";
 
 export const blogPage = defineType({
   name: "blogPage",
-  title: "Blog Index Page",
+  title: "Blog Page",
   type: "document",
-  groups: [
-    { name: "hero", title: "Hero" },
-    { name: "latestArticles", title: "Latest Articles" },
-  ],
   fields: [
-    defineField({ name: "heroTitle", title: "Hero Title", type: "string", group: "hero" }),
-    defineField({ name: "heroParagraphs", title: "Hero Paragraphs", type: "constrainedPortableText", group: "hero" }),
-
-    defineField({ name: "latestArticlesEyebrow", title: "Latest Articles Eyebrow", type: "string", group: "latestArticles" }),
-    defineField({ name: "latestArticlesHeading", title: "Latest Articles Heading", type: "string", group: "latestArticles" }),
-    defineField({ name: "latestArticlesIntro", title: "Latest Articles Intro", type: "text", group: "latestArticles" }),
+    defineField({
+      name: "heroEyebrow",
+      title: "Hero Eyebrow",
+      description: "Optional small text above title.",
+      type: "string",
+      validation: (rule) => rule.max(30),
+    }),
+    defineField({
+      name: "heroTitleLineOne",
+      title: "Hero Title - Line One",
+      description: "First line of main heading.",
+      type: "string",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "heroTitleLineTwo",
+      title: "Hero Title - Line Two",
+      description: "Second line of main heading.",
+      type: "string",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "heroParagraphs",
+      title: "Hero Paragraphs",
+      description: "Main introductory paragraphs.",
+      type: "pagePortableText",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "latestArticlesEyebrow",
+      title: "Latest Articles Eyebrow",
+      description: "Optional small text above the articles grid.",
+      type: "string",
+      validation: (rule) => rule.max(30),
+    }),
+    defineField({
+      name: "latestArticlesHeading",
+      title: "Latest Articles Heading",
+      description: "Heading for the latest articles grid.",
+      type: "string",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "latestArticlesIntroduction",
+      title: "Latest Articles Introduction",
+      description: "Optional introduction text before the articles.",
+      type: "pagePortableText",
+    }),
   ],
 });

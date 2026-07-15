@@ -4,22 +4,21 @@ export const strictImage = defineType({
   name: "strictImage",
   title: "Featured Image",
   type: "image",
-  options: {
-    hotspot: true,
-  },
+  options: { hotspot: true },
+  validation: (rule) => rule.required().assetRequired(),
   fields: [
     defineField({
       name: "altText",
-      title: "Alternative Text",
-      description:
-        "Required. Describe the image for visually impaired users. This image cannot be marked as decorative.",
+      title: "Image description",
+      description: "Required. Describe the activity or information shown for someone who cannot see the image. Do not begin with “Image of”.",
       type: "string",
-      validation: (rule) => rule.required(),
+      validation: (rule) =>
+        rule.required().error("Image description is required."),
     }),
     defineField({
       name: "caption",
-      title: "Caption (Optional)",
-      description: "A visible caption to display below the image.",
+      title: "Caption",
+      description: "An optional visible caption.",
       type: "string",
     }),
   ],

@@ -6,103 +6,329 @@ export const aboutPage = defineType({
   type: "document",
   groups: [
     { name: "hero", title: "Hero" },
-    { name: "approach", title: "Approach" },
+    { name: "approach", title: "Our Approach" },
     { name: "commitment", title: "Commitment" },
     { name: "environment", title: "Environment" },
     { name: "programmes", title: "Programmes" },
     { name: "educators", title: "Educators" },
     { name: "leadership", title: "Leadership" },
-    { name: "team", title: "Team" },
-    { name: "gallery", title: "Gallery Intro" },
+    { name: "gallery", title: "Gallery" },
   ],
   fields: [
-    defineField({ name: "heroTitle", title: "Hero Title", type: "string", group: "hero" }),
-    defineField({ name: "heroParagraphs", title: "Hero Paragraphs", type: "constrainedPortableText", group: "hero" }),
-    
-    defineField({ name: "approachTitle", title: "Approach Title", type: "string", group: "approach" }),
-    defineField({ name: "approachParagraphs", title: "Approach Paragraphs", type: "constrainedPortableText", group: "approach" }),
     defineField({
-      name: "approachChildLed", title: "Approach Child-Led", type: "object", group: "approach",
-      fields: [defineField({ name: "title", type: "string" }), defineField({ name: "description", type: "text" })]
+      name: "heroEyebrow",
+      title: "Hero Eyebrow",
+      description: "Optional small text above title.",
+      type: "string",
+      group: "hero",
+      validation: (rule) => rule.max(30),
     }),
     defineField({
-      name: "approachCalmRhythm", title: "Approach Calm Rhythm", type: "object", group: "approach",
-      fields: [defineField({ name: "title", type: "string" }), defineField({ name: "description", type: "text" })]
+      name: "heroTitleLineOne",
+      title: "Hero Title - Line One",
+      description: "First line of main heading.",
+      type: "string",
+      group: "hero",
+      validation: (rule) => rule.required().max(40),
     }),
     defineField({
-      name: "approachLearning", title: "Approach Learning", type: "object", group: "approach",
-      fields: [defineField({ name: "title", type: "string" }), defineField({ name: "description", type: "text" })]
+      name: "heroTitleLineTwo",
+      title: "Hero Title - Line Two",
+      description: "Second line of main heading.",
+      type: "string",
+      group: "hero",
+      validation: (rule) => rule.required().max(40),
     }),
     defineField({
-      name: "approachExploration", title: "Approach Exploration", type: "object", group: "approach",
-      fields: [defineField({ name: "title", type: "string" }), defineField({ name: "description", type: "text" })]
-    }),
-    defineField({
-      name: "approachConfidence", title: "Approach Confidence", type: "object", group: "approach",
-      fields: [defineField({ name: "title", type: "string" }), defineField({ name: "description", type: "text" })]
-    }),
-    defineField({
-      name: "approachRelationships", title: "Approach Relationships", type: "object", group: "approach",
-      fields: [defineField({ name: "title", type: "string" }), defineField({ name: "description", type: "text" })]
-    }),
-
-    defineField({ name: "commitmentTitle", title: "Commitment Title", type: "string", group: "commitment" }),
-    defineField({ name: "commitmentParagraphs", title: "Commitment Paragraphs", type: "constrainedPortableText", group: "commitment" }),
-    defineField({ name: "commitmentImage", title: "Commitment Image", type: "contentImage", group: "commitment" }),
-
-    defineField({ name: "environmentTitle", title: "Environment Title", type: "string", group: "environment" }),
-    defineField({ name: "environmentParagraphs", title: "Environment Paragraphs", type: "constrainedPortableText", group: "environment" }),
-    defineField({ name: "environmentImage", title: "Environment Image", type: "contentImage", group: "environment" }),
-
-    defineField({ name: "programmesTitle", title: "Programmes Title", type: "string", group: "programmes" }),
-    defineField({ name: "programmesParagraphs", title: "Programmes Paragraphs", type: "constrainedPortableText", group: "programmes" }),
-    defineField({
-      name: "foundationCommunication", title: "Foundation Communication", type: "object", group: "programmes",
-      fields: [defineField({ name: "title", type: "string" }), defineField({ name: "description", type: "text" })]
-    }),
-    defineField({
-      name: "foundationEmpathy", title: "Foundation Empathy", type: "object", group: "programmes",
-      fields: [defineField({ name: "title", type: "string" }), defineField({ name: "description", type: "text" })]
-    }),
-    defineField({
-      name: "foundationIndependence", title: "Foundation Independence", type: "object", group: "programmes",
-      fields: [defineField({ name: "title", type: "string" }), defineField({ name: "description", type: "text" })]
-    }),
-    defineField({
-      name: "foundationCreativity", title: "Foundation Creativity", type: "object", group: "programmes",
-      fields: [defineField({ name: "title", type: "string" }), defineField({ name: "description", type: "text" })]
-    }),
-    defineField({
-      name: "foundationCriticalThinking", title: "Foundation Critical Thinking", type: "object", group: "programmes",
-      fields: [defineField({ name: "title", type: "string" }), defineField({ name: "description", type: "text" })]
+      name: "heroParagraphs",
+      title: "Hero Paragraphs",
+      description: "Main introductory paragraphs.",
+      type: "pagePortableText",
+      group: "hero",
+      validation: (rule) => rule.required(),
     }),
 
-    defineField({ name: "educatorsTitle", title: "Educators Title", type: "string", group: "educators" }),
-    defineField({ name: "educatorsParagraphs", title: "Educators Paragraphs", type: "constrainedPortableText", group: "educators" }),
-    defineField({ name: "educatorsImage", title: "Educators Image", type: "contentImage", group: "educators" }),
+    defineField({
+      name: "approachLabel",
+      title: "Approach Section Label",
+      description: "The eyebrow label for the Approach section.",
+      type: "string",
+      group: "approach",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "approachHeading",
+      title: "Approach Section Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "approach",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "approachParagraphs",
+      title: "Approach Paragraphs",
+      description: "Introductory text for the approach section.",
+      type: "pagePortableText",
+      group: "approach",
+      validation: (rule) => rule.required(),
+    }),
+    ...[
+      "approachChildLed",
+      "approachCalmRhythm",
+      "approachLearning",
+      "approachExploration",
+      "approachConfidence",
+      "approachRelationships",
+    ].map((slot) =>
+      defineField({
+        name: slot,
+        title: `${slot.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}`,
+        description: `Fixed point for the ${slot} section.`,
+        type: "object",
+        group: "approach",
+        fields: [
+          defineField({
+            name: "title",
+            type: "string",
+            title: "Title",
+            validation: (rule) => rule.required().max(40),
+          }),
+          defineField({
+            name: "description",
+            type: "text",
+            title: "Description",
+            validation: (rule) => rule.required().max(150),
+          }),
+        ],
+        validation: (rule) => rule.required(),
+      })
+    ),
 
-    defineField({ name: "leadershipTitle", title: "Leadership Title", type: "string", group: "leadership" }),
-    defineField({ name: "leadershipParagraphs", title: "Leadership Paragraphs", type: "constrainedPortableText", group: "leadership" }),
-    defineField({ name: "leaderImage", title: "Leader Image", type: "contentImage", group: "leadership" }),
+    defineField({
+      name: "commitmentLabel",
+      title: "Commitment Section Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "commitment",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "commitmentHeading",
+      title: "Commitment Section Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "commitment",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "commitmentParagraphs",
+      title: "Commitment Paragraphs",
+      description: "Text for this section.",
+      type: "pagePortableText",
+      group: "commitment",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "commitmentImage",
+      title: "Commitment Image",
+      description: "Image for this section.",
+      type: "contentImage",
+      group: "commitment",
+      validation: (rule) =>
+        rule.required().assetRequired().error("Image required."),
+    }),
 
+    defineField({
+      name: "environmentLabel",
+      title: "Environment Section Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "environment",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "environmentHeading",
+      title: "Environment Section Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "environment",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "environmentParagraphs",
+      title: "Environment Paragraphs",
+      description: "Text for this section.",
+      type: "pagePortableText",
+      group: "environment",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "environmentImage",
+      title: "Environment Image",
+      description: "Image for this section.",
+      type: "contentImage",
+      group: "environment",
+      validation: (rule) =>
+        rule.required().assetRequired().error("Image required."),
+    }),
+
+    defineField({
+      name: "programmesLabel",
+      title: "Programmes Section Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "programmes",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "programmesHeading",
+      title: "Programmes Section Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "programmes",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "programmesParagraphs",
+      title: "Programmes Paragraphs",
+      description: "Text for this section.",
+      type: "pagePortableText",
+      group: "programmes",
+      validation: (rule) => rule.required(),
+    }),
+    ...[
+      "foundationCommunication",
+      "foundationEmpathy",
+      "foundationIndependence",
+      "foundationCreativity",
+      "foundationCriticalThinking",
+    ].map((slot) =>
+      defineField({
+        name: slot,
+        title: `${slot.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}`,
+        description: `Fixed label for the ${slot} foundation.`,
+        type: "string",
+        group: "programmes",
+        validation: (rule) => rule.required().max(40),
+      })
+    ),
+
+    defineField({
+      name: "educatorsLabel",
+      title: "Educators Section Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "educators",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "educatorsHeading",
+      title: "Educators Section Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "educators",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "educatorsParagraphs",
+      title: "Educators Paragraphs",
+      description: "Text for this section.",
+      type: "pagePortableText",
+      group: "educators",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "educatorsImage",
+      title: "Educators Image",
+      description: "Image for this section.",
+      type: "contentImage",
+      group: "educators",
+      validation: (rule) =>
+        rule.required().assetRequired().error("Image required."),
+    }),
+
+    defineField({
+      name: "leadershipLabel",
+      title: "Leadership Section Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "leadership",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "leadershipHeading",
+      title: "Leadership Section Heading",
+      description: "The main H2 heading.",
+      type: "string",
+      group: "leadership",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "leadershipParagraphs",
+      title: "Leadership Paragraphs",
+      description: "Text for this section.",
+      type: "pagePortableText",
+      group: "leadership",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "leadershipImage",
+      title: "Leadership Image",
+      description: "Image for the leadership section.",
+      type: "contentImage",
+      group: "leadership",
+      validation: (rule) => rule.required().assetRequired().error("Image required."),
+    }),
     defineField({
       name: "team",
       title: "Team Members",
+      description: "List of team members to display.",
       type: "array",
-      group: "team",
+      group: "leadership",
       of: [
         {
           type: "object",
           fields: [
-            defineField({ name: "name", title: "Name", type: "string" }),
-            defineField({ name: "role", title: "Role", type: "string" }),
-            defineField({ name: "bio", title: "Bio", type: "text" }),
-            defineField({ name: "image", title: "Image", type: "contentImage" })
-          ]
-        }
-      ]
+            defineField({
+              name: "name",
+              title: "Name",
+              type: "string",
+              validation: (rule) => rule.required().max(60),
+            }),
+            defineField({
+              name: "role",
+              title: "Role",
+              type: "string",
+              validation: (rule) => rule.required().max(60),
+            }),
+            defineField({
+              name: "bio",
+              title: "Biography",
+              type: "text",
+              validation: (rule) => rule.required().max(300),
+            }),
+          ],
+          preview: { select: { title: "name", subtitle: "role" } },
+        },
+      ],
+      validation: (rule) => rule.required().min(1),
     }),
 
-    defineField({ name: "galleryIntroTitle", title: "Gallery Intro Title", type: "string", group: "gallery" }),
+    defineField({
+      name: "gallerySectionLabel",
+      title: "Gallery Section Label",
+      description: "The eyebrow label.",
+      type: "string",
+      group: "gallery",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "gallerySectionHeading",
+      title: "Gallery Section Heading",
+      description: "The main H2 heading for the gallery section.",
+      type: "string",
+      group: "gallery",
+      validation: (rule) => rule.required().max(80),
+    }),
   ],
 });
