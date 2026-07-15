@@ -11,14 +11,14 @@ const routes = [
   "/contact",
   "/blog",
   "/blog/the-power-of-play",
-  "/thank-you"
+  "/thank-you",
 ];
 
 const viewports = [
   { width: 1440, height: 1000, label: "1440x1000" },
   { width: 1024, height: 900, label: "1024x900" },
   { width: 768, height: 1024, label: "768x1024" },
-  { width: 390, height: 844, label: "390x844" }
+  { width: 390, height: 844, label: "390x844" },
 ];
 
 const baseUrl = "http://localhost:4322";
@@ -27,7 +27,7 @@ async function main() {
   const browser = await chromium.launch();
   const results = [];
   const ssDir = path.join(process.cwd(), "hero_screenshots");
-  
+
   if (!fs.existsSync(ssDir)) {
     fs.mkdirSync(ssDir, { recursive: true });
   }
@@ -36,10 +36,10 @@ async function main() {
     console.log(`Checking route: ${route}`);
     for (const vp of viewports) {
       const context = await browser.newContext({
-        viewport: { width: vp.width, height: vp.height }
+        viewport: { width: vp.width, height: vp.height },
       });
       const page = await context.newPage();
-      
+
       try {
         await page.goto(`${baseUrl}${route}`, { waitUntil: "load" });
         // Small wait for layout stability and potential animations
@@ -69,16 +69,20 @@ async function main() {
             titleBottom: titleRect.bottom - heroRect.top,
             copyTop: copyRect ? copyRect.top - heroRect.top : null,
             copyBottom: copyRect ? copyRect.bottom - heroRect.top : null,
-            waveTop: waveRect ? waveRect.top - heroRect.top : null
+            waveTop: waveRect ? waveRect.top - heroRect.top : null,
           };
         });
 
         if (metrics) {
-          const safetyGap = metrics.waveTop && metrics.copyBottom ? (metrics.waveTop - metrics.copyBottom) : null;
-          const routeName = route.replace(/\//g, "_").replace(/^_/, "") || "home";
+          const safetyGap =
+            metrics.waveTop && metrics.copyBottom
+              ? metrics.waveTop - metrics.copyBottom
+              : null;
+          const routeName =
+            route.replace(/\//g, "_").replace(/^_/, "") || "home";
           const ssName = `${routeName}_${vp.label}.png`;
           const ssPath = path.join(ssDir, ssName);
-          
+
           await page.screenshot({ path: ssPath });
 
           results.push({
@@ -86,7 +90,7 @@ async function main() {
             viewport: vp.label,
             ...metrics,
             safetyGap,
-            screenshotPath: ssPath
+            screenshotPath: ssPath,
           });
         } else {
           console.warn(`No hero found on route ${route} at ${vp.label}`);

@@ -1,0 +1,101 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/layout/Container.astro";
+import Icon from "../components/icons/Icon.astro";
+import "./404.css";
+
+const popularPages = [
+  {
+    title: "About Us",
+    description: "Discover who we are",
+    href: "/about-us/",
+    icon: "person",
+    tone: "purple",
+  },
+  {
+    title: "Multilingual Learning",
+    description: "Explore our approach",
+    href: "/multilingual-learning/",
+    icon: "book",
+    tone: "blue",
+  },
+  {
+    title: "Hours & Nutrition",
+    description: "View sessions and meals",
+    href: "/hours-nutrition/",
+    icon: "clock",
+    tone: "green",
+  },
+  {
+    title: "Our Gallery",
+    description: "See life at Little Wise Kids",
+    href: "/our-gallery/",
+    icon: "image",
+    tone: "blue",
+  },
+  {
+    title: "Contact Us",
+    description: "Speak with our team",
+    href: "/contact/",
+    icon: "chat",
+    tone: "purple",
+  },
+] as const;
+---
+
+<BaseLayout
+  title="Page Not Found | Little Wise Kids"
+  description="The page you were looking for could not be found. Return to the Little Wise Kids homepage or explore another part of our website."
+>
+  <article class="not-found-page" aria-labelledby="not-found-title">
+    <section class="not-found">
+      <Container size="wide" class="not-found__container">
+        <div class="not-found__hero">
+          <figure class="not-found__illustration">
+            <img
+              src="/assets/images/404-explorer.png"
+              alt=""
+              width="1536"
+              height="1536"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            />
+          </figure>
+
+          <div class="not-found__content">
+            <p class="not-found__code" aria-hidden="true">
+              <span>4</span>
+              <span>0</span>
+              <span>4</span>
+            </p>
+
+            <p class="not-found__eyebrow">Page Not Found</p>
+
+            <h1 id="not-found-title">Oops! We Can’t Find That Page</h1>
+
+            <p class="not-found__lead">
+              It looks like this page has wandered off on an adventure. Let’s
+              help you find your way back.
+            </p>
+
+            <div class="not-found__actions" aria-label="Page recovery options">
+              <a class="not-found__button not-found__button--primary" href="/">
+                <span aria-hidden="true">←</span>
+                <span>Back to Home</span>
+              </a>
+
+              <a
+                class="not-found__button not-found__button--secondary"
+                href="#popular-pages"
+              >
+                <span>Explore Our Site</span>
+                <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  </article>
+</BaseLayout>
