@@ -1,8 +1,14 @@
 ---
-import { navItems, site, legalLinks, tagline } from "../../data/site";
+import { navItems, legalLinks } from "../../data/site";
 import Icon from "../icons/Icon.astro";
 import Container from "./Container.astro";
 import "./SiteFooter.css";
+
+interface Props {
+  businessDetails: any;
+}
+
+const { businessDetails } = Astro.props;
 
 const exploreLinks = [
   { label: "Home", href: "/" },
@@ -23,12 +29,12 @@ const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact 
       <a
         class="lwk-footer__logo-link"
         href="/"
-        aria-label={`${site.name} home`}
+        aria-label={`${businessDetails.organizationName} home`}
       >
         <img
           class="lwk-footer__logo"
           src="/assets/images/logo.png"
-          alt={site.name}
+          alt={businessDetails.organizationName}
           width="1774"
           height="887"
           loading="lazy"
@@ -37,24 +43,21 @@ const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact 
       </a>
 
       <h2 class="lwk-footer__heading" id="footer-heading">
-        {
-          tagline.map((part) =>
-            part.tone ? (
-              <span class={`tone-${part.tone}`}>{part.text}</span>
-            ) : (
-              part.text
-            )
-          )
-        }
+        {businessDetails.footerTagline.prefix} 
+        <span class="tone-purple">{businessDetails.footerTagline.purplePhrase}</span> 
+        {businessDetails.footerTagline.separatorOne} 
+        <span class="tone-green">{businessDetails.footerTagline.greenPhrase}</span> 
+        {businessDetails.footerTagline.connector} 
+        <span class="tone-blue">{businessDetails.footerTagline.bluePhrase}</span> 
+        {businessDetails.footerTagline.suffix}
       </h2>
 
       <p class="lwk-footer__summary">
-        A warm, screen-free early years setting in Bristol BS5, where every
-        child is supported to learn, explore and thrive at their own pace.
+        {businessDetails.footerBusinessCopy}
       </p>
 
       <a class="lwk-footer__cta" href="/contact">
-        Register Your Interest
+        {businessDetails.footerCtaLabel}
         <Icon name="arrowRight" size={20} />
       </a>
     </section>
@@ -119,9 +122,9 @@ const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact 
               </span>
 
               <span>
-                <span>{site.address.line1}</span>
-                <span>{site.address.line2}</span>
-                <span>{site.address.city}, {site.address.postcode}</span>
+                <span>{businessDetails.address.line1}</span>
+                {businessDetails.address.line2 && <span>{businessDetails.address.line2}</span>}
+                <span>{businessDetails.address.city}, {businessDetails.address.postcode}</span>
               </span>
             </div>
 
@@ -134,11 +137,14 @@ const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact 
               </span>
 
               <span class="lwk-footer__phone-links">
-                {
-                  site.phones.map((phone) => (
-                    <a href={phone.href}>{phone.display}</a>
-                  ))
-                }
+                <a href={`tel:${businessDetails.primaryPhone.number.replace(/\s+/g, '')}`}>
+                  {businessDetails.primaryPhone.number}
+                </a>
+                {businessDetails.secondaryPhone?.number && (
+                  <a href={`tel:${businessDetails.secondaryPhone.number.replace(/\s+/g, '')}`}>
+                    {businessDetails.secondaryPhone.number}
+                  </a>
+                )}
               </span>
             </div>
 
@@ -150,7 +156,7 @@ const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact 
                 <Icon name="mail" size={20} />
               </span>
 
-              <a href={`mailto:${site.email}`}>{site.email}</a>
+              <a href={`mailto:${businessDetails.publicEmail}`}>{businessDetails.publicEmail}</a>
             </div>
           </address>
         </section>
@@ -158,32 +164,36 @@ const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact 
 
       <div class="lwk-footer__social-row">
         <div>
-          <p class="lwk-footer__social-title">Follow our journey</p>
+          <p class="lwk-footer__social-title">{businessDetails.socialHeading}</p>
           <p class="lwk-footer__social-copy">
-            Nursery moments, news and everyday inspiration.
+            {businessDetails.socialIntroduction}
           </p>
         </div>
 
         <nav class="lwk-footer__social-links" aria-label="Social media">
-          <a
-            class="lwk-footer__social-link lwk-footer__social-link--facebook"
-            href={site.social.facebook}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Icon name="facebook" size={21} />
-            <span>Facebook</span>
-          </a>
+          {businessDetails.social?.facebookUrl && (
+            <a
+              class="lwk-footer__social-link lwk-footer__social-link--facebook"
+              href={businessDetails.social.facebookUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Icon name="facebook" size={21} />
+              <span>Facebook</span>
+            </a>
+          )}
 
-          <a
-            class="lwk-footer__social-link lwk-footer__social-link--instagram"
-            href={site.social.instagram}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Icon name="instagram" size={21} />
-            <span>Instagram</span>
-          </a>
+          {businessDetails.social?.instagramUrl && (
+            <a
+              class="lwk-footer__social-link lwk-footer__social-link--instagram"
+              href={businessDetails.social.instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Icon name="instagram" size={21} />
+              <span>Instagram</span>
+            </a>
+          )}
         </nav>
       </div>
 
@@ -193,7 +203,7 @@ const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact 
         </nav>
         <p>
           &copy; {new Date().getFullYear()}
-          {site.name}. All rights reserved.
+          {businessDetails.organizationName}. All rights reserved.
         </p>
       </div>
     </Container>

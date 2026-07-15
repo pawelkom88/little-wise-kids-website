@@ -96,30 +96,30 @@ export type ThankYouPage = {
   nextStepsBody?: PagePortableText;
 };
 
-export type PagePortableText = Array<
-  | {
-      children?: Array<{
+export type PagePortableText = Array<{
+  children?: Array<
+    | {
         marks?: Array<string>;
         text?: string;
         _type: "span";
         _key: string;
-      }>;
-      style?: "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        blank?: boolean;
-        _type: "link";
+      }
+    | ({
         _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }
-  | ({
-      _key: string;
-    } & InlineBusinessDetail)
->;
+      } & InlineBusinessDetail)
+  >;
+  style?: "normal";
+  listItem?: "bullet" | "number";
+  markDefs?: Array<{
+    href?: string;
+    blank?: boolean;
+    _type: "link";
+    _key: string;
+  }>;
+  level?: number;
+  _type: "block";
+  _key: string;
+}>;
 
 export type BusinessDetails = {
   _id: string;
@@ -194,25 +194,25 @@ export type InlineBusinessDetail = {
     | "shortLocation";
 };
 
-export type FaqPortableText = Array<
-  | {
-      children?: Array<{
+export type FaqPortableText = Array<{
+  children?: Array<
+    | {
         marks?: Array<string>;
         text?: string;
         _type: "span";
         _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: null;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }
-  | ({
-      _key: string;
-    } & InlineBusinessDetail)
->;
+      }
+    | ({
+        _key: string;
+      } & InlineBusinessDetail)
+  >;
+  style?: "normal";
+  listItem?: never;
+  markDefs?: null;
+  level?: number;
+  _type: "block";
+  _key: string;
+}>;
 
 export type HomePageReference = {
   _ref: string;
@@ -279,12 +279,17 @@ export type BlogPostReference = {
 
 export type BlogPortableText = Array<
   | {
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
+      children?: Array<
+        | {
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }
+        | ({
+            _key: string;
+          } & InlineBusinessDetail)
+      >;
       style?: "normal" | "h2" | "h3";
       listItem?: "bullet" | "number";
       markDefs?: Array<
@@ -316,9 +321,6 @@ export type BlogPortableText = Array<
   | ({
       _key: string;
     } & ContentImage)
-  | ({
-      _key: string;
-    } & InlineBusinessDetail)
 >;
 
 export type BlogPost = {
@@ -395,25 +397,25 @@ export type ContactPage = {
   locationHeading?: string;
 };
 
-export type MinimalPortableText = Array<
-  | {
-      children?: Array<{
+export type MinimalPortableText = Array<{
+  children?: Array<
+    | {
         marks?: Array<string>;
         text?: string;
         _type: "span";
         _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: null;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }
-  | ({
-      _key: string;
-    } & InlineBusinessDetail)
->;
+      }
+    | ({
+        _key: string;
+      } & InlineBusinessDetail)
+  >;
+  style?: "normal";
+  listItem?: never;
+  markDefs?: null;
+  level?: number;
+  _type: "block";
+  _key: string;
+}>;
 
 export type GalleryPage = {
   _id: string;

@@ -5,6 +5,12 @@ import "./GallerySection.css";
 
 import type { IconName } from "../icons/types";
 
+interface Props {
+  homePage: any;
+}
+
+const { homePage } = Astro.props;
+
 interface GalleryPhoto {
   src: string;
   alt: string;
@@ -131,10 +137,10 @@ const galleryPhotos = galleryPages.flatMap((page) => page.photos);
         <span class="lwk-gallery__camera-body"></span>
       </span>
 
-      <h2 id="gallery-title">Photo Gallery</h2>
+      <h2 id="gallery-title">{homePage.galleryIntroTitle}</h2>
 
       <p>
-        A glimpse into the everyday wonder, growth, and joy at Little Wise Kids.
+        {homePage.galleryIntro}
       </p>
     </header>
 

@@ -1,6 +1,6 @@
 ---
 import "../styles/site.css";
-import { site } from "../data/site";
+import { getBusinessDetails } from "../utils/sanity";
 import SiteHeader from "../components/layout/SiteHeader.astro";
 import SiteFooter from "../components/layout/SiteFooter.astro";
 
@@ -9,7 +9,12 @@ interface Props {
   description?: string;
 }
 
-const { title = site.name, description = site.description } = Astro.props;
+const businessDetails = await getBusinessDetails();
+
+const { 
+  title = businessDetails.organizationName, 
+  description = businessDetails.footerBusinessCopy 
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -36,10 +41,10 @@ const { title = site.name, description = site.description } = Astro.props;
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <SiteHeader />
+    <SiteHeader businessDetails={businessDetails} />
     <main id="main-content">
       <slot />
     </main>
-    <SiteFooter />
+    <SiteFooter businessDetails={businessDetails} />
   </body>
 </html>

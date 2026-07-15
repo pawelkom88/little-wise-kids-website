@@ -1,11 +1,11 @@
-import { defineType, defineArrayMember } from "sanity";
+import { defineType } from "sanity";
 
 export const faqPortableText = defineType({
   name: "faqPortableText",
   title: "FAQ Portable Text",
   type: "array",
   of: [
-    defineArrayMember({
+    {
       title: "Block",
       type: "block",
       styles: [{ title: "Normal", value: "normal" }],
@@ -17,9 +17,7 @@ export const faqPortableText = defineType({
         ],
         annotations: [], // No arbitrary links
       },
-    }),
-    defineArrayMember({
-      type: "inlineBusinessDetail",
-    }),
+      of: [{ type: "inlineBusinessDetail" }],
+    },
   ],
 });

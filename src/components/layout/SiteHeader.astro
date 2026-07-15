@@ -1,14 +1,20 @@
 ---
-import { navItems, site } from "../../data/site";
+import { navItems } from "../../data/site";
 import Icon from "../icons/Icon.astro";
 import Button from "../ui/Button.astro";
 import Container from "./Container.astro";
 import "./SiteHeader.css";
+
+interface Props {
+  businessDetails: any;
+}
+
+const { businessDetails } = Astro.props;
 ---
 
 <header class="site-header" data-site-header>
   <Container size="wide" class="site-header__inner">
-    <a class="brand" href="/" aria-label={`${site.name} home`}>
+    <a class="brand" href="/" aria-label={`${businessDetails.organizationName} home`}>
       <img
         class="brand__logo"
         src="/assets/images/logo.png"
@@ -16,7 +22,7 @@ import "./SiteHeader.css";
         width="1774"
         height="887"
       />
-      <span class="sr-only">{site.name}</span>
+      <span class="sr-only">{businessDetails.organizationName}</span>
     </a>
 
     <nav class="site-nav" aria-label="Primary navigation">
@@ -43,7 +49,7 @@ import "./SiteHeader.css";
           <img
             class="mobile-menu__logo"
             src="/assets/images/logo.png"
-            alt={site.name}
+            alt={businessDetails.organizationName}
           />
           <button
             class="mobile-menu__close"

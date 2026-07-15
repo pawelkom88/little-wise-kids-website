@@ -3,109 +3,102 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
 import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
-import { site } from "../data/site";
+import { PortableText } from "astro-portabletext";
+import { getHoursNutritionPage, getBusinessDetails } from "../utils/sanity";
 import "./hours-nutrition.css";
 
-const startTime = site.openingHours.fullDay.split("–")[0];
-const endTime = site.openingHours.fullDay.split("–")[1];
-const morningEnd = site.openingHours.morning.split("–")[1];
+const hoursNutritionPage = await getHoursNutritionPage();
+const businessDetails = await getBusinessDetails();
+
+const startTime = businessDetails.openingTime;
+const endTime = businessDetails.closingTime;
+const morningEnd = businessDetails.morningSessionEnd;
 
 const sessionDetails = [
   {
     icon: "clock",
     label: "Days",
-    value: site.openingHours.days,
+    value: businessDetails.openingDays,
   },
   {
     icon: "calendar",
     label: "Full day",
-    value: site.openingHours.fullDay,
+    value: `${businessDetails.openingTime}–${businessDetails.closingTime}`,
   },
   {
     icon: "clock",
     label: "Half day",
-    value: site.openingHours.morning,
+    value: `${businessDetails.openingTime}–${businessDetails.morningSessionEnd}`,
   },
   {
     icon: "heart",
     label: "Age range",
-    value: site.ageRange,
+    value: `${businessDetails.ageRange.minimum} to ${businessDetails.ageRange.maximum} years`,
   },
-] as const;
-
-const nutritionPoints = [
-  "Nutritious meals and snacks prepared with children’s needs in mind",
-  "A varied and wholesome food offering",
-  "Warm, social and unhurried mealtimes",
-  "Opportunities to try new tastes and develop independence",
-  "Support for allergies and individual dietary requirements",
 ] as const;
 
 const dailyRhythm = [
   {
     icon: "star",
-    time: `${startTime}–9:00am`,
-    title: "Welcome & Free Play",
-    copy: "Warm arrivals and time to settle through calm, child-led play.",
+    time: `${hoursNutritionPage.welcomeAndFreePlay.startTime}–${hoursNutritionPage.welcomeAndFreePlay.endTime}`,
+    title: hoursNutritionPage.welcomeAndFreePlay.title,
+    copy: hoursNutritionPage.welcomeAndFreePlay.description,
   },
   {
     icon: "book",
-    time: "9:00am–10:30am",
-    title: "Learning & Exploration",
-    copy: "Play-based activities, stories, singing and meaningful discovery.",
+    time: `${hoursNutritionPage.learningAndExploration.startTime}–${hoursNutritionPage.learningAndExploration.endTime}`,
+    title: hoursNutritionPage.learningAndExploration.title,
+    copy: hoursNutritionPage.learningAndExploration.description,
   },
   {
     icon: "heart",
-    time: "10:30am–11:00am",
-    title: "Morning Snack",
-    copy: "A healthy snack and relaxed social time together.",
+    time: `${hoursNutritionPage.morningSnack.startTime}–${hoursNutritionPage.morningSnack.endTime}`,
+    title: hoursNutritionPage.morningSnack.title,
+    copy: hoursNutritionPage.morningSnack.description,
   },
   {
     icon: "star",
-    time: `11:00am–${morningEnd}`,
-    title: "Outdoor Adventures",
-    copy: "Fresh air, movement and nature-based play in our outdoor space.",
+    time: `${hoursNutritionPage.outdoorAdventures.startTime}–${hoursNutritionPage.outdoorAdventures.endTime}`,
+    title: hoursNutritionPage.outdoorAdventures.title,
+    copy: hoursNutritionPage.outdoorAdventures.description,
   },
   {
     icon: "heart",
-    time: `${morningEnd}–1:30pm`,
-    title: "Lunch",
-    copy: "A nutritious, freshly prepared meal enjoyed together.",
+    time: `${hoursNutritionPage.lunch.startTime}–${hoursNutritionPage.lunch.endTime}`,
+    title: hoursNutritionPage.lunch.title,
+    copy: hoursNutritionPage.lunch.description,
   },
   {
     icon: "clock",
-    time: "1:30pm–3:00pm",
-    title: "Rest & Quiet Time",
-    copy: "Sleep or quiet activities that allow children to recharge and relax.",
+    time: `${hoursNutritionPage.restAndQuietTime.startTime}–${hoursNutritionPage.restAndQuietTime.endTime}`,
+    title: hoursNutritionPage.restAndQuietTime.title,
+    copy: hoursNutritionPage.restAndQuietTime.description,
   },
   {
     icon: "star",
-    time: `3:00pm–${endTime}`,
-    title: "Afternoon Play & Home",
-    copy: "Creative play, a nourishing snack and calm goodbyes.",
+    time: `${hoursNutritionPage.afternoonPlayAndHome.startTime}–${hoursNutritionPage.afternoonPlayAndHome.endTime}`,
+    title: hoursNutritionPage.afternoonPlayAndHome.title,
+    copy: hoursNutritionPage.afternoonPlayAndHome.description,
   },
 ] as const;
 ---
 
 <BaseLayout
   title="Childcare Sessions & Wholesome Nutrition Bristol BS5"
-  description={`We are open ${site.openingHours.days}, ${site.openingHours.fullDay} in Easton. Enjoy fresh, healthy, home-cooked meals prepared daily by our nursery chef for growing bodies.`}
+  description={`We are open ${businessDetails.openingDays}, ${businessDetails.openingTime}–${businessDetails.closingTime} in Easton. Enjoy fresh, healthy, home-cooked meals prepared daily by our nursery chef for growing bodies.`}
 >
   <article class="hours-page">
     <SubpageHero
       id="hours-page-title"
-      eyebrow="Operating Hours & Nutrition"
+      eyebrow={hoursNutritionPage.heroEyebrow}
       tone="green"
     >
       <Fragment slot="title">
-        <span>Care That Fits</span>
-        <span>Your Family’s Day</span>
+        <span>{hoursNutritionPage.heroTitleLineOne}</span>
+        <span>{hoursNutritionPage.heroTitleLineTwo}</span>
       </Fragment>
 
-      <p>
-        Clear routines, nourishing meals and caring support to help your child
-        feel secure, energised and ready to thrive every day.
-      </p>
+      <PortableText value={hoursNutritionPage.heroParagraphs} />
     </SubpageHero>
 
     <div class="hours-page__content">
@@ -125,25 +118,16 @@ const dailyRhythm = [
                   </span>
 
                   <div>
-                    <p class="hours-card__label">Operating Hours</p>
+                    <p class="hours-card__label">{hoursNutritionPage.operatingHoursLabel}</p>
 
                     <h2 id="operating-hours-title">
-                      Available Childcare Sessions
+                      {hoursNutritionPage.operatingHoursHeading}
                     </h2>
                   </div>
                 </header>
 
                 <div class="hours-card__prose">
-                  <p>
-                    Little Wise Kids is open Monday to Friday, helping families
-                    access consistent, caring early years support throughout the
-                    week.
-                  </p>
-
-                  <p>
-                    We are open for 51 weeks of the year, providing familiar
-                    routines and continuity for children and their families.
-                  </p>
+                  <PortableText value={hoursNutritionPage.operatingHoursParagraphs} />
                 </div>
               </div>
 
@@ -172,11 +156,10 @@ const dailyRhythm = [
               </span>
 
               <div class="hours-card__note-copy">
-                <h3>Minimum Attendance</h3>
+                <h3>{hoursNutritionPage.minAttendancePanelTitle}</h3>
 
                 <p>
-                  Children attend a minimum of two full days per week, with at
-                  least one of those days being a Monday or Friday.
+                  {hoursNutritionPage.minAttendancePanelCopy}
                 </p>
               </div>
 
@@ -206,25 +189,16 @@ const dailyRhythm = [
                   </span>
 
                   <div>
-                    <p class="hours-card__label">Nutrition</p>
+                    <p class="hours-card__label">{hoursNutritionPage.nutritionLabel}</p>
 
                     <h2 id="nutrition-title">
-                      Wholesome Food for Growing Minds
+                      {hoursNutritionPage.nutritionHeading}
                     </h2>
                   </div>
                 </header>
 
                 <div class="hours-card__prose">
-                  <p>
-                    At Little Wise Kids, we know that thriving minds start with
-                    nourished bodies. Our food offering is designed to support
-                    children’s wellbeing, energy and enjoyment of mealtimes.
-                  </p>
-
-                  <p>
-                    We create a warm, social approach to food, helping children
-                    enjoy a varied and wholesome diet alongside their friends.
-                  </p>
+                  <PortableText value={hoursNutritionPage.nutritionParagraphs} />
                 </div>
               </div>
 
@@ -233,7 +207,7 @@ const dailyRhythm = [
 
                 <ul>
                   {
-                    nutritionPoints.map((point) => (
+                    hoursNutritionPage.nutritionChecklist.map((point: string) => (
                       <li>
                         <span aria-hidden="true">✓</span>
                         <p>{point}</p>
@@ -251,14 +225,10 @@ const dailyRhythm = [
               <h3
                 style="margin-bottom: 0.5rem; color: var(--color-ink); letter-spacing: -0.01em; font-size: 1.25rem;"
               >
-                Freshly Prepared With Care
+                {hoursNutritionPage.freshlyPreparedHeading}
               </h3>
               <p>
-                Our Nursery Chef provides nutritious meals and snacks designed
-                around the needs of growing children. Food is part of the
-                learning day—a chance to try new tastes, build independence and
-                enjoy social moments together. We cater to all dietary
-                requirements and allergies.
+                {hoursNutritionPage.chefNote}
               </p>
             </div>
           </section>
@@ -276,13 +246,12 @@ const dailyRhythm = [
               </span>
 
               <div>
-                <p class="hours-card__label">A Typical Day</p>
+                <p class="hours-card__label">{hoursNutritionPage.typicalDayLabel}</p>
 
-                <h2 id="typical-day-title">A Calm and Familiar Daily Rhythm</h2>
+                <h2 id="typical-day-title">{hoursNutritionPage.typicalDayHeading}</h2>
 
                 <p class="hours-day__lead">
-                  A gentle flow that gives children security, connection,
-                  meaningful learning and time to rest.
+                  {hoursNutritionPage.typicalDayLead}
                 </p>
               </div>
             </header>
@@ -317,16 +286,15 @@ const dailyRhythm = [
             </span>
 
             <div class="hours-contact__copy">
-              <h2>We’re Here for You</h2>
+              <h2>{hoursNutritionPage.contactPanelTitle}</h2>
 
               <p>
-                Have questions about our hours, sessions, meals or your child’s
-                dietary needs? Our team will be happy to help.
+                {hoursNutritionPage.contactPanelCopy}
               </p>
             </div>
 
             <a class="hours-contact__link" href="/contact">
-              Contact Us
+              {hoursNutritionPage.contactPanelCtaLabel}
               <span aria-hidden="true">→</span>
             </a>
           </aside>

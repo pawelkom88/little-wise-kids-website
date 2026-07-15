@@ -1,4 +1,4 @@
-import { defineType, defineArrayMember } from "sanity";
+import { defineType } from "sanity";
 
 export const pagePortableText = defineType({
   name: "pagePortableText",
@@ -40,9 +40,7 @@ export const pagePortableText = defineType({
           },
         ],
       },
+      of: [{ type: "inlineBusinessDetail" }],
     },
-    defineArrayMember({
-      type: "inlineBusinessDetail",
-    }),
   ],
 });

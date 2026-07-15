@@ -3,7 +3,8 @@ import Icon from "../components/icons/Icon.astro";
 import Container from "../components/layout/Container.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
-import { site } from "../data/site";
+import { PortableText } from "astro-portabletext";
+import { getContactPage, getBusinessDetails } from "../utils/sanity";
 import "./contact.css";
 
 const siteUrl = Astro.site ?? new URL("https://littlewisekids.co.uk");
@@ -17,21 +18,24 @@ if (!accessKey) {
 }
 const thankYouUrl = new URL("/thank-you/", siteUrl).toString();
 
+const contactPage = await getContactPage();
+const businessDetails = await getBusinessDetails();
+
 const nextSteps = [
   {
     number: "01",
-    title: "We Receive Your Enquiry",
-    copy: "Your message arrives safely with our team, ready for us to review.",
+    title: contactPage.receiveEnquiryStep.title,
+    copy: contactPage.receiveEnquiryStep.description,
   },
   {
     number: "02",
-    title: "We Get in Touch",
-    copy: "A member of our team will usually respond within one working day.",
+    title: contactPage.getInTouchStep.title,
+    copy: contactPage.getInTouchStep.description,
   },
   {
     number: "03",
-    title: "We Help With Next Steps",
-    copy: "We will answer your questions and help you arrange a visit when appropriate.",
+    title: contactPage.helpWithNextStepsStep.title,
+    copy: contactPage.helpWithNextStepsStep.description,
   },
 ] as const;
 ---
@@ -41,19 +45,13 @@ const nextSteps = [
   description="Contact Little Wise Kids in Bristol BS5 to ask about nursery availability, book a visit, register your interest or learn more about our screen-free early years setting."
 >
   <article class="contact-page">
-    <SubpageHero id="contact-page-title" eyebrow="Contact Us" tone="blue">
+    <SubpageHero id="contact-page-title" eyebrow={contactPage.heroEyebrow} tone="blue">
       <Fragment slot="title">
-        <span>Let’s Start a</span>
-        <span>Conversation</span>
+        <span>{contactPage.heroTitleLineOne}</span>
+        <span>{contactPage.heroTitleLineTwo}</span>
       </Fragment>
 
-      <p>
-        Whether you are looking for childcare in Bristol BS5, would like to
-        learn more about Little Wise Kids, or want to ask about availability, we
-        would love to hear from you. If you are interested in a place, you can
-        also register your child for our waiting list by filling out the form
-        below.
-      </p>
+      <PortableText value={contactPage.heroParagraphs} />
     </SubpageHero>
 
     <div class="contact-page__content">
@@ -64,14 +62,11 @@ const nextSteps = [
             aria-labelledby="contact-form-title"
           >
             <header class="contact-section-heading">
-              <p class="contact-section-heading__eyebrow">Get in Touch</p>
+              <p class="contact-section-heading__eyebrow">{contactPage.sectionLabel}</p>
 
-              <h2 id="contact-form-title">Send Us a Message</h2>
+              <h2 id="contact-form-title">{contactPage.sectionHeading}</h2>
 
-              <p>
-                Tell us how we can help. Fields marked with an asterisk are
-                required.
-              </p>
+              <PortableText value={contactPage.introduction} />
             </header>
 
             <form
@@ -453,9 +448,9 @@ const nextSteps = [
 
           <section class="contact-next" aria-labelledby="contact-next-title">
             <header class="contact-section-heading">
-              <p class="contact-section-heading__eyebrow">After You Submit</p>
+              <p class="contact-section-heading__eyebrow">{contactPage.nextStepsLabel}</p>
 
-              <h2 id="contact-next-title">What Happens Next?</h2>
+              <h2 id="contact-next-title">{contactPage.nextStepsHeading}</h2>
             </header>
 
             <ol class="contact-next__grid">
@@ -500,9 +495,9 @@ const nextSteps = [
               <header
                 class="contact-section-heading contact-section-heading--left"
               >
-                <p class="contact-section-heading__eyebrow">Visit Us</p>
+                <p class="contact-section-heading__eyebrow">{contactPage.locationLabel}</p>
 
-                <h2 id="contact-location-title">Find Little Wise Kids</h2>
+                <h2 id="contact-location-title">{contactPage.locationHeading}</h2>
               </header>
 
               <div class="contact-location__item">
@@ -511,11 +506,9 @@ const nextSteps = [
                 </span>
 
                 <address>
-                  <strong>{site.address.organisation}</strong><br />
-                  {site.address.line1}<br />
-                  {site.address.line2}<br />
-                  {site.address.city}
-                  {site.address.postcode}
+                  <strong>{businessDetails.address.organisation}</strong><br />
+                  {businessDetails.address.line1}<br />
+                  {businessDetails.address.city}, {businessDetails.address.postcode}
                 </address>
               </div>
 
@@ -526,8 +519,8 @@ const nextSteps = [
 
                 <p>
                   <strong>Opening hours</strong><br />
-                  {site.openingHours.days}<br />
-                  {site.openingHours.fullDay}
+                  {businessDetails.openingDays}<br />
+                  {businessDetails.openingTime} - {businessDetails.closingTime}
                 </p>
               </div>
             </div>

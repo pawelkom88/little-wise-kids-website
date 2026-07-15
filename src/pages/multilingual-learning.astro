@@ -3,39 +3,33 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
 import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
-import { site } from "../data/site";
+import { PortableText } from "astro-portabletext";
+import { getMultilingualPage, getBusinessDetails, urlFor } from "../utils/sanity";
 import "./multilingual-learning.css";
 
-const formatLanguages = (languages: readonly string[]) => {
-  if (languages.length === 0) return "";
+const formatLanguages = (languages: readonly string[] | undefined) => {
+  if (!languages || languages.length === 0) return "";
   if (languages.length === 1) return languages[0];
   return `${languages.slice(0, -1).join(", ")} and ${languages[languages.length - 1]}`;
 };
 
+const multilingualPage = await getMultilingualPage();
+const businessDetails = await getBusinessDetails();
+
+const langImage = multilingualPage.languageConnectionImage ? urlFor(multilingualPage.languageConnectionImage).width(800).height(800).url() : undefined;
+
 const philosophyPoints = [
   {
     tone: "purple",
-    text: "Adult-facilitated, free-flow play",
+    text: multilingualPage.philosophyPoints[0],
   },
   {
     tone: "green",
-    text: "Opportunities for experimentation, discovery and sensible risk-taking",
+    text: multilingualPage.philosophyPoints[1],
   },
   {
     tone: "blue",
-    text: "Colour, creativity and artistic expression",
-  },
-  {
-    tone: "yellow",
-    text: "Sensory and hands-on learning",
-  },
-  {
-    tone: "purple",
-    text: "Nature-based experiences",
-  },
-  {
-    tone: "green",
-    text: "A balance of themed learning and children’s individual interests",
+    text: multilingualPage.philosophyPoints[2],
   },
 ] as const;
 
@@ -43,60 +37,60 @@ const eyfsAreas = [
   {
     icon: "chat",
     tone: "purple",
-    title: "Communication and Language",
+    title: multilingualPage.eyfsCommunication.title,
   },
   {
     icon: "person",
     tone: "green",
-    title: "Physical Development",
+    title: multilingualPage.eyfsPhysical.title,
   },
   {
     icon: "heart",
     tone: "blue",
-    title: "Personal, Social and Emotional Development",
+    title: multilingualPage.eyfsPersonal.title,
   },
   {
     icon: "book",
     tone: "yellow",
-    title: "Literacy",
+    title: multilingualPage.eyfsLiteracy.title,
   },
   {
     icon: "calendar",
     tone: "green",
-    title: "Mathematics",
+    title: multilingualPage.eyfsMaths.title,
   },
   {
     icon: "star",
     tone: "purple",
-    title: "Understanding the World",
+    title: multilingualPage.eyfsUnderstanding.title,
   },
   {
     icon: "palette",
     tone: "blue",
-    title: "Expressive Arts and Design",
+    title: multilingualPage.eyfsArts.title,
   },
 ] as const;
 
 const screenFreeBenefits = [
   {
     tone: "purple",
-    text: "Deeper concentration and sustained attention",
+    text: multilingualPage.screenFreeBenefits[0],
   },
   {
     tone: "green",
-    text: "Richer language development and face-to-face communication",
+    text: multilingualPage.screenFreeBenefits[1],
   },
   {
     tone: "blue",
-    text: "Creativity, physical activity and social interaction",
+    text: multilingualPage.screenFreeBenefits[2],
   },
   {
     tone: "yellow",
-    text: "Emotional regulation and meaningful connections",
+    text: multilingualPage.screenFreeBenefits[3],
   },
   {
     tone: "purple",
-    text: "A childhood shaped by puddles, paints, puzzles and people rather than pixels",
+    text: multilingualPage.screenFreeBenefits[4],
   },
 ] as const;
 ---
@@ -108,19 +102,15 @@ const screenFreeBenefits = [
   <article class="lwk-multilingual">
     <SubpageHero
       id="multilingual-page-title"
-      eyebrow="Multilingual Learning"
+      eyebrow={multilingualPage.heroEyebrow}
       tone="purple"
     >
       <Fragment slot="title">
-        <span>Language, Play</span>
-        <span>and Discovery</span>
+        <span>{multilingualPage.heroTitleLineOne}</span>
+        <span>{multilingualPage.heroTitleLineTwo}</span>
       </Fragment>
 
-      <p>
-        A joyful, screen-free approach where children explore language,
-        creativity and the world around them through meaningful everyday
-        experiences.
-      </p>
+      <PortableText value={multilingualPage.heroParagraphs} />
     </SubpageHero>
 
     <div class="lwk-multilingual__sections">
@@ -137,25 +127,15 @@ const screenFreeBenefits = [
                 class="lwk-multilingual__label
                   lwk-multilingual__label--purple"
               >
-                Our Learning Philosophy
+                {multilingualPage.philosophyLabel}
               </p>
 
               <h2 id="learning-philosophy-title">
-                Curiosity-Led. Emotionally Attuned. Rich in Meaning.
+                {multilingualPage.philosophyHeading}
               </h2>
 
               <div class="lwk-multilingual__prose">
-                <p>
-                  At the heart of our curriculum is a simple belief: children
-                  learn best when they feel safe, seen and supported. We bring
-                  the seven areas of the Early Years Foundation Stage together
-                  through engaging, active and joyful experiences.
-                </p>
-
-                <p>
-                  Our approach supports children to become independent thinkers
-                  and doers through play, exploration and real-world discovery.
-                </p>
+                <PortableText value={multilingualPage.philosophyParagraphs} />
               </div>
 
               <aside class="lwk-multilingual__discovery-note">
@@ -175,7 +155,7 @@ const screenFreeBenefits = [
             </div>
 
             <div class="lwk-multilingual__list-panel">
-              <h3>Children Enjoy:</h3>
+              <h3>{multilingualPage.childrenEnjoyHeading}</h3>
 
               <ul class="lwk-multilingual__check-list">
                 {
@@ -216,25 +196,13 @@ const screenFreeBenefits = [
                 class="lwk-multilingual__label
                   lwk-multilingual__label--green"
               >
-                {formatLanguages(site.languages)}
+                {multilingualPage.languageConnectionLabel}
               </p>
 
-              <h2 id="languages-title">Language Through Everyday Connection</h2>
+              <h2 id="languages-title">{multilingualPage.languageConnectionHeading}</h2>
 
               <div class="lwk-multilingual__prose">
-                <p>
-                  Little Wise Kids currently offers children exposure to {
-                    formatLanguages(site.languages)
-                  }
-                  through everyday routines, songs, stories, play and warm interactions.
-                </p>
-
-                <p>
-                  Language learning is woven naturally into the day rather than
-                  taught in a pressured way. Children are encouraged to listen,
-                  communicate and build confidence while celebrating cultural
-                  diversity and connection.
-                </p>
+                <PortableText value={multilingualPage.languageConnectionParagraphs} />
               </div>
 
               <aside class="lwk-multilingual__cms-note">
@@ -244,7 +212,7 @@ const screenFreeBenefits = [
 
                 <p>
                   <strong>CMS note:</strong>
-                  {formatLanguages(site.languages)} are the current languages offered.
+                  {formatLanguages(businessDetails.languages)} are the current languages offered.
                   This may change and must be easy to update.
                 </p>
               </aside>
@@ -255,12 +223,14 @@ const screenFreeBenefits = [
                 lwk-multilingual__media--languages"
               aria-hidden="true"
             >
-              <!-- Add the language-learning image here when it is supplied. -->
-
-              <span class="lwk-multilingual__media-placeholder">
-                <Icon name="book" size={48} />
-                <span>Language-learning image</span>
-              </span>
+              {langImage ? (
+                <img src={langImage} alt="" class="lwk-multilingual__image" />
+              ) : (
+                <span class="lwk-multilingual__media-placeholder">
+                  <Icon name="book" size={48} />
+                  <span>Language-learning image</span>
+                </span>
+              )}
             </div>
           </div>
         </Container>
@@ -278,31 +248,13 @@ const screenFreeBenefits = [
                 class="lwk-multilingual__label
                   lwk-multilingual__label--purple"
               >
-                EYFS
+                {multilingualPage.eyfsLabel}
               </p>
 
-              <h2 id="eyfs-title">Supporting Every Area of Development</h2>
+              <h2 id="eyfs-title">{multilingualPage.eyfsHeading}</h2>
 
               <div class="lwk-multilingual__prose">
-                <p>
-                  Our practice is aligned with the Early Years Foundation Stage,
-                  supporting children’s development through meaningful play and
-                  responsive care.
-                </p>
-
-                <p>
-                  We help children build confidence across communication and
-                  language, physical development, personal, social and emotional
-                  development, literacy, mathematics, understanding the world,
-                  and expressive arts and design.
-                </p>
-
-                <p>
-                  We recognise that children develop in different ways and at
-                  different rates. Our educators observe carefully, follow
-                  children’s interests and work closely with families to support
-                  each child’s individual journey.
-                </p>
+                <PortableText value={multilingualPage.eyfsParagraphs} />
               </div>
             </div>
 
@@ -345,28 +297,15 @@ const screenFreeBenefits = [
                 class="lwk-multilingual__label
                   lwk-multilingual__label--blue"
               >
-                Screen-Free Learning
+                {multilingualPage.screenFreeLabel}
               </p>
 
               <h2 id="screen-free-title">
-                A Rare and Refreshing Childhood in a Noisy World
+                {multilingualPage.screenFreeHeading}
               </h2>
 
               <div class="lwk-multilingual__prose">
-                <p>
-                  In a fast-paced, digital-first world, screen exposure can feel
-                  almost unavoidable. At Little Wise Kids, we have made a
-                  conscious choice to offer a completely screen-free learning
-                  environment.
-                </p>
-
-                <p>
-                  Instead of flashing screens and artificial stimulation,
-                  children are immersed in real-world experiences. They can feel
-                  the texture of soil, enjoy role-play, listen to stories,
-                  paint, build, move, explore outdoors and connect with people
-                  around them.
-                </p>
+                <PortableText value={multilingualPage.screenFreeParagraphs} />
               </div>
             </div>
 
@@ -400,9 +339,7 @@ const screenFreeBenefits = [
               </span>
 
               <p>
-                We believe the early years are sacred. Our screen-free nursery
-                environment gives children space to imagine, create and connect
-                with all their senses fully awake.
+                {multilingualPage.closingNote}
               </p>
             </aside>
           </div>

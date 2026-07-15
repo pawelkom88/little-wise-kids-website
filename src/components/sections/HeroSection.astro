@@ -1,39 +1,47 @@
 ---
-import { heroFeatures, site } from "../../data/site";
+import { PortableText } from "astro-portabletext";
 import Icon from "../icons/Icon.astro";
 import Section from "../layout/Section.astro";
 import Button from "../ui/Button.astro";
 import "./HeroSection.css";
+
+interface Props {
+  homePage: any;
+  businessDetails: any;
+}
+
+const { homePage, businessDetails } = Astro.props;
+
+// Convert the 3 feature objects to array for the strip
+const featureStrip = [
+  { ...homePage.multilingualFeature, icon: 'globe', tone: 'blue' },
+  { ...homePage.childCentredFeature, icon: 'heart', tone: 'purple' },
+  { ...homePage.playToLearnFeature, icon: 'star', tone: 'green' }
+];
 ---
 
 <Section class="hero-section" width="wide">
   <div class="hero" aria-labelledby="hero-title">
     <div class="hero__content">
+      {homePage.heroEyebrow && <span class="hero-eyebrow">{homePage.heroEyebrow}</span>}
       <h1 id="hero-title">
-        <span>Welcome to</span>
-        <span class="tone-purple">Little</span><br />
-        <span class="tone-green">Wise</span>
-        <span class="tone-blue">Kids</span><br />
+        <span>{homePage.heroHeading.introduction}</span>
+        <span class="tone-purple">{homePage.heroHeading.purplePhrase}</span><br />
+        <span class="tone-green">{homePage.heroHeading.greenPhrase}</span>
+        <span class="tone-blue">{homePage.heroHeading.bluePhrase}</span><br />
       </h1>
       <p class="hero-subtitle">
-        Guiding your most precious little ones through their earliest years.
+        {homePage.heroSubtitle}
       </p>
-      <p class="hero-paragraph">
-        A magical oasis of wonder in the heart of Bristol. Step into Little Wise
-        Kids and you will immediately feel the difference: a peaceful haven
-        where laughter echoes, curiosity blooms, and every child is cherished as
-        the unique, capable little learner they are.
-      </p>
-      <p class="hero-paragraph">
-        Nestled in Bristol BS5, Little Wise Kids is more than childcare. It is a
-        nurturing home-from-home where warmth, trust and belonging sit at the
-        heart of every day. We welcome children aged {site.ageRange} for now, supporting
-        each child to learn, play and grow at their own pace.
-      </p>
+      
+      <div class="hero-paragraphs">
+        <PortableText value={homePage.heroParagraphs} />
+      </div>
+
       <div class="hero__actions">
-        <Button href="#approach" icon="heart">Register Your Interest</Button>
+        <Button href="#approach" icon="heart">{homePage.primaryCtaLabel}</Button>
         <Button href="#contact" variant="secondary"
-          >Explore Little Wise Kids</Button
+          >{homePage.secondaryCtaLabel}</Button
         >
       </div>
     </div>
@@ -52,16 +60,16 @@ import "./HeroSection.css";
 
   <div class="feature-strip">
     {
-      heroFeatures.map((feature) => (
+      featureStrip.map((feature) => (
         <article class="feature-strip__item">
           <span class={`feature-strip__icon tone-${feature.tone}`}>
-            <Icon name={feature.icon} size={34} />
+            <Icon name={feature.icon as any} size={34} />
           </span>
           <div>
             <p class={`feature-strip__title tone-${feature.tone}`}>
               {feature.title}
             </p>
-            <p class="feature-strip__text">{feature.text}</p>
+            <p class="feature-strip__text">{feature.description}</p>
           </div>
         </article>
       ))

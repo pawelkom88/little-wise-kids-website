@@ -1,22 +1,25 @@
 ---
+import { PortableText } from "astro-portabletext";
 import Icon from "../../icons/Icon.astro";
 import Button from "../../ui/Button.astro";
+import { urlFor } from "../../../utils/sanity";
 import "./VisitSection.css";
 
 interface Props {
-  image?: { src: string; alt: string };
+  homePage: any;
 }
 
-const { image } = Astro.props;
+const { homePage } = Astro.props;
+const imageUrl = homePage.visitImage ? urlFor(homePage.visitImage).width(1200).height(800).url() : undefined;
 ---
 
 <section class="lwk-visit" aria-labelledby="visit-title">
   <div class="lwk-visit__layout">
     <div class="lwk-visit__content">
       <h2 class="lwk-visit__title" id="visit-title">
-        Come See the <span>Magic</span>
+        {homePage.visitHeading.lineOnePrefix} <span>{homePage.visitHeading.accentedPhrase}</span>
         <br />
-        for Yourself
+        {homePage.visitHeading.lineTwo}
       </h2>
 
       <div class="lwk-title-rule lwk-title-rule--left" aria-hidden="true">
@@ -24,21 +27,11 @@ const { image } = Astro.props;
       </div>
 
       <div class="lwk-visit__copy">
-        <p>
-          The best way to understand what makes Little Wise Kids special is to
-          visit us. We would love to welcome you, introduce our team and help
-          your child explore our calm, engaging space.
-        </p>
-
-        <p>
-          Whether you are looking for nurturing childcare, a screen-free nursery
-          in Bristol, or a setting that truly feels like a second home, we are
-          here to help.
-        </p>
+        <PortableText value={homePage.visitParagraphs} />
       </div>
 
       <div class="lwk-visit__actions">
-        <Button href="/contact" class="lwk-visit__primary"> Contact us </Button>
+        <Button href="/contact" class="lwk-visit__primary"> {homePage.visitCtaLabel} </Button>
       </div>
     </div>
 
@@ -55,10 +48,10 @@ const { image } = Astro.props;
 
       <div class="lwk-visit-media__image">
         {
-          image ? (
+          imageUrl ? (
             <img
-              src={image.src}
-              alt={image.alt}
+              src={imageUrl}
+              alt={homePage.visitImage.alt || ""}
               width="1200"
               height="800"
               loading="lazy"
@@ -72,10 +65,9 @@ const { image } = Astro.props;
 
       <figcaption class="lwk-visit-testimonial">
         <blockquote>
-          “From the moment we walked in, we felt at ease. Our daughter loves it
-          here, and so do we.”
+          “{homePage.testimonialQuote}”
         </blockquote>
-        <p>— Little Wise Kids parent</p>
+        <p>— {homePage.testimonialAttribution}</p>
       </figcaption>
     </figure>
   </div>

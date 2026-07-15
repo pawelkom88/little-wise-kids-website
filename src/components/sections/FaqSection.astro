@@ -1,48 +1,16 @@
 ---
+import { PortableText } from "astro-portabletext";
 import Image from "astro/components/Image.astro";
 import envelopeIcon from "../../../assets/icons/icon-envelope.png";
 import flowerIcon from "../../../assets/icons/flower-icon.png";
 import Section from "../layout/Section.astro";
 import "./FaqSection.css";
 
-import { site } from "../../data/site";
-
-const formatLanguages = (languages: readonly string[]) => {
-  if (languages.length === 0) return "";
-  if (languages.length === 1) return languages[0];
-  return `${languages.slice(0, -1).join(", ")} and ${languages[languages.length - 1]}`;
-};
-
-interface FaqItem {
-  question: string;
-  answer: string;
-  open?: boolean;
+interface Props {
+  homePage: any;
 }
 
-const faqs: FaqItem[] = [
-  {
-    question: "What age range do you care for?",
-    answer: `We care for children aged <strong>${site.ageRange}</strong>, providing a safe, nurturing and engaging early years environment tailored to each stage of development.`,
-    open: true,
-  },
-  {
-    question: "What languages are part of the curriculum?",
-    answer: `${formatLanguages(site.languages)} are introduced through songs, stories, play and everyday routines, so children experience language in a natural and enjoyable way.`,
-  },
-  {
-    question: "What are your opening hours?",
-    answer: `We are open ${site.openingHours.days} from <strong>${site.openingHours.fullDay}</strong>. We are open through school holidays and closed on bank holidays.`,
-  },
-  {
-    question: "Where are you located?",
-    answer: `Little Wise Kids Childminding is based in a home setting at <strong>${site.address.line1}, ${site.address.line2}, ${site.address.city}, ${site.address.postcode}</strong>, with easy access to town and the M32.`,
-  },
-  {
-    question: "What is your childminding approach?",
-    answer:
-      "Our approach combines traditional Early Years learning with modern languages and cultures. We focus on play, care, confidence, curiosity and strong partnerships with families.",
-  },
-];
+const { homePage } = Astro.props;
 ---
 
 <svg
@@ -60,19 +28,18 @@ const faqs: FaqItem[] = [
   <div class="faq-shell" aria-labelledby="faq-title">
     <header class="faq-header">
       <h2 class="faq-title" id="faq-title">
-        Got <span>Questions?</span>
+        {homePage.faqHeading.prefix} <span>{homePage.faqHeading.accentedPhrase}</span>
       </h2>
 
       <p class="faq-intro">
-        Clear answers to the things parents most often ask before joining Little
-        Wise Kids.
+        {homePage.faqIntro}
       </p>
     </header>
 
     <div class="faq-list">
       {
-        faqs.map((faq) => (
-          <details class="faq-item" name="little-wise-kids-faq" open={faq.open}>
+        homePage.faqs.map((faq: any, index: number) => (
+          <details class="faq-item" name="little-wise-kids-faq" open={index === 0}>
             <summary>
               <span class="faq-question">{faq.question}</span>
               <span class="faq-control" aria-hidden="true" />
@@ -80,7 +47,7 @@ const faqs: FaqItem[] = [
             <div class="faq-answer">
               <div class="faq-answer-inner">
                 <div class="faq-answer-content">
-                  <p set:html={faq.answer} />
+                  <PortableText value={faq.answer} />
                 </div>
               </div>
             </div>
@@ -101,13 +68,12 @@ const faqs: FaqItem[] = [
 
       <div class="faq-contact__content">
         <h2 class="faq-contact__title" id="faq-contact-title">
-          Have another question? We’re here to help!
+          {homePage.helpPanelTitle}
         </h2>
 
         <p class="faq-contact__text">
-          Our team is happy to help with anything you need.
-          <a class="faq-contact__link" href="/contact">Contact us</a>
-          — we’d love to hear from you.
+          {homePage.helpPanelCopy}
+          <a class="faq-contact__link" href="/contact">{homePage.helpPanelCtaLabel}</a>
         </p>
       </div>
 

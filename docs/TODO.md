@@ -20,3 +20,8 @@ test in firefox , safari, chrome, edge
 how AI can find little wise kids
 
 dead css and duplicated code - use prompt
+
+
+config : update website on git push
+
+security audit !

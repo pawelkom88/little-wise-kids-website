@@ -1,4 +1,4 @@
-import { defineType, defineArrayMember } from "sanity";
+import { defineType } from "sanity";
 
 export const minimalPortableText = defineType({
   name: "minimalPortableText",
@@ -17,9 +17,7 @@ export const minimalPortableText = defineType({
         ],
         annotations: [],
       },
+      of: [{ type: "inlineBusinessDetail" }],
     },
-    defineArrayMember({
-      type: "inlineBusinessDetail",
-    }),
   ],
 });

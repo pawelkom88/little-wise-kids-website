@@ -3,6 +3,7 @@ import { fileURLToPath } from "url";
 import pathModule from "path";
 
 const __dirname = pathModule.dirname(fileURLToPath(import.meta.url));
+const isDev = process.env.SANITY_DATASET === "development";
 
 function createTextBlock(text) {
   return {
@@ -37,26 +38,180 @@ function validate(doc) {
   }
 }
 
-const imageRef = {
+// For dev, we point to real files via _sanityAsset so the CLI imports them
+// For prod, we omit the images completely.
+const dummyImageRef = isDev ? {
   _type: "image",
-  asset: {
-    _type: "reference",
-    _ref: "image-dummyasset-png"
-  },
+  _sanityAsset: `image@file://${pathModule.resolve(__dirname, 'dummy-image.png')}`,
   isDecorative: false,
   altText: "Representative illustrative image for Little Wise Kids nursery setting."
-};
+} : undefined;
 
-const decorativeImageRef = {
+const decorativeDummyImageRef = isDev ? {
   _type: "image",
-  asset: {
-    _type: "reference",
-    _ref: "image-dummyasset-png"
-  },
+  _sanityAsset: `image@file://${pathModule.resolve(__dirname, 'dummy-image.png')}`,
   isDecorative: true
-};
+} : undefined;
 
-const documents = [
+function getPdfRef() {
+  return isDev ? {
+    _type: "file",
+    _sanityAsset: `file@file://${pathModule.resolve(__dirname, 'dummy-policy.pdf')}`
+  } : undefined;
+}
+
+function getGalleryImageRef() {
+  return isDev ? {
+    _type: "strictImage",
+    _sanityAsset: `image@file://${pathModule.resolve(__dirname, 'dummy-image.png')}`,
+    altText: "Gallery image representing nursery activities"
+  } : undefined;
+}
+
+function getBlogImageRef() {
+  return isDev ? {
+    _type: "strictImage",
+    _sanityAsset: `image@file://${pathModule.resolve(__dirname, 'dummy-image.png')}`,
+    altText: "Blog featured image"
+  } : undefined;
+}
+
+const rawArticles = [
+  {
+    slug: "welcome-to-a-new-term",
+    title: "Welcome to a New Term at Little Wise Kids",
+    excerpt: "A look at what is ahead this season, from joyful learning themes and new experiences to the little moments that make nursery life special.",
+    category: "nursery-news",
+    publishedAt: "2026-07-14T12:00:00Z",
+    featured: true,
+    content: [
+      { type: "paragraph", text: "Welcome to a new term at Little Wise Kids. We are excited to see the children return and to welcome new families to our setting." }
+    ],
+  },
+  {
+    slug: "the-power-of-play",
+    title: "The Power of Play: Learning Through Discovery",
+    excerpt: "How meaningful play helps children build confidence, curiosity, communication and problem-solving skills at their own pace.",
+    category: "early-learning",
+    publishedAt: "2026-07-08T12:00:00Z",
+    featured: false,
+    content: [
+      { type: "paragraph", text: "Play is far more than just fun. It is how children explore, experiment, imagine and make connections that help them grow in so many important ways." }
+    ],
+  },
+  {
+    slug: "settling-in-gentle-tips",
+    title: "Settling In: Gentle Tips for a Smooth Start",
+    excerpt: "Practical ideas to help your child feel safe, secure and understood during those important first days at nursery.",
+    category: "parenting-tips",
+    publishedAt: "2026-07-01T12:00:00Z",
+    featured: false,
+    content: [
+      { type: "paragraph", text: "Starting nursery is a big step for both children and parents. Here are some gentle tips to help make the transition as smooth as possible." }
+    ]
+  },
+  {
+    slug: "outdoor-adventures-why-nature-nurtures",
+    title: "Outdoor Adventures: Why Nature Nurtures",
+    excerpt: "The benefits of outdoor learning and how time in nature supports wellbeing, creativity, confidence and resilience.",
+    category: "early-learning",
+    publishedAt: "2026-06-24T12:00:00Z",
+    featured: false,
+    content: [
+      { type: "paragraph", text: "Nature provides endless opportunities for exploration and discovery. Time spent outdoors is essential for physical and mental wellbeing." }
+    ]
+  },
+  {
+    slug: "healthy-habits-happy-little-learners",
+    title: "Healthy Habits, Happy Little Learners",
+    excerpt: "How positive mealtimes, varied foods and gentle encouragement help children develop a healthy relationship with nutrition.",
+    category: "nutrition",
+    publishedAt: "2026-06-18T12:00:00Z",
+    featured: false,
+    content: [
+      { type: "paragraph", text: "Establishing healthy eating habits early in life lays the foundation for a lifetime of wellness." }
+    ]
+  },
+  {
+    slug: "celebrating-community-and-cultural-diversity",
+    title: "Celebrating Our Community and Cultural Diversity",
+    excerpt: "How we celebrate languages, traditions, family stories and the many different experiences that make our community special.",
+    category: "community",
+    publishedAt: "2026-06-10T12:00:00Z",
+    featured: false,
+    content: [
+      { type: "paragraph", text: "We believe that our diversity is our strength. By celebrating different cultures and traditions, we create a rich learning environment for all." }
+    ]
+  },
+  {
+    slug: "screen-free-learning-deeper-play",
+    title: "Screen-Free Learning: Space for Deeper Play",
+    excerpt: "Why real-world experiences, movement, stories and face-to-face connection matter so much during the earliest years.",
+    category: "early-learning",
+    publishedAt: "2026-06-03T12:00:00Z",
+    featured: false,
+    content: [
+      { type: "paragraph", text: "In a world increasingly dominated by screens, we prioritize screen-free learning to encourage deeper engagement and active play." }
+    ]
+  }
+];
+
+const blogPostDocs = rawArticles.map((article, i) => ({
+  _id: `blogPost-${i}`,
+  _type: "blogPost",
+  title: article.title,
+  slug: { _type: "slug", current: article.slug },
+  publishedAt: article.publishedAt,
+  featured: article.featured,
+  category: article.category,
+  excerpt: article.excerpt,
+  featuredImage: getBlogImageRef(),
+  body: article.content.map(b => createTextBlock(b.text))
+}));
+
+const policies = [
+  { title: "GDPR / Privacy Policy", shortDesc: "Details on how we handle personal data.", id: "gdpr-privacy-policy" },
+  { title: "Safeguarding Policy", shortDesc: "Our commitment to child protection.", id: "safeguarding-policy" },
+  { title: "Complaints Policy", shortDesc: "Procedures for raising concerns.", id: "complaints-policy" },
+  { title: "Health and Safety Policy", shortDesc: "Maintaining a safe nursery environment.", id: "health-and-safety-policy" },
+  { title: "Partnership Policy", shortDesc: "Working together with parents.", id: "partnership-policy" },
+  { title: "Settling-In Process Policy", shortDesc: "Guidelines for a smooth transition.", id: "settling-in-process-policy" }
+];
+
+const policyDocs = policies.map((p, i) => ({
+  _id: `policy-${p.id}`,
+  _type: "policyDocument",
+  title: p.title,
+  shortDescription: p.shortDesc,
+  file: getPdfRef(),
+  displayOrder: i * 10,
+  lastReviewed: "2026-01-01"
+}));
+
+const galleryCategories = [
+  { id: "outdoor-learning-experience", title: "Outdoor Learning Experience", value: "outdoor-learning-experience" },
+  { id: "indoor-learning-experience", title: "Indoor Learning Experience", value: "indoor-learning-experience" },
+  { id: "language-immersion", title: "Language Immersion", value: "language-immersion" },
+  { id: "nutrition-and-mealtimes", title: "Nutrition and Mealtimes", value: "nutrition-and-mealtimes" },
+  { id: "creative-play", title: "Creative Play", value: "creative-play" },
+  { id: "sensory-exploration", title: "Sensory Exploration", value: "sensory-exploration" },
+  { id: "nature-and-gardening", title: "Nature and Gardening", value: "nature-and-gardening" },
+  { id: "celebrations-and-community", title: "Celebrations and Community", value: "celebrations-and-community" }
+];
+
+const galleryDocs = galleryCategories.map((c, i) => ({
+  _id: `galleryPhoto-${c.id}`,
+  _type: "galleryPhoto",
+  internalTitle: `${c.title} Example`,
+  image: getGalleryImageRef(),
+  category: c.value,
+  showOnHomepage: i < 3,
+  displayOrder: i * 10,
+  showOnAboutPage: i < 4,
+  aboutPageDisplayOrder: i * 10
+}));
+
+const singletonDocs = [
   {
     _id: "businessDetails",
     _type: "businessDetails",
@@ -111,10 +266,7 @@ const documents = [
     visitHeading: { _type: "object", lineOnePrefix: "Come and See", accentedPhrase: "For Yourself", lineTwo: "" },
     visitParagraphs: [createTextBlock("Choosing a nursery is a big decision.")],
     visitCtaLabel: "Book a Visit",
-    visitImage: {
-      ...imageRef,
-      altText: "Parents and child exploring the outdoor play space together."
-    },
+    ...(dummyImageRef && { visitImage: dummyImageRef }),
     testimonialQuote: "Little Wise Kids has been wonderful for our daughter.",
     testimonialAttribution: "Sarah, Parent",
     faqHeading: { _type: "object", prefix: "Questions Families", accentedPhrase: "Often Ask" },
@@ -147,11 +299,11 @@ const documents = [
     commitmentLabel: "Our Commitment",
     commitmentHeading: "Nurturing Your Child's Unique Path",
     commitmentParagraphs: [createTextBlock("We are committed to providing the highest quality education.")],
-    commitmentImage: decorativeImageRef,
+    ...(decorativeDummyImageRef && { commitmentImage: decorativeDummyImageRef }),
     environmentLabel: "Our Space",
     environmentHeading: "Designed for Exploration",
     environmentParagraphs: [createTextBlock("Our indoor and outdoor spaces are carefully designed.")],
-    environmentImage: decorativeImageRef,
+    ...(decorativeDummyImageRef && { environmentImage: decorativeDummyImageRef }),
     programmesLabel: "Our Programmes",
     programmesHeading: "Foundations for the Future",
     programmesParagraphs: [createTextBlock("Our programmes build core learning foundations.")],
@@ -163,10 +315,10 @@ const documents = [
     educatorsLabel: "Our Team",
     educatorsHeading: "Passionate Educators",
     educatorsParagraphs: [createTextBlock("Our staff are qualified and dedicated.")],
-    educatorsImage: decorativeImageRef,
+    ...(decorativeDummyImageRef && { educatorsImage: decorativeDummyImageRef }),
     leadershipLabel: "Leadership",
     leadershipHeading: "Our Visionaries",
-    leadershipImage: decorativeImageRef,
+    ...(decorativeDummyImageRef && { leadershipImage: decorativeDummyImageRef }),
     gallerySectionLabel: "Gallery",
     gallerySectionHeading: "Moments from Little Wise Kids",
   },
@@ -188,17 +340,17 @@ const documents = [
     languageConnectionLabel: "Connection",
     languageConnectionHeading: "Building Bridges Through Talk",
     languageConnectionParagraphs: [createTextBlock("Languages connect our diverse community.")],
-    languageConnectionImage: decorativeImageRef,
+    ...(decorativeDummyImageRef && { languageConnectionImage: decorativeDummyImageRef }),
     eyfsLabel: "EYFS",
     eyfsHeading: "Early Years Foundation Stage",
     eyfsParagraphs: [createTextBlock("We follow the EYFS framework dynamically.")],
-    eyfsCommunication: { title: "Communication & Language", description: "Expressing ideas freely." },
-    eyfsPhysical: { title: "Physical Development", description: "Active and healthy lives." },
-    eyfsPersonal: { title: "Personal, Social & Emotional", description: "Self-regulation and relationships." },
-    eyfsLiteracy: { title: "Literacy", description: "Loving books and words." },
-    eyfsMaths: { title: "Mathematics", description: "Exploring shapes and numbers." },
-    eyfsUnderstanding: { title: "Understanding the World", description: "Investigating nature." },
-    eyfsArts: { title: "Expressive Arts & Design", description: "Creating and building." },
+    eyfsCommunication: { _type: "object", title: "Communication & Language", description: "Expressing ideas freely." },
+    eyfsPhysical: { _type: "object", title: "Physical Development", description: "Active and healthy lives." },
+    eyfsPersonal: { _type: "object", title: "Personal, Social & Emotional", description: "Self-regulation and relationships." },
+    eyfsLiteracy: { _type: "object", title: "Literacy", description: "Loving books and words." },
+    eyfsMaths: { _type: "object", title: "Mathematics", description: "Exploring shapes and numbers." },
+    eyfsUnderstanding: { _type: "object", title: "Understanding the World", description: "Investigating nature." },
+    eyfsArts: { _type: "object", title: "Expressive Arts & Design", description: "Creating and building." },
     screenFreeLabel: "Screen-Free",
     screenFreeHeading: "A Space for Mindful Play",
     screenFreeParagraphs: [createTextBlock("We keep our spaces screen-free to encourage real-world interaction.")],
@@ -268,7 +420,7 @@ const documents = [
     howFundingWorksHeading: "15 and 30 Hour Funding Support",
     howFundingWorksParagraphs: [createTextBlock("We support both government schemes.")],
     fundingExamples: [
-      { entitlement: "15 Hours Funding", equivalent: "2 free half days per week" }
+      { _type: "object", _key: "fund1", entitlement: "15 Hours Funding", equivalent: "2 free half days per week" }
     ],
     fundingSupportLabel: "Eligibility",
     fundingSupportHeading: "How to Apply for Subsidies",
@@ -288,7 +440,7 @@ const documents = [
     subsidyFaqsHeading: "Frequently Asked Fee Questions",
     subsidyFaqsParagraphs: [createTextBlock("Common queries about funding.")],
     subsidyFaqs: [
-      { question: "When are fees due?", answer: "Fees are billed monthly in advance on the 1st." }
+      { _type: "object", _key: "faq2", question: "When are fees due?", answer: "Fees are billed monthly in advance on the 1st." }
     ],
     partnershipLabel: "Parents as Partners",
     partnershipHeading: "Nurturing Together",
@@ -361,12 +513,20 @@ const documents = [
   }
 ];
 
+const documents = [...singletonDocs, ...blogPostDocs, ...policyDocs, ...galleryDocs];
+
 documents.forEach(doc => validate(doc));
 
-const ndjson = documents.map((doc) => JSON.stringify(doc)).join("\n");
+// Clean up undefined properties dynamically
+const cleanDocs = documents.map(doc => {
+  return JSON.parse(JSON.stringify(doc));
+});
+
+const ndjson = cleanDocs.map((doc) => JSON.stringify(doc)).join("\n");
 const outputPath = pathModule.join(__dirname, "../docs/sanity/seed-data.ndjson");
 
 fs.mkdirSync(pathModule.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, ndjson, "utf-8");
 
 console.log(`✅ Successfully generated validated seed data at ${outputPath}`);
+console.log(`ℹ️ Environment: ${isDev ? 'DEVELOPMENT (including dummy asset refs)' : 'PRODUCTION (clean/no dummy assets)'}`);

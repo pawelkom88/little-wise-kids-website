@@ -68,8 +68,8 @@ export const blogPortableText = defineType({
           },
         ],
       },
+      of: [{ type: "inlineBusinessDetail" }],
     },
     { type: "contentImage" },
-    { type: "inlineBusinessDetail" },
   ],
 });

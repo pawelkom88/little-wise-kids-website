@@ -5,51 +5,50 @@ import artBubble from "../../../../assets/icons/bubble-art.png";
 import peopleBubble from "../../../../assets/icons/bubble-people.png";
 import outdoorBubble from "../../../../assets/icons/bubble-outdoor.png";
 import nutritionBubble from "../../../../assets/icons/bubble-nutrition.png";
-import { site } from "../../../data/site";
 import "./ValuesDifference.css";
 
-const formatLanguages = (languages: readonly string[]) => {
-  if (languages.length === 0) return "";
-  if (languages.length === 1) return languages[0];
-  return `${languages.slice(0, -1).join(", ")} and ${languages[languages.length - 1]}`;
-};
+interface Props {
+  homePage: any;
+}
+
+const { homePage } = Astro.props;
 
 const cards = [
   {
     tone: "blue",
     image: artBubble,
-    title: "Screen-Free Learning",
-    copy: "Screen-free learning, with meaningful real-world and tactile experiences",
+    title: homePage.screenFreeCard.title,
+    copy: homePage.screenFreeCard.description,
   },
   {
     tone: "purple",
     image: multilingualBubble,
-    title: "Multilingual Exposure",
-    copy: `${formatLanguages(site.languages)} language exposure for now, subject to change`,
+    title: homePage.multilingualCard.title,
+    copy: homePage.multilingualCard.description,
   },
   {
     tone: "green",
     image: outdoorBubble,
-    title: "Indoor & Outdoor",
-    copy: "A balance of indoor and outdoor learning",
+    title: homePage.indoorOutdoorCard.title,
+    copy: homePage.indoorOutdoorCard.description,
   },
   {
     tone: "yellow",
     image: peopleBubble,
-    title: "Child-Led Play",
-    copy: "Child-led play that develops confidence and independence",
+    title: homePage.childLedCard.title,
+    copy: homePage.childLedCard.description,
   },
   {
     tone: "orange",
     image: nutritionBubble,
-    title: "Wholesome Nutrition",
-    copy: "Wholesome nutrition that supports growing bodies and minds",
+    title: homePage.nutritionCard.title,
+    copy: homePage.nutritionCard.description,
   },
   {
     tone: "pink",
     image: heartBubble,
-    title: "Family-Style Setting",
-    copy: "A warm, family-style environment in Bristol BS5",
+    title: homePage.familySettingCard.title,
+    copy: homePage.familySettingCard.description,
   },
 ] as const;
 ---
@@ -70,7 +69,7 @@ const cards = [
       <span class="lwk-values-heading__ray"></span>
     </span>
 
-    <h2 id="difference-title">What Makes Us Different</h2>
+    <h2 id="difference-title">{homePage.valuesDifferenceTitle}</h2>
 
     <span
       class="lwk-values-heading__rays

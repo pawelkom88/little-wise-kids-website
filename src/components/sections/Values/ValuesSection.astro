@@ -4,12 +4,18 @@ import ValuesIntro from "./ValuesIntro.astro";
 import ValuesDifference from "./ValuesDifference.astro";
 import VisitSection from "./VisitSection.astro";
 import "./ValuesSection.css";
+
+interface Props {
+  homePage: any;
+}
+
+const { homePage } = Astro.props;
 ---
 
 <Section id="activities" class="lwk-values" width="wide">
   <div class="lwk-values__stack">
-    <ValuesIntro />
-    <ValuesDifference />
-    <VisitSection />
+    <ValuesIntro homePage={homePage} />
+    <ValuesDifference homePage={homePage} />
+    <VisitSection homePage={homePage} />
   </div>
 </Section>

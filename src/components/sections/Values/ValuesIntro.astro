@@ -1,7 +1,14 @@
 ---
+import { PortableText } from "astro-portabletext";
 import Icon from "../../icons/Icon.astro";
 import planeIcon from "../../../../assets/icons/plane-icon.svg";
 import "./ValuesIntro.css";
+
+interface Props {
+  homePage: any;
+}
+
+const { homePage } = Astro.props;
 ---
 
 <section
@@ -44,7 +51,7 @@ import "./ValuesIntro.css";
       id="values-title"
       data-values-intro-title
     >
-      <span class="lwk-values-intro__title-line"> A Place to </span>
+      <span class="lwk-values-intro__title-line"> {homePage.valuesIntroHeading.prefix} </span>
 
       <span
         class="lwk-values-intro__title-line
@@ -55,7 +62,7 @@ import "./ValuesIntro.css";
             lwk-values-intro__accent--purple
             lwk-tone-purple"
         >
-          Feel Safe,
+          {homePage.valuesIntroHeading.purplePhrase}
 
           <svg
             class="lwk-values-intro__underline"
@@ -72,7 +79,7 @@ import "./ValuesIntro.css";
             lwk-values-intro__accent--green
             lwk-tone-green"
         >
-          Seen
+          {homePage.valuesIntroHeading.greenPhrase}
 
           <svg
             class="lwk-values-intro__underline"
@@ -89,14 +96,14 @@ import "./ValuesIntro.css";
         class="lwk-values-intro__title-line
           lwk-values-intro__title-line--phrases"
       >
-        <span class="lwk-values-intro__connector"> and </span>
+        <span class="lwk-values-intro__connector"> {homePage.valuesIntroHeading.connector} </span>
 
         <span
           class="lwk-values-intro__accent
             lwk-values-intro__accent--blue
             lwk-tone-blue"
         >
-          Celebrated
+          {homePage.valuesIntroHeading.bluePhrase}
 
           <svg
             class="lwk-values-intro__underline"
@@ -117,19 +124,7 @@ import "./ValuesIntro.css";
     </div>
 
     <div class="lwk-values-intro__copy">
-      <p>
-        We created Little Wise Kids with one heartfelt intention: to offer the
-        kind of environment we would want for our own children. Our setting is
-        calm, loving and rich with purpose, designed to feel like an extension
-        of family life.
-      </p>
-
-      <p>
-        Here, children are encouraged to explore their interests, develop
-        confidence and form meaningful relationships. We believe the early years
-        are precious, and every day is an opportunity to support a child’s sense
-        of wonder.
-      </p>
+      <PortableText value={homePage.valuesIntroParagraphs} />
     </div>
   </div>
 </section>
