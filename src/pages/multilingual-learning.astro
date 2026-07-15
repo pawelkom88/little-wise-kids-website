@@ -4,13 +4,13 @@ import Container from "../components/layout/Container.astro";
 import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
-import { getMultilingualPage, urlFor } from "../utils/sanity";
+import { getMultilingualPage } from "../utils/sanity";
+import { getImageUrl } from "../lib/images";
 import "./multilingual-learning.css";
 
 const multilingualPage = await getMultilingualPage();
 
-const hasLangImage = multilingualPage.languageConnectionImage?.asset?._ref && !multilingualPage.languageConnectionImage.asset._ref.includes("dummy");
-const langImage = hasLangImage ? urlFor(multilingualPage.languageConnectionImage).width(800).height(800).url() : undefined;
+const langImage = getImageUrl(multilingualPage.languageConnectionImage, 800);
 
 const philosophyPoints = [
   {

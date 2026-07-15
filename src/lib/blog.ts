@@ -1,4 +1,4 @@
-import { urlFor } from "./images";
+import { getImageUrl } from "./images";
 import type { BlogPost } from "./types";
 
 const categoryConfig: Record<string, { label: string; tone: string; icon: string }> = {
@@ -37,9 +37,7 @@ function calculateReadTime(body: any[]): string {
 
 export function mapBlogPost(post: BlogPost) {
   const cat = categoryConfig[post.category] ?? { label: post.category, tone: "purple", icon: "star" };
-  const imageUrl = post.featuredImage
-    ? urlFor(post.featuredImage).width(900).height(680).url()
-    : null;
+  const imageUrl = post.featuredImage ? getImageUrl(post.featuredImage, 900) : null;
   return {
     slug: post.slug.current,
     title: post.title,

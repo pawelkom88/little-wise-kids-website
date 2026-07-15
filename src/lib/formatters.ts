@@ -37,7 +37,4 @@ export function formatLanguages(languages: readonly string[] | undefined): strin
   return `${languages.slice(0, -1).join(", ")} and ${languages[languages.length - 1]}`;
 }
 
-export function getFileUrl(ref: string): string {
-  const [, id, extension] = ref.split("-");
-  return `https://cdn.sanity.io/files/c10vla3h/production/${id}.${extension}`;
-}
+

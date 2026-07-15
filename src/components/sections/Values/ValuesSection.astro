@@ -4,9 +4,10 @@ import ValuesIntro from "./ValuesIntro.astro";
 import ValuesDifference from "./ValuesDifference.astro";
 import VisitSection from "./VisitSection.astro";
 import "./ValuesSection.css";
+import type { HomePage } from "../../../lib/types";
 
 interface Props {
-  homePage: any;
+  homePage: HomePage;
 }
 
 const { homePage } = Astro.props;

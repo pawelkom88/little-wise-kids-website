@@ -117,7 +117,12 @@ export async function getBlogPage(): Promise<BlogPage> {
   );
 }
 
-export const blogPostsQuery = `*[_type == "blogPost" && defined(slug.current)] | order(publishedAt desc) {
+export const blogPostsQuery = `*[
+  _type == "blogPost" &&
+  defined(slug.current) &&
+  defined(publishedAt) &&
+  publishedAt <= now()
+] | order(publishedAt desc) {
   _id,
   title,
   slug,
@@ -126,7 +131,16 @@ export const blogPostsQuery = `*[_type == "blogPost" && defined(slug.current)] |
   category,
   excerpt,
   featuredImage,
-  body
+  body[]{
+    ...,
+    markDefs[]{
+      ...,
+      _type == "internalLink" => {
+        ...,
+        reference->{ _id, _type, slug }
+      }
+    }
+  }
 }`;
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
@@ -142,7 +156,16 @@ export const blogPostBySlugQuery = `*[_type == "blogPost" && slug.current == $sl
   category,
   excerpt,
   featuredImage,
-  body
+  body[]{
+    ...,
+    markDefs[]{
+      ...,
+      _type == "internalLink" => {
+        ...,
+        reference->{ _id, _type, slug }
+      }
+    }
+  }
 }`;
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
@@ -155,7 +178,7 @@ export async function getGalleryPhotos(): Promise<GalleryPhoto[]> {
   return await sanityClient.fetch<GalleryPhoto[]>(galleryPhotosQuery);
 }
 
-export const homeGalleryPhotosQuery = `*[_type == "galleryPhoto" && showOnHomepage == true && defined(image.asset._ref)] | order(displayOrder asc)`;
+export const homeGalleryPhotosQuery = `*[_type == "galleryPhoto" && showOnHomepage == true && defined(image.asset._ref)] | order(homepageDisplayOrder asc)`;
 
 export async function getHomeGalleryPhotos(): Promise<GalleryPhoto[]> {
   return await sanityClient.fetch<GalleryPhoto[]>(homeGalleryPhotosQuery);
@@ -171,9 +194,10 @@ export const policyDocumentsQuery = `*[_type == "policyDocument" && defined(file
   _id,
   title,
   shortDescription,
-  file,
+  "fileUrl": file.asset->url,
   displayOrder,
-  lastReviewed
+  lastReviewed,
+  file
 }`;
 
 export async function getPolicyDocuments(): Promise<PolicyDocument[]> {

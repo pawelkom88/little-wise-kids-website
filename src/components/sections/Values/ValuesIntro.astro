@@ -1,11 +1,13 @@
 ---
-import { PortableText } from "astro-portabletext";
+import PortableContent from "../../content/PortableContent.astro";
 import Icon from "../../icons/Icon.astro";
 import planeIcon from "../../../../assets/icons/plane-icon.svg";
 import "./ValuesIntro.css";
 
+import type { HomePage } from "../../../lib/types";
+
 interface Props {
-  homePage: any;
+  homePage: HomePage;
 }
 
 const { homePage } = Astro.props;
@@ -124,7 +126,7 @@ const { homePage } = Astro.props;
     </div>
 
     <div class="lwk-values-intro__copy">
-      <PortableText value={homePage.valuesIntroParagraphs} />
+      <PortableContent value={homePage.valuesIntroParagraphs} />
     </div>
   </div>
 </section>

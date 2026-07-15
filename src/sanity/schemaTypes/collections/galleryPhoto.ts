@@ -57,9 +57,22 @@ export const galleryPhoto = defineType({
       type: "boolean",
     }),
     defineField({
+      name: "homepageDisplayOrder",
+      title: "Homepage Display Order",
+      description: "Lower numbers appear first on the homepage gallery.",
+      type: "number",
+    }),
+    defineField({
+      name: "publicCaption",
+      title: "Public Caption",
+      description: "Visible caption shown to visitors. Leave blank to hide the label entirely.",
+      type: "string",
+      validation: (rule) => rule.max(80),
+    }),
+    defineField({
       name: "displayOrder",
-      title: "Display Order",
-      description: "Lower numbers appear first.",
+      title: "Gallery Page Display Order",
+      description: "Lower numbers appear first on the full Gallery page.",
       type: "number",
     }),
     defineField({

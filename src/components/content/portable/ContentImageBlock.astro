@@ -1,13 +1,13 @@
 ---
-import { urlFor } from "../../../lib/images";
+import { getImageUrl } from "../../../lib/images";
+import type { ContentImage } from "../../../lib/types";
 
 interface Props {
-  node: any;
+  node: ContentImage;
 }
 const { node } = Astro.props;
 
-const hasValidAsset = node?.asset?._ref && !node.asset._ref.includes("dummy");
-const imageUrl = hasValidAsset ? urlFor(node).width(1200).url() : null;
+const imageUrl = getImageUrl(node);
 ---
 
 {imageUrl ? (

@@ -6,10 +6,15 @@ import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
 import { getAboutPage, getAboutGalleryPhotos } from "../utils/sanity";
-import { urlFor } from "../lib/images";
+import { getImageUrl } from "../lib/images";
 
 const aboutPage = await getAboutPage();
 const galleryPhotos = await getAboutGalleryPhotos();
+
+const commitmentImg = getImageUrl(aboutPage.commitmentImage, 800);
+const environmentImg = getImageUrl(aboutPage.environmentImage, 800);
+const educatorsImg = getImageUrl(aboutPage.educatorsImage, 800);
+const leadershipImg = getImageUrl(aboutPage.leadershipImage, 400);
 
 const approachPoints = [
   { icon: "users", tone: "purple", text: aboutPage.approachChildLed },
@@ -117,12 +122,8 @@ const learningFoundations = [
               </div>
 
               <div class="lwk-about__media" aria-hidden="true">
-                {aboutPage.commitmentImage?.asset?._ref && !aboutPage.commitmentImage.asset._ref.includes("dummy") ? (
-                  <img
-                    src={urlFor(aboutPage.commitmentImage).width(800).url()}
-                    alt={aboutPage.commitmentImage.altText ?? ""}
-                    class="lwk-about__image"
-                  />
+                {commitmentImg ? (
+                  <img src={commitmentImg} alt={aboutPage.commitmentImage.altText ?? ""} class="lwk-about__image" />
                 ) : (
                   <span class="lwk-about__media-placeholder">
                     <Icon name="heartSmile" size={44} />
@@ -157,12 +158,8 @@ const learningFoundations = [
               </div>
 
               <div class="lwk-about__media" aria-hidden="true">
-                {aboutPage.environmentImage?.asset?._ref && !aboutPage.environmentImage.asset._ref.includes("dummy") ? (
-                  <img
-                    src={urlFor(aboutPage.environmentImage).width(800).url()}
-                    alt={aboutPage.environmentImage.altText ?? ""}
-                    class="lwk-about__image"
-                  />
+                {environmentImg ? (
+                  <img src={environmentImg} alt={aboutPage.environmentImage.altText ?? ""} class="lwk-about__image" />
                 ) : (
                   <span class="lwk-about__media-placeholder">
                     <Icon name="image" size={44} />
@@ -240,12 +237,8 @@ const learningFoundations = [
               </div>
 
               <div class="lwk-about__media" aria-hidden="true">
-                {aboutPage.educatorsImage?.asset?._ref && !aboutPage.educatorsImage.asset._ref.includes("dummy") ? (
-                  <img
-                    src={urlFor(aboutPage.educatorsImage).width(800).url()}
-                    alt={aboutPage.educatorsImage.altText ?? ""}
-                    class="lwk-about__image"
-                  />
+                {educatorsImg ? (
+                  <img src={educatorsImg} alt={aboutPage.educatorsImage.altText ?? ""} class="lwk-about__image" />
                 ) : (
                   <span class="lwk-about__media-placeholder">
                     <Icon name="users" size={44} />
@@ -261,12 +254,8 @@ const learningFoundations = [
           <Container size="wide">
             <div class="lwk-about__leadership-card">
               <div class="lwk-about__portrait" aria-hidden="true">
-                {aboutPage.leadershipImage?.asset?._ref && !aboutPage.leadershipImage.asset._ref.includes("dummy") ? (
-                  <img
-                    src={urlFor(aboutPage.leadershipImage).width(400).url()}
-                    alt={aboutPage.leadershipImage.altText ?? ""}
-                    class="lwk-about__portrait-image"
-                  />
+                {leadershipImg ? (
+                  <img src={leadershipImg} alt={aboutPage.leadershipImage.altText ?? ""} class="lwk-about__portrait-image" />
                 ) : (
                   <span class="lwk-about__media-placeholder">
                     <Icon name="person" size={48} />
@@ -311,16 +300,14 @@ const learningFoundations = [
             <div class="lwk-about__gallery-grid">
               {
                 galleryPhotos.length > 0 ? (
-                  galleryPhotos.map((photo) => (
+                  galleryPhotos.map((photo) => {
+                    const src = getImageUrl(photo.image, 600);
+                    return src ? (
                     <figure class="lwk-about__gallery-card">
-                      <img
-                        src={urlFor(photo.image).width(600).height(500).url()}
-                        alt={photo.image.altText ?? ""}
-                        loading="lazy"
-                        decoding="async"
-                      />
+                      <img src={src} alt={photo.image.altText ?? ""} loading="lazy" decoding="async" />
                     </figure>
-                  ))
+                    ) : null;
+                  })
                 ) : (
                   galleryPhotos.length === 0 && (
                     <p>Gallery photos coming soon.</p>

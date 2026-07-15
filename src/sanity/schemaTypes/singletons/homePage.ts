@@ -73,6 +73,14 @@ export const homePage = defineType({
       validation: (rule) => rule.required().max(30),
     }),
     defineField({
+      name: "heroImage",
+      title: "Hero Image",
+      description: "The large image displayed in the hero section.",
+      type: "contentImage",
+      group: "hero",
+      validation: (rule) => rule.required().assetRequired().error("A hero image is required."),
+    }),
+    defineField({
       name: "multilingualFeature",
       title: "Multilingual Feature",
       description: "The first feature slot below the hero.",

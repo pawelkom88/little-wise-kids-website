@@ -6,7 +6,7 @@ import SubpageHero from "../../components/layout/SubpageHero.astro";
 import PortableContent from "../../components/content/PortableContent.astro";
 import { getBlogPosts } from "../../utils/sanity";
 import { mapBlogPost } from "../../lib/blog";
-import { urlFor } from "../../lib/images";
+import { getImageUrl } from "../../lib/images";
 import "./blog-article.css";
 
 export async function getStaticPaths() {
@@ -17,16 +17,16 @@ export async function getStaticPaths() {
   }));
 }
 
+import type { BlogPost } from "../../lib/types";
+
 interface Props {
-  post: any;
+  post: BlogPost;
 }
 
 const { post } = Astro.props;
 
 const article = mapBlogPost(post);
-const imageUrl = post.featuredImage
-  ? urlFor(post.featuredImage).width(1200).url()
-  : null;
+const imageUrl = getImageUrl(post.featuredImage, 1200);
 ---
 
 <BaseLayout

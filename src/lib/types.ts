@@ -164,6 +164,7 @@ export interface HomePage {
   helpPanelTitle: string;
   helpPanelCopy: string;
   helpPanelCtaLabel: string;
+  heroImage: ContentImage;
   galleryIntroTitle: string;
   galleryIntro: string;
 }
@@ -392,6 +393,8 @@ export interface GalleryPhoto {
   image: StrictImage;
   category?: string;
   showOnHomepage?: boolean;
+  homepageDisplayOrder?: number;
+  publicCaption?: string;
   displayOrder?: number;
   showOnAboutPage?: boolean;
   aboutPageDisplayOrder?: number;
@@ -401,6 +404,7 @@ export interface PolicyDocument {
   _id: string;
   title: string;
   shortDescription?: string;
+  fileUrl: string;
   file: { asset: { _ref: string; _type: "reference" } };
   displayOrder: number;
   lastReviewed: string;

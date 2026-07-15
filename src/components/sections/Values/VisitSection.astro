@@ -2,16 +2,17 @@
 import Icon from "../../icons/Icon.astro";
 import Button from "../../ui/Button.astro";
 import PortableContent from "../../content/PortableContent.astro";
-import { urlFor } from "../../../utils/sanity";
+import { getImageUrl } from "../../../lib/images";
 import "./VisitSection.css";
 
+import type { HomePage } from "../../../lib/types";
+
 interface Props {
-  homePage: any;
+  homePage: HomePage;
 }
 
 const { homePage } = Astro.props;
-const hasVisitImage = homePage.visitImage?.asset?._ref && !homePage.visitImage.asset._ref.includes("dummy");
-const imageUrl = hasVisitImage ? urlFor(homePage.visitImage).width(1200).height(800).url() : undefined;
+const imageUrl = getImageUrl(homePage.visitImage, 1200);
 ---
 
 <section class="lwk-visit" aria-labelledby="visit-title">
@@ -52,7 +53,7 @@ const imageUrl = hasVisitImage ? urlFor(homePage.visitImage).width(1200).height(
           imageUrl ? (
             <img
               src={imageUrl}
-              alt={homePage.visitImage.alt || ""}
+              alt={homePage.visitImage.isDecorative ? "" : homePage.visitImage.altText ?? ""}
               width="1200"
               height="800"
               loading="lazy"

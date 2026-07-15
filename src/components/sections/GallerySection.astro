@@ -1,38 +1,43 @@
 ---
 import Icon from "../icons/Icon.astro";
 import Section from "../layout/Section.astro";
-import { getHomeGalleryPhotos } from "../../utils/sanity";
-import { urlFor } from "../../lib/images";
+import { getImageUrl } from "../../lib/images";
 import "./GallerySection.css";
-import type { HomePage } from "../../lib/types";
+import type { HomePage, GalleryPhoto } from "../../lib/types";
 
 interface Props {
   homePage: HomePage;
+  photos: GalleryPhoto[];
 }
 
-const { homePage } = Astro.props;
-const galleryPhotos = await getHomeGalleryPhotos();
+const { homePage, photos } = Astro.props;
 
 const toneOptions = ["green", "purple", "blue", "yellow"] as const;
 const iconOptions = ["heart", "palette", "star", "book", "users"] as const;
 
+const pageSize = 3;
 const galleryPages = [];
-for (let i = 0; i < galleryPhotos.length; i += 3) {
-  const pagePhotos = galleryPhotos.slice(i, i + 3);
+for (let i = 0; i < photos.length; i += pageSize) {
+  const pagePhotos = photos.slice(i, i + pageSize);
   galleryPages.push({
-    photos: pagePhotos.map((photo, idx) => ({
-      src: urlFor(photo.image).width(1200).height(900).url() ?? "",
-      alt: photo.image.altText ?? "",
-      label: photo.internalTitle ?? `Photo ${i + idx + 1}`,
-      tone: toneOptions[(i + idx) % toneOptions.length],
-      icon: iconOptions[(i + idx) % iconOptions.length],
-    })),
+    photos: pagePhotos.map((photo, idx) => {
+      const globalIndex = i + idx;
+      return {
+        src: getImageUrl(photo.image, 1200) ?? "",
+        alt: photo.image.altText ?? "",
+        label: photo.publicCaption ?? "",
+        tone: toneOptions[globalIndex % toneOptions.length],
+        icon: iconOptions[globalIndex % iconOptions.length],
+      };
+    }),
   });
 }
 
 const flatPhotos = galleryPages.flatMap((p) => p.photos);
+const hasPhotos = flatPhotos.length > 0;
 ---
 
+{hasPhotos ? (
 <Section
   id="parents"
   class="lwk-gallery-section"
@@ -91,7 +96,7 @@ const flatPhotos = galleryPages.flatMap((p) => p.photos);
               aria-label={`Gallery slide ${pageIndex + 1} of ${galleryPages.length}`}
             >
               {page.photos.map((photo, photoIndex) => {
-                const globalIndex = pageIndex * page.photos.length + photoIndex;
+                const globalIndex = pageIndex * pageSize + photoIndex;
 
                 return (
                   <figure
@@ -113,6 +118,7 @@ const flatPhotos = galleryPages.flatMap((p) => p.photos);
                       decoding="async"
                     />
 
+                    {photo.label && (
                     <figcaption class="lwk-gallery__label">
                       <span
                         class={`lwk-gallery__label-icon lwk-gallery__label-icon--${photo.tone}`}
@@ -123,6 +129,7 @@ const flatPhotos = galleryPages.flatMap((p) => p.photos);
 
                       <span>{photo.label}</span>
                     </figcaption>
+                    )}
                   </figure>
                 );
               })}
@@ -195,5 +202,6 @@ const flatPhotos = galleryPages.flatMap((p) => p.photos);
     </div>
   </div>
 </Section>
+) : null}
 
 <script src="./GallerySection.ts"></script>

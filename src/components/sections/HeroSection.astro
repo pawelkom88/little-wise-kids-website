@@ -3,6 +3,7 @@ import Icon from "../icons/Icon.astro";
 import Section from "../layout/Section.astro";
 import Button from "../ui/Button.astro";
 import PortableContent from "../content/PortableContent.astro";
+import { getImageUrl } from "../../lib/images";
 import "./HeroSection.css";
 import type { HomePage, BusinessDetails } from "../../lib/types";
 
@@ -13,7 +14,11 @@ interface Props {
 
 const { homePage } = Astro.props;
 
-// Convert the 3 feature objects to array for the strip
+const heroSrc = homePage.heroImage ? getImageUrl(homePage.heroImage, 800) : null;
+const heroImg = heroSrc
+  ? { src: heroSrc, alt: homePage.heroImage?.isDecorative ? "" : homePage.heroImage?.altText ?? "" }
+  : { src: "/assets/images/hero-image.png", alt: "" };
+
 const featureStrip = [
   { ...homePage.multilingualFeature, icon: 'globe', tone: 'blue' },
   { ...homePage.childCentredFeature, icon: 'heart', tone: 'purple' },
@@ -49,8 +54,8 @@ const featureStrip = [
     <div class="hero__media" aria-hidden="true">
       <img
         class="hero__photo"
-        src="/assets/images/hero-image.png"
-        alt=""
+        src={heroImg.src}
+        alt={heroImg.alt}
         width="1426"
         height="1103"
         fetchpriority="high"

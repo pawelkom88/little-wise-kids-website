@@ -4,7 +4,6 @@ import Container from "../components/layout/Container.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
 import { getParentsPage, getPolicyDocuments } from "../utils/sanity";
-import { getFileUrl } from "../lib/formatters";
 import "./parents-information.css";
 
 const parentsPage = await getParentsPage();
@@ -482,19 +481,18 @@ const policyDocuments = await getPolicyDocuments();
               </div>
             </div>
 
-            <nav
+             <nav
               class="parents-policy-links"
               aria-label="Download nursery policies"
             >
               {
                 policyDocuments.map((doc) => (
-                  <a href={getFileUrl(doc.file.asset._ref)} target="_blank" rel="noreferrer">
-                    <span class="parents-policy-links__title">
-                      {doc.title}
-                    </span>
-
-                    <span class="parents-policy-links__action">
-                      Download PDF
+                  <a href={doc.fileUrl} target="_blank" rel="noreferrer" class="parents-policy-link">
+                    <span class="parents-policy-links__title">{doc.title}</span>
+                    {doc.shortDescription && <span class="parents-policy-links__desc">{doc.shortDescription}</span>}
+                    <span class="parents-policy-links__meta">
+                      <span class="parents-policy-links__action">Download PDF</span>
+                      {doc.lastReviewed && <span class="parents-policy-links__reviewed">Reviewed: {doc.lastReviewed}</span>}
                     </span>
                   </a>
                 ))

@@ -5,7 +5,7 @@ import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
 import { getGalleryPage, getGalleryPhotos } from "../utils/sanity";
-import { urlFor } from "../lib/images";
+import { getImageUrl } from "../lib/images";
 import "./our-gallery.css";
 
 const galleryPage = await getGalleryPage();
@@ -92,33 +92,33 @@ const categoryEntries = Object.entries(categories);
 
           <div class="gallery-grid">
             {
-              categoryEntries.map(([id, { photos, meta }]) =>
-                photos.map((photo) => (
-                  <figure
-                    id={id}
-                    class={`gallery-card gallery-card--${meta.tone}`}
-                  >
-                    <div class="gallery-card__media">
-                      <img
-                        src={urlFor(photo.image).width(900).height(680).url()}
-                        alt={photo.image.altText ?? ""}
-                        width="900"
-                        height="680"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
+              categoryEntries.map(([id, { photos, meta }]) => (
+                <section id={id} class="gallery-category-section" aria-labelledby={`${id}-heading`}>
+                  <h3 id={`${id}-heading`} class="sr-only">{meta.title}</h3>
+                  {photos.map((photo) => (
+                    <figure class={`gallery-card gallery-card--${meta.tone}`}>
+                      <div class="gallery-card__media">
+                        <img
+                          src={getImageUrl(photo.image, 900)}
+                          alt={photo.image.altText ?? ""}
+                          width="900"
+                          height="680"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
 
-                    <figcaption>
-                      <span class="gallery-card__caption-icon" aria-hidden="true">
-                        <Icon name={meta.icon as any} size={19} />
-                      </span>
+                      <figcaption>
+                        <span class="gallery-card__caption-icon" aria-hidden="true">
+                          <Icon name={meta.icon as any} size={19} />
+                        </span>
 
-                      <span>{meta.title}</span>
-                    </figcaption>
-                  </figure>
-                ))
-              )
+                        <span>{meta.title}</span>
+                      </figcaption>
+                    </figure>
+                  ))}
+                </section>
+              ))
             }
           </div>
         </section>

@@ -4,9 +4,11 @@ import InlineBusinessDetail from "./portable/InlineBusinessDetail.astro";
 import ContentImageBlock from "./portable/ContentImageBlock.astro";
 import StrictImageBlock from "./portable/StrictImageBlock.astro";
 import ExternalLink from "./portable/ExternalLink.astro";
+import InternalLink from "./portable/InternalLink.astro";
+import type { PortableTextBlock } from "@portabletext/types";
 
 interface Props {
-  value: any;
+  value: PortableTextBlock | PortableTextBlock[];
   class?: string;
 }
 
@@ -20,6 +22,7 @@ const components = {
   },
   mark: {
     link: ExternalLink,
+    internalLink: InternalLink,
   },
 } as any;
 ---

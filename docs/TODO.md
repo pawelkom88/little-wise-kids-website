@@ -6,9 +6,7 @@
 6. animations/ transitions
 7. icons
 8. photos
-9. SEO
-10. heading hierarchy // doing
-11. heading font size // doing
+9. SEO - URL structure !!!!
 12. Astro optimisations - https://chatgpt.com/c/6a4f9744-9fd8-83eb-a75c-ae435d6e5441
 13. how css is loaded. probalby bloated
 14. one var for address, phone number and email and reused

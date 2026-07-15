@@ -1,0 +1,32 @@
+---
+interface Props {
+  node: {
+    reference?: {
+      _type: string;
+      slug?: { current: string };
+    };
+  };
+  children?: any;
+}
+
+const { node } = Astro.props;
+
+function getHref(ref: { _type: string; slug?: { current: string } }): string {
+  switch (ref._type) {
+    case "homePage": return "/";
+    case "aboutPage": return "/about-us";
+    case "multilingualPage": return "/multilingual-learning";
+    case "hoursNutritionPage": return "/hours-nutrition";
+    case "parentsPage": return "/parents-information";
+    case "galleryPage": return "/our-gallery";
+    case "contactPage": return "/contact";
+    case "blogPage": return "/blog";
+    case "blogPost": return `/blog/${ref.slug?.current ?? ""}`;
+    default: return "#";
+  }
+}
+
+const href = node.reference ? getHref(node.reference) : "#";
+---
+
+<a href={href} class="internal-link"><slot /></a>
