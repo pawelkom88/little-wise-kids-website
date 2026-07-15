@@ -1,8 +1,10 @@
 ---
+import { Image } from "astro:assets";
 import { navItems } from "../../config/navigation";
 import Icon from "../icons/Icon.astro";
 import Button from "../ui/Button.astro";
 import Container from "./Container.astro";
+import logoImg from "../../assets/images/logo.png";
 import "./SiteHeader.css";
 import type { BusinessDetails } from "../../lib/types";
 
@@ -16,12 +18,13 @@ const { businessDetails } = Astro.props;
 <header class="site-header" data-site-header>
   <Container size="wide" class="site-header__inner">
     <a class="brand" href="/" aria-label={`${businessDetails.organisationName} home`}>
-      <img
+      <Image
         class="brand__logo"
-        src="/assets/images/logo.png"
+        src={logoImg}
         alt=""
-        width="1774"
-        height="887"
+        width={160}
+        height={80}
+        layout="fixed"
       />
       <span class="sr-only">{businessDetails.organisationName}</span>
     </a>
@@ -47,10 +50,13 @@ const { businessDetails } = Astro.props;
       </summary>
       <div class="mobile-menu__panel">
         <div class="mobile-menu__top">
-          <img
+          <Image
             class="mobile-menu__logo"
-            src="/assets/images/logo.png"
+            src={logoImg}
             alt={businessDetails.organisationName}
+            width={160}
+            height={80}
+            layout="fixed"
           />
           <button
             class="mobile-menu__close"

@@ -1,18 +1,22 @@
 ---
-import { getImageUrl } from "../../../lib/images";
+import SanityImage from "../../media/SanityImage.astro";
 import type { StrictImage } from "../../../lib/types";
 
 interface Props {
   node: StrictImage;
 }
 const { node } = Astro.props;
-
-const imageUrl = getImageUrl(node);
 ---
 
-{imageUrl ? (
+{node?.asset?._ref ? (
   <figure class="content-image">
-    <img src={imageUrl} alt={node.altText ?? ""} loading="lazy" decoding="async" />
+    <SanityImage
+      image={node}
+      alt={node.altText}
+      widths={[640, 800, 1200]}
+      sizes="(min-width: 72rem) 800px, 100vw"
+      layout="constrained"
+    />
     {node.caption && <figcaption>{node.caption}</figcaption>}
   </figure>
 ) : null}

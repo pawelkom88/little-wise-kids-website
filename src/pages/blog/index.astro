@@ -4,6 +4,7 @@ import Container from "../../components/layout/Container.astro";
 import Icon from "../../components/icons/Icon.astro";
 import SubpageHero from "../../components/layout/SubpageHero.astro";
 import PortableContent from "../../components/content/PortableContent.astro";
+import SanityImage from "../../components/media/SanityImage.astro";
 import { getBlogPage, getBlogPosts } from "../../utils/sanity";
 import { mapBlogPost, blogCategories } from "../../lib/blog";
 import "./blog.css";
@@ -89,13 +90,12 @@ const standardArticles = primaryFeaturedArticle
                   <a class="blog-card__link" href={`/blog/${article.slug}`}>
                     <div class="blog-card__media">
                       {article.image ? (
-                        <img
-                          src={article.image.src}
+                        <SanityImage
+                          image={article.image.sanityImage}
                           alt={article.image.alt}
-                          width={article.image.width}
-                          height={article.image.height}
-                          loading="eager"
-                          decoding="async"
+                          widths={[640, 900, 1200]}
+                          sizes="(min-width: 72rem) 560px, 100vw"
+                          layout="constrained"
                         />
                       ) : (
                         <div class="blog-card__placeholder" aria-hidden="true" />
@@ -139,13 +139,13 @@ const standardArticles = primaryFeaturedArticle
                   <a class="blog-card__link" href={`/blog/${article.slug}`}>
                     <div class="blog-card__media">
                       {article.image ? (
-                        <img
-                          src={article.image.src}
+                        <SanityImage
+                          image={article.image.sanityImage}
                           alt={article.image.alt}
-                          width={article.image.width}
-                          height={article.image.height}
-                          loading={displayIndex < 3 ? "eager" : "lazy"}
-                          decoding="async"
+                          widths={[320, 480, 640, 900]}
+                          sizes="(min-width: 72rem) 360px, (min-width: 48rem) 50vw, 100vw"
+                          layout="constrained"
+                          priority={displayIndex < 1}
                         />
                       ) : (
                         <div class="blog-card__placeholder" aria-hidden="true" />

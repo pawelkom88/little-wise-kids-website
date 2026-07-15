@@ -1,0 +1,105 @@
+---
+import { sanityClient } from "sanity:client";
+import imageUrlBuilder from "@sanity/image-url";
+
+const builder = imageUrlBuilder(sanityClient);
+
+interface SanityImageAsset {
+  _ref: string;
+  _type: "reference";
+}
+
+interface SanityImageObject {
+  _type: string;
+  asset: SanityImageAsset;
+  crop?: { bottom: number; left: number; right: number; top: number };
+  hotspot?: { height: number; width: number; x: number; y: number };
+  isDecorative?: boolean;
+  altText?: string;
+  caption?: string;
+}
+
+interface Props {
+  image: SanityImageObject;
+  alt?: string;
+  widths?: number[];
+  sizes?: string;
+  layout?: "full-width" | "constrained" | "fixed";
+  priority?: boolean;
+  class?: string;
+  fit?: "max" | "min" | "clip" | "crop" | "fill" | "scale";
+  quality?: number;
+}
+
+const {
+  image,
+  alt,
+  widths = [320, 480, 640, 800, 1024, 1280, 1600],
+  sizes,
+  layout = "constrained",
+  priority = false,
+  class: className,
+  fit = "max",
+  quality = 80,
+} = Astro.props;
+
+const assetRef = image?.asset?._ref;
+const validRef = /^image-[A-Za-z0-9]+-\d+x\d+-[a-z]+$/.test(assetRef ?? "");
+
+let srcset = "";
+let fallbackUrl = "";
+let intrinsicWidth = 0;
+let intrinsicHeight = 0;
+
+if (validRef && image?.asset?._ref) {
+  const base = builder.image(image).auto("format").quality(quality).fit(fit);
+
+  const match = image.asset._ref.match(/^image-[A-Za-z0-9]+-(\d+)x(\d+)-[a-z]+$/);
+  if (match) {
+    intrinsicWidth = parseInt(match[1], 10);
+    intrinsicHeight = parseInt(match[2], 10);
+  }
+
+  const srcsetParts: string[] = [];
+  for (const w of widths) {
+    if (w <= intrinsicWidth) {
+      srcsetParts.push(`${base.width(w).url()} ${w}w`);
+    }
+  }
+  srcset = srcsetParts.join(", ");
+
+  const defaultWidth = Math.min(intrinsicWidth || 1200, 1200);
+  fallbackUrl = base.width(defaultWidth).url();
+}
+
+const aspectRatio = intrinsicWidth && intrinsicHeight
+  ? intrinsicWidth / intrinsicHeight
+  : undefined;
+
+const defaultSizes = layout === "full-width"
+  ? "(min-width: 72rem) 1120px, 100vw"
+  : layout === "fixed"
+    ? `${intrinsicWidth}px`
+    : "(min-width: 72rem) 800px, 100vw";
+const resolvedSizes = sizes ?? defaultSizes;
+
+const loading = priority ? "eager" : "lazy";
+const fetchpriority = priority ? "high" : undefined;
+const decoding = priority ? "sync" : "async";
+---
+
+{validRef ? (
+  <img
+    src={fallbackUrl}
+    srcset={srcset || undefined}
+    sizes={resolvedSizes}
+    alt={alt ?? ""}
+    loading={loading}
+    decoding={decoding}
+    fetchpriority={fetchpriority}
+    class={className}
+    style={aspectRatio && layout !== "fixed" ? { aspectRatio: `${intrinsicWidth}/${intrinsicHeight}`, width: "100%", height: "auto" } : undefined}
+    width={layout === "fixed" ? intrinsicWidth || undefined : undefined}
+    height={layout === "fixed" ? intrinsicHeight || undefined : undefined}
+  />
+) : null}

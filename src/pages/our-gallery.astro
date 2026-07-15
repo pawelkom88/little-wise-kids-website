@@ -3,9 +3,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
 import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
-import PortableContent from "../components/content/PortableContent.astro";
+import SanityImage from "../components/media/SanityImage.astro";
 import { getGalleryPage, getGalleryPhotos } from "../utils/sanity";
-import { getImageUrl } from "../lib/images";
 import "./our-gallery.css";
 
 const galleryPage = await getGalleryPage();
@@ -98,13 +97,12 @@ const categoryEntries = Object.entries(categories);
                   {photos.map((photo) => (
                     <figure class={`gallery-card gallery-card--${meta.tone}`}>
                       <div class="gallery-card__media">
-                        <img
-                          src={getImageUrl(photo.image, 900)}
+                        <SanityImage
+                          image={photo.image}
                           alt={photo.image.altText ?? ""}
-                          width="900"
-                          height="680"
-                          loading="lazy"
-                          decoding="async"
+                          widths={[320, 480, 640, 900]}
+                          sizes="(min-width: 72rem) 280px, (min-width: 48rem) 33vw, 100vw"
+                          layout="constrained"
                         />
                       </div>
 

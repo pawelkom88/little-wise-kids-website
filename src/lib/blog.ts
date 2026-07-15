@@ -1,4 +1,3 @@
-import { getImageUrl } from "./images";
 import type { BlogPost } from "./types";
 
 const categoryConfig: Record<string, { label: string; tone: string; icon: string }> = {
@@ -37,7 +36,6 @@ function calculateReadTime(body: any[]): string {
 
 export function mapBlogPost(post: BlogPost) {
   const cat = categoryConfig[post.category] ?? { label: post.category, tone: "purple", icon: "star" };
-  const imageUrl = post.featuredImage ? getImageUrl(post.featuredImage, 900) : null;
   return {
     slug: post.slug.current,
     title: post.title,
@@ -50,8 +48,8 @@ export function mapBlogPost(post: BlogPost) {
     displayDate: formatDisplayDate(post.publishedAt),
     readTime: calculateReadTime(post.body),
     featured: post.featured ?? false,
-    image: imageUrl
-      ? { src: imageUrl, alt: post.featuredImage?.altText ?? "", width: 900, height: 680 }
+    image: post.featuredImage?.asset?._ref
+      ? { sanityImage: post.featuredImage, alt: post.featuredImage?.altText ?? "" }
       : null,
     body: post.body,
   };

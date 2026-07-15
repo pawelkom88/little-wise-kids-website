@@ -4,9 +4,9 @@ import Container from "../../components/layout/Container.astro";
 import Icon from "../../components/icons/Icon.astro";
 import SubpageHero from "../../components/layout/SubpageHero.astro";
 import PortableContent from "../../components/content/PortableContent.astro";
+import SanityImage from "../../components/media/SanityImage.astro";
 import { getBlogPosts } from "../../utils/sanity";
 import { mapBlogPost } from "../../lib/blog";
-import { getImageUrl } from "../../lib/images";
 import "./blog-article.css";
 
 export async function getStaticPaths() {
@@ -26,7 +26,6 @@ interface Props {
 const { post } = Astro.props;
 
 const article = mapBlogPost(post);
-const imageUrl = getImageUrl(post.featuredImage, 1200);
 ---
 
 <BaseLayout
@@ -82,19 +81,18 @@ const imageUrl = getImageUrl(post.featuredImage, 1200);
             </div>
           </header>
 
-          {imageUrl && (
+          {post.featuredImage?.asset?._ref ? (
             <figure class="blog-article__image">
-              <img
-                src={imageUrl}
-                alt={post.featuredImage?.altText ?? ""}
-                width="1200"
-                height="800"
-                loading="eager"
-                decoding="async"
-                itemprop="image"
+              <SanityImage
+                image={post.featuredImage}
+                alt={post.featuredImage.altText ?? ""}
+                widths={[640, 800, 1200, 1600]}
+                sizes="(min-width: 72rem) 1120px, 100vw"
+                layout="full-width"
+                priority
               />
             </figure>
-          )}
+          ) : null}
 
           <div class="blog-article__prose" itemprop="articleBody">
             <PortableContent value={article.body} />

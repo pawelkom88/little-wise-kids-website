@@ -1,10 +1,11 @@
 ---
-import multilingualBubble from "../../../../assets/icons/bubble-multilingual.png";
-import heartBubble from "../../../../assets/icons/bubble-heart-with-smile.png";
-import artBubble from "../../../../assets/icons/bubble-art.png";
-import peopleBubble from "../../../../assets/icons/bubble-people.png";
-import outdoorBubble from "../../../../assets/icons/bubble-outdoor.png";
-import nutritionBubble from "../../../../assets/icons/bubble-nutrition.png";
+import { Image } from "astro:assets";
+import multilingualBubble from "../../../assets/images/bubble-multilingual.png";
+import heartBubble from "../../../assets/images/bubble-heart-with-smile.png";
+import artBubble from "../../../assets/images/bubble-art.png";
+import peopleBubble from "../../../assets/images/bubble-people.png";
+import outdoorBubble from "../../../assets/images/bubble-outdoor.png";
+import nutritionBubble from "../../../assets/images/bubble-nutrition.png";
 import "./ValuesDifference.css";
 import type { HomePage } from "../../../lib/types";
 
@@ -95,13 +96,12 @@ const cards = [
       cards.map((card) => (
         <article class={`lwk-value-card lwk-value-card--${card.tone}`}>
           <div class="lwk-value-card__image" aria-hidden="true">
-            <img
-              src={card.image.src}
+            <Image
+              src={card.image}
               alt=""
-              width="176"
-              height="176"
-              loading="lazy"
-              decoding="async"
+              width={176}
+              height={176}
+              layout="fixed"
             />
           </div>
 

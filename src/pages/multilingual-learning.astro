@@ -4,13 +4,11 @@ import Container from "../components/layout/Container.astro";
 import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
+import SanityImage from "../components/media/SanityImage.astro";
 import { getMultilingualPage } from "../utils/sanity";
-import { getImageUrl } from "../lib/images";
 import "./multilingual-learning.css";
 
 const multilingualPage = await getMultilingualPage();
-
-const langImage = getImageUrl(multilingualPage.languageConnectionImage, 800);
 
 const philosophyPoints = [
   {
@@ -206,8 +204,14 @@ const screenFreeBenefits = [
                 lwk-multilingual__media--languages"
               aria-hidden="true"
             >
-              {langImage ? (
-                <img src={langImage} alt="" class="lwk-multilingual__image" />
+              {multilingualPage.languageConnectionImage?.asset?._ref ? (
+                <SanityImage
+                  image={multilingualPage.languageConnectionImage}
+                  alt=""
+                  widths={[320, 480, 640, 800]}
+                  sizes="(min-width: 72rem) 480px, 100vw"
+                  layout="constrained"
+                />
               ) : (
                 <span class="lwk-multilingual__media-placeholder">
                   <Icon name="book" size={48} />

@@ -1,8 +1,10 @@
 ---
+import { Image } from "astro:assets";
 import { navItems } from "../../config/navigation";
 import { legalLinks } from "../../config/legal-links";
 import Icon from "../icons/Icon.astro";
 import Container from "./Container.astro";
+import logoImg from "../../assets/images/logo.png";
 import "./SiteFooter.css";
 import type { BusinessDetails } from "../../lib/types";
 import { formatPhoneDisplay, formatPhoneHref } from "../../lib/formatters";
@@ -34,14 +36,13 @@ const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact 
         href="/"
         aria-label={`${businessDetails.organisationName} home`}
       >
-        <img
+        <Image
           class="lwk-footer__logo"
-          src="/assets/images/logo.png"
+          src={logoImg}
           alt={businessDetails.organisationName}
-          width="1774"
-          height="887"
-          loading="lazy"
-          decoding="async"
+          width={160}
+          height={80}
+          layout="fixed"
         />
       </a>
 
