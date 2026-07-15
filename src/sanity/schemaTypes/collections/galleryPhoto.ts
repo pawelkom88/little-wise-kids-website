@@ -16,8 +16,9 @@ export const galleryPhoto = defineType({
     defineField({ 
       name: "image", 
       title: "Image", 
-      description: "The photo to display in the gallery.",
-      type: "contentImage" 
+      description: "The photo to display in the gallery. Alt text is strictly required.",
+      type: "strictImage",
+      validation: (rule) => rule.required()
     }),
     defineField({
       name: "category",
@@ -73,5 +74,22 @@ export const galleryPhoto = defineType({
       description: "Lower numbers appear first on the About page gallery.",
       type: "number",
     }),
+  ],
+  preview: {
+    select: {
+      title: "internalTitle",
+      subtitle: "category",
+      media: "image",
+    },
+  },
+  orderings: [
+    {
+      title: "Category, then Title",
+      name: "categoryAsc",
+      by: [
+        { field: "category", direction: "asc" },
+        { field: "internalTitle", direction: "asc" },
+      ],
+    },
   ],
 });

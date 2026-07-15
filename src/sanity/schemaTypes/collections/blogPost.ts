@@ -25,7 +25,7 @@ export const blogPost = defineType({
     defineField({
       name: "publishedAt",
       title: "Published at",
-      description: "The publish date and time of the post.",
+      description: "The publish date and time of the post. Sorted by Published Date.",
       type: "datetime",
       initialValue: () => new Date().toISOString(),
       validation: (rule) => rule.required(),

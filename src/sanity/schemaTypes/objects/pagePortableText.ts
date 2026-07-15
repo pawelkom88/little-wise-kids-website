@@ -1,4 +1,4 @@
-import { defineType } from "sanity";
+import { defineType, defineArrayMember } from "sanity";
 
 export const pagePortableText = defineType({
   name: "pagePortableText",
@@ -30,10 +30,19 @@ export const pagePortableText = defineType({
                 title: "URL",
                 validation: (rule) => rule.required(),
               },
+              {
+                name: "blank",
+                title: "Open in new tab",
+                type: "boolean",
+                initialValue: true,
+              },
             ],
           },
         ],
       },
     },
+    defineArrayMember({
+      type: "inlineBusinessDetail",
+    }),
   ],
 });

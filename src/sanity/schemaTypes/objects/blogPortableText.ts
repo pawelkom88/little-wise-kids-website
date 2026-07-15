@@ -34,6 +34,12 @@ export const blogPortableText = defineType({
                 title: "URL",
                 validation: (rule) => rule.required(),
               },
+              {
+                name: "blank",
+                title: "Open in new tab",
+                type: "boolean",
+                initialValue: true,
+              },
             ],
           },
           {
@@ -53,7 +59,6 @@ export const blogPortableText = defineType({
                   { type: "parentsPage" },
                   { type: "galleryPage" },
                   { type: "contactPage" },
-                  { type: "thankYouPage" },
                   { type: "blogPage" },
                   { type: "blogPost" }
                 ],
@@ -65,5 +70,6 @@ export const blogPortableText = defineType({
       },
     },
     { type: "contentImage" },
+    { type: "inlineBusinessDetail" },
   ],
 });

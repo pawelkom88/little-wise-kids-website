@@ -46,7 +46,7 @@ export type GalleryPhoto = {
   _updatedAt: string;
   _rev: string;
   internalTitle?: string;
-  image?: ContentImage;
+  image?: StrictImage;
   category?:
     | "outdoor-learning-experience"
     | "indoor-learning-experience"
@@ -69,16 +69,57 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
-export type ContentImage = {
-  _type: "contentImage";
+export type StrictImage = {
+  _type: "strictImage";
   asset?: SanityImageAssetReference;
   media?: unknown;
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
-  isDecorative?: boolean;
   altText?: string;
   caption?: string;
 };
+
+export type ThankYouPage = {
+  _id: string;
+  _type: "thankYouPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  heroEyebrow?: string;
+  heroTitleLineOne?: string;
+  heroTitleLineTwo?: string;
+  heroParagraphs?: PagePortableText;
+  primaryCtaLabel?: string;
+  secondaryCtaLabel?: string;
+  nextStepsEyebrow?: string;
+  nextStepsHeading?: string;
+  nextStepsBody?: PagePortableText;
+};
+
+export type PagePortableText = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        blank?: boolean;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }
+  | ({
+      _key: string;
+    } & InlineBusinessDetail)
+>;
 
 export type BusinessDetails = {
   _id: string;
@@ -124,6 +165,9 @@ export type BusinessDetails = {
   };
   availabilityMessage?: string;
   footerBusinessCopy?: string;
+  footerCtaLabel?: string;
+  socialHeading?: string;
+  socialIntroduction?: string;
   footerTagline?: {
     prefix?: string;
     purplePhrase?: string;
@@ -134,6 +178,41 @@ export type BusinessDetails = {
     suffix?: string;
   };
 };
+
+export type InlineBusinessDetail = {
+  _type: "inlineBusinessDetail";
+  field?:
+    | "organisationName"
+    | "ageRange"
+    | "languages"
+    | "openingDays"
+    | "openingHours"
+    | "weeksOpen"
+    | "publicEmail"
+    | "primaryPhone"
+    | "fullAddress"
+    | "shortLocation";
+};
+
+export type FaqPortableText = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: null;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }
+  | ({
+      _key: string;
+    } & InlineBusinessDetail)
+>;
 
 export type HomePageReference = {
   _ref: string;
@@ -184,13 +263,6 @@ export type ContactPageReference = {
   [internalGroqTypeReferenceTo]?: "contactPage";
 };
 
-export type ThankYouPageReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "thankYouPage";
-};
-
 export type BlogPageReference = {
   _ref: string;
   _type: "reference";
@@ -218,6 +290,7 @@ export type BlogPortableText = Array<
       markDefs?: Array<
         | {
             href?: string;
+            blank?: boolean;
             _type: "link";
             _key: string;
           }
@@ -230,7 +303,6 @@ export type BlogPortableText = Array<
               | ParentsPageReference
               | GalleryPageReference
               | ContactPageReference
-              | ThankYouPageReference
               | BlogPageReference
               | BlogPostReference;
             _type: "internalLink";
@@ -244,6 +316,9 @@ export type BlogPortableText = Array<
   | ({
       _key: string;
     } & ContentImage)
+  | ({
+      _key: string;
+    } & InlineBusinessDetail)
 >;
 
 export type BlogPost = {
@@ -267,16 +342,6 @@ export type BlogPost = {
   body?: BlogPortableText;
 };
 
-export type StrictImage = {
-  _type: "strictImage";
-  asset?: SanityImageAssetReference;
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  altText?: string;
-  caption?: string;
-};
-
 export type Slug = {
   _type: "slug";
   current?: string;
@@ -298,42 +363,6 @@ export type BlogPage = {
   latestArticlesIntroduction?: PagePortableText;
 };
 
-export type PagePortableText = Array<{
-  children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  }>;
-  style?: "normal";
-  listItem?: "bullet" | "number";
-  markDefs?: Array<{
-    href?: string;
-    _type: "link";
-    _key: string;
-  }>;
-  level?: number;
-  _type: "block";
-  _key: string;
-}>;
-
-export type ThankYouPage = {
-  _id: string;
-  _type: "thankYouPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  heroEyebrow?: string;
-  heroTitleLineOne?: string;
-  heroTitleLineTwo?: string;
-  heroParagraphs?: PagePortableText;
-  primaryCtaLabel?: string;
-  secondaryCtaLabel?: string;
-  nextStepsEyebrow?: string;
-  nextStepsHeading?: string;
-  nextStepsBody?: PagePortableText;
-};
-
 export type ContactPage = {
   _id: string;
   _type: "contactPage";
@@ -343,32 +372,48 @@ export type ContactPage = {
   heroEyebrow?: string;
   heroTitleLineOne?: string;
   heroTitleLineTwo?: string;
-  heroParagraphs?: PagePortableText;
-  enquiryPanelTitle?: string;
-  formIntro?: string;
-  enquiryPanelCtaLabel?: string;
+  heroParagraphs?: MinimalPortableText;
+  sectionLabel?: string;
+  sectionHeading?: string;
+  introduction?: MinimalPortableText;
   nextStepsLabel?: string;
   nextStepsHeading?: string;
-  nextStepsParagraphs?: PagePortableText;
-  stepOne?: {
+  nextStepsParagraphs?: MinimalPortableText;
+  receiveEnquiryStep?: {
     title?: string;
     description?: string;
   };
-  stepTwo?: {
+  getInTouchStep?: {
     title?: string;
     description?: string;
   };
-  stepThree?: {
-    title?: string;
-    description?: string;
-  };
-  stepFour?: {
+  helpWithNextStepsStep?: {
     title?: string;
     description?: string;
   };
   locationLabel?: string;
   locationHeading?: string;
 };
+
+export type MinimalPortableText = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: null;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }
+  | ({
+      _key: string;
+    } & InlineBusinessDetail)
+>;
 
 export type GalleryPage = {
   _id: string;
@@ -577,6 +622,17 @@ export type MultilingualPage = {
   closingNote?: string;
 };
 
+export type ContentImage = {
+  _type: "contentImage";
+  asset?: SanityImageAssetReference;
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  isDecorative?: boolean;
+  altText?: string;
+  caption?: string;
+};
+
 export type AboutPage = {
   _id: string;
   _type: "aboutPage";
@@ -586,45 +642,27 @@ export type AboutPage = {
   heroEyebrow?: string;
   heroTitleLineOne?: string;
   heroTitleLineTwo?: string;
-  heroParagraphs?: PagePortableText;
+  heroParagraphs?: MinimalPortableText;
   approachLabel?: string;
   approachHeading?: string;
-  approachParagraphs?: PagePortableText;
-  approachChildLed?: {
-    title?: string;
-    description?: string;
-  };
-  approachCalmRhythm?: {
-    title?: string;
-    description?: string;
-  };
-  approachLearning?: {
-    title?: string;
-    description?: string;
-  };
-  approachExploration?: {
-    title?: string;
-    description?: string;
-  };
-  approachConfidence?: {
-    title?: string;
-    description?: string;
-  };
-  approachRelationships?: {
-    title?: string;
-    description?: string;
-  };
+  approachParagraphs?: MinimalPortableText;
+  approachChildLed?: string;
+  approachCalmRhythm?: string;
+  approachLearning?: string;
+  approachExploration?: string;
+  approachConfidence?: string;
+  approachRelationships?: string;
   commitmentLabel?: string;
   commitmentHeading?: string;
-  commitmentParagraphs?: PagePortableText;
+  commitmentParagraphs?: MinimalPortableText;
   commitmentImage?: ContentImage;
   environmentLabel?: string;
   environmentHeading?: string;
-  environmentParagraphs?: PagePortableText;
+  environmentParagraphs?: MinimalPortableText;
   environmentImage?: ContentImage;
   programmesLabel?: string;
   programmesHeading?: string;
-  programmesParagraphs?: PagePortableText;
+  programmesParagraphs?: MinimalPortableText;
   foundationCommunication?: string;
   foundationEmpathy?: string;
   foundationIndependence?: string;
@@ -632,18 +670,12 @@ export type AboutPage = {
   foundationCriticalThinking?: string;
   educatorsLabel?: string;
   educatorsHeading?: string;
-  educatorsParagraphs?: PagePortableText;
+  educatorsParagraphs?: MinimalPortableText;
   educatorsImage?: ContentImage;
   leadershipLabel?: string;
   leadershipHeading?: string;
-  leadershipParagraphs?: PagePortableText;
+  leadershipParagraphs?: MinimalPortableText;
   leadershipImage?: ContentImage;
-  team?: Array<{
-    name?: string;
-    role?: string;
-    bio?: string;
-    _key: string;
-  }>;
   gallerySectionLabel?: string;
   gallerySectionHeading?: string;
 };
@@ -655,10 +687,14 @@ export type HomePage = {
   _updatedAt: string;
   _rev: string;
   heroEyebrow?: string;
-  heroTitleLineOne?: string;
-  heroTitleLineTwo?: string;
+  heroHeading?: {
+    introduction?: string;
+    purplePhrase?: string;
+    greenPhrase?: string;
+    bluePhrase?: string;
+  };
   heroSubtitle?: string;
-  heroParagraphs?: PagePortableText;
+  heroParagraphs?: MinimalPortableText;
   primaryCtaLabel?: string;
   secondaryCtaLabel?: string;
   multilingualFeature?: {
@@ -676,10 +712,11 @@ export type HomePage = {
   valuesIntroHeading?: {
     prefix?: string;
     purplePhrase?: string;
+    greenPhrase?: string;
     connector?: string;
     bluePhrase?: string;
   };
-  valuesIntroParagraphs?: PagePortableText;
+  valuesIntroParagraphs?: MinimalPortableText;
   valuesDifferenceTitle?: string;
   screenFreeCard?: {
     title?: string;
@@ -705,19 +742,24 @@ export type HomePage = {
     title?: string;
     description?: string;
   };
-  visitTitleLineOne?: string;
-  visitTitleLineTwo?: string;
-  visitParagraphs?: PagePortableText;
+  visitHeading?: {
+    lineOnePrefix?: string;
+    accentedPhrase?: string;
+    lineTwo?: string;
+  };
+  visitParagraphs?: MinimalPortableText;
   visitCtaLabel?: string;
   visitImage?: ContentImage;
   testimonialQuote?: string;
   testimonialAttribution?: string;
-  faqTitleLineOne?: string;
-  faqTitleLineTwo?: string;
+  faqHeading?: {
+    prefix?: string;
+    accentedPhrase?: string;
+  };
   faqIntro?: string;
   faqs?: Array<{
     question?: string;
-    answer?: string;
+    answer?: FaqPortableText;
     _key: string;
   }>;
   helpPanelTitle?: string;
@@ -726,21 +768,6 @@ export type HomePage = {
   galleryIntroTitle?: string;
   galleryIntro?: string;
 };
-
-export type MinimalPortableText = Array<{
-  children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  }>;
-  style?: "normal";
-  listItem?: never;
-  markDefs?: null;
-  level?: number;
-  _type: "block";
-  _key: string;
-}>;
 
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
@@ -860,8 +887,12 @@ export type AllSanitySchemaTypes =
   | PolicyDocument
   | GalleryPhoto
   | SanityImageAssetReference
-  | ContentImage
+  | StrictImage
+  | ThankYouPage
+  | PagePortableText
   | BusinessDetails
+  | InlineBusinessDetail
+  | FaqPortableText
   | HomePageReference
   | AboutPageReference
   | MultilingualPageReference
@@ -869,24 +900,21 @@ export type AllSanitySchemaTypes =
   | ParentsPageReference
   | GalleryPageReference
   | ContactPageReference
-  | ThankYouPageReference
   | BlogPageReference
   | BlogPostReference
   | BlogPortableText
   | BlogPost
-  | StrictImage
   | Slug
   | BlogPage
-  | PagePortableText
-  | ThankYouPage
   | ContactPage
+  | MinimalPortableText
   | GalleryPage
   | ParentsPage
   | HoursNutritionPage
   | MultilingualPage
+  | ContentImage
   | AboutPage
   | HomePage
-  | MinimalPortableText
   | SanityImageCrop
   | SanityImageHotspot
   | SanityImagePaletteSwatch

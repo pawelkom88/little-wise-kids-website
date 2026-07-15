@@ -32,9 +32,17 @@ export const policyDocument = defineType({
       options: { accept: "application/pdf" },
       validation: (rule) => [
         rule.required().error("A policy file is required."),
-        rule.custom((fileValue) => {
-          if (!fileValue || !fileValue.asset) return true; // Let required() handle this
-          return true; // We can't synchronously validate asset MIME type here without fetching the asset document, but we will add seed/import validation. Actually Sanity file schema handles accept on upload.
+        rule.custom(async (fileValue: any, context) => {
+          if (!fileValue || !fileValue.asset || !fileValue.asset._ref) return true; 
+          const client = context.getClient({ apiVersion: "2024-01-01" });
+          const asset = await client.fetch(
+            `*[_id == $id][0]{ mimeType }`,
+            { id: fileValue.asset._ref }
+          );
+          if (asset && asset.mimeType !== "application/pdf") {
+            return "Uploaded file must be a PDF document.";
+          }
+          return true;
         })
       ],
     }),

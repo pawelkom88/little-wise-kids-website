@@ -7,18 +7,29 @@ export const businessDetails = defineType({
   validation: (rule) => [
     rule.custom((fields: any) => {
       if (!fields) return true;
+      const paths: any[] = [];
       if (fields.openingTime && fields.closingTime && fields.openingTime >= fields.closingTime) {
-        return "Closing time must be after opening time.";
+        paths.push({ path: ['closingTime'], message: "Closing time must be after opening time." });
       }
       if (fields.morningSessionEnd && fields.afternoonSessionStart && fields.morningSessionEnd > fields.afternoonSessionStart) {
-        return "Afternoon session cannot start before morning session ends.";
+        paths.push({ path: ['afternoonSessionStart'], message: "Afternoon session cannot start before morning session ends." });
       }
       if (fields.ageRange && typeof fields.ageRange.minimum === 'number' && typeof fields.ageRange.maximum === 'number') {
         if (fields.ageRange.minimum > fields.ageRange.maximum) {
-          return "Age range maximum must be greater than or equal to minimum.";
+          paths.push({ path: ['ageRange', 'maximum'], message: "Age range maximum must be greater than or equal to minimum." });
         }
       }
-      return true;
+      if (fields.openingTime && fields.closingTime && fields.morningSessionEnd) {
+        if (fields.morningSessionEnd < fields.openingTime || fields.morningSessionEnd > fields.closingTime) {
+          paths.push({ path: ['morningSessionEnd'], message: "Morning session end must be within opening hours." });
+        }
+      }
+      if (fields.openingTime && fields.closingTime && fields.afternoonSessionStart) {
+        if (fields.afternoonSessionStart < fields.openingTime || fields.afternoonSessionStart > fields.closingTime) {
+          paths.push({ path: ['afternoonSessionStart'], message: "Afternoon session start must be within opening hours." });
+        }
+      }
+      return paths.length > 0 ? paths : true;
     }),
   ],
   groups: [
@@ -318,20 +329,45 @@ export const businessDetails = defineType({
       ],
     }),
     defineField({
+      name: "footerCtaLabel",
+      title: "Footer CTA Label",
+      description: "e.g. 'Register Your Interest'",
+      type: "string",
+      group: "other",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "socialHeading",
+      title: "Social Heading",
+      description: "e.g. 'Follow our journey'",
+      type: "string",
+      group: "other",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "socialIntroduction",
+      title: "Social Introduction",
+      description: "e.g. 'Nursery moments, news and everyday inspiration.'",
+      type: "string",
+      group: "other",
+      validation: (rule) => rule.required().max(100),
+    }),
+    defineField({
       name: "footerTagline",
       title: "Footer Tagline",
       description: "Fixed text fragments for the footer tagline. Colors and order are code-owned.",
       type: "object",
       group: "other",
       fields: [
-        defineField({ name: "prefix", title: "Prefix", type: "string" }),
-        defineField({ name: "purplePhrase", title: "Purple Phrase", type: "string" }),
-        defineField({ name: "separatorOne", title: "Separator One", type: "string" }),
-        defineField({ name: "greenPhrase", title: "Green Phrase", type: "string" }),
-        defineField({ name: "connector", title: "Connector", type: "string" }),
-        defineField({ name: "bluePhrase", title: "Blue Phrase", type: "string" }),
-        defineField({ name: "suffix", title: "Suffix", type: "string" }),
-      ]
+        defineField({ name: "prefix", title: "Prefix", type: "string", validation: (rule) => [rule.required(), rule.max(30).warning("Keep short")] }),
+        defineField({ name: "purplePhrase", title: "Purple Phrase", type: "string", validation: (rule) => [rule.required(), rule.max(30).warning("Keep short")] }),
+        defineField({ name: "separatorOne", title: "Separator One", type: "string", validation: (rule) => [rule.required(), rule.max(30).warning("Keep short")] }),
+        defineField({ name: "greenPhrase", title: "Green Phrase", type: "string", validation: (rule) => [rule.required(), rule.max(30).warning("Keep short")] }),
+        defineField({ name: "connector", title: "Connector", type: "string", validation: (rule) => [rule.required(), rule.max(30).warning("Keep short")] }),
+        defineField({ name: "bluePhrase", title: "Blue Phrase", type: "string", validation: (rule) => [rule.required(), rule.max(30).warning("Keep short")] }),
+        defineField({ name: "suffix", title: "Suffix", type: "string", validation: (rule) => [rule.required(), rule.max(30).warning("Keep short")] }),
+      ],
+      validation: (rule) => rule.required(),
     }),
   ],
 });

@@ -1,23 +1,23 @@
 import { defineType, defineArrayMember } from "sanity";
 
-export const minimalPortableText = defineType({
-  name: "minimalPortableText",
-  title: "Minimal Content",
-  description: "Basic paragraph text.",
+export const faqPortableText = defineType({
+  name: "faqPortableText",
+  title: "FAQ Portable Text",
   type: "array",
   of: [
-    {
+    defineArrayMember({
+      title: "Block",
       type: "block",
       styles: [{ title: "Normal", value: "normal" }],
-      lists: [],
+      lists: [], // No lists
       marks: {
         decorators: [
           { title: "Strong", value: "strong" },
           { title: "Emphasis", value: "em" },
         ],
-        annotations: [],
+        annotations: [], // No arbitrary links
       },
-    },
+    }),
     defineArrayMember({
       type: "inlineBusinessDetail",
     }),
