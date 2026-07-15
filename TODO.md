@@ -16,6 +16,7 @@
 run https://specification.website/mcp/
 16. view transition https://docs.astro.build/en/guides/view-transitions/   , https://stackblitz.com/edit/astro-transitions?file=README.md
 
+test in firefox , safari, chrome, edge
 how AI can find little wise kids
 
 dead css and duplicated code - use prompt

@@ -1,0 +1,45 @@
+Route,Component,Source file,Current content,Current source,Reuse count,Proposed owner,Proposed singleton/collection,Proposed field,CMS-owned or code-owned,Migration status
+Global,SiteHeader,src/components/layout/SiteHeader.astro,Nav items (Home, About, etc.),Hardcoded object,1,Code,N/A,N/A,code-owned,Pending
+Global,SiteFooter,src/components/layout/SiteFooter.astro,Business Tagline,site.ts,1,CMS,businessDetails,footerTagline,cms-owned,Pending
+Global,SiteFooter,src/components/layout/SiteFooter.astro,Legal Links,site.ts,1,Code,N/A,N/A,code-owned,Pending
+/,index.astro,src/pages/index.astro,Hero Title,Hardcoded,1,CMS,homePage,hero.title,cms-owned,Pending
+/,HeroSection,src/components/sections/HeroSection.astro,Hero Paragraphs,Hardcoded,1,CMS,homePage,hero.paragraphs,cms-owned,Pending
+/,HeroSection,src/components/sections/HeroSection.astro,Hero CTA "Register Your Interest",Hardcoded,1,CMS,homePage,hero.primaryCtaLabel,cms-owned,Pending
+/,HeroSection,src/components/sections/HeroSection.astro,Hero Features (3 items),site.ts,1,CMS,homePage,hero.childCentredFeature (etc),cms-owned,Pending
+/,ValuesIntro,src/components/sections/Values/ValuesIntro.astro,Values Heading,Hardcoded,1,CMS,homePage,valuesIntro.heading,cms-owned,Pending
+/,ValuesIntro,src/components/sections/Values/ValuesIntro.astro,Values Paragraphs,Hardcoded,1,CMS,homePage,valuesIntro.paragraphs,cms-owned,Pending
+/,ValuesSection,src/pages/index.astro,What Makes Us Different,Hardcoded,1,CMS,homePage,valuesDifference.heading,cms-owned,Pending
+/,ValuesSection,src/pages/index.astro,Values Cards (6 items),Hardcoded,1,CMS,homePage,valuesDifference.screenFreeCard (etc),cms-owned,Pending
+/,VisitSection,src/pages/index.astro,Visit Heading,Hardcoded,1,CMS,homePage,visit.heading,cms-owned,Pending
+/,VisitSection,src/pages/index.astro,Visit Copy,Hardcoded,1,CMS,homePage,visit.paragraphs,cms-owned,Pending
+/,VisitSection,src/pages/index.astro,Testimonial Quote,Hardcoded,1,CMS,homePage,visit.testimonialQuote,cms-owned,Pending
+/,FaqSection,src/components/sections/FaqSection.astro,FAQ Heading,Hardcoded,1,CMS,homePage,faq.heading,cms-owned,Pending
+/,FaqSection,src/components/sections/FaqSection.astro,FAQ Intro,Hardcoded,1,CMS,homePage,faq.intro,cms-owned,Pending
+/,FaqSection,src/components/sections/FaqSection.astro,FAQ Items,site.ts,1,CMS,homePage,faq.faqs,cms-owned,Pending
+/,GallerySection,src/components/sections/GallerySection.astro,Gallery Heading,Hardcoded,1,CMS,homePage,galleryIntro.heading,cms-owned,Pending
+/,GallerySection,src/components/sections/GallerySection.astro,Gallery Photos,Hardcoded,1,CMS,galleryPhoto,N/A,cms-owned,Pending
+/about-us,about-us.astro,src/pages/about-us.astro,Hero Title,Hardcoded,1,CMS,aboutPage,hero.title,cms-owned,Pending
+/about-us,about-us.astro,src/pages/about-us.astro,Approach Points,Hardcoded array,1,CMS,aboutPage,approachPoints,cms-owned,Pending
+/about-us,about-us.astro,src/pages/about-us.astro,Commitment Text,Hardcoded,1,CMS,aboutPage,commitment.paragraphs,cms-owned,Pending
+/multilingual-learning,multilingual-learning.astro,src/pages/multilingual-learning.astro,Hero Title,Hardcoded,1,CMS,multilingualPage,hero.title,cms-owned,Pending
+/multilingual-learning,multilingual-learning.astro,src/pages/multilingual-learning.astro,Philosophy Points,Hardcoded array,1,CMS,multilingualPage,philosophyPoints,cms-owned,Pending
+/multilingual-learning,multilingual-learning.astro,src/pages/multilingual-learning.astro,EYFS Areas,Hardcoded array,1,CMS,multilingualPage,eyfsAreas,cms-owned,Pending
+/hours-nutrition,hours-nutrition.astro,src/pages/hours-nutrition.astro,Hero Title,Hardcoded,1,CMS,hoursNutritionPage,hero.title,cms-owned,Pending
+/hours-nutrition,hours-nutrition.astro,src/pages/hours-nutrition.astro,Session Details,site.ts,1,CMS,businessDetails,openingDays/openingTime,cms-owned,Pending
+/hours-nutrition,hours-nutrition.astro,src/pages/hours-nutrition.astro,Nutrition Checklist,Hardcoded array,1,CMS,hoursNutritionPage,nutritionChecklist,cms-owned,Pending
+/hours-nutrition,hours-nutrition.astro,src/pages/hours-nutrition.astro,Daily Rhythm,Hardcoded array,1,CMS,hoursNutritionPage,dailyRhythm slots,cms-owned,Pending
+/parents-information,parents-information.astro,src/pages/parents-information.astro,Hero Title,Hardcoded,1,CMS,parentsPage,hero.title,cms-owned,Pending
+/parents-information,parents-information.astro,src/pages/parents-information.astro,Fees Table,Hardcoded,1,CMS,parentsPage,weeklyFees,cms-owned,Pending
+/parents-information,parents-information.astro,src/pages/parents-information.astro,Subsidy FAQs,Hardcoded array,1,CMS,parentsPage,subsidyFaqs,cms-owned,Pending
+/parents-information,parents-information.astro,src/pages/parents-information.astro,Settling Strategies,Hardcoded array,1,CMS,parentsPage,settlingStrategies,cms-owned,Pending
+/parents-information,parents-information.astro,src/pages/parents-information.astro,Policies,Hardcoded array,1,CMS,policyDocument,N/A,cms-owned,Pending
+/our-gallery,our-gallery.astro,src/pages/our-gallery.astro,Hero Title,Hardcoded,1,CMS,galleryPage,hero.title,cms-owned,Pending
+/our-gallery,our-gallery.astro,src/pages/our-gallery.astro,Gallery Categories,Hardcoded array,1,Code,N/A,N/A,code-owned,Pending
+/contact,contact.astro,src/pages/contact.astro,Hero Title,Hardcoded,1,CMS,contactPage,hero.title,cms-owned,Pending
+/contact,contact.astro,src/pages/contact.astro,Form Labels,Hardcoded,1,Code,N/A,N/A,code-owned,Pending
+/contact,contact.astro,src/pages/contact.astro,Next Steps,Hardcoded array,1,CMS,contactPage,nextSteps,cms-owned,Pending
+/thank-you,thank-you.astro,src/pages/thank-you.astro,Message,Hardcoded,1,CMS,thankYouPage,hero.confirmation,cms-owned,Pending
+/thank-you,thank-you.astro,src/pages/thank-you.astro,Return to Home CTA,Hardcoded,1,CMS,thankYouPage,returnHomeCta,cms-owned,Pending
+/blog,blog/index.astro,src/pages/blog/index.astro,Latest Articles Heading,Hardcoded,1,CMS,blogPage,latestArticles.heading,cms-owned,Pending
+/blog,blog/index.astro,src/pages/blog/index.astro,Filter Labels,Hardcoded,1,Code,N/A,N/A,code-owned,Pending
+/blog/[slug],blog/[slug].astro,src/pages/blog/[slug].astro,Blog Content,blog.ts,Multiple,CMS,blogPost,N/A,cms-owned,Pending
