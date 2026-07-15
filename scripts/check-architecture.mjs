@@ -139,6 +139,34 @@ for (const path of sourceFiles) {
   }
 }
 
+// Obsolete hero class assertions
+const obsoleteHeroClasses = [
+  "lwk-about-hero",
+  "contact-hero",
+  "hours-hero",
+  "gallery-hero",
+  "multilingual-hero",
+  "parents-hero",
+  "blog-hero",
+  "blog-article-hero",
+];
+
+for (const path of sourceFiles) {
+  if (path.endsWith(".astro")) {
+    const filePath = path;
+    const source = read(filePath);
+    for (const className of obsoleteHeroClasses) {
+      const pattern = new RegExp(
+        `(?<![a-zA-Z0-9_-])${className}(?![a-zA-Z0-9_-])`
+      );
+      assert(
+        !pattern.test(source),
+        `${filePath} still uses obsolete hero class "${className}". Use SubpageHero.astro.`
+      );
+    }
+  }
+}
+
 // Whitelist of files allowed to bypass the "any" cast check (currently empty)
 const anyCheckWhitelist = [];
 

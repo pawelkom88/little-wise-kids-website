@@ -21,7 +21,9 @@ import assert from "node:assert/strict";
   ];
 
   const port = process.env.PORT || "4321";
-  console.log(`Starting route correctness and sanity checks on port ${port}...`);
+  console.log(
+    `Starting route correctness and sanity checks on port ${port}...`
+  );
 
   for (const route of routes) {
     const url = `http://localhost:${port}${route}`;
