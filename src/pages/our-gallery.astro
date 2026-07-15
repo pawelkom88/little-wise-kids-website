@@ -1,8 +1,10 @@
 ---
+export const prerender = true;
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
 import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
+import PortableContent from "../components/content/PortableContent.astro";
 import SanityImage from "../components/media/SanityImage.astro";
 import { getGalleryPage, getGalleryPhotos } from "../utils/sanity";
 import "./our-gallery.css";

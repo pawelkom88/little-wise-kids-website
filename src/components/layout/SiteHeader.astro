@@ -21,7 +21,7 @@ const { businessDetails } = Astro.props;
       <Image
         class="brand__logo"
         src={logoImg}
-        alt=""
+        alt="Little Wise Kids"
         width={160}
         height={80}
         layout="fixed"
@@ -53,7 +53,7 @@ const { businessDetails } = Astro.props;
           <Image
             class="mobile-menu__logo"
             src={logoImg}
-            alt={businessDetails.organisationName}
+            alt={businessDetails.organisationName || "Little Wise Kids"}
             width={160}
             height={80}
             layout="fixed"

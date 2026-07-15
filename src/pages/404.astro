@@ -1,10 +1,13 @@
 ---
-import { Image } from "astro:assets";
+export const prerender = true;
+import { getImage } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
 import Icon from "../components/icons/Icon.astro";
 import explorerImg from "../assets/images/404-explorer.png";
 import "./404.css";
+
+const optimizedExplorer = await getImage({ src: explorerImg, width: 600, format: "webp" });
 
 const popularPages = [
   {
@@ -54,12 +57,14 @@ const popularPages = [
       <Container size="wide" class="not-found__container">
         <div class="not-found__hero">
           <figure class="not-found__illustration">
-            <Image
-              src={explorerImg}
-              alt=""
-              width={600}
-              layout="constrained"
-              priority
+            <img
+              src={optimizedExplorer.src}
+              alt="Explorer character lost in the woods"
+              width={optimizedExplorer.width}
+              height={optimizedExplorer.height}
+              loading="eager"
+              decoding="sync"
+              fetchpriority="high"
             />
           </figure>
 
