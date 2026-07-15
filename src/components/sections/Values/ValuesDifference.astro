@@ -3,6 +3,8 @@ import multilingualBubble from "../../../../assets/icons/bubble-multilingual.png
 import heartBubble from "../../../../assets/icons/bubble-heart-with-smile.png";
 import artBubble from "../../../../assets/icons/bubble-art.png";
 import peopleBubble from "../../../../assets/icons/bubble-people.png";
+import outdoorBubble from "../../../../assets/icons/bubble-outdoor.png";
+import nutritionBubble from "../../../../assets/icons/bubble-nutrition.png";
 import { site } from "../../../data/site";
 import "./ValuesDifference.css";
 
@@ -14,28 +16,40 @@ const formatLanguages = (languages: readonly string[]) => {
 
 const cards = [
   {
+    tone: "blue",
+    image: artBubble,
+    title: "Screen-Free Learning",
+    copy: "Screen-free learning, with meaningful real-world and tactile experiences",
+  },
+  {
     tone: "purple",
     image: multilingualBubble,
-    title: "Multilingual Learning",
-    copy: `We currently introduce ${formatLanguages(site.languages)} through songs, stories and everyday moments, helping children communicate, connect and enjoy language naturally.`,
+    title: "Multilingual Exposure",
+    copy: `${formatLanguages(site.languages)} language exposure for now, subject to change`,
   },
   {
     tone: "green",
-    image: heartBubble,
-    title: "Safe & Caring",
-    copy: "In our warm, family-style setting in Bristol BS5, children feel secure, loved and respected, with wholesome food supporting growing bodies and minds.",
-  },
-  {
-    tone: "blue",
-    image: artBubble,
-    title: "Creative Play",
-    copy: "Through screen-free, child-led play and tactile real-world experiences, children build confidence, independence, curiosity and a love of learning.",
+    image: outdoorBubble,
+    title: "Indoor & Outdoor",
+    copy: "A balance of indoor and outdoor learning",
   },
   {
     tone: "yellow",
     image: peopleBubble,
-    title: "Parent Partnership",
-    copy: "We work closely with families to create a balanced rhythm of indoor and outdoor learning, supporting each child’s unique needs and development.",
+    title: "Child-Led Play",
+    copy: "Child-led play that develops confidence and independence",
+  },
+  {
+    tone: "orange",
+    image: nutritionBubble,
+    title: "Wholesome Nutrition",
+    copy: "Wholesome nutrition that supports growing bodies and minds",
+  },
+  {
+    tone: "pink",
+    image: heartBubble,
+    title: "Family-Style Setting",
+    copy: "A warm, family-style environment in Bristol BS5",
   },
 ] as const;
 ---

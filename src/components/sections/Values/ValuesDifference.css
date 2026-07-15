@@ -212,6 +212,14 @@
   background: var(--color-yellow-soft);
 }
 
+.lwk-value-card--orange {
+  background: var(--color-orange-soft);
+}
+
+.lwk-value-card--pink {
+  background: var(--color-pink-soft);
+}
+
 .lwk-value-card__image {
   width: clamp(7rem, 10vw, 9rem);
   aspect-ratio: 1;
@@ -244,6 +252,14 @@
 
 .lwk-value-card__title--yellow {
   color: color-mix(in srgb, var(--color-yellow), var(--color-darken-base) 28%);
+}
+
+.lwk-value-card__title--orange {
+  color: var(--color-orange-dark);
+}
+
+.lwk-value-card__title--pink {
+  color: var(--color-pink-dark);
 }
 
 .lwk-value-card p {

@@ -41,26 +41,6 @@ const nutritionPoints = [
   "Support for allergies and individual dietary requirements",
 ] as const;
 
-const nutritionFeatures = [
-  {
-    icon: "star",
-    tone: "yellow",
-    title: "Freshly Prepared With Care",
-    copy: "Our Nursery Chef provides nutritious meals and snacks designed around the needs of growing children.",
-  },
-  {
-    icon: "heart",
-    tone: "green",
-    title: "Positive Mealtimes",
-    copy: "Food is part of the learning day: a chance to try new tastes, build independence and enjoy social moments together.",
-  },
-  {
-    icon: "person",
-    tone: "blue",
-    title: "Dietary Needs",
-    copy: "Please contact us to discuss allergies, dietary requirements and the nursery’s current food offering.",
-  },
-] as const;
 
 const dailyRhythm = [
   {
@@ -265,26 +245,11 @@ const dailyRhythm = [
               </aside>
             </div>
 
-            <div class="nutrition-features">
-              {
-                nutritionFeatures.map((feature) => (
-                  <article
-                    class={`
-                      nutrition-feature
-                      nutrition-feature--${feature.tone}
-                    `}
-                  >
-                    <span class="nutrition-feature__icon" aria-hidden="true">
-                      <Icon name={feature.icon} size={29} />
-                    </span>
-
-                    <div>
-                      <h3>{feature.title}</h3>
-                      <p>{feature.copy}</p>
-                    </div>
-                  </article>
-                ))
-              }
+            <div class="hours-card__prose" style="margin-top: 2rem; max-width: 60ch;">
+              <h3 style="margin-bottom: 0.5rem; color: var(--color-ink); letter-spacing: -0.01em; font-size: 1.25rem;">Freshly Prepared With Care</h3>
+              <p>
+                Our Nursery Chef provides nutritious meals and snacks designed around the needs of growing children. Food is part of the learning day—a chance to try new tastes, build independence and enjoy social moments together. We cater to all dietary requirements and allergies.
+              </p>
             </div>
           </section>
 

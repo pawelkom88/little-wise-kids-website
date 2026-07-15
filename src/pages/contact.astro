@@ -43,14 +43,15 @@ const nextSteps = [
   <article class="contact-page">
     <SubpageHero id="contact-page-title" eyebrow="Contact Us" tone="blue">
       <Fragment slot="title">
-        <span>We’d Love to Hear</span>
-        <span>From Your Family</span>
+        <span>Let’s Start a</span>
+        <span>Conversation</span>
       </Fragment>
 
       <p>
-        Little Wise Kids is here to support families looking for calm, caring
-        and inspiring childcare in Bristol BS5. Get in touch to ask about
-        availability, settling in, daily routines or arranging a personal visit.
+        Whether you are looking for childcare in Bristol BS5, would like to learn
+        more about Little Wise Kids, or want to ask about availability, we would
+        love to hear from you. If you are interested in a place, you can also
+        register your child for our waiting list by filling out the form below.
       </p>
     </SubpageHero>
 
@@ -209,8 +210,34 @@ const nextSteps = [
                 </div>
 
                 <div class="contact-field">
+                  <label for="contact-child-name">
+                    Child’s Name
+                    <span class="contact-field__optional"> Optional </span>
+                  </label>
+
+                  <input
+                    id="contact-child-name"
+                    name="child_name"
+                    type="text"
+                    autocomplete="name"
+                    maxlength="80"
+                    placeholder="Your child’s name"
+                    data-validate
+                    data-label="Child’s name"
+                    aria-describedby="contact-child-name-error"
+                  />
+
+                  <p
+                    id="contact-child-name-error"
+                    class="contact-field__error"
+                    aria-live="polite"
+                  >
+                  </p>
+                </div>
+
+                <div class="contact-field">
                   <label for="contact-child-age">
-                    Child’s Age
+                    Child’s Age or Date of Birth
                     <span class="contact-field__optional"> Optional </span>
                   </label>
 
@@ -219,9 +246,9 @@ const nextSteps = [
                     name="child_age"
                     type="text"
                     maxlength="60"
-                    placeholder="For example, 2 years and 6 months"
+                    placeholder="For example, 2 years or DD/MM/YYYY"
                     data-validate
-                    data-label="Child’s age"
+                    data-label="Child’s age or DOB"
                     aria-describedby="contact-child-age-error"
                   />
 
@@ -273,26 +300,47 @@ const nextSteps = [
                 </div>
 
                 <div class="contact-field">
-                  <label for="contact-visit-date">
-                    Preferred Visit Day
+                  <label for="contact-start-date">
+                    Preferred Start Date
                     <span class="contact-field__optional"> Optional </span>
                   </label>
 
                   <input
-                    id="contact-visit-date"
-                    name="preferred_visit_date"
+                    id="contact-start-date"
+                    name="preferred_start_date"
                     type="date"
                     data-validate
-                    data-label="Preferred visit day"
-                    aria-describedby="contact-visit-date-hint contact-visit-date-error"
+                    data-label="Preferred start date"
+                    aria-describedby="contact-start-date-error"
                   />
 
-                  <p id="contact-visit-date-hint" class="contact-field__hint">
-                    Visits are arranged Monday to Friday.
+                  <p
+                    id="contact-start-date-error"
+                    class="contact-field__error"
+                    aria-live="polite"
+                  >
                   </p>
+                </div>
+
+                <div class="contact-field">
+                  <label for="contact-preferred-days">
+                    Preferred Days or Sessions
+                    <span class="contact-field__optional"> Optional </span>
+                  </label>
+
+                  <input
+                    id="contact-preferred-days"
+                    name="preferred_days"
+                    type="text"
+                    maxlength="100"
+                    placeholder="e.g. Full days Mon-Wed"
+                    data-validate
+                    data-label="Preferred days or sessions"
+                    aria-describedby="contact-preferred-days-error"
+                  />
 
                   <p
-                    id="contact-visit-date-error"
+                    id="contact-preferred-days-error"
                     class="contact-field__error"
                     aria-live="polite"
                   >
@@ -516,7 +564,7 @@ const nextSteps = [
     const formStatus = document.querySelector("#contact-form-status");
     const messageField = document.querySelector("#contact-message");
     const messageCount = document.querySelector("#contact-message-count");
-    const dateField = document.querySelector("#contact-visit-date");
+    const dateField = document.querySelector("#contact-start-date");
     const captchaContainer = document.querySelector("#contact-captcha");
     const captchaError = document.querySelector("#contact-captcha-error");
 
@@ -623,20 +671,12 @@ const nextSteps = [
           break;
         }
 
-        case "preferred_visit_date": {
+        case "preferred_start_date": {
           if (value) {
-            const selectedDate = new Date(`${value}T12:00:00`);
-
             const today = formatLocalDate(new Date());
 
             if (value < today) {
               message = "Choose today or a future date.";
-            } else {
-              const day = selectedDate.getDay();
-
-              if (day === 0 || day === 6) {
-                message = "Choose a Monday to Friday.";
-              }
             }
           }
           break;
