@@ -13,7 +13,6 @@ export type IconName =
   | "star"
   | "users"
   | "image"
-  | "chevron"
   | "location"
   | "phone"
   | "facebook"

@@ -4,23 +4,12 @@ import Icon from "../icons/Icon.astro";
 import Container from "./Container.astro";
 import "./SiteFooter.css";
 
-const primaryLinks = [
+const exploreLinks = [
   { label: "Home", href: "/" },
-  ...navItems
-    .filter((item) => !("children" in item))
-    .map((item) => ({
-      label: item.label,
-      href: "href" in item ? item.href : "/",
-    })),
+  ...navItems.slice(0, 3), // About Us, Multilingual Learning, Parents’ Information
 ];
 
-const navigationGroups = navItems
-  .filter((item) => "children" in item)
-  .map((item) => ({
-    title: item.label,
-    tone: item.tone,
-    links: "children" in item ? item.children : [],
-  }));
+const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact Us, Blog / News
 ---
 
 <footer id="contact" class="lwk-footer">
@@ -74,17 +63,17 @@ const navigationGroups = navItems
       <div class="lwk-footer__rule" aria-hidden="true"></div>
 
       <div class="lwk-footer__navigation">
-        <nav class="lwk-footer__column" aria-labelledby="footer-main-menu">
+        <nav class="lwk-footer__column" aria-labelledby="footer-explore">
           <h3
             class="lwk-footer__column-title tone-purple"
-            id="footer-main-menu"
+            id="footer-explore"
           >
-            Main Menu
+            Explore
           </h3>
 
           <ul>
             {
-              primaryLinks.map((link) => (
+              exploreLinks.map((link) => (
                 <li>
                   <a href={link.href}>{link.label}</a>
                 </li>
@@ -93,33 +82,24 @@ const navigationGroups = navItems
           </ul>
         </nav>
 
-        {
-          navigationGroups.map((group) => {
-            const headingId = `footer-${group.title
-              .toLowerCase()
-              .replace(/[’'\/\s]+/g, "-")
-              .replace(/[^a-z-]/g, "")}`;
+        <nav class="lwk-footer__column" aria-labelledby="footer-information">
+          <h3
+            class="lwk-footer__column-title tone-green"
+            id="footer-information"
+          >
+            Information
+          </h3>
 
-            return (
-              <nav class="lwk-footer__column" aria-labelledby={headingId}>
-                <h3
-                  class={`lwk-footer__column-title tone-${group.tone}`}
-                  id={headingId}
-                >
-                  {group.title}
-                </h3>
-
-                <ul>
-                  {group.links.map((link) => (
-                    <li>
-                      <a href={link.href}>{link.label}</a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            );
-          })
-        }
+          <ul>
+            {
+              infoLinks.map((link) => (
+                <li>
+                  <a href={link.href}>{link.label}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
 
         <section
           class="lwk-footer__column lwk-footer__contact"

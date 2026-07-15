@@ -39,54 +39,21 @@ export const site = {
 export const navItems = [
   {
     label: "About Us",
+    href: "/about-us",
     icon: "person",
     tone: "blue",
-    children: [
-      { label: "About Us", href: "/about-us" },
-      { label: "Our Approach", href: "/about-us#our-approach" },
-      { label: "Our Commitment", href: "/about-us#our-commitment" },
-      { label: "Our Leadership Team", href: "/about-us#our-leadership-team" },
-    ],
   },
   {
     label: "Multilingual Learning",
+    href: "/multilingual-learning",
     icon: "book",
     tone: "green",
-    children: [
-      { label: "Multilingual Learning", href: "/multilingual-learning" },
-      {
-        label: "Our Philosophy",
-        href: "/multilingual-learning#our-learning-philosophy",
-      },
-      {
-        label: "English and Portuguese",
-        href: "/multilingual-learning#english-and-portuguese",
-      },
-      { label: "EYFS", href: "/multilingual-learning#eyfs" },
-      {
-        label: "Screen-Free Learning",
-        href: "/multilingual-learning#screen-free-learning",
-      },
-    ],
   },
   {
     label: "Parents’ Information",
+    href: "/parents-information",
     icon: "users",
     tone: "purple",
-    children: [
-      { label: "Parents’ Information", href: "/parents-information" },
-      { label: "Fees & Funding", href: "/parents-information#fees-funding" },
-      {
-        label: "Childcare Subsidy",
-        href: "/parents-information#childcare-subsidy-questions",
-      },
-      {
-        label: "Partnership With Families",
-        href: "/parents-information#partnership-with-families",
-      },
-      { label: "Settling In", href: "/parents-information#settling-in" },
-      { label: "Policies", href: "/parents-information#policies" },
-    ],
   },
   {
     label: "Hours & Nutrition",
