@@ -20,6 +20,7 @@ jobs:
         env:
           SANITY_DATASET: production
           SANITY_PROJECT_ID: c10vla3h
+          WEB3FORMS_ACCESS_KEY: ${{ secrets.WEB3FORMS_ACCESS_KEY }}
       - name: Deploy to Cloudflare
         uses: cloudflare/wrangler-action@v3
         with:
