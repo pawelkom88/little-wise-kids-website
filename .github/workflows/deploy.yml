@@ -1,0 +1,28 @@
+name: Deploy to Cloudflare
+
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [sanity-publish]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          SANITY_DATASET: production
+          SANITY_PROJECT_ID: c10vla3h
+      - name: Deploy to Cloudflare
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: f5f7a459dda6bb174707e369bd5cd770
+          command: deploy
