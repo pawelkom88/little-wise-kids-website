@@ -1,6 +1,6 @@
 ---
 import "../styles/site.css";
-import { getBusinessDetails } from "../utils/sanity";
+import { getBusinessDetails } from "../lib/queries";
 import SiteHeader from "../components/layout/SiteHeader.astro";
 import SiteFooter from "../components/layout/SiteFooter.astro";
 import type { BusinessDetails } from "../lib/types";
@@ -14,7 +14,7 @@ interface Props {
 const businessDetails = Astro.props.businessDetails ?? await getBusinessDetails();
 
 const { 
-  title = businessDetails.organisationName, 
+  title = businessDetails.organisationName || "Little Wise Kids", 
   description = businessDetails.footerBusinessCopy 
 } = Astro.props;
 ---

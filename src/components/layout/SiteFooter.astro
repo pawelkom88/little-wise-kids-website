@@ -34,7 +34,7 @@ const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact 
       <a
         class="lwk-footer__logo-link"
         href="/"
-        aria-label={`${businessDetails.organisationName} home`}
+        aria-label={`${businessDetails.organisationName || "Little Wise Kids"} home`}
       >
         <Image
           class="lwk-footer__logo"
@@ -207,7 +207,7 @@ const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact 
         </nav>
         <p>
           &copy; {new Date().getFullYear()}
-          {businessDetails.organisationName}. All rights reserved.
+          {businessDetails.organisationName || "Little Wise Kids"}. All rights reserved.
         </p>
       </div>
     </Container>
