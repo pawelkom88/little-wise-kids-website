@@ -8,12 +8,15 @@ import logoImg from "../../assets/images/logo.png";
 import "./SiteFooter.css";
 import type { BusinessDetails } from "../../lib/types";
 import { formatPhoneDisplay, formatPhoneHref } from "../../lib/formatters";
+import { safeExternalUrl } from "../../lib/urls.mjs";
 
 interface Props {
   businessDetails: BusinessDetails;
 }
 
 const { businessDetails } = Astro.props;
+const facebookUrl = safeExternalUrl(businessDetails.social?.facebookUrl);
+const instagramUrl = safeExternalUrl(businessDetails.social?.instagramUrl);
 
 const exploreLinks = [
   { label: "Home", href: "/" },
@@ -175,10 +178,10 @@ const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact 
         </div>
 
         <nav class="lwk-footer__social-links" aria-label="Social media">
-          {businessDetails.social?.facebookUrl && (
+          {facebookUrl && (
             <a
               class="lwk-footer__social-link lwk-footer__social-link--facebook"
-              href={businessDetails.social.facebookUrl}
+              href={facebookUrl}
               target="_blank"
               rel="noreferrer"
             >
@@ -187,10 +190,10 @@ const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact 
             </a>
           )}
 
-          {businessDetails.social?.instagramUrl && (
+          {instagramUrl && (
             <a
               class="lwk-footer__social-link lwk-footer__social-link--instagram"
-              href={businessDetails.social.instagramUrl}
+              href={instagramUrl}
               target="_blank"
               rel="noreferrer"
             >

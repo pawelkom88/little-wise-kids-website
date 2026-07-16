@@ -1,5 +1,8 @@
 name: Deploy to Cloudflare
 
+permissions:
+  contents: read
+
 on:
   push:
     branches: [main]
@@ -8,10 +11,21 @@ on:
 
 jobs:
   deploy:
+    if: >-
+      github.event_name == 'push' ||
+      (github.event.action == 'sanity-publish' &&
+       github.event.client_payload.source == 'sanity-gateway' &&
+       github.event.client_payload.projectId == 'c10vla3h' &&
+       github.event.client_payload.dataset == 'production')
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: production
+    concurrency:
+      group: production-deploy
+      cancel-in-progress: false
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
           cache: npm
@@ -22,7 +36,7 @@ jobs:
           SANITY_PROJECT_ID: c10vla3h
           WEB3FORMS_ACCESS_KEY: ${{ secrets.WEB3FORMS_ACCESS_KEY }}
       - name: Deploy to Cloudflare
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: f5f7a459dda6bb174707e369bd5cd770

@@ -25,3 +25,6 @@ future-section-mobile.png
 .wrangler
 .dev.vars*
 !.dev.vars.example
+
+# sec scan artifacts
+codex-security-scans-*

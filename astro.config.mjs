@@ -28,7 +28,7 @@ export default defineConfig({
     sanity({
       projectId: env.SANITY_PROJECT_ID || "c10vla3h",
       dataset: env.SANITY_DATASET || "production",
-      useCdn: true,
+      useCdn: false,
       studioBasePath: "/admin",
       studioRouterHistory: "hash",
     }),

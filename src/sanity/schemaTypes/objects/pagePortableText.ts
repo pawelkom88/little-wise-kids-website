@@ -28,7 +28,8 @@ export const pagePortableText = defineType({
                 name: "href",
                 type: "url",
                 title: "URL",
-                validation: (rule) => rule.required(),
+                validation: (rule) =>
+                  rule.required().uri({ scheme: ["https"] }),
               },
               {
                 name: "blank",

@@ -9,10 +9,15 @@ interface Props {
   node: { markDef: ExternalLinkDef };
 }
 
+import { safeExternalUrl } from "../../../lib/urls.mjs";
+
 const { node } = Astro.props;
-const { href, blank } = node.markDef;
+const { blank } = node.markDef;
+const href = safeExternalUrl(node.markDef.href);
 ---
 
-<a href={href} target={blank ? "_blank" : undefined} rel={blank ? "noopener noreferrer" : undefined}>
-  <slot />
-</a>
+{href ? (
+  <a href={href} target={blank ? "_blank" : undefined} rel={blank ? "noopener noreferrer" : undefined}>
+    <slot />
+  </a>
+) : <slot />}

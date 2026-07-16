@@ -5,6 +5,7 @@ import Container from "../components/layout/Container.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
 import { getParentsPage, getPolicyDocuments } from "../utils/sanity";
+import { safeExternalUrl } from "../lib/urls.mjs";
 import "./parents-information.css";
 
 const parentsPage = await getParentsPage();
@@ -487,8 +488,8 @@ const policyDocuments = await getPolicyDocuments();
               aria-label="Download nursery policies"
             >
               {
-                policyDocuments.map((doc) => (
-                  <a href={doc.fileUrl} target="_blank" rel="noreferrer" class="parents-policy-link">
+                policyDocuments.map((doc) => safeExternalUrl(doc.fileUrl) ? (
+                  <a href={safeExternalUrl(doc.fileUrl)} target="_blank" rel="noreferrer" class="parents-policy-link">
                     <span class="parents-policy-links__title">{doc.title}</span>
                     {doc.shortDescription && <span class="parents-policy-links__desc">{doc.shortDescription}</span>}
                     <span class="parents-policy-links__meta">
@@ -496,7 +497,7 @@ const policyDocuments = await getPolicyDocuments();
                       {doc.lastReviewed && <span class="parents-policy-links__reviewed">Reviewed: {doc.lastReviewed}</span>}
                     </span>
                   </a>
-                ))
+                ) : null)
               }
             </nav>
           </section>

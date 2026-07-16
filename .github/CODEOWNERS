@@ -1,0 +1,6 @@
+/.github/ @pawelkom88
+/astro.config.mjs @pawelkom88
+/sanity.config.ts @pawelkom88
+/wrangler*.jsonc @pawelkom88
+/workers/ @pawelkom88
+/src/sanity/ @pawelkom88

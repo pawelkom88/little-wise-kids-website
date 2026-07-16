@@ -1,0 +1,35 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "little-wise-kids-sanity-gateway",
+  "main": "workers/sanity-deploy-gateway/index.mjs",
+  "compatibility_date": "2026-07-15",
+  "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "EXPECTED_SANITY_PROJECT_ID": "c10vla3h",
+    "EXPECTED_SANITY_DATASET": "production",
+    "ALLOWED_DOCUMENT_TYPES": "businessDetails,homePage,aboutPage,multilingualPage,hoursNutritionPage,parentsPage,galleryPage,contactPage,thankYouPage,blogPage,blogPost,galleryPhoto,policyDocument",
+    "GITHUB_REPOSITORY": "pawelkom88/little-wise-kids-website"
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "DEPLOY_GATE",
+        "class_name": "DeployGate"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["DeployGate"]
+    }
+  ],
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true,
+      "head_sampling_rate": 1
+    }
+  }
+}
