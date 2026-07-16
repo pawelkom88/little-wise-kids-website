@@ -14,7 +14,7 @@ interface Props {
 const businessDetails = Astro.props.businessDetails ?? await getBusinessDetails();
 
 const { 
-  title = businessDetails.organisationName || "Little Wise Kids", 
+  title = businessDetails.organizationName || "Little Wise Kids", 
   description = businessDetails.footerBusinessCopy 
 } = Astro.props;
 ---

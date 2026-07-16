@@ -19,7 +19,7 @@ function formatAddress(bd: BusinessDetails): string {
 
 function resolve(field: string, bd: BusinessDetails): string {
   switch (field) {
-    case "organisationName": return bd.organisationName;
+    case "organizationName": return bd.organizationName;
     case "ageRange": return getAgeRangeDisplay(bd);
     case "languages": return formatLanguages(bd.languages);
     case "openingDays": return bd.openingDays;

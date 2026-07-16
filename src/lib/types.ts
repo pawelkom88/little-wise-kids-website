@@ -37,7 +37,7 @@ export interface FooterTagline {
 }
 
 export interface BusinessDetails {
-  organisationName: string;
+  organizationName: string;
   publicEmail: string;
   primaryPhone: PhoneEntry;
   secondaryPhone?: PhoneEntry;

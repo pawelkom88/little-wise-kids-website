@@ -17,7 +17,7 @@ const { businessDetails } = Astro.props;
 
 <header class="site-header" data-site-header>
   <Container size="wide" class="site-header__inner">
-    <a class="brand" href="/" aria-label={`${businessDetails.organisationName || "Little Wise Kids"} home`}>
+    <a class="brand" href="/" aria-label={`${businessDetails.organizationName || "Little Wise Kids"} home`}>
       <Image
         class="brand__logo"
         src={logoImg}
@@ -26,7 +26,7 @@ const { businessDetails } = Astro.props;
         height={80}
         layout="fixed"
       />
-      <span class="sr-only">{businessDetails.organisationName || "Little Wise Kids"}</span>
+      <span class="sr-only">{businessDetails.organizationName || "Little Wise Kids"}</span>
     </a>
 
     <nav class="site-nav" aria-label="Primary navigation">
@@ -53,7 +53,7 @@ const { businessDetails } = Astro.props;
           <Image
             class="mobile-menu__logo"
             src={logoImg}
-            alt={businessDetails.organisationName || "Little Wise Kids"}
+            alt={businessDetails.organizationName || "Little Wise Kids"}
             width={160}
             height={80}
             layout="fixed"

@@ -182,7 +182,7 @@ export type BusinessDetails = {
 export type InlineBusinessDetail = {
   _type: "inlineBusinessDetail";
   field?:
-    | "organisationName"
+    | "organizationName"
     | "ageRange"
     | "languages"
     | "openingDays"

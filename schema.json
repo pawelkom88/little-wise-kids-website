@@ -997,7 +997,7 @@
             "of": [
               {
                 "type": "string",
-                "value": "organisationName"
+                "value": "organizationName"
               },
               {
                 "type": "string",

@@ -39,7 +39,7 @@ export const businessDetails = defineType({
   ],
   fields: [
     defineField({
-      name: "organisationName",
+      name: "organizationName",
       title: "Organisation name",
       description: "The official name of the setting.",
       type: "string",

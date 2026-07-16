@@ -13,7 +13,7 @@ export const inlineBusinessDetail = defineType({
       description: "Select which business detail to display here.",
       options: {
         list: [
-          { title: "Organisation Name", value: "organisationName" },
+          { title: "Organisation Name", value: "organizationName" },
           { title: "Age Range", value: "ageRange" },
           { title: "Languages", value: "languages" },
           { title: "Opening Days", value: "openingDays" },
@@ -35,7 +35,7 @@ export const inlineBusinessDetail = defineType({
     },
     prepare(selection) {
       const fieldNames: Record<string, string> = {
-        organisationName: "Organisation Name",
+        organizationName: "Organisation Name",
         ageRange: "Age Range",
         languages: "Languages",
         openingDays: "Opening Days",
