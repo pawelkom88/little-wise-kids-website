@@ -96,8 +96,8 @@ const policyDocuments = await getPolicyDocuments();
                 </div>
               </div>
 
-              <aside class="parents-card__panel">
-                <h3>We Support Children Through:</h3>
+              <aside class="parents-card__panel" aria-labelledby="school-support-title">
+                <h3 id="school-support-title">We Support Children Through:</h3>
 
                 <ul class="parents-check-list">
                   {schoolSupport.map((item: string) => <li>{item}</li>)}
@@ -164,8 +164,8 @@ const policyDocuments = await getPolicyDocuments();
                 </div>
               </div>
 
-              <aside class="parents-card__panel">
-                <h3>Current Example Calculations</h3>
+              <aside class="parents-card__panel" aria-labelledby="funding-calculations-title">
+                <h3 id="funding-calculations-title">Current Example Calculations</h3>
 
                 <div class="parents-calculations">
                   {
@@ -206,8 +206,8 @@ const policyDocuments = await getPolicyDocuments();
                 </div>
               </div>
 
-              <aside class="parents-resource">
-                <p class="parents-resource__label">
+              <aside class="parents-resource" aria-labelledby="childcare-guidance-label">
+                <p id="childcare-guidance-label" class="parents-resource__label">
                   Current Government Guidance and Eligibility
                 </p>
 
@@ -251,8 +251,8 @@ const policyDocuments = await getPolicyDocuments();
                 </div>
               </div>
 
-              <aside class="parents-resource">
-                <p class="parents-resource__label">
+              <aside class="parents-resource" aria-labelledby="tax-free-guidance-label">
+                <p id="tax-free-guidance-label" class="parents-resource__label">
                   Current Details and Eligibility
                 </p>
 

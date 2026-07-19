@@ -1165,3 +1165,14 @@
     }
   }
 }
+
+.fresh-food-block {
+  margin-top: 2rem;
+  max-width: 60ch;
+}
+.fresh-food-title {
+  margin-bottom: 0.5rem;
+  color: var(--color-ink);
+  letter-spacing: -0.01em;
+  font-size: 1.25rem;
+}

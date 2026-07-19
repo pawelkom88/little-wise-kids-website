@@ -25,8 +25,8 @@ const { homePage } = Astro.props;
   ></path>
 </svg>
 
-<Section class="faq-section" width="wide">
-  <div class="faq-shell" aria-labelledby="faq-title">
+<Section class="faq-section" width="wide" aria-labelledby="faq-title">
+  <div class="faq-shell">
     <header class="faq-header">
       <h2 class="faq-title" id="faq-title">
         {homePage.faqHeading.prefix} <span>{homePage.faqHeading.accentedPhrase}</span>
@@ -63,7 +63,7 @@ const { homePage } = Astro.props;
         height={82}
         class="faq-contact__envelope"
         src={envelopeIcon}
-        alt="Envelope icon"
+        alt=""
         aria-hidden="true"
       />
 
@@ -83,7 +83,7 @@ const { homePage } = Astro.props;
         height={82}
         class="faq-contact__flower"
         src={flowerIcon}
-        alt="Flower icon"
+        alt=""
         aria-hidden="true"
       />
     </aside>

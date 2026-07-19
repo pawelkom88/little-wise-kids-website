@@ -460,3 +460,7 @@
     transform: none;
   }
 }
+
+.lwk-footer__column a[href^="tel:"], .lwk-footer__contact a[href^="tel:"] {
+  white-space: nowrap;
+}

@@ -130,10 +130,7 @@ const dailyRhythm = [
                 </div>
               </div>
 
-              <dl
-                class="hours-schedule"
-                aria-label="Little Wise Kids session details"
-              >
+              <dl class="hours-schedule">
                 {
                   sessionDetails.map((detail) => (
                     <div class="hours-schedule__row">
@@ -149,13 +146,13 @@ const dailyRhythm = [
               </dl>
             </div>
 
-            <aside class="hours-card__note">
+            <aside class="hours-card__note" aria-labelledby="min-attendance-title">
               <span class="hours-card__note-icon" aria-hidden="true">
                 <Icon name="heart" size={30} />
               </span>
 
               <div class="hours-card__note-copy">
-                <h3>{hoursNutritionPage.minAttendancePanelTitle}</h3>
+                <h3 id="min-attendance-title">{hoursNutritionPage.minAttendancePanelTitle}</h3>
 
                 <p>
                   {hoursNutritionPage.minAttendancePanelCopy}
@@ -198,8 +195,8 @@ const dailyRhythm = [
                 </div>
               </div>
 
-              <aside class="nutrition-checklist">
-                <h3>What We Provide</h3>
+              <aside class="nutrition-checklist" aria-labelledby="nutrition-checklist-title">
+                <h3 id="nutrition-checklist-title">What We Provide</h3>
 
                 <ul>
                   {
@@ -215,12 +212,9 @@ const dailyRhythm = [
             </div>
 
             <div
-              class="hours-card__prose"
-              style="margin-top: 2rem; max-width: 60ch;"
+              class="hours-card__prose fresh-food-block"
             >
-              <h3
-                style="margin-bottom: 0.5rem; color: var(--color-ink); letter-spacing: -0.01em; font-size: 1.25rem;"
-              >
+              <h3 class="fresh-food-title">
                 {hoursNutritionPage.freshlyPreparedHeading}
               </h3>
               <p>
@@ -276,13 +270,13 @@ const dailyRhythm = [
             </ol>
           </section>
 
-          <aside class="hours-contact">
+          <aside class="hours-contact" aria-labelledby="hours-contact-title">
             <span class="hours-contact__icon" aria-hidden="true">
               <Icon name="heart" size={32} />
             </span>
 
             <div class="hours-contact__copy">
-              <h2>{hoursNutritionPage.contactPanelTitle}</h2>
+              <h2 id="hours-contact-title">{hoursNutritionPage.contactPanelTitle}</h2>
 
               <p>
                 {hoursNutritionPage.contactPanelCopy}
