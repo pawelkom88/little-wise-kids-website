@@ -3,20 +3,25 @@ import "../styles/site.css";
 import { getBusinessDetails } from "../lib/queries";
 import SiteHeader from "../components/layout/SiteHeader.astro";
 import SiteFooter from "../components/layout/SiteFooter.astro";
+import SeoHead from "../components/seo/SeoHead.astro";
+import JsonLd from "../components/seo/JsonLd.astro";
 import type { BusinessDetails } from "../lib/types";
+import type { SeoConfig } from "../lib/seo/types";
+import { buildBusinessSchema } from "../lib/seo/buildBusinessSchema";
+import { buildPageSchema } from "../lib/seo/buildPageSchema";
 
 interface Props {
-  title?: string;
-  description?: string;
+  seo: SeoConfig;
   businessDetails?: BusinessDetails;
 }
 
 const businessDetails = Astro.props.businessDetails ?? await getBusinessDetails();
+const { seo } = Astro.props;
 
-const { 
-  title = businessDetails.organizationName || "Little Wise Kids", 
-  description = businessDetails.footerBusinessCopy 
-} = Astro.props;
+const siteUrl = Astro.site ? Astro.site.toString() : "https://littlewisekids.co.uk";
+const businessSchema = buildBusinessSchema(businessDetails, siteUrl);
+const pageSchema = buildPageSchema(siteUrl, seo.type === "article" ? "ItemPage" : "WebPage");
+const schemaGraph = [businessSchema, ...pageSchema, ...(seo.schemas || [])];
 ---
 
 <!doctype html>
@@ -24,8 +29,8 @@ const {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
-    <title>{title}</title>
+    <SeoHead seo={seo} />
+    <JsonLd data={schemaGraph} />
     <link
       rel="preload"
       href="/assets/fonts/Quicksand/Quicksand-Bold.woff2"

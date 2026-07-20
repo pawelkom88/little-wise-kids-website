@@ -58,6 +58,13 @@ export interface BusinessDetails {
   socialHeading: string;
   socialIntroduction: string;
   footerTagline: FooterTagline;
+  legalName?: string;
+  ofstedRegistrationType?: string;
+  ofstedUrn?: string;
+  ofstedRecordUrl?: string;
+  latitude?: number;
+  longitude?: number;
+  approvedAreaServed?: string[];
 }
 
 export interface InlineBusinessDetail {
@@ -380,6 +387,8 @@ export interface BlogPost {
   excerpt: string;
   featuredImage: StrictImage;
   body: PortableTextBlock[];
+  authorName?: string;
+  authorRole?: string;
 }
 
 export interface GalleryPhoto {

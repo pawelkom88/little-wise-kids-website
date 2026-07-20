@@ -6,8 +6,10 @@ import Icon from "../../components/icons/Icon.astro";
 import SubpageHero from "../../components/layout/SubpageHero.astro";
 import PortableContent from "../../components/content/PortableContent.astro";
 import SanityImage from "../../components/media/SanityImage.astro";
-import { getBlogPosts } from "../../utils/sanity";
+import { getBlogPosts, getBusinessDetails } from "../../utils/sanity";
 import { mapBlogPost } from "../../lib/blog";
+import { buildArticleSchema } from "../../lib/seo/buildArticleSchema";
+import type { SeoConfig } from "../../lib/seo/types";
 import "./blog-article.css";
 
 export async function getStaticPaths() {
@@ -27,13 +29,22 @@ interface Props {
 const { post } = Astro.props;
 
 const article = mapBlogPost(post);
+const businessDetails = await getBusinessDetails();
+
+const siteUrl = Astro.site ? Astro.site.toString() : "https://littlewisekids.co.uk";
+const postUrl = `${siteUrl.replace(/\/$/, "")}/blog/${post.slug.current}`;
+const articleSchemas = buildArticleSchema(post, siteUrl, postUrl);
+
+const seo: SeoConfig = {
+  title: `${article.title} | Little Wise Kids`,
+  description: article.excerpt,
+  canonicalPath: `/blog/${post.slug.current}`,
+  type: "article",
+  schemas: articleSchemas
+};
 ---
 
-<BaseLayout
- 
-  title={`${article.title} | Little Wise Kids`}
-  description={article.excerpt}
->
+<BaseLayout seo={seo} businessDetails={businessDetails}>
   <article
     class="blog-article-page"
     itemscope

@@ -5,3 +5,4 @@ export * from "./pagePortableText";
 export * from "./blogPortableText";
 export * from "./faqPortableText";
 export * from "./inlineBusinessDetail";
+export * from "./approachPoint";

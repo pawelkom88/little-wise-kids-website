@@ -6,11 +6,19 @@ import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
 import SanityImage from "../components/media/SanityImage.astro";
-import { getGalleryPage, getGalleryPhotos } from "../utils/sanity";
+import { getGalleryPage, getGalleryPhotos, getBusinessDetails } from "../utils/sanity";
+import type { SeoConfig } from "../lib/seo/types";
 import "./our-gallery.css";
 
 const galleryPage = await getGalleryPage();
 const allPhotos = await getGalleryPhotos();
+const businessDetails = await getBusinessDetails();
+
+const seo: SeoConfig = {
+  title: "Nursery Photo Gallery | Little Wise Kids Easton",
+  description: "View our indoor and outdoor learning environments in Easton, Bristol. See how our home-from-home setting supports child-led discovery and multilingual play.",
+  canonicalPath: "/our-gallery",
+};
 
 const categoryMeta: Record<string, { title: string; icon: string; tone: string }> = {
   "outdoor-learning-experience": { title: "Outdoor Learning Experience", icon: "star", tone: "green" },
@@ -35,11 +43,7 @@ const categories = allPhotos.reduce((acc, photo) => {
 const categoryEntries = Object.entries(categories);
 ---
 
-<BaseLayout
- 
-  title="Our Gallery | Little Wise Kids"
-  description="Explore moments of curiosity, creativity and connection from the indoor and outdoor learning spaces at Little Wise Kids."
->
+<BaseLayout seo={seo} businessDetails={businessDetails}>
   <article class="gallery-page">
     <SubpageHero id="gallery-page-title" eyebrow={galleryPage.heroEyebrow ?? "Our Gallery"} tone="blue">
       <Fragment slot="title">

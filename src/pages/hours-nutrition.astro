@@ -7,10 +7,17 @@ import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
 import { getHoursNutritionPage, getBusinessDetails } from "../utils/sanity";
 import { formatTimeRange, getAgeRangeDisplay } from "../lib/formatters";
+import type { SeoConfig } from "../lib/seo/types";
 import "./hours-nutrition.css";
 
 const hoursNutritionPage = await getHoursNutritionPage();
 const businessDetails = await getBusinessDetails();
+
+const seo: SeoConfig = {
+  title: "Childcare Opening Hours & Nutrition in Easton | Little Wise Kids",
+  description: `Operating from ${businessDetails.openingTime} to ${businessDetails.closingTime}, we offer flexible childcare in Easton with wholesome, home-cooked meals accommodating various dietary needs.`,
+  canonicalPath: "/hours-nutrition",
+};
 
 const sessionDetails = [
   {
@@ -81,11 +88,7 @@ const dailyRhythm = [
 ] as const;
 ---
 
-<BaseLayout
- 
-  title="Childcare Sessions & Wholesome Nutrition Bristol BS5"
-  description={`We are open ${businessDetails.openingDays}, ${businessDetails.openingTime}–${businessDetails.closingTime} in Easton. Enjoy fresh, healthy, home-cooked meals prepared daily by our nursery chef for growing bodies.`}
->
+<BaseLayout seo={seo} businessDetails={businessDetails}>
   <article class="hours-page">
     <SubpageHero
       id="hours-page-title"

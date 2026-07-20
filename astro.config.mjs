@@ -3,10 +3,13 @@ import { loadEnv } from "vite";
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
 import cloudflare from "@astrojs/cloudflare";
+import sitemap from "@astrojs/sitemap";
 
 const env = loadEnv(process.env.NODE_ENV || "production", process.cwd(), "");
 
 export default defineConfig({
+  site: "https://littlewisekids.co.uk",
+  trailingSlash: "never",
   output: "static",
   adapter: cloudflare({
     imageService: "compile",
@@ -25,6 +28,12 @@ export default defineConfig({
     },
   },
   integrations: [
+    sitemap({
+      filter: (page) =>
+        !page.endsWith("/thank-you") &&
+        !page.endsWith("/404") &&
+        !page.endsWith("/admin"),
+    }),
     sanity({
       projectId: env.SANITY_PROJECT_ID || "c10vla3h",
       dataset: env.SANITY_DATASET || "production",

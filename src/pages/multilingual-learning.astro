@@ -6,10 +6,18 @@ import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
 import SanityImage from "../components/media/SanityImage.astro";
-import { getMultilingualPage } from "../utils/sanity";
+import { getMultilingualPage, getBusinessDetails } from "../utils/sanity";
+import type { SeoConfig } from "../lib/seo/types";
 import "./multilingual-learning.css";
 
 const multilingualPage = await getMultilingualPage();
+const businessDetails = await getBusinessDetails();
+
+const seo: SeoConfig = {
+  title: "Multilingual & Screen-Free Early Years Learning | Little Wise Kids",
+  description: "Our child-led approach combines English and Portuguese exposure with screen-free play, aligned to the EYFS framework, nurturing confidence and creativity.",
+  canonicalPath: "/multilingual-learning",
+};
 
 const philosophyPoints = [
   {
@@ -88,11 +96,7 @@ const screenFreeBenefits = [
 ] as const;
 ---
 
-<BaseLayout
- 
-  title="Multilingual Learning | Little Wise Kids"
-  description="Explore the multilingual, child-led, screen-free learning philosophy at Little Wise Kids."
->
+<BaseLayout seo={seo} businessDetails={businessDetails}>
   <article class="lwk-multilingual">
     <SubpageHero
       id="multilingual-page-title"

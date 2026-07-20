@@ -56,7 +56,7 @@ for (const path of astroFiles) {
   const source = read(path);
   assert(!/<style\b/i.test(source), `${path} contains an inline style block`);
   assert(
-    !/<script\b(?![^>]*\bsrc=)[^>]*>/i.test(source),
+    !/<script\b(?![^>]*\bsrc=)(?![^>]*\btype=['"]application\/ld\+json['"])[^>]*>/i.test(source),
     `${path} contains an inline script block`
   );
   assert(

@@ -5,9 +5,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
 import Icon from "../components/icons/Icon.astro";
 import explorerImg from "../assets/images/404-explorer.png";
+import { getBusinessDetails } from "../utils/sanity";
+import type { SeoConfig } from "../lib/seo/types";
 import "./404.css";
 
 const optimizedExplorer = await getImage({ src: explorerImg, width: 600, format: "webp" });
+const businessDetails = await getBusinessDetails();
+
+const seo: SeoConfig = {
+  title: "Page Not Found | Little Wise Kids",
+  description: "The page you were looking for could not be found. Return to the Little Wise Kids homepage or explore another part of our website.",
+  robots: "noindex",
+  canonicalPath: "/404",
+};
 
 const popularPages = [
   {
@@ -48,10 +58,7 @@ const popularPages = [
 ] as const;
 ---
 
-<BaseLayout
-  title="Page Not Found | Little Wise Kids"
-  description="The page you were looking for could not be found. Return to the Little Wise Kids homepage or explore another part of our website."
->
+<BaseLayout seo={seo} businessDetails={businessDetails}>
   <article class="not-found-page" aria-labelledby="not-found-title">
     <section class="not-found">
       <Container size="wide" class="not-found__container">

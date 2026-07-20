@@ -4,11 +4,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
-import { getParentsPage, getPolicyDocuments } from "../utils/sanity";
+import { getParentsPage, getPolicyDocuments, getBusinessDetails } from "../utils/sanity";
 import { safeExternalUrl } from "../lib/urls.mjs";
+import type { SeoConfig } from "../lib/seo/types";
 import "./parents-information.css";
 
 const parentsPage = await getParentsPage();
+const businessDetails = await getBusinessDetails();
+
+const seo: SeoConfig = {
+  title: "Parents' Information, Fees & Childcare Funding | Little Wise Kids",
+  description: "Information for families joining our Easton childcare setting, covering settling in, daily fees, Tax-Free Childcare, and 15/30 hours government funding.",
+  canonicalPath: "/parents-information",
+};
 
 const schoolSupport = parentsPage.schoolSupport;
 
@@ -49,11 +57,7 @@ const settlingStrategies = parentsPage.settlingStrategies;
 const policyDocuments = await getPolicyDocuments();
 ---
 
-<BaseLayout
- 
-  title="Parents' Information | Little Wise Kids"
-  description="Guidance for Little Wise Kids families covering school readiness, childcare funding, fees, settling in, family partnerships and nursery policies."
->
+<BaseLayout seo={seo} businessDetails={businessDetails}>
   <article class="parents-page">
     <SubpageHero
       id="parents-page-title"

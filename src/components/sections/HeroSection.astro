@@ -10,7 +10,7 @@ interface Props {
   businessDetails: BusinessDetails;
 }
 
-const { homePage } = Astro.props;
+const { homePage, businessDetails } = Astro.props;
 ---
 
 <Section class="hero-section" width="wide" aria-labelledby="hero-title">
@@ -30,6 +30,16 @@ const { homePage } = Astro.props;
       
       <div class="hero-paragraphs">
         <PortableContent value={homePage.heroParagraphs} />
+      </div>
+
+      <div class="hero-facts" style="margin-top: 1rem; font-size: 0.9rem;">
+        <p>
+          <strong>Age range:</strong> {businessDetails.ageRange.minimum} to {businessDetails.ageRange.maximum} years | 
+          <strong>Hours:</strong> {businessDetails.openingTime} - {businessDetails.closingTime} | 
+          <strong>Languages:</strong> {businessDetails.languages.join(", ")} | 
+          <strong>Ofsted:</strong> {businessDetails.ofstedRegistrationType || 'Registered'}
+        </p>
+        <p>Our dedicated early years setting is on Stapleton Road in Easton, within easy reach of Lawrence Hill and Bristol city centre.</p>
       </div>
 
       <div class="hero__actions">

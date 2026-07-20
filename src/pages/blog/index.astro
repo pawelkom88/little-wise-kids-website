@@ -6,25 +6,49 @@ import Icon from "../../components/icons/Icon.astro";
 import SubpageHero from "../../components/layout/SubpageHero.astro";
 import PortableContent from "../../components/content/PortableContent.astro";
 import SanityImage from "../../components/media/SanityImage.astro";
-import { getBlogPage, getBlogPosts } from "../../utils/sanity";
+import { getBlogPage, getBlogPosts, getBusinessDetails } from "../../utils/sanity";
 import { mapBlogPost, blogCategories } from "../../lib/blog";
+import type { SeoConfig } from "../../lib/seo/types";
 import "./blog.css";
 
 const blogPage = await getBlogPage();
 const posts = await getBlogPosts();
+const businessDetails = await getBusinessDetails();
 const articles = posts.map(mapBlogPost);
 
 const primaryFeaturedArticle = articles.find((a) => a.featured) ?? null;
 const standardArticles = primaryFeaturedArticle
   ? articles.filter((a) => a.slug !== primaryFeaturedArticle.slug)
   : articles;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, "") : "https://littlewisekids.co.uk";
+
+const seo: SeoConfig = {
+  title: "Nursery News and Early Years Advice | Little Wise Kids",
+  description: "Read nursery news, early years guidance, parenting ideas, nutrition advice and community updates from Little Wise Kids in Bristol BS5.",
+  canonicalPath: "/blog",
+  schemas: [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": `${siteUrl}/`
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": `${siteUrl}/blog`
+        }
+      ]
+    }
+  ]
+};
 ---
 
-<BaseLayout
- 
-  title="Nursery News and Early Years Advice | Little Wise Kids"
-  description="Read nursery news, early years guidance, parenting ideas, nutrition advice and community updates from Little Wise Kids in Bristol BS5."
->
+<BaseLayout seo={seo} businessDetails={businessDetails}>
   <article class="blog-page">
     <SubpageHero id="blog-page-title" eyebrow={blogPage.heroEyebrow} tone="purple">
       <Fragment slot="title">

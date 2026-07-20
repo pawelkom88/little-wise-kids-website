@@ -74,6 +74,20 @@ export const blogPost = defineType({
       type: "blogPortableText",
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: "authorName",
+      title: "Author Name",
+      description: "The name of the author or reviewer for this post.",
+      type: "string",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "authorRole",
+      title: "Author Role",
+      description: "The role of the author (e.g. 'Setting Manager').",
+      type: "string",
+      validation: (rule) => rule.required(),
+    }),
   ],
   preview: {
     select: {

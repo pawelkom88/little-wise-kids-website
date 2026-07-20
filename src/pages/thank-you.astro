@@ -6,16 +6,21 @@ import Container from "../components/layout/Container.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
-import { getThankYouPage } from "../utils/sanity";
+import { getThankYouPage, getBusinessDetails } from "../utils/sanity";
+import type { SeoConfig } from "../lib/seo/types";
 
 const thankYouPage = await getThankYouPage();
+const businessDetails = await getBusinessDetails();
+
+const seo: SeoConfig = {
+  title: "Thank You | Little Wise Kids",
+  description: "Thank you for contacting Little Wise Kids. Our nursery team will review your enquiry and respond as soon as possible.",
+  canonicalPath: "/thank-you",
+  robots: "noindex",
+};
 ---
 
-<BaseLayout
- 
-  title="Thank You | Little Wise Kids"
-  description="Thank you for contacting Little Wise Kids. Our nursery team will review your enquiry and respond as soon as possible."
->
+<BaseLayout seo={seo} businessDetails={businessDetails}>
   <article class="contact-success">
     <SubpageHero
       id="thank-you-title"
