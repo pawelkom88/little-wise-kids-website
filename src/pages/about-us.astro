@@ -302,21 +302,6 @@ const learningFoundations = [
 
                 <div class="lwk-about__prose">
                   <PortableContent value={aboutPage.leadershipParagraphs} />
-                  
-                  <div class="lwk-about__trust-block" style="margin-top: 2rem; padding: 1.5rem; background: var(--color-purple-50); border-radius: var(--radius-md);">
-                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Registered and accountable</h3>
-                    <p style="font-size: 0.95rem; margin-bottom: 0.5rem;">
-                      <strong>Registration:</strong> {businessDetails.ofstedRegistrationType || 'Childminder without Domestic Premises'}<br>
-                      <strong>Ofsted URN:</strong> {businessDetails.ofstedUrn || 'Pending'}
-                    </p>
-                    {businessDetails.ofstedRecordUrl && (
-                      <p style="font-size: 0.95rem;">
-                        <a href={businessDetails.ofstedRecordUrl} target="_blank" rel="noopener noreferrer" style="color: var(--color-purple-600); text-decoration: underline;">
-                          View our official Ofsted record
-                        </a>
-                      </p>
-                    )}
-                  </div>
                 </div>
               </div>
             </div>

@@ -5,7 +5,7 @@ import "./Button.css";
 interface Props {
   href?: string;
   variant?: "primary" | "secondary";
-  icon?: "arrowRight" | "heart" | "calendar";
+  icon?: "arrowRight" | "heart" | "calendar" | "none";
   class?: string;
   type?: "button" | "submit" | "reset";
 }
@@ -27,12 +27,12 @@ const classes = ["button", `button--${variant}`, className]
   href ? (
     <a class={classes} href={href}>
       <slot />
-      <Icon name={icon} size={20} />
+      {icon !== "none" && <Icon name={icon as any} size={20} />}
     </a>
   ) : (
     <button class={classes} type={type}>
       <slot />
-      <Icon name={icon} size={20} />
+      {icon !== "none" && <Icon name={icon as any} size={20} />}
     </button>
   )
 }

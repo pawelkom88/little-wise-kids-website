@@ -43,51 +43,87 @@ const { businessDetails } = Astro.props;
       }
     </nav>
 
-    <details class="mobile-menu" data-mobile-menu>
-      <summary class="mobile-menu__toggle" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </summary>
-      <div class="mobile-menu__panel">
-        <div class="mobile-menu__top">
-          <Image
-            class="mobile-menu__logo"
-            src={logoImg}
-            alt={businessDetails.organizationName || "Little Wise Kids"}
-            width={160}
-            height={80}
-            layout="fixed"
-          />
-          <button
-            class="mobile-menu__close"
-            type="button"
-            aria-label="Close menu"
-            data-mobile-close><Icon name="close" size={32} /></button
-          >
-        </div>
-        <nav class="mobile-menu__nav" aria-label="Mobile primary navigation">
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      data-mobile-toggle
+    >
+      <span class="menu-toggle__bar" aria-hidden="true"></span>
+    </button>
+
+    <div
+      class="mobile-menu-panel"
+      id="mobile-menu"
+      aria-hidden="true"
+      data-mobile-panel
+    >
+      <div class="mobile-menu-panel__surface" aria-hidden="true"></div>
+
+      <a class="mobile-menu-panel__brand" href="/">
+        <Image
+          class="mobile-menu-panel__logo"
+          src={logoImg}
+          alt={`${businessDetails.organizationName || "Little Wise Kids"} home`}
+          width={160}
+          height={80}
+          layout="fixed"
+        />
+      </a>
+
+      <nav aria-label="Mobile primary navigation">
+        <ul class="nav-list">
           {
             navItems.map((item) => (
-              <a
-                class={`mobile-menu__link tone-${item.tone}`}
-                href={item.href}
-                data-nav-link
-              >
-                <span class="mobile-menu__icon">
-                  <Icon name={item.icon} size={30} />
-                </span>
-                <>
-                  <span>{item.label}</span>
-                  <Icon name="arrowRight" size={22} />
-                </>
-              </a>
+              <li>
+                <a
+                  class={`nav-item tone-${item.tone}`}
+                  href={item.href}
+                  data-nav-link
+                >
+                  <span class="nav-icon" aria-hidden="true">
+                    <Icon name={item.icon} size={28} />
+                  </span>
+                  <span class="nav-item__label">{item.label}</span>
+                  <svg class="nav-arrow" viewBox="0 0 20 34" aria-hidden="true">
+                    <path d="m3 3 13 14L3 31" />
+                  </svg>
+                </a>
+              </li>
             ))
           }
-        </nav>
-        <Button href="/contact" icon="calendar" class="mobile-menu__cta"
-          >Book a Visit</Button
-        >
+        </ul>
+      </nav>
+
+      <div class="menu-decoration" aria-hidden="true">
+        <svg class="deco-star deco-star--top-right" viewBox="0 0 40 40"><path d="m20 5 4.5 9.2 10.2 1.5-7.4 7.2 1.7 10.1-9-4.8-9 4.8 1.7-10.1-7.4-7.2 10.2-1.5L20 5Z"/></svg>
+        <span class="deco-dot deco-dot--top"></span>
+        <span class="deco-dot deco-dot--top-small"></span>
+        <svg class="deco-star deco-star--top-left" viewBox="0 0 40 40"><path d="m20 5 4.5 9.2 10.2 1.5-7.4 7.2 1.7 10.1-9-4.8-9 4.8 1.7-10.1-7.4-7.2 10.2-1.5L20 5Z"/></svg>
+        <svg class="deco-line deco-line--top-left" viewBox="0 0 120 100"><path d="M-4 20c31-18 57-8 57 17 0 21-27 29-39 48"/></svg>
+        <svg class="deco-line deco-line--top-right" viewBox="0 0 220 120"><path d="M3 105c27-59 76-62 103-39 22 19 8 43-14 31-25-14 6-51 33-28 19 16 48 31 94 17"/></svg>
+
+        <svg class="deco-star deco-star--bottom-left" viewBox="0 0 40 40"><path d="m20 5 4.5 9.2 10.2 1.5-7.4 7.2 1.7 10.1-9-4.8-9 4.8 1.7-10.1-7.4-7.2 10.2-1.5L20 5Z"/></svg>
+        <span class="deco-dot deco-dot--bottom-left"></span>
+        <svg class="deco-star deco-star--contact" viewBox="0 0 40 40"><path d="m20 5 4.5 9.2 10.2 1.5-7.4 7.2 1.7 10.1-9-4.8-9 4.8 1.7-10.1-7.4-7.2 10.2-1.5L20 5Z"/></svg>
+        <svg class="deco-star deco-star--bottom-mid" viewBox="0 0 40 40"><path d="m20 5 4.5 9.2 10.2 1.5-7.4 7.2 1.7 10.1-9-4.8-9 4.8 1.7-10.1-7.4-7.2 10.2-1.5L20 5Z"/></svg>
+        <span class="deco-dot deco-dot--bottom-mid"></span>
+        <svg class="deco-star deco-star--bottom-right" viewBox="0 0 40 40"><path d="m20 5 4.5 9.2 10.2 1.5-7.4 7.2 1.7 10.1-9-4.8-9 4.8 1.7-10.1-7.4-7.2 10.2-1.5L20 5Z"/></svg>
+        <span class="deco-dot deco-dot--bottom-right"></span>
+        <svg class="deco-line deco-line--bottom" viewBox="0 0 220 160"><path d="M4 9c48 1 70 27 69 63-1 37 20 68 62 57 28-8 41-38 83-41"/></svg>
       </div>
-    </details>
+
+      <svg class="menu-waves" viewBox="0 0 920 300" preserveAspectRatio="none" aria-hidden="true">
+        <path class="menu-waves__back" d="M0 190C92 232 158 218 238 174c88-49 162-45 246 6 91 55 166 58 248 9 73-44 128-48 188-16v127H0Z"/>
+        <path class="menu-waves__front" d="M0 210c83-57 157-60 240-15 95 52 181 58 267 18 91-43 174-46 260-4 59 29 105 31 153 10v81H0Z"/>
+      </svg>
+
+      <Button class="mobile-menu-cta" href="/contact/#contact-form" icon="none">
+        Book a Visit
+      </Button>
+    </div>
   </Container>
 </header>
 

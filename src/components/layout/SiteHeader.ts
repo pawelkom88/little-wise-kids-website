@@ -3,22 +3,35 @@ const initHeader = () => {
   if (!header || header.dataset.ready) return;
   header.dataset.ready = "true";
 
-  const mobile =
-    header.querySelector<HTMLDetailsElement>("[data-mobile-menu]")!;
-  const mobileSummary = mobile.querySelector<HTMLElement>("summary")!;
-  const mobileClose = mobile.querySelector<HTMLButtonElement>(
-    "[data-mobile-close]"
-  )!;
+  const body = document.body;
+  const toggle = header.querySelector<HTMLButtonElement>("[data-mobile-toggle]");
+  const panel = header.querySelector<HTMLElement>("[data-mobile-panel]");
 
-  mobileClose.addEventListener("click", () => {
-    mobile.open = false;
-    mobileSummary.focus();
+  if (!toggle || !panel) return;
+
+  const setOpen = (open: boolean) => {
+    const updateState = () => {
+      body.classList.toggle("menu-open", open);
+      panel.setAttribute("aria-hidden", String(!open));
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    };
+
+    if ("startViewTransition" in document) {
+      (document as any).startViewTransition(updateState);
+    } else {
+      updateState();
+    }
+  };
+
+  toggle.addEventListener("click", () => {
+    setOpen(!body.classList.contains("menu-open"));
   });
 
-  mobile.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && mobile.open) {
-      mobile.open = false;
-      mobileSummary.focus();
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && body.classList.contains("menu-open")) {
+      setOpen(false);
+      toggle.focus();
     }
   });
 
@@ -26,13 +39,15 @@ const initHeader = () => {
     .querySelectorAll<HTMLAnchorElement>("[data-nav-link]")
     .forEach((link) =>
       link.addEventListener("click", () => {
-        mobile.open = false;
+        setOpen(false);
       })
     );
 
   const desktopViewport = matchMedia("(min-width: 64rem)");
   const resetForBreakpoint = () => {
-    if (desktopViewport.matches) mobile.open = false;
+    if (desktopViewport.matches) {
+      setOpen(false);
+    }
   };
   desktopViewport.addEventListener("change", resetForBreakpoint);
 };
