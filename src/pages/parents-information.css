@@ -52,12 +52,12 @@
 }
 
 .parents-card--green {
-  --parents-accent: var(--color-green-dark);
+  --parents-accent: var(--color-green-strong);
   --parents-soft: var(--color-green-soft);
 }
 
 .parents-card--blue {
-  --parents-accent: var(--color-blue-dark);
+  --parents-accent: var(--color-blue-strong);
   --parents-soft: var(--color-blue-soft);
 }
 

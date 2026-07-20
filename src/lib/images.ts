@@ -1,4 +1,3 @@
-// @ts-ignore
 import { sanityClient } from "sanity:client";
 import { createImageUrlBuilder } from "@sanity/image-url";
 
@@ -11,7 +10,9 @@ export function isValidImageRef(ref: string | undefined): boolean {
   return assetRefPattern.test(ref);
 }
 
-export function urlFor(source: Record<string, unknown>) {
+type ImageSource = Parameters<typeof builder.image>[0];
+
+export function urlFor(source: ImageSource) {
   const s = source as Record<string, Record<string, string>>;
   if (!s?.asset?._ref || !isValidImageRef(s.asset._ref)) {
     const fallback: Record<string, unknown> = {};
@@ -23,7 +24,7 @@ export function urlFor(source: Record<string, unknown>) {
     fallback.quality = () => fallback;
     return fallback as unknown as ReturnType<typeof builder.image>;
   }
-  return builder.image(source as any);
+  return builder.image(source);
 }
 
 export function getImageUrl(source: Record<string, unknown>, w = 1200): string | null {

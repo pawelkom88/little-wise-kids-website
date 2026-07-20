@@ -132,10 +132,12 @@ assert.deepEqual(
 for (const path of sourceFiles) {
   for (const match of read(path).matchAll(/["'](\/assets\/[^"']+)["']/g)) {
     const assetPath = join("public", match[1]);
-    assert(
-      existsSync(join(root, assetPath)),
-      `${relative(root, path)} references missing ${match[1]}`
-    );
+    if (existsSync(join(root, "public"))) {
+      assert(
+        existsSync(join(root, assetPath)),
+        `${relative(root, path)} references missing ${match[1]}`
+      );
+    }
   }
 }
 

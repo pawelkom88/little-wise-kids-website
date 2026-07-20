@@ -159,7 +159,7 @@
   --blog-card-accent: color-mix(
     in srgb,
     var(--color-yellow),
-    var(--color-ink) 28%
+    var(--color-ink) 50%
   );
   --blog-card-soft: var(--color-yellow-soft);
 }

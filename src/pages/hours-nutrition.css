@@ -48,7 +48,7 @@
 }
 
 .hours-card--green {
-  --hours-accent: var(--color-green-dark);
+  --hours-accent: var(--color-green-strong);
   --hours-soft: var(--color-green-soft);
 }
 
@@ -242,7 +242,7 @@
   padding: var(--space-xs) var(--space-s);
   border-radius: var(--radius-pill);
   color: var(--color-surface);
-  background: var(--color-green-dark);
+  background: var(--hours-accent);
   font-family: var(--font-heading);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-compact);
