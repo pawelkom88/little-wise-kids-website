@@ -16,7 +16,7 @@ const businessDetails = await getBusinessDetails();
 
 const seo: SeoConfig = {
   title: "Nursery Photo Gallery | Little Wise Kids Easton",
-  description: "View our indoor and outdoor learning environments in Easton, Bristol. See how our home-from-home setting supports child-led discovery and multilingual play.",
+  description: "View our indoor and outdoor learning environments in Easton, Bristol BS5. See how our setting supports child-led discovery and multilingual play.",
   canonicalPath: "/our-gallery",
 };
 
@@ -45,18 +45,14 @@ const categoryEntries = Object.entries(categories);
 
 <BaseLayout seo={seo} businessDetails={businessDetails}>
   <article class="gallery-page">
-    <SubpageHero id="gallery-page-title" eyebrow={galleryPage.heroEyebrow ?? "Our Gallery"} tone="blue">
-      <Fragment slot="title">
-        <span>{galleryPage.heroTitleLineOne}</span>
-        <span>{galleryPage.heroTitleLineTwo}</span>
-      </Fragment>
-
+    <SubpageHero 
+      id="gallery-page-title" 
+      eyebrow={galleryPage.heroEyebrow ?? "Our Gallery"} 
+      tone="blue"
+      titleLineOne={galleryPage.heroTitleLineOne}
+      titleLineTwo={galleryPage.heroTitleLineTwo}
+    >
       <PortableContent value={galleryPage.heroParagraphs} />
-
-      <a class="gallery-hero__cta" href="/contact#contact-form">
-        {galleryPage.heroCtaLabel}
-        <span aria-hidden="true">→</span>
-      </a>
     </SubpageHero>
 
     <div class="gallery-page__content">
@@ -126,23 +122,6 @@ const categoryEntries = Object.entries(categories);
             }
           </div>
         </section>
-
-        <aside class="gallery-cta">
-          <span class="gallery-cta__icon" aria-hidden="true">
-            <Icon name="heart" size={34} />
-          </span>
-
-          <div class="gallery-cta__copy">
-            <h2>{galleryPage.finalCtaHeading}</h2>
-
-            <PortableContent value={galleryPage.finalCtaCopy} />
-          </div>
-
-          <a class="gallery-cta__link" href="/contact#contact-form">
-            {galleryPage.finalCtaLabel}
-            <span aria-hidden="true">→</span>
-          </a>
-        </aside>
       </Container>
     </div>
   </article>

@@ -543,79 +543,10 @@
 }
 
 /*
- * Contact banner
- */
-
-.hours-contact {
-  display: grid;
-  grid-template-columns:
-    4rem
-    minmax(0, 1fr)
-    auto;
-  gap: var(--space-s);
-  align-items: center;
-  width: 100%;
-  padding: var(--space-m) var(--space-l);
-  border: 1px solid
-    color-mix(in srgb, var(--color-yellow) 32%, var(--color-border));
-  border-radius: var(--radius-l);
-  background: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--color-yellow-soft) 76%, var(--color-surface)),
-    var(--color-surface)
-  );
-}
-
-.hours-contact__icon {
-  display: grid;
-  width: 4rem;
-  aspect-ratio: 1;
-  place-items: center;
-  border: 1px solid
-    color-mix(in srgb, var(--color-yellow) 42%, var(--color-border));
-  border-radius: 50%;
-  color: color-mix(in srgb, var(--color-yellow), var(--color-ink) 24%);
-  background: var(--color-surface);
-}
-
-.hours-contact__copy h2 {
-  margin-bottom: 0.25rem;
-  color: color-mix(in srgb, var(--color-yellow), var(--color-ink) 38%);
-}
-
-.hours-contact__copy p {
-  color: var(--color-ink-soft);
-  line-height: var(--line-height-compact);
-  text-wrap: pretty;
-}
-
-.hours-contact__link {
-  display: inline-flex;
-  min-width: 10rem;
-  min-height: 3.25rem;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-xs);
-  padding: var(--space-xs) var(--space-m);
-  border-radius: var(--radius-m);
-  color: var(--color-ink);
-  background: var(--color-yellow);
-  font-family: var(--font-heading);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-compact);
-  text-decoration: none;
-}
-
-.hours-contact__link span {
-  font-size: var(--font-size-large);
-}
-
-/*
  * Focus states
  */
 
-.hours-card__note-link:focus-visible,
-.hours-contact__link:focus-visible {
+.hours-card__note-link:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--color-purple) 52%, transparent);
   outline-offset: 3px;
 }
@@ -626,7 +557,6 @@
 
 @media (hover: hover) {
   .hours-card__note-link,
-  .hours-contact__link,
   .nutrition-feature,
   .hours-day__event {
     transition:
@@ -635,8 +565,7 @@
       filter 180ms ease;
   }
 
-  .hours-card__note-link:hover,
-  .hours-contact__link:hover {
+  .hours-card__note-link:hover {
     filter: brightness(1.03);
     transform: translateY(-0.1rem);
   }
@@ -692,8 +621,7 @@
     gap: var(--space-m);
   }
 
-  .hours-card,
-  .hours-contact {
+  .hours-card {
     border-radius: var(--radius-m);
   }
 
@@ -803,22 +731,6 @@
   .hours-day__item:nth-child(even) .hours-day__event::after {
     right: auto;
     left: calc(var(--space-s) * -1);
-  }
-
-  .hours-contact {
-    grid-template-columns:
-      3.5rem
-      minmax(0, 1fr);
-    padding: var(--space-m);
-  }
-
-  .hours-contact__icon {
-    width: 3.5rem;
-  }
-
-  .hours-contact__link {
-    grid-column: 1 / -1;
-    width: 100%;
   }
 }
 
@@ -1114,14 +1026,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   .hours-card__note-link,
-  .hours-contact__link,
   .nutrition-feature,
   .hours-day__event {
     transition: none;
   }
 
   .hours-card__note-link:hover,
-  .hours-contact__link:hover,
   .nutrition-feature:hover,
   .hours-day__event:hover {
     transform: none;

@@ -3,6 +3,8 @@ import "./SubpageHero.css";
 
 interface Props {
   title?: string;
+  titleLineOne?: string;
+  titleLineTwo?: string;
   eyebrow?: string;
   tone?: "purple" | "green" | "blue" | "yellow";
   align?: "left" | "center";
@@ -13,6 +15,8 @@ interface Props {
 
 const {
   title,
+  titleLineOne,
+  titleLineTwo,
   eyebrow,
   tone = "purple",
   align = "center",
@@ -36,7 +40,13 @@ const wrapperClasses = [
     {eyebrow && <p class="subpage-hero__eyebrow">{eyebrow}</p>}
 
     <h1 id={id} class="subpage-hero__title" itemprop={itemprop}>
-      <slot name="title">{title}</slot>
+      <slot name="title">
+        {titleLineOne && titleLineTwo ? (
+          <Fragment><span>{titleLineOne} </span><span>{titleLineTwo}</span></Fragment>
+        ) : (
+          title
+        )}
+      </slot>
     </h1>
 
     <div class="subpage-hero__copy">

@@ -8,6 +8,20 @@ export const blogPost = defineType({
   icon: DocumentIcon,
   fields: [
     defineField({
+      name: "publicationStatus",
+      title: "Publication status",
+      type: "string",
+      initialValue: "draft",
+      options: {
+        list: [
+          { title: "Draft", value: "draft" },
+          { title: "Published", value: "published" },
+        ],
+        layout: "radio",
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: "title",
       title: "Title",
       description: "The title of the blog post.",
@@ -66,6 +80,7 @@ export const blogPost = defineType({
       title: "Featured Image",
       description: "The main image used for the post header and thumbnail cards.",
       type: "strictImage",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "body",

@@ -278,9 +278,6 @@ export interface HoursNutritionPage {
   lunch: DailyRhythmSlot;
   restAndQuietTime: DailyRhythmSlot;
   afternoonPlayAndHome: DailyRhythmSlot;
-  contactPanelTitle: string;
-  contactPanelCopy: string;
-  contactPanelCtaLabel: string;
 }
 
 export interface ParentsPage {

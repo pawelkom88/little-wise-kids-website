@@ -20,7 +20,8 @@ export function buildArticleSchema(post: BlogPost, siteUrl: string, postUrl: str
       ...(post.authorName ? {
         "author": {
           "@type": "Person",
-          "name": post.authorName
+          "name": post.authorName,
+          ...(post.authorRole ? { "jobTitle": post.authorRole } : {})
         }
       } : {}),
       "publisher": {

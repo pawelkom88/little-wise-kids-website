@@ -94,11 +94,9 @@ const dailyRhythm = [
       id="hours-page-title"
       eyebrow={hoursNutritionPage.heroEyebrow}
       tone="green"
+      titleLineOne={hoursNutritionPage.heroTitleLineOne}
+      titleLineTwo={hoursNutritionPage.heroTitleLineTwo}
     >
-      <Fragment slot="title">
-        <span>{hoursNutritionPage.heroTitleLineOne}</span>
-        <span>{hoursNutritionPage.heroTitleLineTwo}</span>
-      </Fragment>
 
       <PortableContent value={hoursNutritionPage.heroParagraphs} />
     </SubpageHero>
@@ -130,6 +128,12 @@ const dailyRhythm = [
 
                 <div class="hours-card__prose">
                   <PortableContent value={hoursNutritionPage.operatingHoursParagraphs} />
+
+                  <h3>Flexible Sessions</h3>
+                  <p>We offer both full-day and half-day sessions to suit your family’s routine. While we recommend a minimum attendance to help children settle and build relationships, we are happy to discuss flexible arrangements.</p>
+
+                  <h3>Holidays & Closures</h3>
+                  <p>We are open year-round, closing only for Bank Holidays and for a short period between Christmas and New Year. Exact closure dates are shared with parents well in advance.</p>
                 </div>
               </div>
 
@@ -195,6 +199,12 @@ const dailyRhythm = [
 
                 <div class="hours-card__prose">
                   <PortableContent value={hoursNutritionPage.nutritionParagraphs} />
+
+                  <h3>Allergies & Dietary Requirements</h3>
+                  <p>We take dietary requirements very seriously. All meals are prepared in a dedicated, clean environment, and we work closely with parents to ensure all allergies and intolerances are safely accommodated.</p>
+
+                  <h3>Sample Menu</h3>
+                  <p>Our home-cooked meals vary daily. A typical day might include porridge or fresh fruit for breakfast, a hot lunch like mild vegetable curry with rice, and a healthy afternoon snack such as hummus with carrot sticks.</p>
                 </div>
               </div>
 
@@ -272,25 +282,6 @@ const dailyRhythm = [
               }
             </ol>
           </section>
-
-          <aside class="hours-contact" aria-labelledby="hours-contact-title">
-            <span class="hours-contact__icon" aria-hidden="true">
-              <Icon name="heart" size={32} />
-            </span>
-
-            <div class="hours-contact__copy">
-              <h2 id="hours-contact-title">{hoursNutritionPage.contactPanelTitle}</h2>
-
-              <p>
-                {hoursNutritionPage.contactPanelCopy}
-              </p>
-            </div>
-
-            <a class="hours-contact__link" href="/contact#contact-form">
-              {hoursNutritionPage.contactPanelCtaLabel}
-              <span aria-hidden="true">→</span>
-            </a>
-          </aside>
         </div>
       </Container>
     </div>

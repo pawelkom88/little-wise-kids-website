@@ -27,11 +27,9 @@ const seo: SeoConfig = {
       eyebrow={thankYouPage.heroEyebrow ?? "Message Received"}
       tone="blue"
       class="contact-hero--success"
+      titleLineOne={thankYouPage.heroTitleLineOne}
+      titleLineTwo={thankYouPage.heroTitleLineTwo}
     >
-      <Fragment slot="title">
-        <span>{thankYouPage.heroTitleLineOne}</span>
-        <span>{thankYouPage.heroTitleLineTwo}</span>
-      </Fragment>
 
       <PortableContent value={thankYouPage.heroParagraphs} />
     </SubpageHero>

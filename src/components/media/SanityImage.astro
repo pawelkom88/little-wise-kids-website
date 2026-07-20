@@ -40,7 +40,7 @@ const {
   priority = false,
   class: className,
   fit = "max",
-  quality = 80,
+  quality = 75,
 } = Astro.props;
 
 const assetRef = image?.asset?._ref;
@@ -52,7 +52,7 @@ let intrinsicWidth = 0;
 let intrinsicHeight = 0;
 
 if (validRef && image?.asset?._ref) {
-  const base = builder.image(image).auto("format").quality(quality).fit(fit);
+  const base = builder.image(image).format("webp").quality(quality).fit(fit);
 
   const match = image.asset._ref.match(/^image-[A-Za-z0-9]+-(\d+)x(\d+)-[a-z]+$/);
   if (match) {
@@ -68,7 +68,7 @@ if (validRef && image?.asset?._ref) {
   }
   srcset = srcsetParts.join(", ");
 
-  const defaultWidth = Math.min(intrinsicWidth || 1200, 1200);
+  const defaultWidth = Math.min(intrinsicWidth || 800, 800);
   fallbackUrl = base.width(defaultWidth).url();
 }
 
@@ -99,7 +99,7 @@ const decoding = priority ? "sync" : "async";
     fetchpriority={fetchpriority}
     class={className}
     style={aspectRatio && layout !== "fixed" ? { aspectRatio: `${intrinsicWidth}/${intrinsicHeight}`, width: "100%", height: "auto" } : undefined}
-    width={layout === "fixed" ? intrinsicWidth || undefined : undefined}
-    height={layout === "fixed" ? intrinsicHeight || undefined : undefined}
+    width={intrinsicWidth || undefined}
+    height={intrinsicHeight || undefined}
   />
 ) : null}

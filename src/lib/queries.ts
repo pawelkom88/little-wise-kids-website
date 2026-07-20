@@ -128,6 +128,7 @@ export async function getBlogPage(): Promise<BlogPage> {
 
 export const blogPostsQuery = `*[
   _type == "blogPost" &&
+  publicationStatus == "published" &&
   defined(slug.current) &&
   defined(publishedAt) &&
   publishedAt <= now()
@@ -142,6 +143,8 @@ export const blogPostsQuery = `*[
   excerpt,
   featuredImage,
   "imageUrl": featuredImage.asset->url,
+  authorName,
+  authorRole,
   body[]{
     ...,
     markDefs[]{
@@ -158,7 +161,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
   return await sanityClient.fetch<BlogPost[]>(blogPostsQuery);
 }
 
-export const blogPostBySlugQuery = `*[_type == "blogPost" && slug.current == $slug][0]{
+export const blogPostBySlugQuery = `*[_type == "blogPost" && slug.current == $slug && publicationStatus == "published"][0]{
   _id,
   title,
   slug,
@@ -169,6 +172,8 @@ export const blogPostBySlugQuery = `*[_type == "blogPost" && slug.current == $sl
   excerpt,
   featuredImage,
   "imageUrl": featuredImage.asset->url,
+  authorName,
+  authorRole,
   body[]{
     ...,
     markDefs[]{

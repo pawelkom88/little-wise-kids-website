@@ -227,31 +227,6 @@ export const hoursNutritionPage = defineType({
               }
             ),
       })
-    ),
-
-    defineField({
-      name: "contactPanelTitle",
-      title: "Contact Panel Title",
-      description: "Title for the contact callout.",
-      type: "string",
-      group: "contactPanel",
-      validation: (rule) => rule.required().max(50),
-    }),
-    defineField({
-      name: "contactPanelCopy",
-      title: "Contact Panel Copy",
-      description: "Text inside the contact callout.",
-      type: "text",
-      group: "contactPanel",
-      validation: (rule) => rule.required().max(150),
-    }),
-    defineField({
-      name: "contactPanelCtaLabel",
-      title: "Contact Panel CTA Label",
-      description: "Button text for the contact callout.",
-      type: "string",
-      group: "contactPanel",
-      validation: (rule) => rule.required().max(30),
-    }),
+    )
   ],
 });

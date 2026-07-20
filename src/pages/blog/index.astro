@@ -50,11 +50,13 @@ const seo: SeoConfig = {
 
 <BaseLayout seo={seo} businessDetails={businessDetails}>
   <article class="blog-page">
-    <SubpageHero id="blog-page-title" eyebrow={blogPage.heroEyebrow} tone="purple">
-      <Fragment slot="title">
-        <span>{blogPage.heroTitleLineOne}</span>
-        <span>{blogPage.heroTitleLineTwo}</span>
-      </Fragment>
+    <SubpageHero 
+      id="blog-page-title" 
+      eyebrow={blogPage.heroEyebrow} 
+      tone="purple"
+      titleLineOne={blogPage.heroTitleLineOne}
+      titleLineTwo={blogPage.heroTitleLineTwo}
+    >
 
       <PortableContent value={blogPage.heroParagraphs} />
     </SubpageHero>

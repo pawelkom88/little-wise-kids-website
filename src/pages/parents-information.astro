@@ -14,7 +14,7 @@ const businessDetails = await getBusinessDetails();
 
 const seo: SeoConfig = {
   title: "Parents' Information, Fees & Childcare Funding | Little Wise Kids",
-  description: "Information for families joining our Easton childcare setting, covering settling in, daily fees, Tax-Free Childcare, and 15/30 hours government funding.",
+  description: "Information for families joining our Easton childcare setting, covering settling in, daily fees, Tax-Free Childcare, and government funding.",
   canonicalPath: "/parents-information",
 };
 
@@ -63,11 +63,9 @@ const policyDocuments = await getPolicyDocuments();
       id="parents-page-title"
       eyebrow={parentsPage.heroEyebrow}
       tone="blue"
+      titleLineOne={parentsPage.heroTitleLineOne}
+      titleLineTwo={parentsPage.heroTitleLineTwo}
     >
-      <Fragment slot="title">
-        <span>{parentsPage.heroTitleLineOne}</span>
-        <span>{parentsPage.heroTitleLineTwo}</span>
-      </Fragment>
 
       <PortableContent value={parentsPage.heroParagraphs} />
     </SubpageHero>

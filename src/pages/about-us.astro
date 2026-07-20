@@ -27,7 +27,7 @@ const businessDetails = await getBusinessDetails();
 
 const seo: SeoConfig = {
   title: "About Our Child-Led Childcare Setting in Easton | Little Wise Kids",
-  description: "Meet the people and principles behind Little Wise Kids, a calm, home-from-home early years setting in Easton, Bristol, focused on trust, independence and child-led play.",
+  description: "Meet the team behind Little Wise Kids, a calm, home-from-home childcare setting in Easton, Bristol BS5, focused on child-led play.",
   canonicalPath: "/about-us",
 };
 
@@ -52,12 +52,13 @@ const learningFoundations = [
 <BaseLayout seo={seo} businessDetails={businessDetails}>
   <article class="about-page">
     <section id="about-us" class="lwk-about" aria-labelledby="about-page-title">
-      <SubpageHero id="about-page-title" eyebrow="About Us" tone="purple">
-        <Fragment slot="title">
-          <span>{aboutPage.heroTitleLineOne}</span>
-          <span>{aboutPage.heroTitleLineTwo}</span>
-        </Fragment>
-
+      <SubpageHero 
+        id="about-page-title" 
+        eyebrow="About Us" 
+        tone="purple"
+        titleLineOne={aboutPage.heroTitleLineOne}
+        titleLineTwo={aboutPage.heroTitleLineTwo}
+      >
         <PortableContent value={aboutPage.heroParagraphs} />
       </SubpageHero>
 

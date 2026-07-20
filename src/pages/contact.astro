@@ -26,7 +26,7 @@ const businessDetails = await getBusinessDetails();
 import type { SeoConfig } from "../lib/seo/types";
 const seo: SeoConfig = {
   title: "Contact Little Wise Kids | Nursery in Bristol BS5",
-  description: "Contact Little Wise Kids in Bristol BS5 to ask about nursery availability, book a visit, register your interest or learn more about our screen-free early years setting.",
+  description: "Contact Little Wise Kids in Bristol BS5 to ask about nursery availability, book a visit, or register for our screen-free early years setting.",
   canonicalPath: "/contact",
 };
 
@@ -51,11 +51,13 @@ const nextSteps = [
 
 <BaseLayout seo={seo} businessDetails={businessDetails}>
   <article class="contact-page">
-    <SubpageHero id="contact-page-title" eyebrow={contactPage.heroEyebrow} tone="blue">
-      <Fragment slot="title">
-        <span>{contactPage.heroTitleLineOne}</span>
-        <span>{contactPage.heroTitleLineTwo}</span>
-      </Fragment>
+    <SubpageHero 
+      id="contact-page-title" 
+      eyebrow={contactPage.heroEyebrow} 
+      tone="blue"
+      titleLineOne={contactPage.heroTitleLineOne}
+      titleLineTwo={contactPage.heroTitleLineTwo}
+    >
 
       <PortableContent value={contactPage.heroParagraphs} />
     </SubpageHero>
