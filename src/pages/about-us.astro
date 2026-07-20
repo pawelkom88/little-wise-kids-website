@@ -18,6 +18,10 @@ import iconSensory from "../assets/images/icon-sensory.png";
 import iconConfidence from "../assets/images/icon-confidence.png";
 import iconRelationships from "../assets/images/icon-relationships.png";
 
+import bubbleMultilingual from "../assets/images/bubble-multilingual.png";
+import bubbleHeart from "../assets/images/bubble-heart-with-smile.png";
+import bubbleArt from "../assets/images/bubble-art.png";
+
 const aboutPage = await getAboutPage();
 const businessDetails = await getBusinessDetails();
 
@@ -37,11 +41,11 @@ const approachPoints = [
 ] as const;
 
 const learningFoundations = [
-  { icon: "chat", tone: "purple", label: aboutPage.foundationCommunication },
-  { icon: "heart", tone: "green", label: aboutPage.foundationEmpathy },
-  { icon: "person", tone: "blue", label: aboutPage.foundationIndependence },
-  { icon: "palette", tone: "yellow", label: aboutPage.foundationCreativity },
-  { icon: "star", tone: "purple", label: aboutPage.foundationCriticalThinking },
+  { image: bubbleMultilingual, tone: "purple", label: aboutPage.foundationCommunication, alt: "Communication icon" },
+  { image: bubbleHeart, tone: "green", label: aboutPage.foundationEmpathy, alt: "Empathy icon" },
+  { image: iconPlay, tone: "blue", label: aboutPage.foundationIndependence, alt: "Independence icon" },
+  { image: bubbleArt, tone: "yellow", label: aboutPage.foundationCreativity, alt: "Creativity icon" },
+  { image: iconConfidence, tone: "purple", label: aboutPage.foundationCriticalThinking, alt: "Critical thinking icon" },
 ] as const;
 ---
 
@@ -97,8 +101,8 @@ const learningFoundations = [
                         <Image
                           src={point.image}
                           alt={point.alt}
-                          width={80}
-                          height={80}
+                          width={256}
+                          height={256}
                           quality={100}
                         />
                       </span>
@@ -229,7 +233,13 @@ const learningFoundations = [
                     `}
                         aria-hidden="true"
                       >
-                        <Icon name={foundation.icon} size={27} />
+                        <Image
+                          src={foundation.image}
+                          alt={foundation.alt}
+                          width={256}
+                          height={256}
+                          quality={100}
+                        />
                       </span>
 
                       <span>{foundation.label}</span>
