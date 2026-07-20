@@ -62,25 +62,8 @@ const hasPhotos = flatPhotos.length > 0;
     aria-labelledby="gallery-title"
     aria-roledescription="carousel"
   >
-    <span
-      class="lwk-gallery__trail lwk-gallery__trail--left"
-      aria-hidden="true"
-    >
-      <span>☆</span>
-    </span>
-
-    <span
-      class="lwk-gallery__trail lwk-gallery__trail--right"
-      aria-hidden="true"
-    >
-      <span>♡</span>
-    </span>
-
     <header class="lwk-gallery__header">
-      <span class="lwk-gallery__camera" aria-hidden="true">
-        <span class="lwk-gallery__camera-body"></span>
-      </span>
-
+      <div class="lwk-gallery-icon"><Icon name="sun" size={54} /></div>
       <h2 id="gallery-title">{homePage.galleryIntroTitle}</h2>
 
       <p>

@@ -81,10 +81,6 @@
   text-wrap: balance;
 }
 
-.lwk-footer__heading span {
-  color: var(--color-blue-dark);
-}
-
 .lwk-footer__summary {
   max-width: 48rem;
   margin-top: var(--space-s);
@@ -103,8 +99,6 @@
   border-radius: var(--radius-pill);
   color: var(--color-page);
   background: var(--color-purple-dark);
-  box-shadow: 0 0.75rem 1.75rem
-    color-mix(in srgb, var(--color-purple-dark), transparent 76%);
   font-family: var(--font-heading);
   font-weight: var(--font-weight-bold);
   transition:
@@ -317,8 +311,6 @@
 @media (hover: hover) {
   .lwk-footer__cta:hover {
     background: var(--color-purple-dark);
-    box-shadow: 0 1rem 2.2rem
-      color-mix(in srgb, var(--color-purple), transparent 68%);
     transform: translateY(-0.14rem);
   }
 

@@ -8,6 +8,7 @@
   border: 1px solid transparent;
   border-radius: var(--radius-pill);
   font-size: var(--font-size-small);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-solid);
   white-space: nowrap;
   transition:

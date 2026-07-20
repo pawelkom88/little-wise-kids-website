@@ -16,4 +16,5 @@ export type IconName =
   | "location"
   | "phone"
   | "facebook"
-  | "instagram";
+  | "instagram"
+  | "sun";

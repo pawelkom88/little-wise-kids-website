@@ -30,10 +30,8 @@ const { homePage } = Astro.props;
       <div class="lwk-visit__copy">
         <PortableContent value={homePage.visitParagraphs} />
       </div>
-
-      <div class="lwk-visit__actions">
-        <Button href="/contact" class="lwk-visit__primary"> {homePage.visitCtaLabel} </Button>
-      </div>
+<br>
+        <Button href="/contact/#contact-form"> {homePage.visitCtaLabel} </Button>
     </div>
 
     <figure class="lwk-visit-media">

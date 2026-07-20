@@ -301,7 +301,8 @@ details[open] .faq-answer {
 
   .faq-contact {
     grid-template-columns: 68px 1fr;
-    gap: 18px;
+    gap: 5px;
+    padding: var(--space-s);
   }
 
   .faq-contact__envelope {
@@ -317,7 +318,6 @@ details[open] .faq-answer {
 @media (width < 30rem) {
   .faq-contact {
     align-items: start;
-    padding: 20px 20px 92px;
   }
 
   .faq-contact__envelope {
