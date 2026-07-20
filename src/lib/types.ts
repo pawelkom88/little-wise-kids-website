@@ -382,10 +382,12 @@ export interface BlogPost {
   title: string;
   slug: { current: string };
   publishedAt: string;
+  _updatedAt: string;
   featured?: boolean;
   category: string;
   excerpt: string;
   featuredImage: StrictImage;
+  imageUrl?: string;
   body: PortableTextBlock[];
   authorName?: string;
   authorRole?: string;

@@ -40,7 +40,11 @@ const seo: SeoConfig = {
   description: article.excerpt,
   canonicalPath: `/blog/${post.slug.current}`,
   type: "article",
-  schemas: articleSchemas
+  schemas: articleSchemas,
+  publishedTime: post.publishedAt,
+  modifiedTime: post._updatedAt || post.publishedAt,
+  articleSection: article.categoryLabel,
+  ...(post.imageUrl ? { image: { url: post.imageUrl, alt: article.title } } : {})
 };
 ---
 

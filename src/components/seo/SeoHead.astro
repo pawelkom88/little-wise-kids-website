@@ -21,7 +21,7 @@ if (canonicalUrl.length > siteUrl.length + 1 && canonicalUrl.endsWith("/")) {
 
 const ogType = seo.type || defaultSeoConfig.type;
 const ogImage = seo.image || defaultSeoImage;
-const ogImageUrl = ogImage.url.startsWith("http") ? ogImage.url : `${siteUrl}${ogImage.url}`;
+const ogImageUrl = ogImage ? (ogImage.url.startsWith("http") ? ogImage.url : `${siteUrl}${ogImage.url}`) : undefined;
 ---
 
 <title>{seo.title}</title>
@@ -41,15 +41,15 @@ const ogImageUrl = ogImage.url.startsWith("http") ? ogImage.url : `${siteUrl}${o
 {seo.canonicalPath !== "omit" && (
   <meta property="og:url" content={canonicalUrl} />
 )}
-<meta property="og:image" content={ogImageUrl} />
-<meta property="og:image:alt" content={ogImage.alt} />
-{ogImage.width && <meta property="og:image:width" content={ogImage.width.toString()} />}
-{ogImage.height && <meta property="og:image:height" content={ogImage.height.toString()} />}
+{ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+{ogImage?.alt && <meta property="og:image:alt" content={ogImage.alt} />}
+{ogImage?.width && <meta property="og:image:width" content={ogImage.width.toString()} />}
+{ogImage?.height && <meta property="og:image:height" content={ogImage.height.toString()} />}
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={seo.title} />
 <meta name="twitter:description" content={seo.description} />
-<meta name="twitter:image" content={ogImageUrl} />
+{ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
 
 {ogType === "article" && seo.publishedTime && (
   <meta property="article:published_time" content={seo.publishedTime} />

@@ -1,6 +1,7 @@
-export function buildPageSchema(siteUrl: string, pageType: string = "WebPage") {
+export function buildPageSchema(siteUrl: string, canonicalUrl?: string, title?: string, description?: string, pageType: string = "WebPage") {
   const url = siteUrl.replace(/\/$/, "");
-  return [
+  
+  const graph: Record<string, unknown>[] = [
     {
       "@type": "WebSite",
       "@id": `${url}/#website`,
@@ -10,17 +11,24 @@ export function buildPageSchema(siteUrl: string, pageType: string = "WebPage") {
         "@id": `${url}/#childcare`
       },
       "inLanguage": "en-GB"
-    },
-    {
+    }
+  ];
+
+  if (canonicalUrl) {
+    graph.push({
       "@type": pageType,
-      "@id": `${url}/#webpage`,
-      "url": `${url}/`,
+      "@id": `${canonicalUrl}#webpage`,
+      "url": canonicalUrl,
+      ...(title ? { "name": title } : {}),
+      ...(description ? { "description": description } : {}),
       "isPartOf": {
         "@id": `${url}/#website`
       },
       "about": {
         "@id": `${url}/#childcare`
       }
-    }
-  ];
+    });
+  }
+
+  return graph;
 }

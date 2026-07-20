@@ -18,9 +18,17 @@ interface Props {
 const businessDetails = Astro.props.businessDetails ?? await getBusinessDetails();
 const { seo } = Astro.props;
 
-const siteUrl = Astro.site ? Astro.site.toString() : "https://littlewisekids.co.uk";
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, "") : "https://littlewisekids.co.uk";
+let canonicalUrl: string | undefined = `${siteUrl}${seo.canonicalPath}`;
+if (canonicalUrl.length > siteUrl.length + 1 && canonicalUrl.endsWith("/")) {
+  canonicalUrl = canonicalUrl.slice(0, -1);
+}
+if (seo.canonicalPath === "omit") {
+  canonicalUrl = undefined;
+}
+
 const businessSchema = buildBusinessSchema(businessDetails, siteUrl);
-const pageSchema = buildPageSchema(siteUrl, seo.type === "article" ? "ItemPage" : "WebPage");
+const pageSchema = buildPageSchema(siteUrl, canonicalUrl, seo.title, seo.description, seo.type === "article" ? "ItemPage" : "WebPage");
 const schemaGraph = [businessSchema, ...pageSchema, ...(seo.schemas || [])];
 ---
 

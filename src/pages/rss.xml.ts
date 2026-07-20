@@ -12,7 +12,7 @@ export const GET: APIRoute = async (context) => {
       title: post.title,
       pubDate: new Date(post.publishedAt),
       description: post.excerpt,
-      link: `/blog/${post.slug.current}/`,
+      link: `/blog/${post.slug.current}`,
     })),
     customData: `<language>en-gb</language>`,
   });

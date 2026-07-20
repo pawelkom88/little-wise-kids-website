@@ -127,10 +127,12 @@ export const blogPostsQuery = `*[
   title,
   slug,
   publishedAt,
+  _updatedAt,
   featured,
   category,
   excerpt,
   featuredImage,
+  "imageUrl": featuredImage.asset->url,
   body[]{
     ...,
     markDefs[]{
@@ -152,10 +154,12 @@ export const blogPostBySlugQuery = `*[_type == "blogPost" && slug.current == $sl
   title,
   slug,
   publishedAt,
+  _updatedAt,
   featured,
   category,
   excerpt,
   featuredImage,
+  "imageUrl": featuredImage.asset->url,
   body[]{
     ...,
     markDefs[]{

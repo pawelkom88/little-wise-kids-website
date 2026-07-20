@@ -13,14 +13,16 @@ export function buildArticleSchema(post: BlogPost, siteUrl: string, postUrl: str
       },
       "url": postUrl,
       "datePublished": post.publishedAt,
-      "dateModified": post.publishedAt,
-      "image": [
-        `${url}/assets/images/hero-image.png`
-      ],
-      "author": {
-        "@type": "Person",
-        "name": post.authorName || "Little Wise Kids Team"
-      },
+      "dateModified": post._updatedAt || post.publishedAt,
+      ...(post.imageUrl ? {
+        "image": [post.imageUrl]
+      } : {}),
+      ...(post.authorName ? {
+        "author": {
+          "@type": "Person",
+          "name": post.authorName
+        }
+      } : {}),
       "publisher": {
         "@type": "Organization",
         "name": "Little Wise Kids",

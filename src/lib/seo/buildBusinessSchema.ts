@@ -55,15 +55,12 @@ export function buildBusinessSchema(businessDetails: BusinessDetails, siteUrl: s
         "value": businessDetails.ofstedUrn
       }
     } : {}),
-    "hasMap": businessDetails.address?.mapUrl,
-    "areaServed": businessDetails.approvedAreaServed?.map(area => ({
-      "@type": "Place",
-      "name": area
-    })) || [
-      {
+    ...(businessDetails.address?.mapUrl ? { "hasMap": businessDetails.address.mapUrl } : {}),
+    ...(businessDetails.approvedAreaServed && businessDetails.approvedAreaServed.length > 0 ? {
+      "areaServed": businessDetails.approvedAreaServed.map(area => ({
         "@type": "Place",
-        "name": "Easton, Bristol"
-      }
-    ]
+        "name": area
+      }))
+    } : {})
   };
 }

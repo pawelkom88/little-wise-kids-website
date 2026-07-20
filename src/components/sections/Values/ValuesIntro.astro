@@ -11,6 +11,42 @@ interface Props {
 }
 
 const { homePage } = Astro.props;
+
+const originalParagraphs = homePage.valuesIntroParagraphs || [];
+let paragraphs = originalParagraphs;
+
+if (originalParagraphs.length === 4) {
+  paragraphs = [
+    {
+      ...originalParagraphs[0],
+      children: [
+        ...originalParagraphs[0].children,
+        { _key: "space-1", _type: "span", text: " ", marks: [] },
+        ...originalParagraphs[1].children
+      ]
+    },
+    {
+      ...originalParagraphs[2],
+      children: [
+        ...originalParagraphs[2].children,
+        { _key: "space-2", _type: "span", text: " ", marks: [] },
+        ...originalParagraphs[3].children
+      ]
+    }
+  ];
+} else if (originalParagraphs.length === 3) {
+  paragraphs = [
+    {
+      ...originalParagraphs[0],
+      children: [
+        ...originalParagraphs[0].children,
+        { _key: "space-1", _type: "span", text: " ", marks: [] },
+        ...originalParagraphs[1].children
+      ]
+    },
+    originalParagraphs[2]
+  ];
+}
 ---
 
 <section
@@ -127,7 +163,7 @@ const { homePage } = Astro.props;
     </div>
 
     <div class="lwk-values-intro__copy">
-      <PortableContent value={homePage.valuesIntroParagraphs} />
+      <PortableContent value={paragraphs} />
     </div>
   </div>
 </section>
