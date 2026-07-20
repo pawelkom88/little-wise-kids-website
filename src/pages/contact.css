@@ -57,6 +57,10 @@
   padding: clamp(var(--space-l), 5vw, var(--space-2xl));
 }
 
+#contact-form {
+  scroll-margin-block: var(--section-spacing);
+}
+
 /*
  * Section headings
  */

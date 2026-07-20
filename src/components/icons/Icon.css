@@ -2,3 +2,14 @@
   flex: none;
   stroke-width: 2;
 }
+
+.sun-rays {
+  transform-origin: 55px 55px;
+  animation: spin 20s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
