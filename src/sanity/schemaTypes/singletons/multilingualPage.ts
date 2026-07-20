@@ -34,7 +34,7 @@ export const multilingualPage = defineType({
       description: "Second line of main heading.",
       type: "string",
       group: "hero",
-      validation: (rule) => rule.required().max(40),
+      validation: (rule) => rule.required().max(80),
     }),
     defineField({
       name: "heroParagraphs",
@@ -84,7 +84,7 @@ export const multilingualPage = defineType({
         "List of benefits/activities children enjoy. Must be exactly 3 items.",
       type: "array",
       group: "philosophy",
-      of: [{ type: "string", validation: (rule) => rule.required().max(60) }],
+      of: [{ type: "string", validation: (rule) => rule.required().max(90) }],
       validation: (rule) =>
         rule.required().length(3).error("Must be exactly 3 items."),
     }),
