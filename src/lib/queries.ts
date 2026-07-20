@@ -24,7 +24,16 @@ function assertSingleton<T>(result: T | null, name: string): T {
   return result;
 }
 
-export const businessDetailsQuery = `*[_id == "businessDetails" && _type == "businessDetails"][0]`;
+export const businessDetailsQuery = `*[_id == "businessDetails" && _type == "businessDetails"][0]{
+  ...,
+  "ogImage": {
+    "url": ogImage.asset->url,
+    "altText": ogImage.altText,
+    "width": ogImage.asset->metadata.dimensions.width,
+    "height": ogImage.asset->metadata.dimensions.height,
+    "mimeType": ogImage.asset->mimeType
+  }
+}`;
 
 export async function getBusinessDetails(): Promise<BusinessDetails> {
   return assertSingleton(

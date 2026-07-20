@@ -38,6 +38,13 @@ export interface FooterTagline {
 
 export interface BusinessDetails {
   organizationName: string;
+  ogImage?: {
+    url: string;
+    altText?: string;
+    width?: number;
+    height?: number;
+    mimeType?: string;
+  };
   publicEmail: string;
   primaryPhone: PhoneEntry;
   secondaryPhone?: PhoneEntry;

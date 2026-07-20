@@ -37,7 +37,7 @@ const schemaGraph = [businessSchema, ...pageSchema, ...(seo.schemas || [])];
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <SeoHead seo={seo} />
+    <SeoHead seo={seo} businessDetails={businessDetails} />
     <JsonLd data={schemaGraph} />
     <link
       rel="preload"

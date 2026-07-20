@@ -407,6 +407,22 @@ export const businessDetails = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "ogImage",
+      title: "OG Image",
+      description: "Default Open Graph image for social sharing (1200×630 recommended).",
+      type: "image",
+      group: "other",
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "altText",
+          title: "Alternative text",
+          description: "Describe what is shown in this image for accessibility.",
+          type: "string",
+        }),
+      ],
+    }),
+    defineField({
       name: "ofstedRegistrationType",
       title: "Ofsted Registration Type",
       description: "e.g. 'Childminder without Domestic Premises'",

@@ -1,12 +1,14 @@
 ---
 import type { SeoConfig } from "../../lib/seo/types";
+import type { BusinessDetails } from "../../lib/types";
 import { defaultSeoImage, defaultSeoConfig } from "../../config/seo";
 
 interface Props {
   seo: SeoConfig;
+  businessDetails?: BusinessDetails;
 }
 
-const { seo } = Astro.props;
+const { seo, businessDetails } = Astro.props;
 
 if (!Astro.site) {
   throw new Error("Astro.site is not defined. SEO requires an absolute domain.");
@@ -20,7 +22,10 @@ if (canonicalUrl.length > siteUrl.length + 1 && canonicalUrl.endsWith("/")) {
 }
 
 const ogType = seo.type || defaultSeoConfig.type;
-const ogImage = seo.image || defaultSeoImage;
+const bdImage = businessDetails?.ogImage?.url
+  ? { url: businessDetails.ogImage.url, alt: businessDetails.ogImage.altText || defaultSeoImage.alt, width: businessDetails.ogImage.width, height: businessDetails.ogImage.height }
+  : undefined;
+const ogImage = seo.image || bdImage || defaultSeoImage;
 const ogImageUrl = ogImage ? (ogImage.url.startsWith("http") ? ogImage.url : `${siteUrl}${ogImage.url}`) : undefined;
 ---
 
