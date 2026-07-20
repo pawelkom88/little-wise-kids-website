@@ -7,16 +7,15 @@
   display: grid;
   min-height: clamp(31rem, 43vw, 37rem);
   place-items: center;
-  padding: clamp(3.5rem, 7vw, 5.75rem) clamp(1.5rem, 7vw, 7rem);
   overflow: hidden;
   background: var(--color-cream);
+  padding-bottom: var(--section-spacing);
 }
 
 .lwk-values-intro__content {
   position: relative;
   z-index: 2;
   width: min(100%, var(--container-narrow));
-  text-align: center;
 }
 
 .lwk-values-intro__title {
@@ -26,6 +25,7 @@
   letter-spacing: var(--letter-spacing-section-title);
   line-height: var(--line-height-heading);
   text-wrap: balance;
+  text-align: center;
 }
 
 .lwk-values-intro__title-line {
@@ -258,7 +258,6 @@
 @media (width < 48rem) {
   .lwk-values-intro {
     min-height: 0;
-    padding: 3.25rem 1.25rem;
   }
   .lwk-values-intro__title {
     font-size: var(--values-intro-title-size-mobile);

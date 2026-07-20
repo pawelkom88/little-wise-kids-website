@@ -27,12 +27,12 @@ const classes = ["button", `button--${variant}`, className]
   href ? (
     <a class={classes} href={href}>
       <slot />
-      {icon !== "none" && <Icon name={icon as any} size={20} />}
+      {icon !== "none" && <Icon name={icon as "arrowRight" | "heart" | "calendar"} size={20} />}
     </a>
   ) : (
     <button class={classes} type={type}>
       <slot />
-      {icon !== "none" && <Icon name={icon as any} size={20} />}
+      {icon !== "none" && <Icon name={icon as "arrowRight" | "heart" | "calendar"} size={20} />}
     </button>
   )
 }

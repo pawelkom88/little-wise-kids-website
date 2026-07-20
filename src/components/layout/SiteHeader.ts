@@ -18,7 +18,7 @@ const initHeader = () => {
     };
 
     if ("startViewTransition" in document) {
-      (document as any).startViewTransition(updateState);
+      ((document as unknown) as { startViewTransition: Function }).startViewTransition(updateState);
     } else {
       updateState();
     }

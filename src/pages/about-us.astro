@@ -7,8 +7,16 @@ import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
 import SanityImage from "../components/media/SanityImage.astro";
+import { Image } from "astro:assets";
 import { getAboutPage, getBusinessDetails } from "../utils/sanity";
 import type { SeoConfig } from "../lib/seo/types";
+
+import iconPlay from "../assets/images/icon-play.png";
+import iconRhythm from "../assets/images/icon-rhythm.png";
+import iconOutdoor from "../assets/images/icon-outdoor.png";
+import iconSensory from "../assets/images/icon-sensory.png";
+import iconConfidence from "../assets/images/icon-confidence.png";
+import iconRelationships from "../assets/images/icon-relationships.png";
 
 const aboutPage = await getAboutPage();
 const businessDetails = await getBusinessDetails();
@@ -20,12 +28,12 @@ const seo: SeoConfig = {
 };
 
 const approachPoints = [
-  { icon: "users", tone: "purple", text: aboutPage.approachChildLed },
-  { icon: "clock", tone: "green", text: aboutPage.approachCalmRhythm },
-  { icon: "heart", tone: "blue", text: aboutPage.approachLearning },
-  { icon: "palette", tone: "yellow", text: aboutPage.approachExploration },
-  { icon: "star", tone: "purple", text: aboutPage.approachConfidence },
-  { icon: "users", tone: "green", text: aboutPage.approachRelationships },
+  { image: iconPlay, tone: "purple", text: aboutPage.approachChildLed, alt: "Child-led play icon" },
+  { image: iconRhythm, tone: "green", text: aboutPage.approachCalmRhythm, alt: "Calm rhythm icon" },
+  { image: iconOutdoor, tone: "blue", text: aboutPage.approachLearning, alt: "Outdoor learning icon" },
+  { image: iconSensory, tone: "yellow", text: aboutPage.approachExploration, alt: "Sensory exploration icon" },
+  { image: iconConfidence, tone: "purple", text: aboutPage.approachConfidence, alt: "Confidence icon" },
+  { image: iconRelationships, tone: "green", text: aboutPage.approachRelationships, alt: "Relationships icon" },
 ] as const;
 
 const learningFoundations = [
@@ -86,7 +94,13 @@ const learningFoundations = [
                     `}
                         aria-hidden="true"
                       >
-                        <Icon name={point.icon} size={25} />
+                        <Image
+                          src={point.image}
+                          alt={point.alt}
+                          width={80}
+                          height={80}
+                          quality={100}
+                        />
                       </span>
 
                       <span>{point.text}</span>

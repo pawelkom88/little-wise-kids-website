@@ -44,7 +44,7 @@ const seo: SeoConfig = {
   publishedTime: post.publishedAt,
   modifiedTime: post._updatedAt || post.publishedAt,
   articleSection: article.categoryLabel,
-  ...(post.imageUrl ? { image: { url: post.imageUrl, alt: article.title } } : {})
+  ...(post.imageUrl ? { image: { url: post.imageUrl, alt: post.featuredImage?.altText || article.title } } : {})
 };
 ---
 

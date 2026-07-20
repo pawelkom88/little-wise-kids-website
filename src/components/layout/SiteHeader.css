@@ -104,11 +104,11 @@ body.menu-open {
   width: 3.2rem;
   height: 3.2rem;
   padding: 0;
-  border: 1px solid rgba(137, 39, 210, 0.15);
+  border: 1px solid color-mix(in srgb, var(--color-purple), transparent 85%);
   border-radius: 50%;
   color: var(--color-purple);
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 0.25rem 0.75rem rgba(116, 43, 174, 0.14);
+  background: color-mix(in srgb, var(--color-page), transparent 2%);
+  box-shadow: 0 0.25rem 0.75rem color-mix(in srgb, var(--color-purple-dark), transparent 86%);
   cursor: pointer;
   transition: transform 180ms ease, box-shadow 220ms ease;
   view-transition-name: menu-toggle;
@@ -124,10 +124,10 @@ body.menu-open {
 .menu-toggle::before {
   inset: -6px;
   z-index: -1;
-  border: 1px solid rgba(190, 143, 235, 0.20);
+  border: 1px solid color-mix(in srgb, var(--color-purple), transparent 80%);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.28);
-  box-shadow: 0 0 0 2px rgba(230, 210, 249, 0.25);
+  background: color-mix(in srgb, var(--color-page), transparent 72%);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-purple-soft), transparent 75%);
 }
 
 .menu-toggle::after {
@@ -154,38 +154,32 @@ body.menu-open {
 
 @media (max-width: 63.99rem) {
   .menu-toggle {
-    top: 6vw;
-    right: 4.7vw;
-    width: 10.9vw;
-    height: 10.9vw;
-    min-width: 48px;
-    min-height: 48px;
-    border-width: 0.18vw;
+    top: clamp(1rem, 6vw, 1.5rem);
+    right: clamp(1rem, 4.7vw, 1.5rem);
+    width: clamp(48px, 10.9vw, 56px);
+    height: clamp(48px, 10.9vw, 56px);
+    border-width: 2px;
     box-shadow:
-      0 1.4vw 3.4vw rgba(116, 43, 174, 0.14),
-      inset 0 0 0 0.35vw rgba(251, 248, 255, 0.92);
+      0 1.4vw 3.4vw color-mix(in srgb, var(--color-purple-dark), transparent 86%),
+      inset 0 0 0 3px color-mix(in srgb, var(--color-purple-mist), transparent 8%);
   }
 
   .menu-toggle::before {
-    inset: -1.55vw;
-    border-width: 0.35vw;
-    box-shadow: 0 0 0 0.55vw rgba(230, 210, 249, 0.25);
+    inset: -8px;
+    border-width: 3px;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-purple-soft), transparent 75%);
   }
 
   .menu-toggle::after {
-    width: 4.4vw;
-    height: 0.58vw;
-    min-width: 23px;
-    min-height: 3px;
-    transform: translateY(-1.2vw);
+    width: clamp(23px, 4.4vw, 28px);
+    height: 3px;
+    transform: translateY(-4px);
   }
 
   .menu-toggle__bar {
-    width: 4.4vw;
-    height: 0.58vw;
-    min-width: 23px;
-    min-height: 3px;
-    transform: translateY(1.2vw);
+    width: clamp(23px, 4.4vw, 28px);
+    height: 3px;
+    transform: translateY(4px);
   }
 }
 
@@ -217,9 +211,9 @@ body.menu-open {
     visibility 0s linear 360ms;
   view-transition-name: mobile-menu-panel;
   background:
-    radial-gradient(circle at 88% 2%, rgba(148, 67, 223, 0.15), transparent 30%),
-    radial-gradient(circle at 4% 66%, rgba(82, 191, 160, 0.10), transparent 34%),
-    linear-gradient(180deg, #f7f1ff 0%, #ffffff 38%, #ffffff 100%);
+    radial-gradient(circle at 88% 2%, color-mix(in srgb, var(--color-purple), transparent 85%), transparent 30%),
+    radial-gradient(circle at 4% 66%, color-mix(in srgb, var(--color-green), transparent 90%), transparent 34%),
+    linear-gradient(180deg, var(--color-purple-soft) 0%, var(--color-page) 38%, var(--color-page) 100%);
 }
 
 .menu-open .mobile-menu-panel {
@@ -236,11 +230,11 @@ body.menu-open {
   --offset-y: clamp(20px, 5vw, 26px);
   --distance: calc(var(--cut) + var(--curve));
   --round-mask-size: calc(2 * var(--curve)) calc(2 * var(--curve));
-  --round-mask-image: radial-gradient(#000 70%, #0000 72%);
+  --round-mask-image: radial-gradient(var(--color-darken-base) 70%, transparent 72%);
   --corner-fill: conic-gradient(
     at calc(100% - var(--curve)) var(--curve),
-    #0000 25%,
-    #000 0
+    transparent 25%,
+    var(--color-darken-base) 0
   );
 
   position: absolute;
@@ -248,17 +242,18 @@ body.menu-open {
   z-index: -1;
   border-radius: 7.2vw 0 0 0;
   background:
-    radial-gradient(circle at 50% 42%, rgba(249, 251, 255, 0.7), transparent 58%),
-    #ffffff;
-  box-shadow: 0 0 5vw rgba(95, 39, 145, 0.05);
+    radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--color-purple-mist), transparent 30%), transparent 58%),
+    var(--color-page);
+  box-shadow: 0 0 5vw color-mix(in srgb, var(--color-purple-dark), transparent 95%);
+  min-height: 120dvh; /* Ensure surface background covers scrolling area */
 
   -webkit-mask:
     calc(100% - var(--distance) - var(--offset-x)) 0 / var(--round-mask-size) var(--round-mask-image),
     100% calc(var(--distance) + var(--offset-y)) / var(--round-mask-size) var(--round-mask-image),
     radial-gradient(
       var(--cut) at 100% 0,
-      #0000 99%,
-      #000 calc(100% + 1px)
+      transparent 99%,
+      var(--color-darken-base) calc(100% + 1px)
     )
       calc(-1 * var(--curve) - var(--offset-x))
       calc(var(--curve) + var(--offset-y)),
@@ -271,8 +266,8 @@ body.menu-open {
     100% calc(var(--distance) + var(--offset-y)) / var(--round-mask-size) var(--round-mask-image),
     radial-gradient(
       var(--cut) at 100% 0,
-      #0000 99%,
-      #000 calc(100% + 1px)
+      transparent 99%,
+      var(--color-darken-base) calc(100% + 1px)
     )
       calc(-1 * var(--curve) - var(--offset-x))
       calc(var(--curve) + var(--offset-y)),
@@ -301,16 +296,26 @@ body.menu-open {
   object-position: left top;
 }
 
-.nav-list {
+.mobile-menu-panel > nav {
   position: absolute;
-  top: 41.5vw;
-  left: 6.7vw;
-  right: 6.7vw;
+  top: 37vw;
+  bottom: calc(13.9vw + max(3.2vw, env(safe-area-inset-bottom)) + 4vw);
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  z-index: 4;
+  padding-inline: 6.7vw;
+}
+
+.nav-list {
+  position: relative;
   z-index: 4;
   display: grid;
   gap: 2.9vw;
   margin: 0;
-  padding: 0;
+  padding: 2vw 0 6vw 0;
   list-style: none;
 }
 
@@ -323,10 +328,10 @@ body.menu-open {
   border: 1px solid var(--color-border);
   border-radius: 3.65vw;
   color: var(--color-ink);
-  background: rgba(255, 255, 255, 0.985);
+  background: color-mix(in srgb, var(--color-page), transparent 1.5%);
   box-shadow:
-    0 1.8vw 4.5vw rgba(7, 28, 80, 0.075),
-    0 0.25vw 0.8vw rgba(7, 28, 80, 0.025);
+    0 1.8vw 4.5vw color-mix(in srgb, var(--color-shadow-base), transparent 92.5%),
+    0 0.25vw 0.8vw color-mix(in srgb, var(--color-shadow-base), transparent 97.5%);
   text-decoration: none;
   opacity: 0;
   transform: translateY(2vw) scale(0.99);
@@ -353,7 +358,7 @@ body.menu-open {
 .nav-item:focus-visible {
   outline: none;
   transform: translateY(-0.45vw);
-  box-shadow: 0 2.2vw 5.2vw rgba(7, 28, 80, 0.11);
+  box-shadow: 0 2.2vw 5.2vw color-mix(in srgb, var(--color-shadow-base), transparent 89%);
 }
 
 .nav-icon {
@@ -376,12 +381,16 @@ body.menu-open {
 }
 
 .nav-item__label {
+  --nav-item-font-size: 4.65vw;
+  --nav-item-font-weight: 700;
+  --nav-item-line-height: 1;
+  --nav-item-letter-spacing: -0.035em;
   padding-left: 0.8vw;
   font-family: var(--font-heading);
-  font-size: 4.65vw;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.035em;
+  font-size: var(--nav-item-font-size);
+  font-weight: var(--nav-item-font-weight);
+  line-height: var(--nav-item-line-height);
+  letter-spacing: var(--nav-item-letter-spacing);
   white-space: nowrap;
 }
 
@@ -401,7 +410,7 @@ body.menu-open {
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  color: rgba(145, 55, 209, 0.25);
+  color: color-mix(in srgb, var(--color-purple), transparent 75%);
 }
 
 .deco-star,
@@ -450,8 +459,8 @@ body.menu-open {
   pointer-events: none;
 }
 
-.menu-waves__back { fill: #e8d8f5; opacity: 0.82; }
-.menu-waves__front { fill: #f6effd; }
+.menu-waves__back { fill: color-mix(in srgb, var(--color-purple), transparent 88%); opacity: 0.82; }
+.menu-waves__front { fill: var(--color-purple-soft); }
 
 .mobile-menu-cta {
   position: absolute;
@@ -461,14 +470,18 @@ body.menu-open {
   z-index: 6;
   min-height: 13.9vw;
   border-radius: 999px;
-  color: #fff;
-  background: linear-gradient(90deg, #8524d5 0%, #9c2edf 50%, #7e20c9 100%);
-  box-shadow: 0 2.4vw 5.5vw rgba(126, 32, 201, 0.27);
+  color: var(--color-page);
+  background: linear-gradient(90deg, var(--color-purple) 0%, var(--color-link-accent) 50%, var(--color-purple-dark) 100%);
+  box-shadow: 0 2.4vw 5.5vw color-mix(in srgb, var(--color-purple), transparent 73%);
+  --cta-font-size: 4.85vw;
+  --cta-font-weight: 700;
+  --cta-line-height: 1;
+  --cta-letter-spacing: -0.025em;
   text-decoration: none;
-  font-size: 4.85vw;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.025em;
+  font-size: var(--cta-font-size);
+  font-weight: var(--cta-font-weight);
+  line-height: var(--cta-line-height);
+  letter-spacing: var(--cta-letter-spacing);
   white-space: nowrap;
   opacity: 0;
   transform: translateY(2vw) scale(0.99);
@@ -484,8 +497,11 @@ body.menu-open {
 
 /* Mobile-only guardrails: preserve the composition while avoiding clipping. */
 @media (max-height: 700px) {
+  .mobile-menu-panel > nav {
+    top: 34vw;
+  }
+
   .nav-list {
-    top: 38.5vw;
     gap: 2vw;
   }
 
@@ -521,6 +537,20 @@ body.menu-open {
 
   .mobile-menu-panel,
   .menu-toggle {
+    display: none;
+  }
+}
+
+@media (max-width: 77.99rem) {
+  .site-nav {
+    gap: clamp(1.2rem, 1rem + 2.5vw, 2.5rem);
+  }
+
+  .site-nav__link {
+    padding: 0.6rem;
+  }
+
+  .site-nav__link span {
     display: none;
   }
 }

@@ -89,6 +89,8 @@
   --space-3xl: clamp(6rem, 5.48rem + 2.61vw, 7.5rem);
 
   --section-spacing: clamp(5rem, 7vw, 8rem);
+  --section-padding-y: clamp(3rem, 6vw, 6rem);
+  --section-padding-x: var(--gutter);
   --gutter: clamp(1rem, 0.48rem + 2.61vw, 2.5rem);
   --container: 72rem;
   --container-narrow: 52rem;

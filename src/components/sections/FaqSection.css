@@ -265,7 +265,7 @@ details[open] .faq-answer {
 
 @media (width < 48rem) {
   .faq-shell {
-    width: calc(100% - 28px);
+    width: 100%;
   }
 
   .faq-header {

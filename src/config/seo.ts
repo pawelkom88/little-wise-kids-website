@@ -1,9 +1,9 @@
 import type { SeoImage } from '../lib/seo/types';
-import ogDefault from '../assets/images/og-default.png';
+import ogDefault from '../assets/images/little-wise-kids-social.png';
 
 export const defaultSeoImage: SeoImage = {
   url: ogDefault.src,
-  alt: "Little Wise Kids — Nurturing early years childcare in Bristol BS5",
+  alt: "Little Wise Kids childcare in Easton, Bristol",
   width: ogDefault.width,
   height: ogDefault.height,
 };

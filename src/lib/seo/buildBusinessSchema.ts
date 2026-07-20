@@ -29,20 +29,22 @@ export function buildBusinessSchema(businessDetails: BusinessDetails, siteUrl: s
         "longitude": businessDetails.longitude
       }
     } : {}),
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "https://schema.org/Monday",
-          "https://schema.org/Tuesday",
-          "https://schema.org/Wednesday",
-          "https://schema.org/Thursday",
-          "https://schema.org/Friday"
-        ],
-        "opens": businessDetails.openingTime,
-        "closes": businessDetails.closingTime
-      }
-    ],
+    ...(businessDetails.openingTime && businessDetails.closingTime ? {
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "https://schema.org/Monday",
+            "https://schema.org/Tuesday",
+            "https://schema.org/Wednesday",
+            "https://schema.org/Thursday",
+            "https://schema.org/Friday"
+          ],
+          "opens": businessDetails.openingTime,
+          "closes": businessDetails.closingTime
+        }
+      ]
+    } : {}),
     "sameAs": [
       businessDetails.social?.facebookUrl,
       businessDetails.social?.instagramUrl,
