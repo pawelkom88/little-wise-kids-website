@@ -36,6 +36,9 @@
   --color-shadow-deep: #0a1c4c;
   --color-shadow-accent: #10275f;
   --color-cream: #fffbf1;
+  --color-green-strong: #2b6a1f;
+  --color-blue-strong: #0c6190;
+  --color-yellow-strong: #7c6f42;
 
   --font-heading: "Quicksand", "Trebuchet MS", system-ui, sans-serif;
   --font-body:

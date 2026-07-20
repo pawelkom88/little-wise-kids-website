@@ -8,7 +8,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: [["html", { outputFolder: "playwright-report/accessibility" }]],
   use: {
-    baseURL: "http://localhost:4321",
+    baseURL: "http://localhost:8787",
     trace: "on-first-retry",
   },
   projects: [
@@ -36,15 +36,13 @@ export default defineConfig({
       name: "chromium-reduced-motion",
       use: {
         ...devices["Desktop Chrome"],
-        contextOptions: {
-          prefersReducedMotion: "reduce",
-        },
+        reducedMotion: "reduce",
       },
     },
   ],
   webServer: {
-    command: "ASTRO_TELEMETRY_DISABLED=1 npx wrangler dev --port 4321",
-    url: "http://localhost:4321",
+    command: "npm run preview",
+    url: "http://localhost:8787",
     reuseExistingServer: false,
     stdout: "ignore",
     stderr: "pipe",

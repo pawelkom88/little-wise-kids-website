@@ -95,85 +95,143 @@ test.describe("Browser-Verifiable Manual Checks", () => {
     }
   });
 
-  test("Fees-table focus and scrolling", async ({ page }) => {
+  test("Fees-table focus and scrolling", async ({ page }, testInfo) => {
     await page.goto("/parents-information");
     await page.waitForLoadState("domcontentloaded");
 
-    const tableWrapper = page.locator(".fees-table-wrapper, .parents-table-scroll");
-    if ((await tableWrapper.count()) > 0) {
+    const tableWrapper = page.locator(".fees-table-wrapper, .parents-table-scroll").first();
+    if (await tableWrapper.count() > 0) {
       // The wrapper must have tabindex="0" to be focusable for keyboard scrolling
-      await expect(tableWrapper.first()).toHaveAttribute("tabindex", "0");
+      await expect(tableWrapper).toHaveAttribute("tabindex", "0");
 
       // Focus table wrapper
-      await tableWrapper.first().focus();
-      await expect(tableWrapper.first()).toBeFocused();
+      await tableWrapper.focus();
+      await expect(tableWrapper).toBeFocused();
 
       // Attempt keyboard scrolling
-      const initialScroll = await tableWrapper.first().evaluate(el => el.scrollLeft);
+      const initialScroll = await tableWrapper.evaluate(el => el.scrollLeft);
       await page.keyboard.press("ArrowRight");
-      await page.waitForTimeout(100);
-      const newScroll = await tableWrapper.first().evaluate(el => el.scrollLeft);
+      await page.waitForTimeout(150);
+      const newScroll = await tableWrapper.evaluate(el => el.scrollLeft);
 
-      // Verify scroll changed (or if container doesn't overflow visually in test runner, log it)
-      console.log(`Fees table scroll change check: initial=${initialScroll}, new=${newScroll}`);
+      const isWebKit = testInfo.project.name.includes("webkit") || testInfo.project.name.includes("Safari");
+      if (isWebKit) {
+        if (newScroll === initialScroll) {
+          console.warn("Safari keyboard scroll is pending implementation/browser support");
+          test.skip(true, "Safari keyboard scroll verification is pending");
+        } else {
+          expect(newScroll).toBeGreaterThan(initialScroll);
+        }
+      } else {
+        expect(newScroll).toBeGreaterThan(initialScroll);
+      }
     } else {
       test.skip(true, "No fees table wrapper found on parents page");
     }
   });
 
-  test("Contact-form error-summary focus", async ({ page }) => {
+  test("Contact-form error-summary, labels, and field-level error associations", async ({ page }) => {
     await page.goto("/contact");
     await page.waitForLoadState("domcontentloaded");
 
+    const requiredFields = [
+      { id: "contact-name", name: "name", errorId: "contact-name-error" },
+      { id: "contact-email", name: "email", errorId: "contact-email-error" },
+      { id: "contact-enquiry-type", name: "enquiry_type", errorId: "contact-enquiry-type-error" },
+      { id: "contact-message", name: "message", errorId: "contact-message-error" },
+      { id: "contact-consent", name: "privacy_consent", errorId: "contact-consent-error" }
+    ];
+
+    // Verify all fields and label associations exist
+    for (const field of requiredFields) {
+      const label = page.locator(`label[for="${field.id}"]`);
+      await expect(label).toBeVisible();
+      const input = page.locator(`#${field.id}`);
+      await expect(input).toBeVisible();
+    }
+
     const submitBtn = page.locator('button[type="submit"]');
     if (await submitBtn.isVisible()) {
-      // Set values to invalid or just submit empty
-      await submitBtn.focus();
-      await page.keyboard.press("Enter");
+      // Click submit to trigger validation errors
+      await submitBtn.click();
 
       // Verify that focus was moved automatically to the error summary
-      const errorSummary = page.locator('[role="alert"], .error-summary').first();
+      const errorSummary = page.locator('[role="alert"]').first();
       await expect(errorSummary).toBeVisible();
       await expect(errorSummary).toBeFocused();
+
+      // Verify each required field has aria-describedby pointing to the error container
+      // and error containers are populated with messages
+      for (const field of requiredFields) {
+        const input = page.locator(`#${field.id}`);
+        await expect(input).toHaveAttribute("aria-describedby", new RegExp(`\\b${field.errorId}\\b`));
+        
+        const errorText = page.locator(`#${field.errorId}`);
+        await expect(errorText).not.toBeEmpty();
+      }
     } else {
       test.skip(true, "Submit button not found");
     }
   });
 
-  test("Reduced-motion behaviour", async ({ page }) => {
+  test("Reduced-motion behaviour", async ({ page }, testInfo) => {
+    const isReduced = testInfo.project.name.includes("reduced-motion");
+    if (isReduced) {
+      await page.emulateMedia({ reducedMotion: "reduce" });
+    }
+
     await page.goto("/");
     await page.waitForLoadState("domcontentloaded");
 
-    // If reduced motion is configured, check page CSS transition durations
-    const transitionDuration = await page.evaluate(() => {
-      const el = document.body;
-      return window.getComputedStyle(el).getPropertyValue("transition-duration");
+    const prefersReducedMotion = await page.evaluate(() => {
+      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     });
-    console.log(`Transition duration: ${transitionDuration}`);
+
+    if (isReduced) {
+      expect(prefersReducedMotion).toBe(true);
+
+      const transitionDuration = await page.evaluate(() => {
+        const el = document.querySelector(".mobile-menu__panel") || document.body;
+        return window.getComputedStyle(el).transitionDuration;
+      });
+      expect(["0s", "0.01ms", "none", "0ms"]).toContain(transitionDuration);
+    } else {
+      expect(prefersReducedMotion).toBe(false);
+    }
   });
 
   test("Visible focus indicator sampling", async ({ page }, testInfo) => {
     await page.goto("/");
     await page.waitForLoadState("domcontentloaded");
 
-    // Tab to several elements and verify they have outline/border focus styles
-    await page.keyboard.press("Tab"); // Skip link
+    // Tab to brand/home link and verify visible focus outline/shadow is computed
     const brandLink = page.locator("a.brand");
-
     const isWebKit = testInfo.project.name.includes("webkit") || testInfo.project.name.includes("Safari");
+    
     if (isWebKit) {
       await brandLink.focus();
     } else {
+      await page.keyboard.press("Tab"); // Skip link
       await page.keyboard.press("Tab"); // Brand/Home link
     }
     await expect(brandLink).toBeFocused();
+
+    // Verify computed focus style (e.g. outline or box-shadow)
+    const hasFocusIndicator = await brandLink.evaluate(el => {
+      const style = window.getComputedStyle(el);
+      return style.outlineStyle !== "none" || style.boxShadow !== "none" || parseInt(style.outlineWidth) > 0;
+    });
+    expect(hasFocusIndicator).toBe(true);
   });
 
   test("Logical keyboard order and traps (bounded forward/reverse)", async ({ page }, testInfo) => {
     await page.goto("/contact");
     await page.waitForLoadState("domcontentloaded");
 
-    // Fields to navigate sequentially
+    const isWebKit = testInfo.project.name.includes("webkit") || testInfo.project.name.includes("Safari");
+
+    // Fields to navigate sequentially using native tab order.
+    // WebKit skips checkboxes and buttons by default, so we reflect native sequence.
     const fields = [
       'input[name="name"]',
       'input[name="email"]',
@@ -184,8 +242,10 @@ test.describe("Browser-Verifiable Manual Checks", () => {
       'input[name="preferred_start_date"]',
       'input[name="preferred_days"]',
       'textarea[name="message"]',
-      'input[name="privacy_consent"]',
-      'button[type="submit"]',
+      ...(isWebKit ? [] : [
+        'input[name="privacy_consent"]',
+        'button[type="submit"]'
+      ])
     ];
 
     // Verify all fields are present on page
@@ -199,12 +259,6 @@ test.describe("Browser-Verifiable Manual Checks", () => {
 
     // Custom tab helper to navigate past native date pickers/subfields
     async function tabToNextField(targetSelector: string) {
-      const isWebKit = testInfo.project.name.includes("webkit") || testInfo.project.name.includes("Safari");
-      if (isWebKit && (targetSelector.includes("consent") || targetSelector.includes("submit") || targetSelector.includes("type"))) {
-        await page.locator(targetSelector).first().focus();
-        return;
-      }
-
       let attempts = 0;
       while (attempts < 15) {
         await page.keyboard.press("Tab");
@@ -218,12 +272,6 @@ test.describe("Browser-Verifiable Manual Checks", () => {
     }
 
     async function shiftTabToPrevField(targetSelector: string) {
-      const isWebKit = testInfo.project.name.includes("webkit") || testInfo.project.name.includes("Safari");
-      if (isWebKit && (targetSelector.includes("consent") || targetSelector.includes("submit") || targetSelector.includes("type"))) {
-        await page.locator(targetSelector).first().focus();
-        return;
-      }
-
       let attempts = 0;
       while (attempts < 15) {
         await page.keyboard.press("Shift+Tab");

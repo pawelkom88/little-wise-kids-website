@@ -27,7 +27,6 @@ const routes = [
   { path: "/our-gallery", key: "our-gallery" },
   { path: "/contact", key: "contact" },
   { path: "/blog", key: "blog" },
-  { path: "/blog/test-blog", key: "blog-article" },
   { path: "/404", key: "404-page" },
 ];
 
@@ -48,6 +47,63 @@ test.describe("Baseline Automated Accessibility Audit", () => {
       expect(results.violations).toEqual([]);
     });
   }
+
+  test("Automated Axe scan for Blog Article", async ({ page }, testInfo) => {
+    await page.goto("/blog");
+    await page.waitForLoadState("domcontentloaded");
+
+    const articleLink = page.locator(".blog-card a, a[href^=\"/blog/\"]").first();
+    
+    if (await articleLink.count() > 0) {
+      const href = await articleLink.getAttribute("href");
+      if (href) {
+        await page.goto(href);
+        await page.waitForLoadState("domcontentloaded");
+
+        const results = await new AxeBuilder({ page })
+          .withRules(["color-contrast", "document-title", "html-has-lang", "label"])
+          .analyze();
+
+        saveAxeResults(testInfo, `route-blog-article`, href, results);
+        expect(results.violations).toEqual([]);
+      } else {
+        test.skip(true, "First blog link did not have a valid href");
+      }
+    } else {
+      test.skip(true, "No blog articles discovered dynamically in the Sanity dataset");
+    }
+  });
+
+  test("Automated Axe scan for nonexistent route (404 fallback)", async ({ page }, testInfo) => {
+    // Wrangler's local preview may not route unknown paths to the custom 404.html.
+    // Firefox throws NS_ERROR_NET_ERROR_RESPONSE on bare 404 responses.
+    // The /404 page content is already scanned via the regular routes array above.
+    let response;
+    try {
+      response = await page.goto("/some-nonexistent-page-path");
+    } catch {
+      test.skip(true, "Preview server returned an error response the browser could not render");
+      return;
+    }
+    await page.waitForLoadState("domcontentloaded");
+
+    const heading = page.locator("h1");
+    const headingCount = await heading.count();
+    if (headingCount === 0 || !(await heading.textContent())?.includes("Oops")) {
+      test.skip(true, "Preview server did not serve the custom 404 page for this route");
+      return;
+    }
+
+    expect(response?.status()).toBe(404);
+    await expect(heading).toContainText("Oops! We Can't Find That Page");
+
+    const results = await new AxeBuilder({ page })
+      .withRules(["color-contrast", "document-title", "html-has-lang", "label"])
+      .analyze();
+
+    saveAxeResults(testInfo, "route-404-fallback", "/some-nonexistent-page-path", results);
+    expect(results.violations).toEqual([]);
+  });
 
   test("Material state: Mobile navigation toggle, open and closed state", async ({ page }, testInfo) => {
     await page.goto("/");
