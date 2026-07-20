@@ -58,7 +58,7 @@
 }
 
 #contact-form {
-  scroll-margin-block: var(--section-spacing);
+  scroll-margin-block: 0;
 }
 
 /*
@@ -745,6 +745,10 @@
  */
 
 @media (width < 48rem) {
+  #contact-form {
+    scroll-margin-block: var(--section-spacing);
+  }
+
   .contact-hero--success {
     min-height: 34rem;
   }

@@ -65,6 +65,7 @@ const nextSteps = [
         <div class="contact-page__stack">
           <section
             class="contact-form-card"
+            id="contact-form"
             aria-labelledby="contact-form-title"
           >
             <header class="contact-section-heading">
@@ -76,7 +77,6 @@ const nextSteps = [
             </header>
 
             <form
-              id="contact-form"
               class="contact-form"
               action="https://api.web3forms.com/submit"
               method="POST"
@@ -544,7 +544,7 @@ const nextSteps = [
   type ValidatedField =
     HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
-  const form = document.querySelector("#contact-form");
+  const form = document.querySelector(".contact-form");
 
   if (form instanceof HTMLFormElement) {
     const fields = Array.from(

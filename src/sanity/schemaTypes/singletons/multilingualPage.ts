@@ -81,12 +81,12 @@ export const multilingualPage = defineType({
       name: "philosophyPoints",
       title: "Philosophy Points",
       description:
-        "List of benefits/activities children enjoy. Must be exactly 3 items.",
+        "List of benefits/activities children enjoy. Must be exactly 6 items.",
       type: "array",
       group: "philosophy",
       of: [{ type: "string", validation: (rule) => rule.required().max(90) }],
       validation: (rule) =>
-        rule.required().length(3).error("Must be exactly 3 items."),
+        rule.required().length(6).error("Must be exactly 6 items."),
     }),
 
     defineField({
