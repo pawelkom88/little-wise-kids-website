@@ -185,7 +185,7 @@
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: var(--space-xs);
-  align-items: start;
+  align-items: center;
 }
 
 .lwk-footer__contact-item > span:last-child,

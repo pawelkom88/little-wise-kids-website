@@ -132,15 +132,18 @@ button {
   top: 1rem;
 }
 
-.tone-purple {
+.tone-purple,
+.lwk-tone-purple {
   color: var(--color-purple);
 }
 
-.tone-green {
+.tone-green,
+.lwk-tone-green {
   color: var(--color-green-dark);
 }
 
-.tone-blue {
+.tone-blue,
+.lwk-tone-blue {
   color: var(--color-blue-dark);
 }
 

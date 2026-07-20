@@ -16,7 +16,6 @@ const { homePage } = Astro.props;
 <Section class="hero-section" width="wide" aria-labelledby="hero-title">
   <div class="hero">
     <div class="hero__content">
-      {homePage.heroEyebrow && <span class="hero-eyebrow">{homePage.heroEyebrow}</span>}
       <h1 id="hero-title">
         <!--TODO: no psacing between words!-->
         <span>{homePage.heroHeading.introduction}</span>
@@ -24,6 +23,7 @@ const { homePage } = Astro.props;
         <span class="tone-green">{homePage.heroHeading.greenPhrase}</span>
         <span class="tone-blue">{homePage.heroHeading.bluePhrase}</span><br />
       </h1>
+      <br>
       <p class="hero-subtitle">
         {homePage.heroSubtitle}
       </p>

@@ -95,17 +95,6 @@
   pointer-events: none;
 }
 
-.lwk-visit-media__blob {
-  position: absolute;
-  right: -2rem;
-  bottom: 4rem;
-  width: 88%;
-  aspect-ratio: 1;
-  border-radius: 48% 52% 44% 56%;
-  background: color-mix(in srgb, var(--color-purple-soft), transparent 24%);
-  transform: rotate(-12deg);
-}
-
 .lwk-visit-media__dots {
   position: absolute;
   left: 1rem;
