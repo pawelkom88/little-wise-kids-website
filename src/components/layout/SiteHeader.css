@@ -71,6 +71,16 @@
   color: currentColor;
 }
 
+.site-nav__link.tone-blue {
+  color: var(--color-blue-dark);
+}
+.site-nav__link.tone-green {
+  color: var(--color-green-dark);
+}
+.site-nav__link.tone-purple {
+  color: var(--color-purple);
+}
+
 .site-nav__link span {
   color: var(--color-ink);
   max-width: 9.5rem;
@@ -369,8 +379,21 @@ body.menu-open {
   border-radius: 50%;
 }
 
+.nav-item.tone-blue .nav-icon {
+  color: var(--color-blue-dark);
+  background: color-mix(in srgb, var(--color-blue-dark), transparent 90%);
+}
+.nav-item.tone-green .nav-icon {
+  color: var(--color-green-dark);
+  background: color-mix(in srgb, var(--color-green-dark), transparent 90%);
+}
+.nav-item.tone-purple .nav-icon {
+  color: var(--color-purple);
+  background: color-mix(in srgb, var(--color-purple), transparent 90%);
+}
+
 .nav-icon svg {
-  color: var(--color-ink);
+  color: currentColor;
   width: 6.8vw;
   height: 6.8vw;
   fill: none;
