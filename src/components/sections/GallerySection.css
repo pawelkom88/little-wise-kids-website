@@ -24,6 +24,7 @@
 .lwk-gallery-icon {
 margin-inline: auto;
   width: fit-content;
+  color: var(--color-yellow);
 }
 
 .lwk-gallery::before,
@@ -325,18 +326,6 @@ margin-inline: auto;
     border-radius: var(--radius-m);
   }
 
-  .lwk-gallery::before,
-  .lwk-gallery::after,
-  .lwk-gallery__trail {
-    display: none;
-  }
-
-  .lwk-gallery__camera {
-    width: 4rem;
-    margin-top: calc(var(--space-xl) * -1.3);
-    margin-bottom: var(--space-s);
-  }
-
   .lwk-gallery__header {
     margin-bottom: var(--space-l);
   }
@@ -424,6 +413,13 @@ margin-inline: auto;
   .lwk-gallery__count {
     min-width: 2.75rem;
     font-size: var(--font-size-label);
+  }
+
+  .lwk-gallery::before{
+    top: -5rem;
+    left: -5rem;
+    width: clamp(12rem, 22vw, 22rem);
+    height: clamp(12rem, 22vw, 22rem);
   }
 }
 
