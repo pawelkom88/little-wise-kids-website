@@ -311,5 +311,15 @@ export const homePage = defineType({
       group: "gallery",
       validation: (rule) => rule.required().max(150),
     }),
+    defineField({
+      name: "galleryImages",
+      title: "Gallery Images",
+      description: "Images displayed in the homepage gallery carousel. Upload directly here. Alt text is required for each image.",
+      type: "array",
+      group: "gallery",
+      of: [{ type: "strictImage" }],
+      options: { layout: "grid" },
+      validation: (rule) => rule.min(1).warning("Add at least one image to show the gallery."),
+    }),
   ],
 });

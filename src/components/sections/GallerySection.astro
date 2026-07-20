@@ -3,35 +3,45 @@ import Icon from "../icons/Icon.astro";
 import Section from "../layout/Section.astro";
 import SanityImage from "../media/SanityImage.astro";
 import "./GallerySection.css";
-import type { HomePage, GalleryPhoto } from "../../lib/types";
+import type { HomePage, GalleryPhoto, StrictImage } from "../../lib/types";
+
+interface HomeGalleryImage {
+  image: StrictImage;
+  alt: string;
+  label: string;
+}
 
 interface Props {
   homePage: HomePage;
-  photos: GalleryPhoto[];
+  photos?: GalleryPhoto[];
 }
 
-const { homePage, photos } = Astro.props;
+const { homePage, photos = [] } = Astro.props;
+
+const inlineImages: HomeGalleryImage[] = (homePage.galleryImages ?? []).map((img) => ({
+  image: img,
+  alt: img.altText,
+  label: img.caption ?? "",
+}));
+
+const hasInline = inlineImages.length > 0;
+const sourcePhotos = hasInline ? inlineImages : photos.map((p) => ({
+  image: p.image,
+  alt: p.image.altText ?? "",
+  label: p.publicCaption ?? "",
+}));
 
 const toneOptions = ["green", "purple", "blue", "yellow"] as const;
 const iconOptions = ["heart", "palette", "star", "book", "users"] as const;
 
 const pageSize = 3;
-const galleryPages = [];
-for (let i = 0; i < photos.length; i += pageSize) {
-  const pagePhotos = photos.slice(i, i + pageSize);
-  galleryPages.push({
-    photos: pagePhotos.map((photo, idx) => {
-      const globalIndex = i + idx;
-      return {
-        image: photo.image,
-        alt: photo.image.altText ?? "",
-        label: photo.publicCaption ?? "",
-        tone: toneOptions[globalIndex % toneOptions.length],
-        icon: iconOptions[globalIndex % iconOptions.length],
-      };
-    }),
-  });
-}
+const galleryPages = Array.from({ length: Math.ceil(sourcePhotos.length / pageSize) }, (_, i) => ({
+  photos: sourcePhotos.slice(i * pageSize, i * pageSize + pageSize).map((photo, idx) => ({
+    ...photo,
+    tone: toneOptions[(i * pageSize + idx) % toneOptions.length],
+    icon: iconOptions[(i * pageSize + idx) % iconOptions.length],
+  })),
+}));
 
 const flatPhotos = galleryPages.flatMap((p) => p.photos);
 const hasPhotos = flatPhotos.length > 0;

@@ -163,6 +163,7 @@ export interface HomePage {
   helpPanelCtaLabel: string;
   galleryIntroTitle: string;
   galleryIntro: string;
+  galleryImages?: StrictImage[];
 }
 
 export interface AboutPage {

@@ -5,16 +5,15 @@ import HeroSection from "../components/sections/HeroSection.astro";
 import ValuesSection from "../components/sections/Values/ValuesSection.astro";
 import FaqSection from "../components/sections/FaqSection.astro";
 import GallerySection from "../components/sections/GallerySection.astro";
-import { getHomePage, getBusinessDetails, getHomeGalleryPhotos } from "../utils/sanity";
+import { getHomePage, getBusinessDetails } from "../utils/sanity";
 
 const homePage = await getHomePage();
 const businessDetails = await getBusinessDetails();
-const galleryPhotos = await getHomeGalleryPhotos();
 ---
 
 <BaseLayout businessDetails={businessDetails}>
   <HeroSection homePage={homePage} businessDetails={businessDetails} />
   <ValuesSection homePage={homePage} />
   <FaqSection homePage={homePage} />
-  <GallerySection homePage={homePage} photos={galleryPhotos} />
+  <GallerySection homePage={homePage} />
 </BaseLayout>
