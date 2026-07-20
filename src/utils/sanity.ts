@@ -13,7 +13,6 @@ export {
   getBlogPostBySlug,
   getGalleryPhotos,
   getHomeGalleryPhotos,
-  getAboutGalleryPhotos,
   getPolicyDocuments,
 } from "../lib/queries";
 

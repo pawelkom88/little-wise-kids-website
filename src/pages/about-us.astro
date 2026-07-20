@@ -7,10 +7,9 @@ import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
 import SanityImage from "../components/media/SanityImage.astro";
-import { getAboutPage, getAboutGalleryPhotos } from "../utils/sanity";
+import { getAboutPage } from "../utils/sanity";
 
 const aboutPage = await getAboutPage();
-const galleryPhotos = await getAboutGalleryPhotos();
 
 const approachPoints = [
   { icon: "users", tone: "purple", text: aboutPage.approachChildLed },
@@ -305,46 +304,6 @@ const learningFoundations = [
           </Container>
         </section>
 
-        <section
-          class="lwk-about__section
-        lwk-about__section--gallery"
-          aria-labelledby="about-gallery-title"
-        >
-          <Container size="wide">
-            <header class="lwk-about__gallery-heading">
-              <p class="lwk-about__label
-              lwk-about__label--purple">
-                {aboutPage.gallerySectionLabel}
-              </p>
-
-              <h2 id="about-gallery-title">{aboutPage.gallerySectionHeading}</h2>
-            </header>
-
-            <div class="lwk-about__gallery-grid">
-              {
-                galleryPhotos.length > 0 ? (
-                  galleryPhotos.map((photo) => (
-                    photo.image?.asset?._ref ? (
-                    <figure class="lwk-about__gallery-card">
-                      <SanityImage
-                        image={photo.image}
-                        alt={photo.image.altText ?? ""}
-                        widths={[320, 480, 640]}
-                        sizes="(min-width: 72rem) 280px, 50vw"
-                        layout="constrained"
-                      />
-                    </figure>
-                    ) : null
-                  ))
-                ) : (
-                  galleryPhotos.length === 0 && (
-                    <p>Gallery photos coming soon.</p>
-                  )
-                )
-              }
-            </div>
-          </Container>
-        </section>
       </div>
     </section>
   </article>

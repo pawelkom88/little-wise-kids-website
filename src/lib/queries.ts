@@ -184,12 +184,6 @@ export async function getHomeGalleryPhotos(): Promise<GalleryPhoto[]> {
   return await sanityClient.fetch<GalleryPhoto[]>(homeGalleryPhotosQuery);
 }
 
-export const aboutGalleryPhotosQuery = `*[_type == "galleryPhoto" && showOnAboutPage == true && defined(image.asset._ref)] | order(aboutPageDisplayOrder asc)`;
-
-export async function getAboutGalleryPhotos(): Promise<GalleryPhoto[]> {
-  return await sanityClient.fetch<GalleryPhoto[]>(aboutGalleryPhotosQuery);
-}
-
 export const policyDocumentsQuery = `*[_type == "policyDocument" && defined(file.asset._ref)] | order(displayOrder asc) {
   _id,
   title,

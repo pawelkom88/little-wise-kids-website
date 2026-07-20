@@ -204,8 +204,6 @@ export interface AboutPage {
   leadershipHeading: string;
   leadershipParagraphs: PortableTextBlock[];
   leadershipImage: ContentImage;
-  gallerySectionLabel: string;
-  gallerySectionHeading: string;
 }
 
 export interface MultilingualPage {
@@ -393,8 +391,6 @@ export interface GalleryPhoto {
   homepageDisplayOrder?: number;
   publicCaption?: string;
   displayOrder?: number;
-  showOnAboutPage?: boolean;
-  aboutPageDisplayOrder?: number;
 }
 
 export interface PolicyDocument {

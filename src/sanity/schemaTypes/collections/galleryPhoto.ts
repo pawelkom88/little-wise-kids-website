@@ -77,29 +77,6 @@ export const galleryPhoto = defineType({
       type: "number",
       validation: (rule) => rule.required().integer().min(0).error("Display order is required."),
     }),
-    defineField({
-      name: "showOnAboutPage",
-      title: "Show On About Page",
-      description: "Toggle to feature this photo in the About page activity gallery.",
-      type: "boolean",
-      initialValue: false,
-    }),
-    defineField({
-      name: "aboutPageDisplayOrder",
-      title: "About Page Display Order",
-      description: "Lower numbers appear first on the About page gallery.",
-      type: "number",
-      validation: (rule) => [
-        rule.integer().min(0),
-        rule.custom((value, context) => {
-          const parent = context.parent as { showOnAboutPage?: boolean } | undefined;
-          if (parent?.showOnAboutPage && (value === undefined || value === null)) {
-            return "Display order is required when shown on About page.";
-          }
-          return true;
-        }),
-      ],
-    }),
   ],
   preview: {
     select: {
@@ -118,11 +95,6 @@ export const galleryPhoto = defineType({
       title: "Homepage Order",
       name: "homepageOrder",
       by: [{ field: "homepageDisplayOrder", direction: "asc" }],
-    },
-    {
-      title: "About Page Order",
-      name: "aboutPageOrder",
-      by: [{ field: "aboutPageDisplayOrder", direction: "asc" }],
     },
   ],
 });

@@ -12,7 +12,6 @@ export const aboutPage = defineType({
     { name: "programmes", title: "Programmes" },
     { name: "educators", title: "Educators" },
     { name: "leadership", title: "Leadership" },
-    { name: "gallery", title: "Gallery" },
   ],
   fields: [
     defineField({
@@ -37,7 +36,7 @@ export const aboutPage = defineType({
       description: "Second line of main heading.",
       type: "string",
       group: "hero",
-      validation: (rule) => rule.required().max(40),
+      validation: (rule) => rule.required().max(60),
     }),
     defineField({
       name: "heroParagraphs",
@@ -67,10 +66,11 @@ export const aboutPage = defineType({
     defineField({
       name: "approachParagraphs",
       title: "Approach Paragraphs",
-      description: "Introductory text for the approach section.",
-      type: "minimalPortableText",
+      description: "Paragraphs for the approach introduction.",
+      type: "array",
+      of: [{ type: "approachPoint" }],
       group: "approach",
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required().min(1),
     }),
     ...[
       "approachChildLed",
@@ -264,24 +264,6 @@ export const aboutPage = defineType({
       type: "contentImage",
       group: "leadership",
       validation: (rule) => rule.required().assetRequired().error("Image required."),
-    }),
-
-
-    defineField({
-      name: "gallerySectionLabel",
-      title: "Gallery Section Label",
-      description: "The eyebrow label.",
-      type: "string",
-      group: "gallery",
-      validation: (rule) => rule.required().max(40),
-    }),
-    defineField({
-      name: "gallerySectionHeading",
-      title: "Gallery Section Heading",
-      description: "The main H2 heading for the gallery section.",
-      type: "string",
-      group: "gallery",
-      validation: (rule) => rule.required().max(80),
     }),
   ],
 });

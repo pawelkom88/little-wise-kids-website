@@ -63,8 +63,7 @@
   color: color-mix(in srgb, var(--color-yellow), var(--color-darken-base) 28%);
 }
 
-.lwk-about__copy-block h2,
-.lwk-about__gallery-heading h2 {
+.lwk-about__copy-block h2 {
   color: var(--color-ink);
   letter-spacing: var(--letter-spacing-section-title);
   text-wrap: balance;
@@ -206,8 +205,7 @@
  */
 
 .lwk-about__media,
-.lwk-about__portrait,
-.lwk-about__gallery-card {
+.lwk-about__portrait {
   position: relative;
   min-width: 0;
   margin: 0;
@@ -223,8 +221,7 @@
 }
 
 .lwk-about__media img,
-.lwk-about__portrait img,
-.lwk-about__gallery-card img {
+.lwk-about__portrait img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -336,51 +333,20 @@
 }
 
 /*
- * Activity gallery
- */
-
-.lwk-about__section--gallery {
-  padding-bottom: var(--section-spacing);
-}
-
-.lwk-about__gallery-heading {
-  max-width: 48rem;
-  margin: 0 auto var(--space-l);
-  text-align: center;
-}
-
-.lwk-about__gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-s);
-}
-
-.lwk-about__gallery-card {
-  aspect-ratio: 4 / 3;
-  border-radius: var(--radius-m);
-}
-
-/*
  * Hover
  */
 
 @media (hover: hover) {
   .lwk-about__key-points li,
-  .lwk-about__foundations li,
-  .lwk-about__gallery-card {
+  .lwk-about__foundations li {
     transition:
       transform 180ms ease,
       box-shadow 180ms ease;
   }
 
   .lwk-about__key-points li:hover,
-  .lwk-about__foundations li:hover,
-  .lwk-about__gallery-card:hover {
+  .lwk-about__foundations li:hover {
     transform: translateY(-0.15rem);
-  }
-
-  .lwk-about__gallery-card:hover {
-    box-shadow: var(--shadow-soft);
   }
 }
 
@@ -415,10 +381,6 @@
 
   .lwk-about__portrait {
     min-height: 28rem;
-  }
-
-  .lwk-about__gallery-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -468,14 +430,6 @@
   .lwk-about__portrait {
     min-height: 24rem;
   }
-
-  .lwk-about__gallery-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .lwk-about__gallery-card {
-    aspect-ratio: 16 / 10;
-  }
 }
 
 @media (width < 30rem) {
@@ -490,14 +444,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   .lwk-about__key-points li,
-  .lwk-about__foundations li,
-  .lwk-about__gallery-card {
+  .lwk-about__foundations li {
     transition: none;
   }
 
   .lwk-about__key-points li:hover,
-  .lwk-about__foundations li:hover,
-  .lwk-about__gallery-card:hover {
+  .lwk-about__foundations li:hover {
     transform: none;
   }
 }
