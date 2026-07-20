@@ -65,7 +65,7 @@ const standardArticles = primaryFeaturedArticle
                     aria-pressed={index === 0 ? "true" : "false"}
                   >
                     <span class="blog-filter__icon" aria-hidden="true">
-                      <Icon name={category.icon as any} size={18} />
+                      <Icon name={category.icon} size={18} />
                     </span>
 
                     <span>{category.label}</span>
@@ -108,7 +108,7 @@ const standardArticles = primaryFeaturedArticle
                     </div>
                     <div class="blog-card__body">
                       <span class="blog-card__category">
-                        <span aria-hidden="true"><Icon name={article.icon as any} size={17} /></span>
+                        <span aria-hidden="true"><Icon name={article.icon as import("../../components/icons/types").IconName} size={17} /></span>
                         {article.categoryLabel}
                       </span>
                       <h3>{article.title}</h3>
@@ -154,7 +154,7 @@ const standardArticles = primaryFeaturedArticle
                     </div>
                     <div class="blog-card__body">
                       <span class="blog-card__category">
-                        <span aria-hidden="true"><Icon name={article.icon as any} size={17} /></span>
+                        <span aria-hidden="true"><Icon name={article.icon as import("../../components/icons/types").IconName} size={17} /></span>
                         {article.categoryLabel}
                       </span>
                       <h3>{article.title}</h3>

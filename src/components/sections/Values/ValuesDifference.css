@@ -251,11 +251,11 @@
 }
 
 .lwk-value-card__title--yellow {
-  color: color-mix(in srgb, var(--color-yellow), var(--color-darken-base) 28%);
+  color: color-mix(in srgb, var(--color-yellow), var(--color-darken-base) 50%);
 }
 
 .lwk-value-card__title--orange {
-  color: var(--color-orange-dark);
+  color: color-mix(in srgb, var(--color-orange-dark), var(--color-darken-base) 20%);
 }
 
 .lwk-value-card__title--pink {

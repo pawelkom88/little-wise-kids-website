@@ -18,7 +18,7 @@ const SINGLETON_TYPES = [
   "blogPage",
 ];
 
-export const deskStructure = (S: any) =>
+export const deskStructure: StructureResolver = (S) =>
   S.list()
     .title("Content")
     .items([
@@ -108,7 +108,7 @@ export const deskStructure = (S: any) =>
 
       // Filter out singletons from the main list
       ...S.documentTypeListItems().filter(
-        (listItem: any) =>
+        (listItem: import("sanity/structure").ListItemBuilder) =>
           !SINGLETON_TYPES.includes(listItem.getId() as string) &&
           !["blogPost", "galleryPhoto", "policyDocument"].includes(
             listItem.getId() as string

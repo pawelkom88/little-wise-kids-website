@@ -5,17 +5,19 @@ export const businessDetails = defineType({
   title: "Business Details",
   type: "document",
   validation: (rule) => [
-    rule.custom((fields: any) => {
-      if (!fields) return true;
-      const paths: any[] = [];
-      if (fields.openingTime && fields.closingTime && fields.openingTime >= fields.closingTime) {
+    rule.custom((value: import("sanity").SanityDocument | undefined) => {
+      if (!value) return true;
+      const paths: Array<{path: string[], message: string}> = [];
+      const fields = value as Record<string, string | number | Record<string, number> | undefined>;
+      if (typeof fields.openingTime === 'string' && typeof fields.closingTime === 'string' && fields.openingTime >= fields.closingTime) {
         paths.push({ path: ['closingTime'], message: "Closing time must be after opening time." });
       }
-      if (fields.morningSessionEnd && fields.afternoonSessionStart && fields.morningSessionEnd > fields.afternoonSessionStart) {
+      if (typeof fields.morningSessionEnd === 'string' && typeof fields.afternoonSessionStart === 'string' && fields.morningSessionEnd > fields.afternoonSessionStart) {
         paths.push({ path: ['afternoonSessionStart'], message: "Afternoon session cannot start before morning session ends." });
       }
-      if (fields.ageRange && typeof fields.ageRange.minimum === 'number' && typeof fields.ageRange.maximum === 'number') {
-        if (fields.ageRange.minimum > fields.ageRange.maximum) {
+      const ageRange = fields.ageRange as Record<string, number> | undefined;
+      if (ageRange && typeof ageRange.minimum === 'number' && typeof ageRange.maximum === 'number') {
+        if (ageRange.minimum > ageRange.maximum) {
           paths.push({ path: ['ageRange', 'maximum'], message: "Age range maximum must be greater than or equal to minimum." });
         }
       }

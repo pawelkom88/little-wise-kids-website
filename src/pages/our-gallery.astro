@@ -81,7 +81,7 @@ const categoryEntries = Object.entries(categories);
                     href={`#${id}`}
                   >
                     <span class="gallery-category__icon" aria-hidden="true">
-                      <Icon name={meta.icon as any} size={23} />
+                      <Icon name={meta.icon as import("../components/icons/types").IconName} size={23} />
                     </span>
 
                     <span>{meta.title}</span>
@@ -110,7 +110,7 @@ const categoryEntries = Object.entries(categories);
 
                       <figcaption>
                         <span class="gallery-card__caption-icon" aria-hidden="true">
-                          <Icon name={meta.icon as any} size={19} />
+                          <Icon name={meta.icon as import("../components/icons/types").IconName} size={19} />
                         </span>
 
                         <span>{meta.title}</span>

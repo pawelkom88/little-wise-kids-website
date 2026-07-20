@@ -39,7 +39,7 @@ const { homePage } = Astro.props;
 
     <div class="faq-list">
       {
-        homePage.faqs.map((faq: any, index: number) => (
+        homePage.faqs.map((faq: import("../../lib/types").FaqItem, index: number) => (
           <details class="faq-item" name="little-wise-kids-faq" open={index === 0}>
             <summary>
               <span class="faq-question">{faq.question}</span>

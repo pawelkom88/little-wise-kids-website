@@ -25,7 +25,7 @@ function formatDisplayDate(publishedAt: string): string {
   }).format(new Date(publishedAt));
 }
 
-function calculateReadTime(body: any[]): string {
+function calculateReadTime(body: import("@portabletext/types").PortableTextBlock[]): string {
   const text = JSON.stringify(body)
     .replace(/<[^>]*>/g, "")
     .replace(/\\n/g, " ");

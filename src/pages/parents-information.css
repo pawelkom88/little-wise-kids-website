@@ -52,12 +52,12 @@
 }
 
 .parents-card--green {
-  --parents-accent: var(--color-green);
+  --parents-accent: var(--color-green-dark);
   --parents-soft: var(--color-green-soft);
 }
 
 .parents-card--blue {
-  --parents-accent: var(--color-blue);
+  --parents-accent: var(--color-blue-dark);
   --parents-soft: var(--color-blue-soft);
 }
 
@@ -65,7 +65,7 @@
   --parents-accent: color-mix(
     in srgb,
     var(--color-yellow),
-    var(--color-ink) 26%
+    var(--color-darken-base) 50%
   );
   --parents-soft: var(--color-yellow-soft);
 }

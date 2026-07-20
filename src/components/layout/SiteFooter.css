@@ -82,7 +82,7 @@
 }
 
 .lwk-footer__heading span {
-  color: var(--color-blue);
+  color: var(--color-blue-dark);
 }
 
 .lwk-footer__summary {
@@ -102,9 +102,9 @@
   padding-inline: var(--space-m);
   border-radius: var(--radius-pill);
   color: var(--color-page);
-  background: var(--color-purple);
+  background: var(--color-purple-dark);
   box-shadow: 0 0.75rem 1.75rem
-    color-mix(in srgb, var(--color-purple), transparent 76%);
+    color-mix(in srgb, var(--color-purple-dark), transparent 76%);
   font-family: var(--font-heading);
   font-weight: var(--font-weight-bold);
   transition:

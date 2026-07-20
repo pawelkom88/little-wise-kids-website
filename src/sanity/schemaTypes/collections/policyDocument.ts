@@ -32,7 +32,7 @@ export const policyDocument = defineType({
       options: { accept: "application/pdf" },
       validation: (rule) => [
         rule.required().error("A policy file is required."),
-        rule.custom(async (fileValue: any, context) => {
+        rule.custom(async (fileValue: import('sanity').FileValue | undefined, context) => {
           if (!fileValue || !fileValue.asset || !fileValue.asset._ref) return true; 
           const client = context.getClient({ apiVersion: "2024-01-01" });
           const asset = await client.fetch(

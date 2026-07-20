@@ -15,6 +15,13 @@ const initHeader = () => {
     mobileSummary.focus();
   });
 
+  mobile.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && mobile.open) {
+      mobile.open = false;
+      mobileSummary.focus();
+    }
+  });
+
   header
     .querySelectorAll<HTMLAnchorElement>("[data-nav-link]")
     .forEach((link) =>

@@ -48,17 +48,17 @@
 }
 
 .hours-card--green {
-  --hours-accent: var(--color-green);
+  --hours-accent: var(--color-green-dark);
   --hours-soft: var(--color-green-soft);
 }
 
 .hours-card--purple {
-  --hours-accent: var(--color-purple);
+  --hours-accent: var(--color-purple-dark);
   --hours-soft: var(--color-purple-soft);
 }
 
 .hours-card--blue {
-  --hours-accent: var(--color-blue);
+  --hours-accent: var(--color-blue-dark);
   --hours-soft: var(--color-blue-soft);
 }
 
