@@ -17,11 +17,11 @@ const { businessDetails } = Astro.props;
 
 <header class="site-header" data-site-header>
   <Container size="wide" class="site-header__inner">
-    <a class="brand" href="/" aria-label={`${businessDetails.organizationName || "Little Wise Kids"} home`}>
+    <a class="brand" href="/">
       <Image
         class="brand__logo"
         src={logoImg}
-        alt=""
+        alt={`${businessDetails.organizationName || "Little Wise Kids"} home`}
         width={160}
         height={80}
         layout="fixed"

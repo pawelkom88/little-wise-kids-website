@@ -28,3 +28,6 @@ future-section-mobile.png
 
 # sec scan artifacts
 codex-security-scans-*
+/__MACOSX/
+playwright-report/
+test-results/

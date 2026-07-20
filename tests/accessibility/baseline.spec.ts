@@ -166,7 +166,8 @@ test.describe("Baseline Automated Accessibility Audit", () => {
 
   test("Material state: Contact form invalid state", async ({ page }, testInfo) => {
     await page.goto("/contact");
-    await page.waitForLoadState("domcontentloaded");
+    await page.waitForLoadState("networkidle");
+    await page.waitForFunction(() => document.querySelector('#contact-start-date')?.hasAttribute('min'));
 
     const submitBtn = page.locator('button[type="submit"]');
     if (await submitBtn.isVisible()) {

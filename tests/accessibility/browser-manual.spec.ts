@@ -132,7 +132,8 @@ test.describe("Browser-Verifiable Manual Checks", () => {
 
   test("Contact-form error-summary, labels, and field-level error associations", async ({ page }) => {
     await page.goto("/contact");
-    await page.waitForLoadState("domcontentloaded");
+    await page.waitForLoadState("networkidle");
+    await page.waitForFunction(() => document.querySelector('#contact-start-date')?.hasAttribute('min'));
 
     const requiredFields = [
       { id: "contact-name", name: "name", errorId: "contact-name-error" },

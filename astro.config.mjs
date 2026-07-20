@@ -10,6 +10,9 @@ const env = loadEnv(process.env.NODE_ENV || "production", process.cwd(), "");
 export default defineConfig({
   site: "https://littlewisekids.co.uk",
   trailingSlash: "never",
+  build: {
+    format: "file",
+  },
   output: "static",
   adapter: cloudflare({
     imageService: "compile",

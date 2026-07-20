@@ -80,7 +80,7 @@ const hasPhotos = flatPhotos.length > 0;
       >
         {
           galleryPages.map((page, pageIndex) => (
-            <article
+            <div
               class="lwk-gallery__page"
               id={`gallery-page-${pageIndex + 1}`}
               data-gallery-page
@@ -125,7 +125,7 @@ const hasPhotos = flatPhotos.length > 0;
                   </figure>
                 );
               })}
-            </article>
+            </div>
           ))
         }
       </div>
