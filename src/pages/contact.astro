@@ -18,15 +18,15 @@ if (!accessKey) {
     "Missing WEB3FORMS_ACCESS_KEY environment variable. Add it to .env to enable the contact form."
   );
 }
-const thankYouUrl = new URL("/thank-you/", siteUrl).toString();
+const thankYouUrl = new URL("/thank-you", siteUrl).toString();
 
 const contactPage = await getContactPage();
 const businessDetails = await getBusinessDetails();
 
 import type { SeoConfig } from "../lib/seo/types";
 const seo: SeoConfig = {
-  title: "Contact Little Wise Kids | Nursery in Bristol BS5",
-  description: "Contact Little Wise Kids in Bristol BS5 to ask about nursery availability, book a visit, or register for our screen-free early years setting.",
+  title: "Contact Little Wise Kids | Childcare Setting in Bristol BS5",
+  description: "Contact Little Wise Kids in Bristol BS5 to ask about childcare availability, book a visit, or register for our screen-free early years setting.",
   canonicalPath: "/contact",
 };
 
@@ -284,9 +284,9 @@ const nextSteps = [
                       Register your interest
                     </option>
                     <option value="book-visit">
-                      Arrange a nursery visit
+                      Arrange a setting visit
                     </option>
-                    <option value="availability"> Nursery availability </option>
+                    <option value="availability"> Childcare availability </option>
                     <option value="fees-funding"> Fees and funding </option>
                     <option value="settling-in"> Settling in </option>
                     <option value="nutrition">

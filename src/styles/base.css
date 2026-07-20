@@ -152,3 +152,33 @@ button {
     scroll-behavior: auto;
   }
 }
+
+/* Smooth, app-like crossfade for view transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Add a subtle scale down/up effect for depth */
+::view-transition-old(root) {
+  animation-name: fadeOut, scaleDown;
+}
+::view-transition-new(root) {
+  animation-name: fadeIn, scaleUp;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scaleDown {
+  to { transform: scale(0.98); }
+}
+@keyframes scaleUp {
+  from { transform: scale(0.98); }
+}

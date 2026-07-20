@@ -29,7 +29,7 @@ export function buildArticleSchema(post: BlogPost, siteUrl: string, postUrl: str
         "name": "Little Wise Kids",
         "logo": {
           "@type": "ImageObject",
-          "url": `${url}/assets/images/logo.png`
+          "url": `${url}/assets/logo.png`
         }
       },
       "inLanguage": "en-GB"

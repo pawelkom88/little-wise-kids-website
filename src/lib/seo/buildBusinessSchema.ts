@@ -11,7 +11,7 @@ export function buildBusinessSchema(businessDetails: BusinessDetails, siteUrl: s
     "description": businessDetails.footerBusinessCopy,
     "logo": {
       "@type": "ImageObject",
-      "url": `${url}/assets/images/logo.png`
+      "url": `${url}/assets/logo.png`
     },
     "telephone": businessDetails.primaryPhone?.number,
     "email": businessDetails.publicEmail,

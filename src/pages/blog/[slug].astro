@@ -6,7 +6,7 @@ import Icon from "../../components/icons/Icon.astro";
 import SubpageHero from "../../components/layout/SubpageHero.astro";
 import PortableContent from "../../components/content/PortableContent.astro";
 import SanityImage from "../../components/media/SanityImage.astro";
-import { getBlogPosts, getBusinessDetails } from "../../utils/sanity";
+import { getBlogPosts, getBusinessDetails, urlFor } from "../../utils/sanity";
 import { mapBlogPost } from "../../lib/blog";
 import { buildArticleSchema } from "../../lib/seo/buildArticleSchema";
 import type { SeoConfig } from "../../lib/seo/types";
@@ -35,6 +35,10 @@ const siteUrl = Astro.site ? Astro.site.toString() : "https://littlewisekids.co.
 const postUrl = `${siteUrl.replace(/\/$/, "")}/blog/${post.slug.current}`;
 const articleSchemas = buildArticleSchema(post, siteUrl, postUrl);
 
+const socialImageUrl = post.featuredImage?.asset?._ref 
+  ? urlFor(post.featuredImage.asset).width(1200).height(630).format("jpg").quality(80).url()
+  : post.imageUrl;
+
 const seo: SeoConfig = {
   title: `${article.title} | Little Wise Kids`,
   description: article.excerpt,
@@ -44,7 +48,7 @@ const seo: SeoConfig = {
   publishedTime: post.publishedAt,
   modifiedTime: post._updatedAt || post.publishedAt,
   articleSection: article.categoryLabel,
-  ...(post.imageUrl ? { image: { url: post.imageUrl, alt: post.featuredImage?.altText || article.title } } : {})
+  ...(socialImageUrl ? { image: { url: socialImageUrl, alt: post.featuredImage?.altText || article.title } } : {})
 };
 ---
 
@@ -61,7 +65,7 @@ const seo: SeoConfig = {
       itemprop="headline"
     >
       <Fragment slot="title">
-        {article.title}
+        <span transition:name={`blog-title-${post.slug.current}`}>{article.title}</span>
       </Fragment>
 
       <p itemprop="description">
@@ -98,7 +102,7 @@ const seo: SeoConfig = {
           </header>
 
           {post.featuredImage?.asset?._ref ? (
-            <figure class="blog-article__image">
+            <figure class="blog-article__image" transition:name={`blog-image-${post.slug.current}`}>
               <SanityImage
                 image={post.featuredImage}
                 alt={post.featuredImage.altText ?? ""}

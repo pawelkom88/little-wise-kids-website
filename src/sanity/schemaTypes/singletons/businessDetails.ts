@@ -384,7 +384,7 @@ export const businessDetails = defineType({
     defineField({
       name: "socialIntroduction",
       title: "Social Introduction",
-      description: "e.g. 'Nursery moments, news and everyday inspiration.'",
+      description: "e.g. 'Childcare moments, news and everyday inspiration.'",
       type: "string",
       group: "other",
       validation: (rule) => rule.required().max(100),

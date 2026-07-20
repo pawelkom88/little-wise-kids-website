@@ -1,7 +1,7 @@
 import type { BlogPost } from "./types";
 
 const categoryConfig: Record<string, { label: string; tone: string; icon: string }> = {
-  "nursery-news": { label: "Nursery News", tone: "purple", icon: "star" },
+  "nursery-news": { label: "Childcare News", tone: "purple", icon: "star" },
   "early-learning": { label: "Early Learning", tone: "blue", icon: "book" },
   "parenting-tips": { label: "Parenting Tips", tone: "purple", icon: "heart" },
   nutrition: { label: "Nutrition", tone: "yellow", icon: "heart" },
@@ -10,7 +10,7 @@ const categoryConfig: Record<string, { label: string; tone: string; icon: string
 
 export const blogCategories = [
   { id: "all", label: "All Articles", icon: "star" },
-  { id: "nursery-news", label: "Nursery News", icon: "star" },
+  { id: "nursery-news", label: "Childcare News", icon: "star" },
   { id: "early-learning", label: "Early Learning", icon: "book" },
   { id: "parenting-tips", label: "Parenting Tips", icon: "heart" },
   { id: "nutrition", label: "Nutrition", icon: "heart" },

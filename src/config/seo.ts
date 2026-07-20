@@ -1,11 +1,11 @@
 import type { SeoImage } from '../lib/seo/types';
-import ogDefault from '../assets/images/little-wise-kids-social.png';
+export const themeColor = "#FFFBF1";
 
 export const defaultSeoImage: SeoImage = {
-  url: ogDefault.src,
+  url: "/og/little-wise-kids.jpg",
   alt: "Little Wise Kids childcare in Easton, Bristol",
-  width: ogDefault.width,
-  height: ogDefault.height,
+  width: 1200,
+  height: 630,
 };
 
 export const defaultSeoConfig = {

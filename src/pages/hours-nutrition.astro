@@ -14,7 +14,7 @@ const hoursNutritionPage = await getHoursNutritionPage();
 const businessDetails = await getBusinessDetails();
 
 const seo: SeoConfig = {
-  title: "Childcare Opening Hours & Nutrition in Easton | Little Wise Kids",
+  title: "Opening Hours & Nutrition in Easton | Little Wise Kids",
   description: `Operating from ${businessDetails.openingTime} to ${businessDetails.closingTime}, we offer flexible childcare in Easton with wholesome, home-cooked meals accommodating various dietary needs.`,
   canonicalPath: "/hours-nutrition",
 };
@@ -261,7 +261,7 @@ const dailyRhythm = [
 
             <ol
               class="hours-day__timeline"
-              aria-label="Example daily nursery schedule"
+              aria-label="Example daily childcare schedule"
             >
               {
                 dailyRhythm.map((event) => (

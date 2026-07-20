@@ -23,8 +23,8 @@ const standardArticles = primaryFeaturedArticle
 const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, "") : "https://littlewisekids.co.uk";
 
 const seo: SeoConfig = {
-  title: "Nursery News and Early Years Advice | Little Wise Kids",
-  description: "Read nursery news, early years guidance, parenting ideas, nutrition advice and community updates from Little Wise Kids in Bristol BS5.",
+  title: "Childcare News and Early Years Advice | Little Wise Kids",
+  description: "Read childcare news, early years guidance, parenting ideas, nutrition advice and community updates from Little Wise Kids in Bristol BS5.",
   canonicalPath: "/blog",
   schemas: [
     {
@@ -63,6 +63,7 @@ const seo: SeoConfig = {
 
     <div class="blog-page__content">
       <Container size="wide">
+        {articles.length > 0 && (
         <section class="blog-index" aria-labelledby="latest-articles-title">
           <header class="blog-index__header">
             <div class="blog-index__heading">
@@ -115,7 +116,7 @@ const seo: SeoConfig = {
                   data-article-index={0}
                 >
                   <a class="blog-card__link" href={`/blog/${article.slug}`}>
-                    <div class="blog-card__media">
+                    <div class="blog-card__media" transition:name={`blog-image-${article.slug}`}>
                       {article.image ? (
                         <SanityImage
                           image={article.image.sanityImage}
@@ -137,7 +138,7 @@ const seo: SeoConfig = {
                         <span aria-hidden="true"><Icon name={article.icon as import("../../components/icons/types").IconName} size={17} /></span>
                         {article.categoryLabel}
                       </span>
-                      <h3>{article.title}</h3>
+                      <h3 transition:name={`blog-title-${article.slug}`}>{article.title}</h3>
                       <p class="blog-card__excerpt">{article.excerpt}</p>
                       <footer class="blog-card__footer">
                         <div class="blog-card__meta">
@@ -164,7 +165,7 @@ const seo: SeoConfig = {
                   hidden={displayIndex >= 6}
                 >
                   <a class="blog-card__link" href={`/blog/${article.slug}`}>
-                    <div class="blog-card__media">
+                    <div class="blog-card__media" transition:name={`blog-image-${article.slug}`}>
                       {article.image ? (
                         <SanityImage
                           image={article.image.sanityImage}
@@ -183,7 +184,7 @@ const seo: SeoConfig = {
                         <span aria-hidden="true"><Icon name={article.icon as import("../../components/icons/types").IconName} size={17} /></span>
                         {article.categoryLabel}
                       </span>
-                      <h3>{article.title}</h3>
+                      <h3 transition:name={`blog-title-${article.slug}`}>{article.title}</h3>
                       <p class="blog-card__excerpt">{article.excerpt}</p>
                       <footer class="blog-card__footer">
                         <div class="blog-card__meta">
@@ -209,6 +210,7 @@ const seo: SeoConfig = {
             </button>
           </div>
         </section>
+        )}
       </Container>
     </div>
   </article>

@@ -59,7 +59,7 @@ export const blogPost = defineType({
       type: "string",
       options: {
         list: [
-          { title: "Nursery News", value: "nursery-news" },
+          { title: "Childcare News", value: "nursery-news" },
           { title: "Early Learning", value: "early-learning" },
           { title: "Parenting Tips", value: "parenting-tips" },
           { title: "Nutrition", value: "nutrition" },

@@ -60,7 +60,7 @@ for (const path of astroFiles) {
     `${path} contains an inline script block`
   );
   assert(
-    !/\bis:inline\b/.test(source),
+    !/\bis:inline\b(?!\s+type=['"]application\/ld\+json['"])/.test(source),
     `${path} bypasses Astro script processing`
   );
   assert(!/#[0-9a-f]{3,8}\b/i.test(source), `${path} contains a raw color`);

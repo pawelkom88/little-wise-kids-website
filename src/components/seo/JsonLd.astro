@@ -11,4 +11,4 @@ const graphData = {
 const json = JSON.stringify(graphData).replace(/</g, "\\u003c");
 ---
 
-<script type="application/ld+json" set:html={json} />
+<script is:inline type="application/ld+json" set:html={json} />
