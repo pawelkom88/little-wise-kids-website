@@ -1,11 +1,7 @@
 ---
-import { Picture } from "astro:assets";
-import Icon from "../icons/Icon.astro";
 import Section from "../layout/Section.astro";
 import Button from "../ui/Button.astro";
 import PortableContent from "../content/PortableContent.astro";
-import SanityImage from "../media/SanityImage.astro";
-import heroFallback from "../../assets/images/hero-image.png";
 import "./HeroSection.css";
 import type { HomePage, BusinessDetails } from "../../lib/types";
 
@@ -15,14 +11,6 @@ interface Props {
 }
 
 const { homePage } = Astro.props;
-
-const heroIsDecorative = homePage.heroImage?.isDecorative === true;
-
-const featureStrip = [
-  { ...homePage.multilingualFeature, icon: 'globe', tone: 'blue' },
-  { ...homePage.childCentredFeature, icon: 'heart', tone: 'purple' },
-  { ...homePage.playToLearnFeature, icon: 'star', tone: 'green' }
-];
 ---
 
 <Section class="hero-section" width="wide" aria-labelledby="hero-title">
@@ -51,50 +39,7 @@ const featureStrip = [
         >
       </div>
     </div>
-    <div class="hero__media" aria-hidden={heroIsDecorative ? "true" : undefined}>
-      {homePage.heroImage?.asset?._ref ? (
-        <SanityImage
-          image={homePage.heroImage}
-          alt={heroIsDecorative ? "" : homePage.heroImage?.altText ?? ""}
-          class="hero__photo"
-          widths={[480, 640, 800, 1200, 1600]}
-          sizes="(min-width: 72rem) 560px, 50vw"
-          layout="constrained"
-          priority
-        />
-      ) : (
-        <Picture
-          class="hero__photo"
-          src={heroFallback}
-          formats={["avif", "webp"]}
-          fallbackFormat="png"
-          alt=""
-          width={1426}
-          height={1103}
-          priority
-          layout="constrained"
-        />
-      )}
-    </div>
   </div>
-
-  <!--<div class="feature-strip">-->
-  <!--  {-->
-  <!--    featureStrip.map((feature) => (-->
-  <!--      <article class="feature-strip__item">-->
-  <!--        <span class={`feature-strip__icon tone-${feature.tone}`}>-->
-  <!--          <Icon name={feature.icon} size={34} />-->
-  <!--        </span>-->
-  <!--        <div>-->
-  <!--          <p class={`feature-strip__title tone-${feature.tone}`}>-->
-  <!--            {feature.title}-->
-  <!--          </p>-->
-  <!--          <p class="feature-strip__text">{feature.description}</p>-->
-  <!--        </div>-->
-  <!--      </article>-->
-  <!--    ))-->
-  <!--  }-->
-  <!--</div>-->
 </Section>
 <div class="hero-testimonial">
   <svg

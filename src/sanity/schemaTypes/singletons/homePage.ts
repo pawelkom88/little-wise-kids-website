@@ -14,15 +14,6 @@ export const homePage = defineType({
   ],
   fields: [
     defineField({
-      name: "heroEyebrow",
-      title: "Hero Eyebrow",
-      description: "Optional small text above the main title.",
-      type: "string",
-      group: "hero",
-      validation: (rule) =>
-        rule.max(30).warning("Keep the eyebrow very short."),
-    }),
-    defineField({
       name: "heroHeading",
       title: "Hero Heading",
       description: "The main heading on the homepage. Colours and line breaks are applied automatically.",
@@ -71,83 +62,6 @@ export const homePage = defineType({
       type: "string",
       group: "hero",
       validation: (rule) => rule.required().max(30),
-    }),
-    defineField({
-      name: "heroImage",
-      title: "Hero Image",
-      description: "The large image displayed in the hero section.",
-      type: "contentImage",
-      group: "hero",
-      validation: (rule) => rule.required().assetRequired().error("A hero image is required."),
-    }),
-    defineField({
-      name: "multilingualFeature",
-      title: "Multilingual Feature",
-      description: "The first feature slot below the hero.",
-      type: "object",
-      group: "hero",
-      fields: [
-        defineField({
-          name: "title",
-          type: "string",
-          title: "Title",
-          validation: (rule) => rule.required().max(40),
-        }),
-        defineField({
-          name: "description",
-          type: "text",
-          title: "Description",
-          validation: (rule) =>
-            [rule.required(), rule.max(120).warning("Keep description concise.")],
-        }),
-      ],
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "childCentredFeature",
-      title: "Child-Centred Feature",
-      description: "The second feature slot below the hero.",
-      type: "object",
-      group: "hero",
-      fields: [
-        defineField({
-          name: "title",
-          type: "string",
-          title: "Title",
-          validation: (rule) => rule.required().max(40),
-        }),
-        defineField({
-          name: "description",
-          type: "text",
-          title: "Description",
-          validation: (rule) =>
-            [rule.required(), rule.max(120).warning("Keep description concise.")],
-        }),
-      ],
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "playToLearnFeature",
-      title: "Play to Learn Feature",
-      description: "The third feature slot below the hero.",
-      type: "object",
-      group: "hero",
-      fields: [
-        defineField({
-          name: "title",
-          type: "string",
-          title: "Title",
-          validation: (rule) => rule.required().max(40),
-        }),
-        defineField({
-          name: "description",
-          type: "text",
-          title: "Description",
-          validation: (rule) =>
-            [rule.required(), rule.max(120).warning("Keep description concise.")],
-        }),
-      ],
-      validation: (rule) => rule.required(),
     }),
 
     // Values Intro
@@ -258,7 +172,6 @@ export const homePage = defineType({
       fields: [
         defineField({ name: "lineOnePrefix", type: "string", title: "Line One Prefix", description: "e.g. 'Come See the'" }),
         defineField({ name: "accentedPhrase", type: "string", title: "Accented Phrase", description: "e.g. 'Magic'" }),
-        defineField({ name: "lineTwo", type: "string", title: "Line Two", description: "e.g. 'for Yourself'" }),
       ],
       validation: (rule) => rule.required(),
     }),

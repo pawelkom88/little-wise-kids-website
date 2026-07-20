@@ -688,7 +688,6 @@ export type HomePage = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  heroEyebrow?: string;
   heroHeading?: {
     introduction?: string;
     purplePhrase?: string;
@@ -699,18 +698,6 @@ export type HomePage = {
   heroParagraphs?: MinimalPortableText;
   primaryCtaLabel?: string;
   secondaryCtaLabel?: string;
-  multilingualFeature?: {
-    title?: string;
-    description?: string;
-  };
-  childCentredFeature?: {
-    title?: string;
-    description?: string;
-  };
-  playToLearnFeature?: {
-    title?: string;
-    description?: string;
-  };
   valuesIntroHeading?: {
     prefix?: string;
     purplePhrase?: string;

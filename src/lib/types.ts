@@ -140,9 +140,6 @@ export interface HomePage {
   heroParagraphs: PortableTextBlock[];
   primaryCtaLabel: string;
   secondaryCtaLabel: string;
-  multilingualFeature: FeatureSlot;
-  childCentredFeature: FeatureSlot;
-  playToLearnFeature: FeatureSlot;
   valuesIntroHeading: ValuesIntroHeading;
   valuesIntroParagraphs: PortableTextBlock[];
   valuesDifferenceTitle: string;
@@ -164,7 +161,6 @@ export interface HomePage {
   helpPanelTitle: string;
   helpPanelCopy: string;
   helpPanelCtaLabel: string;
-  heroImage: ContentImage;
   galleryIntroTitle: string;
   galleryIntro: string;
 }
