@@ -219,7 +219,7 @@ const screenFreeBenefits = multilingualPage.screenFreeBenefits.map(
       >
         <Container size="wide">
           <div class="lwk-multilingual__eyfs-layout">
-            <div class="lwk-multilingual__copy-block">
+            <div class="lwk-multilingual__copy-block lwk-multilingual__eyfs-header">
               <p class="lwk-multilingual__label lwk-multilingual__label--blue">
                 {multilingualPage.eyfsLabel}
               </p>
@@ -231,31 +231,58 @@ const screenFreeBenefits = multilingualPage.screenFreeBenefits.map(
               </div>
             </div>
 
-            <ul
-              class="lwk-multilingual__eyfs-journey"
-              aria-label="The seven areas of the Early Years Foundation Stage"
-            >
-              {
-                eyfsAreas.map((area) => (
-                  <li>
-                    <span
-                      class={`lwk-multilingual__area-icon lwk-multilingual__area-icon--${area.tone}`}
-                      aria-hidden="true"
-                    >
-                      <Image
-                        src={area.image}
-                        alt={area.alt}
-                        width={256}
-                        height={256}
-                        quality={100}
-                      />
-                    </span>
+            <div class="lwk-multilingual__eyfs-journey-wrapper">
+              <svg
+                class="lwk-multilingual__eyfs-path-svg"
+                viewBox="0 0 1000 480"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <defs>
+                  <linearGradient id="eyfsPathGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="var(--color-purple)" stop-opacity="0.4" />
+                    <stop offset="35%" stop-color="var(--color-green)" stop-opacity="0.5" />
+                    <stop offset="70%" stop-color="var(--color-blue)" stop-opacity="0.5" />
+                    <stop offset="100%" stop-color="var(--color-yellow)" stop-opacity="0.6" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M 70 80 C 220 20, 320 180, 470 100 C 620 20, 780 140, 910 180 C 980 270, 850 380, 710 390 C 520 400, 340 320, 180 400"
+                  fill="none"
+                  stroke="url(#eyfsPathGrad)"
+                  stroke-width="4"
+                  stroke-dasharray="8 8"
+                  class="lwk-multilingual__eyfs-path-line"
+                />
+              </svg>
 
-                    <span>{area.title}</span>
-                  </li>
-                ))
-              }
-            </ul>
+              <ol
+                class="lwk-multilingual__eyfs-journey"
+                aria-label="The seven areas of the Early Years Foundation Stage"
+              >
+                {
+                  eyfsAreas.map((area, index) => (
+                    <li class={`lwk-multilingual__eyfs-node lwk-multilingual__eyfs-node--${index + 1} lwk-multilingual__eyfs-node--${area.tone}`}>
+                      <div class="lwk-multilingual__node-card">
+                          <span
+                            class={`lwk-multilingual__area-icon lwk-multilingual__area-icon--${area.tone}`}
+                            aria-hidden="true"
+                          >
+                          <Image
+                            src={area.image}
+                            alt={area.alt}
+                            width={256}
+                            height={256}
+                            quality={100}
+                          />
+                        </span>
+                        <span class="lwk-multilingual__area-title">{area.title}</span>
+                      </div>
+                    </li>
+                  ))
+                }
+              </ol>
+            </div>
           </div>
         </Container>
       </section>
