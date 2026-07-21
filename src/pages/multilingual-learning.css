@@ -227,7 +227,7 @@
 
 .lwk-multilingual__eyfs-layout {
   display: grid;
-  grid-template-columns: minmax(15rem, 0.5fr) minmax(0, 1.5fr);
+  grid-template-columns: 1fr 1fr;
   gap: clamp(var(--space-l), 5vw, var(--space-3xl));
   align-items: center;
 }

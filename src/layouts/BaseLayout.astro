@@ -65,8 +65,9 @@ const schemaGraph = [businessSchema, ...pageSchema, ...(seo.schemas || [])];
       />
     )}
     <script is:inline>
-      if (typeof navigator !== 'undefined' && 'modelContext' in navigator) {
-        navigator.modelContext.provideContext({
+      const modelCtx = (typeof document !== 'undefined' && document.modelContext) || (typeof navigator !== 'undefined' && navigator.modelContext);
+      if (modelCtx && typeof modelCtx.provideContext === 'function') {
+        modelCtx.provideContext({
           tools: [
             {
               name: "getBusinessInfo",
