@@ -33,7 +33,7 @@ const businessDetails = await getBusinessDetails();
 
 const siteUrl = Astro.site ? Astro.site.toString() : "https://littlewisekids.co.uk";
 const postUrl = `${siteUrl.replace(/\/$/, "")}/blog/${post.slug.current}`;
-const articleSchemas = buildArticleSchema(post, siteUrl, postUrl);
+const articleSchemas = buildArticleSchema(post, siteUrl, postUrl, article.categoryLabel);
 
 const socialImageUrl = post.featuredImage?.asset?._ref 
   ? urlFor(post.featuredImage.asset).width(1200).height(630).format("jpg").quality(80).url()

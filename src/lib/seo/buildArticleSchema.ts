@@ -1,6 +1,6 @@
 import type { BlogPost } from "../types";
 
-export function buildArticleSchema(post: BlogPost, siteUrl: string, postUrl: string) {
+export function buildArticleSchema(post: BlogPost, siteUrl: string, postUrl: string, categoryLabel?: string) {
   const url = siteUrl.replace(/\/$/, "");
   return [
     {
@@ -8,12 +8,12 @@ export function buildArticleSchema(post: BlogPost, siteUrl: string, postUrl: str
       "headline": post.title,
       "description": post.excerpt,
       "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": postUrl
+        "@id": `${postUrl}#webpage`
       },
       "url": postUrl,
       "datePublished": post.publishedAt,
       "dateModified": post._updatedAt || post.publishedAt,
+      ...(categoryLabel ? { "articleSection": categoryLabel } : {}),
       ...(post.imageUrl ? {
         "image": [post.imageUrl]
       } : {}),
@@ -25,12 +25,7 @@ export function buildArticleSchema(post: BlogPost, siteUrl: string, postUrl: str
         }
       } : {}),
       "publisher": {
-        "@type": "Organization",
-        "name": "Little Wise Kids",
-        "logo": {
-          "@type": "ImageObject",
-          "url": `${url}/assets/logo.png`
-        }
+        "@id": `${url}/#childcare`
       },
       "inLanguage": "en-GB"
     },
