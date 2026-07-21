@@ -16,6 +16,11 @@ const seo: SeoConfig = {
   description: "Little Wise Kids is an Ofsted-registered childcare setting in Easton, Bristol BS5. We offer screen-free play and home-cooked meals for ages 0–4.",
   canonicalPath: "/",
 };
+
+Astro.response.headers.set(
+  "Link",
+  '</.well-known/api-catalog>; rel="api-catalog", </.well-known/mcp/server-card.json>; rel="service-desc"'
+);
 ---
 
 <BaseLayout seo={seo} businessDetails={businessDetails}>

@@ -1,7 +1,7 @@
 {
-  "resource": "https://little-wise-kids.raspy-snowflake-9303.workers.dev",
+  "resource": "https://littlewisekids.co.uk",
   "authorization_servers": [
-    "https://little-wise-kids.raspy-snowflake-9303.workers.dev"
+    "https://littlewisekids.co.uk"
   ],
   "scopes_supported": [
     "read",

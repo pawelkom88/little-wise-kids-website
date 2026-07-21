@@ -41,6 +41,8 @@ const ogImageUrl = ogImage ? (ogImage.url.startsWith("http") ? ogImage.url : `${
 )}
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="alternate" type="application/rss+xml" title="Little Wise Kids Blog RSS Feed" href={`${siteUrl}/rss.xml`} />
+<link rel="api-catalog" href={`${siteUrl}/.well-known/api-catalog`} />
+<link rel="service-desc" type="application/json" href={`${siteUrl}/.well-known/mcp/server-card.json`} />
 
 {seo.robots && <meta name="robots" content={seo.robots} />}
 
