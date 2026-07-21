@@ -9,5 +9,14 @@
 /
   Link: </.well-known/api-catalog>; rel="api-catalog", </.well-known/mcp/server-card.json>; rel="service-desc"
 
+/.well-known/oauth-protected-resource
+  Content-Type: application/json
+
+/.well-known/oauth-authorization-server
+  Content-Type: application/json
+
+/.well-known/api-catalog
+  Content-Type: application/linkset+json
+
 /admin*
   X-Robots-Tag: noindex, nofollow

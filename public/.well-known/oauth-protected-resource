@@ -1,5 +1,5 @@
 {
-  "resource": "https://littlewisekids.co.uk/api",
+  "resource": "https://littlewisekids.co.uk",
   "authorization_servers": [
     "https://littlewisekids.co.uk"
   ],
