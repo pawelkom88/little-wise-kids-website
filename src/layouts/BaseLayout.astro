@@ -64,6 +64,27 @@ const schemaGraph = [businessSchema, ...pageSchema, ...(seo.schemas || [])];
         fetchpriority="high"
       />
     )}
+    <script is:inline>
+      if (typeof navigator !== 'undefined' && 'modelContext' in navigator) {
+        navigator.modelContext.provideContext({
+          tools: [
+            {
+              name: "getBusinessInfo",
+              description: "Get information about Little Wise Kids business.",
+              inputSchema: {
+                type: "object",
+                properties: {}
+              },
+              execute: async () => {
+                return {
+                  text: "Little Wise Kids is a childcare provider in Easton, Bristol."
+                };
+              }
+            }
+          ]
+        });
+      }
+    </script>
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>

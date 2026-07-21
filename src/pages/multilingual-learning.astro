@@ -12,6 +12,14 @@ import flowerImage from "../assets/images/flower-image.webp";
 import languageConnectionImage from "../assets/images/planet-english-portuguese-words.webp";
 import "./multilingual-learning.css";
 
+import iconCommunication from "../assets/images/icon-communication.png";
+import iconPhysical from "../assets/images/icon-physical.png";
+import iconRelationships from "../assets/images/icon-relationships.png";
+import iconLiteracy from "../assets/images/icon-literacy.png";
+import iconMaths from "../assets/images/icon-maths.png";
+import iconOutdoor from "../assets/images/icon-outdoor.png";
+import iconCreativity from "../assets/images/icon-creativity.png";
+
 const multilingualPage = await getMultilingualPage();
 const businessDetails = await getBusinessDetails();
 
@@ -40,39 +48,46 @@ const philosophyPoints = multilingualPage.philosophyPoints.map(
 
 const eyfsAreas = [
   {
-    icon: "chat",
+    image: iconCommunication,
     tone: "purple",
     title: multilingualPage.eyfsCommunication.title,
+    alt: "Communication & Language icon",
   },
   {
-    icon: "person",
+    image: iconPhysical,
     tone: "green",
     title: multilingualPage.eyfsPhysical.title,
+    alt: "Physical Development icon",
   },
   {
-    icon: "heart",
+    image: iconRelationships,
     tone: "blue",
     title: multilingualPage.eyfsPersonal.title,
+    alt: "Personal, Social & Emotional Development icon",
   },
   {
-    icon: "book",
+    image: iconLiteracy,
     tone: "yellow",
     title: multilingualPage.eyfsLiteracy.title,
+    alt: "Literacy icon",
   },
   {
-    icon: "calendar",
+    image: iconMaths,
     tone: "green",
     title: multilingualPage.eyfsMaths.title,
+    alt: "Mathematics icon",
   },
   {
-    icon: "star",
+    image: iconOutdoor,
     tone: "purple",
     title: multilingualPage.eyfsUnderstanding.title,
+    alt: "Understanding the World icon",
   },
   {
-    icon: "palette",
+    image: iconCreativity,
     tone: "blue",
     title: multilingualPage.eyfsArts.title,
+    alt: "Expressive Arts & Design icon",
   },
 ] as const;
 
@@ -227,7 +242,13 @@ const screenFreeBenefits = multilingualPage.screenFreeBenefits.map(
                       class={`lwk-multilingual__area-icon lwk-multilingual__area-icon--${area.tone}`}
                       aria-hidden="true"
                     >
-                      <Icon name={area.icon} size={26} />
+                      <Image
+                        src={area.image}
+                        alt={area.alt}
+                        width={256}
+                        height={256}
+                        quality={100}
+                      />
                     </span>
 
                     <span>{area.title}</span>

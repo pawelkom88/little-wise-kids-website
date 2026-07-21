@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agentskills.io/schema/index-v0.2.0.json",
+  "skills": [
+    {
+      "name": "little-wise-kids-api",
+      "type": "api",
+      "description": "Interact with the Little Wise Kids API.",
+      "url": "https://littlewisekids.co.uk/.well-known/api-catalog",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

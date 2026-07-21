@@ -10,18 +10,17 @@
   padding: var(--section-padding-y) var(--section-padding-x);
 }
 
-.hero-section::after {
-  content: '';
+.hero-section__bg-image {
   position: absolute;
   top: -15px;
   left: 0;
   right: 0;
   bottom: -15px;
   z-index: 0;
-  background-image: url('../../assets/images/littlewisekids-outdoor-hero-image.webp');
-  background-size: cover;
-  background-position: right 20%;
-  background-repeat: no-repeat;
+  width: 100%;
+  height: calc(100% + 30px);
+  object-fit: cover;
+  object-position: right 20%;
   pointer-events: none;
 }
 
@@ -335,8 +334,11 @@
     background-color: var(--white);
   }
 
-  .hero-section::before,
-  .hero-section::after {
+  .hero-section__bg-image {
+    display: none;
+  }
+
+  .hero-section::before {
     display: none;
   }
 

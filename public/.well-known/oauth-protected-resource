@@ -1,0 +1,10 @@
+{
+  "resource": "https://littlewisekids.co.uk/api",
+  "authorization_servers": [
+    "https://littlewisekids.co.uk"
+  ],
+  "scopes_supported": [
+    "read",
+    "write"
+  ]
+}

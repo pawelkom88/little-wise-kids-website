@@ -6,5 +6,8 @@
   Strict-Transport-Security: max-age=31536000
   Content-Security-Policy-Report-Only: default-src 'self' https: 'unsafe-inline' 'unsafe-eval' data:
 
+/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </.well-known/mcp/server-card.json>; rel="service-desc"
+
 /admin*
   X-Robots-Tag: noindex, nofollow

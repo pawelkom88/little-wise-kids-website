@@ -1,0 +1,17 @@
+# Little Wise Kids
+
+> Quality childcare and bilingual early years education in Easton, Bristol.
+
+## Core Pages & Resources
+- [About Us](https://littlewisekids.co.uk/about-us): Learn about our ethos, team, and approach to childcare.
+- [Parents Information](https://littlewisekids.co.uk/parents-information): Details on settling in, policies, and what children need.
+- [Hours & Nutrition](https://littlewisekids.co.uk/hours-nutrition): Operating hours, daily routines, and healthy meal options.
+- [Multilingual Learning](https://littlewisekids.co.uk/multilingual-learning): Information on our English & Portuguese language learning programs.
+- [Our Gallery](https://littlewisekids.co.uk/our-gallery): Photo gallery of our indoor and outdoor facilities.
+- [Contact Us](https://littlewisekids.co.uk/contact): Get in touch to schedule a visit or ask questions.
+
+## Agent Resources & API Discovery
+- [API Catalog](https://littlewisekids.co.uk/.well-known/api-catalog): Automated API discovery catalog.
+- [MCP Server Card](https://littlewisekids.co.uk/.well-known/mcp/server-card.json): Model Context Protocol server configuration.
+- [Agent Skills](https://littlewisekids.co.uk/.well-known/agent-skills/index.json): Index of supported agent skills.
+- [Agent Auth Info](https://littlewisekids.co.uk/auth.md): Authentication and registration guidelines.

@@ -1,0 +1,18 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://littlewisekids.co.uk/",
+      "service-desc": [
+        {
+          "href": "https://littlewisekids.co.uk/.well-known/mcp/server-card.json",
+          "type": "application/json"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://littlewisekids.co.uk/"
+        }
+      ]
+    }
+  ]
+}

@@ -12,6 +12,7 @@ export default defineConfig({
   trailingSlash: "never",
   build: {
     format: "file",
+    inlineStylesheets: "always",
   },
   output: "static",
   adapter: cloudflare({

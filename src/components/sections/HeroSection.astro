@@ -2,6 +2,8 @@
 import Container from "../layout/Container.astro";
 import Button from "../ui/Button.astro";
 import PortableContent from "../content/PortableContent.astro";
+import { Image } from "astro:assets";
+import heroBgImage from "../../assets/images/littlewisekids-outdoor-hero-image.webp";
 import "./HeroSection.css";
 import type { HomePage, BusinessDetails } from "../../lib/types";
 
@@ -14,6 +16,14 @@ const { homePage } = Astro.props;
 ---
 
 <section class="hero-section" aria-labelledby="hero-title">
+  <Image 
+    src={heroBgImage} 
+    alt="" 
+    class="hero-section__bg-image"
+    loading="eager"
+    fetchpriority="high"
+    aria-hidden="true"
+  />
   <Container size="wide">
     <div class="hero">
       <!-- Left Column: Content -->
