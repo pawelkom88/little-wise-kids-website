@@ -3638,13 +3638,6 @@
         },
         "optional": true
       },
-      "philosophyLabel": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
       "philosophyHeading": {
         "type": "objectAttribute",
         "value": {
@@ -3677,20 +3670,6 @@
         },
         "optional": true
       },
-      "philosophyDiscoveryNote": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "languageConnectionLabel": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
       "languageConnectionHeading": {
         "type": "objectAttribute",
         "value": {
@@ -3703,13 +3682,6 @@
         "value": {
           "type": "inline",
           "name": "pagePortableText"
-        },
-        "optional": true
-      },
-      "languageConnectionNote": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
         },
         "optional": true
       },
@@ -3893,13 +3865,6 @@
               "optional": true
             }
           }
-        },
-        "optional": true
-      },
-      "eyfsClosingNote": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
         },
         "optional": true
       },

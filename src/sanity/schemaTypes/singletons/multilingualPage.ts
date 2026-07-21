@@ -44,15 +44,6 @@ export const multilingualPage = defineType({
       group: "hero",
       validation: (rule) => rule.required(),
     }),
-
-    defineField({
-      name: "philosophyLabel",
-      title: "Philosophy Section Label",
-      description: "The eyebrow label.",
-      type: "string",
-      group: "philosophy",
-      validation: (rule) => rule.required().max(40),
-    }),
     defineField({
       name: "philosophyHeading",
       title: "Philosophy Section Heading",
@@ -89,23 +80,6 @@ export const multilingualPage = defineType({
         rule.required().length(6).error("Must be exactly 6 items."),
     }),
     defineField({
-      name: "philosophyDiscoveryNote",
-      title: "Philosophy Discovery Note",
-      description: "Short full-width statement below the philosophy section.",
-      type: "string",
-      group: "philosophy",
-      validation: (rule) => rule.required().max(220),
-    }),
-
-    defineField({
-      name: "languageConnectionLabel",
-      title: "Language Connection Section Label",
-      description: "The eyebrow label.",
-      type: "string",
-      group: "languageConnection",
-      validation: (rule) => rule.required().max(40),
-    }),
-    defineField({
       name: "languageConnectionHeading",
       title: "Language Connection Section Heading",
       description: "The main H2 heading.",
@@ -121,16 +95,6 @@ export const multilingualPage = defineType({
       group: "languageConnection",
       validation: (rule) => rule.required(),
     }),
-    defineField({
-      name: "languageConnectionNote",
-      title: "Language Offering Note",
-      description:
-        "Short public note explaining that the current language offering may change.",
-      type: "string",
-      group: "languageConnection",
-      validation: (rule) => rule.required().max(160),
-    }),
-
     defineField({
       name: "eyfsLabel",
       title: "EYFS Section Label",
@@ -187,16 +151,6 @@ export const multilingualPage = defineType({
         validation: (rule) => rule.required(),
       }),
     ),
-    defineField({
-      name: "eyfsClosingNote",
-      title: "EYFS Closing Note",
-      description: "Closing paragraph shown beneath the seven EYFS areas.",
-      type: "text",
-      rows: 3,
-      group: "eyfs",
-      validation: (rule) => rule.required().max(360),
-    }),
-
     defineField({
       name: "screenFreeLabel",
       title: "Screen-Free Section Label",

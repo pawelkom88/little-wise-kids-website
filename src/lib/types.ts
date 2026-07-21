@@ -223,16 +223,12 @@ export interface MultilingualPage {
   heroTitleLineOne: string;
   heroTitleLineTwo: string;
   heroParagraphs: PortableTextBlock[];
-  philosophyLabel: string;
   philosophyHeading: string;
   philosophyParagraphs: PortableTextBlock[];
   childrenEnjoyHeading: string;
   philosophyPoints: string[];
-  philosophyDiscoveryNote: string;
-  languageConnectionLabel: string;
   languageConnectionHeading: string;
   languageConnectionParagraphs: PortableTextBlock[];
-  languageConnectionNote: string;
   eyfsLabel: string;
   eyfsHeading: string;
   eyfsParagraphs: PortableTextBlock[];
@@ -243,7 +239,6 @@ export interface MultilingualPage {
   eyfsMaths: { title: string; description?: string };
   eyfsUnderstanding: { title: string; description?: string };
   eyfsArts: { title: string; description?: string };
-  eyfsClosingNote: string;
   screenFreeLabel: string;
   screenFreeHeading: string;
   screenFreeParagraphs: PortableTextBlock[];

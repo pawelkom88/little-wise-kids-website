@@ -622,16 +622,12 @@ export type MultilingualPage = {
   heroTitleLineOne?: string;
   heroTitleLineTwo?: string;
   heroParagraphs?: PagePortableText;
-  philosophyLabel?: string;
   philosophyHeading?: string;
   philosophyParagraphs?: PagePortableText;
   childrenEnjoyHeading?: string;
   philosophyPoints?: Array<string>;
-  philosophyDiscoveryNote?: string;
-  languageConnectionLabel?: string;
   languageConnectionHeading?: string;
   languageConnectionParagraphs?: PagePortableText;
-  languageConnectionNote?: string;
   eyfsLabel?: string;
   eyfsHeading?: string;
   eyfsParagraphs?: PagePortableText;
@@ -663,7 +659,6 @@ export type MultilingualPage = {
     title?: string;
     description?: string;
   };
-  eyfsClosingNote?: string;
   screenFreeLabel?: string;
   screenFreeHeading?: string;
   screenFreeParagraphs?: PagePortableText;
