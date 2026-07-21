@@ -248,7 +248,7 @@
   background: rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  color: #ffffff;
+  color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -306,7 +306,7 @@
 /* Responsive Breakpoints */
 @media (width < 64rem) {
   .hero-section {
-    background-image: url('/images/littlewisekids-outdoor-hero-image.webp');
+    background-image: none;
   }
 
   .hero {
