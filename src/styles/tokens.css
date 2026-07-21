@@ -24,6 +24,7 @@
   --color-text-supporting: #243b72;
   --color-muted: #65728e;
   --color-page: #fff;
+  --white: #ffffff;
   --color-surface: var(--color-page);
   --color-surface-glass: rgb(251 253 255 / 88%);
   --color-purple-mist: #fbf7ff;

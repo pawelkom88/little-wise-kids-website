@@ -4,7 +4,6 @@ import Button from "../ui/Button.astro";
 import PortableContent from "../content/PortableContent.astro";
 import "./HeroSection.css";
 import type { HomePage, BusinessDetails } from "../../lib/types";
-import bgImage from "../../assets/images/littlewisekids-outdoor-hero-image.webp";
 
 interface Props {
   homePage: HomePage;
@@ -14,7 +13,7 @@ interface Props {
 const { homePage } = Astro.props;
 ---
 
-<section class="hero-section" style={`background-image: url(${bgImage.src});`} aria-labelledby="hero-title">
+<section class="hero-section" aria-labelledby="hero-title">
   <Container size="wide">
     <div class="hero">
       <!-- Left Column: Content -->

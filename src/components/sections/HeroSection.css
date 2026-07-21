@@ -6,11 +6,23 @@
   --hero-button-tracking: -0.01em;
 
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   padding: var(--section-padding-y) var(--section-padding-x);
+}
+
+.hero-section::after {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 0;
+  right: 0;
+  bottom: -15px;
+  z-index: 0;
+  background-image: url('../../assets/images/littlewisekids-outdoor-hero-image.webp');
   background-size: cover;
   background-position: right 20%;
   background-repeat: no-repeat;
+  pointer-events: none;
 }
 
 .hero-section::before {
@@ -318,8 +330,14 @@
 
 /* Responsive Breakpoints */
 @media (width < 64rem) {
-  .hero-section::before {
-    background: color-mix(in srgb, var(--color-cream) 88%, transparent);
+  .hero-section {
+    background-image: none;
+    background-color: var(--white);
+  }
+
+  .hero-section::before,
+  .hero-section::after {
+    display: none;
   }
 
   .hero {

@@ -1,15 +1,18 @@
 .faq-wave {
+  display: block;
   width: 100%;
   height: auto;
   fill: var(--color-green-soft);
 }
 
 .faq-wave--top {
-  margin-top: 2lh;
+  background-color: var(--color-cream);
+  margin-top: 0;
 }
 
 .faq-wave--rotated {
-  margin-bottom: 1lh;
+  background-color: var(--color-page);
+  margin-bottom: 0;
   transform: rotate(180deg);
 }
 

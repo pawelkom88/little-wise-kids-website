@@ -411,6 +411,7 @@
   }
 
   .lwk-footer__social-row {
+    margin-top: 0;
     padding: var(--space-s);
   }
 
