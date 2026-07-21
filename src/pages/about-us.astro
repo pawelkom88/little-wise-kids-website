@@ -18,9 +18,11 @@ import iconSensory from "../assets/images/icon-sensory.png";
 import iconConfidence from "../assets/images/icon-confidence.png";
 import iconRelationships from "../assets/images/icon-relationships.png";
 
-import bubbleMultilingual from "../assets/images/bubble-multilingual.png";
-import bubbleHeart from "../assets/images/bubble-heart-with-smile.png";
-import bubbleArt from "../assets/images/bubble-art.png";
+import iconCommunication from "../assets/images/icon-communication.png";
+import iconEmpathy from "../assets/images/icon-empathy.png";
+import iconIndependence from "../assets/images/icon-independence.png";
+import iconCreativity from "../assets/images/icon-creativity.png";
+import iconCriticalThinking from "../assets/images/icon-critical-thinking.png";
 
 const aboutPage = await getAboutPage();
 const businessDetails = await getBusinessDetails();
@@ -41,11 +43,11 @@ const approachPoints = [
 ] as const;
 
 const learningFoundations = [
-  { image: bubbleMultilingual, tone: "purple", label: aboutPage.foundationCommunication, alt: "Communication icon" },
-  { image: bubbleHeart, tone: "green", label: aboutPage.foundationEmpathy, alt: "Empathy icon" },
-  { image: iconPlay, tone: "blue", label: aboutPage.foundationIndependence, alt: "Independence icon" },
-  { image: bubbleArt, tone: "yellow", label: aboutPage.foundationCreativity, alt: "Creativity icon" },
-  { image: iconConfidence, tone: "purple", label: aboutPage.foundationCriticalThinking, alt: "Critical thinking icon" },
+  { image: iconCommunication, tone: "purple", label: aboutPage.foundationCommunication, alt: "Communication icon" },
+  { image: iconEmpathy, tone: "green", label: aboutPage.foundationEmpathy, alt: "Empathy icon" },
+  { image: iconIndependence, tone: "blue", label: aboutPage.foundationIndependence, alt: "Independence icon" },
+  { image: iconCreativity, tone: "yellow", label: aboutPage.foundationCreativity, alt: "Creativity icon" },
+  { image: iconCriticalThinking, tone: "purple", label: aboutPage.foundationCriticalThinking, alt: "Critical thinking icon" },
 ] as const;
 ---
 

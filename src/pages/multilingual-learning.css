@@ -109,7 +109,6 @@
  * Philosophy
  */
 
-.lwk-multilingual__discovery-note,
 .lwk-multilingual__cms-note,
 .lwk-multilingual__closing-note {
   display: grid;
@@ -118,40 +117,12 @@
   border-radius: var(--radius-m);
 }
 
-.lwk-multilingual__discovery-note {
-  grid-template-columns:
-    3.75rem
-    minmax(0, 1fr);
-  gap: var(--space-s);
-  margin-top: var(--space-l);
-  padding: var(--space-s);
-  background: color-mix(
-    in srgb,
-    var(--color-purple-soft) 60%,
-    var(--color-surface)
-  );
-}
-
-.lwk-multilingual__discovery-note p {
-  color: var(--color-ink);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-compact);
-  text-wrap: pretty;
-}
-
-.lwk-multilingual__discovery-icon,
 .lwk-multilingual__cms-icon,
 .lwk-multilingual__closing-icon {
   display: grid;
   aspect-ratio: 1;
   place-items: center;
   border-radius: 50%;
-}
-
-.lwk-multilingual__discovery-icon {
-  width: 3.75rem;
-  color: var(--color-page);
-  background: var(--color-purple);
 }
 
 /*
@@ -486,7 +457,6 @@
     padding: var(--space-s);
   }
 
-  .lwk-multilingual__discovery-note,
   .lwk-multilingual__cms-note,
   .lwk-multilingual__closing-note {
     grid-template-columns: 1fr;

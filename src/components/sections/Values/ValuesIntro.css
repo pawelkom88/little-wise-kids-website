@@ -270,10 +270,7 @@
     display: none;
   }
   .lwk-values-intro__icon--star {
-    top: 1.25rem;
-    left: 1.25rem;
-    width: 2.25rem;
-    height: 2.25rem;
+   display: none;
   }
   .lwk-values-intro__underline {
     height: 0.135em;

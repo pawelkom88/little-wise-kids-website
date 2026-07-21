@@ -95,13 +95,6 @@ export const homePage = defineType({
           validation: (rule) => rule.required(),
         }),
         defineField({
-          name: "connector",
-          type: "string",
-          title: "Connector Text",
-          description: "e.g. 'and'",
-          initialValue: " ",
-        }),
-        defineField({
           name: "bluePhrase",
           type: "string",
           title: "Blue Phrase",

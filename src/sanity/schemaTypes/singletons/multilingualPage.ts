@@ -216,14 +216,6 @@ export const multilingualPage = defineType({
         rule.required().length(5).error("Must be exactly 5 items."),
     }),
     defineField({
-      name: "discoveryNote",
-      title: "Discovery Note",
-      description: "Inspirational note shown next to the philosophy section.",
-      type: "text",
-      group: "philosophy",
-      validation: (rule) => rule.required().max(200),
-    }),
-    defineField({
       name: "closingNote",
       title: "Closing Note",
       description: "Final note at the bottom of the page.",

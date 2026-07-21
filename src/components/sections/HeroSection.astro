@@ -1,5 +1,5 @@
 ---
-import Section from "../layout/Section.astro";
+import Container from "../layout/Container.astro";
 import Button from "../ui/Button.astro";
 import PortableContent from "../content/PortableContent.astro";
 import "./HeroSection.css";
@@ -13,35 +13,58 @@ interface Props {
 const { homePage } = Astro.props;
 ---
 
-<Section class="hero-section" width="wide" aria-labelledby="hero-title">
-  <div class="hero">
-    <div class="hero__content">
-      <h1 id="hero-title">
-        <!--TODO: no psacing between words!-->
-        <span>{homePage.heroHeading.introduction}</span>
-        <span class="tone-purple">{homePage.heroHeading.purplePhrase}</span><br />
-        <span class="tone-green">{homePage.heroHeading.greenPhrase}</span>
-        <span class="tone-blue">{homePage.heroHeading.bluePhrase}</span><br />
-      </h1>
-      <br>
-      <p class="hero-subtitle">
-        {homePage.heroSubtitle}
-      </p>
-      
-      <div class="hero-paragraphs">
-        <PortableContent value={homePage.heroParagraphs} />
+<section class="hero-section" aria-labelledby="hero-title">
+  <Container size="wide">
+    <div class="hero">
+      <!-- Left Column: Content -->
+      <div class="hero__text-column">
+        <h1 id="hero-title">
+          <span>{homePage.heroHeading.introduction}</span>
+          <span class="tone-purple">{homePage.heroHeading.purplePhrase}</span><br />
+          <span class="tone-green">{homePage.heroHeading.greenPhrase}</span>
+          <span class="tone-blue">{homePage.heroHeading.bluePhrase}</span><br />
+        </h1>
+        <br>
+        <p class="hero-subtitle">
+          {homePage.heroSubtitle}
+        </p>
+        
+        <div class="hero-paragraphs">
+          <PortableContent value={homePage.heroParagraphs} />
+        </div>
+
+        <div class="hero__actions">
+          <Button href="/contact#contact-form" icon="heart">{homePage.primaryCtaLabel}</Button>
+          <Button href="/about-us" variant="secondary">{homePage.secondaryCtaLabel}</Button>
+        </div>
       </div>
 
-      <div class="hero__actions">
-        <Button href="/contact#contact-form" icon="heart">{homePage.primaryCtaLabel}</Button>
-        <Button href="/about-us" variant="secondary"
-          >{homePage.secondaryCtaLabel}</Button
-        >
+      <!-- Right Column: Video Preview Card -->
+      <div class="hero__video-column">
+        <div class="video-card" role="button" aria-label="Play video full screen" tabindex="0">
+          <video
+            class="hero-video-preview"
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="auto"
+            poster="/images/littlewisekids-hero-poster.webp"
+          >
+            <source src="/video/littlewisekids-hero-video.webm" type="video/webm" />
+            <source src="/video/littlewisekids-hero-video.mp4" type="video/mp4" />
+          </video>
+          <div class="video-card__overlay"></div>
+          <button class="hero-play-btn" aria-hidden="true" tabindex="-1">
+            <span class="play-icon-pulse"></span>
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</Section>
-<div class="hero-testimonial">
+  </Container>
   <svg
     class="hero-wave"
     viewBox="0 0 1448 120"
@@ -52,4 +75,155 @@ const { homePage } = Astro.props;
       d="M0 26c105 38 193 38 292 8 107-32 190-36 304-1 115 35 199 31 305-5 110-37 197-31 308 4 93 29 161 30 239-4v92H0V26Z"
     ></path>
   </svg>
+</section>
+
+<!-- Full-screen Video Dialog (Modal) -->
+<div id="video-dialog" class="video-dialog" role="dialog" aria-modal="true" style="display: none;">
+  <div class="video-dialog__content">
+    <button class="video-dialog__close" aria-label="Close video dialog">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+    <video class="video-dialog__video" controls playsinline>
+      <source src="/video/littlewisekids-hero-video.webm" type="video/webm" />
+      <source src="/video/littlewisekids-hero-video.mp4" type="video/mp4" />
+    </video>
+  </div>
 </div>
+
+<div class="hero-testimonial">
+</div>
+
+<script>
+  const videoCard = document.querySelector('.video-card') as HTMLDivElement | null;
+  const dialog = document.getElementById('video-dialog') as HTMLDivElement | null;
+  const dialogContent = document.querySelector('.video-dialog__content') as HTMLDivElement | null;
+  const modalVideo = document.querySelector('.video-dialog__video') as HTMLVideoElement | null;
+  const closeBtn = document.querySelector('.video-dialog__close') as HTMLButtonElement | null;
+  const previewVideo = document.querySelector('.hero-video-preview') as HTMLVideoElement | null;
+
+  // Initialize transition name on the card container initially
+  if (videoCard) {
+    videoCard.style.setProperty('view-transition-name', 'hero-video');
+  }
+
+  const openModal = () => {
+    if (!dialog || !modalVideo || !previewVideo || !videoCard || !dialogContent) return;
+
+    // Immediately toggle stacking and scroll lock before starting transition
+    document.body.classList.add('video-modal-open');
+
+    const doOpen = () => {
+      // Step 2: In State B, swap name to dialogContent
+      videoCard.style.setProperty('view-transition-name', 'none');
+      dialogContent.style.setProperty('view-transition-name', 'hero-video');
+
+      previewVideo.pause();
+      modalVideo.currentTime = previewVideo.currentTime;
+      dialog.style.display = 'flex';
+      modalVideo.muted = false;
+      modalVideo.play().catch(() => {});
+    };
+
+    // Check for native View Transitions support
+    if (document.startViewTransition) {
+      // Step 1: In State A, make sure only videoCard has it
+      videoCard.style.setProperty('view-transition-name', 'hero-video');
+      dialogContent.style.setProperty('view-transition-name', 'none');
+
+      const transition = document.startViewTransition(() => {
+        doOpen();
+      });
+
+      transition.ready.then(() => {
+        console.log("Open View Transition ready");
+      }).catch((err) => {
+        console.error("Open View Transition ready failed:", err);
+      });
+    } else {
+      doOpen();
+    }
+  };
+
+  const closeModal = () => {
+    if (!dialog || !modalVideo || !previewVideo || !videoCard || !dialogContent) return;
+
+    const doClose = () => {
+      // Step 4: In State A, swap name back to videoCard
+      dialogContent.style.setProperty('view-transition-name', 'none');
+      videoCard.style.setProperty('view-transition-name', 'hero-video');
+
+      modalVideo.pause();
+      previewVideo.currentTime = modalVideo.currentTime;
+      dialog.style.display = 'none';
+      previewVideo.play().catch(() => {});
+    };
+
+    if (document.startViewTransition) {
+      // Step 3: In State B, make sure only dialogContent has it
+      dialogContent.style.setProperty('view-transition-name', 'hero-video');
+      videoCard.style.setProperty('view-transition-name', 'none');
+
+      const transition = document.startViewTransition(() => {
+        doClose();
+      });
+
+      transition.finished.then(() => {
+        // Un-stack and enable scrolling only after the closing animation finishes completely!
+        document.body.classList.remove('video-modal-open');
+        console.log("Close View Transition finished");
+      }).catch((err) => {
+        console.error("Close View Transition finished failed:", err);
+      });
+    } else {
+      doClose();
+      document.body.classList.remove('video-modal-open');
+    }
+  };
+
+  // Keyboard navigation & mouse triggers
+  videoCard?.addEventListener('click', openModal);
+  videoCard?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openModal();
+    }
+  });
+
+  closeBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeModal();
+  });
+
+  // Close on clicking dialog backdrop overlay
+  dialog?.addEventListener('click', (e) => {
+    if (e.target === dialog) {
+      closeModal();
+    }
+  });
+
+  // Handle Escape key to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && dialog && dialog.style.display === 'flex') {
+      closeModal();
+    }
+  });
+
+  // Intersection Observer to pause preview video when scrolled out of view
+  if (previewVideo) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Play only if modal isn't open
+          if (dialog && dialog.style.display !== 'flex') {
+            previewVideo.play().catch(() => {});
+          }
+        } else {
+          previewVideo.pause();
+        }
+      });
+    }, { threshold: 0.05 });
+    observer.observe(previewVideo);
+  }
+</script>

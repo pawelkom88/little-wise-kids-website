@@ -31,7 +31,6 @@ export interface FooterTagline {
   purplePhrase: string;
   separatorOne: string;
   greenPhrase: string;
-  connector: string;
   bluePhrase: string;
   suffix: string;
 }
@@ -105,7 +104,6 @@ export interface ValuesIntroHeading {
   prefix: string;
   purplePhrase: string;
   greenPhrase: string;
-  connector: string;
   bluePhrase: string;
 }
 
@@ -248,7 +246,6 @@ export interface MultilingualPage {
   screenFreeHeading: string;
   screenFreeParagraphs: PortableTextBlock[];
   screenFreeBenefits: string[];
-  discoveryNote: string;
   closingNote: string;
 }
 

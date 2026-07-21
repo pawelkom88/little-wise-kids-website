@@ -55,6 +55,15 @@ const schemaGraph = [businessSchema, ...pageSchema, ...(seo.schemas || [])];
       type="font/woff2"
       crossorigin
     />
+    {Astro.url.pathname === "/" && (
+      <link
+        rel="preload"
+        href="/images/littlewisekids-hero-poster.webp"
+        as="image"
+        type="image/webp"
+        fetchpriority="high"
+      />
+    )}
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
