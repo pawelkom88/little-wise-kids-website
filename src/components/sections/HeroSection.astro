@@ -48,9 +48,10 @@ const { homePage } = Astro.props;
             loop
             muted
             playsinline
-            preload="auto"
-            poster="/images/littlewisekids-hero-poster.webp"
+            poster="/images/littlewisekids-hero-poster.jpg"
           >
+            <source media="(max-width: 768px)" src="/video/littlewisekids-hero-mobile.webm" type="video/webm" />
+            <source media="(max-width: 768px)" src="/video/littlewisekids-hero-mobile.mp4" type="video/mp4" />
             <source src="/video/littlewisekids-hero-video.webm" type="video/webm" />
             <source src="/video/littlewisekids-hero-video.mp4" type="video/mp4" />
           </video>
