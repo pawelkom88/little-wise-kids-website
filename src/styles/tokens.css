@@ -11,7 +11,7 @@
   --color-green-dark: #3f982e;
   --color-green-soft: #effbea;
   --color-blue: #1ba9e8;
-  --color-blue-dark: #1285c5;
+  --color-blue-dark: #0d6fa6;
   --color-blue-soft: #eaf8ff;
   --color-yellow: #f2c63d;
   --color-yellow-soft: #fff6d9;
@@ -22,7 +22,7 @@
   --color-ink: #061947;
   --color-ink-soft: #263a68;
   --color-text-supporting: #243b72;
-  --color-muted: #65728e;
+  --color-muted: #4A5568;
   --color-page: #fff;
   --white: #ffffff;
   --color-surface: var(--color-page);

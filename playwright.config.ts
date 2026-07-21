@@ -41,9 +41,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "npm run preview",
+    command: "npx serve dist/client -p 8787",
     url: "http://localhost:8787",
-    reuseExistingServer: false,
+    reuseExistingServer: true,
     stdout: "ignore",
     stderr: "pipe",
   },

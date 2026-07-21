@@ -36,6 +36,7 @@ const { businessDetails } = Astro.props;
           <a
             class="site-nav__link"
             href={item.href}
+            aria-label={item.label}
             data-nav-link
           >
             <Icon name={item.icon} size={27} />

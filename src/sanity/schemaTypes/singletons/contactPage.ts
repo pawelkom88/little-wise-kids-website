@@ -121,7 +121,7 @@ export const contactPage = defineType({
     defineField({
       name: "locationLabel",
       title: "Location Section Label",
-      description: "The eyebrow label.",
+      description: "The eyebrow label, e.g. 'Our setting'.",
       type: "string",
       group: "location",
       validation: (rule) => rule.required().max(40),
@@ -129,10 +129,60 @@ export const contactPage = defineType({
     defineField({
       name: "locationHeading",
       title: "Location Section Heading",
-      description: "The main H2 heading. Note: the actual address, opening days, and hours shown in this section are pulled automatically from Business Details.",
+      description: "The main H2 heading, e.g. 'Find Little Wise Kids in Easton, Bristol'.",
       type: "string",
       group: "location",
       validation: (rule) => rule.required().max(80),
     }),
+    defineField({
+      name: "locationLead",
+      title: "Location Lead Paragraph",
+      description: "Introductory paragraph for the location section.",
+      type: "text",
+      group: "location",
+    }),
+    defineField({
+      name: "welcomeHeading",
+      title: "Welcome Box Heading",
+      description: "e.g. 'We can’t wait to welcome you.'",
+      type: "string",
+      group: "location",
+    }),
+    defineField({
+      name: "welcomeText",
+      title: "Welcome Box Text",
+      description: "e.g. 'If you need any help finding us, just give us a call.'",
+      type: "string",
+      group: "location",
+    }),
+    ...["findBuildingStep", "turnStreetStep", "lookForSignStep"].map((slot) =>
+      defineField({
+        name: slot,
+        title: slot === "findBuildingStep" ? "Step 1: Find Building" : slot === "turnStreetStep" ? "Step 2: Turn Into Street" : "Step 3: Look For Sign",
+        description: `Content for the '${slot}' step in the location guide.`,
+        type: "object",
+        group: "location",
+        fields: [
+          defineField({
+            name: "title",
+            type: "string",
+            title: "Title",
+            validation: (rule) => rule.required().max(60),
+          }),
+          defineField({
+            name: "description",
+            type: "text",
+            title: "Description",
+            validation: (rule) => rule.required().max(150),
+          }),
+          defineField({
+            name: "alt",
+            type: "string",
+            title: "Image Alt Text",
+            description: "Descriptive alt text for the step image.",
+          }),
+        ],
+      })
+    ),
   ],
 });

@@ -136,6 +136,7 @@ export interface FeatureSlot {
 export interface StepSlot {
   title: string;
   description: string;
+  alt?: string;
 }
 
 export interface DailyRhythmSlot {
@@ -371,8 +372,14 @@ export interface ContactPage {
   receiveEnquiryStep: StepSlot;
   getInTouchStep: StepSlot;
   helpWithNextStepsStep: StepSlot;
-  locationLabel: string;
-  locationHeading: string;
+  locationLabel?: string;
+  locationHeading?: string;
+  locationLead?: string;
+  welcomeHeading?: string;
+  welcomeText?: string;
+  findBuildingStep?: StepSlot;
+  turnStreetStep?: StepSlot;
+  lookForSignStep?: StepSlot;
 }
 
 export interface ThankYouPage {

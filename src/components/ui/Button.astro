@@ -8,6 +8,8 @@ interface Props {
   icon?: "arrowRight" | "heart" | "calendar" | "none";
   class?: string;
   type?: "button" | "submit" | "reset";
+  target?: string;
+  rel?: string;
 }
 
 const {
@@ -16,6 +18,8 @@ const {
   icon = "arrowRight",
   class: className = "",
   type = "button",
+  target,
+  rel,
 } = Astro.props;
 
 const classes = ["button", `button--${variant}`, className]
@@ -25,7 +29,7 @@ const classes = ["button", `button--${variant}`, className]
 
 {
   href ? (
-    <a class={classes} href={href}>
+    <a class={classes} href={href} target={target} rel={rel}>
       <slot />
       {icon !== "none" && <Icon name={icon as "arrowRight" | "heart" | "calendar"} size={20} />}
     </a>

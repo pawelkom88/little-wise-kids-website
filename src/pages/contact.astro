@@ -5,8 +5,9 @@ import Container from "../components/layout/Container.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
-import { getContactPage, getBusinessDetails } from "../utils/sanity";
+import { getContactPage, getBusinessDetails } from "../lib/queries";
 import { formatTimeRange } from "../lib/formatters";
+import LocationGuide from "../components/contact/LocationGuide.astro";
 import "./contact.css";
 
 const siteUrl = Astro.site ?? new URL("https://littlewisekids.co.uk");
@@ -479,68 +480,39 @@ const nextSteps = [
             </ol>
           </section>
 
-          <section
-            class="contact-location"
-            aria-labelledby="contact-location-title"
-          >
-            <div class="contact-location__map" aria-hidden="true">
-              <span
-                class="contact-location__map-line contact-location__map-line--one"
-              ></span>
-              <span
-                class="contact-location__map-line contact-location__map-line--two"
-              ></span>
-              <span
-                class="contact-location__map-line contact-location__map-line--three"
-              ></span>
-
-              <span class="contact-location__pin">
-                <Icon name="heart" size={32} />
-              </span>
-            </div>
-
-            <div class="contact-location__details">
-              <header
-                class="contact-section-heading contact-section-heading--left"
-              >
-                <p class="contact-section-heading__eyebrow">{contactPage.locationLabel}</p>
-
-                <h2 id="contact-location-title">{contactPage.locationHeading}</h2>
-              </header>
-
-              <div class="contact-location__item">
-                <span class="contact-location__icon" aria-hidden="true">
-                  <Icon name="heart" size={25} />
-                </span>
-
-                <address>
-                  <strong>{businessDetails.address.organisation}</strong><br />
-                  {businessDetails.address.line1}<br />
-                  {businessDetails.address.city}, {businessDetails.address.postcode}
-                </address>
-              </div>
-
-              <div class="contact-location__item">
-                <span class="contact-location__icon" aria-hidden="true">
-                  <Icon name="clock" size={25} />
-                </span>
-
-                <p>
-                  <strong>Opening hours</strong><br />
-                  {businessDetails.openingDays}<br />
-                  {formatTimeRange(businessDetails.openingTime, businessDetails.closingTime)}
-                </p>
-              </div>
-            </div>
-          </section>
+          <LocationGuide
+              contactPage={contactPage}
+              businessDetails={businessDetails}
+          />
         </div>
       </Container>
     </div>
   </article>
 </BaseLayout>
 
-<script is:inline src="https://web3forms.com/client/script.js" async defer
-></script>
+<script is:inline>
+  (function() {
+    let scriptLoaded = false;
+    function loadWeb3Forms() {
+      if (scriptLoaded) return;
+      scriptLoaded = true;
+      const script = document.createElement("script");
+      script.src = "https://web3forms.com/client/script.js";
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+    }
+    
+    // Load script when user interacts with the page to prioritize primary content
+    const events = ["mousedown", "mousemove", "keydown", "scroll", "touchstart"];
+    function handleInteraction() {
+      loadWeb3Forms();
+      events.forEach(evt => window.removeEventListener(evt, handleInteraction, { passive: true }));
+    }
+    
+    events.forEach(evt => window.addEventListener(evt, handleInteraction, { passive: true }));
+  })();
+</script>
 
 <script>
   type ValidatedField =
