@@ -65,6 +65,25 @@ const schemaGraph = [businessSchema, ...pageSchema, ...(seo.schemas || [])];
       />
     )}
     <script is:inline>
+      // Suppress harmless InvalidStateError caused by aborted view transitions when rapid navigation occurs
+      window.addEventListener('unhandledrejection', (event) => {
+        if (
+          event.reason &&
+          (event.reason.name === 'InvalidStateError' ||
+            (typeof event.reason.message === 'string' && event.reason.message.includes('Transition was aborted')))
+        ) {
+          event.preventDefault();
+        }
+      });
+
+      // Prevent rapid double clicking during page transitions
+      document.addEventListener('astro:before-preparation', () => {
+        document.body.style.pointerEvents = 'none';
+      });
+      document.addEventListener('astro:page-load', () => {
+        document.body.style.pointerEvents = '';
+      });
+
       const modelCtx = (typeof document !== 'undefined' && document.modelContext) || (typeof navigator !== 'undefined' && navigator.modelContext);
       if (modelCtx && typeof modelCtx.provideContext === 'function') {
         modelCtx.provideContext({
