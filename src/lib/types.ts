@@ -252,18 +252,15 @@ export interface HoursNutritionPage {
   heroTitleLineOne: string;
   heroTitleLineTwo: string;
   heroParagraphs: PortableTextBlock[];
-  operatingHoursLabel: string;
   operatingHoursHeading: string;
   operatingHoursParagraphs: PortableTextBlock[];
   minAttendancePanelTitle: string;
   minAttendancePanelCopy: string;
-  nutritionLabel: string;
   nutritionHeading: string;
   nutritionParagraphs: PortableTextBlock[];
   nutritionChecklist: string[];
   freshlyPreparedHeading: string;
   chefNote: string;
-  typicalDayLabel: string;
   typicalDayHeading: string;
   typicalDayLead: string;
   welcomeAndFreePlay: DailyRhythmSlot;

@@ -3210,13 +3210,6 @@
         },
         "optional": true
       },
-      "operatingHoursLabel": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
       "operatingHoursHeading": {
         "type": "objectAttribute",
         "value": {
@@ -3240,13 +3233,6 @@
         "optional": true
       },
       "minAttendancePanelCopy": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "nutritionLabel": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -3286,13 +3272,6 @@
         "optional": true
       },
       "chefNote": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "typicalDayLabel": {
         "type": "objectAttribute",
         "value": {
           "type": "string"

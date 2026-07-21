@@ -46,15 +46,6 @@ export const hoursNutritionPage = defineType({
       group: "hero",
       validation: (rule) => rule.required(),
     }),
-
-    defineField({
-      name: "operatingHoursLabel",
-      title: "Operating Hours Label",
-      description: "The eyebrow label.",
-      type: "string",
-      group: "operatingHours",
-      validation: (rule) => rule.required().max(40),
-    }),
     defineField({
       name: "operatingHoursHeading",
       title: "Operating Hours Heading",
@@ -86,15 +77,6 @@ export const hoursNutritionPage = defineType({
       type: "text",
       group: "operatingHours",
       validation: (rule) => rule.required().max(150),
-    }),
-
-    defineField({
-      name: "nutritionLabel",
-      title: "Nutrition Label",
-      description: "The eyebrow label.",
-      type: "string",
-      group: "nutrition",
-      validation: (rule) => rule.required().max(40),
     }),
     defineField({
       name: "nutritionHeading",
@@ -135,16 +117,7 @@ export const hoursNutritionPage = defineType({
       description: "Text from the chef.",
       type: "text",
       group: "nutrition",
-      validation: (rule) => rule.required().max(150),
-    }),
-
-    defineField({
-      name: "typicalDayLabel",
-      title: "Typical Day Label",
-      description: "The eyebrow label.",
-      type: "string",
-      group: "typicalDay",
-      validation: (rule) => rule.required().max(40),
+      validation: (rule) => rule.required().max(250),
     }),
     defineField({
       name: "typicalDayHeading",

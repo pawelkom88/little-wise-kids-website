@@ -554,18 +554,15 @@ export type HoursNutritionPage = {
   heroTitleLineOne?: string;
   heroTitleLineTwo?: string;
   heroParagraphs?: PagePortableText;
-  operatingHoursLabel?: string;
   operatingHoursHeading?: string;
   operatingHoursParagraphs?: PagePortableText;
   minAttendancePanelTitle?: string;
   minAttendancePanelCopy?: string;
-  nutritionLabel?: string;
   nutritionHeading?: string;
   nutritionParagraphs?: PagePortableText;
   nutritionChecklist?: Array<string>;
   freshlyPreparedHeading?: string;
   chefNote?: string;
-  typicalDayLabel?: string;
   typicalDayHeading?: string;
   typicalDayLead?: string;
   welcomeAndFreePlay?: {
