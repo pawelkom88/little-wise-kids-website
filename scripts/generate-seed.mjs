@@ -24,15 +24,27 @@ function createTextBlock(text) {
 const timeRegex = /^(?:[01]\d|2[0-3]):[0-5]\d$/;
 
 function validate(doc) {
-  if (!doc._id || !doc._type) throw new Error("Missing _id or _type in document");
-  
+  if (!doc._id || !doc._type)
+    throw new Error("Missing _id or _type in document");
+
   if (doc._type === "hoursNutritionPage") {
-    const slots = ["welcomeAndFreePlay", "learningAndExploration", "morningSnack", "outdoorAdventures", "lunch", "restAndQuietTime", "afternoonPlayAndHome"];
+    const slots = [
+      "welcomeAndFreePlay",
+      "learningAndExploration",
+      "morningSnack",
+      "outdoorAdventures",
+      "lunch",
+      "restAndQuietTime",
+      "afternoonPlayAndHome",
+    ];
     for (const slot of slots) {
       if (doc[slot]) {
-        if (!timeRegex.test(doc[slot].startTime)) throw new Error(`Invalid startTime in ${slot}`);
-        if (!timeRegex.test(doc[slot].endTime)) throw new Error(`Invalid endTime in ${slot}`);
-        if (doc[slot].endTime <= doc[slot].startTime) throw new Error(`endTime must be later than startTime in ${slot}`);
+        if (!timeRegex.test(doc[slot].startTime))
+          throw new Error(`Invalid startTime in ${slot}`);
+        if (!timeRegex.test(doc[slot].endTime))
+          throw new Error(`Invalid endTime in ${slot}`);
+        if (doc[slot].endTime <= doc[slot].startTime)
+          throw new Error(`endTime must be later than startTime in ${slot}`);
       }
     }
   }
@@ -40,120 +52,159 @@ function validate(doc) {
 
 // For dev, we point to real files via _sanityAsset so the CLI imports them
 // For prod, we omit the images completely.
-const dummyImageRef = isDev ? {
-  _type: "image",
-  _sanityAsset: `image@file://${pathModule.resolve(__dirname, 'dummy-image.png')}`,
-  isDecorative: false,
-  altText: "Representative illustrative image for Little Wise Kids nursery setting."
-} : undefined;
+const dummyImageRef = isDev
+  ? {
+      _type: "image",
+      _sanityAsset: `image@file://${pathModule.resolve(__dirname, "dummy-image.png")}`,
+      isDecorative: false,
+      altText:
+        "Representative illustrative image for Little Wise Kids nursery setting.",
+    }
+  : undefined;
 
-const decorativeDummyImageRef = isDev ? {
-  _type: "image",
-  _sanityAsset: `image@file://${pathModule.resolve(__dirname, 'dummy-image.png')}`,
-  isDecorative: true
-} : undefined;
+const decorativeDummyImageRef = isDev
+  ? {
+      _type: "image",
+      _sanityAsset: `image@file://${pathModule.resolve(__dirname, "dummy-image.png")}`,
+      isDecorative: true,
+    }
+  : undefined;
 
 function getPdfRef() {
-  return isDev ? {
-    _type: "file",
-    _sanityAsset: `file@file://${pathModule.resolve(__dirname, 'dummy-policy.pdf')}`
-  } : undefined;
+  return isDev
+    ? {
+        _type: "file",
+        _sanityAsset: `file@file://${pathModule.resolve(__dirname, "dummy-policy.pdf")}`,
+      }
+    : undefined;
 }
 
 function getGalleryImageRef() {
-  return isDev ? {
-    _type: "strictImage",
-    _sanityAsset: `image@file://${pathModule.resolve(__dirname, 'dummy-image.png')}`,
-    altText: "Gallery image representing nursery activities"
-  } : undefined;
+  return isDev
+    ? {
+        _type: "strictImage",
+        _sanityAsset: `image@file://${pathModule.resolve(__dirname, "dummy-image.png")}`,
+        altText: "Gallery image representing nursery activities",
+      }
+    : undefined;
 }
 
 function getBlogImageRef() {
-  return isDev ? {
-    _type: "strictImage",
-    _sanityAsset: `image@file://${pathModule.resolve(__dirname, 'dummy-image.png')}`,
-    altText: "Blog featured image"
-  } : undefined;
+  return isDev
+    ? {
+        _type: "strictImage",
+        _sanityAsset: `image@file://${pathModule.resolve(__dirname, "dummy-image.png")}`,
+        altText: "Blog featured image",
+      }
+    : undefined;
 }
 
 const rawArticles = [
   {
     slug: "welcome-to-a-new-term",
     title: "Welcome to a New Term at Little Wise Kids",
-    excerpt: "A look at what is ahead this season, from joyful learning themes and new experiences to the little moments that make nursery life special.",
+    excerpt:
+      "A look at what is ahead this season, from joyful learning themes and new experiences to the little moments that make nursery life special.",
     category: "nursery-news",
     publishedAt: "2026-07-14T12:00:00Z",
     featured: true,
     content: [
-      { type: "paragraph", text: "Welcome to a new term at Little Wise Kids. We are excited to see the children return and to welcome new families to our setting." }
+      {
+        type: "paragraph",
+        text: "Welcome to a new term at Little Wise Kids. We are excited to see the children return and to welcome new families to our setting.",
+      },
     ],
   },
   {
     slug: "the-power-of-play",
     title: "The Power of Play: Learning Through Discovery",
-    excerpt: "How meaningful play helps children build confidence, curiosity, communication and problem-solving skills at their own pace.",
+    excerpt:
+      "How meaningful play helps children build confidence, curiosity, communication and problem-solving skills at their own pace.",
     category: "early-learning",
     publishedAt: "2026-07-08T12:00:00Z",
     featured: false,
     content: [
-      { type: "paragraph", text: "Play is far more than just fun. It is how children explore, experiment, imagine and make connections that help them grow in so many important ways." }
+      {
+        type: "paragraph",
+        text: "Play is far more than just fun. It is how children explore, experiment, imagine and make connections that help them grow in so many important ways.",
+      },
     ],
   },
   {
     slug: "settling-in-gentle-tips",
     title: "Settling In: Gentle Tips for a Smooth Start",
-    excerpt: "Practical ideas to help your child feel safe, secure and understood during those important first days at nursery.",
+    excerpt:
+      "Practical ideas to help your child feel safe, secure and understood during those important first days at nursery.",
     category: "parenting-tips",
     publishedAt: "2026-07-01T12:00:00Z",
     featured: false,
     content: [
-      { type: "paragraph", text: "Starting nursery is a big step for both children and parents. Here are some gentle tips to help make the transition as smooth as possible." }
-    ]
+      {
+        type: "paragraph",
+        text: "Starting nursery is a big step for both children and parents. Here are some gentle tips to help make the transition as smooth as possible.",
+      },
+    ],
   },
   {
     slug: "outdoor-adventures-why-nature-nurtures",
     title: "Outdoor Adventures: Why Nature Nurtures",
-    excerpt: "The benefits of outdoor learning and how time in nature supports wellbeing, creativity, confidence and resilience.",
+    excerpt:
+      "The benefits of outdoor learning and how time in nature supports wellbeing, creativity, confidence and resilience.",
     category: "early-learning",
     publishedAt: "2026-06-24T12:00:00Z",
     featured: false,
     content: [
-      { type: "paragraph", text: "Nature provides endless opportunities for exploration and discovery. Time spent outdoors is essential for physical and mental wellbeing." }
-    ]
+      {
+        type: "paragraph",
+        text: "Nature provides endless opportunities for exploration and discovery. Time spent outdoors is essential for physical and mental wellbeing.",
+      },
+    ],
   },
   {
     slug: "healthy-habits-happy-little-learners",
     title: "Healthy Habits, Happy Little Learners",
-    excerpt: "How positive mealtimes, varied foods and gentle encouragement help children develop a healthy relationship with nutrition.",
+    excerpt:
+      "How positive mealtimes, varied foods and gentle encouragement help children develop a healthy relationship with nutrition.",
     category: "nutrition",
     publishedAt: "2026-06-18T12:00:00Z",
     featured: false,
     content: [
-      { type: "paragraph", text: "Establishing healthy eating habits early in life lays the foundation for a lifetime of wellness." }
-    ]
+      {
+        type: "paragraph",
+        text: "Establishing healthy eating habits early in life lays the foundation for a lifetime of wellness.",
+      },
+    ],
   },
   {
     slug: "celebrating-community-and-cultural-diversity",
     title: "Celebrating Our Community and Cultural Diversity",
-    excerpt: "How we celebrate languages, traditions, family stories and the many different experiences that make our community special.",
+    excerpt:
+      "How we celebrate languages, traditions, family stories and the many different experiences that make our community special.",
     category: "community",
     publishedAt: "2026-06-10T12:00:00Z",
     featured: false,
     content: [
-      { type: "paragraph", text: "We believe that our diversity is our strength. By celebrating different cultures and traditions, we create a rich learning environment for all." }
-    ]
+      {
+        type: "paragraph",
+        text: "We believe that our diversity is our strength. By celebrating different cultures and traditions, we create a rich learning environment for all.",
+      },
+    ],
   },
   {
     slug: "screen-free-learning-deeper-play",
     title: "Screen-Free Learning: Space for Deeper Play",
-    excerpt: "Why real-world experiences, movement, stories and face-to-face connection matter so much during the earliest years.",
+    excerpt:
+      "Why real-world experiences, movement, stories and face-to-face connection matter so much during the earliest years.",
     category: "early-learning",
     publishedAt: "2026-06-03T12:00:00Z",
     featured: false,
     content: [
-      { type: "paragraph", text: "In a world increasingly dominated by screens, we prioritize screen-free learning to encourage deeper engagement and active play." }
-    ]
-  }
+      {
+        type: "paragraph",
+        text: "In a world increasingly dominated by screens, we prioritize screen-free learning to encourage deeper engagement and active play.",
+      },
+    ],
+  },
 ];
 
 const blogPostDocs = rawArticles.map((article, i) => ({
@@ -166,16 +217,40 @@ const blogPostDocs = rawArticles.map((article, i) => ({
   category: article.category,
   excerpt: article.excerpt,
   featuredImage: getBlogImageRef(),
-  body: article.content.map(b => createTextBlock(b.text))
+  body: article.content.map((b) => createTextBlock(b.text)),
 }));
 
 const policies = [
-  { title: "GDPR / Privacy Policy", shortDesc: "Details on how we handle personal data.", id: "gdpr-privacy-policy" },
-  { title: "Safeguarding Policy", shortDesc: "Our commitment to child protection.", id: "safeguarding-policy" },
-  { title: "Complaints Policy", shortDesc: "Procedures for raising concerns.", id: "complaints-policy" },
-  { title: "Health and Safety Policy", shortDesc: "Maintaining a safe nursery environment.", id: "health-and-safety-policy" },
-  { title: "Partnership Policy", shortDesc: "Working together with parents.", id: "partnership-policy" },
-  { title: "Settling-In Process Policy", shortDesc: "Guidelines for a smooth transition.", id: "settling-in-process-policy" }
+  {
+    title: "GDPR / Privacy Policy",
+    shortDesc: "Details on how we handle personal data.",
+    id: "gdpr-privacy-policy",
+  },
+  {
+    title: "Safeguarding Policy",
+    shortDesc: "Our commitment to child protection.",
+    id: "safeguarding-policy",
+  },
+  {
+    title: "Complaints Policy",
+    shortDesc: "Procedures for raising concerns.",
+    id: "complaints-policy",
+  },
+  {
+    title: "Health and Safety Policy",
+    shortDesc: "Maintaining a safe nursery environment.",
+    id: "health-and-safety-policy",
+  },
+  {
+    title: "Partnership Policy",
+    shortDesc: "Working together with parents.",
+    id: "partnership-policy",
+  },
+  {
+    title: "Settling-In Process Policy",
+    shortDesc: "Guidelines for a smooth transition.",
+    id: "settling-in-process-policy",
+  },
 ];
 
 const policyDocs = policies.map((p, i) => ({
@@ -185,18 +260,46 @@ const policyDocs = policies.map((p, i) => ({
   shortDescription: p.shortDesc,
   file: getPdfRef(),
   displayOrder: i * 10,
-  lastReviewed: "2026-01-01"
+  lastReviewed: "2026-01-01",
 }));
 
 const galleryCategories = [
-  { id: "outdoor-learning-experience", title: "Outdoor Learning Experience", value: "outdoor-learning-experience" },
-  { id: "indoor-learning-experience", title: "Indoor Learning Experience", value: "indoor-learning-experience" },
-  { id: "language-immersion", title: "Language Immersion", value: "language-immersion" },
-  { id: "nutrition-and-mealtimes", title: "Nutrition and Mealtimes", value: "nutrition-and-mealtimes" },
+  {
+    id: "outdoor-learning-experience",
+    title: "Outdoor Learning Experience",
+    value: "outdoor-learning-experience",
+  },
+  {
+    id: "indoor-learning-experience",
+    title: "Indoor Learning Experience",
+    value: "indoor-learning-experience",
+  },
+  {
+    id: "language-immersion",
+    title: "Language Immersion",
+    value: "language-immersion",
+  },
+  {
+    id: "nutrition-and-mealtimes",
+    title: "Nutrition and Mealtimes",
+    value: "nutrition-and-mealtimes",
+  },
   { id: "creative-play", title: "Creative Play", value: "creative-play" },
-  { id: "sensory-exploration", title: "Sensory Exploration", value: "sensory-exploration" },
-  { id: "nature-and-gardening", title: "Nature and Gardening", value: "nature-and-gardening" },
-  { id: "celebrations-and-community", title: "Celebrations and Community", value: "celebrations-and-community" }
+  {
+    id: "sensory-exploration",
+    title: "Sensory Exploration",
+    value: "sensory-exploration",
+  },
+  {
+    id: "nature-and-gardening",
+    title: "Nature and Gardening",
+    value: "nature-and-gardening",
+  },
+  {
+    id: "celebrations-and-community",
+    title: "Celebrations and Community",
+    value: "celebrations-and-community",
+  },
 ];
 
 const galleryDocs = galleryCategories.map((c, i) => ({
@@ -208,7 +311,7 @@ const galleryDocs = galleryCategories.map((c, i) => ({
   showOnHomepage: i < 3,
   displayOrder: i * 10,
   showOnAboutPage: i < 4,
-  aboutPageDisplayOrder: i * 10
+  aboutPageDisplayOrder: i * 10,
 }));
 
 const singletonDocs = [
@@ -217,7 +320,11 @@ const singletonDocs = [
     _type: "businessDetails",
     organizationName: "Little Wise Kids",
     publicEmail: "hello@littlewisekids.co.uk",
-    primaryPhone: { _type: "object", label: "Main Office", number: "+441171234567" },
+    primaryPhone: {
+      _type: "object",
+      label: "Main Office",
+      number: "+441171234567",
+    },
     address: {
       _type: "object",
       organisation: "Little Wise Kids",
@@ -225,7 +332,7 @@ const singletonDocs = [
       city: "Bristol",
       postcode: "BS5 0AB",
       shortLocation: "Easton, Bristol",
-      mapUrl: "https://maps.google.com"
+      mapUrl: "https://maps.google.com",
     },
     openingDays: "Monday to Friday",
     openingTime: "07:30",
@@ -237,42 +344,118 @@ const singletonDocs = [
     ageRange: { _type: "object", minimum: 0, maximum: 4 },
     languages: ["English", "Portuguese"],
     availabilityMessage: "We are currently accepting registrations for 2027.",
-    footerBusinessCopy: "Little Wise Kids provides nurturing, child-led early years education.",
+    footerBusinessCopy:
+      "Little Wise Kids provides nurturing, child-led early years education.",
     footerCtaLabel: "Register Your Interest",
     socialHeading: "Follow our journey",
     socialIntroduction: "Nursery moments, news and everyday inspiration.",
-    footerTagline: { _type: "object", prefix: "Where ", purplePhrase: "Little Minds", separatorOne: " ", greenPhrase: "Feel Safe", connector: " and ", bluePhrase: "Celebrated", suffix: "." },
+    footerTagline: {
+      _type: "object",
+      prefix: "Where ",
+      purplePhrase: "Little Minds",
+      separatorOne: " ",
+      greenPhrase: "Feel Safe",
+      connector: " and ",
+      bluePhrase: "Celebrated",
+      suffix: ".",
+    },
   },
   {
     _id: "homePage",
     _type: "homePage",
-    heroHeading: { _type: "object", introduction: "Welcome to", purplePhrase: "Little", greenPhrase: "Wise", bluePhrase: "Kids" },
-    heroSubtitle: "A calm, nurturing and child-led early years setting in Bristol BS5.",
-    heroParagraphs: [createTextBlock("We provide a screen-free, home-from-home environment.")],
+    heroHeading: {
+      _type: "object",
+      introduction: "Welcome to",
+      purplePhrase: "Little",
+      greenPhrase: "Wise",
+      bluePhrase: "Kids",
+    },
+    heroSubtitle:
+      "A calm, nurturing and child-led early years setting in Bristol BS5.",
+    heroParagraphs: [
+      createTextBlock("We provide a screen-free, home-from-home environment."),
+    ],
     primaryCtaLabel: "Register Your Interest",
     secondaryCtaLabel: "Explore Our Nursery",
-    multilingualFeature: { _type: "object", title: "Multilingual", description: "Exposure to languages." },
-    childCentredFeature: { _type: "object", title: "Child-Centred", description: "Learning inspired by curiosity." },
-    playToLearnFeature: { _type: "object", title: "Play to Learn", description: "Open-ended resources." },
-    valuesIntroHeading: { _type: "object", prefix: "Where ", purplePhrase: "Little Minds", greenPhrase: "Feel Safe", connector: " and ", bluePhrase: "Grow Big Ideas" },
+    multilingualFeature: {
+      _type: "object",
+      title: "Multilingual",
+      description: "Exposure to languages.",
+    },
+    childCentredFeature: {
+      _type: "object",
+      title: "Child-Centred",
+      description: "Learning inspired by curiosity.",
+    },
+    playToLearnFeature: {
+      _type: "object",
+      title: "Play to Learn",
+      description: "Open-ended resources.",
+    },
+    valuesIntroHeading: {
+      _type: "object",
+      prefix: "Where ",
+      purplePhrase: "Little Minds",
+      greenPhrase: "Feel Safe",
+      connector: " and ",
+      bluePhrase: "Grow Big Ideas",
+    },
     valuesIntroParagraphs: [createTextBlock("Every child is unique.")],
     valuesDifferenceTitle: "What Makes Us Different",
-    screenFreeCard: { _type: "object", title: "Screen-Free", description: "Hands-on experiences." },
-    multilingualCard: { _type: "object", title: "Multilingual", description: "English and Portuguese." },
-    indoorOutdoorCard: { _type: "object", title: "Indoor/Outdoor", description: "Free flow play." },
-    childLedCard: { _type: "object", title: "Child-Led", description: "Unhurried days." },
-    nutritionCard: { _type: "object", title: "Wholesome Nutrition", description: "Freshly prepared meals." },
-    familySettingCard: { _type: "object", title: "Family Setting", description: "Home from home." },
-    visitHeading: { _type: "object", lineOnePrefix: "Come and See", accentedPhrase: "For Yourself", lineTwo: "" },
+    screenFreeCard: {
+      _type: "object",
+      title: "Screen-Free",
+      description: "Hands-on experiences.",
+    },
+    multilingualCard: {
+      _type: "object",
+      title: "Multilingual",
+      description: "English and Portuguese.",
+    },
+    indoorOutdoorCard: {
+      _type: "object",
+      title: "Indoor/Outdoor",
+      description: "Free flow play.",
+    },
+    childLedCard: {
+      _type: "object",
+      title: "Child-Led",
+      description: "Unhurried days.",
+    },
+    nutritionCard: {
+      _type: "object",
+      title: "Wholesome Nutrition",
+      description: "Freshly prepared meals.",
+    },
+    familySettingCard: {
+      _type: "object",
+      title: "Family Setting",
+      description: "Home from home.",
+    },
+    visitHeading: {
+      _type: "object",
+      lineOnePrefix: "Come and See",
+      accentedPhrase: "For Yourself",
+      lineTwo: "",
+    },
     visitParagraphs: [createTextBlock("Choosing a nursery is a big decision.")],
     visitCtaLabel: "Book a Visit",
     ...(dummyImageRef && { visitImage: dummyImageRef }),
     testimonialQuote: "Little Wise Kids has been wonderful for our daughter.",
     testimonialAttribution: "Sarah, Parent",
-    faqHeading: { _type: "object", prefix: "Questions Families", accentedPhrase: "Often Ask" },
+    faqHeading: {
+      _type: "object",
+      prefix: "Questions Families",
+      accentedPhrase: "Often Ask",
+    },
     faqIntro: "Here are some common questions.",
     faqs: [
-      { _key: "faq1", _type: "object", question: "Do you offer funded places?", answer: [createTextBlock("Yes.")] }
+      {
+        _key: "faq1",
+        _type: "object",
+        question: "Do you offer funded places?",
+        answer: [createTextBlock("Yes.")],
+      },
     ],
     helpPanelTitle: "Need More Help?",
     helpPanelCopy: "If you have any other questions, our team is here.",
@@ -298,15 +481,27 @@ const singletonDocs = [
     approachRelationships: "Relationships",
     commitmentLabel: "Our Commitment",
     commitmentHeading: "Nurturing Your Child's Unique Path",
-    commitmentParagraphs: [createTextBlock("We are committed to providing the highest quality education.")],
-    ...(decorativeDummyImageRef && { commitmentImage: decorativeDummyImageRef }),
+    commitmentParagraphs: [
+      createTextBlock(
+        "We are committed to providing the highest quality education.",
+      ),
+    ],
+    ...(decorativeDummyImageRef && {
+      commitmentImage: decorativeDummyImageRef,
+    }),
     environmentLabel: "Our Space",
     environmentHeading: "Designed for Exploration",
-    environmentParagraphs: [createTextBlock("Our indoor and outdoor spaces are carefully designed.")],
-    ...(decorativeDummyImageRef && { environmentImage: decorativeDummyImageRef }),
+    environmentParagraphs: [
+      createTextBlock("Our indoor and outdoor spaces are carefully designed."),
+    ],
+    ...(decorativeDummyImageRef && {
+      environmentImage: decorativeDummyImageRef,
+    }),
     programmesLabel: "Our Programmes",
     programmesHeading: "Foundations for the Future",
-    programmesParagraphs: [createTextBlock("Our programmes build core learning foundations.")],
+    programmesParagraphs: [
+      createTextBlock("Our programmes build core learning foundations."),
+    ],
     foundationCommunication: "Communication",
     foundationEmpathy: "Empathy",
     foundationIndependence: "Independence",
@@ -314,54 +509,126 @@ const singletonDocs = [
     foundationCriticalThinking: "Critical Thinking",
     educatorsLabel: "Our Team",
     educatorsHeading: "Passionate Educators",
-    educatorsParagraphs: [createTextBlock("Our staff are qualified and dedicated.")],
+    educatorsParagraphs: [
+      createTextBlock("Our staff are qualified and dedicated."),
+    ],
     ...(decorativeDummyImageRef && { educatorsImage: decorativeDummyImageRef }),
     leadershipLabel: "Leadership",
     leadershipHeading: "Our Visionaries",
-    ...(decorativeDummyImageRef && { leadershipImage: decorativeDummyImageRef }),
+    ...(decorativeDummyImageRef && {
+      leadershipImage: decorativeDummyImageRef,
+    }),
     gallerySectionLabel: "Gallery",
     gallerySectionHeading: "Moments from Little Wise Kids",
   },
   {
     _id: "multilingualPage",
     _type: "multilingualPage",
-    heroTitleLineOne: "Multilingual",
-    heroTitleLineTwo: "Learning",
-    heroParagraphs: [createTextBlock("We speak English and Portuguese.")],
-    philosophyLabel: "Philosophy",
-    philosophyHeading: "Natural Language Acquisition",
-    philosophyParagraphs: [createTextBlock("We believe in natural exposure to multiple languages.")],
-    childrenEnjoyHeading: "What Children Enjoy Here",
+    heroEyebrow: "Multilingual Learning",
+    heroTitleLineOne: "Language, Play",
+    heroTitleLineTwo: "and Discovery",
+    heroParagraphs: [
+      createTextBlock(
+        "A joyful, screen-free approach where children explore language, creativity and the world around them through meaningful everyday experiences.",
+      ),
+    ],
+    philosophyLabel: "Our Learning Philosophy",
+    philosophyHeading: "Curiosity-Led. Emotionally Attuned. Rich in Meaning.",
+    philosophyParagraphs: [
+      createTextBlock(
+        "At the heart of our curriculum is a simple belief: children learn best when they feel safe, seen and supported. We bring the seven areas of the Early Years Foundation Stage together through engaging, active and joyful experiences.",
+      ),
+      createTextBlock(
+        "Our approach supports children to become independent thinkers and doers through play, exploration and real-world discovery.",
+      ),
+    ],
+    childrenEnjoyHeading: "Children Enjoy",
     philosophyPoints: [
-      "Storytelling in multiple languages",
-      "Interactive bilingual music sessions",
-      "Bilingual daily routines"
+      "Adult-facilitated, free-flow play",
+      "Opportunities for experimentation, discovery and sensible risk-taking",
+      "Colour, creativity and artistic expression",
+      "Sensory and hands-on learning",
+      "Nature-based experiences",
+      "A balance of themed learning and children’s individual interests",
     ],
-    languageConnectionLabel: "Connection",
-    languageConnectionHeading: "Building Bridges Through Talk",
-    languageConnectionParagraphs: [createTextBlock("Languages connect our diverse community.")],
-    ...(decorativeDummyImageRef && { languageConnectionImage: decorativeDummyImageRef }),
+    philosophyDiscoveryNote:
+      "Every day can bring a new discovery: a word in Portuguese, an insect in the garden, a new way to solve a problem or a story that sparks a child’s imagination.",
+    languageConnectionLabel: "English and Portuguese",
+    languageConnectionHeading: "Language Through Everyday Connection",
+    languageConnectionParagraphs: [
+      createTextBlock(
+        "Little Wise Kids currently offers children exposure to English and Portuguese through everyday routines, songs, stories, play and warm interactions.",
+      ),
+      createTextBlock(
+        "Language learning is woven naturally into the day rather than taught in a pressured way. Children are encouraged to listen, communicate and build confidence while celebrating cultural diversity and connection.",
+      ),
+    ],
+    languageConnectionNote:
+      "English and Portuguese are our current languages and may evolve as our community grows.",
     eyfsLabel: "EYFS",
-    eyfsHeading: "Early Years Foundation Stage",
-    eyfsParagraphs: [createTextBlock("We follow the EYFS framework dynamically.")],
-    eyfsCommunication: { _type: "object", title: "Communication & Language", description: "Expressing ideas freely." },
-    eyfsPhysical: { _type: "object", title: "Physical Development", description: "Active and healthy lives." },
-    eyfsPersonal: { _type: "object", title: "Personal, Social & Emotional", description: "Self-regulation and relationships." },
-    eyfsLiteracy: { _type: "object", title: "Literacy", description: "Loving books and words." },
-    eyfsMaths: { _type: "object", title: "Mathematics", description: "Exploring shapes and numbers." },
-    eyfsUnderstanding: { _type: "object", title: "Understanding the World", description: "Investigating nature." },
-    eyfsArts: { _type: "object", title: "Expressive Arts & Design", description: "Creating and building." },
-    screenFreeLabel: "Screen-Free",
-    screenFreeHeading: "A Space for Mindful Play",
-    screenFreeParagraphs: [createTextBlock("We keep our spaces screen-free to encourage real-world interaction.")],
-    screenFreeBenefits: [
-      "Greater focus and attention span",
-      "Deeper social connections with peers",
-      "Active physical play and health",
-      "Imaginative open-ended learning",
-      "Closer engagement with nature"
+    eyfsHeading: "Supporting Every Area of Development",
+    eyfsParagraphs: [
+      createTextBlock(
+        "Our practice is aligned with the Early Years Foundation Stage, supporting children’s development through meaningful play and responsive care.",
+      ),
     ],
-    closingNote: "Screen-free play lets children grow naturally."
+    eyfsCommunication: {
+      _type: "object",
+      title: "Communication & Language",
+      description: "Building confident expression and understanding.",
+    },
+    eyfsPhysical: {
+      _type: "object",
+      title: "Physical Development",
+      description: "Supporting movement, coordination and healthy development.",
+    },
+    eyfsPersonal: {
+      _type: "object",
+      title: "Personal, Social & Emotional Development",
+      description: "Growing confidence, relationships and emotional awareness.",
+    },
+    eyfsLiteracy: {
+      _type: "object",
+      title: "Literacy",
+      description: "Discovering stories, sounds, marks and meaning.",
+    },
+    eyfsMaths: {
+      _type: "object",
+      title: "Mathematics",
+      description: "Exploring number, pattern, shape and measure.",
+    },
+    eyfsUnderstanding: {
+      _type: "object",
+      title: "Understanding the World",
+      description: "Investigating people, places, nature and technology.",
+    },
+    eyfsArts: {
+      _type: "object",
+      title: "Expressive Arts & Design",
+      description: "Creating, imagining and expressing ideas.",
+    },
+    eyfsClosingNote:
+      "We recognise that children develop in different ways and at different rates. Our educators observe carefully, follow children’s interests and work closely with families to support each child’s individual journey.",
+    screenFreeLabel: "Screen-Free Learning",
+    screenFreeHeading: "A Rare and Refreshing Childhood in a Noisy World",
+    screenFreeParagraphs: [
+      createTextBlock(
+        "In a fast-paced, digital-first world, screen exposure can feel almost unavoidable. At Little Wise Kids, we have made a conscious choice to offer a completely screen-free learning environment.",
+      ),
+      createTextBlock(
+        "Instead of flashing screens and artificial stimulation, children are immersed in real-world experiences. They can feel the texture of soil, enjoy role-play, listen to stories, paint, build, move, explore outdoors and connect with people around them.",
+      ),
+    ],
+    screenFreeBenefitsHeading: "Screen-Free Learning Supports",
+    screenFreeBenefits: [
+      "Deeper concentration and sustained attention",
+      "Richer language development and face-to-face communication",
+      "Creativity, physical activity and social interaction",
+      "Emotional regulation and meaningful connections",
+      "A childhood shaped by puddles, paints, puzzles and people rather than pixels",
+    ],
+    closingNote:
+      "We believe the early years are sacred. Our screen-free nursery environment gives children space to imagine, create and connect with all their senses fully awake.",
   },
   {
     _id: "hoursNutritionPage",
@@ -373,7 +640,8 @@ const singletonDocs = [
     operatingHoursHeading: "We are open 51 weeks a year",
     operatingHoursParagraphs: [createTextBlock("Monday to Friday.")],
     minAttendancePanelTitle: "Minimum Attendance",
-    minAttendancePanelCopy: "To support continuity, we require a minimum attendance of two full days.",
+    minAttendancePanelCopy:
+      "To support continuity, we require a minimum attendance of two full days.",
     nutritionLabel: "Wholesome Nutrition",
     nutritionHeading: "Healthy, balanced meals",
     nutritionParagraphs: [createTextBlock("We provide healthy meals.")],
@@ -383,16 +651,58 @@ const singletonDocs = [
     typicalDayLabel: "A Typical Day",
     typicalDayHeading: "Our rhythm",
     typicalDayLead: "While we follow a rhythm, days flow as follows:",
-    welcomeAndFreePlay: { _type: "object", startTime: "07:30", endTime: "09:00", title: "Welcome", description: "A gentle start." },
-    learningAndExploration: { _type: "object", startTime: "09:00", endTime: "10:00", title: "Learning", description: "Focused activities." },
-    morningSnack: { _type: "object", startTime: "10:00", endTime: "10:30", title: "Snack", description: "Healthy snack." },
-    outdoorAdventures: { _type: "object", startTime: "10:30", endTime: "11:45", title: "Outdoors", description: "Garden time." },
-    lunch: { _type: "object", startTime: "11:45", endTime: "12:30", title: "Lunch", description: "Hot lunch." },
-    restAndQuietTime: { _type: "object", startTime: "12:30", endTime: "14:00", title: "Rest", description: "Sleep or quiet time." },
-    afternoonPlayAndHome: { _type: "object", startTime: "14:00", endTime: "18:00", title: "Play", description: "Afternoon snack and play." },
+    welcomeAndFreePlay: {
+      _type: "object",
+      startTime: "07:30",
+      endTime: "09:00",
+      title: "Welcome",
+      description: "A gentle start.",
+    },
+    learningAndExploration: {
+      _type: "object",
+      startTime: "09:00",
+      endTime: "10:00",
+      title: "Learning",
+      description: "Focused activities.",
+    },
+    morningSnack: {
+      _type: "object",
+      startTime: "10:00",
+      endTime: "10:30",
+      title: "Snack",
+      description: "Healthy snack.",
+    },
+    outdoorAdventures: {
+      _type: "object",
+      startTime: "10:30",
+      endTime: "11:45",
+      title: "Outdoors",
+      description: "Garden time.",
+    },
+    lunch: {
+      _type: "object",
+      startTime: "11:45",
+      endTime: "12:30",
+      title: "Lunch",
+      description: "Hot lunch.",
+    },
+    restAndQuietTime: {
+      _type: "object",
+      startTime: "12:30",
+      endTime: "14:00",
+      title: "Rest",
+      description: "Sleep or quiet time.",
+    },
+    afternoonPlayAndHome: {
+      _type: "object",
+      startTime: "14:00",
+      endTime: "18:00",
+      title: "Play",
+      description: "Afternoon snack and play.",
+    },
     contactPanelTitle: "Get in Touch",
     contactPanelCopy: "Have questions?",
-    contactPanelCtaLabel: "Contact Us"
+    contactPanelCtaLabel: "Contact Us",
   },
   {
     _id: "parentsPage",
@@ -404,30 +714,45 @@ const singletonDocs = [
     policiesIntro: [createTextBlock("Please read our policies carefully.")],
     startingSchoolLabel: "Transition",
     startingSchoolHeading: "Starting School Readiness",
-    startingSchoolParagraphs: [createTextBlock("We prepare children for school entry.")],
+    startingSchoolParagraphs: [
+      createTextBlock("We prepare children for school entry."),
+    ],
     schoolSupport: [
       "Phonics familiarity and pre-writing skills",
       "Social-emotional readiness",
       "Self-care independence (toileting, dressing)",
       "Listening and concentration games",
       "School visit preparation",
-      "Parent consultation evenings"
+      "Parent consultation evenings",
     ],
     feesFundingLabel: "Fees",
     feesFundingHeading: "Clear and Simple Pricing",
-    feesFundingParagraphs: [createTextBlock("All fee structures are transparent.")],
+    feesFundingParagraphs: [
+      createTextBlock("All fee structures are transparent."),
+    ],
     howFundingWorksLabel: "Funding",
     howFundingWorksHeading: "15 and 30 Hour Funding Support",
-    howFundingWorksParagraphs: [createTextBlock("We support both government schemes.")],
+    howFundingWorksParagraphs: [
+      createTextBlock("We support both government schemes."),
+    ],
     fundingExamples: [
-      { _type: "object", _key: "fund1", entitlement: "15 Hours Funding", equivalent: "2 free half days per week" }
+      {
+        _type: "object",
+        _key: "fund1",
+        entitlement: "15 Hours Funding",
+        equivalent: "2 free half days per week",
+      },
     ],
     fundingSupportLabel: "Eligibility",
     fundingSupportHeading: "How to Apply for Subsidies",
-    fundingSupportParagraphs: [createTextBlock("Visit childcarechoices.gov.uk to check eligibility.")],
+    fundingSupportParagraphs: [
+      createTextBlock("Visit childcarechoices.gov.uk to check eligibility."),
+    ],
     taxFreeLabel: "Tax-Free Childcare",
     taxFreeHeading: "Get 20% Government Help",
-    taxFreeParagraphs: [createTextBlock("Parents can pay through Tax-Free Childcare accounts.")],
+    taxFreeParagraphs: [
+      createTextBlock("Parents can pay through Tax-Free Childcare accounts."),
+    ],
     weeklyFeesLabel: "Rates",
     weeklyFeesHeading: "Weekly and Daily Rates",
     weeklyFeesParagraphs: [createTextBlock("Review our pricing tiers below.")],
@@ -440,14 +765,23 @@ const singletonDocs = [
     subsidyFaqsHeading: "Frequently Asked Fee Questions",
     subsidyFaqsParagraphs: [createTextBlock("Common queries about funding.")],
     subsidyFaqs: [
-      { _type: "object", _key: "faq2", question: "When are fees due?", answer: "Fees are billed monthly in advance on the 1st." }
+      {
+        _type: "object",
+        _key: "faq2",
+        question: "When are fees due?",
+        answer: "Fees are billed monthly in advance on the 1st.",
+      },
     ],
     partnershipLabel: "Parents as Partners",
     partnershipHeading: "Nurturing Together",
-    partnershipParagraphs: [createTextBlock("We value continuous parent feedback.")],
+    partnershipParagraphs: [
+      createTextBlock("We value continuous parent feedback."),
+    ],
     settlingInLabel: "Settling In",
     settlingInHeading: "A Warm, Gentle Welcome",
-    settlingInParagraphs: [createTextBlock("We arrange settling-in sessions for all children.")],
+    settlingInParagraphs: [
+      createTextBlock("We arrange settling-in sessions for all children."),
+    ],
     partnershipText: "We use an online portal for daily parent communication.",
     settlingStrategies: [
       "First short session with parent present",
@@ -455,9 +789,10 @@ const singletonDocs = [
       "Short morning sessions leading to lunch",
       "Consistent drop-off routines",
       "Comfort object from home allowed",
-      "Daily check-in calls for parents"
+      "Daily check-in calls for parents",
     ],
-    policiesSupportingNote: "Printed policy documents are available on request at the main office."
+    policiesSupportingNote:
+      "Printed policy documents are available on request at the main office.",
   },
   {
     _id: "galleryPage",
@@ -468,9 +803,13 @@ const singletonDocs = [
     heroCtaLabel: "Book a Visit",
     galleryIntroLabel: "Nursery Environment",
     galleryIntroHeading: "A Home from Home",
-    galleryIntroCopy: [createTextBlock("Our classrooms use natural wooden materials.")],
+    galleryIntroCopy: [
+      createTextBlock("Our classrooms use natural wooden materials."),
+    ],
     finalCtaHeading: "Ready to Explore?",
-    finalCtaCopy: [createTextBlock("Schedule a walkthrough of our Bristol BS5 setting.")],
+    finalCtaCopy: [
+      createTextBlock("Schedule a walkthrough of our Bristol BS5 setting."),
+    ],
     finalCtaLabel: "Book a Tour",
   },
   {
@@ -485,9 +824,21 @@ const singletonDocs = [
     nextStepsLabel: "After You Submit",
     nextStepsHeading: "What Happens Next?",
     nextStepsParagraphs: [createTextBlock("Here is our process.")],
-    receiveEnquiryStep: { _type: "object", title: "We Receive Your Enquiry", description: "Your message arrives safely." },
-    getInTouchStep: { _type: "object", title: "We Get in Touch", description: "We respond within one working day." },
-    helpWithNextStepsStep: { _type: "object", title: "We Help With Next Steps", description: "We answer questions." },
+    receiveEnquiryStep: {
+      _type: "object",
+      title: "We Receive Your Enquiry",
+      description: "Your message arrives safely.",
+    },
+    getInTouchStep: {
+      _type: "object",
+      title: "We Get in Touch",
+      description: "We respond within one working day.",
+    },
+    helpWithNextStepsStep: {
+      _type: "object",
+      title: "We Help With Next Steps",
+      description: "We answer questions.",
+    },
     locationLabel: "Visit Us",
     locationHeading: "Find Little Wise Kids",
   },
@@ -510,23 +861,33 @@ const singletonDocs = [
     heroParagraphs: [createTextBlock("Read our latest thoughts.")],
     latestArticlesHeading: "Latest Articles",
     latestArticlesIntroduction: [createTextBlock("Here are some articles.")],
-  }
+  },
 ];
 
-const documents = [...singletonDocs, ...blogPostDocs, ...policyDocs, ...galleryDocs];
+const documents = [
+  ...singletonDocs,
+  ...blogPostDocs,
+  ...policyDocs,
+  ...galleryDocs,
+];
 
-documents.forEach(doc => validate(doc));
+documents.forEach((doc) => validate(doc));
 
 // Clean up undefined properties dynamically
-const cleanDocs = documents.map(doc => {
+const cleanDocs = documents.map((doc) => {
   return JSON.parse(JSON.stringify(doc));
 });
 
 const ndjson = cleanDocs.map((doc) => JSON.stringify(doc)).join("\n");
-const outputPath = pathModule.join(__dirname, "../docs/sanity/seed-data.ndjson");
+const outputPath = pathModule.join(
+  __dirname,
+  "../docs/sanity/seed-data.ndjson",
+);
 
 fs.mkdirSync(pathModule.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, ndjson, "utf-8");
 
 console.log(`✅ Successfully generated validated seed data at ${outputPath}`);
-console.log(`ℹ️ Environment: ${isDev ? 'DEVELOPMENT (including dummy asset refs)' : 'PRODUCTION (clean/no dummy assets)'}`);
+console.log(
+  `ℹ️ Environment: ${isDev ? "DEVELOPMENT (including dummy asset refs)" : "PRODUCTION (clean/no dummy assets)"}`,
+);

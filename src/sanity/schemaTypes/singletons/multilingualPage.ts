@@ -72,7 +72,7 @@ export const multilingualPage = defineType({
     defineField({
       name: "childrenEnjoyHeading",
       title: "Children Enjoy Heading",
-      description: "Heading for the bullet points.",
+      description: "Heading for the activity list.",
       type: "string",
       group: "philosophy",
       validation: (rule) => rule.required().max(60),
@@ -81,12 +81,20 @@ export const multilingualPage = defineType({
       name: "philosophyPoints",
       title: "Philosophy Points",
       description:
-        "List of benefits/activities children enjoy. Must be exactly 6 items.",
+        "List of experiences children enjoy. Must be exactly 6 items.",
       type: "array",
       group: "philosophy",
-      of: [{ type: "string", validation: (rule) => rule.required().max(90) }],
+      of: [{ type: "string", validation: (rule) => rule.required().max(120) }],
       validation: (rule) =>
         rule.required().length(6).error("Must be exactly 6 items."),
+    }),
+    defineField({
+      name: "philosophyDiscoveryNote",
+      title: "Philosophy Discovery Note",
+      description: "Short full-width statement below the philosophy section.",
+      type: "string",
+      group: "philosophy",
+      validation: (rule) => rule.required().max(220),
     }),
 
     defineField({
@@ -114,13 +122,13 @@ export const multilingualPage = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "languageConnectionImage",
-      title: "Language Connection Image",
-      description: "Image for this section.",
-      type: "contentImage",
+      name: "languageConnectionNote",
+      title: "Language Offering Note",
+      description:
+        "Short public note explaining that the current language offering may change.",
+      type: "string",
       group: "languageConnection",
-      validation: (rule) =>
-        rule.required().assetRequired().error("Image required."),
+      validation: (rule) => rule.required().max(160),
     }),
 
     defineField({
@@ -141,8 +149,8 @@ export const multilingualPage = defineType({
     }),
     defineField({
       name: "eyfsParagraphs",
-      title: "EYFS Paragraphs",
-      description: "Text for this section.",
+      title: "EYFS Introductory Paragraphs",
+      description: "Introductory text displayed before the seven areas.",
       type: "pagePortableText",
       group: "eyfs",
       validation: (rule) => rule.required(),
@@ -167,18 +175,27 @@ export const multilingualPage = defineType({
             name: "title",
             type: "string",
             title: "Title",
-            validation: (rule) => rule.required().max(50),
+            validation: (rule) => rule.required().max(60),
           }),
           defineField({
             name: "description",
             type: "text",
             title: "Description",
-            validation: (rule) => rule.required().max(150),
+            validation: (rule) => rule.max(150),
           }),
         ],
         validation: (rule) => rule.required(),
-      })
+      }),
     ),
+    defineField({
+      name: "eyfsClosingNote",
+      title: "EYFS Closing Note",
+      description: "Closing paragraph shown beneath the seven EYFS areas.",
+      type: "text",
+      rows: 3,
+      group: "eyfs",
+      validation: (rule) => rule.required().max(360),
+    }),
 
     defineField({
       name: "screenFreeLabel",
@@ -205,23 +222,31 @@ export const multilingualPage = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "screenFreeBenefitsHeading",
+      title: "Screen-Free Benefits Heading",
+      description: "Heading shown above the benefits list.",
+      type: "string",
+      group: "screenFree",
+      validation: (rule) => rule.required().max(60),
+    }),
+    defineField({
       name: "screenFreeBenefits",
       title: "Screen-Free Benefits",
       description:
         "List of benefits. Must be exactly 5 items based on the visual design.",
       type: "array",
       group: "screenFree",
-      of: [{ type: "string", validation: (rule) => rule.required().max(60) }],
+      of: [{ type: "string", validation: (rule) => rule.required().max(120) }],
       validation: (rule) =>
         rule.required().length(5).error("Must be exactly 5 items."),
     }),
     defineField({
       name: "closingNote",
       title: "Closing Note",
-      description: "Final note at the bottom of the page.",
+      description: "Final statement at the bottom of the screen-free section.",
       type: "string",
       group: "screenFree",
-      validation: (rule) => rule.required().max(80),
+      validation: (rule) => rule.required().max(240),
     }),
   ],
 });

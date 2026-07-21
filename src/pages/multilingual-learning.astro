@@ -1,13 +1,15 @@
 ---
 export const prerender = true;
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
 import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
-import SanityImage from "../components/media/SanityImage.astro";
 import { getMultilingualPage, getBusinessDetails } from "../utils/sanity";
 import type { SeoConfig } from "../lib/seo/types";
+import flowerImage from "../assets/images/flower-image.webp";
+import languageConnectionImage from "../assets/images/planet-english-portuguese-words.webp";
 import "./multilingual-learning.css";
 
 const multilingualPage = await getMultilingualPage();
@@ -15,36 +17,26 @@ const businessDetails = await getBusinessDetails();
 
 const seo: SeoConfig = {
   title: "Multilingual Early Years Learning | Little Wise Kids",
-  description: "Our child-led approach combines English and Portuguese exposure with screen-free play, nurturing confidence and creativity.",
+  description:
+    "Our child-led approach combines English and Portuguese exposure with screen-free play, nurturing confidence and creativity.",
   canonicalPath: "/multilingual-learning",
 };
 
-const philosophyPoints = [
-  {
-    tone: "purple",
-    text: multilingualPage.philosophyPoints[0],
-  },
-  {
-    tone: "green",
-    text: multilingualPage.philosophyPoints[1],
-  },
-  {
-    tone: "blue",
-    text: multilingualPage.philosophyPoints[2],
-  },
-  {
-    tone: "yellow",
-    text: multilingualPage.philosophyPoints[3],
-  },
-  {
-    tone: "purple",
-    text: multilingualPage.philosophyPoints[4],
-  },
-  {
-    tone: "green",
-    text: multilingualPage.philosophyPoints[5],
-  },
+const pointTones = [
+  "purple",
+  "green",
+  "blue",
+  "yellow",
+  "purple",
+  "green",
 ] as const;
+
+const philosophyPoints = multilingualPage.philosophyPoints.map(
+  (text, index) => ({
+    tone: pointTones[index % pointTones.length] ?? "purple",
+    text,
+  }),
+);
 
 const eyfsAreas = [
   {
@@ -84,28 +76,20 @@ const eyfsAreas = [
   },
 ] as const;
 
-const screenFreeBenefits = [
-  {
-    tone: "purple",
-    text: multilingualPage.screenFreeBenefits[0],
-  },
-  {
-    tone: "green",
-    text: multilingualPage.screenFreeBenefits[1],
-  },
-  {
-    tone: "blue",
-    text: multilingualPage.screenFreeBenefits[2],
-  },
-  {
-    tone: "yellow",
-    text: multilingualPage.screenFreeBenefits[3],
-  },
-  {
-    tone: "purple",
-    text: multilingualPage.screenFreeBenefits[4],
-  },
+const screenFreeTones = [
+  "purple",
+  "green",
+  "blue",
+  "yellow",
+  "purple",
 ] as const;
+
+const screenFreeBenefits = multilingualPage.screenFreeBenefits.map(
+  (text, index) => ({
+    tone: screenFreeTones[index % screenFreeTones.length] ?? "purple",
+    text,
+  }),
+);
 ---
 
 <BaseLayout seo={seo} businessDetails={businessDetails}>
@@ -117,23 +101,20 @@ const screenFreeBenefits = [
       titleLineOne={multilingualPage.heroTitleLineOne}
       titleLineTwo={multilingualPage.heroTitleLineTwo}
     >
-
       <PortableContent value={multilingualPage.heroParagraphs} />
     </SubpageHero>
 
     <div class="lwk-multilingual__sections">
       <section
         id="our-learning-philosophy"
-        class="lwk-multilingual__section
-          lwk-multilingual__section--philosophy"
+        class="lwk-multilingual__section lwk-multilingual__section--philosophy"
         aria-labelledby="learning-philosophy-title"
       >
         <Container size="wide">
-          <div class="lwk-multilingual__philosophy-card">
+          <div class="lwk-multilingual__philosophy-layout">
             <div class="lwk-multilingual__copy-block">
               <p
-                class="lwk-multilingual__label
-                  lwk-multilingual__label--purple"
+                class="lwk-multilingual__label lwk-multilingual__label--purple"
               >
                 {multilingualPage.philosophyLabel}
               </p>
@@ -143,32 +124,47 @@ const screenFreeBenefits = [
               </h2>
 
               <div class="lwk-multilingual__prose">
-                <PortableContent value={multilingualPage.philosophyParagraphs} />
+                <PortableContent
+                  value={multilingualPage.philosophyParagraphs}
+                />
               </div>
             </div>
 
-            <div class="lwk-multilingual__list-panel">
-              <h3>{multilingualPage.childrenEnjoyHeading}</h3>
+            <div class="lwk-multilingual__philosophy-side">
+              <div class="lwk-multilingual__list-block">
+                <h3>{multilingualPage.childrenEnjoyHeading}</h3>
 
-              <ul class="lwk-multilingual__check-list">
-                {
-                  philosophyPoints.map((point) => (
-                    <li>
-                      <span
-                        class={`
-                          lwk-multilingual__check
-                          lwk-multilingual__check--${point.tone}
-                        `}
-                        aria-hidden="true"
-                      >
-                        ✓
-                      </span>
+                <ul class="lwk-multilingual__check-list">
+                  {
+                    philosophyPoints.map((point) => (
+                      <li>
+                        <span
+                          class={`lwk-multilingual__check lwk-multilingual__check--${point.tone}`}
+                          aria-hidden="true"
+                        >
+                          ✓
+                        </span>
 
-                      <span>{point.text}</span>
-                    </li>
-                  ))
-                }
-              </ul>
+                        <span>{point.text}</span>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+
+              <figure
+                class="lwk-multilingual__philosophy-art"
+                aria-hidden="true"
+              >
+                <Image
+                  src={flowerImage}
+                  alt=""
+                  width={flowerImage.width}
+                  height={flowerImage.height}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
             </div>
           </div>
         </Container>
@@ -176,50 +172,41 @@ const screenFreeBenefits = [
 
       <section
         id="english-and-portuguese"
-        class="lwk-multilingual__section"
+        class="lwk-multilingual__section lwk-multilingual__section--languages"
         aria-labelledby="languages-title"
       >
         <Container size="wide">
-          <div
-            class="lwk-multilingual__split-card
-              lwk-multilingual__split-card--green"
-          >
+          <div class="lwk-multilingual__language-layout">
+            <figure class="lwk-multilingual__language-art" aria-hidden="true">
+              <Image
+                src={languageConnectionImage}
+                alt=""
+                width={languageConnectionImage.width}
+                height={languageConnectionImage.height}
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+
             <div class="lwk-multilingual__copy-block">
-              <p
-                class="lwk-multilingual__label
-                  lwk-multilingual__label--green"
-              >
+              <p class="lwk-multilingual__label lwk-multilingual__label--green">
                 {multilingualPage.languageConnectionLabel}
               </p>
 
-              <h2 id="languages-title">{multilingualPage.languageConnectionHeading}</h2>
+              <h2 id="languages-title">
+                {multilingualPage.languageConnectionHeading}
+              </h2>
 
               <div class="lwk-multilingual__prose">
-                <PortableContent value={multilingualPage.languageConnectionParagraphs} />
+                <PortableContent
+                  value={multilingualPage.languageConnectionParagraphs}
+                />
               </div>
 
-
-            </div>
-
-            <div
-              class="lwk-multilingual__media
-                lwk-multilingual__media--languages"
-              aria-hidden="true"
-            >
-              {multilingualPage.languageConnectionImage?.asset?._ref ? (
-                <SanityImage
-                  image={multilingualPage.languageConnectionImage}
-                  alt=""
-                  widths={[320, 480, 640, 800]}
-                  sizes="(min-width: 72rem) 480px, 100vw"
-                  layout="constrained"
-                />
-              ) : (
-                <span class="lwk-multilingual__media-placeholder">
-                  <Icon name="book" size={48} />
-                  <span>Language-learning image</span>
-                </span>
-              )}
+              <p class="lwk-multilingual__language-note">
+                <span aria-hidden="true">ⓘ</span>
+                <span>{multilingualPage.languageConnectionNote}</span>
+              </p>
             </div>
           </div>
         </Container>
@@ -227,16 +214,13 @@ const screenFreeBenefits = [
 
       <section
         id="eyfs"
-        class="lwk-multilingual__section"
+        class="lwk-multilingual__section lwk-multilingual__section--eyfs"
         aria-labelledby="eyfs-title"
       >
         <Container size="wide">
-          <div class="lwk-multilingual__eyfs-card">
+          <div class="lwk-multilingual__eyfs-layout">
             <div class="lwk-multilingual__copy-block">
-              <p
-                class="lwk-multilingual__label
-                  lwk-multilingual__label--purple"
-              >
+              <p class="lwk-multilingual__label lwk-multilingual__label--blue">
                 {multilingualPage.eyfsLabel}
               </p>
 
@@ -248,20 +232,17 @@ const screenFreeBenefits = [
             </div>
 
             <ul
-              class="lwk-multilingual__eyfs-grid"
+              class="lwk-multilingual__eyfs-journey"
               aria-label="The seven areas of the Early Years Foundation Stage"
             >
               {
                 eyfsAreas.map((area) => (
                   <li>
                     <span
-                      class={`
-                        lwk-multilingual__area-icon
-                        lwk-multilingual__area-icon--${area.tone}
-                      `}
+                      class={`lwk-multilingual__area-icon lwk-multilingual__area-icon--${area.tone}`}
                       aria-hidden="true"
                     >
-                      <Icon name={area.icon} size={28} />
+                      <Icon name={area.icon} size={26} />
                     </span>
 
                     <span>{area.title}</span>
@@ -269,23 +250,23 @@ const screenFreeBenefits = [
                 ))
               }
             </ul>
+
+            <p class="lwk-multilingual__eyfs-note">
+              {multilingualPage.eyfsClosingNote}
+            </p>
           </div>
         </Container>
       </section>
 
       <section
         id="screen-free-learning"
-        class="lwk-multilingual__section
-          lwk-multilingual__section--screen-free"
+        class="lwk-multilingual__section lwk-multilingual__section--screen-free"
         aria-labelledby="screen-free-title"
       >
         <Container size="wide">
-          <div class="lwk-multilingual__screen-free-card">
+          <div class="lwk-multilingual__screen-free-layout">
             <div class="lwk-multilingual__copy-block">
-              <p
-                class="lwk-multilingual__label
-                  lwk-multilingual__label--blue"
-              >
+              <p class="lwk-multilingual__label lwk-multilingual__label--blue">
                 {multilingualPage.screenFreeLabel}
               </p>
 
@@ -294,22 +275,21 @@ const screenFreeBenefits = [
               </h2>
 
               <div class="lwk-multilingual__prose">
-                <PortableContent value={multilingualPage.screenFreeParagraphs} />
+                <PortableContent
+                  value={multilingualPage.screenFreeParagraphs}
+                />
               </div>
             </div>
 
-            <div class="lwk-multilingual__list-panel">
-              <h3>Screen-Free Learning Supports:</h3>
+            <div class="lwk-multilingual__list-block">
+              <h3>{multilingualPage.screenFreeBenefitsHeading}</h3>
 
               <ul class="lwk-multilingual__check-list">
                 {
                   screenFreeBenefits.map((benefit) => (
                     <li>
                       <span
-                        class={`
-                          lwk-multilingual__check
-                          lwk-multilingual__check--${benefit.tone}
-                        `}
+                        class={`lwk-multilingual__check lwk-multilingual__check--${benefit.tone}`}
                         aria-hidden="true"
                       >
                         ✓
@@ -322,15 +302,14 @@ const screenFreeBenefits = [
               </ul>
             </div>
 
-            <div class="lwk-multilingual__closing-note">
-              <span class="lwk-multilingual__closing-icon" aria-hidden="true">
-                <Icon name="heart" size={32} />
+            <p
+              class="lwk-multilingual__statement lwk-multilingual__statement--yellow"
+            >
+              <span class="lwk-multilingual__statement-icon" aria-hidden="true">
+                <Icon name="heart" size={24} />
               </span>
-
-              <p>
-                {multilingualPage.closingNote}
-              </p>
-            </div>
+              <span>{multilingualPage.closingNote}</span>
+            </p>
           </div>
         </Container>
       </section>

@@ -57,9 +57,9 @@ export type GalleryPhoto = {
     | "nature-and-gardening"
     | "celebrations-and-community";
   showOnHomepage?: boolean;
+  homepageDisplayOrder?: number;
+  publicCaption?: string;
   displayOrder?: number;
-  showOnAboutPage?: boolean;
-  aboutPageDisplayOrder?: number;
 };
 
 export type SanityImageAssetReference = {
@@ -128,6 +128,7 @@ export type BusinessDetails = {
   _updatedAt: string;
   _rev: string;
   organizationName?: string;
+  legalName?: string;
   publicEmail?: string;
   primaryPhone?: {
     label?: string;
@@ -146,6 +147,9 @@ export type BusinessDetails = {
     shortLocation?: string;
     mapUrl?: string;
   };
+  latitude?: number;
+  longitude?: number;
+  approvedAreaServed?: Array<string>;
   openingDays?: string;
   openingTime?: string;
   closingTime?: string;
@@ -177,6 +181,47 @@ export type BusinessDetails = {
     bluePhrase?: string;
     suffix?: string;
   };
+  ogImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    altText?: string;
+    _type: "image";
+  };
+  ofstedRegistrationType?: string;
+  ofstedUrn?: string;
+  ofstedRecordUrl?: string;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+export type ApproachPoint = {
+  _type: "approachPoint";
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal";
+  listItem?: never;
+  markDefs?: null;
+  level?: number;
 };
 
 export type InlineBusinessDetail = {
@@ -329,6 +374,7 @@ export type BlogPost = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  publicationStatus?: "draft" | "published";
   title?: string;
   slug?: Slug;
   publishedAt?: string;
@@ -342,6 +388,8 @@ export type BlogPost = {
   excerpt?: string;
   featuredImage?: StrictImage;
   body?: BlogPortableText;
+  authorName?: string;
+  authorRole?: string;
 };
 
 export type Slug = {
@@ -562,9 +610,6 @@ export type HoursNutritionPage = {
     title?: string;
     description?: string;
   };
-  contactPanelTitle?: string;
-  contactPanelCopy?: string;
-  contactPanelCtaLabel?: string;
 };
 
 export type MultilingualPage = {
@@ -582,10 +627,11 @@ export type MultilingualPage = {
   philosophyParagraphs?: PagePortableText;
   childrenEnjoyHeading?: string;
   philosophyPoints?: Array<string>;
+  philosophyDiscoveryNote?: string;
   languageConnectionLabel?: string;
   languageConnectionHeading?: string;
   languageConnectionParagraphs?: PagePortableText;
-  languageConnectionImage?: ContentImage;
+  languageConnectionNote?: string;
   eyfsLabel?: string;
   eyfsHeading?: string;
   eyfsParagraphs?: PagePortableText;
@@ -617,22 +663,13 @@ export type MultilingualPage = {
     title?: string;
     description?: string;
   };
+  eyfsClosingNote?: string;
   screenFreeLabel?: string;
   screenFreeHeading?: string;
   screenFreeParagraphs?: PagePortableText;
+  screenFreeBenefitsHeading?: string;
   screenFreeBenefits?: Array<string>;
   closingNote?: string;
-};
-
-export type ContentImage = {
-  _type: "contentImage";
-  asset?: SanityImageAssetReference;
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  isDecorative?: boolean;
-  altText?: string;
-  caption?: string;
 };
 
 export type AboutPage = {
@@ -647,7 +684,11 @@ export type AboutPage = {
   heroParagraphs?: MinimalPortableText;
   approachLabel?: string;
   approachHeading?: string;
-  approachParagraphs?: MinimalPortableText;
+  approachParagraphs?: Array<
+    {
+      _key: string;
+    } & ApproachPoint
+  >;
   approachChildLed?: string;
   approachCalmRhythm?: string;
   approachLearning?: string;
@@ -678,8 +719,17 @@ export type AboutPage = {
   leadershipHeading?: string;
   leadershipParagraphs?: MinimalPortableText;
   leadershipImage?: ContentImage;
-  gallerySectionLabel?: string;
-  gallerySectionHeading?: string;
+};
+
+export type ContentImage = {
+  _type: "contentImage";
+  asset?: SanityImageAssetReference;
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  isDecorative?: boolean;
+  altText?: string;
+  caption?: string;
 };
 
 export type HomePage = {
@@ -702,7 +752,6 @@ export type HomePage = {
     prefix?: string;
     purplePhrase?: string;
     greenPhrase?: string;
-    connector?: string;
     bluePhrase?: string;
   };
   valuesIntroParagraphs?: MinimalPortableText;
@@ -734,7 +783,6 @@ export type HomePage = {
   visitHeading?: {
     lineOnePrefix?: string;
     accentedPhrase?: string;
-    lineTwo?: string;
   };
   visitParagraphs?: MinimalPortableText;
   visitCtaLabel?: string;
@@ -756,22 +804,11 @@ export type HomePage = {
   helpPanelCtaLabel?: string;
   galleryIntroTitle?: string;
   galleryIntro?: string;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
+  galleryImages?: Array<
+    {
+      _key: string;
+    } & StrictImage
+  >;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -880,6 +917,9 @@ export type AllSanitySchemaTypes =
   | ThankYouPage
   | PagePortableText
   | BusinessDetails
+  | SanityImageCrop
+  | SanityImageHotspot
+  | ApproachPoint
   | InlineBusinessDetail
   | FaqPortableText
   | HomePageReference
@@ -901,11 +941,9 @@ export type AllSanitySchemaTypes =
   | ParentsPage
   | HoursNutritionPage
   | MultilingualPage
-  | ContentImage
   | AboutPage
+  | ContentImage
   | HomePage
-  | SanityImageCrop
-  | SanityImageHotspot
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
