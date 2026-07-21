@@ -142,6 +142,14 @@ const seo: SeoConfig = {
                       <p class="blog-card__excerpt">{article.excerpt}</p>
                       <footer class="blog-card__footer">
                         <div class="blog-card__meta">
+                          {article.authorName && (
+                            <>
+                              <span class="blog-card__author">
+                                {article.authorName}{article.authorRole ? ` (${article.authorRole})` : ""}
+                              </span>
+                              <span aria-hidden="true">·</span>
+                            </>
+                          )}
                           <time datetime={article.published}>{article.displayDate}</time>
                           <span aria-hidden="true">·</span>
                           <span>{article.readTime}</span>
@@ -188,6 +196,14 @@ const seo: SeoConfig = {
                       <p class="blog-card__excerpt">{article.excerpt}</p>
                       <footer class="blog-card__footer">
                         <div class="blog-card__meta">
+                          {article.authorName && (
+                            <>
+                              <span class="blog-card__author">
+                                {article.authorName}{article.authorRole ? ` (${article.authorRole})` : ""}
+                              </span>
+                              <span aria-hidden="true">·</span>
+                            </>
+                          )}
                           <time datetime={article.published}>{article.displayDate}</time>
                           <span aria-hidden="true">·</span>
                           <span>{article.readTime}</span>

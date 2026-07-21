@@ -288,7 +288,7 @@
     minmax(0, 1fr)
     auto;
   gap: var(--space-s);
-  align-items: end;
+  align-items: center;
   margin-top: auto;
   padding-top: var(--space-l);
 }
@@ -296,10 +296,16 @@
 .blog-card__meta {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.35rem;
   color: var(--color-ink-soft);
   font-size: var(--font-size-small);
   line-height: var(--line-height-compact);
+}
+
+.blog-card__author {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-ink);
 }
 
 .blog-card__read {

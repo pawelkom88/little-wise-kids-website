@@ -77,6 +77,23 @@ const seo: SeoConfig = {
       <Container size="wide">
         <div class="blog-article">
           <header class="blog-article__meta">
+            {article.authorName && (
+              <>
+                <div class="blog-article__meta-item" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                  <span aria-hidden="true">
+                    <Icon name="person" size={20} />
+                  </span>
+
+                  <span>
+                    <span itemprop="name">{article.authorName}</span>
+                    {article.authorRole && <span class="blog-article__author-role"> ({article.authorRole})</span>}
+                  </span>
+                </div>
+
+                <span class="blog-article__meta-separator" aria-hidden="true" />
+              </>
+            )}
+
             <div class="blog-article__meta-item">
               <span aria-hidden="true">
                 <Icon name="calendar" size={20} />

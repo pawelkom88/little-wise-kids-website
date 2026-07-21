@@ -52,6 +52,8 @@ export function mapBlogPost(post: BlogPost) {
       ? { sanityImage: post.featuredImage, alt: post.featuredImage?.altText ?? "" }
       : null,
     body: post.body,
+    authorName: post.authorName,
+    authorRole: post.authorRole,
   };
 }
 

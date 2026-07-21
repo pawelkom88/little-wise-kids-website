@@ -57,6 +57,11 @@
   background: var(--color-purple);
 }
 
+.blog-article__author-role {
+  color: var(--color-ink-soft);
+  font-weight: var(--font-weight-regular);
+}
+
 /*
  * Main article image
  */
