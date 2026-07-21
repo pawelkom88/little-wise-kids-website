@@ -881,6 +881,7 @@
   }
 
   .parents-fees-table tbody th {
+    width: 100%;
     background: color-mix(
       in srgb,
       var(--parents-soft) 56%,
