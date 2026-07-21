@@ -147,6 +147,11 @@ button {
   color: var(--color-blue-dark);
 }
 
+.lwk-cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

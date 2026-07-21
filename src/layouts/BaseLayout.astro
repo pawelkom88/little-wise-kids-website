@@ -68,7 +68,7 @@ const schemaGraph = [businessSchema, ...pageSchema, ...(seo.schemas || [])];
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <SiteHeader businessDetails={businessDetails} />
-    <main id="main-content" tabindex="-1" transition:animate="fade">
+    <main id="main-content" transition:animate="fade">
       <slot />
     </main>
     <SiteFooter businessDetails={businessDetails} />
