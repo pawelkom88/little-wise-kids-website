@@ -1,26 +1,31 @@
 ---
 export const prerender = true;
+
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
-import { getParentsPage, getPolicyDocuments, getBusinessDetails } from "../utils/sanity";
+import Icon from "../components/icons/Icon.astro";
+import Button from "../components/ui/Button.astro";
+import {
+  getParentsPage,
+  getPolicyDocuments,
+  getBusinessDetails,
+} from "../utils/sanity";
 import { safeExternalUrl } from "../lib/urls.mjs";
 import type { SeoConfig } from "../lib/seo/types";
 import "./parents-information.css";
 
 const parentsPage = await getParentsPage();
 const businessDetails = await getBusinessDetails();
+const policyDocuments = await getPolicyDocuments();
 
 const seo: SeoConfig = {
   title: "Parents' Info, Fees & Childcare Funding | Little Wise Kids",
-  description: "Information for families joining our Easton childcare setting, covering settling in, daily fees, Tax-Free Childcare, and government funding.",
+  description:
+    "Clear information for Little Wise Kids families, including school readiness, childcare funding, fees, settling in and nursery policies.",
   canonicalPath: "/parents-information",
 };
-
-const schoolSupport = parentsPage.schoolSupport;
-
-const fundingExamples = parentsPage.fundingExamples;
 
 const feeRows = [
   {
@@ -50,11 +55,23 @@ const feeRows = [
   },
 ] as const;
 
-const subsidyFaqs = parentsPage.subsidyFaqs;
+const governmentGuidanceUrl = safeExternalUrl(parentsPage.fundingGuidanceUrl);
+const taxFreeGuidanceUrl = safeExternalUrl(parentsPage.taxFreeGuidanceUrl);
 
-const settlingStrategies = parentsPage.settlingStrategies;
+function formatReviewDate(value: string): string {
+  const date = new Date(`${value}T00:00:00Z`);
 
-const policyDocuments = await getPolicyDocuments();
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(date);
+}
 ---
 
 <BaseLayout seo={seo} businessDetails={businessDetails}>
@@ -66,43 +83,47 @@ const policyDocuments = await getPolicyDocuments();
       titleLineOne={parentsPage.heroTitleLineOne}
       titleLineTwo={parentsPage.heroTitleLineTwo}
     >
-
       <PortableContent value={parentsPage.heroParagraphs} />
     </SubpageHero>
 
-    <div class="parents-page__content">
+    <div class="parents-guide">
       <Container size="wide">
-        <div class="parents-page__stack">
+        <div class="parents-guide__stack">
           <section
             id="starting-school"
-            class="parents-card
-              parents-card--purple"
+            class="parents-guide__row parents-guide__row--blue"
             aria-labelledby="starting-school-title"
           >
-            <div class="parents-card__grid">
-              <div class="parents-card__main">
-                <header class="parents-card__heading">
-                  <span class="parents-card__number" aria-hidden="true">
-                    01
-                  </span>
+            <header class="parents-guide__rail">
+              <span class="parents-guide__number" aria-hidden="true">01</span>
+              <p>{parentsPage.startingSchoolLabel}</p>
+            </header>
 
-                  <div>
-                    <p class="parents-card__label">{parentsPage.startingSchoolLabel}</p>
+            <div
+              class="parents-guide__surface parents-guide__surface--starting"
+            >
+              <div class="parents-starting__copy">
+                <h2 id="starting-school-title">
+                  {parentsPage.startingSchoolHeading}
+                </h2>
 
-                    <h2 id="starting-school-title">{parentsPage.startingSchoolHeading}</h2>
-                  </div>
-                </header>
-
-                <div class="parents-card__prose">
-                  <PortableContent value={parentsPage.startingSchoolParagraphs} />
+                <div class="parents-prose">
+                  <PortableContent
+                    value={parentsPage.startingSchoolParagraphs}
+                  />
                 </div>
               </div>
 
-              <aside class="parents-card__panel" aria-labelledby="school-support-title">
-                <h3 id="school-support-title">We Support Children Through:</h3>
+              <aside
+                class="parents-support"
+                aria-labelledby="school-support-title"
+              >
+                <h3 id="school-support-title">
+                  {parentsPage.schoolSupportHeading}
+                </h3>
 
                 <ul class="parents-check-list">
-                  {schoolSupport.map((item: string) => <li>{item}</li>)}
+                  {parentsPage.schoolSupport.map((item) => <li>{item}</li>)}
                 </ul>
               </aside>
             </div>
@@ -110,398 +131,431 @@ const policyDocuments = await getPolicyDocuments();
 
           <section
             id="fees-funding"
-            class="parents-card
-              parents-card--green"
+            class="parents-guide__row parents-guide__row--purple"
             aria-labelledby="fees-funding-title"
           >
-            <div class="parents-card__grid">
-              <div class="parents-card__main">
-                <header class="parents-card__heading">
-                  <span class="parents-card__number" aria-hidden="true">
-                    02
-                  </span>
+            <header class="parents-guide__rail">
+              <span class="parents-guide__number" aria-hidden="true">02</span>
+              <p>{parentsPage.feesFundingLabel}</p>
+            </header>
 
-                  <div>
-                    <p class="parents-card__label">{parentsPage.feesFundingLabel}</p>
+            <div class="parents-guide__surface parents-guide__surface--funding">
+              <header class="parents-funding__intro">
+                <h2 id="fees-funding-title">
+                  {parentsPage.feesFundingHeading}
+                </h2>
 
-                    <h2 id="fees-funding-title">
-                      {parentsPage.feesFundingHeading}
-                    </h2>
-                  </div>
-                </header>
-
-                <div class="parents-card__prose">
+                <div class="parents-prose">
                   <PortableContent value={parentsPage.feesFundingParagraphs} />
                 </div>
-              </div>
+              </header>
 
-
-            </div>
-          </section>
-
-          <section
-            id="how-funding-works"
-            class="parents-card
-              parents-card--blue"
-            aria-labelledby="funding-works-title"
-          >
-            <div class="parents-card__grid">
-              <div class="parents-card__main">
-                <header class="parents-card__heading">
-                  <span class="parents-card__number" aria-hidden="true">
-                    03
-                  </span>
-
-                  <div>
-                    <p class="parents-card__label">{parentsPage.howFundingWorksLabel}</p>
-
-                    <h2 id="funding-works-title">
-                      {parentsPage.howFundingWorksHeading}
-                    </h2>
-                  </div>
-                </header>
-
-                <div class="parents-card__prose">
-                  <PortableContent value={parentsPage.howFundingWorksParagraphs} />
-                </div>
-              </div>
-
-              <aside class="parents-card__panel" aria-labelledby="funding-calculations-title">
-                <h3 id="funding-calculations-title">Current Example Calculations</h3>
-
-                <div class="parents-calculations">
-                  {
-                    fundingExamples.map((example: { entitlement: string; equivalent: string; }) => (
-                      <article class="parents-calculation">
-                        <p>{example.entitlement}</p>
-                        <strong>{example.equivalent}</strong>
-                      </article>
-                    ))
-                  }
-                </div>
-              </aside>
-            </div>
-          </section>
-
-          <section
-            id="funding-support"
-            class="parents-card
-              parents-card--purple"
-            aria-labelledby="funding-support-title"
-          >
-            <div class="parents-card__grid">
-              <div class="parents-card__main">
-                <header class="parents-card__heading">
-                  <span class="parents-card__number" aria-hidden="true">
-                    04
-                  </span>
-
-                  <div>
-                    <p class="parents-card__label">{parentsPage.fundingSupportLabel}</p>
-
-                    <h2 id="funding-support-title">{parentsPage.fundingSupportHeading}</h2>
-                  </div>
-                </header>
-
-                <div class="parents-card__prose">
-                  <PortableContent value={parentsPage.fundingSupportParagraphs} />
-                </div>
-              </div>
-
-              <aside class="parents-resource" aria-labelledby="childcare-guidance-label">
-                <p id="childcare-guidance-label" class="parents-resource__label">
-                  Current Government Guidance and Eligibility
-                </p>
-
-                <a
-                  href="https://www.gov.uk/get-childcare"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Visit the Government childcare guidance website. Opens in a new tab."
+              <div class="parents-funding__layout">
+                <section
+                  class="parents-funding__explanation"
+                  aria-labelledby="funding-works-title"
                 >
-                  gov.uk/get-childcare
-                  <span aria-hidden="true">↗</span>
-                </a>
-              </aside>
-            </div>
-          </section>
+                  <p class="parents-kicker">
+                    {parentsPage.howFundingWorksLabel}
+                  </p>
 
-          <section
-            id="tax-free-childcare"
-            class="parents-card
-              parents-card--green"
-            aria-labelledby="tax-free-title"
-          >
-            <div class="parents-card__grid">
-              <div class="parents-card__main">
-                <header class="parents-card__heading">
-                  <span class="parents-card__number" aria-hidden="true">
-                    05
-                  </span>
+                  <h3 id="funding-works-title">
+                    {parentsPage.howFundingWorksHeading}
+                  </h3>
 
-                  <div>
-                    <p class="parents-card__label">{parentsPage.taxFreeLabel}</p>
-
-                    <h2 id="tax-free-title">
-                      {parentsPage.taxFreeHeading}
-                    </h2>
+                  <div class="parents-prose">
+                    <PortableContent
+                      value={parentsPage.howFundingWorksParagraphs}
+                    />
                   </div>
-                </header>
 
-                <div class="parents-card__prose">
-                  <PortableContent value={parentsPage.taxFreeParagraphs} />
-                </div>
+                  <h4 class="parents-funding__examples-heading">
+                    {parentsPage.fundingExamplesHeading}
+                  </h4>
+
+                  <div class="parents-funding__examples">
+                    {
+                      parentsPage.fundingExamples.map((example) => (
+                        <article class="parents-funding-example">
+                          <strong>{example.entitlement}</strong>
+                          <p>{example.equivalent}</p>
+                        </article>
+                      ))
+                    }
+                  </div>
+
+                  <p class="parents-funding__note">
+                    {parentsPage.fundingAdditionalFeesNote}
+                  </p>
+                </section>
+
+                <aside class="parents-funding__resources">
+                  <section
+                    class="parents-resource-panel"
+                    aria-labelledby="funding-support-title"
+                  >
+                    <p class="parents-kicker">
+                      {parentsPage.fundingSupportLabel}
+                    </p>
+
+                    <h3 id="funding-support-title">
+                      {parentsPage.fundingSupportHeading}
+                    </h3>
+
+                    <div class="parents-prose">
+                      <PortableContent
+                        value={parentsPage.fundingSupportParagraphs}
+                      />
+                    </div>
+
+                    {
+                      governmentGuidanceUrl && (
+                        <a
+                          class="parents-resource-link"
+                          href={governmentGuidanceUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label="Visit current Government childcare guidance. Opens in a new tab."
+                        >
+                          <span>Government childcare guidance</span>
+                          <span aria-hidden="true">↗</span>
+                        </a>
+                      )
+                    }
+                  </section>
+
+                  <section
+                    class="parents-resource-panel parents-resource-panel--green"
+                    aria-labelledby="tax-free-title"
+                  >
+                    <p class="parents-kicker">{parentsPage.taxFreeLabel}</p>
+
+                    <h3 id="tax-free-title">{parentsPage.taxFreeHeading}</h3>
+
+                    <div class="parents-prose">
+                      <PortableContent value={parentsPage.taxFreeParagraphs} />
+                    </div>
+
+                    {
+                      taxFreeGuidanceUrl && (
+                        <a
+                          class="parents-resource-link"
+                          href={taxFreeGuidanceUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label="Visit current Tax-Free Childcare guidance. Opens in a new tab."
+                        >
+                          <span>Tax-Free Childcare guidance</span>
+                          <span aria-hidden="true">↗</span>
+                        </a>
+                      )
+                    }
+                  </section>
+                </aside>
               </div>
-
-              <aside class="parents-resource" aria-labelledby="tax-free-guidance-label">
-                <p id="tax-free-guidance-label" class="parents-resource__label">
-                  Current Details and Eligibility
-                </p>
-
-                <a
-                  href="https://www.gov.uk/tax-free-childcare"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Visit the Government Tax-Free Childcare website. Opens in a new tab."
-                >
-                  gov.uk/tax-free-childcare
-                  <span aria-hidden="true">↗</span>
-                </a>
-              </aside>
             </div>
           </section>
 
           <section
             id="weekly-fees-funding"
-            class="parents-card
-              parents-card--purple
-              parents-card--table"
+            class="parents-guide__row parents-guide__row--green"
             aria-labelledby="weekly-fees-title"
           >
-            <div class="parents-card__main">
-              <header class="parents-card__heading">
-                <span class="parents-card__number" aria-hidden="true">
-                  06
-                </span>
+            <header class="parents-guide__rail">
+              <span class="parents-guide__number" aria-hidden="true">03</span>
+              <p>{parentsPage.weeklyFeesLabel}</p>
+            </header>
 
+            <div class="parents-guide__surface parents-guide__surface--rates">
+              <header class="parents-rates__header">
                 <div>
-                  <p class="parents-card__label">{parentsPage.weeklyFeesLabel}</p>
-
                   <h2 id="weekly-fees-title">
                     {parentsPage.weeklyFeesHeading}
                   </h2>
+
+                  <div class="parents-prose">
+                    <PortableContent value={parentsPage.weeklyFeesParagraphs} />
+                  </div>
                 </div>
+
+                <ul
+                  class="parents-rates__factors"
+                  aria-label="Factors that affect weekly childcare costs"
+                >
+                  {
+                    parentsPage.weeklyFeesFactors.map((factor) => (
+                      <li>{factor}</li>
+                    ))
+                  }
+                </ul>
               </header>
 
-              <div class="parents-card__prose">
-                  <PortableContent value={parentsPage.weeklyFeesParagraphs} />
-              </div>
-            </div>
-
-            <div
-              class="parents-fees-table-wrapper"
-              tabindex="0"
-              role="region"
-              aria-label="Weekly fees and funding table"
-            >
-              <table class="parents-fees-table">
+              <div class="parents-fees-table-wrapper">
+                <table class="parents-fees-table">
                   <caption class="sr-only">
-                    Weekly childcare fee and funding values
+                    Current weekly childcare fees and funding information
                   </caption>
 
                   <thead>
                     <tr>
-                      <th scope="col"> Fee or funding element </th>
-                      <th scope="col"> Current rate </th>
+                      <th scope="col">Fee or funding element</th>
+                      <th scope="col">Current information</th>
                     </tr>
                   </thead>
 
-                <tbody>
-                  {
-                    feeRows.map((row) => (
-                      <tr>
-                        <th scope="row">{row.label}</th>
-
-                        <td data-cms-field={row.field}>
-                          <em>{row.value}</em>
-                        </td>
-                      </tr>
-                    ))
-                  }
-                </tbody>
-              </table>
+                  <tbody>
+                    {
+                      feeRows.map((row) => (
+                        <tr>
+                          <th scope="row">{row.label}</th>
+                          <td data-cms-field={row.field}>{row.value}</td>
+                        </tr>
+                      ))
+                    }
+                  </tbody>
+                </table>
+              </div>
             </div>
-
-
           </section>
 
           <section
             id="childcare-subsidy-questions"
-            class="parents-card
-              parents-card--yellow
-              parents-card--faq"
+            class="parents-guide__row parents-guide__row--blue"
             aria-labelledby="subsidy-questions-title"
           >
-            <div class="parents-card__main">
-              <header class="parents-card__heading">
-                <span class="parents-card__number" aria-hidden="true">
-                  07
-                </span>
+            <header class="parents-guide__rail">
+              <span class="parents-guide__number" aria-hidden="true">04</span>
+              <p>{parentsPage.subsidyFaqsLabel}</p>
+            </header>
 
-                <div>
-                  <p class="parents-card__label">{parentsPage.subsidyFaqsLabel}</p>
-
+            <div class="parents-guide__surface parents-guide__surface--faq">
+              <div class="parents-faq__main">
+                <header>
                   <h2 id="subsidy-questions-title">
                     {parentsPage.subsidyFaqsHeading}
                   </h2>
+
+                  <div class="parents-prose">
+                    <PortableContent
+                      value={parentsPage.subsidyFaqsParagraphs}
+                    />
+                  </div>
+                </header>
+
+                <div class="parents-faq-list">
+                  {
+                    parentsPage.subsidyFaqs.map((faq) => (
+                      <details class="parents-faq">
+                        <summary>
+                          <span>{faq.question}</span>
+                        </summary>
+
+                        <div class="parents-faq__answer">
+                          <p>{faq.answer}</p>
+                        </div>
+                      </details>
+                    ))
+                  }
                 </div>
-              </header>
-
-              <div class="parents-card__prose">
-                <PortableContent value={parentsPage.subsidyFaqsParagraphs} />
               </div>
-            </div>
 
-            <div class="parents-faq-list">
-              {
-                subsidyFaqs.map((faq: { question: string; answer: string; }) => (
-                  <details class="parents-faq">
-                    <summary>
-                      <span>{faq.question}</span>
-                    </summary>
+              <aside class="parents-help-panel">
+                <span class="parents-help-panel__icon" aria-hidden="true">
+                  <Icon name="chat" size={30} />
+                </span>
 
-                    <div class="parents-faq__answer">
-                      <p>{faq.answer}</p>
-                    </div>
-                  </details>
-                ))
-              }
+                <h3>Need help with your family’s circumstances?</h3>
+
+                <p>
+                  Our team can explain the available options and help you find
+                  the right information.
+                </p>
+
+                <Button href="/contact" variant="secondary">
+                  Contact Us
+                </Button>
+              </aside>
             </div>
           </section>
 
           <section
             id="partnership-with-families"
-            class="parents-card
-              parents-card--blue"
+            class="parents-guide__row parents-guide__row--yellow"
             aria-labelledby="partnership-title"
           >
-            <div class="parents-card__grid">
-              <div class="parents-card__main">
-                <header class="parents-card__heading">
-                  <span class="parents-card__number" aria-hidden="true">
-                    08
-                  </span>
+            <header class="parents-guide__rail">
+              <span class="parents-guide__number" aria-hidden="true">05</span>
+              <p>Partnership &amp; Settling In</p>
+            </header>
 
-                  <div>
-                    <p class="parents-card__label">{parentsPage.partnershipLabel}</p>
+            <div
+              class="parents-guide__surface parents-guide__surface--partnership"
+            >
+              <section class="parents-partnership">
+                <header>
+                  <p class="parents-kicker">{parentsPage.partnershipLabel}</p>
 
-                    <h2 id="partnership-title">
-                      {parentsPage.partnershipHeading}
-                    </h2>
+                  <h2 id="partnership-title">
+                    {parentsPage.partnershipHeading}
+                  </h2>
+
+                  <div class="parents-prose">
+                    <PortableContent
+                      value={parentsPage.partnershipParagraphs}
+                    />
                   </div>
                 </header>
-              </div>
 
-              <div class="parents-card__prose">
-                <PortableContent value={parentsPage.partnershipParagraphs} />
-              </div>
-            </div>
-          </section>
+                <ul class="parents-partnership__highlights">
+                  {
+                    parentsPage.partnershipHighlights.map(
+                      (highlight, index) => (
+                        <li>
+                          <span aria-hidden="true">
+                            <Icon
+                              name={
+                                index === 0
+                                  ? "users"
+                                  : index === 1
+                                    ? "chat"
+                                    : "heart"
+                              }
+                              size={28}
+                            />
+                          </span>
 
-          <section
-            id="settling-in"
-            class="parents-card
-              parents-card--green
-              parents-card--settling"
-            aria-labelledby="settling-title"
-          >
-            <div class="parents-card__main">
-              <header class="parents-card__heading">
-                <span class="parents-card__number" aria-hidden="true">
-                  09
-                </span>
-
-                <div>
-                  <p class="parents-card__label">{parentsPage.settlingInLabel}</p>
-
-                  <h2 id="settling-title">
-                    {parentsPage.settlingInHeading}
-                  </h2>
-                </div>
-              </header>
-
-              <div class="parents-card__prose">
-                <PortableContent value={parentsPage.settlingInParagraphs} />
-              </div>
-            </div>
-
-            <div class="parents-settling-grid">
-              <article class="parents-settling-panel">
-                <h3>Partnership From the First Day</h3>
-
-                <p>
-                  {parentsPage.partnershipText}
-                </p>
-              </article>
-
-              <article class="parents-settling-panel">
-                <h3>Tailored Transition Strategies</h3>
-
-                <p>
-                  Every child settles in differently. We use flexible strategies
-                  that are agreed with families and shaped around the child’s
-                  readiness.
-                </p>
-
-                <ul class="parents-check-list">
-                  {settlingStrategies.map((item: string) => <li>{item}</li>)}
+                          <strong>{highlight.title}</strong>
+                          <p>{highlight.description}</p>
+                        </li>
+                      ),
+                    )
+                  }
                 </ul>
-              </article>
+              </section>
+
+              <section
+                id="settling-in"
+                class="parents-settling"
+                aria-labelledby="settling-title"
+              >
+                <header class="parents-settling__intro">
+                  <p class="parents-kicker">{parentsPage.settlingInLabel}</p>
+
+                  <h3 id="settling-title">{parentsPage.settlingInHeading}</h3>
+
+                  <div class="parents-prose">
+                    <PortableContent value={parentsPage.settlingInParagraphs} />
+                  </div>
+                </header>
+
+                <div class="parents-settling__details">
+                  <article class="parents-settling__partnership">
+                    <h4>{parentsPage.settlingPartnershipHeading}</h4>
+
+                    <div class="parents-prose">
+                      <PortableContent
+                        value={parentsPage.settlingPartnershipParagraphs}
+                      />
+                    </div>
+                  </article>
+
+                  <article class="parents-settling__strategies">
+                    <h4>{parentsPage.settlingStrategiesHeading}</h4>
+                    <p>{parentsPage.settlingStrategiesIntro}</p>
+
+                    <ul class="parents-check-list">
+                      {
+                        parentsPage.settlingStrategies.map((item) => (
+                          <li>{item}</li>
+                        ))
+                      }
+                    </ul>
+                  </article>
+                </div>
+              </section>
             </div>
           </section>
 
           <section
             id="policies"
-            class="parents-card
-    parents-card--blue
-    parents-card--policies"
+            class="parents-guide__row parents-guide__row--purple"
             aria-labelledby="policies-title"
           >
-            <div class="parents-card__main parents-card__main--policies">
-              <header class="parents-card__heading">
-                <span class="parents-card__number" aria-hidden="true">
-                  10
+            <header class="parents-guide__rail">
+              <span class="parents-guide__number" aria-hidden="true">06</span>
+              <p>Policies</p>
+            </header>
+
+            <div
+              class="parents-guide__surface parents-guide__surface--policies"
+            >
+              <div class="parents-policies__main">
+                <header>
+                  <h2 id="policies-title">{parentsPage.policiesHeading}</h2>
+
+                  <div class="parents-prose">
+                    <PortableContent value={parentsPage.policiesIntro} />
+                  </div>
+                </header>
+
+                {
+                  policyDocuments.length > 0 ? (
+                    <nav
+                      class="parents-policy-list"
+                      aria-label="Download nursery policy documents"
+                    >
+                      {policyDocuments.map((document) => {
+                        const fileUrl = safeExternalUrl(document.fileUrl);
+
+                        return fileUrl ? (
+                          <a
+                            class="parents-policy-link"
+                            href={fileUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <span class="parents-policy-link__copy">
+                              <strong>{document.title}</strong>
+
+                              {document.shortDescription && (
+                                <span>{document.shortDescription}</span>
+                              )}
+                            </span>
+
+                            <span class="parents-policy-link__meta">
+                              <span>Download PDF</span>
+                              <span>
+                                Reviewed{" "}
+                                {formatReviewDate(document.lastReviewed)}
+                              </span>
+                            </span>
+                          </a>
+                        ) : null;
+                      })}
+                    </nav>
+                  ) : (
+                    <p class="parents-policies__empty">
+                      Policy documents will be available here shortly. Please
+                      contact the nursery team if you need a copy in the
+                      meantime.
+                    </p>
+                  )
+                }
+              </div>
+
+              <aside class="parents-policies__note">
+                <span aria-hidden="true">
+                  <Icon name="book" size={32} />
                 </span>
 
-                <div>
-                  <p class="parents-card__label">Policies</p>
+                <h3>Managed by the nursery team</h3>
+                <p>{parentsPage.policiesSupportingNote}</p>
 
-                  <h2 id="policies-title">{parentsPage.policiesHeading}</h2>
-                </div>
-              </header>
-
-              <div class="parents-card__prose">
-                <PortableContent value={parentsPage.policiesIntro} />
-              </div>
+                <Button href="/contact" variant="secondary">
+                  Contact Us
+                </Button>
+              </aside>
             </div>
-
-             <nav
-              class="parents-policy-links"
-              aria-label="Download childcare policies"
-            >
-              {
-                policyDocuments.map((doc) => safeExternalUrl(doc.fileUrl) ? (
-                  <a href={safeExternalUrl(doc.fileUrl)} target="_blank" rel="noreferrer" class="parents-policy-link">
-                    <span class="parents-policy-links__title">{doc.title}</span>
-                    {doc.shortDescription && <span class="parents-policy-links__desc">{doc.shortDescription}</span>}
-                    <span class="parents-policy-links__meta">
-                      <span class="parents-policy-links__action">Download PDF</span>
-                      {doc.lastReviewed && <span class="parents-policy-links__reviewed">Reviewed: {doc.lastReviewed}</span>}
-                    </span>
-                  </a>
-                ) : null)
-              }
-            </nav>
           </section>
         </div>
       </Container>

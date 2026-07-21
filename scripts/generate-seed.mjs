@@ -524,111 +524,83 @@ const singletonDocs = [
   {
     _id: "multilingualPage",
     _type: "multilingualPage",
-    heroEyebrow: "Multilingual Learning",
-    heroTitleLineOne: "Language, Play",
-    heroTitleLineTwo: "and Discovery",
-    heroParagraphs: [
-      createTextBlock(
-        "A joyful, screen-free approach where children explore language, creativity and the world around them through meaningful everyday experiences.",
-      ),
-    ],
-    philosophyLabel: "Our Learning Philosophy",
-    philosophyHeading: "Curiosity-Led. Emotionally Attuned. Rich in Meaning.",
+    heroTitleLineOne: "Multilingual",
+    heroTitleLineTwo: "Learning",
+    heroParagraphs: [createTextBlock("We speak English and Portuguese.")],
+    philosophyLabel: "Philosophy",
+    philosophyHeading: "Natural Language Acquisition",
     philosophyParagraphs: [
-      createTextBlock(
-        "At the heart of our curriculum is a simple belief: children learn best when they feel safe, seen and supported. We bring the seven areas of the Early Years Foundation Stage together through engaging, active and joyful experiences.",
-      ),
-      createTextBlock(
-        "Our approach supports children to become independent thinkers and doers through play, exploration and real-world discovery.",
-      ),
+      createTextBlock("We believe in natural exposure to multiple languages."),
     ],
-    childrenEnjoyHeading: "Children Enjoy",
+    childrenEnjoyHeading: "What Children Enjoy Here",
     philosophyPoints: [
-      "Adult-facilitated, free-flow play",
-      "Opportunities for experimentation, discovery and sensible risk-taking",
-      "Colour, creativity and artistic expression",
-      "Sensory and hands-on learning",
-      "Nature-based experiences",
-      "A balance of themed learning and children’s individual interests",
+      "Storytelling in multiple languages",
+      "Interactive bilingual music sessions",
+      "Bilingual daily routines",
     ],
-    philosophyDiscoveryNote:
-      "Every day can bring a new discovery: a word in Portuguese, an insect in the garden, a new way to solve a problem or a story that sparks a child’s imagination.",
-    languageConnectionLabel: "English and Portuguese",
-    languageConnectionHeading: "Language Through Everyday Connection",
+    languageConnectionLabel: "Connection",
+    languageConnectionHeading: "Building Bridges Through Talk",
     languageConnectionParagraphs: [
-      createTextBlock(
-        "Little Wise Kids currently offers children exposure to English and Portuguese through everyday routines, songs, stories, play and warm interactions.",
-      ),
-      createTextBlock(
-        "Language learning is woven naturally into the day rather than taught in a pressured way. Children are encouraged to listen, communicate and build confidence while celebrating cultural diversity and connection.",
-      ),
+      createTextBlock("Languages connect our diverse community."),
     ],
-    languageConnectionNote:
-      "English and Portuguese are our current languages and may evolve as our community grows.",
+    ...(decorativeDummyImageRef && {
+      languageConnectionImage: decorativeDummyImageRef,
+    }),
     eyfsLabel: "EYFS",
-    eyfsHeading: "Supporting Every Area of Development",
+    eyfsHeading: "Early Years Foundation Stage",
     eyfsParagraphs: [
-      createTextBlock(
-        "Our practice is aligned with the Early Years Foundation Stage, supporting children’s development through meaningful play and responsive care.",
-      ),
+      createTextBlock("We follow the EYFS framework dynamically."),
     ],
     eyfsCommunication: {
       _type: "object",
       title: "Communication & Language",
-      description: "Building confident expression and understanding.",
+      description: "Expressing ideas freely.",
     },
     eyfsPhysical: {
       _type: "object",
       title: "Physical Development",
-      description: "Supporting movement, coordination and healthy development.",
+      description: "Active and healthy lives.",
     },
     eyfsPersonal: {
       _type: "object",
-      title: "Personal, Social & Emotional Development",
-      description: "Growing confidence, relationships and emotional awareness.",
+      title: "Personal, Social & Emotional",
+      description: "Self-regulation and relationships.",
     },
     eyfsLiteracy: {
       _type: "object",
       title: "Literacy",
-      description: "Discovering stories, sounds, marks and meaning.",
+      description: "Loving books and words.",
     },
     eyfsMaths: {
       _type: "object",
       title: "Mathematics",
-      description: "Exploring number, pattern, shape and measure.",
+      description: "Exploring shapes and numbers.",
     },
     eyfsUnderstanding: {
       _type: "object",
       title: "Understanding the World",
-      description: "Investigating people, places, nature and technology.",
+      description: "Investigating nature.",
     },
     eyfsArts: {
       _type: "object",
       title: "Expressive Arts & Design",
-      description: "Creating, imagining and expressing ideas.",
+      description: "Creating and building.",
     },
-    eyfsClosingNote:
-      "We recognise that children develop in different ways and at different rates. Our educators observe carefully, follow children’s interests and work closely with families to support each child’s individual journey.",
-    screenFreeLabel: "Screen-Free Learning",
-    screenFreeHeading: "A Rare and Refreshing Childhood in a Noisy World",
+    screenFreeLabel: "Screen-Free",
+    screenFreeHeading: "A Space for Mindful Play",
     screenFreeParagraphs: [
       createTextBlock(
-        "In a fast-paced, digital-first world, screen exposure can feel almost unavoidable. At Little Wise Kids, we have made a conscious choice to offer a completely screen-free learning environment.",
-      ),
-      createTextBlock(
-        "Instead of flashing screens and artificial stimulation, children are immersed in real-world experiences. They can feel the texture of soil, enjoy role-play, listen to stories, paint, build, move, explore outdoors and connect with people around them.",
+        "We keep our spaces screen-free to encourage real-world interaction.",
       ),
     ],
-    screenFreeBenefitsHeading: "Screen-Free Learning Supports",
     screenFreeBenefits: [
-      "Deeper concentration and sustained attention",
-      "Richer language development and face-to-face communication",
-      "Creativity, physical activity and social interaction",
-      "Emotional regulation and meaningful connections",
-      "A childhood shaped by puddles, paints, puzzles and people rather than pixels",
+      "Greater focus and attention span",
+      "Deeper social connections with peers",
+      "Active physical play and health",
+      "Imaginative open-ended learning",
+      "Closer engagement with nature",
     ],
-    closingNote:
-      "We believe the early years are sacred. Our screen-free nursery environment gives children space to imagine, create and connect with all their senses fully awake.",
+    closingNote: "Screen-free play lets children grow naturally.",
   },
   {
     _id: "hoursNutritionPage",
@@ -707,92 +679,228 @@ const singletonDocs = [
   {
     _id: "parentsPage",
     _type: "parentsPage",
-    heroTitleLineOne: "Parents",
-    heroTitleLineTwo: "Information",
-    heroParagraphs: [createTextBlock("Resources for parents.")],
-    policiesHeading: "Our Policies",
-    policiesIntro: [createTextBlock("Please read our policies carefully.")],
-    startingSchoolLabel: "Transition",
-    startingSchoolHeading: "Starting School Readiness",
+    heroEyebrow: "Parents’ Information",
+    heroTitleLineOne: "Everything You Need,",
+    heroTitleLineTwo: "So Your Child Can Thrive",
+    heroParagraphs: [
+      createTextBlock(
+        "Clear guidance on starting school, fees and funding, childcare support, settling in and the policies that help every family feel informed and reassured.",
+      ),
+    ],
+    startingSchoolLabel: "Starting School",
+    startingSchoolHeading: "A Confident First Step",
     startingSchoolParagraphs: [
-      createTextBlock("We prepare children for school entry."),
+      createTextBlock(
+        "Starting school is an exciting and sometimes emotional milestone. At Little Wise Kids, we help make the transition smooth, joyful and empowering for children and families.",
+      ),
+      createTextBlock(
+        "Through a screen-free, child-led and play-rich approach, children build the emotional resilience, social skills, independence and curiosity they need for their next chapter.",
+      ),
     ],
+    schoolSupportHeading: "We Support Children Through",
     schoolSupport: [
-      "Phonics familiarity and pre-writing skills",
-      "Social-emotional readiness",
-      "Self-care independence (toileting, dressing)",
-      "Listening and concentration games",
-      "School visit preparation",
-      "Parent consultation evenings",
+      "Play-based experiences aligned with EYFS",
+      "Early literacy, numeracy, communication and self-care opportunities",
+      "Emotional wellbeing and confidence-building",
+      "Cooperative play and friendships",
+      "Language exposure in English and Portuguese for now",
+      "Consistent, loving routines that help children feel secure",
     ],
-    feesFundingLabel: "Fees",
-    feesFundingHeading: "Clear and Simple Pricing",
+    feesFundingLabel: "Funding & Fees",
+    feesFundingHeading: "Supporting Families, Investing in Early Years",
     feesFundingParagraphs: [
-      createTextBlock("All fee structures are transparent."),
+      createTextBlock(
+        "We believe every child deserves access to nurturing, high-quality early years education and that families deserve clear, supportive information about childcare costs.",
+      ),
+      createTextBlock(
+        "Little Wise Kids offers government-funded childcare places for eligible families. We are open year-round for 51 weeks of the year, helping children benefit from consistent routines, care and learning.",
+      ),
     ],
-    howFundingWorksLabel: "Funding",
-    howFundingWorksHeading: "15 and 30 Hour Funding Support",
+    howFundingWorksLabel: "How Funding Works",
+    howFundingWorksHeading: "Government-Funded Childcare",
     howFundingWorksParagraphs: [
-      createTextBlock("We support both government schemes."),
+      createTextBlock(
+        "The government provides childcare support for eligible families, depending on a child’s age and a family’s circumstances.",
+      ),
+      createTextBlock(
+        "Funding may cover some of your childcare costs, helping to make quality early years education more accessible.",
+      ),
+      createTextBlock(
+        "Because Little Wise Kids operates year-round for 51 weeks, funded hours are spread across the year rather than only used during school terms.",
+      ),
     ],
+    fundingExamplesHeading: "Current Example Calculations",
     fundingExamples: [
       {
         _type: "object",
-        _key: "fund1",
-        entitlement: "15 Hours Funding",
-        equivalent: "2 free half days per week",
+        _key: "funding-15-hours",
+        entitlement: "15 funded hours during term time",
+        equivalent: "Approximately 11.18 hours per week across 51 weeks",
+      },
+      {
+        _type: "object",
+        _key: "funding-30-hours",
+        entitlement: "30 funded hours during term time",
+        equivalent: "Approximately 22.35 hours per week across 51 weeks",
       },
     ],
-    fundingSupportLabel: "Eligibility",
-    fundingSupportHeading: "How to Apply for Subsidies",
+    fundingAdditionalFeesNote:
+      "Additional fees may apply for hours outside a family’s funded entitlement. These support extended care, meals, nursery experiences and the high-quality early years provision offered by Little Wise Kids.",
+    fundingSupportLabel: "Funding Support",
+    fundingSupportHeading: "We Are Here to Help",
     fundingSupportParagraphs: [
-      createTextBlock("Visit childcarechoices.gov.uk to check eligibility."),
+      createTextBlock(
+        "Funding can feel complicated, but you do not have to work it out alone. Our team is happy to help you understand the options available, explain what information may be needed and support you through the process.",
+      ),
     ],
+    fundingGuidanceUrl: "https://www.gov.uk/get-childcare",
     taxFreeLabel: "Tax-Free Childcare",
-    taxFreeHeading: "Get 20% Government Help",
+    taxFreeHeading: "Additional Help With Childcare Costs",
     taxFreeParagraphs: [
-      createTextBlock("Parents can pay through Tax-Free Childcare accounts."),
+      createTextBlock(
+        "Eligible families may also benefit from Tax-Free Childcare. For every £8 paid into a childcare account, the government adds £2, subject to the scheme rules and limits.",
+      ),
+      createTextBlock(
+        "Tax-Free Childcare can often be used alongside funded childcare hours.",
+      ),
     ],
-    weeklyFeesLabel: "Rates",
-    weeklyFeesHeading: "Weekly and Daily Rates",
-    weeklyFeesParagraphs: [createTextBlock("Review our pricing tiers below.")],
-    fullDayRate: "£85.00 per day",
-    halfDayRate: "£50.00 per day",
-    fundedHourDeductions: "Deducted directly",
-    additionalCharges: "Meals & consumables included",
-    exampleWeeklyCosts: "Example: 3 days is £255.00/week",
+    taxFreeGuidanceUrl: "https://www.gov.uk/tax-free-childcare",
+    weeklyFeesLabel: "Rates & Examples",
+    weeklyFeesHeading: "Weekly Costs and Funding Examples",
+    weeklyFeesParagraphs: [
+      createTextBlock(
+        "Your weekly childcare cost will depend on your child’s sessions, funding entitlement and any additional services or charges. We will always explain your estimated fees clearly before a place is confirmed.",
+      ),
+    ],
+    weeklyFeesFactors: [
+      "Your child’s sessions",
+      "Funding entitlement",
+      "Additional services or charges",
+    ],
+    fullDayRate: "[Editable]",
+    halfDayRate: "[Editable]",
+    fundedHourDeductions: "[Editable]",
+    additionalCharges: "[Editable]",
+    exampleWeeklyCosts: "[Editable]",
     subsidyFaqsLabel: "FAQs",
-    subsidyFaqsHeading: "Frequently Asked Fee Questions",
-    subsidyFaqsParagraphs: [createTextBlock("Common queries about funding.")],
+    subsidyFaqsHeading: "Childcare Support: Your Questions Answered",
+    subsidyFaqsParagraphs: [
+      createTextBlock(
+        "Understanding childcare support can feel confusing, especially when your family’s circumstances or eligibility change. We are here to help you understand the options available and signpost you to the right information.",
+      ),
+    ],
     subsidyFaqs: [
       {
         _type: "object",
-        _key: "faq2",
-        question: "When are fees due?",
-        answer: "Fees are billed monthly in advance on the 1st.",
+        _key: "faq-funded-childcare",
+        question: "Can I use funded childcare at Little Wise Kids?",
+        answer:
+          "Yes, eligible families may be able to use government-funded childcare hours. Please contact us so we can explain how funding is applied across our 51-week year.",
+      },
+      {
+        _type: "object",
+        _key: "faq-tax-free",
+        question: "Can I use Tax-Free Childcare?",
+        answer:
+          "Yes, eligible families may be able to pay through the Government’s Tax-Free Childcare scheme.",
+      },
+      {
+        _type: "object",
+        _key: "faq-start-date",
+        question: "When does funding start?",
+        answer:
+          "Funding usually begins from the term after your child becomes eligible. Please check current eligibility and dates through the Government childcare website.",
+      },
+      {
+        _type: "object",
+        _key: "faq-information",
+        question: "What will I need to provide?",
+        answer:
+          "Depending on your entitlement, we may ask for your eligibility code and supporting details before funding can be applied.",
+      },
+      {
+        _type: "object",
+        _key: "faq-application-help",
+        question: "Can you help me apply?",
+        answer:
+          "We can explain the process and help you understand what to do next, although applications are completed through the Government childcare portal.",
       },
     ],
-    partnershipLabel: "Parents as Partners",
-    partnershipHeading: "Nurturing Together",
+    partnershipLabel: "Partnership With Families",
+    partnershipHeading: "Working Together for Your Child",
     partnershipParagraphs: [
-      createTextBlock("We value continuous parent feedback."),
+      createTextBlock(
+        "Families are at the heart of Little Wise Kids. You know your child best, and we value the insight, trust and communication that help us provide consistent, responsive care.",
+      ),
+      createTextBlock(
+        "We share meaningful updates, celebrate milestones and work together around routines, interests, wellbeing and development.",
+      ),
+      createTextBlock(
+        "By creating a strong bridge between home and nursery, we help each child feel secure, understood and ready to thrive.",
+      ),
+    ],
+    partnershipHighlights: [
+      {
+        _type: "object",
+        _key: "partnership-child-best",
+        title: "You know your child best",
+        description:
+          "We value the insight, trust and communication that help us provide consistent, responsive care.",
+      },
+      {
+        _type: "object",
+        _key: "partnership-updates",
+        title: "Meaningful updates",
+        description:
+          "We celebrate milestones and work together around routines, interests, wellbeing and development.",
+      },
+      {
+        _type: "object",
+        _key: "partnership-bridge",
+        title: "A strong bridge",
+        description:
+          "Home and nursery work together so each child feels secure, understood and ready to thrive.",
+      },
     ],
     settlingInLabel: "Settling In",
-    settlingInHeading: "A Warm, Gentle Welcome",
+    settlingInHeading:
+      "Where Transitions Are Gentle, Personal and Full of Heart",
     settlingInParagraphs: [
-      createTextBlock("We arrange settling-in sessions for all children."),
+      createTextBlock(
+        "Choosing an early years setting is one of the most personal decisions a family can make. At Little Wise Kids, we give settling in the time, care and attention it deserves.",
+      ),
+      createTextBlock(
+        "We see settling in as a journey, not a single event. From your first visit onward, we work with you to understand your child’s routines, personality, comforts, preferences and any particular worries or needs.",
+      ),
     ],
-    partnershipText: "We use an online portal for daily parent communication.",
+    settlingPartnershipHeading: "Partnership From the First Day",
+    settlingPartnershipParagraphs: [
+      createTextBlock(
+        "You know your child best. We value your knowledge and work in partnership with you to make each transition feel familiar, reassuring and secure.",
+      ),
+      createTextBlock(
+        "Our team supports children to build trusting relationships with their key person, other educators and their new environment.",
+      ),
+    ],
+    settlingStrategiesHeading: "Tailored Transition Strategies",
+    settlingStrategiesIntro:
+      "Every child settles in differently. We use flexible strategies that are agreed with families and shaped around the child’s readiness.",
     settlingStrategies: [
-      "First short session with parent present",
-      "Second session with parent leaving briefly",
-      "Short morning sessions leading to lunch",
-      "Consistent drop-off routines",
-      "Comfort object from home allowed",
-      "Daily check-in calls for parents",
+      "Short introductory sessions with a parent or carer present",
+      "Gradually increasing session length",
+      "Consistent staffing and key-person continuity",
+      "Familiar comfort routines and transitional objects",
+      "Language cues in English and Portuguese where helpful",
+      "A calm, predictable rhythm to each day",
+    ],
+    policiesHeading: "Our Policies",
+    policiesIntro: [
+      createTextBlock(
+        "Our policies help us maintain a safe, respectful, transparent and nurturing environment for children and families.",
+      ),
     ],
     policiesSupportingNote:
-      "Printed policy documents are available on request at the main office.",
+      "Each policy is uploaded as a downloadable PDF and managed by nursery administrators. Contact us if you need help finding a document.",
   },
   {
     _id: "galleryPage",

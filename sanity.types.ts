@@ -497,6 +497,7 @@ export type ParentsPage = {
   startingSchoolLabel?: string;
   startingSchoolHeading?: string;
   startingSchoolParagraphs?: PagePortableText;
+  schoolSupportHeading?: string;
   schoolSupport?: Array<string>;
   feesFundingLabel?: string;
   feesFundingHeading?: string;
@@ -504,20 +505,25 @@ export type ParentsPage = {
   howFundingWorksLabel?: string;
   howFundingWorksHeading?: string;
   howFundingWorksParagraphs?: PagePortableText;
+  fundingExamplesHeading?: string;
   fundingExamples?: Array<{
     entitlement?: string;
     equivalent?: string;
     _key: string;
   }>;
+  fundingAdditionalFeesNote?: string;
   fundingSupportLabel?: string;
   fundingSupportHeading?: string;
   fundingSupportParagraphs?: PagePortableText;
+  fundingGuidanceUrl?: string;
   taxFreeLabel?: string;
   taxFreeHeading?: string;
   taxFreeParagraphs?: PagePortableText;
+  taxFreeGuidanceUrl?: string;
   weeklyFeesLabel?: string;
   weeklyFeesHeading?: string;
   weeklyFeesParagraphs?: PagePortableText;
+  weeklyFeesFactors?: Array<string>;
   fullDayRate?: string;
   halfDayRate?: string;
   fundedHourDeductions?: string;
@@ -534,10 +540,18 @@ export type ParentsPage = {
   partnershipLabel?: string;
   partnershipHeading?: string;
   partnershipParagraphs?: PagePortableText;
+  partnershipHighlights?: Array<{
+    title?: string;
+    description?: string;
+    _key: string;
+  }>;
   settlingInLabel?: string;
   settlingInHeading?: string;
   settlingInParagraphs?: PagePortableText;
-  partnershipText?: string;
+  settlingPartnershipHeading?: string;
+  settlingPartnershipParagraphs?: PagePortableText;
+  settlingStrategiesHeading?: string;
+  settlingStrategiesIntro?: string;
   settlingStrategies?: Array<string>;
   policiesHeading?: string;
   policiesIntro?: PagePortableText;
@@ -554,15 +568,18 @@ export type HoursNutritionPage = {
   heroTitleLineOne?: string;
   heroTitleLineTwo?: string;
   heroParagraphs?: PagePortableText;
+  operatingHoursLabel?: string;
   operatingHoursHeading?: string;
   operatingHoursParagraphs?: PagePortableText;
   minAttendancePanelTitle?: string;
   minAttendancePanelCopy?: string;
+  nutritionLabel?: string;
   nutritionHeading?: string;
   nutritionParagraphs?: PagePortableText;
   nutritionChecklist?: Array<string>;
   freshlyPreparedHeading?: string;
   chefNote?: string;
+  typicalDayLabel?: string;
   typicalDayHeading?: string;
   typicalDayLead?: string;
   welcomeAndFreePlay?: {
@@ -619,12 +636,15 @@ export type MultilingualPage = {
   heroTitleLineOne?: string;
   heroTitleLineTwo?: string;
   heroParagraphs?: PagePortableText;
+  philosophyLabel?: string;
   philosophyHeading?: string;
   philosophyParagraphs?: PagePortableText;
   childrenEnjoyHeading?: string;
   philosophyPoints?: Array<string>;
+  languageConnectionLabel?: string;
   languageConnectionHeading?: string;
   languageConnectionParagraphs?: PagePortableText;
+  languageConnectionImage?: ContentImage;
   eyfsLabel?: string;
   eyfsHeading?: string;
   eyfsParagraphs?: PagePortableText;
@@ -659,9 +679,19 @@ export type MultilingualPage = {
   screenFreeLabel?: string;
   screenFreeHeading?: string;
   screenFreeParagraphs?: PagePortableText;
-  screenFreeBenefitsHeading?: string;
   screenFreeBenefits?: Array<string>;
   closingNote?: string;
+};
+
+export type ContentImage = {
+  _type: "contentImage";
+  asset?: SanityImageAssetReference;
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  isDecorative?: boolean;
+  altText?: string;
+  caption?: string;
 };
 
 export type AboutPage = {
@@ -711,17 +741,6 @@ export type AboutPage = {
   leadershipHeading?: string;
   leadershipParagraphs?: MinimalPortableText;
   leadershipImage?: ContentImage;
-};
-
-export type ContentImage = {
-  _type: "contentImage";
-  asset?: SanityImageAssetReference;
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  isDecorative?: boolean;
-  altText?: string;
-  caption?: string;
 };
 
 export type HomePage = {
@@ -933,8 +952,8 @@ export type AllSanitySchemaTypes =
   | ParentsPage
   | HoursNutritionPage
   | MultilingualPage
-  | AboutPage
   | ContentImage
+  | AboutPage
   | HomePage
   | SanityImagePaletteSwatch
   | SanityImagePalette

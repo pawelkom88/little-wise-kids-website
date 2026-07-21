@@ -2810,6 +2810,13 @@
         },
         "optional": true
       },
+      "schoolSupportHeading": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "schoolSupport": {
         "type": "objectAttribute",
         "value": {
@@ -2864,6 +2871,13 @@
         },
         "optional": true
       },
+      "fundingExamplesHeading": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "fundingExamples": {
         "type": "objectAttribute",
         "value": {
@@ -2901,6 +2915,13 @@
         },
         "optional": true
       },
+      "fundingAdditionalFeesNote": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "fundingSupportLabel": {
         "type": "objectAttribute",
         "value": {
@@ -2920,6 +2941,13 @@
         "value": {
           "type": "inline",
           "name": "pagePortableText"
+        },
+        "optional": true
+      },
+      "fundingGuidanceUrl": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
         },
         "optional": true
       },
@@ -2945,6 +2973,13 @@
         },
         "optional": true
       },
+      "taxFreeGuidanceUrl": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "weeklyFeesLabel": {
         "type": "objectAttribute",
         "value": {
@@ -2964,6 +2999,16 @@
         "value": {
           "type": "inline",
           "name": "pagePortableText"
+        },
+        "optional": true
+      },
+      "weeklyFeesFactors": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "string"
+          }
         },
         "optional": true
       },
@@ -3083,6 +3128,43 @@
         },
         "optional": true
       },
+      "partnershipHighlights": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "title": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              },
+              "description": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              }
+            },
+            "rest": {
+              "type": "object",
+              "attributes": {
+                "_key": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "optional": true
+      },
       "settlingInLabel": {
         "type": "objectAttribute",
         "value": {
@@ -3105,7 +3187,29 @@
         },
         "optional": true
       },
-      "partnershipText": {
+      "settlingPartnershipHeading": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "settlingPartnershipParagraphs": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "pagePortableText"
+        },
+        "optional": true
+      },
+      "settlingStrategiesHeading": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "settlingStrategiesIntro": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -3210,6 +3314,13 @@
         },
         "optional": true
       },
+      "operatingHoursLabel": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "operatingHoursHeading": {
         "type": "objectAttribute",
         "value": {
@@ -3233,6 +3344,13 @@
         "optional": true
       },
       "minAttendancePanelCopy": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "nutritionLabel": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -3272,6 +3390,13 @@
         "optional": true
       },
       "chefNote": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "typicalDayLabel": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -3617,6 +3742,13 @@
         },
         "optional": true
       },
+      "philosophyLabel": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "philosophyHeading": {
         "type": "objectAttribute",
         "value": {
@@ -3649,6 +3781,13 @@
         },
         "optional": true
       },
+      "languageConnectionLabel": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "languageConnectionHeading": {
         "type": "objectAttribute",
         "value": {
@@ -3661,6 +3800,14 @@
         "value": {
           "type": "inline",
           "name": "pagePortableText"
+        },
+        "optional": true
+      },
+      "languageConnectionImage": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "contentImage"
         },
         "optional": true
       },
@@ -3869,13 +4016,6 @@
         },
         "optional": true
       },
-      "screenFreeBenefitsHeading": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
       "screenFreeBenefits": {
         "type": "objectAttribute",
         "value": {
@@ -3892,6 +4032,74 @@
           "type": "string"
         },
         "optional": true
+      }
+    }
+  },
+  {
+    "name": "contentImage",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "contentImage"
+          }
+        },
+        "asset": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "sanity.imageAsset.reference"
+          },
+          "optional": true
+        },
+        "media": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "unknown"
+          },
+          "optional": true
+        },
+        "hotspot": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "sanity.imageHotspot"
+          },
+          "optional": true
+        },
+        "crop": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "sanity.imageCrop"
+          },
+          "optional": true
+        },
+        "isDecorative": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
+        "altText": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "caption": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        }
       }
     }
   },
@@ -4213,74 +4421,6 @@
           "name": "contentImage"
         },
         "optional": true
-      }
-    }
-  },
-  {
-    "name": "contentImage",
-    "type": "type",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "contentImage"
-          }
-        },
-        "asset": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "sanity.imageAsset.reference"
-          },
-          "optional": true
-        },
-        "media": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "unknown"
-          },
-          "optional": true
-        },
-        "hotspot": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "sanity.imageHotspot"
-          },
-          "optional": true
-        },
-        "crop": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "sanity.imageCrop"
-          },
-          "optional": true
-        },
-        "isDecorative": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
-          },
-          "optional": true
-        },
-        "altText": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        },
-        "caption": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        }
       }
     }
   },
