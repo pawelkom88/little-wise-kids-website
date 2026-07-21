@@ -1,8 +1,8 @@
 {
-  "issuer": "https://littlewisekids.co.uk",
-  "authorization_endpoint": "https://littlewisekids.co.uk/oauth/authorize",
-  "token_endpoint": "https://littlewisekids.co.uk/oauth/token",
-  "jwks_uri": "https://littlewisekids.co.uk/oauth/jwks",
+  "issuer": "https://little-wise-kids.raspy-snowflake-9303.workers.dev",
+  "authorization_endpoint": "https://little-wise-kids.raspy-snowflake-9303.workers.dev/oauth/authorize",
+  "token_endpoint": "https://little-wise-kids.raspy-snowflake-9303.workers.dev/oauth/token",
+  "jwks_uri": "https://little-wise-kids.raspy-snowflake-9303.workers.dev/oauth/jwks",
   "grant_types_supported": [
     "authorization_code",
     "client_credentials"
@@ -17,7 +17,7 @@
     "RS256"
   ],
   "agent_auth": {
-    "register_uri": "https://littlewisekids.co.uk/auth.md",
+    "register_uri": "https://little-wise-kids.raspy-snowflake-9303.workers.dev/auth.md",
     "supported_identity_types": ["x509", "jwt"]
   }
 }

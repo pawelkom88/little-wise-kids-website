@@ -117,7 +117,7 @@ export const hoursNutritionPage = defineType({
       description: "Text from the chef.",
       type: "text",
       group: "nutrition",
-      validation: (rule) => rule.required().max(250),
+      validation: (rule) => rule.required().max(550),
     }),
     defineField({
       name: "typicalDayHeading",

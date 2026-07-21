@@ -1,16 +1,16 @@
 {
   "linkset": [
     {
-      "anchor": "https://littlewisekids.co.uk/",
+      "anchor": "https://little-wise-kids.raspy-snowflake-9303.workers.dev/",
       "service-desc": [
         {
-          "href": "https://littlewisekids.co.uk/.well-known/mcp/server-card.json",
+          "href": "https://little-wise-kids.raspy-snowflake-9303.workers.dev/.well-known/mcp/server-card.json",
           "type": "application/json"
         }
       ],
       "status": [
         {
-          "href": "https://littlewisekids.co.uk/"
+          "href": "https://little-wise-kids.raspy-snowflake-9303.workers.dev/"
         }
       ]
     }
