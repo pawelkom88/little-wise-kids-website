@@ -1,4 +1,4 @@
-import { defineType, defineField } from "sanity";
+import { defineField, defineType } from "sanity";
 
 const timeRegex = /^(?:[01]\d|2[0-3]):[0-5]\d$/;
 
@@ -10,130 +10,212 @@ export const hoursNutritionPage = defineType({
     { name: "hero", title: "Hero" },
     { name: "operatingHours", title: "Operating Hours" },
     { name: "nutrition", title: "Nutrition" },
+    { name: "nurseryChef", title: "Nursery Chef" },
     { name: "typicalDay", title: "Typical Day" },
-    { name: "contactPanel", title: "Contact Panel" },
   ],
   fields: [
     defineField({
       name: "heroEyebrow",
       title: "Hero Eyebrow",
-      description: "Optional small text above title.",
+      description: "Optional small text above the title.",
       type: "string",
       group: "hero",
-      validation: (rule) => rule.max(30),
+      validation: (rule) => rule.max(40),
     }),
     defineField({
       name: "heroTitleLineOne",
-      title: "Hero Title - Line One",
-      description: "First line of main heading.",
+      title: "Hero Title — Line One",
       type: "string",
       group: "hero",
-      validation: (rule) => rule.required().max(40),
+      validation: (rule) => rule.required().max(50),
     }),
     defineField({
       name: "heroTitleLineTwo",
-      title: "Hero Title - Line Two",
-      description: "Second line of main heading.",
+      title: "Hero Title — Line Two",
       type: "string",
       group: "hero",
-      validation: (rule) => rule.required().max(40),
+      validation: (rule) => rule.required().max(50),
     }),
     defineField({
       name: "heroParagraphs",
       title: "Hero Paragraphs",
-      description: "Main introductory paragraphs.",
       type: "pagePortableText",
       group: "hero",
       validation: (rule) => rule.required(),
     }),
+
+    defineField({
+      name: "operatingHoursLabel",
+      title: "Operating Hours Label",
+      type: "string",
+      group: "operatingHours",
+      validation: (rule) => rule.required().max(40),
+    }),
     defineField({
       name: "operatingHoursHeading",
       title: "Operating Hours Heading",
-      description: "The main H2 heading.",
       type: "string",
       group: "operatingHours",
-      validation: (rule) => rule.required().max(80),
+      validation: (rule) => rule.required().max(90),
     }),
     defineField({
       name: "operatingHoursParagraphs",
-      title: "Operating Hours Paragraphs",
-      description: "Text for this section.",
+      title: "Operating Hours Copy",
+      description:
+        "Use the approved Operating Hours copy from the website content brief.",
       type: "pagePortableText",
       group: "operatingHours",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "minAttendancePanelTitle",
-      title: "Minimum Attendance Panel Title",
-      description: "Title of the highlighted panel.",
+      title: "Minimum Attendance Title",
       type: "string",
       group: "operatingHours",
-      validation: (rule) => rule.required().max(50),
+      validation: (rule) => rule.required().max(60),
     }),
     defineField({
       name: "minAttendancePanelCopy",
-      title: "Minimum Attendance Panel Copy",
-      description: "Text in the highlighted panel.",
+      title: "Minimum Attendance Copy",
       type: "text",
+      rows: 3,
       group: "operatingHours",
-      validation: (rule) => rule.required().max(150),
+      validation: (rule) => rule.required().max(260),
+    }),
+    defineField({
+      name: "availabilityCtaLabel",
+      title: "Availability CTA Label",
+      type: "string",
+      group: "operatingHours",
+      validation: (rule) => rule.required().max(55),
+    }),
+
+    defineField({
+      name: "nutritionLabel",
+      title: "Nutrition Label",
+      type: "string",
+      group: "nutrition",
+      validation: (rule) => rule.required().max(40),
     }),
     defineField({
       name: "nutritionHeading",
       title: "Nutrition Heading",
-      description: "The main H2 heading.",
       type: "string",
       group: "nutrition",
-      validation: (rule) => rule.required().max(80),
+      validation: (rule) => rule.required().max(90),
+    }),
+    defineField({
+      name: "nutritionStatement",
+      title: "Nutrition Feature Statement",
+      description:
+        "Short statement displayed prominently. Keep it grounded in the approved copy.",
+      type: "string",
+      group: "nutrition",
+      validation: (rule) => rule.required().max(90),
     }),
     defineField({
       name: "nutritionParagraphs",
-      title: "Nutrition Paragraphs",
-      description: "Text for this section.",
+      title: "Nutrition Copy",
+      description: "Use the approved Nutrition copy from the content brief.",
       type: "pagePortableText",
       group: "nutrition",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "nutritionChecklist",
-      title: "Nutrition Checklist",
-      description: "Bulleted checklist items.",
+      title: "Nutrition Highlights",
+      description:
+        "Five short phrases derived directly from the approved Nutrition copy.",
       type: "array",
       group: "nutrition",
-      of: [{ type: "string", validation: (rule) => rule.required().max(80) }],
-      validation: (rule) => rule.required().min(1),
+      of: [
+        defineField({
+          name: "nutritionHighlight",
+          title: "Nutrition Highlight",
+          type: "string",
+          validation: (rule) => rule.required().max(80),
+        }),
+      ],
+      validation: (rule) => rule.required().min(5).max(5),
+    }),
+
+    defineField({
+      name: "nurseryChefLabel",
+      title: "Nursery Chef Label",
+      type: "string",
+      group: "nurseryChef",
+      validation: (rule) => rule.required().max(40),
     }),
     defineField({
       name: "freshlyPreparedHeading",
-      title: "Freshly Prepared Heading",
-      description: "Heading for the chef note.",
+      title: "Nursery Chef Heading",
       type: "string",
-      group: "nutrition",
-      validation: (rule) => rule.required().max(50),
+      group: "nurseryChef",
+      validation: (rule) => rule.required().max(90),
     }),
     defineField({
       name: "chefNote",
-      title: "Chef Note",
-      description: "Text from the chef.",
+      title: "Nursery Chef Copy",
+      description:
+        "Use the approved Nursery Chef paragraph from the content brief.",
       type: "text",
-      group: "nutrition",
-      validation: (rule) => rule.required().max(550),
+      rows: 6,
+      group: "nurseryChef",
+      validation: (rule) => rule.required().max(700),
+    }),
+    defineField({
+      name: "chefHighlights",
+      title: "Nursery Chef Highlights",
+      description:
+        "Three short phrases taken directly from the approved Nursery Chef copy.",
+      type: "array",
+      group: "nurseryChef",
+      of: [
+        defineField({
+          name: "chefHighlight",
+          title: "Chef Highlight",
+          type: "string",
+          validation: (rule) => rule.required().max(80),
+        }),
+      ],
+      validation: (rule) => rule.required().min(3).max(3),
+    }),
+    defineField({
+      name: "dietaryContactCopy",
+      title: "Dietary Contact Copy",
+      type: "text",
+      rows: 3,
+      group: "nurseryChef",
+      validation: (rule) => rule.required().max(260),
+    }),
+    defineField({
+      name: "dietaryContactCtaLabel",
+      title: "Dietary Contact CTA Label",
+      type: "string",
+      group: "nurseryChef",
+      validation: (rule) => rule.required().max(40),
+    }),
+
+    defineField({
+      name: "typicalDayLabel",
+      title: "Typical Day Label",
+      type: "string",
+      group: "typicalDay",
+      validation: (rule) => rule.required().max(40),
     }),
     defineField({
       name: "typicalDayHeading",
       title: "Typical Day Heading",
-      description: "The main H2 heading.",
       type: "string",
       group: "typicalDay",
       validation: (rule) => rule.required().max(80),
     }),
     defineField({
       name: "typicalDayLead",
-      title: "Typical Day Lead Text",
-      description: "Intro text for the timeline.",
+      title: "Typical Day Lead",
       type: "text",
       group: "typicalDay",
-      validation: (rule) => rule.required().max(150),
+      validation: (rule) => rule.required().max(180),
     }),
     ...[
       "welcomeAndFreePlay",
@@ -146,8 +228,10 @@ export const hoursNutritionPage = defineType({
     ].map((slot) =>
       defineField({
         name: slot,
-        title: `${slot.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}`,
-        description: `Fixed daily rhythm slot for ${slot}.`,
+        title: slot
+          .replace(/([A-Z])/g, " $1")
+          .replace(/^./, (character) => character.toUpperCase()),
+        description: `Existing scroll-driven timeline slot for ${slot}.`,
         type: "object",
         group: "typicalDay",
         fields: [
@@ -155,23 +239,23 @@ export const hoursNutritionPage = defineType({
             name: "startTime",
             type: "string",
             title: "Start Time",
-            description: "24-hour time (e.g. 08:00)",
+            description: "24-hour time, for example 08:00.",
             validation: (rule) =>
               rule
                 .required()
                 .regex(timeRegex)
-                .error("Must be a valid 24-hour time (HH:MM)."),
+                .error("Must be a valid 24-hour time in HH:MM format."),
           }),
           defineField({
             name: "endTime",
             type: "string",
             title: "End Time",
-            description: "24-hour time (e.g. 09:00)",
+            description: "24-hour time, for example 09:00.",
             validation: (rule) =>
               rule
                 .required()
                 .regex(timeRegex)
-                .error("Must be a valid 24-hour time (HH:MM)."),
+                .error("Must be a valid 24-hour time in HH:MM format."),
           }),
           defineField({
             name: "title",
@@ -187,19 +271,27 @@ export const hoursNutritionPage = defineType({
           }),
         ],
         validation: (rule) =>
-          rule
-            .required()
-            .custom(
-              (value: { startTime?: string; endTime?: string } | undefined) => {
-                if (value?.startTime && value?.endTime) {
-                  if (value.endTime <= value.startTime) {
-                    return "End time must be later than start time.";
+          rule.required().custom(
+            (
+              value:
+                | {
+                    startTime?: string;
+                    endTime?: string;
                   }
-                }
-                return true;
+                | undefined,
+            ) => {
+              if (
+                value?.startTime &&
+                value?.endTime &&
+                value.endTime <= value.startTime
+              ) {
+                return "End time must be later than start time.";
               }
-            ),
-      })
-    )
+
+              return true;
+            },
+          ),
+      }),
+    ),
   ],
 });

@@ -228,10 +228,11 @@ export interface MultilingualPage {
   philosophyParagraphs: PortableTextBlock[];
   childrenEnjoyHeading: string;
   philosophyPoints: string[];
+  philosophyDiscoveryNote: string;
   languageConnectionLabel: string;
   languageConnectionHeading: string;
   languageConnectionParagraphs: PortableTextBlock[];
-  languageConnectionImage: ContentImage;
+  languageConnectionNote: string;
   eyfsLabel: string;
   eyfsHeading: string;
   eyfsParagraphs: PortableTextBlock[];
@@ -242,9 +243,11 @@ export interface MultilingualPage {
   eyfsMaths: { title: string; description?: string };
   eyfsUnderstanding: { title: string; description?: string };
   eyfsArts: { title: string; description?: string };
+  eyfsClosingNote: string;
   screenFreeLabel: string;
   screenFreeHeading: string;
   screenFreeParagraphs: PortableTextBlock[];
+  screenFreeBenefitsHeading: string;
   screenFreeBenefits: string[];
   closingNote: string;
 }
@@ -259,12 +262,18 @@ export interface HoursNutritionPage {
   operatingHoursParagraphs: PortableTextBlock[];
   minAttendancePanelTitle: string;
   minAttendancePanelCopy: string;
+  availabilityCtaLabel: string;
   nutritionLabel: string;
   nutritionHeading: string;
+  nutritionStatement: string;
   nutritionParagraphs: PortableTextBlock[];
   nutritionChecklist: string[];
+  nurseryChefLabel: string;
   freshlyPreparedHeading: string;
   chefNote: string;
+  chefHighlights: string[];
+  dietaryContactCopy: string;
+  dietaryContactCtaLabel: string;
   typicalDayLabel: string;
   typicalDayHeading: string;
   typicalDayLead: string;

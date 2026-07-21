@@ -3350,6 +3350,13 @@
         },
         "optional": true
       },
+      "availabilityCtaLabel": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "nutritionLabel": {
         "type": "objectAttribute",
         "value": {
@@ -3358,6 +3365,13 @@
         "optional": true
       },
       "nutritionHeading": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "nutritionStatement": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -3382,6 +3396,13 @@
         },
         "optional": true
       },
+      "nurseryChefLabel": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "freshlyPreparedHeading": {
         "type": "objectAttribute",
         "value": {
@@ -3390,6 +3411,30 @@
         "optional": true
       },
       "chefNote": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "chefHighlights": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "string"
+          }
+        },
+        "optional": true
+      },
+      "dietaryContactCopy": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "dietaryContactCtaLabel": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -3781,6 +3826,13 @@
         },
         "optional": true
       },
+      "philosophyDiscoveryNote": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "languageConnectionLabel": {
         "type": "objectAttribute",
         "value": {
@@ -3803,11 +3855,10 @@
         },
         "optional": true
       },
-      "languageConnectionImage": {
+      "languageConnectionNote": {
         "type": "objectAttribute",
         "value": {
-          "type": "inline",
-          "name": "contentImage"
+          "type": "string"
         },
         "optional": true
       },
@@ -3994,6 +4045,13 @@
         },
         "optional": true
       },
+      "eyfsClosingNote": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "screenFreeLabel": {
         "type": "objectAttribute",
         "value": {
@@ -4013,6 +4071,13 @@
         "value": {
           "type": "inline",
           "name": "pagePortableText"
+        },
+        "optional": true
+      },
+      "screenFreeBenefitsHeading": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
         },
         "optional": true
       },

@@ -1,19 +1,10 @@
 .hours-page {
-  --hours-card-inline: clamp(var(--space-m), 4vw, var(--space-2xl));
-
-  --hours-card-block: clamp(var(--space-l), 4vw, var(--space-2xl));
+  --hours-section-inline: clamp(var(--space-m), 4vw, var(--space-2xl));
+  --hours-section-block: clamp(var(--space-xl), 5vw, var(--space-3xl));
 
   color: var(--color-ink);
   background: var(--color-page);
 }
-
-/*
- * Hero preserved by SubpageHero component
- */
-
-/*
- * Page structure
- */
 
 .hours-page__content {
   padding-bottom: var(--section-spacing);
@@ -26,35 +17,41 @@
 }
 
 /*
- * Shared content cards
+ * Shared section foundation
  */
 
+.hours-section,
 .hours-card {
-  --hours-accent: var(--color-green);
+  --hours-accent: var(--color-green-dark);
   --hours-soft: var(--color-green-soft);
 
   width: 100%;
-  padding: var(--hours-card-block) var(--hours-card-inline);
+  padding: var(--hours-section-block) var(--hours-section-inline);
   border: 1px solid
-    color-mix(in srgb, var(--hours-accent) 18%, var(--color-border));
+    color-mix(in srgb, var(--hours-accent) 20%, var(--color-border));
   border-radius: var(--radius-l);
   background: linear-gradient(
     135deg,
     color-mix(in srgb, var(--hours-soft) 35%, var(--color-surface)),
-    var(--color-surface) 74%
+    var(--color-surface) 76%
   );
-  box-shadow: 0 1.1rem 3rem color-mix(in srgb, var(--color-ink) 4%, transparent);
+  box-shadow: var(--shadow-card);
   scroll-margin-top: var(--section-spacing);
 }
 
-.hours-card--green {
-  --hours-accent: var(--color-green-strong);
+.hours-section--green {
+  --hours-accent: var(--color-green-dark);
   --hours-soft: var(--color-green-soft);
 }
 
-.hours-card--purple {
+.hours-section--purple {
   --hours-accent: var(--color-purple-dark);
   --hours-soft: var(--color-purple-soft);
+}
+
+.hours-section--yellow {
+  --hours-accent: var(--color-orange-dark);
+  --hours-soft: var(--color-yellow-soft);
 }
 
 .hours-card--blue {
@@ -62,330 +59,425 @@
   --hours-soft: var(--color-blue-soft);
 }
 
-.hours-card__split {
+.hours-section__layout,
+.nutrition-section__layout,
+.chef-section__layout {
   display: grid;
   grid-template-columns:
-    minmax(0, 0.95fr)
-    minmax(20rem, 1.05fr);
-  gap: clamp(var(--space-l), 5vw, var(--space-3xl));
+    minmax(0, 0.82fr)
+    minmax(22rem, 1.18fr);
+  gap: clamp(var(--space-xl), 6vw, var(--space-3xl));
   align-items: center;
 }
 
-.hours-card__main {
+.hours-section__intro,
+.nutrition-section__copy,
+.chef-section__copy {
   min-width: 0;
 }
 
-.hours-card__heading {
+.hours-section__heading {
   display: grid;
-  grid-template-columns:
-    3.6rem
-    minmax(0, 1fr);
+  grid-template-columns: 3.5rem minmax(0, 1fr);
   gap: var(--space-s);
   align-items: start;
 }
 
-.hours-card__number {
+.hours-section__number {
   display: grid;
-  width: 3.6rem;
+  width: 3.5rem;
   aspect-ratio: 1;
   place-items: center;
-  border: 1px solid color-mix(in srgb, var(--hours-accent) 25%, transparent);
+  border: 1px solid color-mix(in srgb, var(--hours-accent) 28%, transparent);
   border-radius: 50%;
   color: var(--hours-accent);
-  background: color-mix(in srgb, var(--hours-soft) 78%, var(--color-surface));
+  background: color-mix(in srgb, var(--hours-soft) 76%, var(--color-surface));
   font-family: var(--font-heading);
   font-size: var(--font-size-small);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-solid);
 }
 
+.hours-section__eyebrow,
 .hours-card__label {
-  margin-bottom: var(--space-xs);
+  margin: 0 0 var(--space-xs);
   color: var(--hours-accent);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-compact);
   letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
+.hours-section h2,
 .hours-card h2 {
+  margin: 0;
   color: var(--color-ink);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-section-title);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading);
   letter-spacing: var(--letter-spacing-section-title);
   text-wrap: balance;
 }
 
+.hours-section h3,
 .hours-card h3 {
+  margin: 0;
   color: var(--hours-accent);
-  letter-spacing: -0.025em;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-card-title);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
   text-wrap: balance;
 }
 
-.hours-card__prose {
+.hours-section__prose {
   display: grid;
-  gap: var(--space-s);
-  margin-top: var(--space-m);
+  gap: var(--space-paragraph-flow);
+  margin-top: var(--space-l);
 }
 
-.hours-card__prose p {
+.hours-section__prose p {
+  margin: 0;
   color: var(--color-ink-soft);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
   line-height: var(--line-height-body);
   text-wrap: pretty;
 }
 
 /*
- * Session schedule
+ * Operating hours
  */
 
-.hours-schedule {
+.session-list {
   display: grid;
   margin: 0;
   padding: clamp(var(--space-m), 3vw, var(--space-l));
   border: 1px solid
-    color-mix(in srgb, var(--color-green) 17%, var(--color-border));
+    color-mix(in srgb, var(--color-green) 18%, var(--color-border));
   border-radius: var(--radius-m);
   background: color-mix(
     in srgb,
-    var(--color-green-soft) 54%,
+    var(--color-green-soft) 48%,
     var(--color-surface)
   );
 }
 
-.hours-schedule__row {
+.session-list__row {
   display: grid;
-  grid-template-columns:
-    2.75rem
-    minmax(7rem, 0.7fr)
-    minmax(8rem, 1fr);
-  gap: var(--space-xs);
+  grid-template-columns: 3rem minmax(7rem, 0.75fr) minmax(9rem, 1fr);
+  gap: var(--space-s);
   align-items: center;
-  min-height: 4.5rem;
+  min-height: 5rem;
   border-bottom: 1px solid var(--color-border);
 }
 
-.hours-schedule__row:last-child {
+.session-list__row:last-child {
   border-bottom: 0;
 }
 
-.hours-schedule__icon {
+.session-list__icon {
   display: grid;
-  width: 2.75rem;
+  width: 3rem;
   aspect-ratio: 1;
   place-items: center;
   border-radius: 50%;
-  color: var(--color-green-dark);
-  background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+  background: var(--color-surface);
 }
 
-.hours-schedule dt {
+.session-list__icon img {
+  display: block;
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.session-list dt,
+.session-list dd {
   color: var(--color-ink);
   font-family: var(--font-heading);
+  font-size: var(--font-size-body);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-compact);
 }
 
-.hours-schedule dd {
+.session-list dd {
   margin: 0;
-  color: var(--color-ink);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-compact);
   text-align: right;
 }
 
-/*
- * Minimum attendance strip
- */
-
-.hours-card__note {
+.attendance-strip {
   display: grid;
-  grid-template-columns:
-    3.75rem
-    minmax(0, 1fr)
-    auto;
+  grid-template-columns: 4rem minmax(0, 1fr) auto;
   gap: var(--space-s);
   align-items: center;
-  margin-top: var(--space-l);
+  margin-top: var(--space-xl);
   padding: var(--space-s);
   border: 1px solid
-    color-mix(in srgb, var(--color-green) 16%, var(--color-border));
+    color-mix(in srgb, var(--color-green) 18%, var(--color-border));
   border-radius: var(--radius-m);
   background: color-mix(
     in srgb,
-    var(--color-green-soft) 56%,
+    var(--color-green-soft) 58%,
     var(--color-surface)
   );
 }
 
-.hours-card__note-icon {
+.attendance-strip__icon {
   display: grid;
-  width: 3.75rem;
+  width: 4rem;
   aspect-ratio: 1;
   place-items: center;
   border-radius: 50%;
-  color: var(--color-green-dark);
   background: var(--color-surface);
 }
 
-.hours-card__note-copy h3 {
-  margin-bottom: 0.25rem;
+.attendance-strip__icon img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.attendance-strip__copy h3 {
+  margin-bottom: var(--space-3xs);
   color: var(--color-green-dark);
 }
 
-.hours-card__note-copy p {
+.attendance-strip__copy p {
+  margin: 0;
   color: var(--color-ink-soft);
+  font-size: var(--font-size-body);
   line-height: var(--line-height-compact);
   text-wrap: pretty;
 }
 
-.hours-card__note-link {
+.attendance-strip__link,
+.dietary-note a {
   display: inline-flex;
-  min-height: 3rem;
+  min-height: 3.25rem;
   align-items: center;
   justify-content: center;
   gap: var(--space-xs);
-  padding: var(--space-xs) var(--space-s);
+  padding: var(--space-xs) var(--space-m);
   border-radius: var(--radius-pill);
   color: var(--color-surface);
   background: var(--hours-accent);
   font-family: var(--font-heading);
+  font-size: var(--font-size-body);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-compact);
   text-align: center;
   text-decoration: none;
 }
 
-.hours-card__note-link span {
+.attendance-strip__link span,
+.dietary-note a span {
   flex: none;
   font-size: var(--font-size-large);
 }
 
 /*
- * Nutrition checklist
+ * Nutrition
  */
 
-.nutrition-checklist {
-  min-width: 0;
-  padding: clamp(var(--space-m), 3vw, var(--space-l));
-  border: 1px solid
-    color-mix(in srgb, var(--color-purple) 16%, var(--color-border));
-  border-radius: var(--radius-m);
-  background: color-mix(
-    in srgb,
-    var(--color-purple-soft) 54%,
-    var(--color-surface)
-  );
-}
-
-.nutrition-checklist h3 {
-  margin-bottom: var(--space-m);
+.nutrition-section__heading span {
   color: var(--color-purple-dark);
 }
 
-.nutrition-checklist ul {
+.nutrition-path {
   display: grid;
-  gap: var(--space-xs);
+  gap: var(--space-2xs);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.nutrition-checklist li {
+.nutrition-path li {
+  position: relative;
   display: grid;
-  grid-template-columns:
-    1.5rem
-    minmax(0, 1fr);
-  gap: var(--space-xs);
-  align-items: start;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  gap: var(--space-s);
+  align-items: center;
+  min-height: 4rem;
+  padding: var(--space-xs) var(--space-s);
+  border: 1px solid
+    color-mix(in srgb, var(--color-purple) 13%, var(--color-border));
+  border-radius: var(--radius-s);
+  background: color-mix(
+    in srgb,
+    var(--color-purple-soft) 48%,
+    var(--color-surface)
+  );
 }
 
-.nutrition-checklist li > span {
+.nutrition-path li:not(:last-child)::after {
+  position: absolute;
+  top: 100%;
+  left: calc(var(--space-s) + 1.625rem);
+  width: 1px;
+  height: var(--space-2xs);
+  background: color-mix(in srgb, var(--color-purple) 30%, transparent);
+  content: "";
+}
+
+.nutrition-path__icon {
   display: grid;
-  width: 1.25rem;
+  width: 3.25rem;
   aspect-ratio: 1;
   place-items: center;
-  margin-top: 0.2rem;
   border-radius: 50%;
-  color: var(--color-surface);
-  background: var(--color-purple);
+  background: color-mix(
+    in srgb,
+    var(--color-purple-soft) 76%,
+    var(--color-surface)
+  );
+}
+
+.nutrition-path__icon img {
+  width: 1.75rem;
+  height: 1.75rem;
+  object-fit: contain;
+}
+
+.nutrition-path__content h3 {
+  margin: 0 0 var(--space-3xs);
+  color: var(--color-ink);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-compact);
+}
+
+.nutrition-path__content p {
+  margin: 0;
+  color: var(--color-ink-soft);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-compact);
+}
+
+/*
+ * Nursery chef
+ */
+
+.chef-journey {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: var(--space-s);
+  border: 1px solid
+    color-mix(in srgb, var(--color-yellow) 24%, var(--color-border));
+  border-radius: var(--radius-m);
+  background: color-mix(
+    in srgb,
+    var(--color-yellow-soft) 40%,
+    var(--color-surface)
+  );
+  list-style: none;
+}
+
+.chef-journey li {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-xs);
+  min-width: 0;
+  padding: var(--space-m) var(--space-s);
+  text-align: center;
+}
+
+.chef-journey li + li {
+  border-left: 1px solid var(--color-border);
+}
+
+.chef-journey__number {
+  position: absolute;
+  top: var(--space-xs);
+  left: var(--space-xs);
+  display: grid;
+  width: 2rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--color-ink);
+  background: var(--color-yellow-soft);
+  font-family: var(--font-heading);
   font-size: var(--font-size-label);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-solid);
 }
 
-.nutrition-checklist li p {
-  color: var(--color-ink);
+.chef-journey__icon {
+  display: block;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.chef-journey h3 {
+  margin: var(--space-xs) 0 var(--space-3xs);
+  color: var(--color-orange-dark);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-default);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-compact);
-  text-wrap: pretty;
+  text-wrap: balance;
 }
 
-/*
- * Nutrition feature cards
- */
-
-.nutrition-features {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-s);
-  margin-top: var(--space-l);
-}
-
-.nutrition-feature {
-  --feature-accent: var(--color-purple);
-  --feature-soft: var(--color-purple-soft);
-
-  display: grid;
-  grid-template-columns:
-    3.4rem
-    minmax(0, 1fr);
-  gap: var(--space-s);
-  align-items: start;
-  min-width: 0;
-  padding: var(--space-m);
-  border: 1px solid
-    color-mix(in srgb, var(--feature-accent) 18%, var(--color-border));
-  border-radius: var(--radius-m);
-  background: color-mix(in srgb, var(--feature-soft) 48%, var(--color-surface));
-}
-
-.nutrition-feature--yellow {
-  --feature-accent: color-mix(
-    in srgb,
-    var(--color-yellow),
-    var(--color-ink) 30%
-  );
-  --feature-soft: var(--color-yellow-soft);
-}
-
-.nutrition-feature--green {
-  --feature-accent: var(--color-green-dark);
-  --feature-soft: var(--color-green-soft);
-}
-
-.nutrition-feature--blue {
-  --feature-accent: var(--color-blue-dark);
-  --feature-soft: var(--color-blue-soft);
-}
-
-.nutrition-feature__icon {
-  display: grid;
-  width: 3.4rem;
-  aspect-ratio: 1;
-  place-items: center;
-  border-radius: 50%;
-  color: var(--feature-accent);
-  background: var(--color-surface);
-}
-
-.nutrition-feature h3 {
-  margin-bottom: var(--space-xs);
-  color: var(--feature-accent);
-}
-
-.nutrition-feature p {
+.chef-journey p {
+  margin: 0;
   color: var(--color-ink-soft);
+  font-family: var(--font-body);
   font-size: var(--font-size-small);
   line-height: var(--line-height-body);
   text-wrap: pretty;
 }
 
+.dietary-note {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr) auto;
+  gap: var(--space-s);
+  align-items: center;
+  margin-top: var(--space-s);
+  padding: var(--space-xs) var(--space-s);
+  border: 1px solid
+    color-mix(in srgb, var(--color-yellow) 24%, var(--color-border));
+  border-radius: var(--radius-s);
+  background: color-mix(
+    in srgb,
+    var(--color-yellow-soft) 46%,
+    var(--color-surface)
+  );
+}
+
+.dietary-note__icon {
+  display: grid;
+  width: 3.25rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-yellow-soft);
+}
+
+.dietary-note__icon img {
+  width: 1.55rem;
+  height: 1.55rem;
+}
+
+.dietary-note p {
+  margin: 0;
+  color: var(--color-ink-soft);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-compact);
+  text-wrap: pretty;
+}
+
+.dietary-note a {
+  color: var(--color-ink);
+  background: var(--color-yellow);
+}
+
 /*
- * Daily timeline
+ * Existing scroll-driven timeline — structure and behaviour preserved
  */
 
 .hours-day {
@@ -398,9 +490,7 @@
 
 .hours-day__header {
   display: grid;
-  grid-template-columns:
-    4rem
-    minmax(0, 1fr);
+  grid-template-columns: 4rem minmax(0, 1fr);
   gap: var(--space-s);
   align-items: start;
   max-width: 58rem;
@@ -419,8 +509,9 @@
 }
 
 .hours-day__lead {
-  margin-top: var(--space-xs);
+  margin: var(--space-xs) 0 0;
   color: var(--color-ink-soft);
+  font-size: var(--font-size-body);
   line-height: var(--line-height-body);
   text-wrap: pretty;
 }
@@ -455,10 +546,7 @@
 .hours-day__item {
   position: relative;
   display: grid;
-  grid-template-columns:
-    minmax(0, 1fr)
-    4.5rem
-    minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) 4.5rem minmax(0, 1fr);
   align-items: center;
   min-height: 8rem;
 }
@@ -522,8 +610,27 @@
     color-mix(in srgb, var(--color-blue-soft) 68%, var(--color-surface));
 }
 
+.hours-day__marker-img {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+}
+
+.hours-day__event-watermark {
+  position: absolute;
+  top: 50%;
+  right: var(--space-m);
+  width: 4.5rem;
+  height: 4.5rem;
+  object-fit: contain;
+  opacity: 0.12;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
 .hours-day__time {
-  margin-bottom: 0.3rem;
+  margin: 0 0 var(--space-3xs);
   color: var(--color-blue-dark);
   font-size: var(--font-size-small);
   font-weight: var(--font-weight-bold);
@@ -536,6 +643,7 @@
 }
 
 .hours-day__event > p:last-child {
+  margin: 0;
   color: var(--color-ink-soft);
   font-size: var(--font-size-small);
   line-height: var(--line-height-body);
@@ -543,21 +651,20 @@
 }
 
 /*
- * Focus states
+ * Focus and hover
  */
 
-.hours-card__note-link:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--color-purple) 52%, transparent);
+.attendance-strip__link:focus-visible,
+.dietary-note a:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-purple) 48%, transparent);
   outline-offset: 3px;
 }
 
-/*
- * Hover states
- */
-
 @media (hover: hover) {
-  .hours-card__note-link,
-  .nutrition-feature,
+  .attendance-strip__link,
+  .dietary-note a,
+  .nutrition-path li,
+  .chef-journey li,
   .hours-day__event {
     transition:
       transform 180ms ease,
@@ -565,16 +672,17 @@
       filter 180ms ease;
   }
 
-  .hours-card__note-link:hover {
+  .attendance-strip__link:hover,
+  .dietary-note a:hover {
     filter: brightness(1.03);
     transform: translateY(-0.1rem);
   }
 
-  .nutrition-feature:hover,
+  .nutrition-path li:hover,
+  .chef-journey li:hover,
   .hours-day__event:hover {
-    box-shadow: 0 1rem 2.5rem
-      color-mix(in srgb, var(--color-ink) 6%, transparent);
-    transform: translateY(-0.15rem);
+    box-shadow: var(--shadow-card);
+    transform: translateY(-0.12rem);
   }
 }
 
@@ -583,27 +691,26 @@
  */
 
 @media (width < 64rem) {
-  .hours-card__split {
+  .hours-section__layout,
+  .nutrition-section__layout,
+  .chef-section__layout {
     grid-template-columns: 1fr;
+    gap: var(--space-xl);
   }
 
-  .hours-card__note {
-    grid-template-columns:
-      3.75rem
-      minmax(0, 1fr);
+  .nutrition-section__statement {
+    max-width: 18ch;
   }
 
-  .hours-card__note-link {
+  .attendance-strip,
+  .dietary-note {
+    grid-template-columns: 4rem minmax(0, 1fr);
+  }
+
+  .attendance-strip__link,
+  .dietary-note a {
     grid-column: 1 / -1;
     justify-self: start;
-  }
-
-  .nutrition-features {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .nutrition-feature:last-child {
-    grid-column: 1 / -1;
   }
 }
 
@@ -613,77 +720,91 @@
 
 @media (width < 48rem) {
   .hours-page {
-    --hours-card-inline: var(--space-m);
-    --hours-card-block: var(--space-l);
+    --hours-section-inline: var(--space-m);
+    --hours-section-block: var(--space-xl);
   }
 
   .hours-page__stack {
     gap: var(--space-m);
   }
 
+  .hours-section,
   .hours-card {
     border-radius: var(--radius-m);
   }
 
-  .hours-card__heading {
-    grid-template-columns:
-      3rem
-      minmax(0, 1fr);
+  .hours-section__heading {
+    grid-template-columns: 3rem minmax(0, 1fr);
     gap: var(--space-xs);
   }
 
-  .hours-card__number {
+  .hours-section__number {
     width: 3rem;
-    font-size: var(--font-size-label);
   }
 
-  .hours-card__label {
-    letter-spacing: 0.09em;
-  }
-
-  .hours-schedule {
+  .session-list {
     padding: var(--space-s);
   }
 
-  .hours-schedule__row {
-    grid-template-columns:
-      2.5rem
-      minmax(0, 1fr);
+  .session-list__row {
+    grid-template-columns: 2.75rem minmax(0, 1fr);
     gap: var(--space-xs);
     padding-block: var(--space-xs);
   }
 
-  .hours-schedule__icon {
+  .session-list__icon {
     grid-row: 1 / span 2;
-    width: 2.5rem;
+    width: 2.75rem;
   }
 
-  .hours-schedule dd {
+  .session-list dd {
     grid-column: 2;
     text-align: left;
   }
 
-  .hours-card__note {
+  .attendance-strip,
+  .dietary-note {
     grid-template-columns: 1fr;
     justify-items: start;
   }
 
-  .nutrition-features {
+  .attendance-strip__link,
+  .dietary-note a {
+    width: 100%;
+  }
+
+  .nutrition-section__statement {
+    max-width: none;
+  }
+
+  .chef-journey {
     grid-template-columns: 1fr;
   }
 
-  .nutrition-feature:last-child {
-    grid-column: auto;
+  .chef-journey li {
+    grid-template-columns: 2.5rem 3.25rem minmax(0, 1fr);
+    justify-items: start;
+    align-items: center;
+    text-align: left;
   }
 
-  /*
-     * Mobile timeline
-     */
+  .chef-journey li + li {
+    border-top: 1px solid var(--color-border);
+    border-left: 0;
+  }
+
+  .chef-journey__number {
+    position: static;
+    width: 2.5rem;
+  }
+
+  .chef-journey__icon {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
 
   .hours-day__header {
-    grid-template-columns:
-      3.5rem
-      minmax(0, 1fr);
+    grid-template-columns: 3.5rem minmax(0, 1fr);
   }
 
   .hours-day__header-icon {
@@ -703,9 +824,7 @@
   }
 
   .hours-day__item {
-    grid-template-columns:
-      3rem
-      minmax(0, 1fr);
+    grid-template-columns: 3rem minmax(0, 1fr);
     gap: var(--space-s);
     min-height: 0;
   }
@@ -735,28 +854,7 @@
 }
 
 /*
- * Very small screens
- */
-
-@media (width < 30rem) {
-  .nutrition-feature {
-    grid-template-columns: 1fr;
-  }
-
-  .nutrition-feature__icon {
-    width: 3rem;
-  }
-
-  .hours-card__note-link {
-    width: 100%;
-  }
-}
-
-/*
- * Scroll-driven timeline animation
- *
- * Each item now starts animating around the middle of the viewport.
- * Unsupported browsers retain the static layout.
+ * Existing scroll-driven timeline animation
  */
 
 @supports (animation-timeline: view()) {
@@ -766,10 +864,6 @@
     view-timeline-name: --hours-complete-timeline;
     view-timeline-axis: block;
   }
-
-  /*
-     * Animated progress line
-     */
 
   .hours-day__timeline::after {
     position: absolute;
@@ -790,15 +884,10 @@
     opacity: 0;
     transform: translateX(var(--hours-line-offset)) scaleY(0);
     transform-origin: top center;
-
     animation: hours-day-line-draw 1s linear both;
     animation-timeline: --hours-complete-timeline;
     animation-range: cover 8% cover 84%;
   }
-
-  /*
-     * Individual item view timeline
-     */
 
   .hours-day__item {
     --hours-event-enter-x: -2.5rem;
@@ -813,50 +902,31 @@
     --hours-connector-origin: left center;
   }
 
-  /*
-     * Card reveals close to the centre of the viewport
-     */
-
   .hours-day__event {
     opacity: 0;
     transform: translate3d(var(--hours-event-enter-x), 0.85rem, 0) scale(0.985);
     transform-origin: center;
-
     animation: hours-day-event-reveal 1s cubic-bezier(0.22, 1, 0.36, 1) both;
     animation-timeline: --hours-day-item;
     animation-range: cover 32% cover 48%;
   }
 
-  /*
-     * Connector follows the card
-     */
-
   .hours-day__event::after {
     opacity: 0;
     transform: scaleX(0);
     transform-origin: var(--hours-connector-origin);
-
     animation: hours-day-connector-reveal 1s cubic-bezier(0.22, 1, 0.36, 1) both;
     animation-timeline: --hours-day-item;
     animation-range: cover 36% cover 51%;
   }
 
-  /*
-     * Marker activates as the progress line reaches it
-     */
-
   .hours-day__marker {
     opacity: 0;
     transform: scale(0.65) rotate(-7deg);
-
     animation: hours-day-marker-arrive 1s cubic-bezier(0.34, 1.42, 0.64, 1) both;
     animation-timeline: --hours-day-item;
     animation-range: cover 38% cover 53%;
   }
-
-  /*
-     * Expanding pulse ring
-     */
 
   .hours-day__marker::after {
     position: absolute;
@@ -867,22 +937,16 @@
     opacity: 0;
     pointer-events: none;
     transform: scale(0.72);
-
     animation: hours-day-marker-pulse 1s ease-out both;
     animation-timeline: --hours-day-item;
     animation-range: cover 40% cover 55%;
   }
-
-  /*
-     * Icon appears after its marker
-     */
 
   .hours-day__marker svg,
   .hours-day__marker img {
     opacity: 0;
     transform: scale(0.65);
     transform-origin: center;
-
     animation: hours-day-marker-icon 1s cubic-bezier(0.34, 1.56, 0.64, 1) both;
     animation-timeline: --hours-day-item;
     animation-range: cover 42% cover 57%;
@@ -996,10 +1060,6 @@
   }
 }
 
-/*
- * Scroll-driven mobile timeline alignment
- */
-
 @media (width < 48rem) {
   @supports (animation-timeline: view()) {
     .hours-day__timeline {
@@ -1020,19 +1080,19 @@
   }
 }
 
-/*
- * Reduced motion
- */
-
 @media (prefers-reduced-motion: reduce) {
-  .hours-card__note-link,
-  .nutrition-feature,
+  .attendance-strip__link,
+  .dietary-note a,
+  .nutrition-path li,
+  .chef-journey li,
   .hours-day__event {
     transition: none;
   }
 
-  .hours-card__note-link:hover,
-  .nutrition-feature:hover,
+  .attendance-strip__link:hover,
+  .dietary-note a:hover,
+  .nutrition-path li:hover,
+  .chef-journey li:hover,
   .hours-day__event:hover {
     transform: none;
   }
@@ -1044,7 +1104,10 @@
       animation: none;
     }
 
-    .hours-day__event {
+    .hours-day__event,
+    .hours-day__marker,
+    .hours-day__marker svg,
+    .hours-day__marker img {
       opacity: 1;
       transform: none;
       animation: none;
@@ -1056,33 +1119,9 @@
       animation: none;
     }
 
-    .hours-day__marker {
-      opacity: 1;
-      transform: none;
-      animation: none;
-    }
-
     .hours-day__marker::after {
       display: none;
       animation: none;
     }
-
-    .hours-day__marker svg,
-    .hours-day__marker img {
-      opacity: 1;
-      transform: none;
-      animation: none;
-    }
   }
-}
-
-.fresh-food-block {
-  margin-top: 2rem;
-  max-width: 60ch;
-}
-.fresh-food-title {
-  margin-bottom: 0.5rem;
-  color: var(--color-ink);
-  letter-spacing: -0.01em;
-  font-size: 1.25rem;
 }

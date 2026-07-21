@@ -1,94 +1,192 @@
 ---
 export const prerender = true;
+
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
 import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
-import { getHoursNutritionPage, getBusinessDetails } from "../utils/sanity";
-import { formatTimeRange, getAgeRangeDisplay } from "../lib/formatters";
-import type { SeoConfig } from "../lib/seo/types";
+import { getHoursNutritionPage, getBusinessDetails } from "../lib/queries";
+import { formatTimeRange } from "../lib/formatters";
 import "./hours-nutrition.css";
+
+// Green section icons
+import calendarIcon from "../assets/icons/hours-nutrition/calendar.png";
+import fullDaySunIcon from "../assets/icons/hours-nutrition/full-day-sun.png";
+import halfDaySunriseIcon from "../assets/icons/hours-nutrition/half-day-sunrise.png";
+import attendanceHeartIcon from "../assets/icons/hours-nutrition/attendance-heart.png";
+
+// Purple section icons
+import wellbeingHeartIcon from "../assets/icons/hours-nutrition/wellbeing-heart.png";
+import energyLightningIcon from "../assets/icons/hours-nutrition/energy-lightning.png";
+import mealtimeSmileIcon from "../assets/icons/hours-nutrition/mealtime-smile.png";
+import wholesomeLeafIcon from "../assets/icons/hours-nutrition/wholesome-leaf.png";
+import socialGroupIcon from "../assets/icons/hours-nutrition/social-group.png";
+
+// Yellow section icons
+import tryTastesBowlIcon from "../assets/icons/hours-nutrition/try-tastes-bowl.png";
+import developIndependenceIcon from "../assets/icons/hours-nutrition/develop-independence.png";
+import positiveSocialMomentsIcon from "../assets/icons/hours-nutrition/positive-social-moments.png";
+import dietaryInformationIcon from "../assets/icons/hours-nutrition/dietary-information.png";
+
+// Blue typical day icons
+import welcomeStarIcon from "../assets/icons/hours-nutrition/welcome-star.png";
+import learningBookIcon from "../assets/icons/hours-nutrition/learning-book.png";
+import snackAppleIcon from "../assets/icons/hours-nutrition/snack-apple.png";
+import outdoorsTreeIcon from "../assets/icons/hours-nutrition/outdoors-tree.png";
+import lunchCutleryIcon from "../assets/icons/hours-nutrition/lunch-cutlery.png";
+import restMoonIcon from "../assets/icons/hours-nutrition/rest-moon.png";
+import playBallIcon from "../assets/icons/hours-nutrition/play-ball.png";
 
 const hoursNutritionPage = await getHoursNutritionPage();
 const businessDetails = await getBusinessDetails();
 
-const seo: SeoConfig = {
-  title: "Opening Hours & Nutrition in Easton | Little Wise Kids",
-  description: `Operating from ${businessDetails.openingTime} to ${businessDetails.closingTime}, we offer flexible childcare in Easton with wholesome, home-cooked meals accommodating various dietary needs.`,
-  canonicalPath: "/hours-nutrition",
-};
-
 const sessionDetails = [
   {
-    icon: "clock",
+    icon: calendarIcon,
     label: "Days",
     value: businessDetails.openingDays,
   },
   {
-    icon: "calendar",
+    icon: fullDaySunIcon,
     label: "Full day",
-    value: formatTimeRange(businessDetails.openingTime, businessDetails.closingTime),
+    value: formatTimeRange(
+      businessDetails.openingTime,
+      businessDetails.closingTime,
+    ),
   },
   {
-    icon: "clock",
+    icon: halfDaySunriseIcon,
     label: "Half day",
-    value: formatTimeRange(businessDetails.openingTime, businessDetails.morningSessionEnd),
-  },
-  {
-    icon: "heart",
-    label: "Age range",
-    value: getAgeRangeDisplay(businessDetails),
+    value: formatTimeRange(
+      businessDetails.openingTime,
+      businessDetails.morningSessionEnd,
+    ),
   },
 ] as const;
 
+const nutritionHighlights = [
+  {
+    icon: wellbeingHeartIcon,
+    title: "Wellbeing",
+    text: "Food that supports growing bodies and minds.",
+  },
+  {
+    icon: energyLightningIcon,
+    title: "Energy",
+    text: "Nutritious meals to keep children energised.",
+  },
+  {
+    icon: mealtimeSmileIcon,
+    title: "Enjoyment of mealtimes",
+    text: "Delicious meals in a calm, positive environment.",
+  },
+  {
+    icon: wholesomeLeafIcon,
+    title: "Varied and wholesome diet",
+    text: "Freshly prepared with a balance of key nutrients.",
+  },
+  {
+    icon: socialGroupIcon,
+    title: "Social time with friends",
+    text: "Sharing meals and building friendships.",
+  },
+];
+
+const chefHighlights = [
+  {
+    icon: tryTastesBowlIcon,
+    title: "Try new tastes",
+    text: "A chance to explore different flavours and textures.",
+  },
+  {
+    icon: developIndependenceIcon,
+    title: "Develop independence",
+    text: "Encouraging children to make choices and build confidence.",
+  },
+  {
+    icon: positiveSocialMomentsIcon,
+    title: "Enjoy positive social moments",
+    text: "Mealtimes are a time to connect, chat and share with friends.",
+  },
+];
+
 const dailyRhythm = [
   {
-    icon: "star",
-    time: formatTimeRange(hoursNutritionPage.welcomeAndFreePlay.startTime, hoursNutritionPage.welcomeAndFreePlay.endTime),
+    icon: welcomeStarIcon,
+    time: formatTimeRange(
+      hoursNutritionPage.welcomeAndFreePlay.startTime,
+      hoursNutritionPage.welcomeAndFreePlay.endTime,
+    ),
     title: hoursNutritionPage.welcomeAndFreePlay.title,
     copy: hoursNutritionPage.welcomeAndFreePlay.description,
   },
   {
-    icon: "book",
-    time: formatTimeRange(hoursNutritionPage.learningAndExploration.startTime, hoursNutritionPage.learningAndExploration.endTime),
+    icon: learningBookIcon,
+    time: formatTimeRange(
+      hoursNutritionPage.learningAndExploration.startTime,
+      hoursNutritionPage.learningAndExploration.endTime,
+    ),
     title: hoursNutritionPage.learningAndExploration.title,
     copy: hoursNutritionPage.learningAndExploration.description,
   },
   {
-    icon: "heart",
-    time: formatTimeRange(hoursNutritionPage.morningSnack.startTime, hoursNutritionPage.morningSnack.endTime),
+    icon: snackAppleIcon,
+    time: formatTimeRange(
+      hoursNutritionPage.morningSnack.startTime,
+      hoursNutritionPage.morningSnack.endTime,
+    ),
     title: hoursNutritionPage.morningSnack.title,
     copy: hoursNutritionPage.morningSnack.description,
   },
   {
-    icon: "star",
-    time: formatTimeRange(hoursNutritionPage.outdoorAdventures.startTime, hoursNutritionPage.outdoorAdventures.endTime),
+    icon: outdoorsTreeIcon,
+    time: formatTimeRange(
+      hoursNutritionPage.outdoorAdventures.startTime,
+      hoursNutritionPage.outdoorAdventures.endTime,
+    ),
     title: hoursNutritionPage.outdoorAdventures.title,
     copy: hoursNutritionPage.outdoorAdventures.description,
   },
   {
-    icon: "heart",
-    time: formatTimeRange(hoursNutritionPage.lunch.startTime, hoursNutritionPage.lunch.endTime),
+    icon: lunchCutleryIcon,
+    time: formatTimeRange(
+      hoursNutritionPage.lunch.startTime,
+      hoursNutritionPage.lunch.endTime,
+    ),
     title: hoursNutritionPage.lunch.title,
     copy: hoursNutritionPage.lunch.description,
   },
   {
-    icon: "clock",
-    time: formatTimeRange(hoursNutritionPage.restAndQuietTime.startTime, hoursNutritionPage.restAndQuietTime.endTime),
+    icon: restMoonIcon,
+    time: formatTimeRange(
+      hoursNutritionPage.restAndQuietTime.startTime,
+      hoursNutritionPage.restAndQuietTime.endTime,
+    ),
     title: hoursNutritionPage.restAndQuietTime.title,
     copy: hoursNutritionPage.restAndQuietTime.description,
   },
   {
-    icon: "star",
-    time: formatTimeRange(hoursNutritionPage.afternoonPlayAndHome.startTime, hoursNutritionPage.afternoonPlayAndHome.endTime),
+    icon: playBallIcon,
+    time: formatTimeRange(
+      hoursNutritionPage.afternoonPlayAndHome.startTime,
+      hoursNutritionPage.afternoonPlayAndHome.endTime,
+    ),
     title: hoursNutritionPage.afternoonPlayAndHome.title,
     copy: hoursNutritionPage.afternoonPlayAndHome.description,
   },
 ] as const;
 ---
 
-<BaseLayout seo={seo} businessDetails={businessDetails}>
+<BaseLayout
+  seo={{
+    title: "Opening Hours & Nutrition in Easton | Little Wise Kids",
+    description: `Little Wise Kids is open ${businessDetails.openingDays}, with full-day and half-day childcare sessions and nutritious meals prepared with children’s needs in mind.`,
+    canonicalPath: "/hours-nutrition",
+  }}
+  businessDetails={businessDetails}
+>
   <article class="hours-page">
     <SubpageHero
       id="hours-page-title"
@@ -97,7 +195,6 @@ const dailyRhythm = [
       titleLineOne={hoursNutritionPage.heroTitleLineOne}
       titleLineTwo={hoursNutritionPage.heroTitleLineTwo}
     >
-
       <PortableContent value={hoursNutritionPage.heroParagraphs} />
     </SubpageHero>
 
@@ -106,41 +203,46 @@ const dailyRhythm = [
         <div class="hours-page__stack">
           <section
             id="operating-hours"
-            class="hours-card
-              hours-card--green"
+            class="hours-section hours-section--green"
             aria-labelledby="operating-hours-title"
           >
-            <div class="hours-card__split">
-              <div class="hours-card__main">
-                <header class="hours-card__heading">
-                  <span class="hours-card__number" aria-hidden="true">
-                    01
-                  </span>
+            <div class="hours-section__layout">
+              <div class="hours-section__intro">
+                <header class="hours-section__heading">
+                  <span class="hours-section__number" aria-hidden="true"
+                    >01</span
+                  >
 
                   <div>
+                    <p class="hours-section__eyebrow">
+                      {hoursNutritionPage.operatingHoursLabel}
+                    </p>
+
                     <h2 id="operating-hours-title">
                       {hoursNutritionPage.operatingHoursHeading}
                     </h2>
                   </div>
                 </header>
 
-                <div class="hours-card__prose">
-                  <PortableContent value={hoursNutritionPage.operatingHoursParagraphs} />
-
-                  <h3>Flexible Sessions</h3>
-                  <p>We offer both full-day and half-day sessions to suit your family’s routine. While we recommend a minimum attendance to help children settle and build relationships, we are happy to discuss flexible arrangements.</p>
-
-                  <h3>Holidays & Closures</h3>
-                  <p>We are open year-round, closing only for Bank Holidays and for a short period between Christmas and New Year. Exact closure dates are shared with parents well in advance.</p>
+                <div class="hours-section__prose">
+                  <PortableContent
+                    value={hoursNutritionPage.operatingHoursParagraphs}
+                  />
                 </div>
               </div>
 
-              <dl class="hours-schedule">
+              <dl class="session-list">
                 {
                   sessionDetails.map((detail) => (
-                    <div class="hours-schedule__row">
-                      <span class="hours-schedule__icon" aria-hidden="true">
-                        <Icon name={detail.icon} size={25} />
+                    <div class="session-list__row">
+                      <span class="session-list__icon" aria-hidden="true">
+                        <Image
+                          src={detail.icon}
+                          alt=""
+                          width={48}
+                          height={48}
+                          decoding="async"
+                        />
                       </span>
 
                       <dt>{detail.label}</dt>
@@ -151,21 +253,30 @@ const dailyRhythm = [
               </dl>
             </div>
 
-            <aside class="hours-card__note" aria-labelledby="min-attendance-title">
-              <span class="hours-card__note-icon" aria-hidden="true">
-                <Icon name="heart" size={30} />
+            <aside
+              class="attendance-strip"
+              aria-labelledby="minimum-attendance-title"
+            >
+              <span class="attendance-strip__icon" aria-hidden="true">
+                <Image
+                  src={attendanceHeartIcon}
+                  alt=""
+                  width={56}
+                  height={56}
+                  decoding="async"
+                />
               </span>
 
-              <div class="hours-card__note-copy">
-                <h3 id="min-attendance-title">{hoursNutritionPage.minAttendancePanelTitle}</h3>
+              <div class="attendance-strip__copy">
+                <h3 id="minimum-attendance-title">
+                  {hoursNutritionPage.minAttendancePanelTitle}
+                </h3>
 
-                <p>
-                  {hoursNutritionPage.minAttendancePanelCopy}
-                </p>
+                <p>{hoursNutritionPage.minAttendancePanelCopy}</p>
               </div>
 
-              <a class="hours-card__note-link" href="/contact#contact-form">
-                Contact Us About Availability
+              <a class="attendance-strip__link" href="/contact#contact-form">
+                {hoursNutritionPage.availabilityCtaLabel}
                 <span aria-hidden="true">→</span>
               </a>
             </aside>
@@ -173,70 +284,147 @@ const dailyRhythm = [
 
           <section
             id="nutrition"
-            class="hours-card
-              hours-card--purple"
+            class="hours-section hours-section--purple nutrition-section"
             aria-labelledby="nutrition-title"
           >
-
-
-            <div class="hours-card__split">
-              <div class="hours-card__main">
-                <header class="hours-card__heading">
-                  <span class="hours-card__number" aria-hidden="true">
-                    02
-                  </span>
+            <div class="nutrition-section__layout">
+              <div class="nutrition-section__copy">
+                <header class="hours-section__heading">
+                  <span class="hours-section__number" aria-hidden="true"
+                    >02</span
+                  >
 
                   <div>
-                    <h2 id="nutrition-title">
-                      {hoursNutritionPage.nutritionHeading}
+                    <p class="hours-section__eyebrow">
+                      {hoursNutritionPage.nutritionLabel}
+                    </p>
+
+                    <h2 id="nutrition-title" class="nutrition-section__heading">
+                      Thriving minds start with <span>nourished bodies.</span>
                     </h2>
                   </div>
                 </header>
 
-                <div class="hours-card__prose">
-                  <PortableContent value={hoursNutritionPage.nutritionParagraphs} />
-
-                  <h3>Allergies & Dietary Requirements</h3>
-                  <p>We take dietary requirements very seriously. All meals are prepared in a dedicated, clean environment, and we work closely with parents to ensure all allergies and intolerances are safely accommodated.</p>
-
-                  <h3>Sample Menu</h3>
-                  <p>Our home-cooked meals vary daily. A typical day might include porridge or fresh fruit for breakfast, a hot lunch like mild vegetable curry with rice, and a healthy afternoon snack such as hummus with carrot sticks.</p>
+                <div class="hours-section__prose">
+                  <PortableContent
+                    value={hoursNutritionPage.nutritionParagraphs}
+                  />
                 </div>
               </div>
 
-              <aside class="nutrition-checklist" aria-labelledby="nutrition-checklist-title">
-                <h3 id="nutrition-checklist-title">What We Provide</h3>
+              <ul
+                class="nutrition-path"
+                aria-label="How food supports children at Little Wise Kids"
+              >
+                {
+                  nutritionHighlights.map((item) => (
+                    <li>
+                      <span class="nutrition-path__icon" aria-hidden="true">
+                        <Image
+                          src={item.icon}
+                          alt=""
+                          width={48}
+                          height={48}
+                          decoding="async"
+                        />
+                      </span>
 
-                <ul>
-                  {
-                    hoursNutritionPage.nutritionChecklist.map((point: string) => (
-                      <li>
-                        <span aria-hidden="true">✓</span>
-                        <p>{point}</p>
-                      </li>
-                    ))
-                  }
-                </ul>
-              </aside>
-            </div>
-
-            <div
-              class="hours-card__prose fresh-food-block"
-            >
-              <h3 class="fresh-food-title">
-                {hoursNutritionPage.freshlyPreparedHeading}
-              </h3>
-              <p>
-                {hoursNutritionPage.chefNote}
-              </p>
+                      <div class="nutrition-path__content">
+                        <h3>{item.title}</h3>
+                        <p>{item.text}</p>
+                      </div>
+                    </li>
+                  ))
+                }
+              </ul>
             </div>
           </section>
 
           <section
+            id="nursery-chef"
+            class="hours-section hours-section--yellow chef-section"
+            aria-labelledby="nursery-chef-title"
+          >
+            <div class="chef-section__layout">
+              <div class="chef-section__copy">
+                <header class="hours-section__heading">
+                  <span class="hours-section__number" aria-hidden="true"
+                    >03</span
+                  >
+
+                  <div>
+                    <p class="hours-section__eyebrow">
+                      {hoursNutritionPage.nurseryChefLabel}
+                    </p>
+
+                    <h2 id="nursery-chef-title">
+                      {hoursNutritionPage.freshlyPreparedHeading}
+                    </h2>
+                  </div>
+                </header>
+
+                <div class="hours-section__prose">
+                  <p>{hoursNutritionPage.chefNote}</p>
+                </div>
+              </div>
+
+              <ol
+                class="chef-journey"
+                aria-label="Food experiences for children"
+              >
+                {
+                  chefHighlights.map((item, index) => (
+                    <li>
+                      <span class="chef-journey__number" aria-hidden="true">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+
+                      <span class="chef-journey__icon-wrapper" aria-hidden="true">
+                        <Image
+                          class="chef-journey__icon"
+                          src={item.icon}
+                          alt=""
+                          width={64}
+                          height={64}
+                          decoding="async"
+                        />
+                      </span>
+
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </li>
+                  ))
+                }
+              </ol>
+            </div>
+
+            <aside class="dietary-note">
+              <span class="dietary-note__icon" aria-hidden="true">
+                <Image
+                  src={dietaryInformationIcon}
+                  alt=""
+                  width={48}
+                  height={48}
+                  decoding="async"
+                />
+              </span>
+
+              <p>{hoursNutritionPage.dietaryContactCopy}</p>
+
+              <a href="/contact#contact-form">
+                {hoursNutritionPage.dietaryContactCtaLabel}
+                <span aria-hidden="true">→</span>
+              </a>
+            </aside>
+          </section>
+
+          <!--
+            Existing scroll-driven timeline structure and behaviour are preserved.
+            The content remains Sanity-driven through the existing fixed time slots.
+          -->
+          <section
             id="typical-day"
-            class="hours-card
-              hours-card--blue
-              hours-day"
+            class="hours-card hours-card--blue hours-day"
             aria-labelledby="typical-day-title"
           >
             <header class="hours-day__header">
@@ -245,7 +433,13 @@ const dailyRhythm = [
               </span>
 
               <div>
-                <h2 id="typical-day-title">{hoursNutritionPage.typicalDayHeading}</h2>
+                <p class="hours-card__label">
+                  {hoursNutritionPage.typicalDayLabel}
+                </p>
+
+                <h2 id="typical-day-title">
+                  {hoursNutritionPage.typicalDayHeading}
+                </h2>
 
                 <p class="hours-day__lead">
                   {hoursNutritionPage.typicalDayLead}
@@ -266,10 +460,28 @@ const dailyRhythm = [
                       <h3>{event.title}</h3>
 
                       <p>{event.copy}</p>
+
+                      <Image
+                        src={event.icon}
+                        alt=""
+                        width={72}
+                        height={72}
+                        aria-hidden="true"
+                        decoding="async"
+                        class="hours-day__event-watermark"
+                      />
                     </article>
 
                     <span class="hours-day__marker" aria-hidden="true">
-                      <Icon name={event.icon} size={25} />
+                      <Image
+                        src={event.icon}
+                        alt=""
+                        width={48}
+                        height={48}
+                        aria-hidden="true"
+                        decoding="async"
+                        class="hours-day__marker-img"
+                      />
                     </span>
                   </li>
                 ))
