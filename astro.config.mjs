@@ -16,6 +16,7 @@ export default defineConfig({
   output: "static",
   adapter: cloudflare({
     imageService: "compile",
+    sessionResponse: false,
   }),
   image: {
     responsiveStyles: true,

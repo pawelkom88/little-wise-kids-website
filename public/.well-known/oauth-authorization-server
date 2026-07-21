@@ -17,7 +17,10 @@
     "RS256"
   ],
   "agent_auth": {
-    "register_uri": "https://little-wise-kids.raspy-snowflake-9303.workers.dev/auth.md",
-    "supported_identity_types": ["x509", "jwt"]
+    "register_uri": "https://littlewisekids.co.uk/auth.md",
+    "supported_identity_types": ["x509", "jwt"],
+    "supported_credential_types": ["client_credentials", "bearer"],
+    "revocation_endpoint": "https://littlewisekids.co.uk/oauth/revoke",
+    "claim_endpoint": "https://littlewisekids.co.uk/oauth/claim"
   }
 }
