@@ -1,0 +1,168 @@
+---
+import { Image } from "astro:assets";
+
+import buildingImage from "../../assets/images/little-wise-kids-nursery-building-stapleton-road-bristol.webp";
+import streetImage from "../../assets/images/newton-street-route-to-little-wise-kids-bristol.webp";
+import entranceImage from "../../assets/images/little-wise-kids-nursery-entrance-sign-bristol.webp";
+
+import buildingIcon from "../../assets/images/icon-guide-building.jpg";
+import turnIcon from "../../assets/images/icon-guide-turn.jpg";
+import signIcon from "../../assets/images/icon-guide-sign.jpg";
+import welcomeIcon from "../../assets/images/icon-guide-welcome.jpg";
+import Button from "../ui/Button.astro";
+import { formatTimeRange } from "../../lib/formatters";
+
+import type { ContactPage, BusinessDetails } from "../../lib/types";
+
+import "./location-guide.css";
+
+interface Props {
+  contactPage: ContactPage;
+  businessDetails: BusinessDetails;
+}
+
+const { contactPage, businessDetails } = Astro.props;
+
+const openingHours = formatTimeRange(
+  businessDetails.openingTime,
+  businessDetails.closingTime
+);
+
+const steps = [
+  {
+    number: "1",
+    title: contactPage.findBuildingStep?.title ?? "",
+    description: contactPage.findBuildingStep?.description ?? "",
+    image: buildingImage,
+    alt: contactPage.findBuildingStep?.alt ?? "",
+    icon: buildingIcon,
+  },
+  {
+    number: "2",
+    title: contactPage.turnStreetStep?.title ?? "",
+    description: contactPage.turnStreetStep?.description ?? "",
+    image: streetImage,
+    alt: contactPage.turnStreetStep?.alt ?? "",
+    icon: turnIcon,
+  },
+  {
+    number: "3",
+    title: contactPage.lookForSignStep?.title ?? "",
+    description: contactPage.lookForSignStep?.description ?? "",
+    image: entranceImage,
+    alt: contactPage.lookForSignStep?.alt ?? "",
+    icon: signIcon,
+  },
+];
+---
+
+<section class="location-guide" aria-labelledby="location-guide-title">
+  <div class="location-guide__intro">
+    <header class="location-guide__heading">
+      {contactPage.locationLabel && <p class="location-guide__eyebrow">{contactPage.locationLabel}</p>}
+
+      <h2 id="location-guide-title">{contactPage.locationHeading}</h2>
+
+      {contactPage.locationLead && <p class="location-guide__lead">{contactPage.locationLead}</p>}
+    </header>
+
+    <div class="location-guide__actions">
+      <Button
+        href={businessDetails.address.mapUrl}
+        variant="primary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Open in Google Maps
+      </Button>
+
+      <Button href="#contact-form" variant="secondary" icon="none">
+        Contact us
+      </Button>
+    </div>
+
+    <div class="location-guide__divider" aria-hidden="true"></div>
+
+    <dl class="location-guide__details">
+      <div class="location-guide__detail">
+        <span class="location-guide__detail-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 21s6-5.1 6-11a6 6 0 1 0-12 0c0 5.9 6 11 6 11Z"></path>
+            <circle cx="12" cy="10" r="2.25"></circle>
+          </svg>
+        </span>
+
+        <div>
+          <dt>{businessDetails.address.organisation}</dt>
+          <dd>
+            <address>
+              {businessDetails.address.line1}<br />
+              {businessDetails.address.city}, {businessDetails.address.postcode}
+            </address>
+          </dd>
+        </div>
+      </div>
+
+      <div class="location-guide__detail">
+        <span class="location-guide__detail-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="8"></circle>
+            <path d="M12 7v5l3.5 2"></path>
+          </svg>
+        </span>
+
+        <div>
+          <dt>Opening hours</dt>
+          <dd>
+            {businessDetails.openingDays}<br />
+            {openingHours}
+          </dd>
+        </div>
+      </div>
+    </dl>
+
+    <aside class="location-guide__welcome">
+      <span class="location-guide__welcome-icon" aria-hidden="true">
+        <Image src={welcomeIcon} alt="" width={80} height={80} />
+      </span>
+
+      <p>
+        {contactPage.welcomeHeading && <strong>{contactPage.welcomeHeading}</strong>}
+        {contactPage.welcomeText && <span>{contactPage.welcomeText}</span>}
+      </p>
+    </aside>
+  </div>
+
+  <ol class="location-guide__steps">
+    {
+      steps.map((step) => (
+        <li class="location-guide__step">
+          <span class="location-guide__step-number" aria-hidden="true">
+            {step.number}
+          </span>
+
+          <article class="location-guide__card">
+            <div class="location-guide__image-wrap">
+              <Image
+                class="location-guide__image"
+                src={step.image}
+                alt={step.alt}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
+            <div class="location-guide__card-body">
+              <span class="location-guide__step-icon" aria-hidden="true">
+                <Image src={step.icon} alt="" width={64} height={64} />
+              </span>
+
+              <h3>{step.number}. {step.title}</h3>
+              <p>{step.description}</p>
+            </div>
+          </article>
+        </li>
+      ))
+    }
+  </ol>
+</section>
