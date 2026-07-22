@@ -31,6 +31,11 @@ export default defineConfig({
       },
     },
   },
+  vite: {
+    build: {
+      chunkSizeWarningLimit: 1500,
+    },
+  },
   integrations: [
     sitemap({
       filter: (page) =>
