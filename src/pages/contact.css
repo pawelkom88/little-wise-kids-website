@@ -487,6 +487,41 @@
  * Thank-you page
  */
 
+.thank-you-header {
+  padding-top: clamp(var(--space-xl), 6vw, var(--space-3xl));
+  padding-bottom: clamp(var(--space-l), 4vw, var(--space-xl));
+  text-align: center;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-purple-soft) 30%, var(--color-page)),
+    var(--color-page) 100%
+  );
+}
+
+.thank-you-header__eyebrow {
+  margin-bottom: var(--space-s);
+  color: var(--color-purple-dark);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.thank-you-header__logo {
+  max-width: min(100%, 42rem);
+  margin-inline: auto;
+}
+
+.thank-you-header__copy {
+  max-width: 38rem;
+  margin: var(--space-m) auto 0;
+  color: var(--color-ink-soft);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  text-wrap: balance;
+}
+
 .contact-success__card {
   display: grid;
   width: min(100%, 52rem);
@@ -494,19 +529,6 @@
   margin-inline: auto;
   padding: clamp(var(--space-xl), 7vw, var(--space-3xl));
   text-align: center;
-}
-
-.contact-success__icon {
-  display: grid;
-  width: 6rem;
-  aspect-ratio: 1;
-  place-items: center;
-  margin-bottom: var(--space-m);
-  border: 1px solid
-    color-mix(in srgb, var(--color-purple) 20%, var(--color-border));
-  border-radius: 50%;
-  color: var(--color-purple);
-  background: var(--color-purple-soft);
 }
 
 .contact-success__card h2 {

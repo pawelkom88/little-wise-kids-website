@@ -74,24 +74,24 @@
 
 .location-guide__detail {
   display: grid;
-  grid-template-columns: 3.5rem minmax(0, 1fr);
-  gap: var(--space-s);
-  align-items: start;
+  gap: var(--space-xs);
 }
 
 .location-guide__detail-icon {
-  display: grid;
-  width: 3.5rem;
-  aspect-ratio: 1;
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
   place-items: center;
+  justify-content: center;
   border-radius: 50%;
   color: var(--color-purple);
   background: var(--color-purple-soft);
+  flex-shrink: 0;
 }
 
 .location-guide__detail-icon svg {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
@@ -100,10 +100,12 @@
 }
 
 .location-guide__detail dt {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
   color: var(--color-ink);
   font-family: var(--font-heading);
   font-weight: var(--font-weight-bold);
-  margin-bottom: 0.25rem;
 }
 
 .location-guide__detail dd,
@@ -112,6 +114,7 @@
   font-style: normal;
   line-height: var(--line-height-body);
   margin: 0;
+  padding-left: calc(2.5rem + var(--space-xs));
 }
 
 .location-guide__welcome {

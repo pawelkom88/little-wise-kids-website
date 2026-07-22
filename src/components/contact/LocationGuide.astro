@@ -85,39 +85,37 @@ const steps = [
 
     <dl class="location-guide__details">
       <div class="location-guide__detail">
-        <span class="location-guide__detail-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 21s6-5.1 6-11a6 6 0 1 0-12 0c0 5.9 6 11 6 11Z"></path>
-            <circle cx="12" cy="10" r="2.25"></circle>
-          </svg>
-        </span>
-
-        <div>
-          <dt>{businessDetails.address.organisation}</dt>
-          <dd>
-            <address>
-              {businessDetails.address.line1}<br />
-              {businessDetails.address.city}, {businessDetails.address.postcode}
-            </address>
-          </dd>
-        </div>
+        <dt>
+          <span class="location-guide__detail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 21s6-5.1 6-11a6 6 0 1 0-12 0c0 5.9 6 11 6 11Z"></path>
+              <circle cx="12" cy="10" r="2.25"></circle>
+            </svg>
+          </span>
+          <span>{businessDetails.address.organisation}</span>
+        </dt>
+        <dd>
+          <address>
+            {businessDetails.address.line1}<br />
+            {businessDetails.address.city}, {businessDetails.address.postcode}
+          </address>
+        </dd>
       </div>
 
       <div class="location-guide__detail">
-        <span class="location-guide__detail-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="8"></circle>
-            <path d="M12 7v5l3.5 2"></path>
-          </svg>
-        </span>
-
-        <div>
-          <dt>Opening hours</dt>
-          <dd>
-            {businessDetails.openingDays}<br />
-            {openingHours}
-          </dd>
-        </div>
+        <dt>
+          <span class="location-guide__detail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="8"></circle>
+              <path d="M12 7v5l3.5 2"></path>
+            </svg>
+          </span>
+          <span>Opening hours</span>
+        </dt>
+        <dd>
+          {businessDetails.openingDays}<br />
+          {openingHours}
+        </dd>
       </div>
     </dl>
 

@@ -31,21 +31,27 @@
 }
 
 .parents-guide__row--blue {
-  --parents-accent: var(--color-blue);
+  --parents-accent: var(--color-blue-dark);
   --parents-accent-dark: var(--color-blue-dark);
   --parents-soft: var(--color-blue-soft);
 }
 
 .parents-guide__row--green {
-  --parents-accent: var(--color-green);
+  --parents-accent: var(--color-green-strong);
   --parents-accent-dark: var(--color-green-dark);
   --parents-soft: var(--color-green-soft);
 }
 
 .parents-guide__row--yellow {
-  --parents-accent: var(--color-yellow);
-  --parents-accent-dark: var(--color-yellow-strong);
+  --parents-accent: var(--color-orange-strong);
+  --parents-accent-dark: var(--color-orange-dark);
   --parents-soft: var(--color-yellow-soft);
+}
+
+.parents-guide__row--purple {
+  --parents-accent: var(--color-purple-strong);
+  --parents-accent-dark: var(--color-purple-dark);
+  --parents-soft: var(--color-purple-soft);
 }
 
 .parents-guide__rail {
@@ -55,7 +61,7 @@
 }
 
 .parents-guide__number {
-  color: color-mix(in srgb, var(--parents-accent) 58%, var(--color-page));
+  color: var(--parents-accent);
   font-family: var(--font-heading);
   font-size: var(--font-size-section-title);
   font-weight: var(--font-weight-bold);
@@ -390,7 +396,7 @@
 
 .parents-fees-table tbody th {
   width: 52%;
-  color: var(--parents-accent-dark);
+  color: var(--color-ink);
   background: color-mix(in srgb, var(--parents-soft) 44%, var(--color-surface));
   font-family: var(--font-heading);
   font-size: var(--font-size-body);

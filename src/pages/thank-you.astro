@@ -1,11 +1,10 @@
 ---
 export const prerender = true;
 import "./contact.css";
-import Icon from "../components/icons/Icon.astro";
 import Container from "../components/layout/Container.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
+import AnimatedThankYouLogo from "../components/ui/AnimatedThankYouLogo.astro";
 import { getThankYouPage, getBusinessDetails } from "../utils/sanity";
 import type { SeoConfig } from "../lib/seo/types";
 
@@ -21,25 +20,25 @@ const seo: SeoConfig = {
 
 <BaseLayout seo={seo} businessDetails={businessDetails}>
   <article class="contact-success">
-    <SubpageHero
-      id="thank-you-title"
-      eyebrow={thankYouPage.heroEyebrow ?? "Message Received"}
-      tone="blue"
-      class="contact-hero--success"
-      titleLineOne={thankYouPage.heroTitleLineOne}
-      titleLineTwo={thankYouPage.heroTitleLineTwo}
-    >
+    <header class="thank-you-header">
+      <Container size="wide">
+        {thankYouPage.heroEyebrow && (
+          <p class="thank-you-header__eyebrow">{thankYouPage.heroEyebrow}</p>
+        )}
 
-      <PortableContent value={thankYouPage.heroParagraphs} />
-    </SubpageHero>
+        <AnimatedThankYouLogo class="thank-you-header__logo" />
+
+        {thankYouPage.heroParagraphs && (
+          <div class="thank-you-header__copy">
+            <PortableContent value={thankYouPage.heroParagraphs} />
+          </div>
+        )}
+      </Container>
+    </header>
 
     <section class="contact-success__content">
       <Container size="wide">
         <div class="contact-success__card">
-          <span class="contact-success__icon" aria-hidden="true">
-            <Icon name="heart" size={44} />
-          </span>
-
           {thankYouPage.nextStepsEyebrow && (
             <p class="contact-section-heading__eyebrow">{thankYouPage.nextStepsEyebrow}</p>
           )}

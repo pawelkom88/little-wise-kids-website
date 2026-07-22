@@ -1,0 +1,324 @@
+---
+interface Props {
+  class?: string;
+  ariaLabel?: string;
+}
+
+const { class: className = "", ariaLabel = "Thank You from Little Wise Kids" } = Astro.props;
+---
+
+<div class:list={["animated-thank-you-logo", className]}>
+  <svg
+    viewBox="0 0 1774 887"
+    role="img"
+    aria-label={ariaLabel}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <linearGradient id="purpleIcon" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#c23dcc" />
+        <stop offset=".48" stop-color="#aa34b9" />
+        <stop offset="1" stop-color="#922ca8" />
+      </linearGradient>
+      <linearGradient id="purpleText" x1="0" y1="0" x2=".7" y2="1">
+        <stop offset="0" stop-color="#a83ac8" />
+        <stop offset=".55" stop-color="#9437c2" />
+        <stop offset="1" stop-color="#812aae" />
+      </linearGradient>
+      <linearGradient id="green" x1="0" y1="0" x2=".35" y2="1">
+        <stop offset="0" stop-color="#69c95a" />
+        <stop offset=".52" stop-color="#59bd50" />
+        <stop offset="1" stop-color="#4caf48" />
+      </linearGradient>
+    </defs>
+
+    <g class="logo-finish">
+      <!-- Icon Artwork (Child, Hand, Stars) -->
+      <g id="left-icon" aria-hidden="true">
+        <path
+          class="hand"
+          fill="url(#purpleIcon)"
+          fill-rule="evenodd"
+          d="M766,700 L749,679 L721,651 L701,635 L677,619 L651,606 L632,599 L625,598 L617,595 L607,594 L606,593 L576,591 L575,592 L559,592 L558,593 L544,594 L543,595 L539,595 L538,596 L534,596 L533,597 L518,600 L515,602 L512,602 L509,604 L501,606 L476,617 L474,619 L458,627 L431,645 L424,648 L417,653 L381,671 L352,681 L301,692 L289,697 L285,701 L285,706 L287,710 L296,718 L314,726 L326,728 L327,729 L333,729 L334,730 L358,730 L359,729 L368,729 L369,728 L385,726 L386,725 L401,722 L408,719 L411,719 L429,713 L432,711 L443,708 L446,706 L454,704 L457,702 L465,701 L466,700 L470,700 L471,701 L471,703 L465,710 L444,725 L418,737 L386,747 L382,747 L381,748 L363,751 L362,752 L356,752 L355,753 L349,753 L348,754 L340,754 L339,755 L322,755 L321,756 L287,755 L286,754 L270,753 L269,752 L264,752 L263,751 L244,748 L153,724 L149,724 L148,723 L126,719 L125,718 L113,717 L112,716 L104,716 L103,715 L85,715 L84,716 L80,716 L77,717 L74,720 L74,725 L84,740 L106,762 L129,780 L148,793 L182,813 L217,830 L257,845 L260,845 L274,850 L277,850 L290,854 L299,855 L304,857 L322,859 L323,860 L331,860 L332,861 L341,861 L342,862 L388,862 L389,861 L399,861 L400,860 L415,859 L416,858 L440,854 L444,852 L451,851 L461,847 L464,847 L476,843 L479,841 L499,834 L524,822 L526,822 L547,811 L549,811 L563,803 L565,803 L567,801 L592,789 L594,787 L615,777 L617,775 L625,771 L627,771 L636,765 L661,753 L663,751 L711,727 L713,727 L749,709 L751,709 L764,702 L766,702Z"
+        />
+        <path
+          class="child"
+          fill="url(#green)"
+          fill-rule="evenodd"
+          d="M452,138 L448,141 L443,172 L442,173 L436,200 L432,211 L431,218 L428,225 L428,228 L425,235 L425,238 L421,248 L419,257 L417,260 L412,277 L410,280 L408,288 L403,298 L401,305 L392,320 L384,337 L382,339 L378,351 L376,350 L374,345 L374,334 L385,308 L385,296 L379,284 L373,278 L358,270 L358,261 L357,258 L355,258 L353,260 L342,265 L331,265 L307,255 L306,254 L306,243 L305,242 L304,233 L301,225 L297,221 L295,222 L289,241 L286,244 L285,243 L285,235 L284,234 L284,230 L283,229 L281,218 L278,213 L272,208 L269,211 L269,230 L268,231 L268,235 L267,236 L265,247 L259,256 L239,279 L231,291 L223,308 L219,322 L218,337 L217,338 L218,339 L218,351 L220,356 L220,360 L224,368 L224,370 L233,384 L241,392 L253,400 L269,406 L281,407 L282,408 L291,408 L292,407 L299,407 L300,406 L309,405 L318,402 L347,387 L351,390 L351,395 L337,432 L329,448 L329,450 L309,489 L278,538 L246,581 L248,584 L251,584 L259,581 L274,573 L286,565 L294,558 L298,561 L302,567 L310,575 L315,578 L318,577 L319,573 L314,564 L312,558 L312,551 L311,550 L313,536 L342,492 L354,472 L357,465 L359,464 L360,465 L360,476 L361,477 L363,494 L364,495 L366,509 L370,522 L371,531 L375,544 L377,557 L372,572 L372,575 L366,591 L366,594 L364,597 L364,600 L358,615 L358,618 L356,621 L354,629 L352,632 L349,643 L347,646 L345,654 L341,662 L338,672 L347,670 L351,668 L354,668 L386,656 L388,645 L391,637 L393,638 L394,652 L422,638 L424,636 L453,620 L458,616 L463,614 L466,611 L466,605 L467,604 L469,578 L470,577 L470,567 L471,566 L471,555 L449,551 L445,549 L442,549 L441,547 L442,546 L455,546 L456,545 L468,545 L469,544 L480,544 L483,543 L482,532 L480,526 L480,521 L479,520 L475,496 L471,483 L470,475 L468,471 L468,468 L466,464 L466,461 L460,442 L458,439 L455,428 L446,408 L446,406 L442,399 L442,397 L429,372 L417,353 L418,350 L424,352 L427,352 L428,350 L428,347 L431,338 L431,334 L433,329 L433,325 L440,300 L443,283 L444,282 L458,223 L459,222 L471,221 L472,220 L489,220 L491,218 L489,212 L483,206 L474,201 L463,199 L462,198 L462,187 L463,186 L462,159 L461,158 L461,153 L458,143Z"
+        />
+        <g id="stars">
+          <path
+            class="star star-a"
+            fill="url(#purpleText)"
+            fill-rule="evenodd"
+            d="M357,42 L352,49 L349,49 L346,53 L351,59 L351,63 L353,65 L356,64 L365,65 L366,59 L371,55 L372,52 L369,49 L366,49 L362,42Z"
+          />
+          <path
+            class="star star-b"
+            fill="url(#purpleText)"
+            fill-rule="evenodd"
+            d="M405,40 L403,40 L401,44 L400,57 L399,58 L397,74 L381,82 L374,84 L366,88 L365,90 L367,93 L397,107 L398,132 L399,133 L399,139 L401,141 L403,141 L409,135 L425,116 L430,116 L435,118 L445,119 L451,121 L456,121 L457,120 L457,117 L444,91 L457,65 L457,63 L456,62 L450,62 L449,63 L437,64 L436,65 L427,65 L409,43Z"
+          />
+          <path
+            class="star star-c"
+            fill="url(#purpleText)"
+            fill-rule="evenodd"
+            d="M510,68 L499,75 L494,74 L485,69 L484,70 L487,80 L487,85 L478,95 L479,96 L492,97 L499,110 L500,110 L506,96 L519,94 L520,93 L510,83 L510,74 L511,73 L511,69Z"
+          />
+        </g>
+      </g>
+
+      <!-- Crisp Typography - "Thank" (Purple Gradient) -->
+      <g id="Thank" class="text-line line-thank">
+        <text
+          x="610"
+          y="430"
+          fill="url(#purpleText)"
+          font-family="'Quicksand', system-ui, -apple-system, sans-serif"
+          font-size="270"
+          font-weight="700"
+          letter-spacing="2"
+        >Thank</text>
+      </g>
+
+      <!-- Crisp Typography - "You!" (Green Gradient) -->
+      <g id="You" class="text-line line-you">
+        <text
+          x="880"
+          y="730"
+          fill="url(#green)"
+          font-family="'Quicksand', system-ui, -apple-system, sans-serif"
+          font-size="260"
+          font-weight="700"
+          letter-spacing="4"
+        >You!</text>
+      </g>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .animated-thank-you-logo {
+    display: block;
+    width: 100%;
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+
+  .animated-thank-you-logo svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Hardware accelerated character entrance */
+  .hand {
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+    animation: hand-in 8s cubic-bezier(0.2, 0.72, 0.22, 1) infinite;
+  }
+  .child {
+    transform-box: fill-box;
+    transform-origin: 50% 85%;
+    animation: child-in 8s cubic-bezier(0.18, 0.72, 0.24, 1) infinite;
+  }
+  .star {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .star-a {
+    animation: star-a 8s ease-in-out infinite;
+  }
+  .star-b {
+    animation: star-b 8s ease-in-out infinite;
+  }
+  .star-c {
+    animation: star-c 8s ease-in-out infinite;
+  }
+
+  /* Sleek, modern opacity + translateY fade-slide animation */
+  .text-line {
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+    will-change: opacity, transform;
+  }
+
+  .line-thank {
+    animation: fade-slide-thank 8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+
+  .line-you {
+    animation: fade-slide-you 8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+
+  @keyframes fade-slide-thank {
+    0%, 5% {
+      opacity: 0;
+      transform: translateY(32px);
+    }
+    22% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    86% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    94%, 100% {
+      opacity: 0;
+      transform: translateY(-12px);
+    }
+  }
+
+  @keyframes fade-slide-you {
+    0%, 18% {
+      opacity: 0;
+      transform: translateY(32px);
+    }
+    35% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    86% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    94%, 100% {
+      opacity: 0;
+      transform: translateY(-12px);
+    }
+  }
+
+  .logo-finish {
+    transform-box: view-box;
+    transform-origin: 50% 50%;
+    animation: finish-settle 8s cubic-bezier(0.22, 0.74, 0.22, 1) infinite;
+  }
+
+  @keyframes hand-in {
+    0%, 1% {
+      opacity: 0;
+      transform: translate(-34px, 26px) rotate(-2.2deg) scale(0.975);
+    }
+    8.5% {
+      opacity: 1;
+      transform: translate(2px, -1px) rotate(0.2deg) scale(1.006);
+    }
+    10.5%, 100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes child-in {
+    0%, 1.5% {
+      opacity: 0;
+      transform: translate(10px, -28px) rotate(1.8deg) scale(0.982);
+    }
+    9.3% {
+      opacity: 1;
+      transform: translate(-1px, 2px) rotate(-0.18deg) scale(1.005);
+    }
+    11.2%, 100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes star-a {
+    0%, 4% {
+      opacity: 0;
+      transform: translate(-9px, 13px) scale(0.72) rotate(-12deg);
+    }
+    10% {
+      opacity: 1;
+      transform: translate(1px, -1px) scale(1.04) rotate(2deg);
+    }
+    12%, 82% {
+      opacity: 1;
+      transform: none;
+    }
+    85% {
+      opacity: 0.82;
+      transform: scale(0.95) rotate(-2deg);
+    }
+    88%, 100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes star-b {
+    0%, 5% {
+      opacity: 0;
+      transform: translate(2px, 14px) scale(0.74) rotate(10deg);
+    }
+    11% {
+      opacity: 1;
+      transform: translate(-1px, -1px) scale(1.04) rotate(-2deg);
+    }
+    13%, 84% {
+      opacity: 1;
+      transform: none;
+    }
+    87% {
+      opacity: 0.84;
+      transform: scale(0.96) rotate(2deg);
+    }
+    90%, 100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes star-c {
+    0%, 6% {
+      opacity: 0;
+      transform: translate(10px, 9px) scale(0.72) rotate(-8deg);
+    }
+    12% {
+      opacity: 1;
+      transform: translate(-1px, 1px) scale(1.035) rotate(1deg);
+    }
+    14%, 86% {
+      opacity: 1;
+      transform: none;
+    }
+    89% {
+      opacity: 0.83;
+      transform: scale(0.95) rotate(-2deg);
+    }
+    92%, 100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes finish-settle {
+    0%, 59% {
+      transform: none;
+    }
+    62% {
+      transform: scale(1.004);
+    }
+    65%, 100% {
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+    }
+    .text-line {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .hand,
+    .child,
+    .star {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

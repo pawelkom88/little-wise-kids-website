@@ -40,22 +40,22 @@
 }
 
 .hours-section--green {
-  --hours-accent: var(--color-green-dark);
+  --hours-accent: var(--color-green-strong);
   --hours-soft: var(--color-green-soft);
 }
 
 .hours-section--purple {
-  --hours-accent: var(--color-purple-dark);
+  --hours-accent: var(--color-purple-strong);
   --hours-soft: var(--color-purple-soft);
 }
 
 .hours-section--yellow {
-  --hours-accent: var(--color-orange-dark);
+  --hours-accent: var(--color-orange-strong);
   --hours-soft: var(--color-yellow-soft);
 }
 
 .hours-card--blue {
-  --hours-accent: var(--color-blue-dark);
+  --hours-accent: var(--color-blue-strong);
   --hours-soft: var(--color-blue-soft);
 }
 
@@ -125,7 +125,7 @@
 .hours-section h3,
 .hours-card h3 {
   margin: 0;
-  color: var(--hours-accent);
+  color: var(--color-ink);
   font-family: var(--font-heading);
   font-size: var(--font-size-card-title);
   font-weight: var(--font-weight-bold);
