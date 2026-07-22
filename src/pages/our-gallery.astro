@@ -8,6 +8,7 @@ import PortableContent from "../components/content/PortableContent.astro";
 import SanityImage from "../components/media/SanityImage.astro";
 import { getGalleryPage, getGalleryPhotos, getBusinessDetails } from "../utils/sanity";
 import type { SeoConfig } from "../lib/seo/types";
+import heroBg from "../assets/images/littlewisekids-outdoor-hero-image.webp";
 import "./our-gallery.css";
 
 const galleryPage = await getGalleryPage();
@@ -51,6 +52,7 @@ const categoryEntries = Object.entries(categories);
       tone="blue"
       titleLineOne={galleryPage.heroTitleLineOne}
       titleLineTwo={galleryPage.heroTitleLineTwo}
+      bgImage={heroBg}
     >
       <PortableContent value={galleryPage.heroParagraphs} />
     </SubpageHero>

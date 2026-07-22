@@ -10,6 +10,7 @@ import { getMultilingualPage, getBusinessDetails } from "../utils/sanity";
 import type { SeoConfig } from "../lib/seo/types";
 import flowerImage from "../assets/images/flower-image.webp";
 import languageConnectionImage from "../assets/images/planet-english-portuguese-words.webp";
+import heroBg from "../assets/images/littlewisekids-outdoor-hero-image.webp";
 import "./multilingual-learning.css";
 
 import iconCommunication from "../assets/images/icon-communication.png";
@@ -115,6 +116,7 @@ const screenFreeBenefits = multilingualPage.screenFreeBenefits.map(
       tone="purple"
       titleLineOne={multilingualPage.heroTitleLineOne}
       titleLineTwo={multilingualPage.heroTitleLineTwo}
+      bgImage={heroBg}
     >
       <PortableContent value={multilingualPage.heroParagraphs} />
     </SubpageHero>

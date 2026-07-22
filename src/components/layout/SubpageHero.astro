@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import "./SubpageHero.css";
 
 interface Props {
@@ -8,6 +10,8 @@ interface Props {
   eyebrow?: string;
   tone?: "purple" | "green" | "blue" | "yellow";
   align?: "left" | "center";
+  bgImage?: ImageMetadata;
+  bgAlt?: string;
   id?: string;
   class?: string;
   itemprop?: string;
@@ -20,6 +24,8 @@ const {
   eyebrow,
   tone = "purple",
   align = "center",
+  bgImage,
+  bgAlt = "",
   id,
   class: className,
   itemprop,
@@ -36,6 +42,17 @@ const wrapperClasses = [
 ---
 
 <header class={wrapperClasses}>
+  {
+    bgImage && (
+      <Image
+        src={bgImage}
+        alt={bgAlt}
+        class="subpage-hero__bg-img"
+        aria-hidden={bgAlt ? undefined : "true"}
+      />
+    )
+  }
+
   <div class="subpage-hero__content">
     {eyebrow && <p class="subpage-hero__eyebrow">{eyebrow}</p>}
 

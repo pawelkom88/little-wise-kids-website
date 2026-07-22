@@ -10,6 +10,7 @@ import { getBlogPosts, getBusinessDetails, urlFor } from "../../utils/sanity";
 import { mapBlogPost } from "../../lib/blog";
 import { buildArticleSchema } from "../../lib/seo/buildArticleSchema";
 import type { SeoConfig } from "../../lib/seo/types";
+import heroBg from "../../assets/images/littlewisekids-outdoor-hero-image.webp";
 import "./blog-article.css";
 
 export async function getStaticPaths() {
@@ -63,6 +64,7 @@ const seo: SeoConfig = {
       eyebrow={`Blog / ${article.categoryLabel}`}
       tone="purple"
       itemprop="headline"
+      bgImage={heroBg}
     >
       <Fragment slot="title">
         <span transition:name={`blog-title-${post.slug.current}`}>{article.title}</span>

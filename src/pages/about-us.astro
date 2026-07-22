@@ -12,6 +12,7 @@ import { getAboutPage, getBusinessDetails, urlFor } from "../utils/sanity";
 import type { SeoConfig } from "../lib/seo/types";
 import { buildPersonSchema } from "../lib/seo/buildPersonSchema";
 
+import heroBg from "../assets/images/littlewisekids-outdoor-hero-image.webp";
 import iconQuote from "../assets/images/icon-quote.png";
 import iconPlay from "../assets/images/icon-play.png";
 import iconRhythm from "../assets/images/icon-rhythm.png";
@@ -80,6 +81,7 @@ const learningFoundations = [
         tone="purple"
         titleLineOne={aboutPage.heroTitleLineOne}
         titleLineTwo={aboutPage.heroTitleLineTwo}
+        bgImage={heroBg}
       >
         <PortableContent value={aboutPage.heroParagraphs} />
       </SubpageHero>

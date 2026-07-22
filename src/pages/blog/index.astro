@@ -9,6 +9,7 @@ import SanityImage from "../../components/media/SanityImage.astro";
 import { getBlogPage, getBlogPosts, getBusinessDetails } from "../../utils/sanity";
 import { mapBlogPost, blogCategories } from "../../lib/blog";
 import type { SeoConfig } from "../../lib/seo/types";
+import heroBg from "../../assets/images/littlewisekids-outdoor-hero-image.webp";
 import "./blog.css";
 
 const blogPage = await getBlogPage();
@@ -56,6 +57,7 @@ const seo: SeoConfig = {
       tone="purple"
       titleLineOne={blogPage.heroTitleLineOne}
       titleLineTwo={blogPage.heroTitleLineTwo}
+      bgImage={heroBg}
     >
 
       <PortableContent value={blogPage.heroParagraphs} />

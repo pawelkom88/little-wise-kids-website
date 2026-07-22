@@ -9,6 +9,7 @@ import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
 import { getHoursNutritionPage, getBusinessDetails } from "../lib/queries";
 import { formatTimeRange } from "../lib/formatters";
+import heroBg from "../assets/images/littlewisekids-outdoor-hero-image.webp";
 import "./hours-nutrition.css";
 
 // Green section icons
@@ -194,6 +195,7 @@ const dailyRhythm = [
       tone="green"
       titleLineOne={hoursNutritionPage.heroTitleLineOne}
       titleLineTwo={hoursNutritionPage.heroTitleLineTwo}
+      bgImage={heroBg}
     >
       <PortableContent value={hoursNutritionPage.heroParagraphs} />
     </SubpageHero>

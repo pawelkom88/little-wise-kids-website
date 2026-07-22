@@ -14,6 +14,7 @@ import {
 } from "../utils/sanity";
 import { safeExternalUrl } from "../lib/urls.mjs";
 import type { SeoConfig } from "../lib/seo/types";
+import heroBg from "../assets/images/littlewisekids-outdoor-hero-image.webp";
 import "./parents-information.css";
 
 const parentsPage = await getParentsPage();
@@ -82,6 +83,7 @@ function formatReviewDate(value: string): string {
       tone="blue"
       titleLineOne={parentsPage.heroTitleLineOne}
       titleLineTwo={parentsPage.heroTitleLineTwo}
+      bgImage={heroBg}
     >
       <PortableContent value={parentsPage.heroParagraphs} />
     </SubpageHero>

@@ -8,6 +8,7 @@ import PortableContent from "../components/content/PortableContent.astro";
 import { getContactPage, getBusinessDetails } from "../lib/queries";
 import { formatTimeRange } from "../lib/formatters";
 import LocationGuide from "../components/contact/LocationGuide.astro";
+import heroBg from "../assets/images/littlewisekids-outdoor-hero-image.webp";
 import "./contact.css";
 
 const siteUrl = Astro.site ?? new URL("https://littlewisekids.co.uk");
@@ -25,6 +26,7 @@ const contactPage = await getContactPage();
 const businessDetails = await getBusinessDetails();
 
 import type { SeoConfig } from "../lib/seo/types";
+
 const seo: SeoConfig = {
   title: "Contact Little Wise Kids | Childcare Setting in Bristol BS5",
   description: "Contact Little Wise Kids in Bristol BS5 to ask about childcare availability, book a visit, or register for our screen-free early years setting.",
@@ -58,6 +60,7 @@ const nextSteps = [
       tone="blue"
       titleLineOne={contactPage.heroTitleLineOne}
       titleLineTwo={contactPage.heroTitleLineTwo}
+      bgImage={heroBg}
     >
 
       <PortableContent value={contactPage.heroParagraphs} />
