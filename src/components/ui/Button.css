@@ -11,6 +11,8 @@
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-solid);
   white-space: nowrap;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
   transition:
     transform 160ms ease,
     box-shadow 160ms ease,
@@ -21,9 +23,18 @@
   transform: translateY(-2px);
 }
 
+.button:active {
+  transform: scale(0.96);
+  transition-duration: 80ms;
+}
+
 .button--primary {
   color: var(--color-surface);
   background: var(--color-purple-dark);
+}
+
+.button--primary:active {
+  box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.25);
 }
 
 .button--secondary {
@@ -36,12 +47,21 @@
   );
 }
 
+.button--secondary:active {
+  background: color-mix(
+    in srgb,
+    var(--color-purple),
+    var(--color-surface) 92%
+  );
+}
+
 @media (prefers-reduced-motion: reduce) {
   .button {
     transition: none;
   }
 
-  .button:hover {
+  .button:hover,
+  .button:active {
     transform: none;
   }
 }

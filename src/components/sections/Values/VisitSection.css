@@ -144,14 +144,12 @@
 
 .lwk-visit-testimonial::before {
   position: absolute;
-  top: 0.9rem;
+  top: 1.1rem;
   left: 1rem;
-  color: var(--color-purple);
-  content: "“";
-  font-family: var(--font-decorative-symbol);
-  font-size: var(--visit-quote-mark-size);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-solid);
+  content: "";
+  width: 28px;
+  height: 28px;
+  background: url('../../../assets/images/icon-quote.png') no-repeat center / contain;
 }
 
 .lwk-visit-testimonial blockquote {

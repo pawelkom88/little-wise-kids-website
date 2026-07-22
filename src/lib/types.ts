@@ -217,6 +217,10 @@ export interface AboutPage {
   leadershipHeading: string;
   leadershipParagraphs: PortableTextBlock[];
   leadershipImage: ContentImage;
+  founderName?: string;
+  founderRole?: string;
+  founderQuote?: string;
+  founderTestimonial?: string;
 }
 
 export interface MultilingualPage {

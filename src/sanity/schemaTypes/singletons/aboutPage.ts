@@ -265,5 +265,33 @@ export const aboutPage = defineType({
       group: "leadership",
       validation: (rule) => rule.required().assetRequired().error("Image required."),
     }),
+    defineField({
+      name: "founderName",
+      title: "Founder Name",
+      description: "Name of the founder (e.g. Lukeba).",
+      type: "string",
+      group: "leadership",
+    }),
+    defineField({
+      name: "founderRole",
+      title: "Founder Role",
+      description: "Role of the founder (e.g. Founder & Early Years Educator).",
+      type: "string",
+      group: "leadership",
+    }),
+    defineField({
+      name: "founderQuote",
+      title: "Founder Statement / Quote",
+      description: "Callout statement text displayed under the founder video card.",
+      type: "text",
+      group: "leadership",
+    }),
+    defineField({
+      name: "founderTestimonial",
+      title: "Founder Testimonial / Quote",
+      description: "Testimonial quote displayed under the founder video card.",
+      type: "text",
+      group: "leadership",
+    }),
   ],
 });

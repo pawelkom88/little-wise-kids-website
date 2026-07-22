@@ -8,9 +8,11 @@ import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
 import SanityImage from "../components/media/SanityImage.astro";
 import { Image } from "astro:assets";
-import { getAboutPage, getBusinessDetails } from "../utils/sanity";
+import { getAboutPage, getBusinessDetails, urlFor } from "../utils/sanity";
 import type { SeoConfig } from "../lib/seo/types";
+import { buildPersonSchema } from "../lib/seo/buildPersonSchema";
 
+import iconQuote from "../assets/images/icon-quote.png";
 import iconPlay from "../assets/images/icon-play.png";
 import iconRhythm from "../assets/images/icon-rhythm.png";
 import iconOutdoor from "../assets/images/icon-outdoor.png";
@@ -23,14 +25,32 @@ import iconEmpathy from "../assets/images/icon-empathy.png";
 import iconIndependence from "../assets/images/icon-independence.png";
 import iconCreativity from "../assets/images/icon-creativity.png";
 import iconCriticalThinking from "../assets/images/icon-critical-thinking.png";
+import lukebaSignature from "../assets/images/lukeba-signature.webp";
 
 const aboutPage = await getAboutPage();
 const businessDetails = await getBusinessDetails();
 
+const founderName = aboutPage.founderName || "Lukeba";
+const founderRole = aboutPage.founderRole || "Founder & Early Years Educator";
+const founderQuote = aboutPage.founderQuote || aboutPage.founderTestimonial || "Today, I bring together strategic thinking, emotional intelligence and a deep respect for children’s individuality. At Little Wise Kids, I blend structure with warmth, curiosity with care, and high expectations with a truly nurturing approach.";
+
+const posterUrl = aboutPage.leadershipImage?.asset?._ref
+  ? urlFor(aboutPage.leadershipImage).width(800).url()
+  : "/images/littlewisekids-hero-poster.jpg";
+
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, "") : "https://littlewisekids.co.uk";
+const canonicalUrl = `${siteUrl}/about-us`;
+const seoTitle = `${aboutPage.heroTitleLineOne || "Child-Led Childcare"} ${aboutPage.heroTitleLineTwo || "in Easton"} | Little Wise Kids`;
+const seoDescription = `Meet Lukeba and the team behind Little Wise Kids, a calm, home-from-home childcare setting in ${businessDetails.address?.shortLocation || "Easton, Bristol BS5"}, focused on child-led play.`;
+
 const seo: SeoConfig = {
-  title: "Child-Led Childcare Setting in Easton | Little Wise Kids",
-  description: "Meet the team behind Little Wise Kids, a calm, home-from-home childcare setting in Easton, Bristol BS5, focused on child-led play.",
+  title: seoTitle,
+  description: seoDescription,
   canonicalPath: "/about-us",
+  type: "website",
+  schemas: [
+    buildPersonSchema(siteUrl, founderName, founderRole, founderQuote),
+  ],
 };
 
 const approachPoints = [
@@ -65,6 +85,85 @@ const learningFoundations = [
       </SubpageHero>
 
       <div class="lwk-about__sections">
+        <section
+          id="our-leadership-team"
+          class="lwk-about__section lwk-about__section--founder"
+          aria-labelledby="founder-story-heading"
+        >
+          <Container size="wide">
+            <div class="lwk-about__founder-story">
+              <div class="lwk-about__founder-media-column">
+                <div
+                  class="video-card lwk-about__founder-video"
+                  role="button"
+                  aria-label="Play founder story video full screen"
+                  tabindex="0"
+                  data-founder-video
+                >
+                  <video
+                    class="hero-video-preview"
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    poster={posterUrl}
+                  >
+                    <source media="(max-width: 768px)" src="/video/littlewisekids-hero-mobile.webm" type="video/webm" />
+                    <source media="(max-width: 768px)" src="/video/littlewisekids-hero-mobile.mp4" type="video/mp4" />
+                    <source src="/video/littlewisekids-hero-video.webm" type="video/webm" />
+                    <source src="/video/littlewisekids-hero-video.mp4" type="video/mp4" />
+                  </video>
+                  <div class="video-card__overlay"></div>
+                  <div class="hero-play-btn" aria-hidden="true">
+                    <span class="play-icon-pulse"></span>
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="lwk-about__testimonial-container">
+                  <div class="lwk-about__founder-callout-card">
+                    <p class="lwk-about__founder-callout-text">
+                      {founderQuote}
+                    </p>
+                  </div>
+
+                  <div class="lwk-about__testimonial-meta">
+                    <Image
+                      src={lukebaSignature}
+                      alt={founderName}
+                      class="lwk-about__founder-signature-img"
+                      height={48}
+                    />
+                    <span class="lwk-about__testimonial-divider" aria-hidden="true"></span>
+                    <div class="lwk-about__founder-info">
+                      <strong class="lwk-about__founder-title">{founderRole}</strong>
+                      <span class="lwk-about__founder-org">Little Wise Kids</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="lwk-about__founder-content">
+                <div class="lwk-about__founder-kicker">
+                  <p class="lwk-about__label lwk-about__label--purple">
+                    {aboutPage.leadershipLabel}
+                  </p>
+                </div>
+
+                <h2 id="founder-story-heading">
+                  {aboutPage.leadershipHeading}
+                </h2>
+
+                <div class="lwk-about__prose lwk-about__founder-prose">
+                  <PortableContent value={aboutPage.leadershipParagraphs} />
+                </div>
+              </div>
+            </div>
+          </Container>
+        </section>
+
         <section
           id="our-approach"
           class="lwk-about__section
@@ -296,46 +395,143 @@ const learningFoundations = [
           </Container>
         </section>
 
-        <section id="our-leadership-team" class="lwk-about__section">
-          <Container size="wide">
-            <div class="lwk-about__leadership-card">
-              <div class="lwk-about__portrait" aria-hidden="true">
-                {aboutPage.leadershipImage?.asset?._ref ? (
-                  <SanityImage
-                    image={aboutPage.leadershipImage}
-                    alt={aboutPage.leadershipImage.altText ?? ""}
-                    class="lwk-about__portrait-image"
-                    widths={[320, 480, 640]}
-                    sizes="(min-width: 72rem) 400px, 50vw"
-                    layout="constrained"
-                  />
-                ) : (
-                  <span class="lwk-about__media-placeholder">
-                    <Icon name="person" size={48} />
-                    <span>Leadership photo to be supplied</span>
-                  </span>
-                )}
-              </div>
-
-              <div class="lwk-about__copy-block">
-                <p
-                  class="lwk-about__label
-                lwk-about__label--yellow"
-                >
-                  {aboutPage.leadershipLabel}
-                </p>
-
-                <h2>{aboutPage.leadershipHeading}</h2>
-
-                <div class="lwk-about__prose">
-                  <PortableContent value={aboutPage.leadershipParagraphs} />
-                </div>
-              </div>
-            </div>
-          </Container>
-        </section>
 
       </div>
     </section>
   </article>
+
+<!-- Full-screen Video Dialog (Modal) -->
+  <div id="about-video-dialog" class="video-dialog" role="dialog" aria-modal="true" style="display: none;">
+    <div class="video-dialog__content">
+      <button class="video-dialog__close" aria-label="Close video dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+      <video class="video-dialog__video" controls playsinline>
+        <source src="/video/littlewisekids-hero-video.webm" type="video/webm" />
+        <source src="/video/littlewisekids-hero-video.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+
+  <script>
+    const videoCard = document.querySelector('[data-founder-video]') as HTMLDivElement | null;
+    const dialog = document.getElementById('about-video-dialog') as HTMLDivElement | null;
+    const dialogContent = dialog?.querySelector('.video-dialog__content') as HTMLDivElement | null;
+    const modalVideo = dialog?.querySelector('.video-dialog__video') as HTMLVideoElement | null;
+    const closeBtn = dialog?.querySelector('.video-dialog__close') as HTMLButtonElement | null;
+    const previewVideo = videoCard?.querySelector('.hero-video-preview') as HTMLVideoElement | null;
+
+    if (videoCard) {
+      videoCard.style.setProperty('view-transition-name', 'about-founder-video');
+    }
+
+    const openModal = () => {
+      if (!dialog || !modalVideo || !previewVideo || !videoCard || !dialogContent) return;
+
+      document.body.classList.add('video-modal-open');
+
+      const doOpen = () => {
+        videoCard.style.setProperty('view-transition-name', 'none');
+        dialogContent.style.setProperty('view-transition-name', 'about-founder-video');
+
+        previewVideo.pause();
+        modalVideo.currentTime = previewVideo.currentTime;
+        dialog.style.display = 'flex';
+        modalVideo.muted = false;
+        modalVideo.play().catch(() => {});
+      };
+
+      if (document.startViewTransition) {
+        videoCard.style.setProperty('view-transition-name', 'about-founder-video');
+        dialogContent.style.setProperty('view-transition-name', 'none');
+
+        const transition = document.startViewTransition(() => {
+          doOpen();
+        });
+
+        transition.ready.then(() => {
+          console.log("Open View Transition ready");
+        }).catch((err) => {
+          console.error("Open View Transition ready failed:", err);
+        });
+      } else {
+        doOpen();
+      }
+    };
+
+    const closeModal = () => {
+      if (!dialog || !modalVideo || !previewVideo || !videoCard || !dialogContent) return;
+
+      const doClose = () => {
+        dialogContent.style.setProperty('view-transition-name', 'none');
+        videoCard.style.setProperty('view-transition-name', 'about-founder-video');
+
+        modalVideo.pause();
+        previewVideo.currentTime = modalVideo.currentTime;
+        dialog.style.display = 'none';
+        previewVideo.play().catch(() => {});
+      };
+
+      if (document.startViewTransition) {
+        dialogContent.style.setProperty('view-transition-name', 'about-founder-video');
+        videoCard.style.setProperty('view-transition-name', 'none');
+
+        const transition = document.startViewTransition(() => {
+          doClose();
+        });
+
+        transition.finished.then(() => {
+          document.body.classList.remove('video-modal-open');
+          console.log("Close View Transition finished");
+        }).catch((err) => {
+          console.error("Close View Transition finished failed:", err);
+        });
+      } else {
+        doClose();
+        document.body.classList.remove('video-modal-open');
+      }
+    };
+
+    videoCard?.addEventListener('click', openModal);
+    videoCard?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal();
+      }
+    });
+
+    closeBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeModal();
+    });
+
+    dialog?.addEventListener('click', (e) => {
+      if (e.target === dialog) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && dialog && dialog.style.display === 'flex') {
+        closeModal();
+      }
+    });
+
+    if (previewVideo) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (dialog && dialog.style.display !== 'flex') {
+              previewVideo.play().catch(() => {});
+            }
+          } else {
+            previewVideo.pause();
+          }
+        });
+      }, { threshold: 0.05 });
+      observer.observe(previewVideo);
+    }
+  </script>
 </BaseLayout>
