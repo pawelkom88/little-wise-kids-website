@@ -52,4 +52,4 @@ const initHeader = () => {
   desktopViewport.addEventListener("change", resetForBreakpoint);
 };
 
-initHeader();
+document.addEventListener("astro:page-load", initHeader);

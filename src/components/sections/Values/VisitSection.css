@@ -190,6 +190,19 @@
     text-align: center;
   }
 
+  .lwk-visit__copy {
+    text-align: center;
+  }
+
+  .lwk-visit__cta-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .lwk-title-rule {
+    margin-inline: auto;
+  }
+
   .lwk-visit-highlights {
     grid-template-columns: 1fr;
   }

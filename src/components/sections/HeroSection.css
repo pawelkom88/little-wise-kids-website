@@ -355,6 +355,9 @@
 
   .hero h1 {
     text-align: center;
+    font-size: clamp(1.8rem, 1.2rem + 3vw, 2.49rem);
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .hero-paragraphs p {
