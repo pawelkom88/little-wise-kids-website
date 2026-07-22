@@ -613,7 +613,7 @@ body.video-modal-open main {
   margin: 0;
   color: var(--color-ink);
   font-family: var(--font-heading);
-  font-size: var(--font-size-h2);
+  font-size: var(--font-size-section-title);
   font-style: italic;
   font-weight: var(--font-weight-regular);
   letter-spacing: -0.06em;
@@ -656,7 +656,7 @@ body.video-modal-open main {
   }
 
   .lwk-about__founder-play:hover {
-    box-shadow: var(--shadow-elevated, var(--shadow-card));
+    box-shadow: var(--shadow-soft, var(--shadow-card));
     transform: translate(-50%, -50%) scale(1.04);
   }
 }
