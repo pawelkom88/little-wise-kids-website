@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "check": "astro check",
-    "build": "astro build",
+    "build": "astro build && node scripts/generate-ai-content.mjs",
     "preview": "npm run build && wrangler dev",
     "check:architecture": "node scripts/check-architecture.mjs",
     "test:security": "node --test src/lib/urls.test.mjs workers/sanity-deploy-gateway/index.test.mjs",

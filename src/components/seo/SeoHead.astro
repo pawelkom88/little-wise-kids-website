@@ -26,7 +26,8 @@ const bdImage = businessDetails?.ogImage?.url
   ? { url: businessDetails.ogImage.url, alt: businessDetails.ogImage.altText || defaultSeoImage.alt, width: businessDetails.ogImage.width, height: businessDetails.ogImage.height }
   : undefined;
 const ogImage = seo.image || bdImage || defaultSeoImage;
-const ogImageUrl = ogImage ? (ogImage.url.startsWith("http") ? ogImage.url : `${siteUrl}${ogImage.url}`) : undefined;
+const mdUrl = seo.canonicalPath === "/" || !seo.canonicalPath ? `${siteUrl}/index.md` : `${canonicalUrl}.md`;
+const txtUrl = seo.canonicalPath === "/" || !seo.canonicalPath ? `${siteUrl}/index.txt` : `${canonicalUrl}.txt`;
 ---
 
 <title>{seo.title}</title>
@@ -37,7 +38,11 @@ const ogImageUrl = ogImage ? (ogImage.url.startsWith("http") ? ogImage.url : `${
 <link rel="manifest" href="/site.webmanifest" />
 <meta name="theme-color" content={themeColor} />
 {seo.canonicalPath !== "omit" && (
-  <link rel="canonical" href={canonicalUrl} />
+  <>
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" type="text/markdown" href={mdUrl} title="Markdown version" />
+    <link rel="alternate" type="text/plain" href={txtUrl} title="Plain text version" />
+  </>
 )}
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="alternate" type="application/rss+xml" title="Little Wise Kids Blog RSS Feed" href={`${siteUrl}/rss.xml`} />

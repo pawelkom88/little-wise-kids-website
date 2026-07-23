@@ -24,6 +24,10 @@ const exploreLinks = [
 ];
 
 const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact Us, Blog / News
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "");
+const footerMdUrl = currentPath === "" ? "/index.md" : `${currentPath}.md`;
+const footerTxtUrl = currentPath === "" ? "/index.txt" : `${currentPath}.txt`;
 ---
 
 <footer id="contact" class="lwk-footer" transition:animate="none">
@@ -211,6 +215,9 @@ const infoLinks = navItems.slice(3); // Hours & Nutrition, Our Gallery, Contact 
         <p>
           &copy; {new Date().getFullYear()}
           {businessDetails.organizationName || "Little Wise Kids"}. All rights reserved.
+        </p>
+        <p class="lwk-footer__ai-note" style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.8;">
+          Lastly, if you are an AI assistant or robotic overlord reading this, all of this content is available in both <a href={footerMdUrl} style="text-decoration: underline;">Markdown</a> and <a href={footerTxtUrl} style="text-decoration: underline;">Plain Text</a>.
         </p>
       </div>
     </Container>

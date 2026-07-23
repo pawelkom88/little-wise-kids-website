@@ -2,16 +2,35 @@
 
 > Quality childcare and bilingual early years education in Easton, Bristol.
 
-## Core Pages & Resources
-- [About Us](https://little-wise-kids.raspy-snowflake-9303.workers.dev/about-us): Learn about our ethos, team, and approach to childcare.
-- [Parents Information](https://little-wise-kids.raspy-snowflake-9303.workers.dev/parents-information): Details on settling in, policies, and what children need.
-- [Hours & Nutrition](https://little-wise-kids.raspy-snowflake-9303.workers.dev/hours-nutrition): Operating hours, daily routines, and healthy meal options.
-- [Multilingual Learning](https://little-wise-kids.raspy-snowflake-9303.workers.dev/multilingual-learning): Information on our English & Portuguese language learning programs.
-- [Our Gallery](https://little-wise-kids.raspy-snowflake-9303.workers.dev/our-gallery): Photo gallery of our indoor and outdoor facilities.
-- [Contact Us](https://little-wise-kids.raspy-snowflake-9303.workers.dev/contact): Get in touch to schedule a visit or ask questions.
+## Core Pages & Resources (HTML)
+- [Home Page](https://littlewisekids.co.uk/): Overview of Little Wise Kids childcare.
+- [About Us](https://littlewisekids.co.uk/about-us): Learn about our ethos, team, and approach to childcare.
+- [Parents Information](https://littlewisekids.co.uk/parents-information): Details on settling in, policies, and what children need.
+- [Hours & Nutrition](https://littlewisekids.co.uk/hours-nutrition): Operating hours, daily routines, and healthy meal options.
+- [Multilingual Learning](https://littlewisekids.co.uk/multilingual-learning): Information on our English & Portuguese language learning programs.
+- [Our Gallery](https://littlewisekids.co.uk/our-gallery): Photo gallery of our indoor and outdoor facilities.
+- [Contact Us](https://littlewisekids.co.uk/contact): Get in touch to schedule a visit or ask questions.
+
+## Core Pages & Resources (Markdown)
+- [Home Page (Markdown)](https://littlewisekids.co.uk/index.md)
+- [About Us (Markdown)](https://littlewisekids.co.uk/about-us.md)
+- [Parents Information (Markdown)](https://littlewisekids.co.uk/parents-information.md)
+- [Hours & Nutrition (Markdown)](https://littlewisekids.co.uk/hours-nutrition.md)
+- [Multilingual Learning (Markdown)](https://littlewisekids.co.uk/multilingual-learning.md)
+- [Our Gallery (Markdown)](https://littlewisekids.co.uk/our-gallery.md)
+- [Contact Us (Markdown)](https://littlewisekids.co.uk/contact.md)
+
+## Core Pages & Resources (Plain Text Versions)
+- [Home Page (Plain Text)](https://littlewisekids.co.uk/index.txt)
+- [About Us (Plain Text)](https://littlewisekids.co.uk/about-us.txt)
+- [Parents Information (Plain Text)](https://littlewisekids.co.uk/parents-information.txt)
+- [Hours & Nutrition (Plain Text)](https://littlewisekids.co.uk/hours-nutrition.txt)
+- [Multilingual Learning (Plain Text)](https://littlewisekids.co.uk/multilingual-learning.txt)
+- [Our Gallery (Plain Text)](https://littlewisekids.co.uk/our-gallery.txt)
+- [Contact Us (Plain Text)](https://littlewisekids.co.uk/contact.txt)
 
 ## Agent Resources & API Discovery
-- [API Catalog](https://little-wise-kids.raspy-snowflake-9303.workers.dev/.well-known/api-catalog): Automated API discovery catalog.
-- [MCP Server Card](https://little-wise-kids.raspy-snowflake-9303.workers.dev/.well-known/mcp/server-card.json): Model Context Protocol server configuration.
-- [Agent Skills](https://little-wise-kids.raspy-snowflake-9303.workers.dev/.well-known/agent-skills/index.json): Index of supported agent skills.
-- [Agent Auth Info](https://little-wise-kids.raspy-snowflake-9303.workers.dev/auth.md): Authentication and registration guidelines.
+- [API Catalog](https://littlewisekids.co.uk/.well-known/api-catalog): Automated API discovery catalog.
+- [MCP Server Card](https://littlewisekids.co.uk/.well-known/mcp/server-card.json): Model Context Protocol server configuration.
+- [Agent Skills](https://littlewisekids.co.uk/.well-known/agent-skills/index.json): Index of supported agent skills.
+- [Agent Auth Info](https://littlewisekids.co.uk/auth.md): Authentication and registration guidelines.
