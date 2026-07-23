@@ -95,7 +95,7 @@ test.describe("Baseline Automated Accessibility Audit", () => {
     }
 
     expect(response?.status()).toBe(404);
-    await expect(heading).toContainText("Oops! We Can't Find That Page");
+    await expect(heading).toContainText(/Oops! We Can['’]t Find That Page/);
 
     const results = await new AxeBuilder({ page })
       .withRules(["color-contrast", "document-title", "html-has-lang", "label"])

@@ -33,6 +33,7 @@ export interface FooterTagline {
   greenPhrase: string;
   bluePhrase: string;
   suffix: string;
+  connector?: string;
 }
 
 export interface BusinessDetails {
@@ -105,6 +106,7 @@ export interface ValuesIntroHeading {
   purplePhrase: string;
   greenPhrase: string;
   bluePhrase: string;
+  connector?: string;
 }
 
 export interface VisitHeading {

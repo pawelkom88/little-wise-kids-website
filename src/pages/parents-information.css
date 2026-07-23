@@ -38,13 +38,13 @@
 
 .parents-guide__row--green {
   --parents-accent: var(--color-green-strong);
-  --parents-accent-dark: var(--color-green-dark);
+  --parents-accent-dark: var(--color-green-strong);
   --parents-soft: var(--color-green-soft);
 }
 
 .parents-guide__row--yellow {
   --parents-accent: var(--color-orange-strong);
-  --parents-accent-dark: var(--color-orange-dark);
+  --parents-accent-dark: var(--color-orange-strong);
   --parents-soft: var(--color-yellow-soft);
 }
 
@@ -289,7 +289,7 @@
 }
 
 .parents-resource-panel--green {
-  --resource-accent: var(--color-green);
+  --resource-accent: var(--color-green-strong);
   --resource-soft: var(--color-green-soft);
 }
 

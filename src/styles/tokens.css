@@ -41,10 +41,45 @@
   --color-orange-strong: #a14e03;
   --color-purple-strong: #6b14a8;
 
+  /* SVG gradient stop tokens – AnimatedThankYouLogo */
+  --color-svg-purple-icon-0: #c23dcc;
+  --color-svg-purple-icon-mid: #aa34b9;
+  --color-svg-purple-icon-1: #922ca8;
+  --color-svg-purple-text-0: #a83ac8;
+  --color-svg-purple-text-mid: #9437c2;
+  --color-svg-purple-text-1: #812aae;
+  --color-svg-green-0: #69c95a;
+  --color-svg-green-mid: #59bd50;
+  --color-svg-green-1: #4caf48;
+
+  /* Modal overlay tokens */
+  --color-modal-backdrop: rgb(6 15 38 / 85%);
+  --color-modal-border: rgb(255 255 255 / 10%);
+  --color-modal-surface: #000;
+  --color-modal-shadow: rgb(0 0 0 / 60%);
+  --color-modal-close-bg: rgb(0 0 0 / 58%);
+  --color-modal-close-bg-hover: rgb(0 0 0 / 76%);
+  --color-modal-focus-outline: var(--white);
+
+  /* Glassmorphism tokens */
+  --color-glass-inset-highlight: rgb(255 255 255 / 50%);
+  --color-glass-shadow: rgb(0 0 0 / 6%);
+
+  /* Hero card & play button tokens */
+  --color-hero-card-shadow-sm: rgb(0 0 0 / 5%);
+  --color-hero-card-shadow-md: rgb(0 0 0 / 8%);
+  --color-hero-overlay: rgb(6 25 71 / 12%);
+  --color-hero-overlay-hover: rgb(6 25 71 / 5%);
+  --color-hero-play-bg: rgb(255 255 255 / 90%);
+  --color-hero-play-shadow: rgb(145 55 209 / 25%);
+  --color-hero-play-shadow-hover: rgb(145 55 209 / 35%);
+
+  /* Button tokens */
+  --color-button-active-shadow: rgb(0 0 0 / 25%);
+
   --font-heading: "Quicksand", "Trebuchet MS", system-ui, sans-serif;
   --font-body:
     "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-  --font-decorative-symbol: Georgia, serif;
 
   --font-weight-regular: 400;
   --font-weight-bold: 700;
@@ -80,6 +115,7 @@
   --line-height-tight: 1.2;
   --line-height-solid: 1;
   --letter-spacing-section-title: -0.045em;
+  --letter-spacing-eyebrow: 0.13em;
 
   --space-3xs: clamp(0.25rem, 0.23rem + 0.11vw, 0.31rem);
   --space-2xs: clamp(0.5rem, 0.46rem + 0.22vw, 0.63rem);

@@ -2,6 +2,7 @@
  * Preserve the existing cream Values section.
  */
 
-.lwk-values {
+.section.lwk-values {
+  padding-inline: 0;
   background: var(--color-cream);
 }

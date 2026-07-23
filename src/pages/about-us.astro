@@ -13,6 +13,9 @@ import type { SeoConfig } from "../lib/seo/types";
 import { buildPersonSchema } from "../lib/seo/buildPersonSchema";
 
 import heroBg from "../assets/images/littlewisekids-outdoor-hero-image.webp";
+import heroVideoMp4 from "../assets/videos/littlewisekids-hero-mobile.mp4?url";
+import heroVideoWebm from "../assets/videos/littlewisekids-hero-mobile.webm?url";
+import "../components/media/VideoModal.css";
 import iconQuote from "../assets/images/icon-quote.png";
 import iconPlay from "../assets/images/icon-play.png";
 import iconRhythm from "../assets/images/icon-rhythm.png";
@@ -94,13 +97,13 @@ const learningFoundations = [
         >
           <Container size="wide">
             <div class="lwk-about__founder-story">
-              <div class="lwk-about__founder-media-column">
+              <div class="lwk-about__founder-media-column" data-founder-video-modal>
                 <div
                   class="video-card lwk-about__founder-video"
                   role="button"
                   aria-label="Play founder story video full screen"
                   tabindex="0"
-                  data-founder-video
+                  data-video-trigger
                 >
                   <video
                     class="hero-video-preview"
@@ -108,12 +111,12 @@ const learningFoundations = [
                     loop
                     muted
                     playsinline
+                    preload="metadata"
                     poster={posterUrl}
+                    data-preview-video
                   >
-                    <source media="(max-width: 768px)" src="/video/littlewisekids-hero-mobile.webm" type="video/webm" />
-                    <source media="(max-width: 768px)" src="/video/littlewisekids-hero-mobile.mp4" type="video/mp4" />
-                    <source src="/video/littlewisekids-hero-video.webm" type="video/webm" />
-                    <source src="/video/littlewisekids-hero-video.mp4" type="video/mp4" />
+                    <source src={heroVideoWebm} type="video/webm" />
+                    <source src={heroVideoMp4} type="video/mp4" />
                   </video>
                   <div class="video-card__overlay"></div>
                   <div class="hero-play-btn" aria-hidden="true">
@@ -123,6 +126,43 @@ const learningFoundations = [
                     </svg>
                   </div>
                 </div>
+
+                <dialog
+                  id="about-video-dialog"
+                  class="video-dialog"
+                  aria-label="Founder video"
+                  data-video-dialog
+                >
+                  <div class="video-dialog__content">
+                    <button
+                      class="video-dialog__close"
+                      type="button"
+                      aria-label="Close video"
+                      data-video-close
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        aria-hidden="true"
+                      >
+                        <path d="M18 6L6 18M6 6l12 12" />
+                      </svg>
+                    </button>
+                    <video
+                      class="video-dialog__video"
+                      controls
+                      playsinline
+                      preload="metadata"
+                      data-modal-video
+                    >
+                      <source src={heroVideoWebm} type="video/webm" />
+                      <source src={heroVideoMp4} type="video/mp4" />
+                      Your browser does not support embedded video.
+                    </video>
+                  </div>
+                </dialog>
 
                 <div class="lwk-about__testimonial-container">
                   <div class="lwk-about__founder-callout-card">
@@ -402,138 +442,27 @@ const learningFoundations = [
     </section>
   </article>
 
-<!-- Full-screen Video Dialog (Modal) -->
-  <div id="about-video-dialog" class="video-dialog" role="dialog" aria-modal="true" style="display: none;">
-    <div class="video-dialog__content">
-      <button class="video-dialog__close" aria-label="Close video dialog">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <path d="M18 6L6 18M6 6l12 12"/>
-        </svg>
-      </button>
-      <video class="video-dialog__video" controls playsinline>
-        <source src="/video/littlewisekids-hero-video.webm" type="video/webm" />
-        <source src="/video/littlewisekids-hero-video.mp4" type="video/mp4" />
-      </video>
-    </div>
-  </div>
-
   <script>
-    const videoCard = document.querySelector('[data-founder-video]') as HTMLDivElement | null;
-    const dialog = document.getElementById('about-video-dialog') as HTMLDivElement | null;
-    const dialogContent = dialog?.querySelector('.video-dialog__content') as HTMLDivElement | null;
-    const modalVideo = dialog?.querySelector('.video-dialog__video') as HTMLVideoElement | null;
-    const closeBtn = dialog?.querySelector('.video-dialog__close') as HTMLButtonElement | null;
-    const previewVideo = videoCard?.querySelector('.hero-video-preview') as HTMLVideoElement | null;
+    import { initialiseVideoModal } from "../components/media/videoModal";
 
-    if (videoCard) {
-      videoCard.style.setProperty('view-transition-name', 'about-founder-video');
-    }
+    const root = document.querySelector<HTMLElement>("[data-founder-video-modal]");
 
-    const openModal = () => {
-      if (!dialog || !modalVideo || !previewVideo || !videoCard || !dialogContent) return;
+    if (root) {
+      const trigger = root.querySelector<HTMLElement>("[data-video-trigger]");
+      const dialog = root.querySelector<HTMLDialogElement>("[data-video-dialog]");
+      const modalVideo = root.querySelector<HTMLVideoElement>("[data-modal-video]");
+      const previewVideo = root.querySelector<HTMLVideoElement>("[data-preview-video]");
+      const closeButton = root.querySelector<HTMLButtonElement>("[data-video-close]");
 
-      document.body.classList.add('video-modal-open');
-
-      const doOpen = () => {
-        videoCard.style.setProperty('view-transition-name', 'none');
-        dialogContent.style.setProperty('view-transition-name', 'about-founder-video');
-
-        previewVideo.pause();
-        modalVideo.currentTime = previewVideo.currentTime;
-        dialog.style.display = 'flex';
-        modalVideo.muted = false;
-        modalVideo.play().catch(() => {});
-      };
-
-      if (document.startViewTransition) {
-        videoCard.style.setProperty('view-transition-name', 'about-founder-video');
-        dialogContent.style.setProperty('view-transition-name', 'none');
-
-        const transition = document.startViewTransition(() => {
-          doOpen();
+      if (trigger && dialog && modalVideo && previewVideo && closeButton) {
+        initialiseVideoModal({
+          trigger,
+          dialog,
+          modalVideo,
+          previewVideo,
+          closeButton,
         });
-
-        transition.ready.then(() => {
-          console.log("Open View Transition ready");
-        }).catch((err) => {
-          console.error("Open View Transition ready failed:", err);
-        });
-      } else {
-        doOpen();
       }
-    };
-
-    const closeModal = () => {
-      if (!dialog || !modalVideo || !previewVideo || !videoCard || !dialogContent) return;
-
-      const doClose = () => {
-        dialogContent.style.setProperty('view-transition-name', 'none');
-        videoCard.style.setProperty('view-transition-name', 'about-founder-video');
-
-        modalVideo.pause();
-        previewVideo.currentTime = modalVideo.currentTime;
-        dialog.style.display = 'none';
-        previewVideo.play().catch(() => {});
-      };
-
-      if (document.startViewTransition) {
-        dialogContent.style.setProperty('view-transition-name', 'about-founder-video');
-        videoCard.style.setProperty('view-transition-name', 'none');
-
-        const transition = document.startViewTransition(() => {
-          doClose();
-        });
-
-        transition.finished.then(() => {
-          document.body.classList.remove('video-modal-open');
-          console.log("Close View Transition finished");
-        }).catch((err) => {
-          console.error("Close View Transition finished failed:", err);
-        });
-      } else {
-        doClose();
-        document.body.classList.remove('video-modal-open');
-      }
-    };
-
-    videoCard?.addEventListener('click', openModal);
-    videoCard?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openModal();
-      }
-    });
-
-    closeBtn?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      closeModal();
-    });
-
-    dialog?.addEventListener('click', (e) => {
-      if (e.target === dialog) {
-        closeModal();
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && dialog && dialog.style.display === 'flex') {
-        closeModal();
-      }
-    });
-
-    if (previewVideo) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (dialog && dialog.style.display !== 'flex') {
-              previewVideo.play().catch(() => {});
-            }
-          } else {
-            previewVideo.pause();
-          }
-        });
-      }, { threshold: 0.05 });
-      observer.observe(previewVideo);
     }
   </script>
 </BaseLayout>

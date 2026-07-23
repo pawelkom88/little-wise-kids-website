@@ -1,0 +1,106 @@
+/* Native Video Dialog (Modal) Styles */
+.video-dialog {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: clamp(0.75rem, 3vw, 2rem);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  overflow: hidden;
+}
+
+.video-dialog[open] {
+  display: grid;
+  place-items: center;
+}
+
+.video-dialog::backdrop {
+  background: var(--color-modal-backdrop);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.video-dialog__content {
+  position: relative;
+  width: min(100%, 68.75rem);
+  max-height: calc(100dvh - clamp(1.5rem, 6vw, 4rem));
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--color-modal-border);
+  border-radius: clamp(0.875rem, 2vw, 1.25rem);
+  background: var(--color-modal-surface);
+  box-shadow: 0 1.5rem 3.75rem var(--color-modal-shadow);
+}
+
+.video-dialog__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--color-modal-surface);
+}
+
+.video-dialog__close {
+  position: absolute;
+  top: clamp(0.5rem, 2vw, 1.25rem);
+  right: clamp(0.5rem, 2vw, 1.25rem);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: var(--white);
+  background: var(--color-modal-close-bg);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.video-dialog__close:hover {
+  background: var(--color-modal-close-bg-hover);
+  transform: scale(1.06);
+}
+
+.video-dialog__close:focus-visible {
+  outline: 3px solid var(--color-modal-focus-outline);
+  outline-offset: 3px;
+}
+
+.video-dialog__close svg {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+body.video-modal-open {
+  position: fixed;
+  inset-inline: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+@media (width < 48rem) {
+  .video-dialog {
+    padding: 0.75rem;
+  }
+
+  .video-dialog__content {
+    width: 100%;
+    max-height: calc(100dvh - 1.5rem);
+    border-radius: 0.875rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-dialog,
+  .video-dialog__content {
+    animation: none;
+    transition: none;
+  }
+}

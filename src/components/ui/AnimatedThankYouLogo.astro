@@ -1,4 +1,6 @@
 ---
+import "./AnimatedThankYouLogo.css";
+
 interface Props {
   class?: string;
   ariaLabel?: string;
@@ -16,19 +18,19 @@ const { class: className = "", ariaLabel = "Thank You from Little Wise Kids" } =
   >
     <defs>
       <linearGradient id="purpleIcon" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#c23dcc" />
-        <stop offset=".48" stop-color="#aa34b9" />
-        <stop offset="1" stop-color="#922ca8" />
+        <stop offset="0" stop-color="var(--color-svg-purple-icon-0)" />
+        <stop offset=".48" stop-color="var(--color-svg-purple-icon-mid)" />
+        <stop offset="1" stop-color="var(--color-svg-purple-icon-1)" />
       </linearGradient>
       <linearGradient id="purpleText" x1="0" y1="0" x2=".7" y2="1">
-        <stop offset="0" stop-color="#a83ac8" />
-        <stop offset=".55" stop-color="#9437c2" />
-        <stop offset="1" stop-color="#812aae" />
+        <stop offset="0" stop-color="var(--color-svg-purple-text-0)" />
+        <stop offset=".55" stop-color="var(--color-svg-purple-text-mid)" />
+        <stop offset="1" stop-color="var(--color-svg-purple-text-1)" />
       </linearGradient>
       <linearGradient id="green" x1="0" y1="0" x2=".35" y2="1">
-        <stop offset="0" stop-color="#69c95a" />
-        <stop offset=".52" stop-color="#59bd50" />
-        <stop offset="1" stop-color="#4caf48" />
+        <stop offset="0" stop-color="var(--color-svg-green-0)" />
+        <stop offset=".52" stop-color="var(--color-svg-green-mid)" />
+        <stop offset="1" stop-color="var(--color-svg-green-1)" />
       </linearGradient>
     </defs>
 
@@ -97,228 +99,3 @@ const { class: className = "", ariaLabel = "Thank You from Little Wise Kids" } =
     </g>
   </svg>
 </div>
-
-<style>
-  .animated-thank-you-logo {
-    display: block;
-    width: 100%;
-    max-width: 48rem;
-    margin-inline: auto;
-  }
-
-  .animated-thank-you-logo svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    overflow: visible;
-  }
-
-  /* Hardware accelerated character entrance */
-  .hand {
-    transform-box: fill-box;
-    transform-origin: 50% 50%;
-    animation: hand-in 8s cubic-bezier(0.2, 0.72, 0.22, 1) infinite;
-  }
-  .child {
-    transform-box: fill-box;
-    transform-origin: 50% 85%;
-    animation: child-in 8s cubic-bezier(0.18, 0.72, 0.24, 1) infinite;
-  }
-  .star {
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-  .star-a {
-    animation: star-a 8s ease-in-out infinite;
-  }
-  .star-b {
-    animation: star-b 8s ease-in-out infinite;
-  }
-  .star-c {
-    animation: star-c 8s ease-in-out infinite;
-  }
-
-  /* Sleek, modern opacity + translateY fade-slide animation */
-  .text-line {
-    transform-box: fill-box;
-    transform-origin: 50% 50%;
-    will-change: opacity, transform;
-  }
-
-  .line-thank {
-    animation: fade-slide-thank 8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-  }
-
-  .line-you {
-    animation: fade-slide-you 8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-  }
-
-  @keyframes fade-slide-thank {
-    0%, 5% {
-      opacity: 0;
-      transform: translateY(32px);
-    }
-    22% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    86% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    94%, 100% {
-      opacity: 0;
-      transform: translateY(-12px);
-    }
-  }
-
-  @keyframes fade-slide-you {
-    0%, 18% {
-      opacity: 0;
-      transform: translateY(32px);
-    }
-    35% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    86% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    94%, 100% {
-      opacity: 0;
-      transform: translateY(-12px);
-    }
-  }
-
-  .logo-finish {
-    transform-box: view-box;
-    transform-origin: 50% 50%;
-    animation: finish-settle 8s cubic-bezier(0.22, 0.74, 0.22, 1) infinite;
-  }
-
-  @keyframes hand-in {
-    0%, 1% {
-      opacity: 0;
-      transform: translate(-34px, 26px) rotate(-2.2deg) scale(0.975);
-    }
-    8.5% {
-      opacity: 1;
-      transform: translate(2px, -1px) rotate(0.2deg) scale(1.006);
-    }
-    10.5%, 100% {
-      opacity: 1;
-      transform: none;
-    }
-  }
-  @keyframes child-in {
-    0%, 1.5% {
-      opacity: 0;
-      transform: translate(10px, -28px) rotate(1.8deg) scale(0.982);
-    }
-    9.3% {
-      opacity: 1;
-      transform: translate(-1px, 2px) rotate(-0.18deg) scale(1.005);
-    }
-    11.2%, 100% {
-      opacity: 1;
-      transform: none;
-    }
-  }
-  @keyframes star-a {
-    0%, 4% {
-      opacity: 0;
-      transform: translate(-9px, 13px) scale(0.72) rotate(-12deg);
-    }
-    10% {
-      opacity: 1;
-      transform: translate(1px, -1px) scale(1.04) rotate(2deg);
-    }
-    12%, 82% {
-      opacity: 1;
-      transform: none;
-    }
-    85% {
-      opacity: 0.82;
-      transform: scale(0.95) rotate(-2deg);
-    }
-    88%, 100% {
-      opacity: 1;
-      transform: none;
-    }
-  }
-  @keyframes star-b {
-    0%, 5% {
-      opacity: 0;
-      transform: translate(2px, 14px) scale(0.74) rotate(10deg);
-    }
-    11% {
-      opacity: 1;
-      transform: translate(-1px, -1px) scale(1.04) rotate(-2deg);
-    }
-    13%, 84% {
-      opacity: 1;
-      transform: none;
-    }
-    87% {
-      opacity: 0.84;
-      transform: scale(0.96) rotate(2deg);
-    }
-    90%, 100% {
-      opacity: 1;
-      transform: none;
-    }
-  }
-  @keyframes star-c {
-    0%, 6% {
-      opacity: 0;
-      transform: translate(10px, 9px) scale(0.72) rotate(-8deg);
-    }
-    12% {
-      opacity: 1;
-      transform: translate(-1px, 1px) scale(1.035) rotate(1deg);
-    }
-    14%, 86% {
-      opacity: 1;
-      transform: none;
-    }
-    89% {
-      opacity: 0.83;
-      transform: scale(0.95) rotate(-2deg);
-    }
-    92%, 100% {
-      opacity: 1;
-      transform: none;
-    }
-  }
-
-  @keyframes finish-settle {
-    0%, 59% {
-      transform: none;
-    }
-    62% {
-      transform: scale(1.004);
-    }
-    65%, 100% {
-      transform: none;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation: none !important;
-    }
-    .text-line {
-      opacity: 1 !important;
-      transform: none !important;
-    }
-    .hand,
-    .child,
-    .star {
-      opacity: 1;
-      transform: none;
-    }
-  }
-</style>

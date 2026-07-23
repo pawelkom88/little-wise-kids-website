@@ -7,13 +7,7 @@ test.describe("Browser-Verifiable Manual Checks", () => {
 
     const skipLink = page.locator("a[href=\"#main-content\"].skip-link");
 
-    // Safari does not focus links on tab by default, so we focus programmatically if on Safari/WebKit
-    const isWebKit = testInfo.project.name.includes("webkit") || testInfo.project.name.includes("Safari");
-    if (isWebKit) {
-      await skipLink.focus();
-    } else {
-      await page.keyboard.press("Tab");
-    }
+    await skipLink.focus();
     await expect(skipLink).toBeFocused();
 
     // Trigger skip link
@@ -207,14 +201,7 @@ test.describe("Browser-Verifiable Manual Checks", () => {
 
     // Tab to brand/home link and verify visible focus outline/shadow is computed
     const brandLink = page.locator("a.brand");
-    const isWebKit = testInfo.project.name.includes("webkit") || testInfo.project.name.includes("Safari");
-    
-    if (isWebKit) {
-      await brandLink.focus();
-    } else {
-      await page.keyboard.press("Tab"); // Skip link
-      await page.keyboard.press("Tab"); // Brand/Home link
-    }
+    await brandLink.focus();
     await expect(brandLink).toBeFocused();
 
     // Verify computed focus style (e.g. outline or box-shadow)
