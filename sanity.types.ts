@@ -578,11 +578,19 @@ export type HoursNutritionPage = {
   nutritionHeading?: string;
   nutritionStatement?: string;
   nutritionParagraphs?: PagePortableText;
-  nutritionChecklist?: Array<string>;
+  nutritionChecklist?: Array<{
+    title?: string;
+    text?: string;
+    _key: string;
+  }>;
   nurseryChefLabel?: string;
   freshlyPreparedHeading?: string;
   chefNote?: string;
-  chefHighlights?: Array<string>;
+  chefHighlights?: Array<{
+    title?: string;
+    text?: string;
+    _key: string;
+  }>;
   dietaryContactCopy?: string;
   dietaryContactCtaLabel?: string;
   typicalDayLabel?: string;

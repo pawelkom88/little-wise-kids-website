@@ -129,12 +129,25 @@ export const hoursNutritionPage = defineType({
       type: "array",
       group: "nutrition",
       of: [
-        defineField({
-          name: "nutritionHighlight",
-          title: "Nutrition Highlight",
-          type: "string",
-          validation: (rule) => rule.required().max(80),
-        }),
+        {
+          type: "object",
+          fields: [
+            defineField({
+              name: "title",
+              title: "Title",
+              type: "string",
+              validation: (rule) => rule.required().max(60),
+            }),
+            defineField({
+              name: "text",
+              title: "Text",
+              type: "text",
+              rows: 3,
+              validation: (rule) => rule.required().max(240),
+            }),
+          ],
+          preview: { select: { title: "title", subtitle: "text" } },
+        },
       ],
       validation: (rule) => rule.required().min(5).max(5),
     }),
@@ -171,12 +184,25 @@ export const hoursNutritionPage = defineType({
       type: "array",
       group: "nurseryChef",
       of: [
-        defineField({
-          name: "chefHighlight",
-          title: "Chef Highlight",
-          type: "string",
-          validation: (rule) => rule.required().max(80),
-        }),
+        {
+          type: "object",
+          fields: [
+            defineField({
+              name: "title",
+              title: "Title",
+              type: "string",
+              validation: (rule) => rule.required().max(60),
+            }),
+            defineField({
+              name: "text",
+              title: "Text",
+              type: "text",
+              rows: 3,
+              validation: (rule) => rule.required().max(240),
+            }),
+          ],
+          preview: { select: { title: "title", subtitle: "text" } },
+        },
       ],
       validation: (rule) => rule.required().min(3).max(3),
     }),

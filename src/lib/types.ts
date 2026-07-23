@@ -272,11 +272,11 @@ export interface HoursNutritionPage {
   nutritionHeading: string;
   nutritionStatement: string;
   nutritionParagraphs: PortableTextBlock[];
-  nutritionChecklist: string[];
+  nutritionChecklist: { title: string; text: string }[];
   nurseryChefLabel: string;
   freshlyPreparedHeading: string;
   chefNote: string;
-  chefHighlights: string[];
+  chefHighlights: { title: string; text: string }[];
   dietaryContactCopy: string;
   dietaryContactCtaLabel: string;
   typicalDayLabel: string;

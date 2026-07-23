@@ -151,6 +151,7 @@
 .contact-field select,
 .contact-field textarea {
   width: 100%;
+  max-width: 100%;
   margin-top: var(--space-xs);
   border: 1px solid
     color-mix(in srgb, var(--color-ink) 18%, var(--color-border));

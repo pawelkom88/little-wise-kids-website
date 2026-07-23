@@ -28,6 +28,9 @@ const bdImage = businessDetails?.ogImage?.url
 const ogImage = seo.image || bdImage || defaultSeoImage;
 const mdUrl = seo.canonicalPath === "/" || !seo.canonicalPath ? `${siteUrl}/index.md` : `${canonicalUrl}.md`;
 const txtUrl = seo.canonicalPath === "/" || !seo.canonicalPath ? `${siteUrl}/index.txt` : `${canonicalUrl}.txt`;
+const ogImageUrl = ogImage?.url
+  ? ogImage.url.startsWith("http") ? ogImage.url : `${siteUrl}${ogImage.url}`
+  : undefined;
 ---
 
 <title>{seo.title}</title>

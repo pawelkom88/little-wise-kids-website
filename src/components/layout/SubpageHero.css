@@ -25,22 +25,15 @@
 }
 
 .subpage-hero__bg-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  z-index: -3;
-  pointer-events: none;
+  display: none;
 }
 
 .subpage-hero::before {
   z-index: -3;
-  /* background-image: var(--hero-image); can be set in inline style if needed */
   background-position: center;
   background-size: cover;
   transform: scale(1.03);
+  display: none;
 }
 
 .subpage-hero::after {
@@ -53,43 +46,61 @@
   backdrop-filter: blur(1.5px);
 }
 
-.subpage-hero:has(.subpage-hero__bg-img)::after {
-  background: radial-gradient(
-    ellipse at center,
-    color-mix(in srgb, var(--color-page) 85%, transparent) 0%,
-    color-mix(in srgb, var(--color-page) 65%, transparent) 50%,
-    color-mix(in srgb, var(--color-page) 30%, transparent) 100%
-  );
-  backdrop-filter: blur(1px);
-}
+@media (min-width: 48rem) {
+  .subpage-hero__bg-img {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: -3;
+    pointer-events: none;
+  }
 
-.subpage-hero:has(.subpage-hero__bg-img) .subpage-hero__title span:nth-child(2) {
-  color: color-mix(in srgb, var(--hero-tone), var(--color-ink) 45%);
-}
+  .subpage-hero::before {
+    display: block;
+  }
 
-.subpage-hero:has(.subpage-hero__bg-img) .subpage-hero__copy {
-  color: var(--color-ink);
-  font-weight: var(--font-weight-medium);
-}
+  .subpage-hero:has(.subpage-hero__bg-img)::after {
+    background: radial-gradient(
+      ellipse at center,
+      color-mix(in srgb, var(--color-page) 85%, transparent) 0%,
+      color-mix(in srgb, var(--color-page) 65%, transparent) 50%,
+      color-mix(in srgb, var(--color-page) 30%, transparent) 100%
+    );
+    backdrop-filter: blur(1px);
+  }
 
-.subpage-hero:has(.subpage-hero__bg-img) .subpage-hero__title,
-.subpage-hero:has(.subpage-hero__bg-img) .subpage-hero__eyebrow,
-.subpage-hero:has(.subpage-hero__bg-img) .subpage-hero__copy {
-  text-shadow: 
-    0 1px 4px color-mix(in srgb, var(--color-page) 90%, transparent),
-    0 0 12px color-mix(in srgb, var(--color-page) 70%, transparent);
-}
+  .subpage-hero:has(.subpage-hero__bg-img) .subpage-hero__title span:nth-child(2) {
+    color: color-mix(in srgb, var(--hero-tone), var(--color-ink) 45%);
+  }
 
-.subpage-hero:has(.subpage-hero__bg-img) .subpage-hero__content {
-  background: color-mix(in srgb, var(--color-page) 15%, transparent);
-  backdrop-filter: blur(28px) saturate(150%);
-  -webkit-backdrop-filter: blur(28px) saturate(150%);
-  padding: clamp(2rem, 5vw, 3.5rem);
-  border-radius: var(--radius-l);
-  border: 1px solid color-mix(in srgb, white 45%, transparent);
-  box-shadow: 
-    inset 0 1px 2px rgba(255, 255, 255, 0.5),
-    0 16px 40px rgba(0, 0, 0, 0.06);
+  .subpage-hero:has(.subpage-hero__bg-img) .subpage-hero__copy {
+    color: var(--color-ink);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .subpage-hero:has(.subpage-hero__bg-img) .subpage-hero__title,
+  .subpage-hero:has(.subpage-hero__bg-img) .subpage-hero__eyebrow,
+  .subpage-hero:has(.subpage-hero__bg-img) .subpage-hero__copy {
+    text-shadow: 
+      0 1px 4px color-mix(in srgb, var(--color-page) 90%, transparent),
+      0 0 12px color-mix(in srgb, var(--color-page) 70%, transparent);
+  }
+
+  .subpage-hero:has(.subpage-hero__bg-img) .subpage-hero__content {
+    background: color-mix(in srgb, var(--color-page) 15%, transparent);
+    backdrop-filter: blur(28px) saturate(150%);
+    -webkit-backdrop-filter: blur(28px) saturate(150%);
+    padding: clamp(2rem, 5vw, 3.5rem);
+    border-radius: var(--radius-l);
+    border: 1px solid color-mix(in srgb, white 45%, transparent);
+    box-shadow: 
+      inset 0 1px 2px rgba(255, 255, 255, 0.5),
+      0 16px 40px rgba(0, 0, 0, 0.06);
+  }
 }
 
 .subpage-hero--tone-purple {
