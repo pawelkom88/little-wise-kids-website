@@ -260,8 +260,8 @@ export interface MultilingualPage {
 }
 
 export interface SanityImageField {
-  _type?: string;
-  asset: { _ref: string; _type?: "reference" };
+  _type: string;
+  asset: { _ref: string; _type: "reference" };
   altText?: string;
   crop?: { top: number; bottom: number; left: number; right: number };
   hotspot?: { x: number; y: number; height: number; width: number };

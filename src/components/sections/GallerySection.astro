@@ -80,29 +80,35 @@ const hasPhotos = flatPhotos.length > 0;
         aria-label="Little Wise Kids photo gallery"
       >
         {
-          galleryPages.map((page, pageIndex) => (
-            <div
-              class="lwk-gallery__page"
-              id={`gallery-page-${pageIndex + 1}`}
-              data-gallery-page
-              role="group"
-              aria-roledescription="slide"
-              aria-label={`Gallery slide ${pageIndex + 1} of ${galleryPages.length}`}
-            >
-              {page.photos.map((photo, photoIndex) => {
-                const globalIndex = pageIndex * pageSize + photoIndex;
+          galleryPages.map((page, pageIndex) => {
+            const patterns = ["pattern-a", "pattern-b", "pattern-c", "pattern-d"];
+            const layoutPattern = patterns[pageIndex % patterns.length];
 
-                return (
-                  <figure
-                    class:list={[
-                      "lwk-gallery__card",
-                      photoIndex === 0 && "lwk-gallery__card--large",
-                      `lwk-gallery__card--${photo.tone}`,
-                    ]}
-                    id={`gallery-photo-${globalIndex + 1}`}
-                    data-gallery-card
-                    data-lightbox-trigger
-                    data-index={globalIndex}
+            return (
+              <div
+                class="lwk-gallery__page"
+                id={`gallery-page-${pageIndex + 1}`}
+                data-gallery-page
+                data-layout={layoutPattern}
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`Gallery slide ${pageIndex + 1} of ${galleryPages.length}`}
+              >
+                {page.photos.map((photo, photoIndex) => {
+                  const globalIndex = pageIndex * pageSize + photoIndex;
+
+                  return (
+                    <figure
+                      class:list={[
+                        "lwk-gallery__card",
+                        photoIndex === 0 && "lwk-gallery__card--large",
+                        `lwk-gallery__card--${photo.tone}`,
+                      ]}
+                      id={`gallery-photo-${globalIndex + 1}`}
+                      data-gallery-card
+                      data-card-index={photoIndex + 1}
+                      data-lightbox-trigger
+                      data-index={globalIndex}
                     tabindex="0"
                     role="button"
                     aria-label={`View ${photo.label || 'photo'} full screen, photo ${globalIndex + 1} of ${flatPhotos.length}`}
@@ -131,7 +137,8 @@ const hasPhotos = flatPhotos.length > 0;
                 );
               })}
             </div>
-          ))
+          );
+        })
         }
       </div>
     </div>

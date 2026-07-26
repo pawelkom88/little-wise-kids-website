@@ -1,4 +1,5 @@
 import { initLightbox } from "../../lib/initLightbox";
+import { useTouchSwipe } from "../../lib/useTouchSwipe";
 
 const initialiseGalleries = () => {
   document
@@ -129,6 +130,11 @@ const initialiseGalleries = () => {
             scrollToIndex(index);
           }
         });
+      });
+
+      useTouchSwipe(track, {
+        onSwipeLeft: () => scrollToIndex(activeIndex + 1),
+        onSwipeRight: () => scrollToIndex(activeIndex - 1),
       });
 
       track.addEventListener("scroll", () => {

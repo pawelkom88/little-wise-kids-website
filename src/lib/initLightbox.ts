@@ -1,3 +1,9 @@
+import { useTouchSwipe } from "./useTouchSwipe";
+
+type DocumentWithVT = Document & {
+  startViewTransition?: (cb: () => void) => { finished: Promise<void> };
+};
+
 export function initLightbox(container: HTMLElement | Document = document) {
   const dialog = document.getElementById("gallery-lightbox") as HTMLDivElement | null;
   if (!dialog) return;
@@ -70,9 +76,6 @@ export function initLightbox(container: HTMLElement | Document = document) {
       document.body.style.overflow = "hidden";
     };
 
-    interface DocumentWithVT extends Document {
-      startViewTransition?: (cb: () => void) => { finished: Promise<void> };
-    }
     const docWithVT = document as DocumentWithVT;
     if (docWithVT.startViewTransition) {
       const vt = docWithVT.startViewTransition(() => {
@@ -102,6 +105,7 @@ export function initLightbox(container: HTMLElement | Document = document) {
       document.body.style.overflow = "";
     };
 
+    const docWithVT = document as DocumentWithVT;
     if (docWithVT.startViewTransition) {
       const vt = docWithVT.startViewTransition(() => {
         doClose();
@@ -160,6 +164,20 @@ export function initLightbox(container: HTMLElement | Document = document) {
     nextBtn?.addEventListener("click", (e) => {
       e.stopPropagation();
       navigate(1);
+    });
+
+    // Touch swipe left / right support for mobile
+    useTouchSwipe(dialog, {
+      onSwipeLeft: () => {
+        if (dialog.style.display === "flex") {
+          navigate(1);
+        }
+      },
+      onSwipeRight: () => {
+        if (dialog.style.display === "flex") {
+          navigate(-1);
+        }
+      },
     });
 
     document.addEventListener("keydown", (e) => {
