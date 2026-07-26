@@ -7,9 +7,12 @@ import Container from "../components/layout/Container.astro";
 import Icon from "../components/icons/Icon.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
+import SanityImage from "../components/media/SanityImage.astro";
+import Button from "../components/ui/Button.astro";
 import { getHoursNutritionPage, getBusinessDetails } from "../lib/queries";
 import { formatTimeRange } from "../lib/formatters";
 import heroBg from "../assets/images/littlewisekids-outdoor-hero-image.webp";
+import nurseryChefMealFallback from "../assets/images/nursery-chef-meal.jpg";
 import "./hours-nutrition.css";
 
 // Green section icons
@@ -344,82 +347,115 @@ const dailyRhythm = [
 
           <section
             id="nursery-chef"
-            class="hours-section hours-section--yellow chef-section"
+            class="chef-section"
             aria-labelledby="nursery-chef-title"
           >
-            <div class="chef-section__layout">
-              <div class="chef-section__copy">
-                <header class="hours-section__heading">
-                  <span class="hours-section__number" aria-hidden="true"
-                    >03</span
-                  >
-
-                  <div>
-                    <p class="hours-section__eyebrow">
-                      {hoursNutritionPage.nurseryChefLabel}
-                    </p>
-
-                    <h2 id="nursery-chef-title">
-                      {hoursNutritionPage.freshlyPreparedHeading}
-                    </h2>
-                  </div>
-                </header>
-
-                <div class="hours-section__prose">
-                  <p>{hoursNutritionPage.chefNote}</p>
-                </div>
+            <!-- Top Feature Card -->
+            <div class="chef-feature-card">
+              <!-- 1. Meal Image (Left side on desktop, first on mobile) -->
+              <div class="chef-feature-card__media">
+                {
+                  hoursNutritionPage.nurseryChefImage?.asset ? (
+                    <SanityImage
+                      image={hoursNutritionPage.nurseryChefImage}
+                      alt={
+                        hoursNutritionPage.nurseryChefImage.altText ||
+                        "Freshly prepared nutritious nursery meal with salmon, pasta and fresh vegetables"
+                      }
+                      class="chef-feature-card__image"
+                      sizes="(min-width: 64rem) 540px, 100vw"
+                      widths={[400, 600, 800, 1000]}
+                      quality={85}
+                    />
+                  ) : (
+                    <Image
+                      src={nurseryChefMealFallback}
+                      alt="Freshly prepared nutritious nursery meal featuring salmon, pasta and tomatoes"
+                      class="chef-feature-card__image"
+                      width={800}
+                      height={600}
+                    />
+                  )
+                }
               </div>
 
-              <ol
-                class="chef-journey"
-                aria-label="Food experiences for children"
-              >
-                {
-                  chefHighlights.map((item, index) => (
-                    <li>
-                      <span class="chef-journey__number" aria-hidden="true">
+              <!-- 2-5. Content Side (Right side on desktop) -->
+              <div class="chef-feature-card__content">
+                <div class="chef-feature-card__header">
+                  <span class="chef-feature-card__badge" aria-hidden="true">03</span>
+                  <p class="chef-feature-card__eyebrow">
+                    {hoursNutritionPage.nurseryChefLabel}
+                  </p>
+                </div>
+
+                <h2 id="nursery-chef-title" class="chef-feature-card__title">
+                  {hoursNutritionPage.freshlyPreparedHeading}
+                </h2>
+
+                <div class="chef-feature-card__prose">
+                  <p>{hoursNutritionPage.chefNote}</p>
+                </div>
+
+                <div class="chef-feature-card__cta">
+                  <Button
+                    href="/contact#contact-form"
+                    variant="primary"
+                    class="button--yellow chef-cta-btn"
+                  >
+                    {hoursNutritionPage.dietaryContactCtaLabel || "Contact Us"}
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6-8. Three Equal Benefit Cards -->
+            <ol
+              class="chef-benefits-grid"
+              aria-label="Food experiences for children"
+            >
+              {
+                chefHighlights.map((item, index) => (
+                  <li class="chef-benefit-card">
+                    <div class="chef-benefit-card__header">
+                      <span class="chef-benefit-card__badge" aria-hidden="true">
                         {String(index + 1).padStart(2, "0")}
                       </span>
 
-                      <span class="chef-journey__icon-wrapper" aria-hidden="true">
+                      <span class="chef-benefit-card__icon-wrapper" aria-hidden="true">
                         <Image
-                          class="chef-journey__icon"
+                          class="chef-benefit-card__icon"
                           src={item.icon}
                           alt=""
-                          width={64}
-                          height={64}
+                          width={56}
+                          height={56}
                           decoding="async"
                         />
                       </span>
+                    </div>
 
-                      <div class="chef-journey__content">
-                        <h3>{item.title}</h3>
-                        <p>{item.text}</p>
-                      </div>
-                    </li>
-                  ))
-                }
-              </ol>
-            </div>
+                    <div class="chef-benefit-card__content">
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </div>
+                  </li>
+                ))
+              }
+            </ol>
 
-            <aside class="dietary-note">
-              <span class="dietary-note__icon" aria-hidden="true">
+            <!-- 9. Dietary & Allergy Notice (No duplicate button) -->
+            <div class="chef-dietary-notice">
+              <span class="chef-dietary-notice__icon" aria-hidden="true">
                 <Image
                   src={dietaryInformationIcon}
                   alt=""
-                  width={48}
-                  height={48}
+                  width={32}
+                  height={32}
                   decoding="async"
                 />
               </span>
 
               <p>{hoursNutritionPage.dietaryContactCopy}</p>
-
-              <a href="/contact#contact-form">
-                {hoursNutritionPage.dietaryContactCtaLabel}
-                <span aria-hidden="true">→</span>
-              </a>
-            </aside>
+            </div>
           </section>
 
           <!--

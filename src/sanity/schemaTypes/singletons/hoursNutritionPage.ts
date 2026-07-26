@@ -167,6 +167,28 @@ export const hoursNutritionPage = defineType({
       validation: (rule) => rule.required().max(90),
     }),
     defineField({
+      name: "nurseryChefImage",
+      title: "Nursery Chef Meal Image",
+      description:
+        "Standalone meal photograph displayed in the Nursery Chef feature card.",
+      type: "image",
+      group: "nurseryChef",
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "altText",
+          title: "Alternative text",
+          description:
+            "Describe the food shown for someone who cannot see the image. Do not begin with 'Image of'.",
+          type: "string",
+          validation: (rule) =>
+            rule.required().error("Image description is required."),
+        }),
+      ],
+      validation: (rule) =>
+        rule.required().assetRequired().error("Nursery Chef meal image is required."),
+    }),
+    defineField({
       name: "chefNote",
       title: "Nursery Chef Copy",
       description:

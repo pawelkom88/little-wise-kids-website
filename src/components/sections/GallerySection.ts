@@ -1,3 +1,5 @@
+import { initLightbox } from "../../lib/initLightbox";
+
 const initialiseGalleries = () => {
   document
     .querySelectorAll<HTMLElement>("[data-gallery]")
@@ -138,6 +140,9 @@ const initialiseGalleries = () => {
       });
 
       track.addEventListener("keydown", (event) => {
+        const dialog = document.getElementById("gallery-lightbox");
+        if (dialog && dialog.style.display === "flex") return;
+
         if (event.key === "ArrowLeft") {
           event.preventDefault();
           scrollToIndex(activeIndex - 1);
@@ -171,6 +176,9 @@ const initialiseGalleries = () => {
 
       resizeObserver.observe(track);
       updateControls(0);
+
+      // Initialize shared lightbox functionality
+      initLightbox(gallery);
     });
 };
 

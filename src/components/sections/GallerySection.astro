@@ -2,6 +2,7 @@
 import Icon from "../icons/Icon.astro";
 import Section from "../layout/Section.astro";
 import SanityImage from "../media/SanityImage.astro";
+import GalleryLightbox from "../ui/GalleryLightbox.astro";
 import "./GallerySection.css";
 import type { HomePage, GalleryPhoto, StrictImage } from "../../lib/types";
 
@@ -100,7 +101,11 @@ const hasPhotos = flatPhotos.length > 0;
                     ]}
                     id={`gallery-photo-${globalIndex + 1}`}
                     data-gallery-card
-                    aria-label={`${photo.label}, photo ${globalIndex + 1} of ${flatPhotos.length}`}
+                    data-lightbox-trigger
+                    data-index={globalIndex}
+                    tabindex="0"
+                    role="button"
+                    aria-label={`View ${photo.label || 'photo'} full screen, photo ${globalIndex + 1} of ${flatPhotos.length}`}
                   >
                     <SanityImage
                       image={photo.image}
@@ -130,6 +135,8 @@ const hasPhotos = flatPhotos.length > 0;
         }
       </div>
     </div>
+
+    <GalleryLightbox />
 
     <div class="lwk-gallery__controls" aria-label="Gallery controls">
       <button

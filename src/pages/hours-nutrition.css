@@ -357,45 +357,167 @@
 }
 
 /*
- * Nursery chef
+ * Nursery chef (Redesigned)
  */
 
-.chef-journey {
+.chef-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+}
+
+.chef-feature-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(var(--space-l), 4vw, var(--space-2xl));
+  align-items: center;
+  padding: clamp(var(--space-m), 3vw, var(--space-xl));
+  border: 1px solid
+    color-mix(in srgb, var(--color-yellow) 28%, var(--color-border));
+  border-radius: var(--radius-l);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-yellow-soft) 42%, var(--color-surface)),
+    var(--color-surface) 80%
+  );
+  box-shadow: var(--shadow-card);
+}
+
+.chef-feature-card__media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 20rem;
+  border-radius: var(--radius-m);
+  overflow: hidden;
+}
+
+.chef-feature-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-m);
+}
+
+.chef-feature-card__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: var(--space-xs);
+}
+
+.chef-feature-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  margin-bottom: var(--space-xs);
+}
+
+.chef-feature-card__badge {
+  display: grid;
+  width: 2.75rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid
+    color-mix(in srgb, var(--color-orange-strong) 28%, transparent);
+  border-radius: 50%;
+  color: var(--color-orange-strong);
+  background: var(--color-yellow-soft);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-solid);
+  flex-shrink: 0;
+}
+
+.chef-feature-card__eyebrow {
+  margin: 0;
+  color: var(--color-orange-strong);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-compact);
+  letter-spacing: var(--letter-spacing-eyebrow);
+  text-transform: uppercase;
+}
+
+.chef-feature-card__title {
+  margin: 0 0 var(--space-s);
+  color: var(--color-ink);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-section-title);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading);
+  letter-spacing: var(--letter-spacing-section-title);
+  text-wrap: balance;
+}
+
+.chef-feature-card__prose {
+  margin-bottom: var(--space-l);
+}
+
+.chef-feature-card__prose p {
+  margin: 0;
+  color: var(--color-ink-soft);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  text-wrap: pretty;
+}
+
+.chef-feature-card__cta {
+  display: flex;
+  align-items: center;
+}
+
+.chef-cta-btn {
+  font-size: var(--font-size-default);
+  padding: 0.85rem 1.6rem;
+}
+
+/* Three Equal Benefit Cards */
+.chef-benefits-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-m);
   margin: 0;
-  padding: var(--space-s);
+  padding: 0;
+  list-style: none;
+}
+
+.chef-benefit-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  padding: var(--space-l) var(--space-m);
   border: 1px solid
     color-mix(in srgb, var(--color-yellow) 24%, var(--color-border));
   border-radius: var(--radius-m);
   background: color-mix(
     in srgb,
-    var(--color-yellow-soft) 40%,
+    var(--color-yellow-soft) 38%,
     var(--color-surface)
   );
-  list-style: none;
+  box-shadow: var(--shadow-card);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
 }
 
-.chef-journey li {
-  position: relative;
+.chef-benefit-card:hover {
+  transform: translateY(-0.12rem);
+}
+
+.chef-benefit-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+}
+
+.chef-benefit-card__badge {
   display: grid;
-  justify-items: center;
-  gap: var(--space-xs);
-  min-width: 0;
-  padding: var(--space-m) var(--space-s);
-  text-align: center;
-}
-
-.chef-journey li + li {
-  border-left: 1px solid var(--color-border);
-}
-
-.chef-journey__number {
-  position: absolute;
-  top: var(--space-xs);
-  left: var(--space-xs);
-  display: grid;
-  width: 2rem;
+  width: 2.25rem;
   aspect-ratio: 1;
   place-items: center;
   border-radius: 50%;
@@ -405,25 +527,33 @@
   font-size: var(--font-size-label);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-solid);
+  flex-shrink: 0;
 }
 
-.chef-journey__icon {
+.chef-benefit-card__icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chef-benefit-card__icon {
   display: block;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3.25rem;
+  height: 3.25rem;
+  object-fit: contain;
 }
 
-.chef-journey h3 {
-  margin: var(--space-xs) 0 var(--space-3xs);
+.chef-benefit-card__content h3 {
+  margin: 0 0 var(--space-3xs);
   color: var(--color-orange-strong);
   font-family: var(--font-heading);
-  font-size: var(--font-size-default);
+  font-size: var(--font-size-card-title);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-compact);
   text-wrap: balance;
 }
 
-.chef-journey p {
+.chef-benefit-card__content p {
   margin: 0;
   color: var(--color-ink-soft);
   font-family: var(--font-body);
@@ -432,13 +562,12 @@
   text-wrap: pretty;
 }
 
-.dietary-note {
-  display: grid;
-  grid-template-columns: 3.25rem minmax(0, 1fr) auto;
-  gap: var(--space-s);
+/* Dietary & Allergy Notice (Bottom Notice) */
+.chef-dietary-notice {
+  display: flex;
   align-items: center;
-  margin-top: var(--space-s);
-  padding: var(--space-xs) var(--space-s);
+  gap: var(--space-s);
+  padding: var(--space-s) var(--space-m);
   border: 1px solid
     color-mix(in srgb, var(--color-yellow) 24%, var(--color-border));
   border-radius: var(--radius-s);
@@ -449,31 +578,28 @@
   );
 }
 
-.dietary-note__icon {
+.chef-dietary-notice__icon {
   display: grid;
-  width: 3.25rem;
+  width: 2.5rem;
   aspect-ratio: 1;
   place-items: center;
   border-radius: 50%;
   background: var(--color-yellow-soft);
+  flex-shrink: 0;
 }
 
-.dietary-note__icon img {
-  width: 1.55rem;
-  height: 1.55rem;
+.chef-dietary-notice__icon img {
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: contain;
 }
 
-.dietary-note p {
+.chef-dietary-notice p {
   margin: 0;
   color: var(--color-ink-soft);
   font-size: var(--font-size-body);
   line-height: var(--line-height-compact);
   text-wrap: pretty;
-}
-
-.dietary-note a {
-  color: var(--color-ink);
-  background: var(--color-yellow);
 }
 
 /*
@@ -733,6 +859,36 @@
     border-radius: var(--radius-m);
   }
 
+  .chef-feature-card {
+    padding: var(--space-m);
+    border-radius: var(--radius-m);
+  }
+
+  .chef-feature-card__media {
+    border-radius: var(--radius-s);
+    aspect-ratio: 16 / 10;
+    min-height: auto;
+    max-height: none;
+  }
+
+  .chef-feature-card__image {
+    border-radius: var(--radius-s);
+  }
+
+  .chef-cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .chef-benefit-card {
+    padding: var(--space-m);
+    border-radius: var(--radius-s);
+  }
+
+  .chef-dietary-notice {
+    padding: var(--space-xs) var(--space-s);
+  }
+
   .hours-section__heading {
     grid-template-columns: 3rem minmax(0, 1fr);
     gap: var(--space-xs);
@@ -777,30 +933,18 @@
     max-width: none;
   }
 
-  .chef-journey {
+  .chef-feature-card {
     grid-template-columns: 1fr;
+    gap: var(--space-l);
   }
 
-  .chef-journey li {
+  .chef-feature-card__media {
+    min-height: 16rem;
+    max-height: 24rem;
+  }
+
+  .chef-benefits-grid {
     grid-template-columns: 1fr;
-    justify-items: start;
-    align-items: center;
-    text-align: left;
-  }
-
-  .chef-journey li + li {
-    border-top: 1px solid var(--color-border);
-    border-left: 0;
-  }
-
-  .chef-journey__number {
-    position: static;
-    width: 2.5rem;
-  }
-
-  .chef-journey__icon {
-    width: 3.25rem;
-    height: 3.25rem;
   }
 
   .hours-day__header {

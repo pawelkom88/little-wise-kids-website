@@ -259,6 +259,14 @@ export interface MultilingualPage {
   closingNote: string;
 }
 
+export interface SanityImageField {
+  _type?: string;
+  asset: { _ref: string; _type?: "reference" };
+  altText?: string;
+  crop?: { top: number; bottom: number; left: number; right: number };
+  hotspot?: { x: number; y: number; height: number; width: number };
+}
+
 export interface HoursNutritionPage {
   heroEyebrow?: string;
   heroTitleLineOne: string;
@@ -277,6 +285,7 @@ export interface HoursNutritionPage {
   nutritionChecklist: { title: string; text: string }[];
   nurseryChefLabel: string;
   freshlyPreparedHeading: string;
+  nurseryChefImage?: SanityImageField;
   chefNote: string;
   chefHighlights: { title: string; text: string }[];
   dietaryContactCopy: string;

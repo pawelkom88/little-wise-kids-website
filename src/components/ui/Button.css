@@ -55,6 +55,23 @@
   );
 }
 
+.button--yellow {
+  color: var(--color-ink);
+  background: var(--color-yellow);
+}
+
+.button--yellow:hover {
+  background: color-mix(
+    in srgb,
+    var(--color-yellow) 88%,
+    var(--color-darken-base)
+  );
+}
+
+.button--yellow:active {
+  box-shadow: inset 0 2px 4px var(--color-button-active-shadow);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .button {
     transition: none;
