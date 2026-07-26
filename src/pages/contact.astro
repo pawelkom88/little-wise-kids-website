@@ -1,12 +1,11 @@
 ---
 export const prerender = true;
-import Icon from "../components/icons/Icon.astro";
 import Container from "../components/layout/Container.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SubpageHero from "../components/layout/SubpageHero.astro";
 import PortableContent from "../components/content/PortableContent.astro";
 import { getContactPage, getBusinessDetails } from "../lib/queries";
-import { formatTimeRange } from "../lib/formatters";
+import { formatTimeRange, formatPhoneDisplay, formatPhoneHref } from "../lib/formatters";
 import LocationGuide from "../components/contact/LocationGuide.astro";
 import heroBg from "../assets/images/littlewisekids-outdoor-hero-image.webp";
 import "./contact.css";
@@ -116,6 +115,67 @@ const nextSteps = [
                 name="source"
                 value="Little Wise Kids contact page"
               />
+
+              <div
+                id="contact-submission-error"
+                class="contact-form__submission-error"
+                role="alert"
+                tabindex="-1"
+                hidden
+              >
+                <div class="contact-form__submission-error-header">
+                  <svg
+                    class="contact-form__submission-error-icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </svg>
+                  <h3>Form Submission Failed</h3>
+                </div>
+
+                <p
+                  id="contact-submission-error-text"
+                  class="contact-form__submission-error-text"
+                >
+                </p>
+
+                <div class="contact-form__submission-error-fallback">
+                  <p>You can also reach out to us directly:</p>
+                  <ul>
+                    {
+                      businessDetails.publicEmail && (
+                        <li>
+                          <strong>Email:</strong>{" "}
+                          <a href={`mailto:${businessDetails.publicEmail}`}>
+                            {businessDetails.publicEmail}
+                          </a>
+                        </li>
+                      )
+                    }
+                    {
+                      businessDetails.primaryPhone?.number && (
+                        <li>
+                          <strong>Phone:</strong>{" "}
+                          <a href={formatPhoneHref(businessDetails.primaryPhone.number)}>
+                            {formatPhoneDisplay(businessDetails.primaryPhone.number)}
+                          </a>
+                        </li>
+                      )
+                    }
+                  </ul>
+                </div>
+              </div>
 
               <div
                 id="contact-error-summary"
@@ -533,6 +593,36 @@ const nextSteps = [
       "#contact-error-summary"
     ) as HTMLElement | null;
     const errorSummaryList = errorSummary?.querySelector("ul");
+    const submissionError = document.querySelector(
+      "#contact-submission-error"
+    ) as HTMLElement | null;
+    const submissionErrorText = document.querySelector(
+      "#contact-submission-error-text"
+    ) as HTMLElement | null;
+
+    const showSubmissionError = (message: string) => {
+      if (!submissionError || !submissionErrorText) return;
+      submissionErrorText.textContent = message;
+      submissionError.hidden = false;
+      submissionError.focus();
+      submissionError.scrollIntoView({ behavior: "smooth", block: "center" });
+    };
+
+    const hideSubmissionError = () => {
+      if (!submissionError) return;
+      submissionError.hidden = true;
+      if (submissionErrorText) submissionErrorText.textContent = "";
+    };
+
+    const resetSubmitButton = () => {
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = false;
+        submitButton.removeAttribute("aria-busy");
+      }
+      if (submitLabel) {
+        submitLabel.textContent = "Send Enquiry";
+      }
+    };
 
     const subjectInput = document.querySelector("#contact-subject");
     const redirectInput = document.querySelector("#contact-redirect");
@@ -755,7 +845,9 @@ const nextSteps = [
       });
     }
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
       const errors = [];
 
       for (const field of fields) {
@@ -785,8 +877,7 @@ const nextSteps = [
       }
 
       if (errors.length > 0) {
-        event.preventDefault();
-
+        hideSubmissionError();
         renderErrorSummary(errors);
 
         if (formStatus) {
@@ -798,6 +889,7 @@ const nextSteps = [
       }
 
       renderErrorSummary([]);
+      hideSubmissionError();
 
       const nameField = form.elements.namedItem("name");
 
@@ -838,6 +930,64 @@ const nextSteps = [
 
       if (formStatus) {
         formStatus.textContent = "Sending your enquiry securely.";
+      }
+
+      try {
+        const formData = new FormData(form);
+
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Accept": "application/json",
+          },
+          body: formData,
+        });
+
+        const data = await response.json().catch(() => null);
+
+        if (response.ok && data && data.success) {
+          if (formStatus) {
+            formStatus.textContent = "Enquiry submitted successfully! Redirecting…";
+          }
+          window.location.href = redirectInput instanceof HTMLInputElement && redirectInput.value
+              ? redirectInput.value
+              : new URL("/thank-you/", window.location.origin).href;
+        } else {
+          let userFriendlyMsg =
+            "We could not complete your submission. Please try again or contact us directly using the details below.";
+
+          const rawMsg = data?.message || (response.status ? `Server returned status ${response.status}` : "");
+
+          if (rawMsg) {
+            const lowerMsg = rawMsg.toLowerCase();
+            if (lowerMsg.includes("access_key") || lowerMsg.includes("form_id") || lowerMsg.includes("api key")) {
+              userFriendlyMsg =
+                "The contact form service is currently missing its API configuration. Please contact us directly via email or phone while we resolve this issue.";
+            } else if (lowerMsg.includes("captcha") || lowerMsg.includes("hcaptcha")) {
+              userFriendlyMsg =
+                "The anti-spam verification failed. Please complete the captcha check again and resubmit.";
+            } else if (response.status === 429 || lowerMsg.includes("rate limit")) {
+              userFriendlyMsg =
+                "Too many submission attempts. Please wait a few minutes before trying again or email us directly.";
+            } else {
+              userFriendlyMsg = `Form submission failed (${rawMsg}). Please try again or contact us directly.`;
+            }
+          }
+
+          showSubmissionError(userFriendlyMsg);
+          if (formStatus) {
+            formStatus.textContent = "Submission failed. Please check the error details above.";
+          }
+          resetSubmitButton();
+        }
+      } catch (err) {
+        showSubmissionError(
+          "Network error: Unable to reach the contact form service. Please check your internet connection and try again."
+        );
+        if (formStatus) {
+          formStatus.textContent = "Network error. Please check your connection and try again.";
+        }
+        resetSubmitButton();
       }
     });
   }

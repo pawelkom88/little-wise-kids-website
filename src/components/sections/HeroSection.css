@@ -13,13 +13,13 @@
 
 .hero-section__bg-image {
   position: absolute;
-  top: -15px;
+  top: -2px;
   left: 0;
   right: 0;
-  bottom: -15px;
+  bottom: -2px;
   z-index: 0;
   width: 100%;
-  height: calc(100% + 30px);
+  height: calc(100% + 4px);
   object-fit: cover;
   object-position: right 20%;
   pointer-events: none;

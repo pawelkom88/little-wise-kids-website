@@ -251,6 +251,89 @@
 }
 
 /*
+ * Submission error banner
+ */
+
+.contact-form__submission-error {
+  margin-bottom: var(--space-l);
+  padding: var(--space-m) var(--space-l);
+  border: 1px solid color-mix(in srgb, var(--contact-error) 45%, var(--color-border));
+  border-radius: var(--radius-m);
+  color: var(--color-ink);
+  background: var(--contact-error-soft);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--contact-error) 10%, transparent);
+}
+
+.contact-form__submission-error[hidden] {
+  display: none;
+}
+
+.contact-form__submission-error:focus {
+  outline: 3px solid color-mix(in srgb, var(--contact-error) 35%, transparent);
+  outline-offset: 3px;
+}
+
+.contact-form__submission-error-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: 0.35rem;
+}
+
+.contact-form__submission-error-icon {
+  flex-shrink: 0;
+  color: var(--contact-error);
+}
+
+.contact-form__submission-error-header h3 {
+  margin: 0;
+  color: var(--contact-error);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+}
+
+.contact-form__submission-error-text {
+  margin-top: 0.25rem;
+  color: var(--color-ink);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.contact-form__submission-error-fallback {
+  margin-top: var(--space-s);
+  padding-top: var(--space-xs);
+  border-top: 1px dashed color-mix(in srgb, var(--contact-error) 30%, transparent);
+  font-size: var(--font-size-small);
+}
+
+.contact-form__submission-error-fallback p {
+  margin-bottom: 0.35rem;
+  color: var(--color-ink-soft);
+  font-weight: var(--font-weight-bold);
+}
+
+.contact-form__submission-error-fallback ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-l);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-form__submission-error-fallback a {
+  color: var(--contact-error);
+  font-weight: var(--font-weight-bold);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.contact-form__submission-error-fallback a:hover {
+  color: var(--color-purple-dark);
+}
+
+/*
  * Error summary
  */
 

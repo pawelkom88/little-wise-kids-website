@@ -175,7 +175,7 @@ test.describe("Baseline Automated Accessibility Audit", () => {
       await submitBtn.click();
 
       // Wait for alert / error summary to appear
-      const errorSummary = page.locator('[role="alert"], .error-summary');
+      const errorSummary = page.locator('#contact-error-summary');
       await expect(errorSummary).toBeVisible();
 
       const results = await new AxeBuilder({ page }).analyze();

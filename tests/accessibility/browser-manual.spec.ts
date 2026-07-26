@@ -151,7 +151,7 @@ test.describe("Browser-Verifiable Manual Checks", () => {
       await submitBtn.click();
 
       // Verify that focus was moved automatically to the error summary
-      const errorSummary = page.locator('[role="alert"]').first();
+      const errorSummary = page.locator("#contact-error-summary");
       await expect(errorSummary).toBeVisible();
       await expect(errorSummary).toBeFocused();
 
@@ -167,6 +167,61 @@ test.describe("Browser-Verifiable Manual Checks", () => {
     } else {
       test.skip(true, "Submit button not found");
     }
+  });
+
+  test("Contact-form API submission error displays error banner with descriptive message", async ({ page }) => {
+    await page.goto("/contact");
+    await page.waitForLoadState("networkidle");
+
+    // Intercept Web3Forms script and submit API request
+    await page.route("https://web3forms.com/client/script.js", (route) =>
+      route.fulfill({ status: 200, contentType: "application/javascript", body: "" })
+    );
+
+    await page.route("https://api.web3forms.com/submit", async (route) => {
+      await route.fulfill({
+        status: 400,
+        contentType: "application/json",
+        body: JSON.stringify({
+          success: false,
+          message: "Form must include a 'form_id' (in path) or 'access_key' field. Visit Docs for help."
+        })
+      });
+    });
+
+    // Fill form validly
+    await page.fill("#contact-name", "Test Parent");
+    await page.fill("#contact-email", "parent@example.com");
+    await page.selectOption("#contact-enquiry-type", "general");
+    await page.fill("#contact-message", "This is a test message with more than 20 characters.");
+    await page.check("#contact-consent");
+
+    // Inject mock hcaptcha token so client validation passes
+    await page.evaluate(() => {
+      const captchaDiv = document.querySelector("#contact-captcha");
+      if (captchaDiv) {
+        const textarea = document.createElement("textarea");
+        textarea.name = "h-captcha-response";
+        textarea.value = "mocked-captcha-token";
+        captchaDiv.appendChild(textarea);
+      }
+    });
+
+    // Click submit
+    await page.click('button[type="submit"]');
+
+    // Submission error banner should become visible and focused
+    const submissionError = page.locator("#contact-submission-error");
+    await expect(submissionError).toBeVisible();
+    await expect(submissionError).toBeFocused();
+
+    // Text should explain missing API configuration and fallback options
+    const errorText = page.locator("#contact-submission-error-text");
+    await expect(errorText).toContainText("missing its API configuration");
+
+    // Fallback contact links should be rendered
+    const fallbackList = page.locator(".contact-form__submission-error-fallback");
+    await expect(fallbackList).toBeVisible();
   });
 
   test("Reduced-motion behaviour", async ({ page }, testInfo) => {
