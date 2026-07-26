@@ -1,9 +1,5 @@
 import { useTouchSwipe } from "./useTouchSwipe";
 
-type DocumentWithVT = Document & {
-  startViewTransition?: (cb: () => void) => { finished: Promise<void> };
-};
-
 export function initLightbox(container: HTMLElement | Document = document) {
   const dialog = document.getElementById("gallery-lightbox") as HTMLDivElement | null;
   if (!dialog) return;
@@ -31,22 +27,27 @@ export function initLightbox(container: HTMLElement | Document = document) {
 
   let currentIndex = 0;
 
-  const updateDialogContent = (trigger: HTMLElement) => {
+  const updateDialogContent = (trigger: HTMLElement, isNavigating = false) => {
     if (!mediaContainer || !captionContainer) return;
 
     const img = trigger.querySelector("img");
     if (img) {
       const clonedImg = img.cloneNode(true) as HTMLImageElement;
-      clonedImg.style.viewTransitionName = "none";
-      clonedImg.style.opacity = "0";
-      clonedImg.style.transition = "opacity 0.2s ease";
+      if (isNavigating) {
+        clonedImg.style.opacity = "0";
+        clonedImg.style.transform = "scale(0.97)";
+        clonedImg.style.transition = "opacity 200ms ease, transform 200ms ease";
+      }
 
       mediaContainer.innerHTML = "";
       mediaContainer.appendChild(clonedImg);
 
-      requestAnimationFrame(() => {
-        clonedImg.style.opacity = "1";
-      });
+      if (isNavigating) {
+        requestAnimationFrame(() => {
+          clonedImg.style.opacity = "1";
+          clonedImg.style.transform = "scale(1)";
+        });
+      }
     }
 
     const caption = trigger.querySelector("figcaption");
@@ -64,58 +65,25 @@ export function initLightbox(container: HTMLElement | Document = document) {
     const trigger = triggers[currentIndex];
     if (!trigger) return;
 
-    triggers.forEach((t) => (t.style.viewTransitionName = "none"));
-    trigger.style.viewTransitionName = "gallery-active-image";
-    mediaContainer.style.viewTransitionName = "none";
-
-    const doOpen = () => {
-      updateDialogContent(trigger);
-      trigger.style.viewTransitionName = "none";
-      mediaContainer.style.viewTransitionName = "gallery-active-image";
-      dialog.style.display = "flex";
-      document.body.style.overflow = "hidden";
-    };
-
-    const docWithVT = document as DocumentWithVT;
-    if (docWithVT.startViewTransition) {
-      const vt = docWithVT.startViewTransition(() => {
-        doOpen();
-      });
-      vt.finished.then(() => {
-        mediaContainer.style.viewTransitionName = "none";
-      });
-    } else {
-      doOpen();
-    }
+    updateDialogContent(trigger, false);
+    dialog.style.display = "flex";
+    // Force browser reflow before adding open class for smooth CSS transition
+    void dialog.offsetWidth;
+    dialog.classList.add("gallery-lightbox--open");
+    document.body.style.overflow = "hidden";
   };
 
   const closeLightbox = () => {
-    if (!dialog || !mediaContainer) return;
+    if (!dialog) return;
 
-    const trigger = triggers[currentIndex];
+    dialog.classList.remove("gallery-lightbox--open");
+    document.body.style.overflow = "";
 
-    triggers.forEach((t) => (t.style.viewTransitionName = "none"));
-    mediaContainer.style.viewTransitionName = "gallery-active-image";
-    if (trigger) trigger.style.viewTransitionName = "none";
-
-    const doClose = () => {
-      mediaContainer.style.viewTransitionName = "none";
-      if (trigger) trigger.style.viewTransitionName = "gallery-active-image";
-      dialog.style.display = "none";
-      document.body.style.overflow = "";
-    };
-
-    const docWithVT = document as DocumentWithVT;
-    if (docWithVT.startViewTransition) {
-      const vt = docWithVT.startViewTransition(() => {
-        doClose();
-      });
-      vt.finished.then(() => {
-        if (trigger) trigger.style.viewTransitionName = "none";
-      });
-    } else {
-      doClose();
-    }
+    setTimeout(() => {
+      if (!dialog.classList.contains("gallery-lightbox--open")) {
+        dialog.style.display = "none";
+      }
+    }, 280);
   };
 
   const navigate = (direction: 1 | -1) => {
@@ -128,7 +96,7 @@ export function initLightbox(container: HTMLElement | Document = document) {
     currentIndex = newIndex;
     const newTrigger = triggers[currentIndex];
     if (newTrigger) {
-      updateDialogContent(newTrigger);
+      updateDialogContent(newTrigger, true);
     }
   };
 
@@ -148,10 +116,13 @@ export function initLightbox(container: HTMLElement | Document = document) {
   if (dialog.dataset.lightboxBound !== "true") {
     dialog.dataset.lightboxBound = "true";
 
-    closeBtn?.addEventListener("click", () => closeLightbox());
+    closeBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      closeLightbox();
+    });
 
     dialog.addEventListener("click", (e) => {
-      if (e.target === dialog) {
+      if (e.target === dialog || e.target === dialog.querySelector(".gallery-lightbox__content")) {
         closeLightbox();
       }
     });
@@ -166,22 +137,21 @@ export function initLightbox(container: HTMLElement | Document = document) {
       navigate(1);
     });
 
-    // Touch swipe left / right support for mobile
     useTouchSwipe(dialog, {
       onSwipeLeft: () => {
-        if (dialog.style.display === "flex") {
+        if (dialog.classList.contains("gallery-lightbox--open")) {
           navigate(1);
         }
       },
       onSwipeRight: () => {
-        if (dialog.style.display === "flex") {
+        if (dialog.classList.contains("gallery-lightbox--open")) {
           navigate(-1);
         }
       },
     });
 
     document.addEventListener("keydown", (e) => {
-      if (dialog.style.display !== "flex") return;
+      if (!dialog.classList.contains("gallery-lightbox--open")) return;
 
       if (e.key === "Escape") {
         closeLightbox();
