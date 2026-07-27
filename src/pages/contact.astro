@@ -188,11 +188,15 @@ const nextSteps = [
                 <ul></ul>
               </div>
 
+              <p class="contact-form__required-note">
+                Fields marked with an asterisk (<span class="contact-form__asterisk" aria-hidden="true">*</span>) are required.
+              </p>
+
               <div class="contact-form__grid">
                 <div class="contact-field">
                   <label for="contact-name">
                     Parent / Carer Name
-                    <span aria-hidden="true">*</span>
+                    <span class="contact-form__asterisk" aria-hidden="true">*</span>
                   </label>
 
                   <input
@@ -204,6 +208,7 @@ const nextSteps = [
                     maxlength="80"
                     placeholder="Your full name"
                     required
+                    aria-required="true"
                     data-validate
                     data-label="Parent or carer name"
                     data-required-message="Enter your name."
@@ -221,7 +226,7 @@ const nextSteps = [
                 <div class="contact-field">
                   <label for="contact-email">
                     Email Address
-                    <span aria-hidden="true">*</span>
+                    <span class="contact-form__asterisk" aria-hidden="true">*</span>
                   </label>
 
                   <input
@@ -232,6 +237,7 @@ const nextSteps = [
                     maxlength="160"
                     placeholder="you@example.com"
                     required
+                    aria-required="true"
                     data-validate
                     data-label="Email address"
                     data-required-message="Enter your email address."
@@ -331,13 +337,14 @@ const nextSteps = [
                 <div class="contact-field">
                   <label for="contact-enquiry-type">
                     Enquiry Type
-                    <span aria-hidden="true">*</span>
+                    <span class="contact-form__asterisk" aria-hidden="true">*</span>
                   </label>
 
                   <select
                     id="contact-enquiry-type"
                     name="enquiry_type"
                     required
+                    aria-required="true"
                     data-validate
                     data-label="Enquiry type"
                     data-required-message="Choose the type of enquiry."
@@ -419,7 +426,7 @@ const nextSteps = [
                   <div class="contact-field__label-row">
                     <label for="contact-message">
                       Message
-                      <span aria-hidden="true">*</span>
+                      <span class="contact-form__asterisk" aria-hidden="true">*</span>
                     </label>
 
                     <span
@@ -439,6 +446,7 @@ const nextSteps = [
                     maxlength="1500"
                     placeholder="Tell us a little about your child and how we can help."
                     required
+                    aria-required="true"
                     data-validate
                     data-label="Message"
                     data-required-message="Tell us how we can help."
@@ -479,6 +487,7 @@ const nextSteps = [
                       type="checkbox"
                       value="Consent provided"
                       required
+                      aria-required="true"
                       data-validate
                       data-label="Privacy consent"
                       data-required-message="Confirm that we may use your information to respond."

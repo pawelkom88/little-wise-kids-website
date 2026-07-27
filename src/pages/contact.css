@@ -128,8 +128,16 @@
   line-height: var(--line-height-compact);
 }
 
-.contact-field label > span[aria-hidden="true"] {
+.contact-form__required-note {
+  margin-bottom: var(--space-m);
+  color: var(--color-ink-soft);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-compact);
+}
+
+.contact-form__asterisk {
   color: var(--contact-error);
+  font-weight: var(--font-weight-bold);
 }
 
 .contact-field__optional {
